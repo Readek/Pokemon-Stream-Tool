@@ -1,0 +1,29 @@
+{
+  "name": "poke-st-gui",
+  "version": "1.0.0",
+  "description": "An electron interface for Pokemon streams.",
+  "main": "index.js",
+  "repository": "https://github.com/Readek/Pokemon-Stream-Tool",
+  "author": "Readek",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "poke.st.gui",
+    "linux": {
+      "target": "AppImage"
+    },
+    "win": {
+      "target": "portable"
+    }
+  },
+  "dependencies": {
+    "ws": "^8.8.1"
+  }
+}

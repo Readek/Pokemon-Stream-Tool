@@ -1,0 +1,9 @@
+{
+  "guiWidth": 600,
+  "guiHeight": 300,
+  "alwaysOnTop": false,
+  "resizable": false,
+  "zoom": 100,
+  "remoteUpdatePort": 1111,
+  "webSocketPort": 8080
+}

@@ -1,0 +1,540 @@
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url('../Fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url('../Fonts/Roboto-Medium.ttf');
+}
+
+:root {
+  --text1: #ececec;
+  --text2: #b6b6b6;
+  --bg1: #131318;
+  --bg2: #383838;
+  --bg3: #1e1e24;
+  --bg4: #444444b6;
+  --bg5: #2b2b2b;
+  --selected: #2ba4eb;
+  --focused: #686868;
+  --iconFill: #b6b6b6;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--bg2);
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--focused);
+}
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  padding: 0px;
+  margin: 0px;
+  background-color: var(--bg2);
+  color: var(--text1);
+  user-select: none;
+  font-family: 'Roboto-Regular';
+  font-size: 16px;
+}
+
+
+/* general text input class*/
+.textInput {
+  outline: none;
+  border: none;
+  background: var(--bg4);
+  color: var(--text1);
+  height: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid var(--bg4);
+  transition: border-color 100ms;  
+}
+input[type="text"] {
+  font-family: 'Roboto-Regular';
+  font-size: 13px;
+}
+
+.textInput:hover {
+  border-color: var(--selected);
+}
+
+.textInput:focus {
+  border-color: var(--focused);
+}
+
+/* rip button defaults */
+button {
+  outline: none;
+  overflow: visible;
+  border: none;
+  font: inherit;
+  padding: 0;
+  background-color: none;
+  background: none;
+  color: white;
+  text-transform: inherit;
+  text-shadow: inherit;
+}
+button, [type="button"] {
+  -webkit-appearance: button;
+}
+button:hover {
+  cursor: pointer;
+}
+
+/* selects can be a bit pretty sometimes */
+.selectDropDown {
+  outline: none;
+  height: 25px;
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  padding: 0px 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.selectDropDown:hover {
+  border-color: var(--selected);
+}
+.selectDropDown:active {
+  background-color: var(--bg2);
+}
+
+
+/* main viewport */
+#viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition: transform 300ms ease;
+}
+
+
+/* where all the magic happens */
+#overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 300ms;
+  display: flex;
+  flex-direction: column;
+}
+
+/* player stuff */
+#playerRegion {
+  display: flex;
+  height: 100%;
+  padding: 10px;
+}
+
+
+#pokeParty {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pokemonDiv {
+  display: flex;
+  gap: 5px;
+}
+
+
+.finderPosition {
+  position: relative;
+  display: flex;
+}
+
+.finderEntry {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  z-index: 30;
+  cursor: pointer;
+}
+.finderEntry:not(:first-child) {
+  border-top: 1px solid var(--bg2);
+}
+.finderEntry:hover {
+  background-color: var(--bg2);
+}
+.finderEntry-active {
+  background-color: var(--bg2);
+}
+
+.pfTag {
+  color: var(--text2);
+  font-size: 13px;
+  margin-left: 5px;
+  z-index: 32;
+}
+.pfName {
+  font-family: "Roboto-Medium";
+  margin-right: 5px;
+  margin-left: 5px;
+  z-index: 32;
+}
+.pfChar {
+  font-style: italic;
+  font-size: 13px;
+  margin-right: 5px;
+  z-index: 32;
+}
+.pfCharImgBox {
+  position: absolute;
+  height: 30px;
+  width: 100%;
+  transform: scaleX(-1);
+  overflow: hidden;
+  opacity: .8;
+}
+.pfCharImg {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  object-fit: contain;
+  height: 40px;
+  opacity: .8;
+  z-index: 31;
+}
+
+
+.selector {
+  width: 126px;
+  height: 32px;
+  color: var(--text1);
+  background-color: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto-Regular';
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.selector:hover {
+  border-color: var(--selected);
+}
+.selector:active {
+  background-color: var(--bg2);
+}
+
+.charSelects {
+  display: flex;
+}
+
+.pokeSelector {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.pokeSelectorIcon {
+  width: 40px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.bCharSelector {
+  width: 70px;
+}
+
+
+.finder {
+  display: none;
+  position: absolute;
+  width: 180px;
+  top: 100%;
+  left: 0;
+  filter: drop-shadow(0px 0px 5px var(--bg3));
+  z-index: 3;
+  max-height: 165px;
+}
+.pokeSelector:focus-within .finder {
+  display: block;
+}
+.listSearch {
+  outline: none;
+  border: none;
+  width: 100%;
+  background: var(--bg1);
+  color: var(--text1);
+  padding: 2px;
+  box-sizing: border-box;
+}
+.searchList {
+  background-color: var(--bg5);
+  font-size: 15px;
+  text-shadow: 0px 0px 3px black;
+  overflow: auto;
+  max-height: 140px;
+  position: relative;
+}
+
+
+.fIconImg {
+  width: 40px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.pokeForm {
+  outline: none;
+  height: 30px;
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  padding: 0px 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+
+/* the bottom bar */
+#botBar {
+  width: 100%;
+  height: 28px;
+  display: flex;
+  background-color: var(--bg5);
+  cursor: pointer;
+}
+
+.botRegion {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botText {
+  color: var(--text1);
+  font-family: 'Roboto-Medium';
+  white-space: nowrap;
+}
+
+.rectangle {
+  height: 2px;
+  width: 100%;
+  margin: 10px;
+  background-color: var(--text2);
+}
+
+#updateRegion:hover {
+  background-color: var(--bg3);
+}
+#updateRegion:active{
+  background-color: var(--bg5);
+}
+
+#botBarBracket, #settingsRegion {
+  width: 32px;
+  background-color: var(--bg3)
+}
+
+#configIcon {
+  width: 20px;
+  height: 20px;
+  fill: var(--text2);
+}
+
+#botBarBracket:hover, #settingsRegion:hover {
+  background-color: var(--bg1);
+}
+
+#botBarBracket:active, #settingsRegion:active{
+  background-color: var(--bg5);
+}
+
+
+/* settings section */
+#settings {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg5);
+  z-index: 2;
+  transform: translateX(100%);
+}
+
+
+#actualSettings {
+  width: 240px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+#settingsTitleTop {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto-Medium";
+  background-color: var(--bg3);
+  border-bottom-style: solid;
+  border-color: var(--bg4);
+}
+
+#settingsList {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.settingsTitle {
+  width: 100%;
+  color: var(--text2);
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Roboto-Medium";
+  border-bottom: solid 1px var(--bg4);
+  padding: 5px 0px;
+  margin-bottom: 4px;
+}
+.settingsTitle:not(:first-child) {
+  border-top: solid 3px var(--bg4);
+  margin-top: 10px;
+}
+
+.settingBox {
+  padding: 2px 0px 2px 5px;
+  display: flex;
+  outline: none;
+  justify-content: center;
+}
+.settingBox:hover {
+  background-color: var(--bg2);
+}
+
+.settingsCheck {
+  outline: none;
+  margin-right: 4px;
+}
+
+.settingsText {
+  width: 100%;
+}
+
+#settingsButtonSection {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0px;
+}
+.settingsButton {
+  padding: 2px 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: "Roboto-Medium";
+  background: none;
+  border: solid 2px var(--focused);
+  border-radius: 5px;
+  color: var(--text2);
+  outline: none;
+}
+.settingsButton:hover {
+  filter: brightness(1.4);
+}
+.settingsButton:active {
+  filter: brightness(.8);
+}
+
+#settingsElectron {
+  border-top: solid 3px var(--bg4);
+  margin-top: 10px;
+}
+
+#zoomDiv {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+#zoomText {
+  padding: 0px 5px;
+}
+#zoomButtonsDiv {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.zoomButton {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* clickable area that gets enabled when moving the viewport */
+#goBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: none;
+}
+
+
+/* notification area */
+#notifDiv {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+#notifText {
+  padding: 5px;
+  background-color: var(--bg4);
+  border: 2px solid var(--focused);
+  border-radius: 5px;
+  opacity: 0;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes notifAnim {
+  0% {
+    opacity: 0px;
+    border-color: var(--selected);
+  }
+  10% {opacity: 1}
+  20% {border-color: var(--focused);}
+  75% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+
+@media (max-width: 590px) {
+
+  #botBar {
+    height: 40px;
+  }
+  #settingsRegion, #botBarBracket {
+    width: 50px;
+  }
+
+}

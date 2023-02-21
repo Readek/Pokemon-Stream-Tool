@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Stream Tool</title>
+  <link rel="stylesheet" href="CSS/GUI.css">
+  <script src="Scripts/GUI/mousetrap.min.js" defer></script>
+  <script src="Scripts/GUI.js" type="module"></script>
+</head>
+  
+<body>
+
+<div id="viewport"> <!-- so we can move the viewport easily -->
+
+  <div id="overlay">
+
+    <div id="playerRegion">
+
+      <div id=pokeParty>
+
+        <div class="pokemonDiv">
+
+          <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+              <img class="pokeSelectorIcon" alt="">
+              <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+
+          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false">
+
+          <select class="pokeForm">
+            <option value="Default">Default</option>
+            <option value="Shiny">Shiny</option>
+          </select>
+
+          <input type="checkbox" class="pokeGender">
+
+        </div>
+
+        <div class="pokemonDiv">
+
+          <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+              <img class="pokeSelectorIcon" alt="">
+              <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+          
+          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false">
+
+          <select class="pokeForm">
+            <option value="Default">Default</option>
+            <option value="Shiny">Shiny</option>
+          </select>
+
+          <input type="checkbox" class="pokeGender">
+
+        </div>
+
+        <div class="pokemonDiv">
+
+          <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+              <img class="pokeSelectorIcon" alt="">
+              <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+
+          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false">
+
+          <select class="pokeForm">
+            <option value="Default">Default</option>
+            <option value="Shiny">Shiny</option>
+          </select>
+          
+          <input type="checkbox" class="pokeGender">
+
+        </div>
+
+        <div class="pokemonDiv">
+
+          <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+              <img class="pokeSelectorIcon" alt="">
+              <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+
+          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false">
+
+          <select class="pokeForm">
+            <option value="Default">Default</option>
+            <option value="Shiny">Shiny</option>
+          </select>
+
+          <input type="checkbox" class="pokeGender">
+
+        </div>
+
+        <div class="pokemonDiv">
+
+          <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+              <img class="pokeSelectorIcon" alt="">
+              <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+
+          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false">
+
+          <select class="pokeForm">
+            <option value="Default">Default</option>
+            <option value="Shiny">Shiny</option>
+          </select>
+
+          <input type="checkbox" class="pokeGender">
+
+        </div>
+
+        <div class="pokemonDiv">
+
+          <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+              <img class="pokeSelectorIcon" alt="">
+              <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+          
+          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false">
+
+          <select class="pokeForm">
+            <option value="Default">Default</option>
+            <option value="Shiny">Shiny</option>
+          </select>
+
+          <input type="checkbox" class="pokeGender">
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="botRegion">
+      
+      <div id="botBar">
+
+        <button id="updateRegion" class="botRegion" title="Save current info to the json file. [Shortcut: Enter]">
+          <div class="rectangle"></div>
+          <span class="botText">UPDATE</span>
+          <div class="rectangle"></div>
+        </button>
+
+        <button id="settingsRegion" class="botRegion" title="Go to settings">
+          <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="settings">
+
+    <div id="actualSettings">
+
+      <div id="settingsTitleTop">SETTINGS</div>
+
+      <div id="settingsList">
+
+        <div id="settingsElectron">
+
+          <div class="settingsTitle">Window Settings</div>
+
+          <div class="settingBox" title="Prevents other windows to be displayed on top of this one.">
+            <input type="checkbox" id="alwaysOnTop" class="settingsCheck" tabindex="-1">
+            <label for="alwaysOnTop" class="settingsText">Window always on top</span>
+          </div>
+  
+          <div class="settingBox" title="Unlocks window resizing">
+            <input type="checkbox" id="resizableWindow" class="settingsCheck" tabindex="-1">
+            <label for="resizableWindow" class="settingsText">Resizable window</span>
+          </div>
+  
+          <div class="settingBox">
+            <div id="zoomDiv">
+              <div id="zoomText">Zoom: </div>
+              <div id="zoomButtonsDiv">
+                <button class="settingsButton zoomButton" id="lessZoomButt">-</button>
+                <div id="zoomTextValue">100%</div>
+                <button class="settingsButton zoomButton" id="moreZoomButt">+</button>
+              </div>            
+            </div>
+          </div>
+  
+          <div id="settingsButtonSection">
+            <button class="settingsButton" id="restoreWindowButt" tabindex="-1" title='Restores the default window width, height, and zoom values'>
+              Restore default dimensions
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="goBack"></div>
+
+</div>
+
+
+<!-- stuff that will get overlayed on the entire screen -->
+<div id="notifDiv">
+  <span id="notifText"></span>
+</div>
+
+
+<!-- stuff that will get moved around -->
+<div id="pokeFinder" class="finder">
+  <input type="text" class="listSearch mousetrap" placeholder="Type to filter..." spellcheck="false" tabindex="-1">
+  <div class="searchList" id="pokeSearchList"></div>
+</div>
+  
+</body>
+</html>

@@ -1,0 +1,101 @@
+import { saveJson } from './File System.mjs';
+import { updateGUI } from './Remote Update.mjs';
+import { writeScoreboard } from './Write Scoreboard.mjs';
+
+const ipc = require('electron').ipcRenderer;
+
+// ipc is the communication bridge between us and nodejs
+// we can send signals to do node exclusive stuff,
+// and recieve messages from it with data
+
+// node code is the only thing thats embbeded on the executable
+// meaning that to see it or modify it, you will need to
+// be able to build this project yourself... check the repo's wiki!
+
+
+// we will store data to send to the browsers here
+let gameData;
+
+
+// when a new browser connects
+ipc.on('requestData', () => {
+
+    // send the current (not updated) data
+    sendGameData();
+
+})
+
+/** Sends current game data object to websocket clients */
+export function sendGameData() {
+    ipc.send('sendData', gameData);
+}
+export function updateGameData(data) {
+    gameData = data;
+}
+/** Sends current game data to remote GUIs */
+export function sendRemoteGameData() {
+    ipc.send("sendData", JSON.stringify(remoteID(gameData), null, 2));
+}
+
+/**
+ * Changes the ID of an object so a Remote GUI can receive it
+ * @param {Object} data - Data that will change its ID
+ * @returns Data with changed ID
+ */
+function remoteID(data) {
+    const newData = JSON.parse(data);
+    newData.id = "remoteGUI";
+    return newData;
+}
+
+/**
+ * Sends the signal to Electron to keep the window
+ * on top of others (or not) at all times
+ * @param {Boolean} value - Verdadero o Falso
+ */
+export function alwaysOnTop(value) {
+    ipc.send('alwaysOnTop', value);
+}
+
+/**
+ * Sends the signal to Electron to unlock window resizing
+ * @param {Boolean} value - Si o No
+ */
+export function resizable(value) {
+    ipc.send('resizable', value);
+}
+
+/** Sends the signal to Electron to restore window dimensions */
+export function defaultWindowDimensions() {
+    ipc.send('defaultWindow');
+}
+
+// when we get data remotely, update GUI
+ipc.on('remoteGuiData', async (event, data) => {
+
+    const jsonData = JSON.parse(data);
+    
+    if (jsonData.message == "RemoteUpdateGUI") {
+
+        // when we get data from remote GUIs
+        await updateGUI(jsonData);
+        writeScoreboard();
+
+    } else if (jsonData.message == "RemoteRequestData") {
+
+        // when remote GUIs request data
+        sendRemoteGameData();
+        
+    } else if (jsonData.message == "RemoteSaveJson") {
+
+        // when remote GUIs request a file save
+        const filePath = jsonData.path;
+        delete jsonData.path;
+        delete jsonData.message;
+
+        // save locally
+        saveJson(filePath, jsonData);
+        
+    }
+
+});
