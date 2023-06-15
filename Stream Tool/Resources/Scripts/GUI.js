@@ -1,13 +1,14 @@
 import { loadKeybinds } from './GUI/Keybinds.mjs';
-import { inside } from './GUI/Globals.mjs';
+import { inside, stPath } from './GUI/Globals.mjs';
 import { pokemons } from './GUI/Pokemon/Pokemons.mjs'
 import { settings } from './GUI/Settings.mjs';
 import { writeScoreboard } from './GUI/Write Scoreboard.mjs';
 import { Pokemon } from './GUI/Pokemon/Pokemon.mjs';
 import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
+import { updateGUI } from './GUI/Remote Update.mjs';
+import { getJson } from './GUI/File System.mjs';
 // so it loads the listeners
 import './GUI/Top Bar.mjs';
-
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -47,6 +48,7 @@ async function init() {
 
     // update the GUI on startup so we have something to send to browsers
     if (inside.electron) {
+        updateGUI(await getJson(`${stPath.text}/GUI State`), true);
         writeScoreboard();
     } else { // remote GUIs will ask about the current main GUI state
         const remote = await import("./GUI/Remote Requests.mjs");

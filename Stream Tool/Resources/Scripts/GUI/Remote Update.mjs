@@ -7,7 +7,7 @@ import { pokemons } from "./Pokemon/Pokemons.mjs";
  * Updates the entire GUI with values sent remotely
  * @param {Object} data GUI info
  */
-export async function updateGUI(data) {
+export async function updateGUI(data, noNotif) {
 
     // poketeam time
     for (let i = 0; i < pokemons.length; i++) {
@@ -24,6 +24,8 @@ export async function updateGUI(data) {
     playerStats.setDeaths(data.player.deaths);
 
     // write it down
-    displayNotif("GUI was remotely updated");
+    if (!noNotif) {
+        displayNotif("GUI was remotely updated");
+    }
     
 }

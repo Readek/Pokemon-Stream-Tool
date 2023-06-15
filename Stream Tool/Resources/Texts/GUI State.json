@@ -1,0 +1,56 @@
+{
+  "playerPokemons": [
+    {
+      "species": "",
+      "nickName": "",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Default.gif"
+    },
+    {
+      "species": "",
+      "nickName": "",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Default.gif"
+    },
+    {
+      "species": "",
+      "nickName": "",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Default.gif"
+    },
+    {
+      "species": "",
+      "nickName": "",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Default.gif"
+    },
+    {
+      "species": "",
+      "nickName": "",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Default.gif"
+    },
+    {
+      "species": "",
+      "nickName": "",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Default.gif"
+    }
+  ],
+  "id": "gameData",
+  "player": {
+    "badges": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "catches": "0",
+    "kills": "0",
+    "deaths": "0"
+  }
+}

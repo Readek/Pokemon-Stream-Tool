@@ -6,6 +6,7 @@ const http = require('http')
 let resourcesPath, nodePath;
 let httpPort, wsPort, guiWidth, guiHeight, failed;
 let wsServer, sockets = [];
+let storedGuiData;
 
 module.exports = function initExec(rPath, gPath, wSocket) {
     
@@ -194,6 +195,10 @@ function createWindow() {
                 socket.ws.send(data)
             }
         })
+        // we will store this for later
+        if (jsonData.id == "gameData") {
+            storedGuiData = jsonData;
+        }
     })
 
     win.on("close", () => {
@@ -212,6 +217,7 @@ app.whenReady().then(() => {
 // close electron when all windows close (for Windows and Linux)
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
+
         // save current window dimensions
         const data = JSON.parse(fs.readFileSync(`${resourcesPath}/Texts/GUI Settings.json`));
         if (process.platform == "win32") {
@@ -222,6 +228,10 @@ app.on('window-all-closed', () => {
             data.guiHeight = guiHeight;
         }
         fs.writeFileSync(`${resourcesPath}/Texts/GUI Settings.json`, JSON.stringify(data, null, 2));
+        
+        // save current data state
+        fs.writeFileSync(`${resourcesPath}/Texts/GUI State.json`, JSON.stringify(storedGuiData, null, 2));
+        
         // and good bye
         app.quit()
     }
