@@ -63,6 +63,44 @@ html, body {
 }
 
 
+#playerStats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.statIcon {
+    object-fit: contain;
+    width: 20px;
+    height: 20px
+}
+#catchesIcon {
+    stroke: white;
+    fill: none;
+    transform: scale(1.15);
+}
+#killsIcon {
+    fill: white;
+}
+#deathsIcon {
+    fill: white;
+}
+
+.statNumber {
+    color: #f8f8f8;
+    font-family: "Deansgate";
+    font-size: 24px;
+    text-shadow: 0px 0px 5px black;
+}
+
+
 #botPokes {
     position: absolute;
     bottom: 0px;

@@ -2,6 +2,15 @@
 
 let webSocket;
 
+// this is a weird way to have file svg's that can be recolored by css
+customElements.define("load-svg", class extends HTMLElement {
+    async connectedCallback(
+      shadowRoot = this.shadowRoot || this.attachShadow({mode:"open"})
+    ) {
+      shadowRoot.innerHTML = await (await fetch(this.getAttribute("src"))).text()
+    }
+});
+
 class Pokemon {
 
     constructor(el) {
@@ -44,6 +53,10 @@ class Pokemon {
 
 const pokemons = [];
 const badges = document.getElementsByClassName("badge");
+const catchesNum = document.getElementById("catchesNumber");
+const killsNum = document.getElementById("killsNumber");
+const deathsNum = document.getElementById("deathsNumber");
+
 initPokemon();
 function initPokemon() {
     for (const pokeDiv of document.getElementsByClassName("pokeDiv")) {
@@ -109,6 +122,7 @@ async function updateData(data) {
         
     }
 
+    // display those shiny gym badges
     for (let i = 0; i < data.player.badges.length; i++) {
         if (data.player.badges[i]) {
             badges[i].style.opacity = 1;
@@ -116,5 +130,10 @@ async function updateData(data) {
             badges[i].style.opacity = 0;
         }
     }
+
+    // get us those sweet stats
+    catchesNum.innerText = data.player.catches;
+    killsNum.innerText = data.player.kills;
+    deathsNum.innerText = data.player.deaths;
 
 }

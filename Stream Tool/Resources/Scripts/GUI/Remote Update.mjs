@@ -1,5 +1,6 @@
 import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Gym Badges.mjs";
+import { playerStats } from "./Player/Stats.mjs";
 import { pokemons } from "./Pokemon/Pokemons.mjs";
 
 /**
@@ -18,6 +19,9 @@ export async function updateGUI(data) {
 
     // player time
     setBadges(data.player.badges);
+    playerStats.setCatches(data.player.catches);
+    playerStats.setKills(data.player.kills);
+    playerStats.setDeaths(data.player.deaths);
 
     // write it down
     displayNotif("GUI was remotely updated");

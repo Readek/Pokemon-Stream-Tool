@@ -1,5 +1,6 @@
 import { inside } from './Globals.mjs';
 import { getBadges } from './Player/Gym Badges.mjs';
+import { playerStats } from './Player/Stats.mjs';
 import { pokemons } from './Pokemon/Pokemons.mjs'
 
 const updateDiv = document.getElementById('updateRegion');
@@ -30,7 +31,10 @@ export async function writeScoreboard() {
         playerPokemons: [], //more lines will be added below
         id : "gameData",
         player : {
-            badges : getBadges()
+            badges : getBadges(),
+            catches : playerStats.getCatches(),
+            kills : playerStats.getKills(),
+            deaths : playerStats.getDeaths()
         }
     };
 

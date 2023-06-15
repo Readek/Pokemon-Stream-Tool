@@ -325,6 +325,9 @@ button:hover {
 
 #playerInfoDiv {
   display: none;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
 }
 
 #gymBadges {
@@ -333,13 +336,19 @@ button:hover {
   align-items: center;
   gap: 20px;
   width: 100%;
-  margin: 10px;
   image-rendering: pixelated;
 }
-
 .badgeDisabled {
   filter: grayscale(1);
   opacity: .5;
+}
+
+#playerStats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
 }
 
 
