@@ -1,4 +1,5 @@
 import { displayNotif } from "./Notifications.mjs";
+import { setBadges } from "./Player/Gym Badges.mjs";
 import { pokemons } from "./Pokemon/Pokemons.mjs";
 
 /**
@@ -7,13 +8,16 @@ import { pokemons } from "./Pokemon/Pokemons.mjs";
  */
 export async function updateGUI(data) {
 
-    // player time
+    // poketeam time
     for (let i = 0; i < pokemons.length; i++) {
 
         pokemons[i].setSpecies(data.playerPokemons[i].species);
         pokemons[i].setNickName(data.playerPokemons[i].nickName);
 
     };
+
+    // player time
+    setBadges(data.player.badges);
 
     // write it down
     displayNotif("GUI was remotely updated");

@@ -263,6 +263,7 @@ button:hover {
   width: 40px;
   height: 30px;
   object-fit: contain;
+  image-rendering: pixelated;
 }
 
 .bCharSelector {
@@ -306,6 +307,7 @@ button:hover {
   width: 40px;
   height: 30px;
   object-fit: contain;
+  image-rendering: pixelated;
 }
 
 .pokeForm {
@@ -332,6 +334,7 @@ button:hover {
   gap: 20px;
   width: 100%;
   margin: 10px;
+  image-rendering: pixelated;
 }
 
 .badgeDisabled {
