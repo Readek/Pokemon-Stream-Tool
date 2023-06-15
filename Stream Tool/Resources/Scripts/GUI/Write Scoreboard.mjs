@@ -1,4 +1,5 @@
 import { inside } from './Globals.mjs';
+import { getBadges } from './Player/Gym Badges.mjs';
 import { pokemons } from './Pokemon/Pokemons.mjs'
 
 const updateDiv = document.getElementById('updateRegion');
@@ -27,7 +28,10 @@ export async function writeScoreboard() {
     // this is what's going to be sent to the browsers
     const scoreboardJson = {
         playerPokemons: [], //more lines will be added below
-        id : "gameData"
+        id : "gameData",
+        player : {
+            badges : getBadges()
+        }
     };
 
     // add the player's info to the player section of the json

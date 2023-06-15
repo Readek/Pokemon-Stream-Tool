@@ -5,6 +5,9 @@ import { settings } from './GUI/Settings.mjs';
 import { writeScoreboard } from './GUI/Write Scoreboard.mjs';
 import { Pokemon } from './GUI/Pokemon/Pokemon.mjs';
 import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
+// so it loads the listeners
+import './GUI/Top Bar.mjs';
+
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {

@@ -43,6 +43,7 @@ class Pokemon {
 }
 
 const pokemons = [];
+const badges = document.getElementsByClassName("badge");
 initPokemon();
 function initPokemon() {
     for (const pokeDiv of document.getElementsByClassName("pokeDiv")) {
@@ -106,6 +107,14 @@ async function updateData(data) {
         // set image
         pokemons[i].setImg(data.playerPokemons[i].img);
         
+    }
+
+    for (let i = 0; i < data.player.badges.length; i++) {
+        if (data.player.badges[i]) {
+            badges[i].style.opacity = 1;
+        } else {
+            badges[i].style.opacity = 0;
+        }
     }
 
 }

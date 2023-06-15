@@ -139,6 +139,16 @@ button:hover {
   flex-direction: column;
 }
 
+
+#topBar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 5px;
+  gap: 10px;
+}
+
+
 /* player stuff */
 #playerRegion {
   display: flex;
@@ -311,6 +321,25 @@ button:hover {
 }
 
 
+#playerInfoDiv {
+  display: none;
+}
+
+#gymBadges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin: 10px;
+}
+
+.badgeDisabled {
+  filter: grayscale(1);
+  opacity: .5;
+}
+
+
 /* the bottom bar */
 #botBar {
   width: 100%;
@@ -348,7 +377,7 @@ button:hover {
   background-color: var(--bg5);
 }
 
-#botBarBracket, #settingsRegion {
+#settingsRegion {
   width: 32px;
   background-color: var(--bg3)
 }
@@ -359,11 +388,11 @@ button:hover {
   fill: var(--text2);
 }
 
-#botBarBracket:hover, #settingsRegion:hover {
+#settingsRegion:hover {
   background-color: var(--bg1);
 }
 
-#botBarBracket:active, #settingsRegion:active{
+#settingsRegion:active{
   background-color: var(--bg5);
 }
 

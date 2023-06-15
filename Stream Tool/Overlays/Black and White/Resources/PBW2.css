@@ -13,6 +13,56 @@ html, body {
     height: 1080px;
 }
 
+
+#playerInfo {
+    position: absolute;
+    top: 560px;
+    left: 426px;
+    display: flex;
+    flex-direction: column;
+}
+
+#badgesTop, #badgesBot {
+    position: relative;
+}
+
+.badge {
+    position: absolute
+}
+#badge1 {
+    top: 16px;
+    left: 20px;
+}
+#badge2 {
+    top: 20px;
+    left: 66px;
+}
+#badge3 {
+    top: 18px;
+    right: 72px;
+}
+#badge4 {
+    top: 16px;
+    right: 8px;
+}
+#badge5 {
+    top: 16px;
+    left: 14px;
+}
+#badge6 {
+    top: 18px;
+    left: 74px;
+}
+#badge7 {
+    top: 18px;
+    right: 68px;
+}
+#badge8 {
+    top: 20px;
+    right: 9px;
+}
+
+
 #botPokes {
     position: absolute;
     bottom: 0px;
