@@ -3,22 +3,26 @@ import { stPath } from "../Globals.mjs";
 
 export class Pokemon {
 
+    #gender;
+
     constructor(el) {
 
         this.pokeSel = el.getElementsByClassName(`pokeSelector`)[0];
         this.nickInp = el.getElementsByClassName(`pokeNickName`)[0];
         this.formSel = el.getElementsByClassName(`pokeForm`)[0];
-        this.genderChk = el.getElementsByClassName(`pokeGender`)[0];
+        this.genderButt = el.getElementsByClassName(`pokeGenderButton`)[0];
+        this.genderIcon = el.getElementsByClassName(`pokeGenderIcon`)[0];
         
         // set a listener that will trigger when pokemon selector is clicked
         this.pokeSel.addEventListener("click", () => {
             pokeFinder.open(this.pokeSel);
             pokeFinder.setCurrentPokemon(this);
             pokeFinder.focusFilter();
-
         });
         // also set an initial pokemon value
         this.setSpecies();
+
+        this.genderButt.addEventListener("click", () => {this.swapGender()});
 
     }
 
@@ -56,12 +60,23 @@ export class Pokemon {
     getForm() {
         return this.formSel.value;
     }
+    setForm(value) {
+        this.formSel.value = value;
+    }
 
     getGender() {
-        if (this.genderChk.checked) {
-            return "F"
+        return this.#gender;
+    }
+    setGender(value) {
+        this.#gender = value;
+        this.genderIcon.src = `Assets/Gender ${value}.png`;
+    }
+
+    swapGender() {
+        if (this.getGender() == "M") {
+            this.setGender("F");
         } else {
-            return "M"
+            this.setGender("M");
         }
     }
 

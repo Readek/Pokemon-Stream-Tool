@@ -323,6 +323,28 @@ button:hover {
 }
 
 
+.pokeGenderButton {
+  outline: none;
+  height: 30px;
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  padding: 0px 3px 0px 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pokeGenderButton:hover {
+  border-color: var(--selected);
+}
+.pokeGenderButton:active {
+  background-color: var(--bg2);
+}
+
+
 #playerInfoDiv {
   display: none;
   flex-direction: column;

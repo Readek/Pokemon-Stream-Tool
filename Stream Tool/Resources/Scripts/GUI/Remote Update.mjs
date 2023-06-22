@@ -14,6 +14,8 @@ export async function updateGUI(data, noNotif) {
 
         pokemons[i].setSpecies(data.playerPokemons[i].species);
         pokemons[i].setNickName(data.playerPokemons[i].nickName);
+        pokemons[i].setForm(data.playerPokemons[i].form);
+        pokemons[i].setGender(data.playerPokemons[i].gender);
 
     };
 
