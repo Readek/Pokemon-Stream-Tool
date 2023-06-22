@@ -310,6 +310,38 @@ button:hover {
   image-rendering: pixelated;
 }
 
+
+.pokeLvlDiv {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 30px;
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  border-radius: 5px;
+  padding: 0px 0px 0px 6px;
+}
+.pokeLvlDiv:hover {
+  border-color: var(--selected);
+}
+.pokeLvlText {
+  font-weight: bold;
+}
+.pokeLvlNumber {
+  width: 46px;
+  height: 18px;
+  outline: none;
+  border: none;
+  background: var(--bg4);
+  color: var(--text1);
+  font-family: 'Roboto-Medium';
+  font-size: 16px;
+  padding-left: 3px;
+}
+
+
 .pokeForm {
   outline: none;
   height: 30px;
@@ -320,6 +352,9 @@ button:hover {
   padding: 0px 4px;
   box-sizing: border-box;
   border-radius: 5px;
+}
+.pokeForm:hover {
+  border-color: var(--selected);
 }
 
 

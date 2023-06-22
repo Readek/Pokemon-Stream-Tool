@@ -9,11 +9,13 @@ import { pokemons } from "./Pokemon/Pokemons.mjs";
  */
 export async function updateGUI(data, noNotif) {
 
+    console.log(data);
     // poketeam time
     for (let i = 0; i < pokemons.length; i++) {
 
         pokemons[i].setSpecies(data.playerPokemons[i].species);
         pokemons[i].setNickName(data.playerPokemons[i].nickName);
+        pokemons[i].setLvl(data.playerPokemons[i].lvl)
         pokemons[i].setForm(data.playerPokemons[i].form);
         pokemons[i].setGender(data.playerPokemons[i].gender);
 

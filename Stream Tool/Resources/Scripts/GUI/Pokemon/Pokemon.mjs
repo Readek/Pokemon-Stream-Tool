@@ -9,6 +9,7 @@ export class Pokemon {
 
         this.pokeSel = el.getElementsByClassName(`pokeSelector`)[0];
         this.nickInp = el.getElementsByClassName(`pokeNickName`)[0];
+        this.lvlInp = el.getElementsByClassName("pokeLvlNumber")[0];
         this.formSel = el.getElementsByClassName(`pokeForm`)[0];
         this.genderButt = el.getElementsByClassName(`pokeGenderButton`)[0];
         this.genderIcon = el.getElementsByClassName(`pokeGenderIcon`)[0];
@@ -55,6 +56,13 @@ export class Pokemon {
         } else {
             this.nickInp.value = "";
         }
+    }
+
+    getLvl() {
+        return this.lvlInp.value;
+    }
+    setLvl(value) {
+        this.lvlInp.value = value;
     }
 
     getForm() {

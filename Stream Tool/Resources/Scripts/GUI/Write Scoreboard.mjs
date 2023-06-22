@@ -45,6 +45,7 @@ export async function writeScoreboard() {
         scoreboardJson.playerPokemons.push({
             species : pokemons[i].getSpecies(),
             nickName : pokemons[i].getNickName(),
+            lvl : pokemons[i].getLvl(),
             form : pokemons[i].getForm(),
             gender : pokemons[i].getGender(),
             img : pokemons[i].getSriteImgSrc()

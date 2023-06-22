@@ -18,6 +18,7 @@ class Pokemon {
         this.mainEl = el;
 
         this.speciesEl = el.getElementsByClassName(`pokeSpecies`)[0];
+        this.lvlEl = el.getElementsByClassName(`pokeLvlNum`)[0];
         this.nickEl = el.getElementsByClassName(`pokeNick`)[0];
         this.gendEl = el.getElementsByClassName(`pokeGender`)[0];
         this.imgEl = el.getElementsByClassName(`pokeImg`)[0];
@@ -27,6 +28,9 @@ class Pokemon {
     
     setSpecies(species) {
         this.speciesEl.innerHTML = species;
+    }
+    setLvl(lvl) {
+        this.lvlEl.innerHTML = lvl
     }
     setNickname(name) {
         this.nickEl.innerHTML = name;
@@ -110,6 +114,9 @@ async function updateData(data) {
         } else {
             pokemons[i].hidePoke();
         }
+
+        // set level
+        pokemons[i].setLvl(data.playerPokemons[i].lvl);
 
         // set nickname
         pokemons[i].setNickname(data.playerPokemons[i].nickName);
