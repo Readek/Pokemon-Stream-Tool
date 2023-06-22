@@ -4,43 +4,43 @@
       "species": "Snivy",
       "nickName": "Toic",
       "form": "Default",
-      "gender": "M",
+      "gender": "F",
       "img": "../../Resources/Assets/Pokemon/Snivy/Sprite Anim/Default.gif"
-    },
-    {
-      "species": "",
-      "nickName": "",
-      "form": "Shiny",
-      "gender": "M",
-      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Shiny.gif"
     },
     {
       "species": "Purrloin",
       "nickName": "Scug",
       "form": "Default",
-      "gender": "M",
+      "gender": "F",
       "img": "../../Resources/Assets/Pokemon/Purrloin/Sprite Anim/Default.gif"
-    },
-    {
-      "species": "",
-      "nickName": "",
-      "form": "Default",
-      "gender": "M",
-      "img": "../../Resources/Assets/Pokemon//Sprite Anim/Default.gif"
     },
     {
       "species": "Psyduck",
       "nickName": "Migraña",
-      "form": "Shiny",
-      "gender": "M",
-      "img": "../../Resources/Assets/Pokemon/Psyduck/Sprite Anim/Shiny.gif"
+      "form": "Default",
+      "gender": "F",
+      "img": "../../Resources/Assets/Pokemon/Psyduck/Sprite Anim/Default.gif"
     },
     {
       "species": "Mareep",
       "nickName": "jeb_",
       "form": "Default",
-      "gender": "M",
+      "gender": "F",
       "img": "../../Resources/Assets/Pokemon/Mareep/Sprite Anim/Default.gif"
+    },
+    {
+      "species": "Lillipup",
+      "nickName": "Xankleta",
+      "form": "Default",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon/Lillipup/Sprite Anim/Default.gif"
+    },
+    {
+      "species": "Patrat",
+      "nickName": "WatchDogs2",
+      "form": "Default",
+      "gender": "M",
+      "img": "../../Resources/Assets/Pokemon/Patrat/Sprite Anim/Default.gif"
     }
   ],
   "id": "gameData",
