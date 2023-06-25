@@ -1,6 +1,6 @@
 <p align="center">
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/master/Github Resources/Preview GUI.png" alt="GUI Preview">
+  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20GUI.png" alt="GUI Preview">
   
 </p>
 
@@ -19,6 +19,6 @@ This repo is under active WIP! But for now, feature list:
 
 <p align="center">
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/master/Github Resources/Preview Overlay BnW2.png" alt="GUI Preview">
+  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20BnW2.jpg" alt="GUI Preview">
   
 </p>
