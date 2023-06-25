@@ -1,68 +1,75 @@
 {
-  "playerPokemons": [
-    {
-      "species": "Snivy",
-      "nickName": "Toic",
-      "lvl": "10",
-      "form": "Default",
-      "gender": "F",
-      "img": "../../Resources/Assets/Pokemon/Snivy/Sprite Anim/Default.gif"
-    },
-    {
-      "species": "Purrloin",
-      "nickName": "Scug",
-      "lvl": "8",
-      "form": "Default",
-      "gender": "F",
-      "img": "../../Resources/Assets/Pokemon/Purrloin/Sprite Anim/Default.gif"
-    },
-    {
-      "species": "Psyduck",
-      "nickName": "Migraña",
-      "lvl": "6",
-      "form": "Default",
-      "gender": "F",
-      "img": "../../Resources/Assets/Pokemon/Psyduck/Sprite Anim/Default.gif"
-    },
-    {
-      "species": "Mareep",
-      "nickName": "jeb_",
-      "lvl": "7",
-      "form": "Default",
-      "gender": "F",
-      "img": "../../Resources/Assets/Pokemon/Mareep/Sprite Anim/Default.gif"
-    },
-    {
-      "species": "Lillipup",
-      "nickName": "Xankleta",
-      "lvl": "4",
-      "form": "Default",
-      "gender": "M",
-      "img": "../../Resources/Assets/Pokemon/Lillipup/Sprite Anim/Default.gif"
-    },
-    {
-      "species": "Patrat",
-      "nickName": "WatchDogs2",
-      "lvl": "2",
-      "form": "Default",
-      "gender": "M",
-      "img": "../../Resources/Assets/Pokemon/Patrat/Sprite Anim/Default.gif"
+  "storedTeamData": {
+    "id": "gameData",
+    "type": "Team",
+    "playerPokemons": [
+      {
+        "species": "Snivy",
+        "nickName": "Toic",
+        "lvl": "13",
+        "form": "Default",
+        "gender": "F",
+        "img": "../../Resources/Assets/Pokemon/Snivy/Sprite Anim/Default.gif"
+      },
+      {
+        "species": "Riolu",
+        "nickName": "Rico",
+        "lvl": "11",
+        "form": "Default",
+        "gender": "M",
+        "img": "../../Resources/Assets/Pokemon/Riolu/Sprite Anim/Default.gif"
+      },
+      {
+        "species": "Mareep",
+        "nickName": "jeb_",
+        "lvl": "11",
+        "form": "Default",
+        "gender": "F",
+        "img": "../../Resources/Assets/Pokemon/Mareep/Sprite Anim/Default.gif"
+      },
+      {
+        "species": "Venipede",
+        "nickName": "Dropwig",
+        "lvl": "10",
+        "form": "Default",
+        "gender": "F",
+        "img": "../../Resources/Assets/Pokemon/Venipede/Sprite Anim/Default.gif"
+      },
+      {
+        "species": "Psyduck",
+        "nickName": "Migraña",
+        "lvl": "9",
+        "form": "Default",
+        "gender": "F",
+        "img": "../../Resources/Assets/Pokemon/Psyduck/Sprite Anim/Default.gif"
+      },
+      {
+        "species": "Purrloin",
+        "nickName": "Scug",
+        "lvl": "10",
+        "form": "Default",
+        "gender": "F",
+        "img": "../../Resources/Assets/Pokemon/Purrloin/Sprite Anim/Default.gif"
+      }
+    ]
+  },
+  "storedPlayerData": {
+    "id": "gameData",
+    "type": "Player",
+    "player": {
+      "badges": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "catches": "12",
+      "kills": "27",
+      "deaths": "18"
     }
-  ],
-  "id": "gameData",
-  "player": {
-    "badges": [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    ],
-    "catches": "6",
-    "kills": "13",
-    "deaths": "2"
   }
 }

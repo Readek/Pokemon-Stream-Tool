@@ -119,24 +119,13 @@ button:hover {
 }
 
 
-/* main viewport */
+/* now for some actual elements */
 #viewport {
-  position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  transition: transform 300ms ease;
-}
-
-
-/* where all the magic happens */
-#overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: opacity 300ms;
   display: flex;
   flex-direction: column;
+  transition: transform 300ms ease, opacity 300ms;
 }
 
 
@@ -144,19 +133,70 @@ button:hover {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 5px;
+  padding: 7px;
+  gap: 10px;
+  border-bottom: 1px solid var(--focused);
+  background-color: var(--bg5);
+}
+.topBarButton, .updateButt {
+  padding: 2px 5px;
+  font-size: 14px;
+  height: 32px;
+  font-family: "Roboto-Medium";
+  border: solid 2px var(--focused);
+  border-radius: 5px;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 100ms;
+}
+.topBarButton:hover, .updateButt:hover{
+  border: solid 2px var(--text2);
+}
+.topBarButton:active, .updateButt:active {
+  filter: brightness(.8);
+}
+.topBarSelected {
+  background: var(--bg2);
+}
+
+.pokeballIcon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text2);
+  fill: none;
+}
+.personIcon {
+  width: 20px;
+  height: 20px;
+  fill: var(--text2);
+}
+#configIcon, #checkIcon {
+  width: 20px;
+  height: 20px;
+  fill: var(--text2);
+}
+
+
+
+#content {
+  height: 100%;
+}
+
+
+.region {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
   gap: 10px;
 }
 
 
-/* player stuff */
-#playerRegion {
-  display: flex;
-  height: 100%;
-  padding: 10px;
-}
-
-
+/* team stuff */
 #pokeParty {
   display: flex;
   flex-direction: column;
@@ -302,12 +342,16 @@ button:hover {
   position: relative;
 }
 
-
 .fIconImg {
   width: 40px;
   height: 30px;
   object-fit: contain;
   image-rendering: pixelated;
+}
+
+
+.pokeNickName {
+  width: 120px;
 }
 
 
@@ -380,11 +424,9 @@ button:hover {
 }
 
 
-#playerInfoDiv {
+/* Player Info stuff */
+#playerInfoRegion {
   display: none;
-  flex-direction: column;
-  gap: 10px;
-  height: 100%;
 }
 
 #gymBadges {
@@ -399,106 +441,51 @@ button:hover {
   filter: grayscale(1);
   opacity: .5;
 }
+.gymBadgeButton {
+  transition: transform 100ms;
+}
+.gymBadgeButton:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
 
 #playerStats {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
 }
-
-
-/* the bottom bar */
-#botBar {
-  width: 100%;
-  height: 28px;
-  display: flex;
-  background-color: var(--bg5);
-  cursor: pointer;
-}
-
-.botRegion {
-  width: 100%;
-  height: 100%;
+.statDiv {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 5px;
+}
+.statInput {
+  width: 60px;
 }
 
-.botText {
-  color: var(--text1);
-  font-family: 'Roboto-Medium';
-  white-space: nowrap;
-}
-
-.rectangle {
-  height: 2px;
-  width: 100%;
-  margin: 10px;
-  background-color: var(--text2);
-}
-
-#updateRegion:hover {
-  background-color: var(--bg3);
-}
-#updateRegion:active{
-  background-color: var(--bg5);
-}
-
-#settingsRegion {
-  width: 32px;
-  background-color: var(--bg3)
-}
-
-#configIcon {
+.knifeIcon, .skullIcon {
   width: 20px;
   height: 20px;
   fill: var(--text2);
 }
 
-#settingsRegion:hover {
-  background-color: var(--bg1);
-}
 
-#settingsRegion:active{
-  background-color: var(--bg5);
+/* Settings stuff */
+#settingsRegion {
+  display: none;
 }
 
 
 /* settings section */
-#settings {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: var(--bg5);
-  z-index: 2;
-  transform: translateX(100%);
-}
-
-
-#actualSettings {
-  width: 240px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-
-#settingsTitleTop {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Roboto-Medium";
-  background-color: var(--bg3);
-  border-bottom-style: solid;
-  border-color: var(--bg4);
-}
-
 #settingsList {
   overflow-y: auto;
   height: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
 .settingsTitle {
@@ -511,10 +498,7 @@ button:hover {
   padding: 5px 0px;
   margin-bottom: 4px;
 }
-.settingsTitle:not(:first-child) {
-  border-top: solid 3px var(--bg4);
-  margin-top: 10px;
-}
+
 
 .settingBox {
   padding: 2px 0px 2px 5px;
@@ -558,11 +542,6 @@ button:hover {
   filter: brightness(.8);
 }
 
-#settingsElectron {
-  border-top: solid 3px var(--bg4);
-  margin-top: 10px;
-}
-
 #zoomDiv {
   width: 100%;
   display: flex;
@@ -580,16 +559,6 @@ button:hover {
 .zoomButton {
   width: 24px;
   height: 24px;
-}
-
-
-/* clickable area that gets enabled when moving the viewport */
-#goBack {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
-  display: none;
 }
 
 

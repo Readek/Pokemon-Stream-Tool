@@ -1,6 +1,7 @@
 import { saveJson } from './File System.mjs';
+import { updatePlayer } from './Player/Update Player.mjs';
+import { updateTeam } from './Pokemon/Update Team.mjs';
 import { updateGUI } from './Remote Update.mjs';
-import { writeScoreboard } from './Write Scoreboard.mjs';
 
 const ipc = require('electron').ipcRenderer;
 
@@ -14,27 +15,40 @@ const ipc = require('electron').ipcRenderer;
 
 
 // we will store data to send to the browsers here
-let gameData;
+let teamData, playerData;
 
 
 // when a new browser connects
 ipc.on('requestData', () => {
 
     // send the current (not updated) data
-    sendGameData();
+    sendTeamData();
+    sendPlayerData();
 
 })
 
 /** Sends current game data object to websocket clients */
-export function sendGameData() {
-    ipc.send('sendData', gameData);
+export function sendTeamData() {
+    ipc.send('sendData', teamData);
 }
-export function updateGameData(data) {
-    gameData = data;
+export function updateTeamData(data) {
+    teamData = data;
 }
 /** Sends current game data to remote GUIs */
-export function sendRemoteGameData() {
-    ipc.send("sendData", JSON.stringify(remoteID(gameData), null, 2));
+export function sendRemoteTeamData() {
+    ipc.send("sendData", JSON.stringify(remoteID(teamData), null, 2));
+}
+
+/** Sends current game data object to websocket clients */
+export function sendPlayerData() {
+    ipc.send('sendData', playerData);
+}
+export function updatePlayerData(data) {
+    playerData = data;
+}
+/** Sends current game data to remote GUIs */
+export function sendRemotePlayerData() {
+    ipc.send("sendData", JSON.stringify(remoteID(playerData), null, 2));
 }
 
 /**
@@ -79,12 +93,17 @@ ipc.on('remoteGuiData', async (event, data) => {
 
         // when we get data from remote GUIs
         await updateGUI(jsonData);
-        writeScoreboard();
+        if (jsonData.type == "Team") {
+            updateTeam();
+        } else if (jsonData.type == "Player") {
+            updatePlayer();
+        }
 
     } else if (jsonData.message == "RemoteRequestData") {
 
         // when remote GUIs request data
-        sendRemoteGameData();
+        sendRemoteTeamData();
+        sendRemotePlayerData();
         
     } else if (jsonData.message == "RemoteSaveJson") {
 

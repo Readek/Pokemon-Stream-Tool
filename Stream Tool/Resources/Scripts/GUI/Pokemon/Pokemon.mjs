@@ -3,7 +3,7 @@ import { stPath } from "../Globals.mjs";
 
 export class Pokemon {
 
-    #gender;
+    #gender = "M";
 
     constructor(el) {
 

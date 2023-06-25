@@ -1,4 +1,3 @@
-import { viewport } from "./Viewport.mjs";
 import { inside, stPath } from "./Globals.mjs";
 import { getJson, saveJson } from "./File System.mjs";
 
@@ -27,11 +26,6 @@ class GuiSettings {
         } else {
             document.getElementById("settingsElectron").style.display = "none";
         }
-
-        // clicking the settings button will bring up the menu
-        document.getElementById('settingsRegion').addEventListener("click", () => {
-            viewport.toSettings();
-        });
 
     }
 

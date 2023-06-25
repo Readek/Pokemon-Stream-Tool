@@ -102,45 +102,55 @@ function errorWebsocket() {
 }
 
 
-
+/**
+ * Updates overlay data with a provided object
+ * @param {Object} data 
+ */
 async function updateData(data) {
 
-    for (let i = 0; i < data.playerPokemons.length; i++) {
+    if (data.type == "Team") {
+        
+        // pokemon team update
+        for (let i = 0; i < data.playerPokemons.length; i++) {
 
-        // set species
-        if (data.playerPokemons[i].species) {
-            pokemons[i].setSpecies(data.playerPokemons[i].species);
-            pokemons[i].showPoke();
-        } else {
-            pokemons[i].hidePoke();
+            // set species
+            if (data.playerPokemons[i].species) {
+                pokemons[i].setSpecies(data.playerPokemons[i].species);
+                pokemons[i].showPoke();
+            } else {
+                pokemons[i].hidePoke();
+            }
+    
+            // set level
+            pokemons[i].setLvl(data.playerPokemons[i].lvl);
+    
+            // set nickname
+            pokemons[i].setNickname(data.playerPokemons[i].nickName);
+    
+            // set gender
+            pokemons[i].setGender(data.playerPokemons[i].gender);
+    
+            // set image
+            pokemons[i].setImg(data.playerPokemons[i].img);
+            
         }
 
-        // set level
-        pokemons[i].setLvl(data.playerPokemons[i].lvl);
+    } else if (data.type == "Player") {
 
-        // set nickname
-        pokemons[i].setNickname(data.playerPokemons[i].nickName);
+        // display those shiny gym badges
+        for (let i = 0; i < data.player.badges.length; i++) {
+            if (data.player.badges[i]) {
+                badges[i].style.opacity = 1;
+            } else {
+                badges[i].style.opacity = 0;
+            }
+        }
 
-        // set gender
-        pokemons[i].setGender(data.playerPokemons[i].gender);
-
-        // set image
-        pokemons[i].setImg(data.playerPokemons[i].img);
+        // get us those sweet stats
+        catchesNum.innerText = data.player.catches;
+        killsNum.innerText = data.player.kills;
+        deathsNum.innerText = data.player.deaths;
         
     }
-
-    // display those shiny gym badges
-    for (let i = 0; i < data.player.badges.length; i++) {
-        if (data.player.badges[i]) {
-            badges[i].style.opacity = 1;
-        } else {
-            badges[i].style.opacity = 0;
-        }
-    }
-
-    // get us those sweet stats
-    catchesNum.innerText = data.player.catches;
-    killsNum.innerText = data.player.kills;
-    deathsNum.innerText = data.player.deaths;
 
 }

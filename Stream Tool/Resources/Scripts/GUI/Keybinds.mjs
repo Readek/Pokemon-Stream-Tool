@@ -1,7 +1,5 @@
 import { pokeFinder } from './Finder/Pokemon Finder.mjs';
-import { current, inside } from './Globals.mjs';
-import { viewport } from './Viewport.mjs';
-import { writeScoreboard } from './Write Scoreboard.mjs';
+import { current } from './Globals.mjs';
 
 export function loadKeybinds() {
 
@@ -13,23 +11,13 @@ export function loadKeybinds() {
             if (pokeFinder.isVisible()) {
                 pokeFinder.getFinderEntries()[current.focus].click();
             }
-        } else {
-            // update scoreboard info (updates botBar color for visual feedback)
-            writeScoreboard();
-            document.getElementById('botBar').style.backgroundColor = "var(--bg3)";
         }
 
     }, 'keydown');
-    // when releasing enter, change bottom bar's color back to normal
-    Mousetrap.bind('enter', () => {
-        document.getElementById('botBar').style.backgroundColor = "var(--bg5)";
-    }, 'keyup');
 
     // esc
     Mousetrap.bind('esc', () => {
-        if (inside.settings) {
-            viewport.toCenter();
-        } else if (pokeFinder.isVisible()) {
+        if (pokeFinder.isVisible()) {
             document.activeElement.blur();
         }
     });

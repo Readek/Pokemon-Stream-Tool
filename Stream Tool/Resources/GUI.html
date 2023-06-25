@@ -14,15 +14,24 @@
 
 <div id="viewport"> <!-- so we can move the viewport easily -->
 
-  <div id="overlay">
+  <div id="topBar">
+    <button id="topBarTeam" class="topBarButton topBarSelected">
+      <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+      <div class="topBarText">Team</div>
+    </button>
+    <button id="topBarPlayer" class="topBarButton">
+      <load-svg src="SVGs/Person.svg" class="personIcon"></load-svg>
+      <div class="topBarText">Player</div>
+    </button>
+    <button id="topBarSettings" class="topBarButton">
+      <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
+      <div class="tobBarText">Settings</div>
+    </button>
+  </div>
 
-    <div id="topBar">
-      <button id="topBarTeam" class="topBarButton">Team</button>
-      <button id="topBarPlayer" class="topBarButton">Player</button>
-      <button id="topBarSettings" class="topBarButton">Settings</button>
-    </div>
+  <div id="content">
 
-    <div id="playerRegion">
+    <div id="teamRegion" class="region">
 
       <div id=pokeParty>
 
@@ -190,9 +199,14 @@
 
       </div>
 
+      <button id="updateTeamButt" class="updateButt">
+        <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+        <div id="updateTeamText">UPDATE TEAM</div>
+      </button>
+
     </div>
 
-    <div id="playerInfoDiv">
+    <div id="playerInfoRegion" class="region">
 
       <div id="gymBadges">
         <button class="gymBadgeButton badgeDisabled" id="badge1">
@@ -224,92 +238,71 @@
       <div id="playerStats">
 
         <div class="statDiv">
-          <div class="statText">Catches</div>
-          <input type="number" id="catchesInput" value="0">
+          <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon" title="Catches"></load-svg>
+          <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0" title="Catches">
         </div>
         
         <div class="statDiv">
-          <div class="statText">Kills</div>
-          <input type="number" id="killsInput" value="0">
+          <load-svg src="SVGs/Knife.svg" class="knifeIcon" title="Kills"></load-svg>
+          <input type="number" id="killsInput" class="statInput textInput mousetrap" value="0" title="Kills">
         </div>
 
         <div class="statDiv">
-          <div class="statText">Deaths</div>
-          <input type="number" id="deathsInput" value="0">
+          <load-svg src="SVGs/Skull.svg" class="skullIcon" title="Deaths"></load-svg>
+          <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0" title="Deaths">
         </div>
 
       </div>
+
+      <button id="updatePlayerButt" class="updateButt">
+        <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+        <div id="updatePlayerText">UPDATE PLAYER</div>
+      </button>
   
     </div>
 
-    <div id="botRegion">
-      
-      <div id="botBar">
-
-        <button id="updateRegion" class="botRegion" title="Save current info to the json file. [Shortcut: Enter]">
-          <div class="rectangle"></div>
-          <span class="botText">UPDATE</span>
-          <div class="rectangle"></div>
-        </button>
-
-        <button id="settingsRegion" class="botRegion" title="Go to settings">
-          <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div id="settings">
-
-    <div id="actualSettings">
-
-      <div id="settingsTitleTop">SETTINGS</div>
-
-      <div id="settingsList">
-
-        <div id="settingsElectron">
-
-          <div class="settingsTitle">Window Settings</div>
-
-          <div class="settingBox" title="Prevents other windows to be displayed on top of this one.">
-            <input type="checkbox" id="alwaysOnTop" class="settingsCheck" tabindex="-1">
-            <label for="alwaysOnTop" class="settingsText">Window always on top</span>
-          </div>
+    <div id="settingsRegion" class="region">
+    
+        <div id="settingsList">
   
-          <div class="settingBox" title="Unlocks window resizing">
-            <input type="checkbox" id="resizableWindow" class="settingsCheck" tabindex="-1">
-            <label for="resizableWindow" class="settingsText">Resizable window</span>
-          </div>
+          <div id="settingsElectron">
   
-          <div class="settingBox">
-            <div id="zoomDiv">
-              <div id="zoomText">Zoom: </div>
-              <div id="zoomButtonsDiv">
-                <button class="settingsButton zoomButton" id="lessZoomButt">-</button>
-                <div id="zoomTextValue">100%</div>
-                <button class="settingsButton zoomButton" id="moreZoomButt">+</button>
-              </div>            
+            <div class="settingsTitle">Window Settings</div>
+  
+            <div class="settingBox" title="Prevents other windows to be displayed on top of this one.">
+              <input type="checkbox" id="alwaysOnTop" class="settingsCheck" tabindex="-1">
+              <label for="alwaysOnTop" class="settingsText">Window always on top</span>
             </div>
+    
+            <div class="settingBox" title="Unlocks window resizing">
+              <input type="checkbox" id="resizableWindow" class="settingsCheck" tabindex="-1">
+              <label for="resizableWindow" class="settingsText">Resizable window</span>
+            </div>
+    
+            <div class="settingBox">
+              <div id="zoomDiv">
+                <div id="zoomText">Zoom: </div>
+                <div id="zoomButtonsDiv">
+                  <button class="settingsButton zoomButton" id="lessZoomButt">-</button>
+                  <div id="zoomTextValue">100%</div>
+                  <button class="settingsButton zoomButton" id="moreZoomButt">+</button>
+                </div>            
+              </div>
+            </div>
+    
+            <div id="settingsButtonSection">
+              <button class="settingsButton" id="restoreWindowButt" tabindex="-1" title='Restores the default window width, height, and zoom values'>
+                Restore default dimensions
+              </button>
+            </div>
+  
           </div>
   
-          <div id="settingsButtonSection">
-            <button class="settingsButton" id="restoreWindowButt" tabindex="-1" title='Restores the default window width, height, and zoom values'>
-              Restore default dimensions
-            </button>
-          </div>
-
         </div>
-
-      </div>
-
+    
     </div>
 
   </div>
-
-  <div id="goBack"></div>
 
 </div>
 

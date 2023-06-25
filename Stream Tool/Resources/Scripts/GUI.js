@@ -2,11 +2,12 @@ import { loadKeybinds } from './GUI/Keybinds.mjs';
 import { inside, stPath } from './GUI/Globals.mjs';
 import { pokemons } from './GUI/Pokemon/Pokemons.mjs'
 import { settings } from './GUI/Settings.mjs';
-import { writeScoreboard } from './GUI/Write Scoreboard.mjs';
 import { Pokemon } from './GUI/Pokemon/Pokemon.mjs';
 import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
 import { updateGUI } from './GUI/Remote Update.mjs';
 import { getJson } from './GUI/File System.mjs';
+import { updatePlayer } from './GUI/Player/Update Player.mjs';
+import { updateTeam } from './GUI/Pokemon/Update Team.mjs';
 // so it loads the listeners
 import './GUI/Top Bar.mjs';
 
@@ -48,8 +49,16 @@ async function init() {
 
     // update the GUI on startup so we have something to send to browsers
     if (inside.electron) {
-        updateGUI(await getJson(`${stPath.text}/GUI State`), true);
-        writeScoreboard();
+
+        // load previous gui state
+        const storedData = await getJson(`${stPath.text}/GUI State`);
+        updateGUI(storedData.storedTeamData, true);
+        updateGUI(storedData.storedPlayerData, true);
+
+        // send that data
+        updatePlayer();
+        updateTeam();
+
     } else { // remote GUIs will ask about the current main GUI state
         const remote = await import("./GUI/Remote Requests.mjs");
         remote.startWebsocket();
