@@ -7,7 +7,11 @@ const pokeInfo = dexGen.get(current.generation).species;
 export class Pokemon {
 
     #gender = "M";
-    #types = [];
+    #pokeData;
+    #baseFormPokeData;
+    #form = ""; //Short name.
+    #formNames = []; //These can be used as identifiers for pokeInfo.get(); e.g., "Wormadam-Trash".
+    #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
 
     constructor(el) {
 
@@ -52,22 +56,30 @@ export class Pokemon {
         } else {
 
             // this will fetch us all the data we will ever need
-            const pokeData = pokeInfo.get(name);
+            // We should consider migrating this logic to another class.
+            this.#pokeData = pokeInfo.get(name);
+            this.#baseFormPokeData = pokeInfo.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
 
             // set the pokemon name and icon on the selector
             this.pokeSel.children[1].innerHTML = name;
             this.pokeSel.children[0].src = `${stPath.poke}/${name}/Icon/Default.png`;
 
-            // set pokemon types
-            this.#types = pokeData.types;
-            this.typeImg1.src = `${stPath.assets}/Type Icons/${this.#types[0]}.png`;
-            if (this.#types[1]) {
-                this.typeImg2.src = `${stPath.assets}/Type Icons/${this.#types[1]}.png`;
+            // set types from @pkmn/data Specie object
+            let types = this.#pokeData.types;
+            this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
+            if (types[1]) {
+                this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
                 this.typeImg2.style.display = "block";
             } else {
                 this.typeImg2.style.display = "none";
             }
-
+            // sets the form lists.
+            this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
+            this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
+            this.#shortFormNames = this.#formNames.map( (speciesName) => {
+                let forme = pokeInfo.get(speciesName);
+                return forme.forme || forme.baseForme || "Base"; //Either the correct form name or "Base".
+            });
         }
 
     }
@@ -94,7 +106,15 @@ export class Pokemon {
         return this.formSel.value;
     }
     setForm(value) {
+        //value = formName
         this.formSel.value = value;
+        let form = this.#formNames[this.#shortFormNames.indexOf(value)];
+        this.setSpecies(form);
+        //Untested.
+    }
+
+    getFormNames() {
+        return this.#shortFormNames;
     }
 
     getGender() {
@@ -113,7 +133,7 @@ export class Pokemon {
     }
 
     getTypes() {
-        return this.#types;
+        return this.#pokeData.types;
     }
 
     getSriteImgSrc() {

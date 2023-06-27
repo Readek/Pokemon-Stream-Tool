@@ -15,23 +15,28 @@ class PokeFinder extends FinderSelect {
         const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
         const gen = dexGens.get(current.generation);
 
+        const speciesList = [...gen.species].filter( 
+            (poke) => (!poke.forme) // Checks if the Pokémon is not a forme (other than the base forme).
+        ).sort( 
+            (poke1, poke2) => (poke1.num - poke2.num) // Sorts by National Dex number. 
+        );
         // add entries to the character list
-        for (let pokemon of gen.species) {
+        for (let pokemon of speciesList) {
 
             // this will be the div to click
             const newDiv = document.createElement('div');
             newDiv.className = "finderEntry";
-            newDiv.addEventListener("click", () => {this.#entryClick(pokemon.baseSpecies)});
+            newDiv.addEventListener("click", () => {this.#entryClick(pokemon.name)});
 
             // character icon
             const imgIcon = document.createElement('img');
             imgIcon.className = "fIconImg";
             // this will get us the true default icon for any character
-            imgIcon.src = `${stPath.poke}/${pokemon.baseSpecies}/Icon/Default.png`;
+            imgIcon.src = `${stPath.poke}/${pokemon.name}/Icon/Default.png`;
             
             // pokemon name
             const spanName = document.createElement('span');
-            spanName.innerHTML = pokemon.baseSpecies;
+            spanName.innerHTML = pokemon.name;
             spanName.className = "pfName";
 
             // add them to the div we created before
