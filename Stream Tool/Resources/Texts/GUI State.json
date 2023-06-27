@@ -9,6 +9,9 @@
         "lvl": "13",
         "form": "Default",
         "gender": "F",
+        "types": [
+          "Grass"
+        ],
         "img": "../../Resources/Assets/Pokemon/Snivy/Sprite Anim/Default.gif"
       },
       {
@@ -17,6 +20,9 @@
         "lvl": "11",
         "form": "Default",
         "gender": "M",
+        "types": [
+          "Fighting"
+        ],
         "img": "../../Resources/Assets/Pokemon/Riolu/Sprite Anim/Default.gif"
       },
       {
@@ -25,6 +31,9 @@
         "lvl": "11",
         "form": "Default",
         "gender": "F",
+        "types": [
+          "Electric"
+        ],
         "img": "../../Resources/Assets/Pokemon/Mareep/Sprite Anim/Default.gif"
       },
       {
@@ -33,6 +42,10 @@
         "lvl": "10",
         "form": "Default",
         "gender": "F",
+        "types": [
+          "Bug",
+          "Poison"
+        ],
         "img": "../../Resources/Assets/Pokemon/Venipede/Sprite Anim/Default.gif"
       },
       {
@@ -41,6 +54,9 @@
         "lvl": "9",
         "form": "Default",
         "gender": "F",
+        "types": [
+          "Water"
+        ],
         "img": "../../Resources/Assets/Pokemon/Psyduck/Sprite Anim/Default.gif"
       },
       {
@@ -49,6 +65,9 @@
         "lvl": "10",
         "form": "Default",
         "gender": "F",
+        "types": [
+          "Dark"
+        ],
         "img": "../../Resources/Assets/Pokemon/Purrloin/Sprite Anim/Default.gif"
       }
     ]

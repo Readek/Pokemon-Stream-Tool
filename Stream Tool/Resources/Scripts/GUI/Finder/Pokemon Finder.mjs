@@ -1,5 +1,4 @@
-import { getCharacterList } from '../File System.mjs';
-import { stPath } from '../Globals.mjs';
+import { current, stPath } from '../Globals.mjs';
 import { FinderSelect } from './Finder Select.mjs';
 
 class PokeFinder extends FinderSelect {
@@ -13,26 +12,26 @@ class PokeFinder extends FinderSelect {
     /** Fills the character list with each folder on the Characters folder */
     async loadCharacters() {
 
-        // create a list with folder names on charPath
-        const pokemonList = await getCharacterList();
+        const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
+        const gen = dexGens.get(current.generation);
 
         // add entries to the character list
-        for (let i = 0; i < pokemonList.length; i++) {
+        for (let pokemon of gen.species) {
 
             // this will be the div to click
             const newDiv = document.createElement('div');
             newDiv.className = "finderEntry";
-            newDiv.addEventListener("click", () => {this.#entryClick(pokemonList[i])});
+            newDiv.addEventListener("click", () => {this.#entryClick(pokemon.baseSpecies)});
 
             // character icon
             const imgIcon = document.createElement('img');
             imgIcon.className = "fIconImg";
             // this will get us the true default icon for any character
-            imgIcon.src = `${stPath.poke}/${pokemonList[i]}/Icon/Default.png`;
+            imgIcon.src = `${stPath.poke}/${pokemon.baseSpecies}/Icon/Default.png`;
             
             // pokemon name
             const spanName = document.createElement('span');
-            spanName.innerHTML = pokemonList[i];
+            spanName.innerHTML = pokemon.baseSpecies;
             spanName.className = "pfName";
 
             // add them to the div we created before

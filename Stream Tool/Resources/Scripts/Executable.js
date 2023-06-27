@@ -56,7 +56,7 @@ function initHttpServer() {
                 fname = resourcesPath + request.url;
             }
             try {
-                fname = fname.replaceAll("%20", " ");
+                fname = decodeURI(fname);
                 if (request.method === "GET") {
                     fs.readFile(fname, (err, data) => {
                         if (err) {

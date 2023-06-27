@@ -436,6 +436,7 @@ button:hover {
 .typeIcon {
   height: 30px;
   margin: 0px -2px;
+  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.5));
 }
 
 

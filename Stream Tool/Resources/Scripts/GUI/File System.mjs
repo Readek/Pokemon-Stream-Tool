@@ -51,36 +51,6 @@ export async function fileExists(filePath) {
 }
 
 /**
- * Generates a character list depending on the folders of the character path
- * @returns Character list array
- */
-export async function getCharacterList() {
-
-    if (inside.electron) {
-        
-        // create a list with folder names on pokePath
-        const fs = require('fs');
-        const pokemonList = fs.readdirSync(stPath.poke, { withFileTypes: true })
-            .filter(dirent => dirent.isDirectory())
-            .map(dirent => dirent.name)
-
-        // add None to the end of the character list
-        pokemonList.push("None");
-
-        // save the data for the remote gui
-        saveJson(`/Pokemon List`, pokemonList);
-
-        return pokemonList;
-
-    } else {
-        
-        return await getJson(`${stPath.text}/Pokemon List`);
-
-    }
-
-}
-
-/**
  * Saves a local json file with the provided values
  * @param {String} path - Path where the file will be saved
  * @param {Object} data - Data to be saved
