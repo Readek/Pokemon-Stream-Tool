@@ -53,6 +53,14 @@ class Pokemon {
         this.mainEl.style.display = "block";
     }
 
+    setBackgroundColor(types, typeColors) {
+        if (types.length == 2) {
+            this.mainEl.style.background = `linear-gradient(to bottom, ${typeColors[1]}35, ${typeColors[0]}35)`;
+        } else if (types.length == 1) {
+            this.mainEl.style.background = `${typeColors[0]}35`;
+        }
+    }
+
 }
 
 const pokemons = [];
@@ -129,6 +137,10 @@ async function updateData(data) {
     
             // set gender
             pokemons[i].setGender(data.playerPokemons[i].gender);
+
+            // set background color
+            pokemons[i].setBackgroundColor(data.playerPokemons[i].types,
+                data.playerPokemons[i].typeColors);
     
             // set image
             pokemons[i].setImg(data.playerPokemons[i].img);

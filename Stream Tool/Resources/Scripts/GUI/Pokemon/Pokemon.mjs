@@ -1,5 +1,6 @@
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, stPath } from "../Globals.mjs";
+import { typeToColor } from "../Type to Color.mjs";
 
 const dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
 const pokeInfo = dexGen.get(current.generation).species;
@@ -134,6 +135,9 @@ export class Pokemon {
 
     getTypes() {
         return this.#pokeData.types;
+    }
+    getTypeColors() {
+        return this.getTypes().map( (type) => (typeToColor(type)) );
     }
 
     getSriteImgSrc() {
