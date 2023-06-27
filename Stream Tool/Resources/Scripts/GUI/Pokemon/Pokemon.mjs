@@ -1,9 +1,13 @@
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
-import { stPath } from "../Globals.mjs";
+import { current, stPath } from "../Globals.mjs";
+
+const dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
+const pokeInfo = dexGen.get(current.generation).species;
 
 export class Pokemon {
 
     #gender = "M";
+    #types = [];
 
     constructor(el) {
 
@@ -11,8 +15,13 @@ export class Pokemon {
         this.nickInp = el.getElementsByClassName(`pokeNickName`)[0];
         this.lvlInp = el.getElementsByClassName("pokeLvlNumber")[0];
         this.formSel = el.getElementsByClassName(`pokeForm`)[0];
+
         this.genderButt = el.getElementsByClassName(`pokeGenderButton`)[0];
         this.genderIcon = el.getElementsByClassName(`pokeGenderIcon`)[0];
+
+        this.typeImg1 = el.getElementsByClassName('typeIcon1')[0];
+        this.typeImg2 = el.getElementsByClassName('typeIcon2')[0];
+        
         
         // set a listener that will trigger when pokemon selector is clicked
         this.pokeSel.addEventListener("click", () => {
@@ -36,13 +45,29 @@ export class Pokemon {
      */
     setSpecies(name) {
 
-        // set the pokemon name and icon on the selector
+        // if we select none, just display nothin
         if (!name || name == "None") {
             this.pokeSel.children[1].innerHTML = "";
             this.pokeSel.children[0].src = `${stPath.poke}/../None.png`;
         } else {
+
+            // this will fetch us all the data we will ever need
+            const pokeData = pokeInfo.get(name);
+
+            // set the pokemon name and icon on the selector
             this.pokeSel.children[1].innerHTML = name;
             this.pokeSel.children[0].src = `${stPath.poke}/${name}/Icon/Default.png`;
+
+            // set pokemon types
+            this.#types = pokeData.types;
+            this.typeImg1.src = `${stPath.assets}/Type Icons/${this.#types[0]}.png`;
+            if (this.#types[1]) {
+                this.typeImg2.src = `${stPath.assets}/Type Icons/${this.#types[1]}.png`;
+                this.typeImg2.style.display = "block";
+            } else {
+                this.typeImg2.style.display = "none";
+            }
+
         }
 
     }
@@ -77,15 +102,18 @@ export class Pokemon {
     }
     setGender(value) {
         this.#gender = value;
-        this.genderIcon.src = `Assets/Gender ${value}.png`;
+        this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
     }
-
     swapGender() {
         if (this.getGender() == "M") {
             this.setGender("F");
         } else {
             this.setGender("M");
         }
+    }
+
+    getTypes() {
+        return this.#types;
     }
 
     getSriteImgSrc() {

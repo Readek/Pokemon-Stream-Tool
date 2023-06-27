@@ -424,6 +424,21 @@ button:hover {
 }
 
 
+.pokeTypeDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 56px;
+  background-color: var(--bg4);
+  border-radius: 5px;
+}
+.typeIcon {
+  height: 30px;
+  margin: 0px -2px;
+}
+
+
 /* Player Info stuff */
 #playerInfoRegion {
   display: none;

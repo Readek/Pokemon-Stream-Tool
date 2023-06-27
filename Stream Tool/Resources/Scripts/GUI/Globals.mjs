@@ -9,10 +9,12 @@ export const inside = {
 const realPath = inside.electron ? __dirname : ""; // local file path if in executable
 export const stPath = {
     poke: realPath + "/Assets/Pokemon",
+    assets: realPath + "/Assets",
     text : realPath + '/Texts',
 };
 
 /** Current values for stuff */
 export const current = {
-    focus : -1
+    focus : -1,
+    generation : 5
 }
