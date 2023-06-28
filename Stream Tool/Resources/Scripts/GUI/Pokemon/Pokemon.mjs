@@ -1,6 +1,5 @@
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, stPath } from "../Globals.mjs";
-import { typeToColor } from "../Type to Color.mjs";
 
 const dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
 const pokeInfo = dexGen.get(current.generation).species;
@@ -81,6 +80,22 @@ export class Pokemon {
                 let forme = pokeInfo.get(speciesName);
                 return forme.forme || forme.baseForme || "Base"; //Either the correct form name or "Base".
             });
+
+            // gender locking
+            if (pokeData.genderRatio.M == 1) {
+                this.setGender("M");
+                this.disableGenderButt();
+            } else if (pokeData.genderRatio.F == 1) {
+                this.setGender("F");
+                this.disableGenderButt();
+            } else if (pokeData.genderRatio.M == 0 && pokeData.genderRatio.F == 0) {
+                this.setGender();
+                this.disableGenderButt();
+            } else {
+                this.enableGenderButt();
+            }
+            
+
         }
 
     }
@@ -122,8 +137,13 @@ export class Pokemon {
         return this.#gender;
     }
     setGender(value) {
-        this.#gender = value;
-        this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
+        if (value) {
+            this.#gender = value;
+            this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
+        } else {
+            this.#gender = "M";
+            this.genderIcon.src = `${stPath.assets}/Gender N.png`;
+        }
     }
     swapGender() {
         if (this.getGender() == "M") {
@@ -132,12 +152,15 @@ export class Pokemon {
             this.setGender("M");
         }
     }
+    disableGenderButt() {
+        this.genderButt.disabled = true;
+    }
+    enableGenderButt() {
+        this.genderButt.disabled = false;
+    }
 
     getTypes() {
         return this.#pokeData.types;
-    }
-    getTypeColors() {
-        return this.getTypes().map( (type) => (typeToColor(type)) );
     }
 
     getSriteImgSrc() {

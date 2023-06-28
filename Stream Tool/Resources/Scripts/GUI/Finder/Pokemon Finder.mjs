@@ -48,6 +48,23 @@ class PokeFinder extends FinderSelect {
 
         }
 
+        // add a final "None" button
+        const newDiv = document.createElement('div');
+        newDiv.className = "finderEntry";
+        newDiv.addEventListener("click", () => {this.#entryClick("None")});
+
+        const imgIcon = document.createElement('img');
+        imgIcon.className = "fIconImg";
+        imgIcon.src = `${stPath.assets}/None.png`;
+        
+        const spanName = document.createElement('span');
+        spanName.innerHTML = "None";
+        spanName.className = "pfName";
+
+        newDiv.appendChild(imgIcon);
+        newDiv.appendChild(spanName);
+        this.addEntry(newDiv);
+
     }
 
     #entryClick(pokeName) {
