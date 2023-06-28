@@ -1,4 +1,4 @@
-import { current, stPath } from '../Globals.mjs';
+import { current, nameReplacements, stPath } from '../Globals.mjs';
 import { FinderSelect } from './Finder Select.mjs';
 
 class PokeFinder extends FinderSelect {
@@ -26,17 +26,25 @@ class PokeFinder extends FinderSelect {
             // this will be the div to click
             const newDiv = document.createElement('div');
             newDiv.className = "finderEntry";
-            newDiv.addEventListener("click", () => {this.#entryClick(pokemon.name)});
+            newDiv.addEventListener("click", () => {this.#entryClick(pokemon.name)}); //We DON'T replace the name here, as it's used for internal logic.
 
             // character icon
             const imgIcon = document.createElement('img');
             imgIcon.className = "fIconImg";
+
             // this will get us the true default icon for any character
-            imgIcon.src = `${stPath.poke}/${pokemon.name}/Icon/Default.png`;
-            
+            //TODO: move this to a more proper class (Pokemon), in order to have more advanced logic (different sprites depending on gen, etc).
+            let imgInfo = pkmn.img.Icons.getPokemon(pokemon.name, {protocol: 'http', domain: stPath.poke});
+            imgInfo.style = imgInfo.style.replace("http://", "");
+            // Includes fields: style, url, left, top, css: {display, width, height, imageRendering, background}.
+            // All the Pokémon icons are cropped from a single big spritesheet (pokemonicons-sheet.png).
+            //TODO: Fix the view inside electron and remove the ugly workaround.            
+            imgIcon.style = imgInfo.style; //This should do the trick
+            imgIcon.src = `${stPath.assets}/Transparent.png`; //Ugly workaround.
+
             // pokemon name
             const spanName = document.createElement('span');
-            spanName.innerHTML = pokemon.name;
+            spanName.innerHTML = nameReplacements[pokemon.name] ?? pokemon.name; //We replace the name if it exists in the dict.
             spanName.className = "pfName";
 
             // add them to the div we created before

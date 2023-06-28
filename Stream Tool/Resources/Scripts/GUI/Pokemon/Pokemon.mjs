@@ -1,5 +1,5 @@
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
-import { current, stPath } from "../Globals.mjs";
+import { current, nameReplacements, stPath } from "../Globals.mjs";
 
 const dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
 const pokeInfo = dexGen.get(current.generation).species;
@@ -7,6 +7,7 @@ const pokeInfo = dexGen.get(current.generation).species;
 export class Pokemon {
 
     #gender = "M";
+    #shiny = false;
     #pokeData;
     #baseFormPokeData;
     #form = ""; //Short name.
@@ -43,8 +44,14 @@ export class Pokemon {
 
     }
 
+    getFullSpecies() {
+        return this.#pokeData.name;
+    }
     getSpecies() {
-        return this.pokeSel.children[1].innerHTML;
+        //Maybe we should rename this to getSpeciesName(), in order to emphasize that this doesn't return forms and the names are replaced. 
+        //(In other words, this doesn't return unique identifiers, but human-readable values).
+        let baseSpecies = this.#pokeData.baseSpecies;
+        return nameReplacements[baseSpecies] ?? baseSpecies; //We return the replacement if it exists in the dict; otherwise, the first term is undefined and we return the normal name.
     }
     /**
      * Sets a new pokemon based on the name
@@ -64,9 +71,14 @@ export class Pokemon {
             this.#baseFormPokeData = pokeInfo.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
 
             // set the pokemon name and icon on the selector
-            this.pokeSel.children[1].innerHTML = this.#pokeData.baseSpecies; //We use the base species name.
-            this.pokeSel.children[0].src = `${stPath.poke}/${name}/Icon/Default.png`;
-
+            this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies; //We use the base species name.
+            let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {gender: this.getGender(), protocol: 'http', domain: stPath.poke});
+            imgInfo.style = imgInfo.style.replace("http://", "");
+            this.pokeSel.children[0].style = imgInfo.style;
+            //TODO: Fix the view inside electron and remove the ugly workaround.
+            //TODO: Move this into its own method.
+            this.pokeSel.children[0].src = `${stPath.assets}/Transparent.png`; //Ugly workaround.
+            
             // set types from @pkmn/data Specie object
             let types = this.#pokeData.types;
             this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
@@ -167,6 +179,13 @@ export class Pokemon {
             this.#gender = "M";
             this.genderIcon.src = `${stPath.assets}/Gender N.png`;
         }
+        //Update the icon, for things like Jellicent.
+        let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {gender: this.getGender(), protocol: 'http', domain: stPath.poke});
+        imgInfo.style = imgInfo.style.replace("http://", "");
+        this.pokeSel.children[0].style = imgInfo.style;
+        //TODO: Fix the view inside electron and remove the ugly workaround.
+        //TODO: Move this into its own method.
+        this.pokeSel.children[0].src = `${stPath.assets}/Transparent.png`; //Ugly workaround.
     }
     swapGender() {
         if (this.getGender() == "M") {
@@ -186,8 +205,17 @@ export class Pokemon {
         return this.#pokeData.types;
     }
 
-    getSriteImgSrc() {
-        return `../../Resources/Assets/Pokemon/${this.getSpecies()}/Sprite Anim/${this.getForm()}.gif`;
+    getSpriteImgSrc() {
+        //TODO: don't hardcode gen 5.
+        //TODO: Fallback to gen5 if gen5ani doesn't exist.
+        let result = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {
+            gen: "gen5ani", 
+            gender: this.getGender(), 
+            shiny: this.#shiny,
+            protocol: 'http', domain: stPath.poke
+        })
+        result.url = result.url.replace("http://", ""); //ugly workaround.
+        return result.url;
     }
 
 }
