@@ -60,7 +60,6 @@ export class Pokemon {
 
             // set pokemon types
             this.#types = pokeData.types;
-
             // set type images
             this.typeImg1.src = `${stPath.assets}/Type Icons/${this.#types[0]}.png`;
             // show or hide second type image
@@ -70,6 +69,21 @@ export class Pokemon {
             } else {
                 this.typeImg2.style.display = "none";
             }
+
+            // gender locking
+            if (pokeData.genderRatio.M == 1) {
+                this.setGender("M");
+                this.disableGenderButt();
+            } else if (pokeData.genderRatio.F == 1) {
+                this.setGender("F");
+                this.disableGenderButt();
+            } else if (pokeData.genderRatio.M == 0 && pokeData.genderRatio.F == 0) {
+                this.setGender();
+                this.disableGenderButt();
+            } else {
+                this.enableGenderButt();
+            }
+            
 
         }
 
@@ -104,8 +118,13 @@ export class Pokemon {
         return this.#gender;
     }
     setGender(value) {
-        this.#gender = value;
-        this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
+        if (value) {
+            this.#gender = value;
+            this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
+        } else {
+            this.#gender = "M";
+            this.genderIcon.src = `${stPath.assets}/Gender N.png`;
+        }
     }
     swapGender() {
         if (this.getGender() == "M") {
@@ -113,6 +132,12 @@ export class Pokemon {
         } else {
             this.setGender("M");
         }
+    }
+    disableGenderButt() {
+        this.genderButt.disabled = true;
+    }
+    enableGenderButt() {
+        this.genderButt.disabled = false;
     }
 
     getTypes() {

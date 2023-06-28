@@ -422,6 +422,11 @@ button:hover {
 .pokeGenderButton:active {
   background-color: var(--bg2);
 }
+.pokeGenderButton:disabled {
+  filter: grayscale(.8);
+  pointer-events: none;
+  border: 1px solid var(--bg4);
+}
 
 
 .pokeTypeDiv {
