@@ -1,6 +1,5 @@
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, stPath } from "../Globals.mjs";
-import { typeToColor } from "../Type to Color.mjs";
 
 const dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
 const pokeInfo = dexGen.get(current.generation).species;
@@ -9,7 +8,6 @@ export class Pokemon {
 
     #gender = "M";
     #types = [];
-    #typeColors = [];
 
     constructor(el) {
 
@@ -62,9 +60,6 @@ export class Pokemon {
 
             // set pokemon types
             this.#types = pokeData.types;
-            for (let i = 0; i < this.#types.length; i++) {
-                this.#typeColors[i] = typeToColor(this.#types[i]);
-            }
 
             // set type images
             this.typeImg1.src = `${stPath.assets}/Type Icons/${this.#types[0]}.png`;
@@ -122,9 +117,6 @@ export class Pokemon {
 
     getTypes() {
         return this.#types;
-    }
-    getTypeColors() {
-        return this.#typeColors;
     }
 
     getSriteImgSrc() {

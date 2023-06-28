@@ -1,4 +1,4 @@
-'use strict';
+import { typeToColor } from "./Scripts/Type to Color.mjs";
 
 let webSocket;
 
@@ -53,11 +53,12 @@ class Pokemon {
         this.mainEl.style.display = "block";
     }
 
-    setBackgroundColor(types, typeColors) {
+    setBackgroundColor(types) {
         if (types.length == 2) {
-            this.mainEl.style.background = `linear-gradient(to bottom, ${typeColors[1]}35, ${typeColors[0]}35)`;
+            this.mainEl.style.background = `linear-gradient(to bottom,
+                ${typeToColor(types[1])}35, ${typeToColor(types[0])}35)`;
         } else if (types.length == 1) {
-            this.mainEl.style.background = `${typeColors[0]}35`;
+            this.mainEl.style.background = `${typeToColor(types[0])}35`;
         }
     }
 
