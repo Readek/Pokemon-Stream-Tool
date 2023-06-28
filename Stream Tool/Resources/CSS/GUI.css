@@ -389,6 +389,7 @@ button:hover {
 .pokeForm {
   outline: none;
   height: 30px;
+  width: 130px; /* Dudunsparce-Three-Segment is a very long name. */
   color: var(--text1);
   background: var(--bg4);
   border: 1px solid var(--focused);

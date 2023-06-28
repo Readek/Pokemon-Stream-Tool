@@ -38,6 +38,9 @@ export class Pokemon {
 
         this.genderButt.addEventListener("click", () => {this.swapGender()});
 
+        // event listener for the form selector.
+        this.formSel.addEventListener("change", () => {this.setForm(this.formSel.value)});
+
     }
 
     getSpecies() {
@@ -61,7 +64,7 @@ export class Pokemon {
             this.#baseFormPokeData = pokeInfo.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
 
             // set the pokemon name and icon on the selector
-            this.pokeSel.children[1].innerHTML = name;
+            this.pokeSel.children[1].innerHTML = this.#pokeData.baseSpecies; //We use the base species name.
             this.pokeSel.children[0].src = `${stPath.poke}/${name}/Icon/Default.png`;
 
             // set types from @pkmn/data Specie object
@@ -81,14 +84,27 @@ export class Pokemon {
                 return forme.forme || forme.baseForme || "Base"; //Either the correct form name or "Base".
             });
 
+            // populate the form selector.
+            // We could consider adding an icon for each form, similar to the Finder.
+            this.formSel.replaceChildren(); // First, we remove all the previous child nodes, if any.
+            for(let formName of this.#shortFormNames){
+                let el = document.createElement("option");
+                el.textContent = formName;
+                el.value = formName;
+                this.formSel.appendChild(el);
+            }
+            this.formSel.value = this.#form;
+            this.formSel.disabled = (this.#formNames.length <= 1); //If there is only one form, we disable the form selector.
+            
+
             // gender locking
-            if (pokeData.genderRatio.M == 1) {
+            if (this.#pokeData.genderRatio.M == 1) {
                 this.setGender("M");
                 this.disableGenderButt();
-            } else if (pokeData.genderRatio.F == 1) {
+            } else if (this.#pokeData.genderRatio.F == 1) {
                 this.setGender("F");
                 this.disableGenderButt();
-            } else if (pokeData.genderRatio.M == 0 && pokeData.genderRatio.F == 0) {
+            } else if (this.#pokeData.genderRatio.M == 0 && this.#pokeData.genderRatio.F == 0) {
                 this.setGender();
                 this.disableGenderButt();
             } else {
@@ -119,14 +135,21 @@ export class Pokemon {
     }
 
     getForm() {
+        //temporary workaround, will change the sprite logic in the next commit.
+        if(this.formSel.value == "Base") return "Default";
         return this.formSel.value;
     }
     setForm(value) {
         //value = formName
-        this.formSel.value = value;
-        let form = this.#formNames[this.#shortFormNames.indexOf(value)];
-        this.setSpecies(form);
-        //Untested.
+        if(this.#shortFormNames.includes(value)){
+            let form = this.#formNames[this.#shortFormNames.indexOf(value)]; //We get the form's fullname.
+            //We should probably consider making an object with both the short and full name as properties.
+            this.setSpecies(form);
+            return true;
+        }
+        console.log(`"{value}" isn't a valid form name for {this.#pokeData.name}.`);
+        return false;
+        //Should we throw an exception if the value doesn't exist or just log it?
     }
 
     getFormNames() {
