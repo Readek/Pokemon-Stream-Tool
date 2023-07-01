@@ -51,24 +51,20 @@ export async function fileExists(filePath) {
 }
 
 /**
- * Saves a local json file with the provided values
- * @param {String} path - Path where the file will be saved
+ * Saves current settings with the provided values
  * @param {Object} data - Data to be saved
  */
-export async function saveJson(path, data) {
+export async function saveSettings(data) {
 
     if (inside.electron) {
-
-        // save the file
-        const fs = require('fs');
-        fs.writeFileSync(`${stPath.text}${path}.json`, JSON.stringify(data, null, 2));
         
         // send signal to update remote GUIs
         const ipc = await import("./IPC.mjs");
+        ipc.refreshSettingsStore(data);
 
     } else {
         const remote = await import("./Remote Requests.mjs");
-        data.message = "RemoteSaveJson";
+        data.message = "RemoteSaveJson"; // TODO
         data.path = path;
         remote.sendRemoteData(data);
     }
