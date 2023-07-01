@@ -6,7 +6,7 @@
       {
         "species": "Snivy",
         "nickName": "Toic",
-        "lvl": "13",
+        "lvl": "15",
         "form": "Default",
         "gender": "F",
         "types": [
@@ -17,7 +17,7 @@
       {
         "species": "Riolu",
         "nickName": "Rico",
-        "lvl": "11",
+        "lvl": "14",
         "form": "Default",
         "gender": "M",
         "types": [
@@ -26,20 +26,20 @@
         "img": "../../Resources/Assets/Pokemon/Riolu/Sprite Anim/Default.gif"
       },
       {
-        "species": "Mareep",
-        "nickName": "jeb_",
-        "lvl": "11",
+        "species": "Growlithe",
+        "nickName": "BORk",
+        "lvl": "12",
         "form": "Default",
-        "gender": "F",
+        "gender": "M",
         "types": [
-          "Electric"
+          "Fire"
         ],
-        "img": "../../Resources/Assets/Pokemon/Mareep/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/Pokemon/Growlithe/Sprite Anim/Default.gif"
       },
       {
         "species": "Venipede",
         "nickName": "Dropwig",
-        "lvl": "10",
+        "lvl": "17",
         "form": "Default",
         "gender": "F",
         "types": [
@@ -49,15 +49,15 @@
         "img": "../../Resources/Assets/Pokemon/Venipede/Sprite Anim/Default.gif"
       },
       {
-        "species": "Psyduck",
-        "nickName": "Migraña",
-        "lvl": "9",
+        "species": "Mareep",
+        "nickName": "jeb_",
+        "lvl": "12",
         "form": "Default",
-        "gender": "F",
+        "gender": "M",
         "types": [
-          "Water"
+          "Electric"
         ],
-        "img": "../../Resources/Assets/Pokemon/Psyduck/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/Pokemon/Mareep/Sprite Anim/Default.gif"
       },
       {
         "species": "Purrloin",
@@ -78,7 +78,7 @@
     "player": {
       "badges": [
         true,
-        false,
+        true,
         false,
         false,
         false,
@@ -86,9 +86,9 @@
         false,
         false
       ],
-      "catches": "12",
-      "kills": "27",
-      "deaths": "18"
+      "catches": "13",
+      "kills": "43",
+      "deaths": "27"
     }
   }
 }

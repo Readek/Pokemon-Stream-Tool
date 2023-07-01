@@ -18,6 +18,10 @@ class PokeFinder extends FinderSelect {
         // add entries to the character list
         for (let pokemon of gen.species) {
 
+            if (pokemon.baseSpecies == "Mime Jr.") {
+                pokemon.baseSpecies = "Mime Jr"
+            }
+
             // this will be the div to click
             const newDiv = document.createElement('div');
             newDiv.className = "finderEntry";
