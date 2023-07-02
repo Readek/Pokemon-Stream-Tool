@@ -1,4 +1,4 @@
-import { saveJson } from './File System.mjs';
+import { saveSettings } from './File System.mjs';
 import { updatePlayer } from './Player/Update Player.mjs';
 import { updateTeam } from './Pokemon/Update Team.mjs';
 import { updateGUI } from './Remote Update.mjs';
@@ -84,6 +84,14 @@ export function defaultWindowDimensions() {
     ipc.send('defaultWindow');
 }
 
+/**
+ * Sends the signal to Electron to store current settings data
+ * @param {Object} data - Settings data
+ */
+export function refreshSettingsStore(data) {
+    ipc.send('storeSettings', data)
+}
+
 // when we get data remotely, update GUI
 ipc.on('remoteGuiData', async (event, data) => {
 
@@ -113,7 +121,7 @@ ipc.on('remoteGuiData', async (event, data) => {
         delete jsonData.message;
 
         // save locally
-        saveJson(filePath, jsonData);
+        saveSettings(filePath, jsonData);
         
     }
 

@@ -1,7 +1,6 @@
 import { loadKeybinds } from './GUI/Keybinds.mjs';
 import { inside, stPath } from './GUI/Globals.mjs';
 import { pokemons } from './GUI/Pokemon/Pokemons.mjs'
-import { settings } from './GUI/Settings.mjs';
 import { Pokemon } from './GUI/Pokemon/Pokemon.mjs';
 import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
 import { updateGUI } from './GUI/Remote Update.mjs';
@@ -10,6 +9,9 @@ import { updatePlayer } from './GUI/Player/Update Player.mjs';
 import { updateTeam } from './GUI/Pokemon/Update Team.mjs';
 // so it loads the listeners
 import './GUI/Top Bar.mjs';
+import { settings } from './GUI/Settings/Settings.mjs';
+import { restoreWindowDefaults } from './GUI/Settings/Window Settings/Restore Window Defaults.mjs';
+
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -28,10 +30,6 @@ init();
 /** It all starts here */
 async function init() {
     
-    // we need to set the current char path
-    await settings.load();
-
-
     // initialize our pokemon class
     const pokeEls = document.getElementsByClassName("pokemonDiv");
     for (let i = 0; i < pokeEls.length; i++) {

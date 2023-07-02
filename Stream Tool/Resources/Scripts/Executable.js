@@ -6,7 +6,7 @@ const http = require('http')
 let resourcesPath, nodePath;
 let httpPort, wsPort, guiWidth, guiHeight, failed;
 let wsServer, sockets = [];
-let storedTeamData, storedPlayerData;
+let storedTeamData, storedPlayerData, storedSettings;
 
 module.exports = function initExec(rPath, gPath, wSocket) {
     
@@ -14,14 +14,14 @@ module.exports = function initExec(rPath, gPath, wSocket) {
     resourcesPath = rPath;
     nodePath = gPath; // this is the path from within the executable
 
-    // get some settings from our save
     try {
 
-        const guiSettings = JSON.parse(fs.readFileSync(resourcesPath + "/Texts/GUI Settings.json"));
-        httpPort = guiSettings.remoteUpdatePort;
-        wsPort = guiSettings.webSocketPort;
-        guiWidth = guiSettings.guiWidth;
-        guiHeight = guiSettings.guiHeight;
+        // get some settings from our local settings file
+        storedSettings = JSON.parse(fs.readFileSync(resourcesPath + "/Texts/GUI Settings.json"));
+        httpPort = storedSettings.remoteUpdatePort;
+        wsPort = storedSettings.webSocketPort;
+        guiWidth = storedSettings.guiWidth;
+        guiHeight = storedSettings.guiHeight;
         if (process.platform == "win32") {
             guiWidth = guiWidth + 4; // windows why cant you be normal
             guiHeight = guiHeight + 30;
@@ -40,7 +40,6 @@ module.exports = function initExec(rPath, gPath, wSocket) {
         guiWidth = 600;
         guiHeight = 300;
     }
-
 
 }
 
@@ -158,11 +157,11 @@ function createWindow() {
 
     // restore default window dimensions
     ipcMain.on('defaultWindow', (event) => {
-        // windows includes flame borders on the window dimensions and i hate it
+        // windows includes frame borders on the window dimensions and i hate it
         if (process.platform == "win32") {
-            win.setBounds({width: 604, height: 330});
+            win.setBounds({width: 651, height: 382});
         } else {
-            win.setBounds({width: 600, height: 300});
+            win.setBounds({width: 647, height: 352});
         }
     })
 
@@ -205,6 +204,11 @@ function createWindow() {
         }
     })
 
+    // we will store current settings, then save them on window close
+    ipcMain.on('storeSettings', (event, data) => {
+        storedSettings = data;
+    })
+
     win.on("close", () => {
         // save current window dimensions
         guiWidth = win.getBounds().width;
@@ -222,8 +226,9 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
 
-        // save current window dimensions
-        const data = JSON.parse(fs.readFileSync(`${resourcesPath}/Texts/GUI Settings.json`));
+        // save current settings
+        const data = storedSettings;
+        // this is to determine proper window size because Windows sucks
         if (process.platform == "win32") {
             data.guiWidth = guiWidth - 4;
             data.guiHeight = guiHeight - 30;
@@ -231,6 +236,7 @@ app.on('window-all-closed', () => {
             data.guiWidth = guiWidth;
             data.guiHeight = guiHeight;
         }
+        // write down that file
         fs.writeFileSync(`${resourcesPath}/Texts/GUI Settings.json`, JSON.stringify(data, null, 2));
         
         // save current data state
