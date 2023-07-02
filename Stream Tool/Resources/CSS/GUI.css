@@ -304,6 +304,10 @@ button:hover {
   height: 30px;
   object-fit: contain;
   image-rendering: pixelated;
+  display:inline-block;
+  content: url("../Assets/Transparent.png"); /* ugly workaround; we could use a div instead of an img. */
+  background-repeat: no-repeat;
+  background-position: -0px -0px;
 }
 
 .bCharSelector {
@@ -347,6 +351,10 @@ button:hover {
   height: 30px;
   object-fit: contain;
   image-rendering: pixelated;
+  display:inline-block;
+  content: url("../Assets/Transparent.png"); /* ugly workaround; we could use a div instead of an img. */
+  background-repeat: no-repeat;
+  background-position: -0px -0px;
 }
 
 

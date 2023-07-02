@@ -33,14 +33,10 @@ class PokeFinder extends FinderSelect {
             imgIcon.className = "fIconImg";
 
             // this will get us the true default icon for any character
-            //TODO: move this to a more proper class (Pokemon), in order to have more advanced logic (different sprites depending on gen, etc).
-            let imgInfo = pkmn.img.Icons.getPokemon(pokemon.name, {protocol: 'http', domain: stPath.poke});
-            imgInfo.style = imgInfo.style.replace("http://", "");
-            // Includes fields: style, url, left, top, css: {display, width, height, imageRendering, background}.
-            // All the Pokémon icons are cropped from a single big spritesheet (pokemonicons-sheet.png).
-            //TODO: Fix the view inside electron and remove the ugly workaround.            
-            imgIcon.style = imgInfo.style; //This should do the trick
-            imgIcon.src = `${stPath.assets}/Transparent.png`; //Ugly workaround.
+            let imgInfo = pkmn.img.Icons.getPokemon(pokemon.name, {side: 'p2', protocol: 'http', domain: stPath.poke});
+            imgIcon.alt = pokemon.name;
+            imgIcon.style.backgroundImage = `url('${stPath.poke}/sprites/pokemonicons-sheet.png')`;
+            imgIcon.style.backgroundPosition = `${imgInfo.left}px ${imgInfo.top}px`;
 
             // pokemon name
             const spanName = document.createElement('span');
@@ -63,7 +59,7 @@ class PokeFinder extends FinderSelect {
 
         const imgIcon = document.createElement('img');
         imgIcon.className = "fIconImg";
-        imgIcon.src = `${stPath.assets}/None.png`;
+        imgIcon.style.backgroundImage = `url('${stPath.assets}/None.png')`;
         
         const spanName = document.createElement('span');
         spanName.innerHTML = "None";

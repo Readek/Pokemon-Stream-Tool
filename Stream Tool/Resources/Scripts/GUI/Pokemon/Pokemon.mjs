@@ -62,7 +62,7 @@ export class Pokemon {
         // if we select none, just display nothin
         if (!name || name == "None") {
             this.pokeSel.children[1].innerHTML = "";
-            this.pokeSel.children[0].src = `${stPath.poke}/../None.png`;
+            this.pokeSel.children[0].style.backgroundImage = `url('${stPath.poke}/../None.png')`;
         } else {
 
             // this will fetch us all the data we will ever need
@@ -72,12 +72,7 @@ export class Pokemon {
 
             // set the pokemon name and icon on the selector
             this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies; //We use the base species name.
-            let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {gender: this.getGender(), protocol: 'http', domain: stPath.poke});
-            imgInfo.style = imgInfo.style.replace("http://", "");
-            this.pokeSel.children[0].style = imgInfo.style;
-            //TODO: Fix the view inside electron and remove the ugly workaround.
-            //TODO: Move this into its own method.
-            this.pokeSel.children[0].src = `${stPath.assets}/Transparent.png`; //Ugly workaround.
+            this.#updateIcon();
             
             // set types from @pkmn/data Specie object
             let types = this.#pokeData.types;
@@ -127,6 +122,14 @@ export class Pokemon {
         }
 
     }
+    
+    #updateIcon() {
+        let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {side: 'p2', gender: this.getGender(), protocol: 'http', domain: stPath.poke});
+        this.pokeSel.children[0].alt = this.#pokeData.name;
+        this.pokeSel.children[0].style.backgroundImage = `url('${stPath.poke}/sprites/pokemonicons-sheet.png')`;
+        this.pokeSel.children[0].src = `${stPath.assets}/Transparent.png`;
+        this.pokeSel.children[0].style.backgroundPosition = `${imgInfo.left}px ${imgInfo.top}px`;
+    }
 
     getNickName() {
         return this.nickInp.value;
@@ -159,7 +162,7 @@ export class Pokemon {
             this.setSpecies(form);
             return true;
         }
-        console.log(`"{value}" isn't a valid form name for {this.#pokeData.name}.`);
+        console.log(`"${value}" isn't a valid form name for ${this.#pokeData.name}.`);
         return false;
         //Should we throw an exception if the value doesn't exist or just log it?
     }
@@ -180,12 +183,7 @@ export class Pokemon {
             this.genderIcon.src = `${stPath.assets}/Gender N.png`;
         }
         //Update the icon, for things like Jellicent.
-        let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {gender: this.getGender(), protocol: 'http', domain: stPath.poke});
-        imgInfo.style = imgInfo.style.replace("http://", "");
-        this.pokeSel.children[0].style = imgInfo.style;
-        //TODO: Fix the view inside electron and remove the ugly workaround.
-        //TODO: Move this into its own method.
-        this.pokeSel.children[0].src = `${stPath.assets}/Transparent.png`; //Ugly workaround.
+        this.#updateIcon();
     }
     swapGender() {
         if (this.getGender() == "M") {
