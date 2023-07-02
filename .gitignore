@@ -1,0 +1,9 @@
+Stream Tool/Resources/Assets/play.pokemonshowdown.com/**
+#Only sprites from gen5 or ani folders, but not gen5icons (They're redundant).
+!Stream Tool/Resources/Assets/play.pokemonshowdown.com/sprites/
+#!Stream Tool/Resources/Assets/play.pokemonshowdown.com/sprites/gen5**
+#!Stream Tool/Resources/Assets/play.pokemonshowdown.com/sprites/ani**
+Stream Tool/Resources/Assets/play.pokemonshowdown.com/sprites/gen5icons*
+#Plus, the party icon sprite sheet.
+!Stream Tool/Resources/Assets/play.pokemonshowdown.com/sprites/pokemonicons-sheet.png
+Stream Tool/Resources/Assets/play.pokemonshowdown.com/**/index.html*

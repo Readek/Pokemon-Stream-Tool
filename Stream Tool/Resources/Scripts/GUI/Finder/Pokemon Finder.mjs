@@ -1,4 +1,4 @@
-import { current, stPath } from '../Globals.mjs';
+import { current, nameReplacements, stPath } from '../Globals.mjs';
 import { FinderSelect } from './Finder Select.mjs';
 
 class PokeFinder extends FinderSelect {
@@ -15,27 +15,32 @@ class PokeFinder extends FinderSelect {
         const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
         const gen = dexGens.get(current.generation);
 
+        const speciesList = [...gen.species].filter( 
+            (poke) => (!poke.forme) // Checks if the Pokémon is not a forme (other than the base forme).
+        ).sort( 
+            (poke1, poke2) => (poke1.num - poke2.num) // Sorts by National Dex number. 
+        );
         // add entries to the character list
-        for (let pokemon of gen.species) {
-
-            if (pokemon.baseSpecies == "Mime Jr.") {
-                pokemon.baseSpecies = "Mime Jr"
-            }
+        for (let pokemon of speciesList) {
 
             // this will be the div to click
             const newDiv = document.createElement('div');
             newDiv.className = "finderEntry";
-            newDiv.addEventListener("click", () => {this.#entryClick(pokemon.baseSpecies)});
+            newDiv.addEventListener("click", () => {this.#entryClick(pokemon.name)}); //We DON'T replace the name here, as it's used for internal logic.
 
             // character icon
             const imgIcon = document.createElement('img');
             imgIcon.className = "fIconImg";
+
             // this will get us the true default icon for any character
-            imgIcon.src = `${stPath.poke}/${pokemon.baseSpecies}/Icon/Default.png`;
-            
+            let imgInfo = pkmn.img.Icons.getPokemon(pokemon.name, {side: 'p2', protocol: 'http', domain: stPath.poke});
+            imgIcon.alt = pokemon.name;
+            imgIcon.style.backgroundImage = `url('${stPath.poke}/sprites/pokemonicons-sheet.png')`;
+            imgIcon.style.backgroundPosition = `${imgInfo.left}px ${imgInfo.top}px`;
+
             // pokemon name
             const spanName = document.createElement('span');
-            spanName.innerHTML = pokemon.baseSpecies;
+            spanName.innerHTML = nameReplacements[pokemon.name] ?? pokemon.name; //We replace the name if it exists in the dict.
             spanName.className = "pfName";
 
             // add them to the div we created before
@@ -54,7 +59,7 @@ class PokeFinder extends FinderSelect {
 
         const imgIcon = document.createElement('img');
         imgIcon.className = "fIconImg";
-        imgIcon.src = `${stPath.assets}/None.png`;
+        imgIcon.style.backgroundImage = `url('${stPath.assets}/None.png')`;
         
         const spanName = document.createElement('span');
         spanName.innerHTML = "None";

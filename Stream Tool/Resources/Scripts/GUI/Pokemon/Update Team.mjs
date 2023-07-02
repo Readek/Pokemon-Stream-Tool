@@ -34,7 +34,7 @@ export async function updateTeam() {
             form : pokemons[i].getForm(),
             gender : pokemons[i].getGender(),
             types : pokemons[i].getTypes(),
-            img : pokemons[i].getSriteImgSrc()
+            img : pokemons[i].getSpriteImgSrc()
         })
 
     }

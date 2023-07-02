@@ -1,5 +1,5 @@
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
-import { current, stPath } from "../Globals.mjs";
+import { current, nameReplacements, stPath } from "../Globals.mjs";
 
 const dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
 const pokeInfo = dexGen.get(current.generation).species;
@@ -7,7 +7,12 @@ const pokeInfo = dexGen.get(current.generation).species;
 export class Pokemon {
 
     #gender = "M";
-    #types = [];
+    #shiny = false;
+    #pokeData;
+    #baseFormPokeData;
+    #form = ""; //Short name.
+    #formNames = []; //These can be used as identifiers for pokeInfo.get(); e.g., "Wormadam-Trash".
+    #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
 
     constructor(el) {
 
@@ -34,10 +39,19 @@ export class Pokemon {
 
         this.genderButt.addEventListener("click", () => {this.swapGender()});
 
+        // event listener for the form selector.
+        this.formSel.addEventListener("change", () => {this.setForm(this.formSel.value)});
+
     }
 
+    getFullSpecies() {
+        return this.#pokeData.name;
+    }
     getSpecies() {
-        return this.pokeSel.children[1].innerHTML;
+        //Maybe we should rename this to getSpeciesName(), in order to emphasize that this doesn't return forms and the names are replaced. 
+        //(In other words, this doesn't return unique identifiers, but human-readable values).
+        let baseSpecies = this.#pokeData.baseSpecies;
+        return nameReplacements[baseSpecies] ?? baseSpecies; //We return the replacement if it exists in the dict; otherwise, the first term is undefined and we return the normal name.
     }
     /**
      * Sets a new pokemon based on the name
@@ -48,36 +62,56 @@ export class Pokemon {
         // if we select none, just display nothin
         if (!name || name == "None") {
             this.pokeSel.children[1].innerHTML = "";
-            this.pokeSel.children[0].src = `${stPath.poke}/../None.png`;
+            this.pokeSel.children[0].style.backgroundImage = `url('${stPath.poke}/../None.png')`;
         } else {
 
             // this will fetch us all the data we will ever need
-            const pokeData = pokeInfo.get(name);
+            // We should consider migrating this logic to another class.
+            this.#pokeData = pokeInfo.get(name);
+            this.#baseFormPokeData = pokeInfo.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
 
             // set the pokemon name and icon on the selector
-            this.pokeSel.children[1].innerHTML = name;
-            this.pokeSel.children[0].src = `${stPath.poke}/${name}/Icon/Default.png`;
-
-            // set pokemon types
-            this.#types = pokeData.types;
-            // set type images
-            this.typeImg1.src = `${stPath.assets}/Type Icons/${this.#types[0]}.png`;
-            // show or hide second type image
-            if (this.#types[1]) {
-                this.typeImg2.src = `${stPath.assets}/Type Icons/${this.#types[1]}.png`;
+            this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies; //We use the base species name.
+            this.#updateIcon();
+            
+            // set types from @pkmn/data Specie object
+            let types = this.#pokeData.types;
+            this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
+            if (types[1]) {
+                this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
                 this.typeImg2.style.display = "block";
             } else {
                 this.typeImg2.style.display = "none";
             }
+            // sets the form lists.
+            this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
+            this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
+            this.#shortFormNames = this.#formNames.map( (speciesName) => {
+                let forme = pokeInfo.get(speciesName);
+                return forme.forme || forme.baseForme || "Base"; //Either the correct form name or "Base".
+            });
+
+            // populate the form selector.
+            // We could consider adding an icon for each form, similar to the Finder.
+            this.formSel.replaceChildren(); // First, we remove all the previous child nodes, if any.
+            for(let formName of this.#shortFormNames){
+                let el = document.createElement("option");
+                el.textContent = formName;
+                el.value = formName;
+                this.formSel.appendChild(el);
+            }
+            this.formSel.value = this.#form;
+            this.formSel.disabled = (this.#formNames.length <= 1); //If there is only one form, we disable the form selector.
+            
 
             // gender locking
-            if (pokeData.genderRatio.M == 1) {
+            if (this.#pokeData.genderRatio.M == 1) {
                 this.setGender("M");
                 this.disableGenderButt();
-            } else if (pokeData.genderRatio.F == 1) {
+            } else if (this.#pokeData.genderRatio.F == 1) {
                 this.setGender("F");
                 this.disableGenderButt();
-            } else if (pokeData.genderRatio.M == 0 && pokeData.genderRatio.F == 0) {
+            } else if (this.#pokeData.genderRatio.M == 0 && this.#pokeData.genderRatio.F == 0) {
                 this.setGender();
                 this.disableGenderButt();
             } else {
@@ -87,6 +121,14 @@ export class Pokemon {
 
         }
 
+    }
+    
+    #updateIcon() {
+        let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {side: 'p2', gender: this.getGender(), protocol: 'http', domain: stPath.poke});
+        this.pokeSel.children[0].alt = this.#pokeData.name;
+        this.pokeSel.children[0].style.backgroundImage = `url('${stPath.poke}/sprites/pokemonicons-sheet.png')`;
+        this.pokeSel.children[0].src = `${stPath.assets}/Transparent.png`;
+        this.pokeSel.children[0].style.backgroundPosition = `${imgInfo.left}px ${imgInfo.top}px`;
     }
 
     getNickName() {
@@ -111,7 +153,20 @@ export class Pokemon {
         return this.formSel.value;
     }
     setForm(value) {
-        this.formSel.value = value;
+        //value = formName
+        if(this.#shortFormNames.includes(value)){
+            let form = this.#formNames[this.#shortFormNames.indexOf(value)]; //We get the form's fullname.
+            //We should probably consider making an object with both the short and full name as properties.
+            this.setSpecies(form);
+            return true;
+        }
+        console.log(`"${value}" isn't a valid form name for ${this.#pokeData.name}.`);
+        return false;
+        //Should we throw an exception if the value doesn't exist or just log it?
+    }
+
+    getFormNames() {
+        return this.#shortFormNames;
     }
 
     getGender() {
@@ -125,6 +180,8 @@ export class Pokemon {
             this.#gender = "M";
             this.genderIcon.src = `${stPath.assets}/Gender N.png`;
         }
+        //Update the icon, for things like Jellicent.
+        this.#updateIcon();
     }
     swapGender() {
         if (this.getGender() == "M") {
@@ -141,11 +198,19 @@ export class Pokemon {
     }
 
     getTypes() {
-        return this.#types;
+        return this.#pokeData.types;
     }
 
-    getSriteImgSrc() {
-        return `../../Resources/Assets/Pokemon/${this.getSpecies()}/Sprite Anim/${this.getForm()}.gif`;
+    getSpriteImgSrc() {
+        //TODO: don't hardcode gen 5.
+        //TODO: Fallback to gen5 if gen5ani doesn't exist.
+        let imgData = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {
+            gen: "gen5ani", 
+            gender: this.getGender(), 
+            shiny: this.#shiny,
+            protocol: 'http', domain: "../../Resources/Assets/play.pokemonshowdown.com"
+        })
+        return imgData.url.replace("http://", ""); //ugly workaround.
     }
 
 }
