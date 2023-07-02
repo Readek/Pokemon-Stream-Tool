@@ -13,6 +13,7 @@ export class Pokemon {
     #form = ""; //Short name.
     #formNames = []; //These can be used as identifiers for pokeInfo.get(); e.g., "Wormadam-Trash".
     #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
+    #isNone = true;
 
     constructor(el) {
 
@@ -55,6 +56,9 @@ export class Pokemon {
     getSpecies() {
         //Maybe we should rename this to getSpeciesName(), in order to emphasize that this doesn't return forms and the names are replaced. 
         //(In other words, this doesn't return unique identifiers, but human-readable values).
+        if(this.#isNone){
+            return "";
+        }
         let baseSpecies = this.#pokeData.baseSpecies;
         return nameReplacements[baseSpecies] ?? baseSpecies; //We return the replacement if it exists in the dict; otherwise, the first term is undefined and we return the normal name.
     }
@@ -66,10 +70,15 @@ export class Pokemon {
 
         // if we select none, just display nothin
         if (!name || name == "None") {
+            this.#isNone = true;
             this.pokeSel.children[1].innerHTML = "";
-            this.pokeSel.children[0].style.backgroundImage = `url('${stPath.poke}/../None.png')`;
+            this.pokeSel.children[0].alt = "None";
+            this.pokeSel.children[0].style.backgroundImage = `url('${stPath.assets}/None.png')`;
+            this.pokeSel.children[0].style.backgroundPosition = `-0px -0px`;
+            console.log(this.pokeSel.children[0].style.backgroundImage);
         } else {
 
+            this.#isNone = false;
             // this will fetch us all the data we will ever need
             // We should consider migrating this logic to another class.
             this.#pokeData = pokeInfo.get(name);
