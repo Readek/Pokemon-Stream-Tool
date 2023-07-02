@@ -24,6 +24,9 @@ export class Pokemon {
         this.genderButt = el.getElementsByClassName(`pokeGenderButton`)[0];
         this.genderIcon = el.getElementsByClassName(`pokeGenderIcon`)[0];
 
+        this.shinyButt = el.getElementsByClassName('pokeShinyButton')[0];
+        this.shinyIcon = el.getElementsByClassName('pokeShinyIcon')[0];
+
         this.typeImg1 = el.getElementsByClassName('typeIcon1')[0];
         this.typeImg2 = el.getElementsByClassName('typeIcon2')[0];
         
@@ -38,6 +41,8 @@ export class Pokemon {
         this.setSpecies();
 
         this.genderButt.addEventListener("click", () => {this.swapGender()});
+
+        this.shinyButt.addEventListener("click", () => {this.swapShiny()});
 
         // event listener for the form selector.
         this.formSel.addEventListener("change", () => {this.setForm(this.formSel.value)});
@@ -195,6 +200,25 @@ export class Pokemon {
     }
     enableGenderButt() {
         this.genderButt.disabled = false;
+    }
+
+    getShiny() {
+        return this.#shiny;
+    }
+    setShiny(value) {
+        this.#shiny = value;
+        if (value) {
+            this.shinyIcon.style.opacity = 1;
+        } else {
+            this.shinyIcon.style.opacity = .3;
+        }
+    }
+    swapShiny() {
+        if (this.#shiny) {
+            this.setShiny(false);
+        } else {
+            this.setShiny(true);
+        }
     }
 
     getTypes() {

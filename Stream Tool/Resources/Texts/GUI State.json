@@ -7,68 +7,68 @@
         "species": "Snivy",
         "nickName": "Toic",
         "lvl": "15",
-        "form": "Default",
+        "form": "Base",
         "gender": "F",
         "types": [
           "Grass"
         ],
-        "img": "../../Resources/Assets/Pokemon/Snivy/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/snivy.gif"
       },
       {
         "species": "Riolu",
         "nickName": "Rico",
         "lvl": "14",
-        "form": "Default",
+        "form": "Base",
         "gender": "M",
         "types": [
           "Fighting"
         ],
-        "img": "../../Resources/Assets/Pokemon/Riolu/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/riolu.gif"
       },
       {
         "species": "Growlithe",
         "nickName": "BORk",
         "lvl": "12",
-        "form": "Default",
+        "form": "Base",
         "gender": "M",
         "types": [
           "Fire"
         ],
-        "img": "../../Resources/Assets/Pokemon/Growlithe/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/growlithe.gif"
       },
       {
         "species": "Venipede",
         "nickName": "Dropwig",
         "lvl": "17",
-        "form": "Default",
+        "form": "Base",
         "gender": "F",
         "types": [
           "Bug",
           "Poison"
         ],
-        "img": "../../Resources/Assets/Pokemon/Venipede/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/venipede.gif"
       },
       {
         "species": "Mareep",
         "nickName": "jeb_",
         "lvl": "12",
-        "form": "Default",
+        "form": "Base",
         "gender": "M",
         "types": [
           "Electric"
         ],
-        "img": "../../Resources/Assets/Pokemon/Mareep/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/mareep.gif"
       },
       {
         "species": "Purrloin",
         "nickName": "Scug",
         "lvl": "10",
-        "form": "Default",
+        "form": "Base",
         "gender": "F",
         "types": [
           "Dark"
         ],
-        "img": "../../Resources/Assets/Pokemon/Purrloin/Sprite Anim/Default.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/purrloin.gif"
       }
     ]
   },
