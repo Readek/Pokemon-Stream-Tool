@@ -15,11 +15,26 @@ export async function updateGUI(data, noNotif) {
         // poketeam time
         for (let i = 0; i < pokemons.length; i++) {
 
-            pokemons[i].setSpecies(data.playerPokemons[i].species);
-            pokemons[i].setNickName(data.playerPokemons[i].nickName);
-            pokemons[i].setLvl(data.playerPokemons[i].lvl)
-            pokemons[i].setForm(data.playerPokemons[i].form);
-            pokemons[i].setGender(data.playerPokemons[i].gender);
+            console.log(pokemons[i].getSpecies(), data.playerPokemons[i].species);
+
+            if (pokemons[i].getSpecies() != data.playerPokemons[i].species) {
+                pokemons[i].setSpecies(data.playerPokemons[i].species);
+            }
+            if (pokemons[i].getNickName() != data.playerPokemons[i].nickName) {
+                pokemons[i].setNickName(data.playerPokemons[i].nickName);
+            }
+            if (pokemons[i].getLvl() != data.playerPokemons[i].lvl) {
+                pokemons[i].setLvl(data.playerPokemons[i].lvl)
+            }
+            if (pokemons[i].getForm() != data.playerPokemons[i].form) {
+                pokemons[i].setForm(data.playerPokemons[i].form);
+            }
+            if (pokemons[i].getGender() != data.playerPokemons[i].gender) {
+                pokemons[i].setGender(data.playerPokemons[i].gender);
+            }
+            if (pokemons[i].getShiny() != data.playerPokemons[i].shiny) {
+                pokemons[i].setShiny(data.playerPokemons[i].shiny);
+            }
 
         };
 

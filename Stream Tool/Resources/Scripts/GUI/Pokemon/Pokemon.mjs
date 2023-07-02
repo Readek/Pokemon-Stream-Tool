@@ -75,7 +75,6 @@ export class Pokemon {
             this.pokeSel.children[0].alt = "None";
             this.pokeSel.children[0].style.backgroundImage = `url('${stPath.assets}/None.png')`;
             this.pokeSel.children[0].style.backgroundPosition = `-0px -0px`;
-            console.log(this.pokeSel.children[0].style.backgroundImage);
         } else {
 
             this.#isNone = false;
