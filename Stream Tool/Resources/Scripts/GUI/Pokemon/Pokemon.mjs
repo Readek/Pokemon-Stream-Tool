@@ -150,8 +150,6 @@ export class Pokemon {
     }
 
     getForm() {
-        //temporary workaround, will change the sprite logic in the next commit.
-        if(this.formSel.value == "Base") return "Default";
         return this.formSel.value;
     }
     setForm(value) {
@@ -206,14 +204,13 @@ export class Pokemon {
     getSpriteImgSrc() {
         //TODO: don't hardcode gen 5.
         //TODO: Fallback to gen5 if gen5ani doesn't exist.
-        let result = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {
+        let imgData = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {
             gen: "gen5ani", 
             gender: this.getGender(), 
             shiny: this.#shiny,
-            protocol: 'http', domain: stPath.poke
+            protocol: 'http', domain: "../../Resources/Assets/play.pokemonshowdown.com"
         })
-        result.url = result.url.replace("http://", ""); //ugly workaround.
-        return result.url;
+        return imgData.url.replace("http://", ""); //ugly workaround.
     }
 
 }
