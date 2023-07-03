@@ -15,8 +15,6 @@ export async function updateGUI(data, noNotif) {
         // poketeam time
         for (let i = 0; i < pokemons.length; i++) {
 
-            console.log(pokemons[i].getSpecies(), data.playerPokemons[i].species);
-
             if (pokemons[i].getSpecies() != data.playerPokemons[i].species) {
                 pokemons[i].setSpecies(data.playerPokemons[i].species);
             }

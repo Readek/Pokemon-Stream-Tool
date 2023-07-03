@@ -1,3 +1,5 @@
+#just in case we build a new exe
+Interface Source Code/dist
 Stream Tool/Resources/Assets/play.pokemonshowdown.com/**
 #Only sprites from gen5 or ani folders, but not gen5icons (They're redundant).
 !Stream Tool/Resources/Assets/play.pokemonshowdown.com/sprites/
