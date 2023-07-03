@@ -50,9 +50,6 @@ export class Pokemon {
 
     }
 
-    getFullSpecies() {
-        return this.#pokeData.name;
-    }
     getSpecies() {
         //Maybe we should rename this to getSpeciesName(), in order to emphasize that this doesn't return forms and the names are replaced. 
         //(In other words, this doesn't return unique identifiers, but human-readable values).
@@ -72,9 +69,20 @@ export class Pokemon {
         if (!name || name == "None") {
             this.#isNone = true;
             this.pokeSel.children[1].innerHTML = "";
-            this.pokeSel.children[0].alt = "None";
-            this.pokeSel.children[0].style.backgroundImage = `url('${stPath.assets}/None.png')`;
-            this.pokeSel.children[0].style.backgroundPosition = `-0px -0px`;
+            this.#updateIcon();
+            // We reset and disable the form selector, to prevent some visual bugs in edge cases. 
+            let formEl = document.createElement("option");
+            formEl.textContent = "Base";
+            formEl.value = "Base";
+            this.formSel.replaceChildren(formEl);
+            this.formSel.value = "Base";
+            this.formSel.disabled = true;
+            //We also disable the type icons.
+            this.typeImg1.style.display = "none";
+            this.typeImg2.style.display = "none";
+            //In case you select a gender-locked Pokémon before and you want to pre-select another Pokémon's gender.
+            //Alternatively, we could disable everything but the Pokémon selector, in order to remain consistent.
+            this.enableGenderButt();
         } else {
 
             this.#isNone = false;
@@ -137,11 +145,16 @@ export class Pokemon {
     }
     
     #updateIcon() {
+        if(this.#isNone){
+            this.pokeSel.children[0].alt = "None";
+            this.pokeSel.children[0].src = `${stPath.assets}/None.png`;
+            this.pokeSel.children[0].style.objectPosition = `-0px -0px`;
+            return;
+        }
         let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {side: 'p2', gender: this.getGender(), protocol: 'http', domain: stPath.poke});
         this.pokeSel.children[0].alt = this.#pokeData.name;
-        this.pokeSel.children[0].style.backgroundImage = `url('${stPath.poke}/sprites/pokemonicons-sheet.png')`;
-        this.pokeSel.children[0].src = `${stPath.assets}/Transparent.png`;
-        this.pokeSel.children[0].style.backgroundPosition = `${imgInfo.left}px ${imgInfo.top}px`;
+        this.pokeSel.children[0].src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
+        this.pokeSel.children[0].style.objectPosition = `${imgInfo.left}px ${imgInfo.top}px`;
     }
 
     getNickName() {
@@ -166,6 +179,9 @@ export class Pokemon {
         return this.formSel.value;
     }
     setForm(value) {
+        if(this.#isNone){
+            return false;
+        }
         //value = formName
         if(this.#shortFormNames.includes(value)){
             let form = this.#formNames[this.#shortFormNames.indexOf(value)]; //We get the form's fullname.
@@ -179,6 +195,9 @@ export class Pokemon {
     }
 
     getFormNames() {
+        if(this.#isNone){
+            return ["Base"];
+        }
         return this.#shortFormNames;
     }
 
@@ -230,10 +249,16 @@ export class Pokemon {
     }
 
     getTypes() {
+        if(this.#isNone){
+            return ["Normal"]; //Placeholder, shouldn't be used for anything but prevents undefined exceptions.
+        }
         return this.#pokeData.types;
     }
 
     getSpriteImgSrc() {
+        if(this.#isNone){
+            return "../../Resources/Assets/None.png";
+        }
         //TODO: don't hardcode gen 5.
         //TODO: Fallback to gen5 if gen5ani doesn't exist.
         let imgData = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {

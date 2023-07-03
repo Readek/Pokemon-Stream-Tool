@@ -53,7 +53,7 @@ Stream Tool/Resources/Assets
 │   │   ├── gen5-shiny
 │   │   │   ├── [files]
 │   │   ├── pokemonicons-sheet.png
-├── Transparent.png
+├── Shiny Icon.png
 ├── Type Icons
 │   ├── [files]
 └── wget_url_list.txt

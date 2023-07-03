@@ -35,8 +35,8 @@ class PokeFinder extends FinderSelect {
             // this will get us the true default icon for any character
             let imgInfo = pkmn.img.Icons.getPokemon(pokemon.name, {side: 'p2', protocol: 'http', domain: stPath.poke});
             imgIcon.alt = pokemon.name;
-            imgIcon.style.backgroundImage = `url('${stPath.poke}/sprites/pokemonicons-sheet.png')`;
-            imgIcon.style.backgroundPosition = `${imgInfo.left}px ${imgInfo.top}px`;
+            imgIcon.src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
+            imgIcon.style.objectPosition = `${imgInfo.left}px ${imgInfo.top}px`;
 
             // pokemon name
             const spanName = document.createElement('span');
@@ -59,7 +59,8 @@ class PokeFinder extends FinderSelect {
 
         const imgIcon = document.createElement('img');
         imgIcon.className = "fIconImg";
-        imgIcon.style.backgroundImage = `url('${stPath.assets}/None.png')`;
+        imgIcon.alt = "None";
+        imgIcon.src = `${stPath.assets}/None.png`;
         
         const spanName = document.createElement('span');
         spanName.innerHTML = "None";
