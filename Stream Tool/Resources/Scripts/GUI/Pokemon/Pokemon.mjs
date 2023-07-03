@@ -98,6 +98,7 @@ export class Pokemon {
             // set types from @pkmn/data Specie object
             let types = this.#pokeData.types;
             this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
+            this.typeImg1.style.display = "block";
             if (types[1]) {
                 this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
                 this.typeImg2.style.display = "block";
