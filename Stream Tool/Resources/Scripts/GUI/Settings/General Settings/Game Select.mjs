@@ -1,5 +1,6 @@
 import { pokeFinder } from "../../Finder/Pokemon Finder.mjs";
 import { current } from "../../Globals.mjs";
+import { Pokemon } from "../../Pokemon/Pokemon.mjs";
 import { Setting } from "../Setting.mjs";
 
 export class SettingGameSelect extends Setting {
@@ -22,16 +23,8 @@ export class SettingGameSelect extends Setting {
 
     #setListener() {
         this.#gameSelectSelect.addEventListener("change", () => {
-            this.#refresh();
+            this.setGen(this.#gameSelectSelect.value);
         });
-    }
-
-    #refresh() {
-        
-        current.generation = this.#gameSelectSelect.value;
-        pokeFinder.loadCharacters();
-        this.save("gameGen", this.#gameSelectSelect.value);
-
     }
 
     setGen(value) {
@@ -39,6 +32,7 @@ export class SettingGameSelect extends Setting {
         this.#gameSelectSelect.value = value;
         current.generation = value;
         pokeFinder.loadCharacters();
+        Pokemon.updateGen(value);
         this.save("gameGen", this.#gameSelectSelect.value);
 
     }
