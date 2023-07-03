@@ -125,7 +125,7 @@ html, body {
     height: 120px;
     width: 300px;
     border: thick double #949494;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 5px;
 }
 
@@ -168,6 +168,7 @@ html, body {
     display: flex;
     justify-content: right;
     align-items: center;
+    clip-path: inset(-100px -100px 0px -100px);
     width: 200px;
     height: 100%;
 }
