@@ -12,6 +12,8 @@ class PokeFinder extends FinderSelect {
     /** Fills the character list with each folder on the Characters folder */
     async loadCharacters() {
 
+        this._clearList();
+
         const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
         const gen = dexGens.get(current.generation);
 

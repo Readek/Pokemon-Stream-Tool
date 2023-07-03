@@ -391,7 +391,7 @@ button:hover {
 .pokeForm {
   outline: none;
   height: 30px;
-  width: 90px; /* Dudunsparce-Three-Segment is a very long name. */
+  width: 90px;
   color: var(--text1);
   background: var(--bg4);
   border: 1px solid var(--focused);
@@ -555,6 +555,7 @@ button:hover {
   display: flex;
   outline: none;
   justify-content: center;
+  align-items: center;
 }
 .settingBox:hover {
   background-color: var(--bg2);
@@ -590,6 +591,25 @@ button:hover {
 }
 .settingsButton:active {
   filter: brightness(.8);
+}
+
+#gameSelectDiv {
+  gap: 10px;
+}
+#gameSelect {
+  outline: none;
+  height: 30px;
+  width: 40px;
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  padding: 0px 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+#gameSelect:hover {
+  border-color: var(--selected);
 }
 
 #zoomDiv {
