@@ -17,6 +17,13 @@ customElements.define("load-svg", class extends HTMLElement {
 
 class Pokemon {
 
+    #species;
+    #lvl;
+    #nickname;
+    #gender;
+    #types = [];
+    #imgSrc;
+
     constructor(el) {
 
         this.mainEl = el;
@@ -31,22 +38,51 @@ class Pokemon {
 
     
     setSpecies(species) {
+        this.#species = species;
         this.speciesEl.innerHTML = species;
     }
-    setLvl(lvl) {
-        this.lvlEl.innerHTML = lvl
+    getSpecies() {
+        return this.#species;
     }
+
+    setLvl(lvl) {
+        this.#lvl = lvl;
+        this.lvlEl.innerHTML = lvl;
+    }
+    getLvl() {
+        return this.#lvl;
+    }
+
     setNickname(name) {
+        this.#nickname = name;
         this.nickEl.innerHTML = name;
     }
+    getNickname() {
+        return this.#nickname;
+    }
+
     setGender(gender) {
+        this.#gender = gender;
         if (gender == "F") {
             this.gendEl.innerHTML = "la";
         } else {
             this.gendEl.innerHTML = "el";
         }
     }
+    getGender() {
+        return this.#gender;
+    }
+
+    setTypes(types) {
+        this.#types = types;
+        this.setBackgroundColor(types);
+    }
+    getTypes() {
+        return this.#types;
+    }
+
     setImg(src) {
+        this.#imgSrc = src;
         this.imgEl.src = src;
         let filename = src.replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
         let offset = offsets[filename] ?? [0, 0];
@@ -54,6 +90,9 @@ class Pokemon {
         //We compensate to account for the cases where the gif center is skewed towards a place where the Pokémon
         //doesn't spend that much time; e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their body (Thundurus-Therian, Timburr).
         //The offsets are the difference between the actual center of the gif and the mean of the bounding boxes of each gif frame, and are precalculated using a Python script included in the repo.
+    }
+    getImgSrc() {
+        return this.#imgSrc;
     }
 
     hidePoke() {
@@ -63,6 +102,10 @@ class Pokemon {
         this.mainEl.style.display = "block";
     }
 
+    /**
+     * Changes the background color depending on the pokemons type
+     * @param {Array} types - Names of types (Strings)
+     */
     setBackgroundColor(types) {
         if (types.length == 2) {
             this.mainEl.style.background = `linear-gradient(to bottom,
@@ -70,6 +113,23 @@ class Pokemon {
         } else if (types.length == 1) {
             this.mainEl.style.background = `${typeToColor(types[0])}35`;
         }
+    }
+
+    /**
+     * Compares current types with incoming
+     * @param {Array} types - Names of types (Strings)
+     * @returns {Boolean} - True if different
+     */
+    compareIncTypes(types) {
+        if (types.length == this.#types.length) {
+            for (let i = 0; i < types.length; i++) {
+                if (types[i] != this.#types[i]) {
+                    return true
+                }
+            }
+            return;
+        }
+        return true;
     }
 
 }
@@ -133,28 +193,39 @@ async function updateData(data) {
         for (let i = 0; i < data.playerPokemons.length; i++) {
 
             // set species
-            if (data.playerPokemons[i].species) {
-                pokemons[i].setSpecies(data.playerPokemons[i].species);
-                pokemons[i].showPoke();
-            } else {
-                pokemons[i].hidePoke();
+            if (data.playerPokemons[i].species != pokemons[i].getSpecies()) {
+                if (data.playerPokemons[i].species) {
+                    pokemons[i].setSpecies(data.playerPokemons[i].species);
+                    pokemons[i].showPoke();
+                } else {
+                    pokemons[i].hidePoke();
+                }
             }
     
             // set level
-            pokemons[i].setLvl(data.playerPokemons[i].lvl);
+            if (data.playerPokemons[i].lvl != pokemons[i].getLvl()) {
+                pokemons[i].setLvl(data.playerPokemons[i].lvl);
+            }
     
             // set nickname
-            pokemons[i].setNickname(data.playerPokemons[i].nickName);
+            if (data.playerPokemons[i].nickName != pokemons[i].getNickname()) {
+                pokemons[i].setNickname(data.playerPokemons[i].nickName);
+            }
     
             // set gender
-            pokemons[i].setGender(data.playerPokemons[i].gender);
+            if (data.playerPokemons[i].gender != pokemons[i].getGender()) {
+                pokemons[i].setGender(data.playerPokemons[i].gender);
+            }
 
             // set background color
-            pokemons[i].setBackgroundColor(data.playerPokemons[i].types,
-                data.playerPokemons[i].typeColors);
+            if (pokemons[i].compareIncTypes(data.playerPokemons[i].types)) {
+                pokemons[i].setTypes(data.playerPokemons[i].types);
+            }
     
             // set image
-            pokemons[i].setImg(data.playerPokemons[i].img);
+            if (data.playerPokemons[i].img != pokemons[i].getImgSrc()) {
+                pokemons[i].setImg(data.playerPokemons[i].img);
+            }
             
         }
 
