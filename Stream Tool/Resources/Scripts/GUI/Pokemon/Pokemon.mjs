@@ -133,9 +133,9 @@ export class Pokemon {
             } else if (this.#pokeData.genderRatio.M == 0 && this.#pokeData.genderRatio.F == 0) {
                 this.setGender();
                 this.disableGenderButt();
-            } else { // defaulting to male
+            } else { // defaulting to male if gender neutral selected
+                if(!this.getGender()) this.setGender('M');
                 this.enableGenderButt();
-                this.setGender("M")
             }
             
 
