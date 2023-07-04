@@ -1,15 +1,10 @@
+import { getJson } from "./Scripts/Get JSON.mjs";
 import { typeToColor } from "./Scripts/Type to Color.mjs";
 
 let webSocket;
 
-const offsets = await fetch("../../Resources/Assets/play.pokemonshowdown.com/sprites/offsets.json")
-                      .then((response) => {
-                        if(!response.ok){
-                            return {}; //Disable the feature instead of failing completely if the file doesn't exist.
-                        }
-                        return response.json();
-                      })
-                      .catch((reason) => {});
+// these are the sprite offsets so their positions are more centered
+const offsets = await getJson("../../Resources/Assets/play.pokemonshowdown.com/sprites/offsets") || {};
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
