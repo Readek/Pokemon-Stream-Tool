@@ -269,4 +269,13 @@ export class Pokemon {
         return imgData.url.replace("http://", ""); //ugly workaround.
     }
 
+    clear() {
+        this.setSpecies("None");
+    }
+    randomize() {
+        let fullSpeciesList = [...current.pkmnSpecies];
+        let randomSpecies = fullSpeciesList[Math.floor(Math.random()*fullSpeciesList.length)];
+        this.setSpecies(randomSpecies.name);
+    }
+
 }

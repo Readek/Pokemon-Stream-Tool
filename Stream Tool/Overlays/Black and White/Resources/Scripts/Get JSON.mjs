@@ -6,8 +6,12 @@
 export async function getJson(jPath) {
 
     try {
-        return await fetch(jPath + ".json", {cache: "no-store"}).json();
-    } catch (e) {
+        return await fetch(jPath, {cache: "no-store"})
+                    .then((response) => {
+                        if(!response.ok) return null; //404 go here
+                        return response.json();
+                    })
+    } catch (e) { //other errors go here
         return null;
     }
 

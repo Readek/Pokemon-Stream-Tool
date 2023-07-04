@@ -4,7 +4,7 @@ import { typeToColor } from "./Scripts/Type to Color.mjs";
 let webSocket;
 
 // these are the sprite offsets so their positions are more centered
-const offsets = await getJson("../../Resources/Assets/play.pokemonshowdown.com/sprites/offsets") || {};
+const offsets = await getJson("../../Resources/Assets/play.pokemonshowdown.com/sprites/offsets.json") || {};
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
