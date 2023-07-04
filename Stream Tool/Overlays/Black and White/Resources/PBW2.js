@@ -2,6 +2,15 @@ import { typeToColor } from "./Scripts/Type to Color.mjs";
 
 let webSocket;
 
+const offsets = await fetch("../../Resources/Assets/play.pokemonshowdown.com/sprites/offsets.json")
+                      .then((response) => {
+                        if(!response.ok){
+                            return {}; //Disable the feature instead of failing completely if the file doesn't exist.
+                        }
+                        return response.json();
+                      })
+                      .catch((reason) => {});
+
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
     async connectedCallback(
@@ -44,6 +53,12 @@ class Pokemon {
     }
     setImg(src) {
         this.imgEl.src = src;
+        let filename = src.replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
+        let offset = offsets[filename] ?? [0, 0];
+        this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
+        //We compensate to account for the cases where the gif center is skewed towards a place where the Pokémon
+        //doesn't spend that much time; e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their body (Thundurus-Therian, Timburr).
+        //The offsets are the difference between the actual center of the gif and the mean of the bounding boxes of each gif frame, and are precalculated using a Python script included in the repo.
     }
 
     hidePoke() {
