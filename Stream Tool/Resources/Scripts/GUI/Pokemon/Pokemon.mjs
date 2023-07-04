@@ -133,8 +133,9 @@ export class Pokemon {
             } else if (this.#pokeData.genderRatio.M == 0 && this.#pokeData.genderRatio.F == 0) {
                 this.setGender();
                 this.disableGenderButt();
-            } else {
+            } else { // defaulting to male
                 this.enableGenderButt();
+                this.setGender("M")
             }
             
 
@@ -207,7 +208,7 @@ export class Pokemon {
             this.#gender = value;
             this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
         } else {
-            this.#gender = "M";
+            this.#gender = null;
             this.genderIcon.src = `${stPath.assets}/Gender N.png`;
         }
         //Update the icon, for things like Jellicent.
