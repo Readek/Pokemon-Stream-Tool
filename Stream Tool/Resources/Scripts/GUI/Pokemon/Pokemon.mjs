@@ -8,17 +8,9 @@ export class Pokemon {
     #pokeData;
     #baseFormPokeData;
     #form = ""; //Short name.
-    #formNames = []; //These can be used as identifiers for pokeInfo.get(); e.g., "Wormadam-Trash".
+    #formNames = []; //These can be used as identifiers for current.pkmnSpecies.get(); e.g., "Wormadam-Trash".
     #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
     #isNone = true;
-
-    static dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
-    static pokeInfo = Pokemon.dexGen.get(current.generation).species;
-
-    static updateGen(value){
-        Pokemon.dexGen = new pkmn.data.Generations(pkmn.dex.Dex);
-        Pokemon.pokeInfo = Pokemon.dexGen.get(value).species;
-    }
 
     constructor(el) {
 
@@ -93,8 +85,8 @@ export class Pokemon {
             this.#isNone = false;
             // this will fetch us all the data we will ever need
             // We should consider migrating this logic to another class.
-            this.#pokeData = Pokemon.pokeInfo.get(name);
-            this.#baseFormPokeData = Pokemon.pokeInfo.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
+            this.#pokeData = current.pkmnSpecies.get(name);
+            this.#baseFormPokeData = current.pkmnSpecies.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
 
             // set the pokemon name and icon on the selector
             this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies; //We use the base species name.
@@ -114,7 +106,7 @@ export class Pokemon {
             this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
             this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
             this.#shortFormNames = this.#formNames.map( (speciesName) => {
-                let forme = Pokemon.pokeInfo.get(speciesName);
+                let forme = current.pkmnSpecies.get(speciesName);
                 return forme.forme || forme.baseForme || "Base"; //Either the correct form name or "Base".
             });
 

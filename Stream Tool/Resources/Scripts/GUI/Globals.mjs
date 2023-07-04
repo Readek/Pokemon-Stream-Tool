@@ -14,10 +14,13 @@ export const stPath = {
     text : realPath + '/Texts',
 };
 
+export const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
+
 /** Current values for stuff */
 export const current = {
     focus : -1,
-    generation : 5
+    generation : 5,
+    pkmnSpecies : dexGens.get(5).species
 }
 
 export const nameReplacements = { //Some substitutions for presentation sake or translation.

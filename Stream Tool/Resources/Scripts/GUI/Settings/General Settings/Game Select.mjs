@@ -1,5 +1,5 @@
 import { pokeFinder } from "../../Finder/Pokemon Finder.mjs";
-import { current } from "../../Globals.mjs";
+import { current, dexGens } from "../../Globals.mjs";
 import { Pokemon } from "../../Pokemon/Pokemon.mjs";
 import { Setting } from "../Setting.mjs";
 
@@ -31,8 +31,8 @@ export class SettingGameSelect extends Setting {
 
         this.#gameSelectSelect.value = value;
         current.generation = value;
+        current.pkmnSpecies = dexGens.get(value).species
         pokeFinder.loadCharacters();
-        Pokemon.updateGen(value);
         this.save("gameGen", this.#gameSelectSelect.value);
 
     }

@@ -14,10 +14,7 @@ class PokeFinder extends FinderSelect {
 
         this._clearList();
 
-        const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
-        const gen = dexGens.get(current.generation);
-
-        const speciesList = [...gen.species].filter( 
+        const speciesList = [...current.pkmnSpecies].filter( 
             (poke) => (!poke.forme) // Checks if the Pokémon is not a forme (other than the base forme).
         ).sort( 
             (poke1, poke2) => (poke1.num - poke2.num) // Sorts by National Dex number. 
