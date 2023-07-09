@@ -1,7 +1,7 @@
 {
   "guiWidth": 647,
   "guiHeight": 352,
-  "gameGen": 5,
+  "gameGen": "5",
   "alwaysOnTop": false,
   "resizable": false,
   "zoom": 100,

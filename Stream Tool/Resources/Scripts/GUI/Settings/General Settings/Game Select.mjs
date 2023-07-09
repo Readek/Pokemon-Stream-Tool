@@ -29,6 +29,9 @@ export class SettingGameSelect extends Setting {
 
     setGen(value) {
 
+        // just in case
+        value = Number(value);
+
         this.#gameSelectSelect.value = value;
         current.generation = value;
         current.pkmnSpecies = dexGens.get(value).species

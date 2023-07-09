@@ -1,4 +1,4 @@
-import { inside } from "../Globals.mjs";
+import { current, inside } from "../Globals.mjs";
 import { pokemons } from "./Pokemons.mjs";
 
 const updateButt = document.getElementById("updateTeamButt");
@@ -20,13 +20,14 @@ export async function updateTeam() {
     const dataJson = {
         id : "gameData",
         type : "Team",
-        playerPokemons: [] // more lines will be added below
+        playerPokemons: [], // more lines will be added below
+        generation : current.generation
     };
 
     // add the teams's info
     for (let i = 0; i < pokemons.length; i++) {
 
-        // finally, add it to the main json
+        // add it to the main json
         dataJson.playerPokemons.push({
             species : pokemons[i].getSpecies(),
             nickName : pokemons[i].getNickName(),

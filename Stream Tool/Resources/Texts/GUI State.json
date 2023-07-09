@@ -71,7 +71,8 @@
         ],
         "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/purrloin.gif"
       }
-    ]
+    ],
+    "generation": 5
   },
   "storedPlayerData": {
     "id": "gameData",

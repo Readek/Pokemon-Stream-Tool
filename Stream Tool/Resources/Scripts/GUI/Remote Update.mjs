@@ -1,7 +1,9 @@
+import { current } from "./Globals.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Gym Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
 import { pokemons } from "./Pokemon/Pokemons.mjs";
+import { settings } from "./Settings/Settings.mjs";
 
 /**
  * Updates the entire GUI with values sent remotely
@@ -11,6 +13,11 @@ import { pokemons } from "./Pokemon/Pokemons.mjs";
 export async function updateGUI(data, noNotif) {
 
     if (data.type == "Team") {
+
+        // this maybe should be somewhere else
+        if (current.generation != data.generation) {
+            settings.gameSelect.setGen(data.generation);
+        }
 
         // poketeam time
         for (let i = 0; i < pokemons.length; i++) {
