@@ -4,31 +4,32 @@
     "type": "Team",
     "playerPokemons": [
       {
-        "species": "Snivy",
+        "species": "Servine",
         "nickName": "Toic",
-        "lvl": "15",
+        "lvl": "18",
         "form": "Base",
         "gender": "F",
         "types": [
           "Grass"
         ],
-        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/snivy.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/servine.gif"
       },
       {
-        "species": "Riolu",
+        "species": "Lucario",
         "nickName": "Rico",
-        "lvl": "14",
+        "lvl": "17",
         "form": "Base",
         "gender": "M",
         "types": [
-          "Fighting"
+          "Fighting",
+          "Steel"
         ],
-        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/riolu.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/lucario.gif"
       },
       {
         "species": "Growlithe",
         "nickName": "BORk",
-        "lvl": "12",
+        "lvl": "18",
         "form": "Base",
         "gender": "M",
         "types": [
@@ -49,20 +50,20 @@
         "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/venipede.gif"
       },
       {
-        "species": "Mareep",
-        "nickName": "jeb_",
-        "lvl": "12",
+        "species": "Eevee",
+        "nickName": "Terry",
+        "lvl": "19",
         "form": "Base",
         "gender": "M",
         "types": [
-          "Electric"
+          "Normal"
         ],
-        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/mareep.gif"
+        "img": "../../Resources/Assets/play.pokemonshowdown.com/sprites/gen5ani/eevee.gif"
       },
       {
         "species": "Purrloin",
         "nickName": "Scug",
-        "lvl": "10",
+        "lvl": "13",
         "form": "Base",
         "gender": "F",
         "types": [
@@ -86,9 +87,9 @@
         false,
         false
       ],
-      "catches": "13",
-      "kills": "43",
-      "deaths": "27"
+      "catches": "21",
+      "kills": "79",
+      "deaths": "36"
     }
   }
 }

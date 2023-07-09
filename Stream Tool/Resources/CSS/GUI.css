@@ -403,6 +403,10 @@ button:hover {
 .pokeForm:hover {
   border-color: var(--selected);
 }
+.pokeForm:disabled {
+  pointer-events: none;
+  color: var(--text2);
+}
 
 
 .pokeGenderButton {
