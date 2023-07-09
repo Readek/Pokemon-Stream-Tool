@@ -34,6 +34,7 @@ export class Pokemon {
             pokeFinder.open(this.pokeSel);
             pokeFinder.setCurrentPokemon(this);
             pokeFinder.focusFilter();
+            pokeFinder.setSpeciesFocus();
         });
         // also set an initial pokemon value
         this.setSpecies();
@@ -267,6 +268,10 @@ export class Pokemon {
             protocol: 'http', domain: "../../Resources/Assets/play.pokemonshowdown.com"
         })
         return imgData.url.replace("http://", ""); //ugly workaround.
+    }
+
+    getPokeData() {
+        return this.#pokeData;
     }
 
     clear() {

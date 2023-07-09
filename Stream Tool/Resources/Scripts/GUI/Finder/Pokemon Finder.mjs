@@ -88,6 +88,12 @@ class PokeFinder extends FinderSelect {
         this.#curPokemon = pokemon;
     }
 
+    /** Focuses the Finder to the currently selected pokemon */
+    setSpeciesFocus() {
+        current.focus = this.#curPokemon.getPokeData().num - 2;
+        this.addActive(true);        
+    }
+
 }
 
 export const pokeFinder = new PokeFinder;
