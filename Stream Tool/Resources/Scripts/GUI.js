@@ -2,14 +2,15 @@ import { loadKeybinds } from './GUI/Keybinds.mjs';
 import { inside, stPath } from './GUI/Globals.mjs';
 import { pokemons } from './GUI/Pokemon/Pokemons.mjs'
 import { Pokemon } from './GUI/Pokemon/Pokemon.mjs';
-import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
 import { updateGUI } from './GUI/Remote Update.mjs';
 import { getJson } from './GUI/File System.mjs';
 import { updatePlayer } from './GUI/Player/Update Player.mjs';
 import { updateTeam } from './GUI/Pokemon/Update Team.mjs';
+import { settings } from './GUI/Settings/Settings.mjs';
+import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
+
 // so it loads the listeners
 import './GUI/Top Bar.mjs';
-import { settings } from './GUI/Settings/Settings.mjs';
 import { restoreWindowDefaults } from './GUI/Settings/Window Settings/Restore Window Defaults.mjs';
 
 
@@ -36,10 +37,6 @@ async function init() {
         pokemons.push(new Pokemon(pokeEls[i]))
     }
 
-    
-    // initialize the character list
-    pokeFinder.loadCharacters();
-
 
     // get those keybinds running
     loadKeybinds();
@@ -49,11 +46,19 @@ async function init() {
     if (inside.electron) {
 
         // load previous gui state
-        const storedData = await getJson(`${stPath.text}/GUI State`);
-        updateGUI(storedData.storedTeamData, true);
-        updateGUI(storedData.storedPlayerData, true);
+        let storedData = await getJson(`${stPath.text}/GUI State`);
 
-        // send that data
+        // don't do this if we got no data to restore
+        if (storedData) {
+            updateGUI(storedData.storedTeamData, true);
+            updateGUI(storedData.storedPlayerData, true);
+        } else {
+            // set default values
+            settings.gameSelect.setGen(5); // best gen amarite
+            pokeFinder.loadCharacters();
+        }
+
+        // send initial data
         updatePlayer();
         updateTeam();
 

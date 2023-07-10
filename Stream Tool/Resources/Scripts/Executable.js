@@ -14,10 +14,28 @@ module.exports = function initExec(rPath, gPath, wSocket) {
     resourcesPath = rPath;
     nodePath = gPath; // this is the path from within the executable
 
-    try {
+    if (fs.existsSync(resourcesPath)) {
 
-        // get some settings from our local settings file
-        storedSettings = JSON.parse(fs.readFileSync(resourcesPath + "/Texts/GUI Settings.json"));
+        if (fs.existsSync(`${resourcesPath}/Texts/GUI Settings.json`)) {
+            // get some settings from our local settings file (if it exists)
+            storedSettings = JSON.parse(fs.readFileSync(`${resourcesPath}/Texts/GUI Settings.json`));
+        } else {
+            // create default data
+            storedSettings = {
+                guiWidth: 647,
+                guiHeight: 352,
+                gameGen: 5,
+                alwaysOnTop: false,
+                resizable: false,
+                zoom: 100,
+                remoteUpdatePort: 1111,
+                webSocketPort: 8080
+            }
+            // write down to a file
+            fs.writeFileSync(`${resourcesPath}/Texts/GUI Settings.json`, JSON.stringify(storedSettings, null, 2));
+        }
+        
+        // appoly that data to current state
         httpPort = storedSettings.remoteUpdatePort;
         wsPort = storedSettings.webSocketPort;
         guiWidth = storedSettings.guiWidth;
@@ -31,8 +49,8 @@ module.exports = function initExec(rPath, gPath, wSocket) {
         initHttpServer();
         initWsServer(wSocket);
 
-    } catch (e) { // if the settings file cant be found
-        console.log("GUI Settings.json could not be found!!");
+    } else {
+        console.log("The resources folder could not be found!!");
         console.log(e);
         failed = true;
         httpPort = 7070;

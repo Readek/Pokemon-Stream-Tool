@@ -10,15 +10,8 @@ export class SettingGameSelect extends Setting {
     constructor() {
 
         super();
-        this.load();
         this.#setListener();
 
-    }
-
-    load() {
-        this.#gameSelectSelect.value = this.guiSettings.gameGen;
-        current.generation = this.guiSettings.gameGen;
-        pokeFinder.loadCharacters();
     }
 
     #setListener() {
@@ -37,7 +30,6 @@ export class SettingGameSelect extends Setting {
         current.pkmnSpecies = dexGens.get(value).species
         pokeFinder.loadCharacters();
         clearAllPokemon();
-        this.save("gameGen", this.#gameSelectSelect.value);
 
     }
 

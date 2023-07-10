@@ -19,8 +19,8 @@ export const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
 /** Current values for stuff */
 export const current = {
     focus : -1,
-    generation : 5,
-    pkmnSpecies : dexGens.get(5).species
+    generation : null, // will be changed on startup
+    pkmnSpecies : dexGens.get(5).species // same here
 }
 
 export const nameReplacements = { //Some substitutions for presentation sake or translation.

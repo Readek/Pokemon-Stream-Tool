@@ -5,6 +5,8 @@ import { playerStats } from "./Player/Stats.mjs";
 import { pokemons } from "./Pokemon/Pokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
 
+let firstTime = true;
+
 /**
  * Updates the entire GUI with values sent remotely
  * @param {Object} data GUI info
@@ -15,12 +17,13 @@ export async function updateGUI(data, noNotif) {
     if (data.type == "Team") {
 
         // this maybe should be somewhere else
-        if (current.generation != data.generation) {
+        if (current.generation != data.generation || firstTime) {
             settings.gameSelect.setGen(data.generation);
+            firstTime = false;
         }
 
         // poketeam time
-        for (let i = 0; i < pokemons.length; i++) {
+        for (let i = 0; i < data.playerPokemons.length; i++) {
 
             if (pokemons[i].getSpecies() != data.playerPokemons[i].species) {
                 pokemons[i].setSpecies(data.playerPokemons[i].species);
