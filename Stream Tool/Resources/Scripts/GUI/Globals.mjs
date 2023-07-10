@@ -8,7 +8,7 @@ export const inside = {
 /** Paths used for all of the Stream Tool */
 const realPath = inside.electron ? __dirname : ""; // local file path if in executable
 export const stPath = {
-    poke: realPath + "/Assets/play.pokemonshowdown.com", //The "sprites" part will be completed by @pkmn/img. //You need to cd into the Assets folder and run `wget --mirror "https://play.pokemonshowdown.com/sprites/"`.
+    poke: realPath + "/Assets/Pokemon", //The "sprites" part will be completed by @pkmn/img.
 
     assets: realPath + "/Assets",
     text : realPath + '/Texts',

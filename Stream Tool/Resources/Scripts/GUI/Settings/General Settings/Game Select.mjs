@@ -23,7 +23,7 @@ export class SettingGameSelect extends Setting {
 
     #setListener() {
         this.#gameSelectSelect.addEventListener("change", () => {
-            this.setGen(this.#gameSelectSelect.value);
+            this.setGen(Number(this.#gameSelectSelect.value));
         });
     }
 

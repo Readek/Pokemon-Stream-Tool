@@ -25,13 +25,7 @@ This repo is under active WIP! But for now, feature list:
 
 ## Getting the Pokémon sprites
 
-The overlay needs the gen 5 sprites from Pokémon Showdown, which aren't included in this repo. You can download a zip file including them in the [releases page](https://github.com/Readek/Pokemon-Stream-Tool/releases/latest).
-
-If you prefer, you can download them from the [Showdown servers](https://play.pokemonshowdown.com/sprites/gen5/) using `wget`, but this may take a while:
-```sh
-cd "<path/to/repo>/Stream Tool/Resources/Assets"
-wget --mirror --no-parent --input-file wget_url_list.txt
-```
+The overlay needs the gen 5 sprites from Pokémon Showdown, which aren't included in this repo. You can download a zip file including them in the [releases page](https://github.com/Readek/Pokemon-Stream-Tool/releases/latest), or from its [own repository](https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets). More info about assets can be found there.
 
 The directory structure after unzipping or `wget`ting should be:
 ```text
@@ -42,7 +36,7 @@ Stream Tool/Resources/Assets
 ├── Gym Badges
 │   ├── [files]
 ├── None.png
-├── play.pokemonshowdown.com
+├── Pokemon
 │   ├── sprites
 │   │   ├── gen5
 │   │   │   ├── [files]

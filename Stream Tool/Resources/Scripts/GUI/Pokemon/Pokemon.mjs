@@ -265,7 +265,7 @@ export class Pokemon {
             gen: "gen5ani", 
             gender: this.getGender(), 
             shiny: this.#shiny,
-            protocol: 'http', domain: "../../Resources/Assets/play.pokemonshowdown.com"
+            protocol: 'http', domain: "../../Resources/Assets/Pokemon"
         })
         return imgData.url.replace("http://", ""); //ugly workaround.
     }
