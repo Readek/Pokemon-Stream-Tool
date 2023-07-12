@@ -36,6 +36,7 @@ export async function updateTeam() {
             gender : pokemons[i].getGender(),
             shiny : pokemons[i].getShiny(),
             types : pokemons[i].getTypes(),
+            status : pokemons[i].getStatus(),
             img : pokemons[i].getSpriteImgSrc()
         })
 

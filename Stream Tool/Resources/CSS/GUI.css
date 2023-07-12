@@ -484,6 +484,22 @@ button:hover {
 }
 
 
+.pokeStatus {
+  outline: none;
+  height: 30px;
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  padding: 0px 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.pokeStatus:hover {
+  border-color: var(--selected);
+}
+
+
 /* Player Info stuff */
 #playerInfoRegion {
   display: none;

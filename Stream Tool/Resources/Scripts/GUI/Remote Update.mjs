@@ -43,6 +43,9 @@ export async function updateGUI(data, noNotif) {
             if (pokemons[i].getShiny() != data.playerPokemons[i].shiny) {
                 pokemons[i].setShiny(data.playerPokemons[i].shiny);
             }
+            if (pokemons[i].getStatus() != data.playerPokemons[i].status) {
+                pokemons[i].setStatus(data.playerPokemons[i].status);
+            }
 
         };
 

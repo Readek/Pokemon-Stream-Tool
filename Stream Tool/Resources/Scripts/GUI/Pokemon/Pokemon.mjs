@@ -30,6 +30,8 @@ export class Pokemon {
         this.typeImg1 = el.getElementsByClassName('typeIcon1')[0];
         this.typeImg2 = el.getElementsByClassName('typeIcon2')[0];
         
+        this.statusSel = el.getElementsByClassName('pokeStatus')[0];
+
         
         // set a listener that will trigger when pokemon selector is clicked
         this.pokeSel.addEventListener("click", () => {
@@ -257,6 +259,13 @@ export class Pokemon {
         return this.#pokeData.types;
     }
 
+    getStatus() {
+        return this.statusSel.value;
+    }
+    setStatus(value) {
+        this.statusSel.value = value;
+    }
+
     getSpriteImgSrc() {
         if(this.#isNone){
             return "../../Resources/Assets/None.png";
@@ -294,35 +303,45 @@ export class Pokemon {
         // and now for the big fat text
         element.innerHTML = `
         
-        <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-              <img class="pokeSelectorIcon" alt="">
-              <div class="pokeSelectorText"></div>
+            <div class="finderPosition">
+                <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+                <img class="pokeSelectorIcon" alt="">
+                <div class="pokeSelectorText"></div>
+                </div>
             </div>
-          </div>
 
-          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
+            <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
 
-          <div class="pokeLvlDiv" title="Pokemon level">
-            <div class="pokeLvlText">Lv.</div>
-            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-          </div>          
+            <div class="pokeLvlDiv" title="Pokemon level">
+                <div class="pokeLvlText">Lv.</div>
+                <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
+            </div>          
 
-          <select class="pokeForm" title="For pokemons that have different forms">
-          </select>
+            <select class="pokeForm" title="For pokemons that have different forms">
+            </select>
 
-          <button class="pokeGenderButton" title="Pokemon gender">
-            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-          </button>
+            <button class="pokeGenderButton" title="Pokemon gender">
+                <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
+            </button>
 
-          <button class="pokeShinyButton" title="Shiny indicator">
-            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-          </button>
+            <button class="pokeShinyButton" title="Shiny indicator">
+                <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
+            </button>
 
-          <div class="pokeTypeDiv" title="Pokemon types">
-            <img alt="" class="typeIcon typeIcon1">
-            <img alt="" class="typeIcon typeIcon2">
-          </div>
+            <div class="pokeTypeDiv" title="Pokemon types">
+                <img alt="" class="typeIcon typeIcon1">
+                <img alt="" class="typeIcon typeIcon2">
+            </div>
+
+            <select class="pokeStatus" title="Current status condition">
+                <option value="---">----</option>
+                <option value="Par">Par.</option>
+                <option value="Poi">Poi.</option>
+                <option value="Fre">Fre.</option>
+                <option value="Bur">Bur.</option>
+                <option value="Sle">Sle.</option>
+                <option value="Fai">Fai.</option>
+            </select>
 
         `
 
