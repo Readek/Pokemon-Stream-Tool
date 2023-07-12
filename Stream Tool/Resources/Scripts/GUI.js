@@ -32,9 +32,8 @@ init();
 async function init() {
     
     // initialize our pokemon class
-    const pokeEls = document.getElementsByClassName("pokemonDiv");
-    for (let i = 0; i < pokeEls.length; i++) {
-        pokemons.push(new Pokemon(pokeEls[i]))
+    for (let i = 0; i < 6; i++) {
+        pokemons.push(new Pokemon())
     }
 
 

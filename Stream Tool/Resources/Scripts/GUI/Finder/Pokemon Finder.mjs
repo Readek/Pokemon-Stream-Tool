@@ -90,8 +90,10 @@ class PokeFinder extends FinderSelect {
 
     /** Focuses the Finder to the currently selected pokemon */
     setSpeciesFocus() {
-        current.focus = this.#curPokemon.getPokeData().num - 2;
-        this.addActive(true);        
+        if (this.#curPokemon.getSpecies()) {
+            current.focus = this.#curPokemon.getPokeData().num - 2;
+            this.addActive(true);   
+        }
     }
 
 }

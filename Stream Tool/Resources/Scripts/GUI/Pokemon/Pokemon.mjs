@@ -12,7 +12,9 @@ export class Pokemon {
     #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
     #isNone = true;
 
-    constructor(el) {
+    constructor() {
+
+        const el = this.generateElement();
 
         this.pokeSel = el.getElementsByClassName(`pokeSelector`)[0];
         this.nickInp = el.getElementsByClassName(`pokeNickName`)[0];
@@ -281,6 +283,53 @@ export class Pokemon {
         let fullSpeciesList = [...current.pkmnSpecies];
         let randomSpecies = fullSpeciesList[Math.floor(Math.random()*fullSpeciesList.length)];
         this.setSpecies(randomSpecies.name);
+    }
+
+
+    /** Creates the pokemon's HTML element */
+    generateElement() {
+
+        const element = document.createElement("div");
+        element.classList.add("pokemonDiv");
+        // and now for the big fat text
+        element.innerHTML = `
+        
+        <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+              <img class="pokeSelectorIcon" alt="">
+              <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+
+          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
+
+          <div class="pokeLvlDiv" title="Pokemon level">
+            <div class="pokeLvlText">Lv.</div>
+            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
+          </div>          
+
+          <select class="pokeForm" title="For pokemons that have different forms">
+          </select>
+
+          <button class="pokeGenderButton" title="Pokemon gender">
+            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
+          </button>
+
+          <button class="pokeShinyButton" title="Shiny indicator">
+            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
+          </button>
+
+          <div class="pokeTypeDiv" title="Pokemon types">
+            <img alt="" class="typeIcon typeIcon1">
+            <img alt="" class="typeIcon typeIcon2">
+          </div>
+
+        `
+
+        // add it to the GUI
+        document.getElementById("pokeParty").appendChild(element);
+        return element;
+
     }
 
 }

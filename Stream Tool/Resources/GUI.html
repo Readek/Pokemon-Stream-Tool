@@ -32,343 +32,143 @@
     </button>
   </div>
 
-  <div id="content">
+  <div id="centerWrap">
 
-    <div id="teamRegion" class="region">
+    <div id="content">
 
-      <div id=pokeParty>
-
-        <div class="pokemonDiv">
-
-          <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-              <img class="pokeSelectorIcon" alt="">
-              <div class="pokeSelectorText"></div>
-            </div>
-          </div>
-
-          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
-
-          <div class="pokeLvlDiv" title="Pokemon level">
-            <div class="pokeLvlText">Lv.</div>
-            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-          </div>          
-
-          <select class="pokeForm" title="For pokemons that have different forms">
-          </select>
-
-          <button class="pokeGenderButton" title="Pokemon gender">
-            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
+      <div id="teamRegion" class="region">
+  
+        <div id=pokeParty></div>
+  
+        <button id="updateTeamButt" class="updateButt">
+          <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+          <div id="updateTeamText">UPDATE TEAM</div>
+        </button>
+  
+      </div>
+  
+      <div id="playerInfoRegion" class="region">
+  
+        <div id="gymBadges">
+          <button class="gymBadgeButton badgeDisabled" id="badge1" title="Gym Badge 1">
+            <img src="Assets/Gym Badges/BW2/1.png">
           </button>
-
-          <button class="pokeShinyButton" title="Shiny indicator">
-            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
+          <button class="gymBadgeButton badgeDisabled" id="badge2" title="Gym Badge 2">
+            <img src="Assets/Gym Badges/BW2/2.png">
           </button>
-
-          <div class="pokeTypeDiv" title="Pokemon types">
-            <img alt="" class="typeIcon typeIcon1">
-            <img alt="" class="typeIcon typeIcon2">
-          </div>
-
+          <button class="gymBadgeButton badgeDisabled" id="badge3" title="Gym Badge 3">
+            <img src="Assets/Gym Badges/BW2/3.png">
+          </button>
+          <button class="gymBadgeButton badgeDisabled" id="badge4" title="Gym Badge 4">
+            <img src="Assets/Gym Badges/BW2/4.png">
+          </button>
+          <button class="gymBadgeButton badgeDisabled" id="badge5" title="Gym Badge 5">
+            <img src="Assets/Gym Badges/BW2/5.png">
+          </button>
+          <button class="gymBadgeButton badgeDisabled" id="badge6" title="Gym Badge 6">
+            <img src="Assets/Gym Badges/BW2/6.png">
+          </button>
+          <button class="gymBadgeButton badgeDisabled" id="badge7" title="Gym Badge 7">
+            <img src="Assets/Gym Badges/BW2/7.png">
+          </button>
+          <button class="gymBadgeButton badgeDisabled" id="badge8" title="Gym Badge 8">
+            <img src="Assets/Gym Badges/BW2/8.png">
+          </button>
         </div>
-
-        <div class="pokemonDiv">
-
-          <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-              <img class="pokeSelectorIcon" alt="">
-              <div class="pokeSelectorText"></div>
-            </div>
+  
+        <div id="playerStats">
+  
+          <div class="statDiv" title="Catches">
+            <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon" title="Catches"></load-svg>
+            <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0" title="Catches">
           </div>
           
-          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
-
-          <div class="pokeLvlDiv" title="Pokemon level">
-            <div class="pokeLvlText">Lv.</div>
-            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-          </div>          
-
-          <select class="pokeForm" title="For pokemons that have different forms">
-          </select>
-
-          <button class="pokeGenderButton" title="Pokemon gender">
-            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-          </button>
-
-          <button class="pokeShinyButton" title="Shiny indicator">
-            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-          </button>
-
-          <div class="pokeTypeDiv" title="Pokemon types">
-            <img alt="" class="typeIcon typeIcon1">
-            <img alt="" class="typeIcon typeIcon2">
+          <div class="statDiv" title="Kills">
+            <load-svg src="SVGs/Knife.svg" class="knifeIcon" title="Kills"></load-svg>
+            <input type="number" id="killsInput" class="statInput textInput mousetrap" value="0" title="Kills">
           </div>
-
-        </div>
-
-        <div class="pokemonDiv">
-
-          <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-              <img class="pokeSelectorIcon" alt="">
-              <div class="pokeSelectorText"></div>
-            </div>
-          </div>
-
-          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
-
-          <div class="pokeLvlDiv" title="Pokemon level">
-            <div class="pokeLvlText">Lv.</div>
-            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-          </div>          
-
-          <select class="pokeForm" title="For pokemons that have different forms">
-          </select>
-
-          <button class="pokeGenderButton" title="Pokemon gender">
-            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-          </button>
-
-          <button class="pokeShinyButton" title="Shiny indicator">
-            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-          </button>
-
-          <div class="pokeTypeDiv" title="Pokemon types">
-            <img alt="" class="typeIcon typeIcon1">
-            <img alt="" class="typeIcon typeIcon2">
-          </div>
-
-        </div>
-
-        <div class="pokemonDiv">
-
-          <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-              <img class="pokeSelectorIcon" alt="">
-              <div class="pokeSelectorText"></div>
-            </div>
-          </div>
-
-          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
-
-          <div class="pokeLvlDiv" title="Pokemon level">
-            <div class="pokeLvlText">Lv.</div>
-            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-          </div>          
-
-          <select class="pokeForm" title="For pokemons that have different forms">
-          </select>
-
-          <button class="pokeGenderButton" title="Pokemon gender">
-            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-          </button>
-
-          <button class="pokeShinyButton" title="Shiny indicator">
-            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-          </button>
-
-          <div class="pokeTypeDiv" title="Pokemon types">
-            <img alt="" class="typeIcon typeIcon1">
-            <img alt="" class="typeIcon typeIcon2">
-          </div>
-
-        </div>
-
-        <div class="pokemonDiv">
-
-          <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-              <img class="pokeSelectorIcon" alt="">
-              <div class="pokeSelectorText"></div>
-            </div>
-          </div>
-
-          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
-
-          <div class="pokeLvlDiv" title="Pokemon level">
-            <div class="pokeLvlText">Lv.</div>
-            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-          </div>          
-
-          <select class="pokeForm" title="For pokemons that have different forms">
-          </select>
-
-          <button class="pokeGenderButton" title="Pokemon gender">
-            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-          </button>
-
-          <button class="pokeShinyButton" title="Shiny indicator">
-            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-          </button>
-
-          <div class="pokeTypeDiv" title="Pokemon types">
-            <img alt="" class="typeIcon typeIcon1">
-            <img alt="" class="typeIcon typeIcon2">
-          </div>
-
-        </div>
-
-        <div class="pokemonDiv">
-
-          <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-              <img class="pokeSelectorIcon" alt="">
-              <div class="pokeSelectorText"></div>
-            </div>
-          </div>
-          
-          <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
-
-          <div class="pokeLvlDiv" title="Pokemon level">
-            <div class="pokeLvlText">Lv.</div>
-            <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-          </div>          
-
-          <select class="pokeForm" title="For pokemons that have different forms">
-          </select>
-
-          <button class="pokeGenderButton" title="Pokemon gender">
-            <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-          </button>
-
-          <button class="pokeShinyButton" title="Shiny indicator">
-            <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-          </button>
-
-          <div class="pokeTypeDiv" title="Pokemon types">
-            <img alt="" class="typeIcon typeIcon1">
-            <img alt="" class="typeIcon typeIcon2">
-          </div>
-
-        </div>
-
-      </div>
-
-      <button id="updateTeamButt" class="updateButt">
-        <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
-        <div id="updateTeamText">UPDATE TEAM</div>
-      </button>
-
-    </div>
-
-    <div id="playerInfoRegion" class="region">
-
-      <div id="gymBadges">
-        <button class="gymBadgeButton badgeDisabled" id="badge1" title="Gym Badge 1">
-          <img src="Assets/Gym Badges/BW2/1.png">
-        </button>
-        <button class="gymBadgeButton badgeDisabled" id="badge2" title="Gym Badge 2">
-          <img src="Assets/Gym Badges/BW2/2.png">
-        </button>
-        <button class="gymBadgeButton badgeDisabled" id="badge3" title="Gym Badge 3">
-          <img src="Assets/Gym Badges/BW2/3.png">
-        </button>
-        <button class="gymBadgeButton badgeDisabled" id="badge4" title="Gym Badge 4">
-          <img src="Assets/Gym Badges/BW2/4.png">
-        </button>
-        <button class="gymBadgeButton badgeDisabled" id="badge5" title="Gym Badge 5">
-          <img src="Assets/Gym Badges/BW2/5.png">
-        </button>
-        <button class="gymBadgeButton badgeDisabled" id="badge6" title="Gym Badge 6">
-          <img src="Assets/Gym Badges/BW2/6.png">
-        </button>
-        <button class="gymBadgeButton badgeDisabled" id="badge7" title="Gym Badge 7">
-          <img src="Assets/Gym Badges/BW2/7.png">
-        </button>
-        <button class="gymBadgeButton badgeDisabled" id="badge8" title="Gym Badge 8">
-          <img src="Assets/Gym Badges/BW2/8.png">
-        </button>
-      </div>
-
-      <div id="playerStats">
-
-        <div class="statDiv" title="Catches">
-          <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon" title="Catches"></load-svg>
-          <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0" title="Catches">
-        </div>
-        
-        <div class="statDiv" title="Kills">
-          <load-svg src="SVGs/Knife.svg" class="knifeIcon" title="Kills"></load-svg>
-          <input type="number" id="killsInput" class="statInput textInput mousetrap" value="0" title="Kills">
-        </div>
-
-        <div class="statDiv" title="Deaths">
-          <load-svg src="SVGs/Skull.svg" class="skullIcon" title="Deaths"></load-svg>
-          <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0" title="Deaths">
-        </div>
-
-      </div>
-
-      <button id="updatePlayerButt" class="updateButt">
-        <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
-        <div id="updatePlayerText">UPDATE PLAYER</div>
-      </button>
   
-    </div>
-
-    <div id="settingsRegion" class="region">
+          <div class="statDiv" title="Deaths">
+            <load-svg src="SVGs/Skull.svg" class="skullIcon" title="Deaths"></load-svg>
+            <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0" title="Deaths">
+          </div>
+  
+        </div>
+  
+        <button id="updatePlayerButt" class="updateButt">
+          <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+          <div id="updatePlayerText">UPDATE PLAYER</div>
+        </button>
     
-        <div id="settingsList">
-
-          <div>
-
-            <div class="settingsTitle">General Settings</div>
-
-            <div id="gameSelectDiv" class="settingBox" title="Changes the current pokedex data">
-              <div>Game select</div>
-              <select id="gameSelect">
-                <option value="1">1 - Red/Blue</option>
-                <option value="2">2 - Gold/Silver</option>
-                <option value="3">3 - Ruby/Saphire</option>
-                <option value="4">4 - Pearl/Diamond</option>
-                <option value="5">5 - Black/White</option>
-                <option value="6">6 - X/Y</option>
-                <option value="7">7 - Sun/Moon</option>
-                <option value="8">8 - Sword/Shield</option>
-                <option value="9">9 - Scarlet/Violet</option>
-              </select>
-            </div>
-
-          </div>
+      </div>
   
-          <div id="settingsElectron">
+      <div id="settingsRegion" class="region">
+      
+          <div id="settingsList">
   
-            <div class="settingsTitle">Window Settings</div>
+            <div>
   
-            <div class="settingBox" title="Prevents other windows to be displayed on top of this one.">
-              <input type="checkbox" id="alwaysOnTop" class="settingsCheck" tabindex="-1">
-              <label for="alwaysOnTop" class="settingsText">Window always on top</span>
-            </div>
-    
-            <div class="settingBox" title="Unlocks window resizing">
-              <input type="checkbox" id="resizableWindow" class="settingsCheck" tabindex="-1">
-              <label for="resizableWindow" class="settingsText">Resizable window</span>
-            </div>
-    
-            <div class="settingBox">
-              <div id="zoomDiv">
-                <div id="zoomText">Zoom: </div>
-                <div id="zoomButtonsDiv">
-                  <button class="settingsButton zoomButton" id="lessZoomButt">-</button>
-                  <div id="zoomTextValue">100%</div>
-                  <button class="settingsButton zoomButton" id="moreZoomButt">+</button>
-                </div>            
+              <div class="settingsTitle">General Settings</div>
+  
+              <div id="gameSelectDiv" class="settingBox" title="Changes the current pokedex data">
+                <div>Game select</div>
+                <select id="gameSelect">
+                  <option value="1">1 - Red/Blue</option>
+                  <option value="2">2 - Gold/Silver</option>
+                  <option value="3">3 - Ruby/Saphire</option>
+                  <option value="4">4 - Pearl/Diamond</option>
+                  <option value="5">5 - Black/White</option>
+                  <option value="6">6 - X/Y</option>
+                  <option value="7">7 - Sun/Moon</option>
+                  <option value="8">8 - Sword/Shield</option>
+                  <option value="9">9 - Scarlet/Violet</option>
+                </select>
               </div>
+  
             </div>
     
-            <div id="settingsButtonSection">
-              <button class="settingsButton" id="restoreWindowButt" tabindex="-1" title='Restores the default window width, height, and zoom values'>
-                Restore default dimensions
-              </button>
+            <div id="settingsElectron">
+    
+              <div class="settingsTitle">Window Settings</div>
+    
+              <div class="settingBox" title="Prevents other windows to be displayed on top of this one.">
+                <input type="checkbox" id="alwaysOnTop" class="settingsCheck" tabindex="-1">
+                <label for="alwaysOnTop" class="settingsText">Window always on top</span>
+              </div>
+      
+              <div class="settingBox" title="Unlocks window resizing">
+                <input type="checkbox" id="resizableWindow" class="settingsCheck" tabindex="-1">
+                <label for="resizableWindow" class="settingsText">Resizable window</span>
+              </div>
+      
+              <div class="settingBox">
+                <div id="zoomDiv">
+                  <div id="zoomText">Zoom: </div>
+                  <div id="zoomButtonsDiv">
+                    <button class="settingsButton zoomButton" id="lessZoomButt">-</button>
+                    <div id="zoomTextValue">100%</div>
+                    <button class="settingsButton zoomButton" id="moreZoomButt">+</button>
+                  </div>            
+                </div>
+              </div>
+      
+              <div id="settingsButtonSection">
+                <button class="settingsButton" id="restoreWindowButt" tabindex="-1" title='Restores the default window width, height, and zoom values'>
+                  Restore default dimensions
+                </button>
+              </div>
+    
             </div>
-  
+    
           </div>
+      
+      </div>
   
-        </div>
-    
     </div>
 
   </div>
+
+  
 
 </div>
 
