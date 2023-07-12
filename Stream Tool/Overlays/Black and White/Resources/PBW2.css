@@ -128,6 +128,10 @@ html, body {
     overflow: visible;
     border-radius: 5px;
 }
+.pokeDed {
+    border-color: red;
+    filter: grayscale(.8);
+}
 
 
 .pokeTexts {

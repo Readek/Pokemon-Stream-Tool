@@ -22,6 +22,7 @@ class Pokemon {
     #nickname;
     #gender;
     #types = [];
+    #status;
     #imgSrc;
 
     constructor(el) {
@@ -79,6 +80,18 @@ class Pokemon {
     }
     getTypes() {
         return this.#types;
+    }
+
+    setStatus(status) {
+        this.#status = status;
+        if (status == "Fai") {
+            this.mainEl.classList.add("pokeDed");
+        } else {
+            this.mainEl.classList.remove("pokeDed");
+        }
+    }
+    getStatus() {
+        return this.#status;
     }
 
     setImg(src) {
@@ -220,6 +233,11 @@ async function updateData(data) {
             // set background color
             if (pokemons[i].compareIncTypes(data.playerPokemons[i].types)) {
                 pokemons[i].setTypes(data.playerPokemons[i].types);
+            }
+            
+            // set status condition
+            if (data.playerPokemons[i].status != pokemons[i].getStatus()) {
+                pokemons[i].setStatus(data.playerPokemons[i].status);
             }
     
             // set image
