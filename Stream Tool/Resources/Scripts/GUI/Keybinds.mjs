@@ -1,5 +1,6 @@
 import { pokeFinder } from './Finder/Pokemon Finder.mjs';
 import { current } from './Globals.mjs';
+import { randomizeAllPokemon } from './Pokemon/Pokemons.mjs';
 
 export function loadKeybinds() {
 
@@ -32,6 +33,10 @@ export function loadKeybinds() {
         if (pokeFinder.isVisible()) {
             pokeFinder.addActive(false);
         }
+    });
+
+    Mousetrap.bind('f6', () => {
+        randomizeAllPokemon(); //Useful for testing.
     });
     
 }

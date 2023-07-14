@@ -52,9 +52,13 @@ export class Pokemon {
 
     }
 
+    getInternalSpecies() {
+        if(this.#isNone) return "";
+        return this.#pokeData.name;
+    }
+
     getSpecies() {
-        //Maybe we should rename this to getSpeciesName(), in order to emphasize that this doesn't return forms and the names are replaced. 
-        //(In other words, this doesn't return unique identifiers, but human-readable values).
+        //This doesn't return unique identifiers, but human-readable values; for example, it localizes names ("Type: Null" becomes "Código Cero"), and ignores forms ("Arceus-Dark" becomes "Arceus").
         if(this.#isNone){
             return "";
         }
@@ -91,6 +95,11 @@ export class Pokemon {
             // this will fetch us all the data we will ever need
             // We should consider migrating this logic to another class.
             this.#pokeData = current.pkmnSpecies.get(name);
+            if(!this.#pokeData){
+                console.log(`Something went wrong: "${name}" is not a valid species name.`);
+                this.setSpecies("None");
+                return;
+            }
             this.#baseFormPokeData = current.pkmnSpecies.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
 
             // set the pokemon name and icon on the selector

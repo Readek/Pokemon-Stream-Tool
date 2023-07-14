@@ -25,8 +25,8 @@ export async function updateGUI(data, noNotif) {
         // poketeam time
         for (let i = 0; i < data.playerPokemons.length; i++) {
 
-            if (pokemons[i].getSpecies() != data.playerPokemons[i].species) {
-                pokemons[i].setSpecies(data.playerPokemons[i].species);
+            if (pokemons[i].getInternalSpecies() != data.playerPokemons[i].internalSpecies) {
+                pokemons[i].setSpecies(data.playerPokemons[i].internalSpecies);
             }
             if (pokemons[i].getNickName() != data.playerPokemons[i].nickName) {
                 pokemons[i].setNickName(data.playerPokemons[i].nickName);

@@ -29,6 +29,7 @@ export async function updateTeam() {
 
         // add it to the main json
         dataJson.playerPokemons.push({
+            internalSpecies : pokemons[i].getInternalSpecies(),
             species : pokemons[i].getSpecies(),
             nickName : pokemons[i].getNickName(),
             lvl : pokemons[i].getLvl(),
