@@ -14,7 +14,7 @@ This repo is under active WIP! But for now, feature list:
 - **Remote GUI** so multiple people can manage the overlay info at the same time.
 - All info is inputted manually, with plans to automate things.
 - All scripts outside of executable, so modifying stuff to your liking is ez.
-- For the moment, focusing on Gen5
+- For the moment, focusing on Gen5.
 - Current Overlay looks like this:
 
 <p align="center">
@@ -25,7 +25,7 @@ This repo is under active WIP! But for now, feature list:
 
 ## Getting the Pokémon sprites
 
-The overlay needs the gen 5 sprites from Pokémon Showdown, which aren't included in this repo. You can download a zip file including them in the [releases page](https://github.com/Readek/Pokemon-Stream-Tool/releases/latest), or from its [own repository](https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets). More info about assets can be found there.
+The overlay needs the gen 5 sprites from Pokémon Showdown, which aren't included in this repo. **The project won't work without these.** You can download them from its [own repository](https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets). More info about assets can be found there.
 
 The directory structure after unzipping or `wget`ting should be:
 ```text
