@@ -23,7 +23,7 @@ class Pokemon {
     #gender;
     #types = [];
     #status;
-    #imgSrc;
+    #img;
 
     constructor(el) {
 
@@ -94,10 +94,10 @@ class Pokemon {
         return this.#status;
     }
 
-    setImg(src) {
-        this.#imgSrc = src;
-        this.imgEl.src = src;
-        let filename = src.replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
+    setImg(img) {
+        this.#img = img;
+        this.imgEl.src = img.gen5Front;
+        let filename = img.gen5Front.replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
         let offset = offsets[filename] ?? [0, 0];
         this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
         //We compensate to account for the cases where the gif center is skewed towards a place where the Pokémon
@@ -105,7 +105,7 @@ class Pokemon {
         //The offsets are the difference between the actual center of the gif and the mean of the bounding boxes of each gif frame, and are precalculated using a Python script included in the repo.
     }
     getImgSrc() {
-        return this.#imgSrc;
+        return this.#img;
     }
 
     hidePoke() {
@@ -209,6 +209,7 @@ async function updateData(data) {
             if (data.playerPokemons[i].species != pokemons[i].getSpecies()) {
                 if (data.playerPokemons[i].species) {
                     pokemons[i].setSpecies(data.playerPokemons[i].species);
+                    pokemons[i].setImg(data.playerPokemons[i].img);
                     pokemons[i].showPoke();
                 } else {
                     pokemons[i].hidePoke();
@@ -238,11 +239,6 @@ async function updateData(data) {
             // set status condition
             if (data.playerPokemons[i].status != pokemons[i].getStatus()) {
                 pokemons[i].setStatus(data.playerPokemons[i].status);
-            }
-    
-            // set image
-            if (data.playerPokemons[i].img != pokemons[i].getImgSrc()) {
-                pokemons[i].setImg(data.playerPokemons[i].img);
             }
             
         }

@@ -266,15 +266,38 @@ export class Pokemon {
         this.statusSel.value = value;
     }
 
-    getSpriteImgSrc() {
-        if(this.#isNone){
-            return "../../Resources/Assets/None.png";
+    getImgSrc() {
+
+        // final data to be sent
+        const img = {
+            gen5Front : "",
+            gen5Back : "",
+            aniFront : "",
+            aniBack : ""
         }
-        //TODO: don't hardcode gen 5.
-        //TODO: Fallback to gen5 if gen5ani doesn't exist.
+
+        if(!this.#isNone){
+            // get those actual images!
+            img.gen5Front = this.#findImg("gen5ani", "p2");
+            img.gen5Back = this.#findImg("gen5ani", "p1");
+            img.aniFront = this.#findImg("ani", "p2");
+            img.aniBack = this.#findImg("ani", "p1");
+        }
+
+        return img;
+
+    }
+    /**
+     * Finds a requested image depending on current Pokemon data
+     * @param {String} gen Generation of sprites ( `gen?`, `gen?ani`, and `ani`)
+     * @param {String} side If front facing (`p2`) or back facing (`p1`)
+     * @returns {Object} Collection of found images
+     */
+    #findImg(gen, side) {
         let imgData = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {
-            gen: "gen5ani", 
-            gender: this.getGender(), 
+            gen: gen,
+            side: side,
+            gender: this.getGender(),
             shiny: this.#shiny,
             protocol: 'http', domain: "../../Resources/Assets/Pokemon"
         })

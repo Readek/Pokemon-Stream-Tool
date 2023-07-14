@@ -37,7 +37,7 @@ export async function updateTeam() {
             shiny : pokemons[i].getShiny(),
             types : pokemons[i].getTypes(),
             status : pokemons[i].getStatus(),
-            img : pokemons[i].getSpriteImgSrc()
+            img : pokemons[i].getImgSrc()
         })
 
     }
