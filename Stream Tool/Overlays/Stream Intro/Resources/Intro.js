@@ -6,12 +6,16 @@ const fadeInTime = 1; //(seconds)
 const fadeOutTime = 1;
 const revealTime = 10;
 const displayTime = 7.5;
+const countdownTime = 300;
+let countdown;
 
 const whoThatDiv = document.getElementById("whoThatDiv");
+const whoThatProgressBar = document.getElementById("whoThatRevealProgress");
 const whoThatPokeImg = document.getElementById("whoThatPokeImg");
 const whoThatPokeNick = document.getElementById("pokeNick");
 const whoThatPokeGender = document.getElementById("pokeGender");
 const whoThatPokeSpecies = document.getElementById("pokeSpecies");
+const countdownNumber = document.getElementById("countdownNumber");
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -168,6 +172,8 @@ async function updateData(data) {
         }, (revealTime + displayTime + (fadeOutTime * 2))*1000);
         startup = false;
 
+        startCountdown();
+
     }
 
 }
@@ -195,6 +201,7 @@ function whosThatPokemon() {
 
     // on load
     fadeIn(whoThatPokeImg);
+    whoThatProgressBar.style.animation = `barReveal ${revealTime}s linear both`;
 
     // after reveal time
     setTimeout(() => {
@@ -211,6 +218,7 @@ function whosThatPokemon() {
             fadeOut(whoThatPokeImg);
             fadeOut(whoThatPokeNick.parentElement);
             whoThatPokeImg.style.filter = "brightness(0)";
+            whoThatProgressBar.style.animation = `barRevealnt ${fadeOutTime}s ease-out both`;
             // after final fadeout
             setTimeout(() => {
                 whoThatPokeNick.parentElement.style.width = "0px";
@@ -222,6 +230,44 @@ function whosThatPokemon() {
     }, revealTime * 1000);
 
 }
+
+
+function startCountdown() {
+
+    countdown = countdownTime;
+
+    reduceCountdown();
+    setInterval(() => {
+        reduceCountdown();
+    }, 1000);
+    
+}
+
+function reduceCountdown() {
+
+    if (countdown > 0) {
+        
+        let seconds = countdown % 60;
+        const minutes = Math.floor(countdown / 60);
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        
+        countdownNumber.innerHTML = `en ${minutes}:${seconds}`;
+
+        countdown -= 1;
+
+    } else {
+        
+        countdownNumber.innerHTML = "pronto!";
+
+    }
+
+    
+
+}
+
 
 function fadeIn(itemID, delay = 0, dur = fadeInTime) {
 	itemID.style.animation = `fadeIn ${dur}s ${delay}s both`;
