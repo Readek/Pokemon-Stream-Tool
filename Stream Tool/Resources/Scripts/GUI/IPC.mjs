@@ -1,3 +1,4 @@
+import { updateCatches } from './Catches/Update Catches.mjs';
 import { saveSettings } from './File System.mjs';
 import { updatePlayer } from './Player/Update Player.mjs';
 import { updateTeam } from './Pokemon/Update Team.mjs';
@@ -15,40 +16,51 @@ const ipc = require('electron').ipcRenderer;
 
 
 // we will store data to send to the browsers here
-let teamData, playerData;
+let catchesData, teamData, playerData;
 
 
 // when a new browser connects
 ipc.on('requestData', () => {
 
     // send the current (not updated) data
+    sendCatchesData();
     sendTeamData();
     sendPlayerData();
 
 })
 
 /** Sends current game data object to websocket clients */
+export function sendCatchesData() {
+    ipc.send('sendData', catchesData);
+}
 export function sendTeamData() {
     ipc.send('sendData', teamData);
+}
+export function sendPlayerData() {
+    ipc.send('sendData', playerData);
+}
+
+
+/** Sends current game data to remote GUIs */
+export function sendRemoteCatchesData() {
+    ipc.send("sendData", JSON.stringify(remoteID(catchesData), null, 2));
+}
+export function sendRemoteTeamData() {
+    ipc.send("sendData", JSON.stringify(remoteID(teamData), null, 2));
+}
+export function sendRemotePlayerData() {
+    ipc.send("sendData", JSON.stringify(remoteID(playerData), null, 2));
+}
+
+/** Updates local object with new data */
+export function updateCatchesData(data) {
+    catchesData = data;
 }
 export function updateTeamData(data) {
     teamData = data;
 }
-/** Sends current game data to remote GUIs */
-export function sendRemoteTeamData() {
-    ipc.send("sendData", JSON.stringify(remoteID(teamData), null, 2));
-}
-
-/** Sends current game data object to websocket clients */
-export function sendPlayerData() {
-    ipc.send('sendData', playerData);
-}
 export function updatePlayerData(data) {
     playerData = data;
-}
-/** Sends current game data to remote GUIs */
-export function sendRemotePlayerData() {
-    ipc.send("sendData", JSON.stringify(remoteID(playerData), null, 2));
 }
 
 /**
@@ -101,7 +113,9 @@ ipc.on('remoteGuiData', async (event, data) => {
 
         // when we get data from remote GUIs
         await updateGUI(jsonData);
-        if (jsonData.type == "Team") {
+        if (jsonData.type == "Catches") {
+            updateCatches();
+        } else if (jsonData.type == "Team") {
             updateTeam();
         } else if (jsonData.type == "Player") {
             updatePlayer();
@@ -110,6 +124,7 @@ ipc.on('remoteGuiData', async (event, data) => {
     } else if (jsonData.message == "RemoteRequestData") {
 
         // when remote GUIs request data
+        sendRemoteCatchesData();
         sendRemoteTeamData();
         sendRemotePlayerData();
         

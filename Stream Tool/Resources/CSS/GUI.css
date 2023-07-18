@@ -199,10 +199,48 @@ button:hover {
   flex-direction: column;
   height: 100%;
   gap: 10px;
+  display: none;
 }
 
 
+/* catches stuff */
+#catchesDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.catchDiv {
+  display: flex;
+  gap: 5px;
+}
+
+#addCatchButt {
+  padding: 0px 7px;
+  font-size: 18px;
+  height: 30px;
+  font-family: "Roboto-Medium";
+  border: solid 2px var(--focused);
+  border-radius: 100%;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  transition: border-color 100ms;
+}
+#addCatchButt:hover {
+  border: solid 2px var(--text2);
+}
+#addCatchButt:active {
+  filter: brightness(.8);
+}
+
+
+
 /* team stuff */
+#teamRegion {
+  display: flex;
+}
+
 #pokeParty {
   display: flex;
   flex-direction: column;
@@ -501,10 +539,6 @@ button:hover {
 
 
 /* Player Info stuff */
-#playerInfoRegion {
-  display: none;
-}
-
 #gymBadges {
   display: flex;
   justify-content: center;
@@ -549,12 +583,6 @@ button:hover {
 
 
 /* Settings stuff */
-#settingsRegion {
-  display: none;
-}
-
-
-/* settings section */
 #settingsList {
   overflow-y: auto;
   height: 100%;

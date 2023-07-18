@@ -26,7 +26,7 @@ customElements.define("load-svg", class extends HTMLElement {
     }
 });
 
-class Pokemon {
+class Catch {
 
     #species;
     #nickname;
@@ -84,15 +84,7 @@ class Pokemon {
 
 }
 
-const pokemons = [];
-
-initPokemon();
-function initPokemon() {
-    for (let i = 0; i < 6; i++) {
-        pokemons.push(new Pokemon())
-    }
-}
-
+const catches = [];
 
 // first we will start by connecting with the GUI with a websocket
 startWebsocket();
@@ -133,31 +125,36 @@ function errorWebsocket() {
  */
 async function updateData(data) {
 
-    if (data.type == "Team") {
+    if (data.type == "Catches") {
         
         // pokemon team update
-        for (let i = 0; i < data.playerPokemons.length; i++) {
+        for (let i = 0; i < data.catches.length; i++) {
+
+            // if theres no data on that slot, create a new catch
+            if (!catches[i]) {
+                catches.push(new Catch());
+            }
 
             // set species
-            if (data.playerPokemons[i].species != pokemons[i].getSpecies()) {
-                if (data.playerPokemons[i].species) {
-                    pokemons[i].setSpecies(data.playerPokemons[i].species);
-                    pokemons[i].setImg(data.playerPokemons[i].img);
-                    pokemons[i].setTypes(data.playerPokemons[i].types);
-                    pokemons[i].setNone(false);
+            if (data.catches[i].species != catches[i].getSpecies()) {
+                if (data.catches[i].species) {
+                    catches[i].setSpecies(data.catches[i].species);
+                    catches[i].setImg(data.catches[i].img);
+                    catches[i].setTypes(data.catches[i].types);
+                    catches[i].setNone(false);
                 } else {
-                    pokemons[i].setNone(true);
+                    catches[i].setNone(true);
                 }
             }
     
             // set nickname
-            if (data.playerPokemons[i].nickName != pokemons[i].getNickname()) {
-                pokemons[i].setNickname(data.playerPokemons[i].nickName);
+            if (data.catches[i].nickName != catches[i].getNickname()) {
+                catches[i].setNickname(data.catches[i].nickName);
             }
     
             // set gender
-            if (data.playerPokemons[i].gender != pokemons[i].getGender()) {
-                pokemons[i].setGender(data.playerPokemons[i].gender);
+            if (data.catches[i].gender != catches[i].getGender()) {
+                catches[i].setGender(data.catches[i].gender);
             }
             
         }
@@ -180,7 +177,7 @@ async function updateData(data) {
 
 function whosThatPokemon() {
     
-    const chosenPoke = pokemons[genRnd(0, 5)];
+    const chosenPoke = catches[genRnd(0, 5)];
 
     // image
     whoThatPokeImg.src = Object.values(chosenPoke.getImg())[genRnd(0, 3)];

@@ -1,6 +1,7 @@
+import { enableCatchesUpdate } from "./Catches/Update Catches.mjs";
 import { displayNotif } from "./Notifications.mjs";
-import { enablePlayerUpdate, updatePlayer } from "./Player/Update Player.mjs";
-import { enableTeamUpdate, updateTeam } from "./Pokemon/Update Team.mjs";
+import { enablePlayerUpdate } from "./Player/Update Player.mjs";
+import { enableTeamUpdate } from "./Pokemon/Update Team.mjs";
 import { updateGUI } from "./Remote Update.mjs";
 
 let webSocket;
@@ -40,8 +41,10 @@ async function getData(data) {
     if (data) { // if this is a GUI update
 
         await updateGUI(data);
-        if (data.type == "Team") {
-            enableTeamUpdate()
+        if (data.type == "Catches") {
+            enableCatchesUpdate();
+        } else if (data.type == "Team") {
+            enableTeamUpdate();
         } else if (data.type == "Player") {
             enablePlayerUpdate();
         }

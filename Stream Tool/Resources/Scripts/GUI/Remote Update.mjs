@@ -1,3 +1,5 @@
+import { Catch } from "./Catches/Catch.mjs";
+import { catches } from "./Catches/Catches.mjs";
 import { current } from "./Globals.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Gym Badges.mjs";
@@ -13,6 +15,41 @@ let firstTime = true;
  * @param {boolean} noNotif Disables update notification
  */
 export async function updateGUI(data, noNotif) {
+
+    if (data.type == "Catches") {
+
+        // this maybe should be somewhere else
+        if (current.generation != data.generation || firstTime) {
+            settings.gameSelect.setGen(data.generation);
+            firstTime = false;
+        }
+        
+        for (let i = 0; i < data.catches.length; i++) {
+            
+            // if theres no data on that slot, create a new catch
+            if (!catches[i]) {
+                catches.push(new Catch());
+            }
+
+            if (catches[i].getInternalSpecies() != data.catches[i].internalSpecies) {
+                catches[i].setSpecies(data.catches[i].internalSpecies);
+            }
+            if (catches[i].getNickName() != data.catches[i].nickName) {
+                catches[i].setNickName(data.catches[i].nickName);
+            }
+            if (catches[i].getForm() != data.catches[i].form) {
+                catches[i].setForm(data.catches[i].form);
+            }
+            if (catches[i].getGender() != data.catches[i].gender) {
+                catches[i].setGender(data.catches[i].gender);
+            }
+            if (catches[i].getShiny() != data.catches[i].shiny) {
+                catches[i].setShiny(data.catches[i].shiny);
+            }
+            
+        }
+
+    }
 
     if (data.type == "Team") {
 
@@ -50,6 +87,7 @@ export async function updateGUI(data, noNotif) {
         };
 
     }
+
     if (data.type == "Player") {
 
         // player time

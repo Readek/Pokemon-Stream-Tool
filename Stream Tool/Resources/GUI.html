@@ -18,15 +18,19 @@
 <div id="viewport"> <!-- so we can move the viewport easily -->
 
   <div id="topBar">
-    <button id="topBarTeam" class="topBarButton topBarSelected">
+    <button id="topBarCatches" class="topBarButton" title="Add in your precious collection of friends">
+      <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+      <div class="topBarText">Catches</div>
+    </button>
+    <button id="topBarTeam" class="topBarButton topBarSelected" title="Modify your current Pokemon party">
       <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
       <div class="topBarText">Team</div>
     </button>
-    <button id="topBarPlayer" class="topBarButton">
+    <button id="topBarPlayer" class="topBarButton" title="Modify your badge data (and more)">
       <load-svg src="SVGs/Person.svg" class="personIcon"></load-svg>
       <div class="topBarText">Player</div>
     </button>
-    <button id="topBarSettings" class="topBarButton">
+    <button id="topBarSettings" class="topBarButton" title="We all need to tweak something from time to time">
       <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
       <div class="tobBarText">Settings</div>
     </button>
@@ -35,6 +39,18 @@
   <div id="centerWrap">
 
     <div id="content">
+
+      <div id="catchesRegion" class="region">
+
+        <div id="catchesDiv"></div>
+        <button id="addCatchButt">+</button>
+
+        <button id="updateCatchesButt" class="updateButt">
+          <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+          <div id="updateCatchesText">UPDATE CATCHES</div>
+        </button>
+
+      </div>
 
       <div id="teamRegion" class="region">
   

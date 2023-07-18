@@ -6,7 +6,7 @@ const http = require('http')
 let resourcesPath, nodePath;
 let httpPort, wsPort, guiWidth, guiHeight, failed;
 let wsServer, sockets = [];
-let storedTeamData, storedPlayerData, storedSettings;
+let storedCatchesData, storedTeamData, storedPlayerData, storedSettings;
 
 module.exports = function initExec(rPath, gPath, wSocket) {
     
@@ -214,7 +214,9 @@ function createWindow() {
         })
         // we will store this for later
         if (jsonData.id == "gameData") {
-            if (jsonData.type == "Team") {
+            if (jsonData.type == "Catches") {
+                storedCatchesData = jsonData;
+            } else if (jsonData.type == "Team") {
                 storedTeamData = jsonData;
             } else if (jsonData.type == "Player") {
                 storedPlayerData = jsonData;
@@ -259,6 +261,7 @@ app.on('window-all-closed', () => {
         
         // save current data state
         const storedGuiData = {
+            storedCatchesData : storedCatchesData,
             storedTeamData : storedTeamData,
             storedPlayerData : storedPlayerData
         };
