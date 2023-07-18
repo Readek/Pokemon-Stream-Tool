@@ -15,7 +15,7 @@ const whoThatPokeImg = document.getElementById("whoThatPokeImg");
 const whoThatPokeNick = document.getElementById("pokeNick");
 const whoThatPokeGender = document.getElementById("pokeGender");
 const whoThatPokeSpecies = document.getElementById("pokeSpecies");
-const countdownNumber = document.getElementById("countdownNumber");
+const countdownText = document.getElementById("countdownText");
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -177,7 +177,7 @@ async function updateData(data) {
 
 function whosThatPokemon() {
     
-    const chosenPoke = catches[genRnd(0, 5)];
+    const chosenPoke = catches[genRnd(0, catches.length-1)];
 
     // image
     whoThatPokeImg.src = Object.values(chosenPoke.getImg())[genRnd(0, 3)];
@@ -251,13 +251,13 @@ function reduceCountdown() {
             seconds = "0" + seconds;
         }
         
-        countdownNumber.innerHTML = `en ${minutes}:${seconds}`;
+        countdownText.innerHTML = `El stream comienza en ${minutes}:${seconds}`;
 
         countdown -= 1;
 
     } else {
         
-        countdownNumber.innerHTML = "pronto!";
+        countdownText.innerHTML = "¡El stream comienza pronto!";
 
     }
 
