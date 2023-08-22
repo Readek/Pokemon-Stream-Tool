@@ -6,6 +6,7 @@ import { setBadges } from "./Player/Gym Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
 import { pokemons } from "./Pokemon/Pokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
+import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 
 let firstTime = true;
 
@@ -95,6 +96,20 @@ export async function updateGUI(data, noNotif) {
         playerStats.setCatches(data.player.catches);
         playerStats.setKills(data.player.kills);
         playerStats.setDeaths(data.player.deaths);
+
+    }
+
+    if (data.type == "Wild Encounter") {
+
+        if (data.pokemon) {
+            wildEncounter.setSpecies(data.pokemon.species);
+            wildEncounter.setForm(data.pokemon.form);
+            wildEncounter.setGender(data.pokemon.gender),
+            wildEncounter.setShiny(data.pokemon.shiny);
+        } else {
+            wildEncounter.setSpecies("None");
+        }
+
 
     }
 

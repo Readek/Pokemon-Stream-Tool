@@ -165,11 +165,13 @@ button:hover {
   height: 20px;
   stroke: var(--text2);
   fill: none;
+  margin-right: -1px;
 }
 .personIcon {
   width: 20px;
   height: 20px;
   fill: var(--text2);
+  margin-right: -2px;
 }
 #configIcon, #checkIcon {
   width: 20px;
@@ -363,7 +365,7 @@ button:hover {
   top: 100%;
   left: 0;
   filter: drop-shadow(0px 0px 5px var(--bg3));
-  z-index: 3;
+  z-index: 5;
   max-height: 165px;
 }
 .pokeSelector:focus-within .finder {
@@ -579,6 +581,185 @@ button:hover {
   width: 20px;
   height: 20px;
   fill: var(--text2);
+}
+
+
+/* VS Wild encounter stuff */
+.vsWildTopRow {
+  display: flex;
+  gap: 5px;
+}
+
+#vsWildStatsDiv {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.vsWildStat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--focused);
+  height: 25px;
+}
+.vsWildStat:not(:first-child) {
+  border-top: none;
+}
+.vsWildStatText {
+  text-shadow: 0px 0px 2px black;
+  z-index: 3;
+  padding: 0px 5px;
+}
+
+.vsWildMeter {
+  position: absolute;
+  height: 100%;
+  transition: width .5s;
+  width: 0%;
+}
+
+#vsWildStatHP {
+  background-color: #4e2826;
+}
+#vsWildMeterHP {
+  background-color: #C7312A;
+}
+#vsWildStatAT {
+  background-color: #553726;
+}
+#vsWildMeterAT {
+  background-color: #F77F32;
+}
+#vsWildStatDE {
+  background-color: #4e3b18;
+}
+#vsWildMeterDE {
+  background-color: #FFA40A;
+}
+#vsWildStatSA {
+  background-color: #2b3a55;
+}
+#vsWildMeterSA {
+  background-color: #5F92ED;
+}
+#vsWildStatSD {
+  background-color: #2b4121;
+}
+#vsWildMeterSD {
+  background-color: #72C34D;
+}
+#vsWildStatSP {
+  background-color: #582836;
+}
+#vsWildMeterSP {
+  background-color: #EB527D;
+}
+#vsWildStatTS {
+  background-color: #3c214b;
+}
+#vsWildMeterTS {
+  background-color: #b352eb;
+}
+
+
+#vsWildBotRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#vsWildRightDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 240px;
+  gap: 10px;
+}
+
+
+.vsWildPokeTypeDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.vsWildTypeDiv {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  background-color: var(--bg4);
+  border-radius: 5px;
+  padding-right: 4px;
+  text-transform: uppercase;
+}
+
+
+#vsWildGenderRatio {
+  display: flex;
+  gap: 10px;
+}
+
+.vsWildGenderRatioDiv {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg4);
+  border-radius: 5px;
+  height: 26px;
+  gap: 5px;
+  padding: 5px;
+}
+
+
+#vsWildAbilities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.vsWildAbilityText {
+  background-color: var(--bg4);
+  border-radius: 5px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+#vsWildAbilityH {
+  border: 1px solid #5d4d68;
+}
+
+
+#vsWildSendRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#vsWildSendCatchDiv {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#sendCatchButt {
+  border: 1px solid var(--focused);
+}
+#sendCatchButt:hover {
+  border: 1px solid var(--selected);
+}
+
+#vsWildInCombatDiv {
+  padding: 6px;
+  background-color: var(--bg4);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+#vsWildInCombatDiv:hover {
+  border: 1px solid var(--selected);
+  padding: 5px;
 }
 
 

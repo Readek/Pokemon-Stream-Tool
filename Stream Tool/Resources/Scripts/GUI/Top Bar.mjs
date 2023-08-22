@@ -1,11 +1,13 @@
 const catchesButton = document.getElementById("topBarCatches");
 const teamButton = document.getElementById("topBarTeam");
 const playerButton = document.getElementById("topBarPlayer");
+const vsWildButton = document.getElementById("topBarVsWild");
 const settingsButton = document.getElementById("topBarSettings");
 
 const catchesDiv = document.getElementById("catchesRegion");
 const teamDiv = document.getElementById("teamRegion");
 const playerDiv = document.getElementById("playerInfoRegion");
+const vsWildDiv = document.getElementById("vsWildRegion");
 const settingsDiv = document.getElementById("settingsRegion");
 
 const buttons = document.getElementsByClassName("topBarButton");
@@ -14,6 +16,7 @@ const regions = document.getElementsByClassName("region");
 catchesButton.addEventListener("click", showCatchesRegion);
 teamButton.addEventListener("click", showTeamRegion);
 playerButton.addEventListener("click", showPlayerRegion);
+vsWildButton.addEventListener("click", showVsWildRegion);
 settingsButton.addEventListener("click", showSettingsRegion);
 
 
@@ -22,19 +25,21 @@ function showCatchesRegion() {
     catchesDiv.style.display = "flex";
     catchesButton.classList.add("topBarSelected");
 }
-
 function showTeamRegion() {
     hideAll();
     teamDiv.style.display = "flex";
     teamButton.classList.add("topBarSelected");
 }
-
 function showPlayerRegion() {
     hideAll();
     playerDiv.style.display = "flex";
     playerButton.classList.add("topBarSelected");
 }
-
+function showVsWildRegion() {
+    hideAll();
+    vsWildDiv.style.display = "flex";
+    vsWildButton.classList.add("topBarSelected");
+}
 function showSettingsRegion() {
     hideAll();
     settingsDiv.style.display = "flex";

@@ -3,6 +3,7 @@ import { displayNotif } from "./Notifications.mjs";
 import { enablePlayerUpdate } from "./Player/Update Player.mjs";
 import { enableTeamUpdate } from "./Pokemon/Update Team.mjs";
 import { updateGUI } from "./Remote Update.mjs";
+import { enableWildUpdate } from "./VS Wild/Update Wild.mjs";
 
 let webSocket;
 
@@ -47,6 +48,8 @@ async function getData(data) {
             enableTeamUpdate();
         } else if (data.type == "Player") {
             enablePlayerUpdate();
+        } else if (data.type == "Wild Encounter") {
+            enableWildUpdate();
         }
 
     }

@@ -30,6 +30,10 @@
       <load-svg src="SVGs/Person.svg" class="personIcon"></load-svg>
       <div class="topBarText">Player</div>
     </button>
+    <button id="topBarVsWild" class="topBarButton" title="Wild Pokemon encounter stats">
+      <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+      <div class="topBarText">VS Wild</div>
+    </button>
     <button id="topBarSettings" class="topBarButton" title="We all need to tweak something from time to time">
       <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
       <div class="tobBarText">Settings</div>
@@ -115,6 +119,138 @@
           <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
           <div id="updatePlayerText">UPDATE PLAYER</div>
         </button>
+    
+      </div>
+
+      <div id="vsWildRegion" class="region">
+
+        <div class="vsWildTopRow">
+
+          <div class="finderPosition">
+            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+            <img class="pokeSelectorIcon" alt="">
+            <div class="pokeSelectorText"></div>
+            </div>
+          </div>
+  
+          <select class="pokeForm" title="For pokemons that have different forms">
+          </select>
+  
+          <button class="pokeGenderButton" title="Pokemon gender">
+              <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
+          </button>
+  
+          <button class="pokeShinyButton" title="Shiny indicator">
+              <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
+          </button>
+
+        </div>
+
+        <div id="vsWildBotRow">
+
+          <div id="vsWildStatsDiv">
+
+            <div class="vsWildStat" id="vsWildStatHP">
+              <div class="vsWildStatName vsWildStatText">HP</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberHP"></div>
+              <div class="vsWildMeter" id="vsWildMeterHP"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatAT">
+              <div class="vsWildStatName vsWildStatText">Attack</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberAT"></div>
+              <div class="vsWildMeter" id="vsWildMeterAT"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatDE">
+              <div class="vsWildStatName vsWildStatText">Defense</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberDE"></div>
+              <div class="vsWildMeter" id="vsWildMeterDE"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatSA">
+              <div class="vsWildStatName vsWildStatText">Sp. Attack</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSA"></div>
+              <div class="vsWildMeter" id="vsWildMeterSA"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatSD">
+              <div class="vsWildStatName vsWildStatText">Sp. Defense</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSD"></div>
+              <div class="vsWildMeter" id="vsWildMeterSD"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatSP">
+              <div class="vsWildStatName vsWildStatText">Speed</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSP"></div>
+              <div class="vsWildMeter" id="vsWildMeterSP"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatTS">
+              <div class="vsWildStatName vsWildStatText">Total</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberTS"></div>
+              <div class="vsWildMeter" id="vsWildMeterTS"></div>
+            </div>
+  
+          </div>
+  
+          <div id="vsWildRightDiv">
+
+            <div class="vsWildPokeTypeDiv" title="Pokemon types">
+              <div class="vsWildTypeDiv">
+                <img alt="" class="typeIcon typeIcon1">
+                <span></span>
+              </div>
+              <div class="vsWildTypeDiv">
+                <img alt="" class="typeIcon typeIcon2">
+                <span></span>
+              </div>
+            </div>
+
+            <div id="vsWildGenderRatio">
+
+              <div class="vsWildGenderRatioDiv">
+                <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
+                <span class="vsWildGenderRatioText" id="vsWildGenderRatioM"></span>
+              </div>
+
+              <div class="vsWildGenderRatioDiv">
+                <img class="pokeGenderIcon" src="Assets/Gender F.png" alt="">
+                <span class="vsWildGenderRatioText" id="vsWildGenderRatioF"></span>
+              </div>
+
+            </div>
+
+            <div id="vsWildAbilities">
+
+              <div class="vsWildAbilityText" id="vsWildAbility0"></div>
+              <div class="vsWildAbilityText" id="vsWildAbility1"></div>
+              <div class="vsWildAbilityText" id="vsWildAbilityH"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div id="vsWildSendRow">
+
+          <div id="vsWildSendCatchDiv">
+            <input type="text" id="vsWildNickInput" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
+            <button id="sendCatchButt" class="updateButt">Send to Catches</button>
+          </div>
+
+          <div id="vsWildInCombatDiv">
+            <label for="vsWildInCombatCheck">In combat</label>
+            <input type="checkbox" name="vsWildInCombatCheck" id="vsWildInCombatCheck">
+          </div>
+
+          <button id="updateWildButt" class="updateButt">
+            <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+            <div id="updateWildText">UPDATE ENCOUNTER</div>
+          </button>
+
+        </div>
     
       </div>
   

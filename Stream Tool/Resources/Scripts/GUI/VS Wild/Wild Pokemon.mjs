@@ -1,7 +1,10 @@
+import { Catch } from "../Catches/Catch.mjs";
+import { catches } from "../Catches/Catches.mjs";
+import { updateCatches } from "../Catches/Update Catches.mjs";
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, nameReplacements, stPath } from "../Globals.mjs";
 
-export class Catch {
+class WildPokemon {
 
     #gender = "M";
     #shiny = false;
@@ -12,12 +15,39 @@ export class Catch {
     #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
     #isNone = true;
 
-    constructor(data) {
+    #infoDiv = document.getElementById("vsWildBotRow");
+    #sendInp = document.getElementById("vsWildNickInput");
+    #sendBut = document.getElementById("sendCatchButt");
+    #inComCheck = document.getElementById("vsWildInCombatCheck");
 
-        const el = this.generateElement();
+    #statTextHP;
+    #statTextAT;
+    #statTextDE;
+    #statTextSA;
+    #statTextSD;
+    #statTextSP;
+    #statTextTS;
+
+    #statMeterHP;
+    #statMeterAT;
+    #statMeterDE;
+    #statMeterSA;
+    #statMeterSD;
+    #statMeterSP;
+    #statMeterTS;
+
+    #genderRatioTextM;
+    #genderRatioTextF;
+
+    #abilityText0;
+    #abilityText1;
+    #abilityTextH;
+
+    constructor() {
+
+        const el = document.getElementById("vsWildRegion");
 
         this.pokeSel = el.getElementsByClassName(`pokeSelector`)[0];
-        this.nickInp = el.getElementsByClassName(`pokeNickName`)[0];
         this.formSel = el.getElementsByClassName(`pokeForm`)[0];
 
         this.genderButt = el.getElementsByClassName(`pokeGenderButton`)[0];
@@ -25,6 +55,33 @@ export class Catch {
 
         this.shinyButt = el.getElementsByClassName('pokeShinyButton')[0];
         this.shinyIcon = el.getElementsByClassName('pokeShinyIcon')[0];
+
+        this.typeImg1 = el.getElementsByClassName('typeIcon1')[0];
+        this.typeImg2 = el.getElementsByClassName('typeIcon2')[0];
+
+
+        this.#statTextHP = document.getElementById("vsWildStatNumberHP");
+        this.#statTextAT = document.getElementById("vsWildStatNumberAT");
+        this.#statTextDE = document.getElementById("vsWildStatNumberDE");
+        this.#statTextSA = document.getElementById("vsWildStatNumberSA");
+        this.#statTextSD = document.getElementById("vsWildStatNumberSD");
+        this.#statTextSP = document.getElementById("vsWildStatNumberSP");
+        this.#statTextTS = document.getElementById("vsWildStatNumberTS");
+
+        this.#statMeterHP = document.getElementById("vsWildMeterHP");
+        this.#statMeterAT = document.getElementById("vsWildMeterAT");
+        this.#statMeterDE = document.getElementById("vsWildMeterDE");
+        this.#statMeterSA = document.getElementById("vsWildMeterSA");
+        this.#statMeterSD = document.getElementById("vsWildMeterSD");
+        this.#statMeterSP = document.getElementById("vsWildMeterSP");
+        this.#statMeterTS = document.getElementById("vsWildMeterTS");
+
+        this.#genderRatioTextM = document.getElementById("vsWildGenderRatioM");
+        this.#genderRatioTextF = document.getElementById("vsWildGenderRatioF");
+
+        this.#abilityText0 = document.getElementById("vsWildAbility0");
+        this.#abilityText1 = document.getElementById("vsWildAbility1");
+        this.#abilityTextH = document.getElementById("vsWildAbilityH");
 
         
         // set a listener that will trigger when pokemon selector is clicked
@@ -35,15 +92,7 @@ export class Catch {
             pokeFinder.setSpeciesFocus();
         });
         // also set an initial pokemon value
-        if (data) { // if we get catch data from somewhere else
-            this.setSpecies(data.species);
-            this.setForm(data.form);
-            this.setGender(data.gender);
-            this.setNickName(data.nickname);
-            this.setShiny(data.shiny);
-        } else {
-            this.setSpecies();
-        }
+        this.setSpecies();
 
         this.genderButt.addEventListener("click", () => {this.swapGender()});
 
@@ -51,6 +100,9 @@ export class Catch {
 
         // event listener for the form selector.
         this.formSel.addEventListener("change", () => {this.setForm(this.formSel.value)});
+
+        // send catch listener
+        this.#sendBut.addEventListener("click", () => {this.#sendCatch()})
 
     }
 
@@ -75,6 +127,7 @@ export class Catch {
 
         // if we select none, just display nothin
         if (!name || name == "None") {
+
             this.#isNone = true;
             this.pokeSel.children[1].innerHTML = "";
             this.#updateIcon();
@@ -85,9 +138,18 @@ export class Catch {
             this.formSel.replaceChildren(formEl);
             this.formSel.value = "Base";
             this.formSel.disabled = true;
+            //We also disable the type icons.
+            this.typeImg1.style.display = "none";
+            this.typeImg2.style.display = "none";
             //In case you select a gender-locked Pokémon before and you want to pre-select another Pokémon's gender.
             //Alternatively, we could disable everything but the Pokémon selector, in order to remain consistent.
             this.enableGenderButt();
+
+            // hide them stats
+            this.#infoDiv.style.display = "none";
+            document.getElementById("vsWildSendCatchDiv").style.display = "none";
+            document.getElementById("vsWildInCombatDiv").style.display = "none";
+
         } else {
 
             this.#isNone = false;
@@ -105,6 +167,20 @@ export class Catch {
             this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies; //We use the base species name.
             this.#updateIcon();
             
+            // set types from @pkmn/data Specie object
+            let types = this.#pokeData.types;
+            this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
+            this.typeImg1.style.display = "block";
+            this.typeImg1.parentElement.lastElementChild.innerHTML = types[0];
+            if (types[1]) {
+                this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
+                this.typeImg2.style.display = "block";
+                this.typeImg2.parentElement.style.display = "flex";
+                this.typeImg2.parentElement.lastElementChild.innerHTML = types[1];
+            } else {
+                this.typeImg2.parentElement.style.display = "none";
+            }
+
             // sets the form lists.
             this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
             this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
@@ -140,7 +216,12 @@ export class Catch {
                 if(!this.getGender()) this.setGender('M');
                 this.enableGenderButt();
             }
-            
+
+            // show them stats and fill them
+            this.#infoDiv.style.display = "flex";
+            document.getElementById("vsWildSendCatchDiv").style.display = "flex";
+            document.getElementById("vsWildInCombatDiv").style.display = "flex";
+            this.#fillInfo();
 
         }
 
@@ -157,17 +238,6 @@ export class Catch {
         this.pokeSel.children[0].alt = this.#pokeData.name;
         this.pokeSel.children[0].src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
         this.pokeSel.children[0].style.objectPosition = `${imgInfo.left}px ${imgInfo.top}px`;
-    }
-
-    getNickName() {
-        return this.nickInp.value;
-    }
-    setNickName(name) {
-        if (name) {
-            this.nickInp.value = name;
-        } else {
-            this.nickInp.value = "";
-        }
     }
 
     getForm() {
@@ -250,6 +320,13 @@ export class Catch {
         return this.#pokeData.types;
     }
 
+    getInCombat() {
+        this.#inComCheck.value;
+    }
+    setInCombat(value) {
+        this.#inComCheck.value = value;
+    }
+
     getImgSrc() {
 
         // final data to be sent
@@ -292,50 +369,117 @@ export class Catch {
         return this.#pokeData;
     }
 
-    clear() {
-        this.setSpecies("None");
-    }
-    randomize() {
-        let fullSpeciesList = [...current.pkmnSpecies];
-        let randomSpecies = fullSpeciesList[Math.floor(Math.random()*fullSpeciesList.length)];
-        this.setSpecies(randomSpecies.name);
-    }
 
-
-    /** Creates the pokemon's HTML element */
-    generateElement() {
-
-        const element = document.createElement("div");
-        element.classList.add("catchDiv");
-        // and now for the big fat text
-        element.innerHTML = `
+    #fillInfo() {
         
-            <div class="finderPosition">
-                <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
-                <img class="pokeSelectorIcon" alt="">
-                <div class="pokeSelectorText"></div>
-                </div>
-            </div>
+        // base stats
+        this.#statTextHP.innerHTML = this.#pokeData.baseStats.hp;
+        this.#statTextAT.innerHTML = this.#pokeData.baseStats.atk;
+        this.#statTextDE.innerHTML = this.#pokeData.baseStats.def;
+        this.#statTextSA.innerHTML = this.#pokeData.baseStats.spa;
+        this.#statTextSD.innerHTML = this.#pokeData.baseStats.spd;
+        this.#statTextSP.innerHTML = this.#pokeData.baseStats.spe;
+        this.#statTextTS.innerHTML = this.#pokeData.bst;
 
-            <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
+        // we wait a tick so the animation plays when coming from display none
+        setTimeout(() => {
+            this.#statMeterHP.style.width = this.#calcStatMeter(this.#pokeData.baseStats.hp) + "%";
+            this.#statMeterAT.style.width = this.#calcStatMeter(this.#pokeData.baseStats.atk) + "%";
+            this.#statMeterDE.style.width = this.#calcStatMeter(this.#pokeData.baseStats.def) + "%";
+            this.#statMeterSA.style.width = this.#calcStatMeter(this.#pokeData.baseStats.spa) + "%";
+            this.#statMeterSD.style.width = this.#calcStatMeter(this.#pokeData.baseStats.spd) + "%";
+            this.#statMeterSP.style.width = this.#calcStatMeter(this.#pokeData.baseStats.spe) + "%";
+            this.#statMeterTS.style.width = this.#calcStatMeter(this.#pokeData.bst, true) + "%";
+        }, 0);
 
-            <select class="pokeForm" title="For pokemons that have different forms">
-            </select>
+        // gender ratio
+        this.#genderRatioTextM.innerHTML = this.#pokeData.genderRatio.M * 100 + "%";
+        this.#genderRatioTextF.innerHTML = this.#pokeData.genderRatio.F * 100 + "%";
 
-            <button class="pokeGenderButton" title="Pokemon gender">
-                <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-            </button>
+        // Abilities
+        this.#abilityText0.innerHTML = this.#pokeData.abilities[0];
 
-            <button class="pokeShinyButton" title="Shiny indicator">
-                <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-            </button>
+        if (this.#pokeData.abilities[1]) {
+            this.#abilityText1.innerHTML = this.#pokeData.abilities[1];
+            this.#abilityText1.style.display = "flex";
+        } else {
+            this.#abilityText1.style.display = "none";
+        }
 
-        `
+        if (this.#pokeData.abilities.H) {
+            this.#abilityTextH.innerHTML = this.#pokeData.abilities.H;
+            this.#abilityTextH.style.display = "flex";
+        } else {
+            this.#abilityTextH.style.display = "none";
+        }
 
-        // add it to the GUI
-        document.getElementById("catchesDiv").appendChild(element);
-        return element;
+    }
+
+    #calcStatMeter(value, total) {
+
+        if (total) {
+            return value * 100 / 720 // 680 being max total base stats a pokemon can have
+        } else {
+            return value * 100 / 230 // 230 being max base stat a pokemon can have
+        }
+
+    }
+
+    #sendCatch() {
+
+        const dataToSend = {
+            species : this.getSpecies(),
+            form : this.getForm(),
+            nickname : this.#sendInp.value,
+            gender : this.getGender(),
+            shiny : this.getShiny(),
+        }
+
+        catches.push(new Catch(dataToSend));
+        updateCatches();
+
+    }
+
+    /**
+     * Gathers are usable data from wild encounter
+     * @returns {Object} Data to be read by browsers
+     */
+    sendData() {
+
+
+        if (this.#isNone) {
+            return null;
+        } else {
+            return {
+                // these are only for remote updating
+                species : this.getSpecies(),
+                form : this.getForm(),
+                gender : this.getGender(),
+                shiny : this.getShiny(),
+                // and this is the data for browsers
+                type : this.getTypes(),
+                img : this.getImgSrc(),
+                hp : this.#pokeData.baseStats.hp,
+                atk : this.#pokeData.baseStats.atk,
+                def : this.#pokeData.baseStats.def,
+                spa : this.#pokeData.baseStats.spa,
+                spd : this.#pokeData.baseStats.spd,
+                spe : this.#pokeData.baseStats.spe,
+                bst : this.#pokeData.bst,
+                ratioM : this.#pokeData.genderRatio.M,
+                ratioF : this.#pokeData.genderRatio.F,
+                abilities : [
+                    this.#pokeData.abilities[0],
+                    this.#pokeData.abilities[1],
+                    this.#pokeData.abilities.H
+                ]
+            }
+        }
+
+        
 
     }
 
 }
+
+export const wildEncounter = new WildPokemon;

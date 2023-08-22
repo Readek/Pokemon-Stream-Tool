@@ -3,20 +3,20 @@ import { saveSettings } from './File System.mjs';
 import { updatePlayer } from './Player/Update Player.mjs';
 import { updateTeam } from './Pokemon/Update Team.mjs';
 import { updateGUI } from './Remote Update.mjs';
+import { updateWildEnc } from './VS Wild/Update Wild.mjs';
 
 const ipc = require('electron').ipcRenderer;
+
 
 // ipc is the communication bridge between us and nodejs
 // we can send signals to do node exclusive stuff,
 // and recieve messages from it with data
 
-// node code is the only thing thats embbeded on the executable
-// meaning that to see it or modify it, you will need to
-// be able to build this project yourself... check the repo's wiki!
+// avoid calling this module outside Electron, or things will break
 
 
 // we will store data to send to the browsers here
-let catchesData, teamData, playerData;
+let catchesData, teamData, playerData, wildData;
 
 
 // when a new browser connects
@@ -26,6 +26,7 @@ ipc.on('requestData', () => {
     sendCatchesData();
     sendTeamData();
     sendPlayerData();
+    sendWildData();
 
 })
 
@@ -39,6 +40,9 @@ export function sendTeamData() {
 export function sendPlayerData() {
     ipc.send('sendData', playerData);
 }
+export function sendWildData() {
+    ipc.send('sendData', wildData);
+}
 
 
 /** Sends current game data to remote GUIs */
@@ -51,6 +55,9 @@ export function sendRemoteTeamData() {
 export function sendRemotePlayerData() {
     ipc.send("sendData", JSON.stringify(remoteID(playerData), null, 2));
 }
+export function sendRemoteWildData() {
+    ipc.send("sendData", JSON.stringify(remoteID(wildData), null, 2));
+}
 
 /** Updates local object with new data */
 export function updateCatchesData(data) {
@@ -61,6 +68,9 @@ export function updateTeamData(data) {
 }
 export function updatePlayerData(data) {
     playerData = data;
+}
+export function updateWildData(data) {
+    wildData = data;
 }
 
 /**
@@ -119,6 +129,8 @@ ipc.on('remoteGuiData', async (event, data) => {
             updateTeam();
         } else if (jsonData.type == "Player") {
             updatePlayer();
+        } else if (jsonData.type == "Wild Encounter") {
+            updateWildEnc();
         }
 
     } else if (jsonData.message == "RemoteRequestData") {
@@ -127,6 +139,7 @@ ipc.on('remoteGuiData', async (event, data) => {
         sendRemoteCatchesData();
         sendRemoteTeamData();
         sendRemotePlayerData();
+        sendRemoteWildData();
         
     } else if (jsonData.message == "RemoteSaveJson") {
 

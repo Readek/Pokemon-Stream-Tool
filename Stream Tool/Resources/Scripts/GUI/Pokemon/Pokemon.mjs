@@ -151,7 +151,6 @@ export class Pokemon {
                 if(!this.getGender()) this.setGender('M');
                 this.enableGenderButt();
             }
-            
 
         }
 

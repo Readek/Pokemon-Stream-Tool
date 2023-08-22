@@ -19,9 +19,7 @@ html, body {
 #content {
     width: 1920px;
     height: 1080px;
-    background-image: url(Images/bg.png);
-    background-size: 82px 84px;
-    image-rendering: pixelated;
+
     display: flex;
     flex-direction: column;
 }
@@ -94,17 +92,18 @@ html, body {
 
 
 #whoThatInfoDiv {
-    text-shadow: 0px 0px 5px black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     opacity: 0;
     transition: width 1s;
     width: 0px;
+    filter: drop-shadow(0px 0px 10px black);
 }
 #pokeNick {
     font-size: 74px;
     width: 200px;
+    white-space: nowrap;
 }
 
 #pokeSubText {

@@ -15,6 +15,8 @@ import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
 import { catches } from './GUI/Catches/Catches.mjs';
 import { Catch } from './GUI/Catches/Catch.mjs';
 import { updateCatches } from './GUI/Catches/Update Catches.mjs';
+import { wildEncounter } from './GUI/VS Wild/Wild Pokemon.mjs'; // remove later
+import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
 
 
 // this is a weird way to have file svg's that can be recolored by css
@@ -66,6 +68,7 @@ async function init() {
         updateCatches();
         updatePlayer();
         updateTeam();
+        updateWildEnc();
 
     } else { // remote GUIs will ask about the current main GUI state
         const remote = await import("./GUI/Remote Requests.mjs");
