@@ -106,6 +106,181 @@ html, body {
 }
 
 
+/* Wild Encounter Section */
+
+#wildEncounterDiv {
+    opacity: 0;
+    position: absolute;
+    top: 560px;
+    left: 415px;
+    width: 280px;
+    height: 340px;
+    font-family: "Aero";
+    font-size: 20px;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+}
+
+#wildPokeImgDiv {
+    transform: translate(-5px, -90px);
+    z-index: 1;
+}
+
+
+#wildBackground {
+    position: absolute;
+    width: 100%;
+    height: 186px;
+    background-color: #5a54676c;
+    border-radius: 20px;
+    z-index: 0;
+    transform: translateY(-6px)
+}
+
+
+#wildInfoDiv {
+    width: 160px;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transform: translate(-4px, -10px);
+}
+
+.vsWildPokeTypeDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.vsWildTypeDiv {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    border-radius: 5px;
+    padding-right: 4px;
+    text-transform: uppercase;
+    gap: 5px;
+}
+
+
+#vsWildGenderRatio {
+    display: flex;
+    gap: 0px;
+}
+
+.vsWildGenderRatioDiv {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    height: 26px;
+    gap: 5px;
+    padding: 5px;
+}
+
+
+#vsWildAbilities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.vsWildAbilityText {
+    background-color: rgba(78, 78, 78, 0.5);
+    border-radius: 5px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+#vsWildAbilityH {
+    border: 1px solid #5d4d68;
+}
+
+
+#vsWildStatsDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 10px;
+    font-size: 18px;
+}
+  
+.vsWildStat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border: 1px solid grey;
+    height: 22px;
+}
+.vsWildStat:not(:first-child) {
+    border-top: none;
+}
+.vsWildStatText {
+    text-shadow: 0px 0px 2px black;
+    z-index: 3;
+    padding: 0px 5px;
+}
+  
+.vsWildMeter {
+    position: absolute;
+    height: 100%;
+    transition: width .5s;
+    width: 0%;
+    opacity: .7;
+}
+  
+#vsWildStatHP {
+    background-color: #4e2826;
+}
+#vsWildMeterHP {
+    background-color: #C7312A;
+}
+#vsWildStatAT {
+    background-color: #553726;
+}
+#vsWildMeterAT {
+    background-color: #F77F32;
+}
+#vsWildStatDE {
+    background-color: #4e3b18;
+}
+#vsWildMeterDE {
+    background-color: #FFA40A;
+}
+#vsWildStatSA {
+    background-color: #2b3a55;
+}
+#vsWildMeterSA {
+    background-color: #5F92ED;
+}
+#vsWildStatSD {
+    background-color: #2b4121;
+}
+#vsWildMeterSD {
+    background-color: #72C34D;
+}
+#vsWildStatSP {
+    background-color: #582836;
+}
+#vsWildMeterSP {
+    background-color: #EB527D;
+}
+#vsWildStatTS {
+    background-color: #3c214b;
+}
+#vsWildMeterTS {
+    background-color: #b352eb;
+}
+
+
+/* Bottom Pokemon Section */
+
 #botPokes {
     position: absolute;
     bottom: 0px;
@@ -197,4 +372,28 @@ html, body {
     font-size: 28px;
     color: lightcoral;
     text-shadow: 0px 0px 5px black;
+}
+
+
+/* Animations! */
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }

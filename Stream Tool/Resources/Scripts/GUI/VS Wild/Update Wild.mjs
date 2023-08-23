@@ -1,4 +1,4 @@
-import { current, inside } from "../Globals.mjs";
+import { inside } from "../Globals.mjs";
 import { wildEncounter } from "./Wild Pokemon.mjs";
 
 const updateButt = document.getElementById("updateWildButt");
@@ -21,7 +21,7 @@ export async function updateWildEnc() {
        id : "gameData",
        type : "Wild Encounter",
        pokemon : wildEncounter.sendData(),
-       generation : current.generation
+       inCombat : wildEncounter.getInCombat()
    };
 
    // its time to send the data away

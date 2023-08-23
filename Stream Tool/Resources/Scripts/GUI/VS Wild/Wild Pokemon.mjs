@@ -3,6 +3,7 @@ import { catches } from "../Catches/Catches.mjs";
 import { updateCatches } from "../Catches/Update Catches.mjs";
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, nameReplacements, stPath } from "../Globals.mjs";
+import { updateWildEnc } from "./Update Wild.mjs";
 
 class WildPokemon {
 
@@ -321,10 +322,10 @@ class WildPokemon {
     }
 
     getInCombat() {
-        this.#inComCheck.value;
+        return this.#inComCheck.checked;
     }
     setInCombat(value) {
-        this.#inComCheck.value = value;
+        this.#inComCheck.checked = value;
     }
 
     getImgSrc() {
@@ -438,6 +439,10 @@ class WildPokemon {
         catches.push(new Catch(dataToSend));
         updateCatches();
 
+        // automatically exit combat state
+        this.setInCombat(false);
+        updateWildEnc();
+
     }
 
     /**
@@ -459,20 +464,22 @@ class WildPokemon {
                 // and this is the data for browsers
                 type : this.getTypes(),
                 img : this.getImgSrc(),
-                hp : this.#pokeData.baseStats.hp,
-                atk : this.#pokeData.baseStats.atk,
-                def : this.#pokeData.baseStats.def,
-                spa : this.#pokeData.baseStats.spa,
-                spd : this.#pokeData.baseStats.spd,
-                spe : this.#pokeData.baseStats.spe,
-                bst : this.#pokeData.bst,
+                stats : {
+                    hp : this.#pokeData.baseStats.hp,
+                    atk : this.#pokeData.baseStats.atk,
+                    def : this.#pokeData.baseStats.def,
+                    spa : this.#pokeData.baseStats.spa,
+                    spd : this.#pokeData.baseStats.spd,
+                    spe : this.#pokeData.baseStats.spe,
+                    bst : this.#pokeData.bst
+                },                
                 ratioM : this.#pokeData.genderRatio.M,
                 ratioF : this.#pokeData.genderRatio.F,
-                abilities : [
-                    this.#pokeData.abilities[0],
-                    this.#pokeData.abilities[1],
-                    this.#pokeData.abilities.H
-                ]
+                abilities : {
+                    0 : this.#pokeData.abilities[0],
+                    1 : this.#pokeData.abilities[1],
+                    H : this.#pokeData.abilities.H
+                }
             }
         }
 

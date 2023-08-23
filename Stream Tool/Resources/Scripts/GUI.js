@@ -15,7 +15,6 @@ import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
 import { catches } from './GUI/Catches/Catches.mjs';
 import { Catch } from './GUI/Catches/Catch.mjs';
 import { updateCatches } from './GUI/Catches/Update Catches.mjs';
-import { wildEncounter } from './GUI/VS Wild/Wild Pokemon.mjs'; // remove later
 import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
 
 

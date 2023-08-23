@@ -110,6 +110,8 @@ export async function updateGUI(data, noNotif) {
             wildEncounter.setSpecies("None");
         }
 
+        wildEncounter.setInCombat(data.inCombat);
+
 
     }
 

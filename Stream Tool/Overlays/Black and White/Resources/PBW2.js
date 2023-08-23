@@ -1,5 +1,6 @@
 import { getJson } from "./Scripts/Get JSON.mjs";
 import { typeToColor } from "./Scripts/Type to Color.mjs";
+import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
 
 let webSocket;
 
@@ -24,6 +25,7 @@ class Pokemon {
     #types = [];
     #status;
     #img;
+    #side = "Front";
 
     constructor(el) {
 
@@ -96,8 +98,8 @@ class Pokemon {
 
     setImg(img) {
         this.#img = img;
-        this.imgEl.src = img.gen5Front;
-        let filename = img.gen5Front.replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
+        this.imgEl.src = img["gen5" + this.#side];
+        let filename = img["gen5" + this.#side].replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
         let offset = offsets[filename] ?? [0, 0];
         this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
         //We compensate to account for the cases where the gif center is skewed towards a place where the Pokémon
@@ -110,6 +112,7 @@ class Pokemon {
 
     hidePoke() {
         this.mainEl.style.display = "none";
+        this.setSpecies(null);
     }
     showPoke() {
         this.mainEl.style.display = "block";
@@ -145,13 +148,29 @@ class Pokemon {
         return true;
     }
 
+    /**
+     * Turns the pokemon's sprite
+     * @param {Boolean} side - True for "Back", false for "Front"
+     */
+    turnSprite(side) {
+        this.#side = side ? "Back" : "Front";
+        this.setImg(this.getImgSrc());
+
+    }
+
 }
 
 const pokemons = [];
+
+const playerInfoDiv = document.getElementById("playerInfo");
 const badges = document.getElementsByClassName("badge");
 const catchesNum = document.getElementById("catchesNumber");
 const killsNum = document.getElementById("killsNumber");
 const deathsNum = document.getElementById("deathsNumber");
+
+const wildDiv = document.getElementById("wildEncounterDiv");
+
+let inCombatPrev;
 
 initPokemon();
 function initPokemon() {
@@ -259,6 +278,54 @@ async function updateData(data) {
         killsNum.innerText = data.player.kills;
         deathsNum.innerText = data.player.deaths;
         
+    } else if (data.type == "Wild Encounter") {
+
+        // wild pokemon image
+        if (data.pokemon) {
+            wildPokemon.setImg(data.pokemon.img);
+        }
+
+        // set type info
+        wildPokemon.setTypes(data.pokemon.type);
+
+        // gender ratio
+        wildPokemon.setGenderRatio(data.pokemon.ratioM, data.pokemon.ratioF);
+
+        // abilities
+        wildPokemon.setAbilities(data.pokemon.abilities);
+
+        // stat meters
+        wildPokemon.updateMeters(data.pokemon.stats);
+
+        // check if the in combat state changed
+        if (inCombatPrev != data.inCombat) {
+
+            // show or hide info if the fight is happening or not
+            if (data.inCombat) {
+                playerInfoDiv.style.animation = "slideOut .5s both";
+                setTimeout(() => {
+                    wildDiv.style.animation = "slideIn .5s both";
+                }, 250);
+            } else {
+                wildDiv.style.animation = "slideOut .5s both";
+                setTimeout(() => {
+                    playerInfoDiv.style.animation = "slideIn .5s both";
+                }, 250);
+            }
+            
+            // if in combat, turn everyone so they get to see this glorious fight
+            for (let i = 0; i < pokemons.length; i++) {
+
+                if (pokemons[i].getSpecies()) {
+                    pokemons[i].turnSprite(data.inCombat);
+                }
+                
+            }
+
+        }
+
+        inCombatPrev = data.inCombat;
+
     }
 
 }
