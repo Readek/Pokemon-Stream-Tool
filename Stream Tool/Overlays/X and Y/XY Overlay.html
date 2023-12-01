@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poke BnW Overlay</title>
+    <script src="Resources/XY.js" type="module"></script>
+    <link rel="stylesheet" href="Resources/XY.css">
+</head>
+
+<body>
+
+<div id="content">
+
+    <img src="Resources/Images/Overlay.png" class="absol">
+
+    <div id="borderMainScreenExtra" class="mainScreen"></div>
+    <div id="borderMainScreen" class="mainScreen"></div>
+
+    <div id="borderBotScreenExtra" class="botScreen"></div>
+    <div id="borderBotScreen" class="botScreen"></div>
+
+    <div id="playerInfo">
+
+        <div id="badges">
+
+            <div id="badgesTop">
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/1.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/1 Empty.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/2.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/2 Empty.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/3.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/3 Empty.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/4.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/4 Empty.png" class="emptyBadge" alt="">
+                </div>
+            </div>
+    
+            <div id="badgesBot">
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/5.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/5 Empty.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/6.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/6 Empty.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/7.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/7 Empty.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Gym Badges/XY/8.png" id="badge1" class="badge" alt="">
+                    <img src="../../Resources/Assets/Gym Badges/XY/8 Empty.png" class="emptyBadge" alt="">
+                </div>
+            </div>
+
+        </div>        
+
+        <div id="playerStats">
+
+            <div class="stat">
+                <load-svg src="../../Resources/SVGs/Pokeball.svg" id="catchesIcon" class="statIcon"></load-svg>
+                <div class="statNumber" id="catchesNumber"></div>
+            </div>
+
+            <div class="stat">
+                <load-svg src="../../Resources/SVGs/Skull.svg" id="deathsIcon" class="statIcon"></load-svg>
+                <div class="statNumber" id="deathsNumber"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="wildEncounterDiv">
+
+        <div class="pokeImgDiv" id="wildPokeImgDiv">
+            <img class="pokeImg" id="wildPokeImg">
+        </div>
+
+        <div id="wildBackground">
+
+            <div id="wildInfoDiv">
+
+                <div class="vsWildPokeTypeDiv">
+                    <div class="vsWildTypeDiv">
+                      <img alt="" class="typeIcon">
+                      <span></span>
+                    </div>
+                    <div class="vsWildTypeDiv">
+                      <img alt="" class="typeIcon">
+                      <span></span>
+                    </div>
+                </div>
+                  
+                <div id="vsWildGenderRatio">
+      
+                    <div class="vsWildGenderRatioDiv">
+                      <img class="pokeGenderIcon" src="../../Resources/Assets/Gender M.png" alt="">
+                      <span class="vsWildGenderRatioText" id="vsWildGenderRatioM"></span>
+                    </div>
+      
+                    <div class="vsWildGenderRatioDiv">
+                      <img class="pokeGenderIcon" src="../../Resources/Assets/Gender F.png" alt="">
+                      <span class="vsWildGenderRatioText" id="vsWildGenderRatioF"></span>
+                    </div>
+      
+                </div>
+      
+                <div id="vsWildAbilities">
+      
+                    <div class="vsWildAbilityText" id="vsWildAbility0"></div>
+                    <div class="vsWildAbilityText" id="vsWildAbility1"></div>
+                    <div class="vsWildAbilityText" id="vsWildAbilityH"></div>
+      
+                </div>
+    
+            </div>
+
+        </div>
+
+        <div id="vsWildStatsDiv">
+
+            <div class="vsWildStat" id="vsWildStatHP">
+              <div class="vsWildStatName vsWildStatText">HP</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberHP"></div>
+              <div class="vsWildMeter" id="vsWildMeterHP"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatAT">
+              <div class="vsWildStatName vsWildStatText">Attack</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberAT"></div>
+              <div class="vsWildMeter" id="vsWildMeterAT"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatDE">
+              <div class="vsWildStatName vsWildStatText">Defense</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberDE"></div>
+              <div class="vsWildMeter" id="vsWildMeterDE"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatSA">
+              <div class="vsWildStatName vsWildStatText">Sp. Attack</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSA"></div>
+              <div class="vsWildMeter" id="vsWildMeterSA"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatSD">
+              <div class="vsWildStatName vsWildStatText">Sp. Defense</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSD"></div>
+              <div class="vsWildMeter" id="vsWildMeterSD"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatSP">
+              <div class="vsWildStatName vsWildStatText">Speed</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSP"></div>
+              <div class="vsWildMeter" id="vsWildMeterSP"></div>
+            </div>
+  
+            <div class="vsWildStat" id="vsWildStatTS">
+              <div class="vsWildStatName vsWildStatText">Total</div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberTS"></div>
+              <div class="vsWildMeter" id="vsWildMeterTS"></div>
+            </div>
+  
+          </div>
+
+    </div>
+
+    <div id="botPokes">
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlBefore"></div>
+                    <div class="pokeLvlTexts">
+                        <div class="pokeLvlText">Lv. </div>
+                        <div class="pokeLvlNum"></div>
+                    </div>
+                    <div class="pokeLvlAfter"></div>
+                    <div class="pokeLvlEnd"></div>
+                </div>
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpBefore"></div>
+                    <div class="pokeHpText">123/157</div>
+                    <div class="pokeHpAfter"></div>
+                    <div class="pokeHpBar">
+                        <div class="pokeHpBarTotal"></div>
+                        <div class="pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+
+            </div>            
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlBefore"></div>
+                    <div class="pokeLvlTexts">
+                        <div class="pokeLvlText">Lv. </div>
+                        <div class="pokeLvlNum"></div>
+                    </div>
+                    <div class="pokeLvlAfter"></div>
+                    <div class="pokeLvlEnd"></div>
+                </div>
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpBefore"></div>
+                    <div class="pokeHpText">13/257</div>
+                    <div class="pokeHpAfter"></div>
+                    <div class="pokeHpBar">
+                        <div class="pokeHpBarTotal"></div>
+                        <div class="pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+
+            </div>            
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlBefore"></div>
+                    <div class="pokeLvlTexts">
+                        <div class="pokeLvlText">Lv. </div>
+                        <div class="pokeLvlNum"></div>
+                    </div>
+                    <div class="pokeLvlAfter"></div>
+                    <div class="pokeLvlEnd"></div>
+                </div>
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpBefore"></div>
+                    <div class="pokeHpText">123/157</div>
+                    <div class="pokeHpAfter"></div>
+                    <div class="pokeHpBar">
+                        <div class="pokeHpBarTotal"></div>
+                        <div class="pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+
+            </div>            
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlBefore"></div>
+                    <div class="pokeLvlTexts">
+                        <div class="pokeLvlText">Lv. </div>
+                        <div class="pokeLvlNum"></div>
+                    </div>
+                    <div class="pokeLvlAfter"></div>
+                    <div class="pokeLvlEnd"></div>
+                </div>
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpBefore"></div>
+                    <div class="pokeHpText">123/157</div>
+                    <div class="pokeHpAfter"></div>
+                    <div class="pokeHpBar">
+                        <div class="pokeHpBarTotal"></div>
+                        <div class="pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+
+            </div>            
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlBefore"></div>
+                    <div class="pokeLvlTexts">
+                        <div class="pokeLvlText">Lv. </div>
+                        <div class="pokeLvlNum"></div>
+                    </div>
+                    <div class="pokeLvlAfter"></div>
+                    <div class="pokeLvlEnd"></div>
+                </div>
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpBefore"></div>
+                    <div class="pokeHpText">123/157</div>
+                    <div class="pokeHpAfter"></div>
+                    <div class="pokeHpBar">
+                        <div class="pokeHpBarTotal"></div>
+                        <div class="pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+
+            </div>            
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlBefore"></div>
+                    <div class="pokeLvlTexts">
+                        <div class="pokeLvlText">Lv. </div>
+                        <div class="pokeLvlNum"></div>
+                    </div>
+                    <div class="pokeLvlAfter"></div>
+                    <div class="pokeLvlEnd"></div>
+                </div>
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpBefore"></div>
+                    <div class="pokeHpText">123/157</div>
+                    <div class="pokeHpAfter"></div>
+                    <div class="pokeHpBar">
+                        <div class="pokeHpBarTotal"></div>
+                        <div class="pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+
+            </div>            
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="connErrorDiv">
+    Can't connect with GUI, attempting to reconnect every 5 seconds...
+</div>
+    
+</body>
+</html>
