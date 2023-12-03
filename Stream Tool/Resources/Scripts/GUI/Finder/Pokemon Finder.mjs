@@ -19,6 +19,10 @@ class PokeFinder extends FinderSelect {
         ).sort( 
             (poke1, poke2) => (poke1.num - poke2.num) // Sorts by National Dex number. 
         );
+
+        // some other script may need this
+        const numToPoke = {};
+
         // add entries to the character list
         for (let pokemon of speciesList) {
 
@@ -49,6 +53,9 @@ class PokeFinder extends FinderSelect {
             // and now add the div to the actual interface
             this.addEntry(newDiv);
 
+            // add a dex number to pokemon name translation for future scripts
+            numToPoke[pokemon.num] = pokemon.name;
+
         }
 
         // add a final "None" button
@@ -68,6 +75,9 @@ class PokeFinder extends FinderSelect {
         newDiv.appendChild(imgIcon);
         newDiv.appendChild(spanName);
         this.addEntry(newDiv);
+
+        // send this to global variables for other scripts
+        current.numToPoke = numToPoke;
 
     }
 
