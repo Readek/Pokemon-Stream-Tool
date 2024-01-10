@@ -70,30 +70,34 @@
       <div id="playerInfoRegion" class="region">
   
         <div id="gymBadges">
-          <button class="gymBadgeButton badgeDisabled" id="badge1" title="Gym Badge 1">
-            <img src="Assets/Gym Badges/BW2/1.png">
-          </button>
-          <button class="gymBadgeButton badgeDisabled" id="badge2" title="Gym Badge 2">
-            <img src="Assets/Gym Badges/BW2/2.png">
-          </button>
-          <button class="gymBadgeButton badgeDisabled" id="badge3" title="Gym Badge 3">
-            <img src="Assets/Gym Badges/BW2/3.png">
-          </button>
-          <button class="gymBadgeButton badgeDisabled" id="badge4" title="Gym Badge 4">
-            <img src="Assets/Gym Badges/BW2/4.png">
-          </button>
-          <button class="gymBadgeButton badgeDisabled" id="badge5" title="Gym Badge 5">
-            <img src="Assets/Gym Badges/BW2/5.png">
-          </button>
-          <button class="gymBadgeButton badgeDisabled" id="badge6" title="Gym Badge 6">
-            <img src="Assets/Gym Badges/BW2/6.png">
-          </button>
-          <button class="gymBadgeButton badgeDisabled" id="badge7" title="Gym Badge 7">
-            <img src="Assets/Gym Badges/BW2/7.png">
-          </button>
-          <button class="gymBadgeButton badgeDisabled" id="badge8" title="Gym Badge 8">
-            <img src="Assets/Gym Badges/BW2/8.png">
-          </button>
+          <div class="gymBadgesWrap">
+            <button class="gymBadgeButton badgeDisabled" id="badge1" title="Gym Badge 1">
+              <img>
+            </button>
+            <button class="gymBadgeButton badgeDisabled" id="badge2" title="Gym Badge 2">
+              <img>
+            </button>
+            <button class="gymBadgeButton badgeDisabled" id="badge3" title="Gym Badge 3">
+              <img>
+            </button>
+            <button class="gymBadgeButton badgeDisabled" id="badge4" title="Gym Badge 4">
+              <img>
+            </button>
+          </div>
+          <div class="gymBadgesWrap">
+            <button class="gymBadgeButton badgeDisabled" id="badge5" title="Gym Badge 5">
+              <img>
+            </button>
+            <button class="gymBadgeButton badgeDisabled" id="badge6" title="Gym Badge 6">
+              <img>
+            </button>
+            <button class="gymBadgeButton badgeDisabled" id="badge7" title="Gym Badge 7">
+              <img>
+            </button>
+            <button class="gymBadgeButton badgeDisabled" id="badge8" title="Gym Badge 8">
+              <img>
+            </button>
+          </div>
         </div>
   
         <div id="playerStats">
@@ -262,9 +266,9 @@
   
               <div class="settingsTitle">General Settings</div>
   
-              <div id="gameSelectDiv" class="settingBox" title="Changes the current pokedex data">
-                <div>Game select</div>
-                <select id="gameSelect">
+              <div id="genSelectDiv" class="settingBox" title="Changes the current generation pokedex data">
+                <div>Gen select</div>
+                <select id="genSelect" class="settingsSelect">
                   <option value="1">1 - Red/Blue</option>
                   <option value="2">2 - Gold/Silver</option>
                   <option value="3">3 - Ruby/Saphire</option>
@@ -274,6 +278,14 @@
                   <option value="7">7 - Sun/Moon</option>
                   <option value="8">8 - Sword/Shield</option>
                   <option value="9">9 - Scarlet/Violet</option>
+                </select>
+              </div>
+
+              <div id="gameSelectDiv" class="settingBox" title="Changes the current game data">
+                <div>Game select</div>
+                <select id="gameSelect" class="settingsSelect">
+                  <option value="BW2">BW2</option>
+                  <option value="XY">XY</option>
                 </select>
               </div>
   

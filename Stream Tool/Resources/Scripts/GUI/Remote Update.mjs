@@ -21,7 +21,7 @@ export async function updateGUI(data, noNotif) {
 
         // this maybe should be somewhere else
         if (current.generation != data.generation || firstTime) {
-            settings.gameSelect.setGen(data.generation);
+            settings.genSelect.setGen(data.generation);
             firstTime = false;
         }
         
@@ -56,7 +56,7 @@ export async function updateGUI(data, noNotif) {
 
         // this maybe should be somewhere else
         if (current.generation != data.generation || firstTime) {
-            settings.gameSelect.setGen(data.generation);
+            settings.genSelect.setGen(data.generation);
             firstTime = false;
         }
 

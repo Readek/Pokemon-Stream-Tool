@@ -58,7 +58,7 @@ async function init() {
         } else {
             // set default values
             catches.push(new Catch());
-            settings.gameSelect.setGen(5); // best gen amarite
+            settings.genSelect.setGen(5); // best gen amarite
             pokeFinder.loadCharacters();
         }
 

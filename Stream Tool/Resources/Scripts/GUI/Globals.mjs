@@ -9,7 +9,6 @@ export const inside = {
 const realPath = inside.electron ? __dirname : ""; // local file path if in executable
 export const stPath = {
     poke: realPath + "/Assets/Pokemon", //The "sprites" part will be completed by @pkmn/img.
-
     assets: realPath + "/Assets",
     text : realPath + '/Texts',
 };

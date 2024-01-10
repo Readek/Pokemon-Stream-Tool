@@ -548,7 +548,15 @@ button:hover {
   gap: 20px;
   width: 100%;
   image-rendering: pixelated;
+  flex-wrap: wrap;
 }
+.gymBadgesWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .badgeDisabled {
   filter: grayscale(1);
   opacity: .5;
@@ -828,13 +836,13 @@ button:hover {
   filter: brightness(.8);
 }
 
-#gameSelectDiv {
+#gameSelectDiv, #genSelectDiv {
   gap: 10px;
 }
-#gameSelect {
+
+.settingsSelect {
   outline: none;
   height: 30px;
-  width: 40px;
   color: var(--text1);
   background: var(--bg4);
   border: 1px solid var(--focused);
@@ -843,8 +851,15 @@ button:hover {
   box-sizing: border-box;
   border-radius: 5px;
 }
-#gameSelect:hover {
+.settingsSelect:hover {
   border-color: var(--selected);
+}
+
+#genSelect {
+  width: 40px;
+}
+#gameSelect {
+  width: 100px;
 }
 
 #zoomDiv {

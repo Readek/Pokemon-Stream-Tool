@@ -1,3 +1,5 @@
+import { current, stPath } from "../Globals.mjs";
+
 const badges = document.getElementsByClassName("gymBadgeButton");
 
 for (let i = 0; i < badges.length; i++) {
@@ -39,4 +41,13 @@ export function getBadges() {
         badgeState.push(state);
     }
     return badgeState;
+}
+
+export function changeBadges(game) {
+    
+    for (let i = 0; i < badges.length; i++) {
+        badges[i].firstElementChild.src = 
+            `${stPath.assets}/Gym Badges/${current.generation}/${game}/${i+1}.png`;
+    }
+
 }

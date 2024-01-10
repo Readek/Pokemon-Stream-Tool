@@ -1,11 +1,20 @@
-import { pokeFinder } from "../../Finder/Pokemon Finder.mjs";
-import { current, dexGens } from "../../Globals.mjs";
-import { clearAllPokemon } from "../../Pokemon/Pokemons.mjs";
+import { changeBadges } from "../../Player/Gym Badges.mjs";
 import { Setting } from "../Setting.mjs";
 
-export class SettingGameSelect extends Setting {
+const gameSelectSelect = document.getElementById("gameSelect");
 
-    #gameSelectSelect = document.getElementById("gameSelect");
+const genGameData = {
+    5 : [
+        {value : "BW", name : "Black & White"},
+        {value : "BW2", name : "Black & White 2"}
+    ],
+    6 : [
+        {value : "XY", name : "X & Y"},
+        {value : "ORAS", name : "Omega Ruby & Alpha Saphire"}
+    ]
+}
+
+export class SettingGameSelect extends Setting {
 
     constructor() {
 
@@ -15,21 +24,60 @@ export class SettingGameSelect extends Setting {
     }
 
     #setListener() {
-        this.#gameSelectSelect.addEventListener("change", () => {
-            this.setGen(Number(this.#gameSelectSelect.value));
+        gameSelectSelect.addEventListener("change", () => {
+            this.setGame(gameSelectSelect.value);
         });
     }
 
-    setGen(value) {
+    /**
+     * Changes game data to desired generation
+     * @param {String} value - Game acronym
+     */
+    setGame(value) {
 
-        // just in case
-        value = Number(value);
+        // in case function wasn't triggered by the change event
+        gameSelectSelect.value = value;
 
-        this.#gameSelectSelect.value = value;
-        current.generation = value;
-        current.pkmnSpecies = dexGens.get(value).species
-        pokeFinder.loadCharacters();
-        clearAllPokemon();
+        // change player badges
+        changeBadges(value);
+
+    }
+
+    /**
+     * Clears the game list and adds games from provided generation
+     * @param {Number} gen - Generation number
+     */
+    addGames(gen) {
+
+        // clear current game select state
+        gameSelectSelect.innerHTML = "";
+
+        // check if gen requested has data
+        if (genGameData[gen]) {
+        
+            // add a new select entry for each game found
+            for (let i = 0; i < genGameData[gen].length; i++) {
+                this.#addGameEntry(genGameData[gen][i].value, genGameData[gen][i].name);                
+            }
+            
+        }
+
+        // auto-select the first game on the list
+        this.setGame(gameSelectSelect.value);
+
+    }
+
+    /**
+     * Adds a new entry on the game select combo
+     * @param {String} value - Game acronym
+     * @param {String} name - Game name
+     */
+    #addGameEntry(value, name) {
+
+        const entry = document.createElement("option");
+        entry.value = value;
+        entry.text = name;
+        gameSelectSelect.add(entry);
 
     }
 
