@@ -21,7 +21,6 @@ export async function updateTeam() {
         id : "gameData",
         type : "Team",
         playerPokemons: [], // more lines will be added below
-        generation : current.generation
     };
 
     // add the teams's info
@@ -47,9 +46,9 @@ export async function updateTeam() {
     if (inside.electron) {
 
         const ipc = await import("../IPC.mjs");
-        ipc.updateTeamData(JSON.stringify(dataJson, null, 2));
-        ipc.sendTeamData();
-        ipc.sendRemoteTeamData();
+        ipc.updateStoredData("team", JSON.stringify(dataJson, null, 2));
+        ipc.sendData("team");
+        ipc.sendRemoteData("team");
 
     } else { // for remote GUIs
 

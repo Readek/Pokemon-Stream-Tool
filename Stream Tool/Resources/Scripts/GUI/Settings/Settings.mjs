@@ -1,4 +1,4 @@
-import { inside } from "../Globals.mjs";
+import { current, inside } from "../Globals.mjs";
 import { SettingGameSelect } from "./General Settings/Game Select.mjs";
 import { SettingGenSelect } from "./General Settings/Gen Select.mjs";
 import { SettingAlwaysOnTop } from "./Window Settings/Always on top.mjs";
@@ -18,6 +18,36 @@ class Settings {
             this.windowZoom = new SettingWindowZoom();
         } else { // browser users dont need any of this
             document.getElementById("settingsElectron").style.display = "none";
+        }
+
+    }
+
+    /** Generates an object with GUI data, then sends it */
+    async update() {
+
+        // this is what's going to be sent to the browsers
+        const dataJson = {
+            id : "guiData",
+            type : "Settings",
+            gen : current.generation,
+            game : current.game
+        };
+
+        // its time to send the data away
+        if (inside.electron) {
+
+            const ipc = await import("../IPC.mjs");
+            ipc.updateStoredData("settings", JSON.stringify(dataJson, null, 2));
+            ipc.sendData("settings");
+            ipc.sendRemoteData("settings");
+
+        } else { // for remote GUIs
+
+            const remote = await import("../Remote Requests.mjs");
+            dataJson.id = "";
+            dataJson.message = "RemoteUpdateGUI";
+            remote.sendRemoteData(dataJson);
+
         }
 
     }

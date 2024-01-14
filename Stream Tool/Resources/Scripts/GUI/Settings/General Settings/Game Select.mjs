@@ -1,5 +1,7 @@
+import { current } from "../../Globals.mjs";
 import { changeBadges } from "../../Player/Gym Badges.mjs";
 import { Setting } from "../Setting.mjs";
+import { settings } from "../Settings.mjs";
 
 const gameSelectSelect = document.getElementById("gameSelect");
 
@@ -25,7 +27,12 @@ export class SettingGameSelect extends Setting {
 
     #setListener() {
         gameSelectSelect.addEventListener("change", () => {
+            
             this.setGame(gameSelectSelect.value);
+
+            // send the data to remote guis
+            settings.update();
+
         });
     }
 
@@ -40,6 +47,8 @@ export class SettingGameSelect extends Setting {
 
         // change player badges
         changeBadges(value);
+
+        current.game = value;
 
     }
 

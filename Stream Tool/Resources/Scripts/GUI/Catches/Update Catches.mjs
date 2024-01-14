@@ -21,7 +21,6 @@ export async function updateCatches() {
         id : "gameData",
         type : "Catches",
         catches: [], // more lines will be added below
-        generation : current.generation
     };
 
     // add the catches info
@@ -45,9 +44,9 @@ export async function updateCatches() {
     if (inside.electron) {
 
         const ipc = await import("../IPC.mjs");
-        ipc.updateCatchesData(JSON.stringify(dataJson, null, 2));
-        ipc.sendCatchesData();
-        ipc.sendRemoteCatchesData();
+        ipc.updateStoredData("catches", JSON.stringify(dataJson, null, 2));
+        ipc.sendData("catches");
+        ipc.sendRemoteData("catches");
 
     } else { // for remote GUIs
 

@@ -6,7 +6,13 @@ const http = require('http')
 let resourcesPath, nodePath;
 let httpPort, wsPort, guiWidth, guiHeight, failed;
 let wsServer, sockets = [];
-let storedCatchesData, storedTeamData, storedPlayerData, storedSettings;
+let storedSettings;
+const storedGuiData = {
+    settings : {},
+    catches : {},
+    team : {},
+    player : {}
+}
 
 module.exports = function initExec(rPath, gPath, wSocket) {
     
@@ -206,22 +212,27 @@ function createWindow() {
 
     // when the GUI is ready to send data to browsers
     ipcMain.on('sendData', (event, data) => {
+
         const jsonData = JSON.parse(data);
         sockets.forEach(socket => {
             if (jsonData.id == socket.id) {
                 socket.ws.send(data)
             }
         })
+
         // we will store this for later
         if (jsonData.id == "gameData") {
             if (jsonData.type == "Catches") {
-                storedCatchesData = jsonData;
+                storedGuiData.catches = jsonData;
             } else if (jsonData.type == "Team") {
-                storedTeamData = jsonData;
+                storedGuiData.team = jsonData;
             } else if (jsonData.type == "Player") {
-                storedPlayerData = jsonData;
+                storedGuiData.player = jsonData;
             }
+        } else if (jsonData.id == "guiData") {
+            storedGuiData.settings = jsonData;
         }
+
     })
 
     // we will store current settings, then save them on window close
@@ -259,12 +270,7 @@ app.on('window-all-closed', () => {
         // write down that file
         fs.writeFileSync(`${resourcesPath}/Texts/GUI Settings.json`, JSON.stringify(data, null, 2));
         
-        // save current data state
-        const storedGuiData = {
-            storedCatchesData : storedCatchesData,
-            storedTeamData : storedTeamData,
-            storedPlayerData : storedPlayerData
-        };
+        // save current GUI data state
         fs.writeFileSync(`${resourcesPath}/Texts/GUI State.json`, JSON.stringify(storedGuiData, null, 2));
         
         // and good bye

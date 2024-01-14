@@ -8,8 +8,6 @@ import { pokemons } from "./Pokemon/Pokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
 import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 
-let firstTime = true;
-
 /**
  * Updates the entire GUI with values sent remotely
  * @param {Object} data GUI info
@@ -17,13 +15,21 @@ let firstTime = true;
  */
 export async function updateGUI(data, noNotif) {
 
-    if (data.type == "Catches") {
+    
 
-        // this maybe should be somewhere else
-        if (current.generation != data.generation || firstTime) {
-            settings.genSelect.setGen(data.generation);
-            firstTime = false;
+    if (data.type == "Settings") {
+        
+        if (current.generation != data.gen) {
+            settings.genSelect.setGen(data.gen);
+
         }
+        if (current.game != data.game) {
+            settings.gameSelect.setGame(data.game);
+        }
+
+    }
+
+    if (data.type == "Catches") {
         
         for (let i = 0; i < data.catches.length; i++) {
             
@@ -53,12 +59,6 @@ export async function updateGUI(data, noNotif) {
     }
 
     if (data.type == "Team") {
-
-        // this maybe should be somewhere else
-        if (current.generation != data.generation || firstTime) {
-            settings.genSelect.setGen(data.generation);
-            firstTime = false;
-        }
 
         // poketeam time
         for (let i = 0; i < data.playerPokemons.length; i++) {

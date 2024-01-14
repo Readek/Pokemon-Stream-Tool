@@ -16,6 +16,13 @@ const ipc = require('electron').ipcRenderer;
 
 
 // we will store data to send to the browsers here
+const data = {
+    settings : {},
+    catches : {},
+    team : {},
+    player : {},
+    wild : {}
+}
 let catchesData, teamData, playerData, wildData;
 
 
@@ -23,29 +30,29 @@ let catchesData, teamData, playerData, wildData;
 ipc.on('requestData', () => {
 
     // send the current (not updated) data
-    sendCatchesData();
-    sendTeamData();
-    sendPlayerData();
-    sendWildData();
+    sendData("settings");
+    sendData("catches");
+    sendData("team");
+    sendData("player");
+    sendData("wild");
 
 })
 
-/** Sends current game data object to websocket clients */
-export function sendCatchesData() {
-    ipc.send('sendData', catchesData);
-}
-export function sendTeamData() {
-    ipc.send('sendData', teamData);
-}
-export function sendPlayerData() {
-    ipc.send('sendData', playerData);
-}
-export function sendWildData() {
-    ipc.send('sendData', wildData);
+/**
+ * Sends current game data object to websocket clients
+ * @param {String} type - Data type identifier
+ */
+export function sendData(type) {
+    ipc.send('sendData', data[type]);
 }
 
-
-/** Sends current game data to remote GUIs */
+/**
+ * Sends current game data to remote GUIs
+ * @param {String} type - Data type identifier
+ */
+export function sendRemoteData(type) {
+    ipc.send("sendData", JSON.stringify(remoteID(data[type]), null, 2));
+}
 export function sendRemoteCatchesData() {
     ipc.send("sendData", JSON.stringify(remoteID(catchesData), null, 2));
 }
@@ -59,18 +66,13 @@ export function sendRemoteWildData() {
     ipc.send("sendData", JSON.stringify(remoteID(wildData), null, 2));
 }
 
-/** Updates local object with new data */
-export function updateCatchesData(data) {
-    catchesData = data;
-}
-export function updateTeamData(data) {
-    teamData = data;
-}
-export function updatePlayerData(data) {
-    playerData = data;
-}
-export function updateWildData(data) {
-    wildData = data;
+/**
+ * Updates local stored data to be sent to clients
+ * @param {String} type - Data type identifier
+ * @param {Object} newData - New data to store
+ */
+export function updateStoredData(type, newData) {
+    data[type] = newData;
 }
 
 /**
@@ -123,6 +125,7 @@ ipc.on('remoteGuiData', async (event, data) => {
 
         // when we get data from remote GUIs
         await updateGUI(jsonData);
+        
         if (jsonData.type == "Catches") {
             updateCatches();
         } else if (jsonData.type == "Team") {
@@ -136,10 +139,11 @@ ipc.on('remoteGuiData', async (event, data) => {
     } else if (jsonData.message == "RemoteRequestData") {
 
         // when remote GUIs request data
-        sendRemoteCatchesData();
-        sendRemoteTeamData();
-        sendRemotePlayerData();
-        sendRemoteWildData();
+        sendRemoteData("settings");
+        sendRemoteData("catches");
+        sendRemoteData("team");
+        sendRemoteData("player");
+        sendRemoteData("wild");
         
     } else if (jsonData.message == "RemoteSaveJson") {
 

@@ -33,9 +33,9 @@ export async function updatePlayer() {
     if (inside.electron) {
 
         const ipc = await import("../IPC.mjs");
-        ipc.updatePlayerData(JSON.stringify(dataJson, null, 2));
-        ipc.sendPlayerData();
-        ipc.sendRemotePlayerData();
+        ipc.updateStoredData("player", JSON.stringify(dataJson, null, 2));
+        ipc.sendData("player");
+        ipc.sendRemoteData("player");
 
     } else { // for remote GUIs
 

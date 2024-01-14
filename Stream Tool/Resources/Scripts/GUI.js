@@ -48,13 +48,14 @@ async function init() {
     if (inside.electron) {
 
         // load previous gui state
-        let storedData = await getJson(`${stPath.text}/GUI State`);
+        const storedData = await getJson(`${stPath.text}/GUI State`);
 
         // don't do this if we got no data to restore
         if (storedData) {
-            updateGUI(storedData.storedCatchesData, true);
-            updateGUI(storedData.storedTeamData, true);
-            updateGUI(storedData.storedPlayerData, true);
+            updateGUI(storedData.settings, true)
+            updateGUI(storedData.catches, true);
+            updateGUI(storedData.team, true);
+            updateGUI(storedData.player, true);
         } else {
             // set default values
             catches.push(new Catch());
@@ -63,6 +64,7 @@ async function init() {
         }
 
         // send initial data
+        settings.update();
         updateCatches();
         updatePlayer();
         updateTeam();
@@ -83,4 +85,3 @@ if (inside.electron) {
         readpartydata.readPartyData.getParty();
     })
 }
-

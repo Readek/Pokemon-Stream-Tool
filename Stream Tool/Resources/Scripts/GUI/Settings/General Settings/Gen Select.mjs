@@ -17,7 +17,12 @@ export class SettingGenSelect extends Setting {
 
     #setListener() {
         genSelectSelect.addEventListener("change", () => {
+
             this.setGen(Number(genSelectSelect.value));
+
+            // send the data to remote guis
+            settings.update();
+            
         });
     }
 

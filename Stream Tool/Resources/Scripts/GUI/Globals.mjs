@@ -19,6 +19,7 @@ export const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
 export const current = {
     focus : -1,
     generation : 0, // will be changed on startup
+    game : "", // same here
     pkmnSpecies : dexGens.get(5).species, // same here
     numToPoke : {} // filled on pokeFinder fill
 }

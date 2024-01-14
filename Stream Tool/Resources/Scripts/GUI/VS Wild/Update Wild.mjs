@@ -28,9 +28,9 @@ export async function updateWildEnc() {
    if (inside.electron) {
 
         const ipc = await import("../IPC.mjs");
-        ipc.updateWildData(JSON.stringify(dataJson, null, 2));
-        ipc.sendWildData();
-        ipc.sendRemoteWildData();
+        ipc.updateStoredData("wild", JSON.stringify(dataJson, null, 2));
+        ipc.sendData("wild");
+        ipc.sendRemoteData("wild");
 
     } else { // for remote GUIs
 
