@@ -1,7 +1,12 @@
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, nameReplacements, stPath } from "../Globals.mjs";
+import { deleteCatch } from "./Catches.mjs";
+
+let idCounter = 1; // used to find pokemon on an array
 
 export class Catch {
+
+    #id = 0;
 
     #gender = "M";
     #shiny = false;
@@ -12,9 +17,16 @@ export class Catch {
     #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
     #isNone = true;
 
+    #el;
+
     constructor(data) {
 
+        this.#id = idCounter; // set the unique id to this pokemon
+        idCounter++; // change number for the next one
+
         const el = this.generateElement();
+
+        this.deletButt = el.getElementsByClassName('catchDeleteButt')[0];
 
         this.pokeSel = el.getElementsByClassName(`pokeSelector`)[0];
         this.nickInp = el.getElementsByClassName(`pokeNickName`)[0];
@@ -25,6 +37,8 @@ export class Catch {
 
         this.shinyButt = el.getElementsByClassName('pokeShinyButton')[0];
         this.shinyIcon = el.getElementsByClassName('pokeShinyIcon')[0];
+
+        this.#el = el;
 
         
         // set a listener that will trigger when pokemon selector is clicked
@@ -52,6 +66,13 @@ export class Catch {
         // event listener for the form selector.
         this.formSel.addEventListener("change", () => {this.setForm(this.formSel.value)});
 
+        // but what if the pokemon wants to be free
+        this.deletButt.addEventListener("click", () => {this.delet()});
+        
+    }
+
+    getId() {
+        return this.#id;
     }
 
     getInternalSpecies() {
@@ -309,6 +330,8 @@ export class Catch {
         element.classList.add("catchDiv");
         // and now for the big fat text
         element.innerHTML = `
+
+            <button class="catchDeleteButt catchButt" title="Delete Pokemon">-</button>
         
             <div class="finderPosition">
                 <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
@@ -335,6 +358,13 @@ export class Catch {
         // add it to the GUI
         document.getElementById("catchesDiv").appendChild(element);
         return element;
+
+    }
+
+    delet() {
+
+        this.#el.remove();
+        deleteCatch(this.#id);
 
     }
 

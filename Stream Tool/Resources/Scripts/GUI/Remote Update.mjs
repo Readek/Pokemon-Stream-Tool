@@ -15,8 +15,6 @@ import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
  */
 export async function updateGUI(data, noNotif) {
 
-    
-
     if (data.type == "Settings") {
         
         if (current.generation != data.gen) {
@@ -30,13 +28,24 @@ export async function updateGUI(data, noNotif) {
     }
 
     if (data.type == "Catches") {
-        
-        for (let i = 0; i < data.catches.length; i++) {
-            
-            // if theres no data on that slot, create a new catch
-            if (!catches[i]) {
+
+        const homeCatchesLength = catches.length;
+        const incCatchesLength = data.catches.length;
+
+        // add or remove catches if needed
+        if (homeCatchesLength < incCatchesLength) {
+            for (let i = 0; i < incCatchesLength - homeCatchesLength; i++) {
+                // if theres no data on that slot, create a new catch
                 catches.push(new Catch());
             }
+        } else if (homeCatchesLength > incCatchesLength) {
+            for (let i = homeCatchesLength-1; i > incCatchesLength-1; i--) {
+                // remove slots that we wont need
+                catches[i].delet();
+            }
+        }
+        
+        for (let i = 0; i < data.catches.length; i++) {
 
             if (catches[i].getInternalSpecies() != data.catches[i].internalSpecies) {
                 catches[i].setSpecies(data.catches[i].internalSpecies);

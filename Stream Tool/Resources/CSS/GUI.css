@@ -214,13 +214,11 @@ button:hover {
 
 .catchDiv {
   display: flex;
+  align-items: center;
   gap: 5px;
 }
 
-#addCatchButt {
-  padding: 0px 7px;
-  font-size: 18px;
-  height: 30px;
+.catchButt {
   font-family: "Roboto-Medium";
   border: solid 2px var(--focused);
   border-radius: 100%;
@@ -229,10 +227,25 @@ button:hover {
   align-items: center;
   transition: border-color 100ms;
 }
+#addCatchButt {
+  padding: 0px 8px;
+  font-size: 18px;
+  height: 30px;
+}
+.catchDeleteButt {
+  padding: 0px 8px;
+  margin-right: 2px;
+  font-size: 18px;
+  height: 26px;
+}
 #addCatchButt:hover {
   border: solid 2px var(--text2);
 }
-#addCatchButt:active {
+.catchDeleteButt:hover {
+  border: solid 2px lightcoral;
+  color: lightcoral;
+}
+.catchButt:active {
   filter: brightness(.8);
 }
 
