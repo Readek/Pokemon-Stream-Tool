@@ -76,12 +76,3 @@ async function init() {
     }
 
 }
-
-// provisional citra memory reading button
-if (inside.electron) {
-
-    const readpartydata = await import("./GUI/Emu Scripts/Citra/Read Player Party.mjs");
-    document.getElementById("citraButt").addEventListener("click", () => {
-        readpartydata.readPartyData.getParty();
-    })
-}

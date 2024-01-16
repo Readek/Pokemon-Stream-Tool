@@ -271,7 +271,7 @@ export class Pokemon {
         return this.statusSel.value;
     }
     setStatus(value) {
-        this.statusSel.value = value;
+        this.statusSel.value = value || "---";
     }
 
     getImgSrc() {
@@ -368,7 +368,7 @@ export class Pokemon {
                 <option value="---">----</option>
                 <option value="Par">Par.</option>
                 <option value="Poi">Poi.</option>
-                <option value="Fre">Fre.</option>
+                <option value="Fro">Fro.</option>
                 <option value="Bur">Bur.</option>
                 <option value="Sle">Sle.</option>
                 <option value="Fai">Fai.</option>

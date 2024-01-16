@@ -553,6 +553,12 @@ button:hover {
 }
 
 
+.teamButtRegion {
+  display: flex;
+  gap: 8px;
+}
+
+
 /* Player Info stuff */
 #gymBadges {
   display: flex;
