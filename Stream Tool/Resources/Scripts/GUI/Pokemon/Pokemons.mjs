@@ -20,11 +20,17 @@ if (inside.electron) {
         const rawPokes = await readpartydata.readPartyData.getParty();
 
         for (let i = 0; i < pokemons.length; i++) {
-            pokemons[i].setSpecies(rawPokes[i].speciesName());
+
+            if (rawPokes[i].speciesName() != pokemons[i].getSpecies()) {
+                pokemons[i].setSpecies(rawPokes[i].speciesName());
+            }
             pokemons[i].setNickName(rawPokes[i].nickname());
             pokemons[i].setLvl(rawPokes[i].level());
             pokemons[i].setGender(rawPokes[i].gender());
+            pokemons[i].setHpMax(rawPokes[i].maxHP());
+            pokemons[i].setHpCurrent(rawPokes[i].currentHP());
             pokemons[i].setStatus(rawPokes[i].status());
+            
         }
 
     })

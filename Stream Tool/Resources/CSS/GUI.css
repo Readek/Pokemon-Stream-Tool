@@ -31,6 +31,14 @@
 *::-webkit-scrollbar-thumb {
   background-color: var(--focused);
 }
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type=number] { 
+  -moz-appearance: textfield;
+  appearance: textfield;
+  margin: 0; 
+}
 * {
   box-sizing: border-box;
 }
@@ -435,7 +443,7 @@ button:hover {
   font-weight: bold;
 }
 .pokeLvlNumber {
-  width: 46px;
+  width: 34px;
   height: 18px;
   outline: none;
   border: none;
@@ -521,19 +529,35 @@ button:hover {
 }
 
 
-.pokeTypeDiv {
+.pokeHpDiv {
+  --healthy: var(--focused);
+  --warning: #7e7c11;
+  --danger: #7e1111;
+  --ded: #460404;
+  --activeColor: var(--healthy);
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 0px;
   height: 30px;
-  width: 56px;
-  background-color: var(--bg4);
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--activeColor);
+  transition: border-color 100ms;
   border-radius: 5px;
+  padding: 0 4px 0 4px;
 }
-.typeIcon {
-  height: 30px;
-  margin: 0px -2px;
-  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.5));
+.pokeHpDiv:hover {
+  border-color: var(--selected);
+}
+.pokeHpNumber {
+  width: 27px;
+  height: 18px;
+  outline: none;
+  border: none;
+  background: var(--bg4);
+  color: var(--text1);
+  font-family: 'Roboto-Medium';
+  font-size: 14px;
 }
 
 
@@ -719,8 +743,13 @@ button:hover {
   height: 30px;
   background-color: var(--bg4);
   border-radius: 5px;
-  padding-right: 4px;
   text-transform: uppercase;
+  padding: 0 4px 0 2px;
+}
+.typeIcon {
+  height: 30px;
+  margin: 0px -2px;
+  filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.5));
 }
 
 

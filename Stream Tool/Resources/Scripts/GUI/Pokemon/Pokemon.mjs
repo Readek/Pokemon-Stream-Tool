@@ -27,8 +27,8 @@ export class Pokemon {
         this.shinyButt = el.getElementsByClassName('pokeShinyButton')[0];
         this.shinyIcon = el.getElementsByClassName('pokeShinyIcon')[0];
 
-        this.typeImg1 = el.getElementsByClassName('typeIcon1')[0];
-        this.typeImg2 = el.getElementsByClassName('typeIcon2')[0];
+        this.hpCurrentInp = el.getElementsByClassName('pokeHpCurrent')[0];
+        this.hpMaxInp = el.getElementsByClassName('pokeHpMax')[0];
         
         this.statusSel = el.getElementsByClassName('pokeStatus')[0];
 
@@ -83,9 +83,6 @@ export class Pokemon {
             this.formSel.replaceChildren(formEl);
             this.formSel.value = "Base";
             this.formSel.disabled = true;
-            //We also disable the type icons.
-            this.typeImg1.style.display = "none";
-            this.typeImg2.style.display = "none";
             //In case you select a gender-locked Pokémon before and you want to pre-select another Pokémon's gender.
             //Alternatively, we could disable everything but the Pokémon selector, in order to remain consistent.
             this.enableGenderButt();
@@ -108,14 +105,6 @@ export class Pokemon {
             
             // set types from @pkmn/data Specie object
             let types = this.#pokeData.types;
-            this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
-            this.typeImg1.style.display = "block";
-            if (types[1]) {
-                this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
-                this.typeImg2.style.display = "block";
-            } else {
-                this.typeImg2.style.display = "none";
-            }
             // sets the form lists.
             this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
             this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
@@ -260,18 +249,62 @@ export class Pokemon {
         }
     }
 
+    getHpCurrent() {
+        return Number(this.hpCurrentInp.value);
+    }
+    /**
+     * @param {Number} value 
+     */
+    setHpCurrent(value) {
+
+        this.hpCurrentInp.value = value;
+
+        // and just because its cool, recolor border if in danger
+        if (value <= 0 && this.getHpMax() == 0) {
+            // do nothin
+        } else if (value <= 0) {
+            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--ded)");
+        } else if (value <= this.getHpMax()/4) {
+            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--danger)");
+        } else if (value <= this.getHpMax()/2) {
+            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--warning)");
+        } else {
+            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--healthy)");
+        }
+
+    }
+
+    getHpMax() {
+        return Number(this.hpMaxInp.value);
+    }
+    /**
+     * @param {Number} value 
+     */
+    setHpMax(value) {
+        this.hpMaxInp.value = value;
+    }
+
+    /**
+     * @returns {String}
+     */
+    getStatus() {
+        return this.statusSel.value;
+    }
+    /**
+     * @param {String} value 
+     */
+    setStatus(value) {
+        if (this.getHpCurrent() <= 0 && this.getHpMax()) {
+            value = "Fai"
+        }
+        this.statusSel.value = value || "---";
+    }
+
     getTypes() {
         if(this.#isNone){
             return ["Normal"]; //Placeholder, shouldn't be used for anything but prevents undefined exceptions.
         }
         return this.#pokeData.types;
-    }
-
-    getStatus() {
-        return this.statusSel.value;
-    }
-    setStatus(value) {
-        this.statusSel.value = value || "---";
     }
 
     getImgSrc() {
@@ -359,9 +392,10 @@ export class Pokemon {
                 <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
             </button>
 
-            <div class="pokeTypeDiv" title="Pokemon types">
-                <img alt="" class="typeIcon typeIcon1">
-                <img alt="" class="typeIcon typeIcon2">
+            <div class="pokeHpDiv" title="Pokemon HP">
+                <input class="pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0">
+                /
+                <input class="pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0">
             </div>
 
             <select class="pokeStatus" title="Current status condition">
