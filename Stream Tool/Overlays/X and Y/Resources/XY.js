@@ -24,6 +24,10 @@ class Pokemon {
     #gender;
     #types = [];
     #status;
+
+    #hpCurrent;
+    #hpMax;
+
     #img;
     #side = "Front";
 
@@ -35,6 +39,10 @@ class Pokemon {
         this.lvlEl = el.getElementsByClassName(`pokeLvlNum`)[0];
         this.nickEl = el.getElementsByClassName(`pokeNick`)[0];
         this.gendEl = el.getElementsByClassName(`pokeGender`)[0];
+
+        this.hpBar = el.getElementsByClassName(`pokeHpBarCurrent`)[0];
+        this.hpEl = el.getElementsByClassName(`pokeHpText`)[0];
+
         this.imgEl = el.getElementsByClassName(`pokeImg`)[0];
         
     }
@@ -85,15 +93,55 @@ class Pokemon {
     }
 
     setStatus(status) {
+
         this.#status = status;
+
+        if (status != "---") {
+            this.mainEl.style.setProperty("--activeColor", "var(--"+status+")");
+        }
         if (status == "Fai") {
             this.mainEl.classList.add("pokeDed");
         } else {
             this.mainEl.classList.remove("pokeDed");
         }
+
     }
     getStatus() {
         return this.#status;
+    }
+
+    getHpCurrent() {
+        return this.#hpCurrent;
+    }
+    getHpMax() {
+        return this.#hpMax;
+    }
+    /**
+     * @param {Number} current 
+     * @param {Numner} max 
+     */
+    setHp(current, max) {
+        
+        this.#hpCurrent = current;
+        this.#hpMax = max;
+        this.hpEl.innerHTML = current + "/" + max;
+
+        // adjust the health bar
+        const percent = current / max * 100 - 100;
+        this.hpBar.style.transform = "translateX("+percent+"%)";
+
+        // and just because its cool, recolor border if in danger
+        if (current == max) {
+            // this one is here for data sent with 0/0 HP
+            this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
+        } else if (current <= max/4) {
+            this.mainEl.style.setProperty("--activeColor", "var(--danger)");
+        } else if (current <= max/2) {
+            this.mainEl.style.setProperty("--activeColor", "var(--warning)");
+        } else {
+            this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
+        }
+
     }
 
     setImg(img) {
@@ -254,10 +302,11 @@ async function updateData(data) {
                 pokemons[i].setTypes(data.playerPokemons[i].types);
             }
             
+            // set HP
+            pokemons[i].setHp(data.playerPokemons[i].hpCurrent, data.playerPokemons[i].hpMax);
+
             // set status condition
-            if (data.playerPokemons[i].status != pokemons[i].getStatus()) {
-                pokemons[i].setStatus(data.playerPokemons[i].status);
-            }
+            pokemons[i].setStatus(data.playerPokemons[i].status);
             
         }
 

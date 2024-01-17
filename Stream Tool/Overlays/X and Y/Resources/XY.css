@@ -315,6 +315,11 @@ html, body {
     --healthy: #337E11;
     --warning: #7e7c11;
     --danger: #7e1111;
+    --Par: var(--warning);
+    --Poi: #56117e;
+    --Fro: #1a8fa3;
+    --Bur: #7e4611;
+    --Sle: grey;
     --activeColor: var(--healthy);
     position: relative;
     height: 120px;
@@ -324,7 +329,7 @@ html, body {
     border-radius: 30% / 100% 100% 100% 100%;
 }
 .pokeDed {
-    --activeColor: var(--danger);
+    --activeColor: var(--danger) !important;
     filter: grayscale(.8);
 }
 
@@ -393,11 +398,15 @@ html, body {
 }
 .pokeHpText {
     display: flex;
-    gap: 3px;
+    justify-content: center;
+    width: 55px;
     background-color: var(--bacColor);
-    padding: 6px 0px 0px 5px;
+    padding: 5px 0px 1px 5px;
     z-index: 2;
     flex-shrink: 0;
+    text-wrap: nowrap;
+    color: #b6b6b6;
+    font-size: 16px;
 }
 .pokeHpAfter {
     background-color: var(--bacColor);
@@ -423,8 +432,7 @@ html, body {
     width: 100%;
     height: 100%;
     background-color: var(--activeColor);
-    filter: brightness(1.4);
-    transform: translateX(-50px);
+    filter: brightness(1.7);
 }
 .pokeHpBarTotal {
     position: absolute;

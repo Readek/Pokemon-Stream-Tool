@@ -90,6 +90,12 @@ export async function updateGUI(data, noNotif) {
             if (pokemons[i].getShiny() != data.playerPokemons[i].shiny) {
                 pokemons[i].setShiny(data.playerPokemons[i].shiny);
             }
+            if (pokemons[i].getHpMax() != data.playerPokemons[i].hpMax) {
+                pokemons[i].setHpMax(data.playerPokemons[i].hpMax);
+            }
+            if (pokemons[i].getHpCurrent() != data.playerPokemons[i].hpCurrent) {
+                pokemons[i].setHpCurrent(data.playerPokemons[i].hpCurrent);
+            }
             if (pokemons[i].getStatus() != data.playerPokemons[i].status) {
                 pokemons[i].setStatus(data.playerPokemons[i].status);
             }
