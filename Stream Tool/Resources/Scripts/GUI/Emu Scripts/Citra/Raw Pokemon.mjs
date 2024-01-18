@@ -37,7 +37,8 @@ export class RawPokemon {
      * @returns {String}
      */
     nickname() {
-        return struct("<24s").unpack(this.#data.slice(0x40, 0x58))[0].split(`\0\0`)[0];
+        return struct("<24s").unpack(this.#data.slice(0x40, 0x58))[0]
+            .split(`\0\0`)[0].replace(/\0/g, '');
     }
 
     /**

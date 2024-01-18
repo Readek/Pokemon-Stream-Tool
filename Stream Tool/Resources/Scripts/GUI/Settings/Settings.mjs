@@ -1,6 +1,7 @@
 import { current, inside } from "../Globals.mjs";
 import { SettingGameSelect } from "./General Settings/Game Select.mjs";
 import { SettingGenSelect } from "./General Settings/Gen Select.mjs";
+import { SettingVersionSelect } from "./General Settings/Version Select.mjs";
 import { SettingAlwaysOnTop } from "./Window Settings/Always on top.mjs";
 import { SettingResizableWindow } from "./Window Settings/Resizable.mjs";
 import { SettingWindowZoom } from "./Window Settings/Zoom.mjs";
@@ -11,6 +12,7 @@ class Settings {
 
         this.genSelect = new SettingGenSelect();
         this.gameSelect = new SettingGameSelect();
+        this.versionSelect = new SettingVersionSelect();
 
         if (inside.electron) {
             this.alwaysOnTop = new SettingAlwaysOnTop();
@@ -30,7 +32,8 @@ class Settings {
             id : "guiData",
             type : "Settings",
             gen : current.generation,
-            game : current.game
+            game : current.game,
+            version : current.version
         };
 
         // its time to send the data away

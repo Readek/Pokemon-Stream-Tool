@@ -1,3 +1,4 @@
+import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
 import { RawPokemon } from "./Raw Pokemon.mjs";
 
@@ -53,9 +54,17 @@ class ReadPlayerParty {
     #getPartyAdress(game) {
 
         if (game == "XY") {
-            return 0x8CE1CE8; // seems to only read 1.0 version?
+            if (current.version == "1.0") {
+                return 0x8CE1CE8;
+            } else if (current.version == "1.5") {
+                return 0x8CE1CF8;
+            }
         } else if ("ORAS") {
-            return 0x8CF727C
+            if (current.version == "1.0") {
+                return 0x8CF727C;
+            } else if (current.version == "1.4") {
+                return 0x8CFB26C;
+            }
         } else if ("SM") {
             return 0x34195E10;
         } else if ("USUM") {

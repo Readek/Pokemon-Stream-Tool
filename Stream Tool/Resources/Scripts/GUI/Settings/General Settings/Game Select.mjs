@@ -45,10 +45,13 @@ export class SettingGameSelect extends Setting {
         // in case function wasn't triggered by the change event
         gameSelectSelect.value = value;
 
+        current.game = value;
+
         // change player badges
         changeBadges(value);
 
-        current.game = value;
+        // set game versions if any
+        settings.versionSelect.addVersions(value);
 
     }
 

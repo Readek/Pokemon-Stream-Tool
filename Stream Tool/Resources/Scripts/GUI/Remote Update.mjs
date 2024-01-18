@@ -24,6 +24,9 @@ export async function updateGUI(data, noNotif) {
         if (current.game != data.game) {
             settings.gameSelect.setGame(data.game);
         }
+        if (current.version != data.version) {
+            settings.versionSelect.setVersion(data.version);
+        }
 
     }
 
