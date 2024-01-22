@@ -13,6 +13,10 @@ const genGameData = {
     6 : [
         {value : "XY", name : "X & Y"},
         {value : "ORAS", name : "Omega Ruby & Alpha Saphire"}
+    ],
+    7 : [
+        {value : "SM", name : "Sun & Moon"},
+        {value : "USUM", name : "Ultra Sun & Ultra Moon"}
     ]
 }
 

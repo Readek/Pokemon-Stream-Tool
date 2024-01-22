@@ -194,6 +194,10 @@ export class Pokemon {
         return false;
         //Should we throw an exception if the value doesn't exist or just log it?
     }
+    setFormNumber(value) {
+        this.formSel.selectedIndex = value;
+        this.setForm(this.formSel.value);
+    }
 
     getFormNames() {
         if(this.#isNone){
@@ -264,9 +268,9 @@ export class Pokemon {
             // do nothin
         } else if (value <= 0) {
             this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--ded)");
-        } else if (value <= this.getHpMax()/4) {
+        } else if (value <= this.getHpMax()*.2) { // 20%
             this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--danger)");
-        } else if (value <= this.getHpMax()/2) {
+        } else if (value <= this.getHpMax()/2) { // 50%
             this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--warning)");
         } else {
             this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--healthy)");

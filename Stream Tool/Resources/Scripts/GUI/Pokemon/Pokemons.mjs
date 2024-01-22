@@ -1,4 +1,3 @@
-import { inside } from "../Globals.mjs";
 import { Pokemon } from "./Pokemon.mjs";
 
 /** @type {Pokemon[]} */
@@ -9,30 +8,4 @@ export function clearAllPokemon(){
 }
 export function randomizeAllPokemon(){ //Useful for quick testing.
     pokemons.map((pokemon) => (pokemon.randomize()));
-}
-
-// citra memory reading button
-if (inside.electron) {
-
-    const readpartydata = await import("../Emu Scripts/Citra/Read Player Party.mjs");
-    document.getElementById("citraButt").addEventListener("click", async () => {
-
-        const rawPokes = await readpartydata.readPartyData.getParty();
-
-        for (let i = 0; i < pokemons.length; i++) {
-
-            if (rawPokes[i].speciesName() != pokemons[i].getSpecies()) {
-                pokemons[i].setSpecies(rawPokes[i].speciesName());
-            }
-            pokemons[i].setNickName(rawPokes[i].nickname());
-            pokemons[i].setLvl(rawPokes[i].level());
-            pokemons[i].setGender(rawPokes[i].gender());
-            pokemons[i].setHpMax(rawPokes[i].maxHP());
-            pokemons[i].setHpCurrent(rawPokes[i].currentHP());
-            pokemons[i].setStatus(rawPokes[i].status());
-            
-        }
-
-    })
-
 }

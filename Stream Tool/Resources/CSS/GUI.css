@@ -582,6 +582,16 @@ button:hover {
   gap: 8px;
 }
 
+#updateTeamButt:disabled {
+  filter: grayscale(.8);
+  opacity: .5;
+  pointer-events: none;
+}
+
+.citraButtOff {
+  filter: grayscale(.8);
+}
+
 
 /* Player Info stuff */
 #gymBadges {

@@ -16,7 +16,21 @@ const currentRequestVersion = 1;
 const maxRequestDataSize = 32;
 const readMemory = 1;
 
+let theResolve = null;
+
 class Citra {
+
+    constructor() {
+
+        // todo improve this way to listen to responses
+        socket.on("message", (msg) => {
+            if (theResolve != null) {
+                theResolve(msg);
+                theResolve = null;
+            }
+        })
+    
+    }
 
     /**
      * Sends a request to Citra via socket to read from the game's memory
@@ -51,9 +65,7 @@ class Citra {
 
             // now we wait for an answer
             const reply = await new Promise((resolve) => {
-                socket.on("message", (msg) => {
-                    resolve(msg);
-                })
+                theResolve = resolve;
             })
 
             // check if the data we got is what we expect

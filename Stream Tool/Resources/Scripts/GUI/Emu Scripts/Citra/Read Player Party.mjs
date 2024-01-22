@@ -1,6 +1,6 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
-import { RawPokemon } from "./Raw Pokemon.mjs";
+import { RawPokemonParty } from "./Raw Pokemon Party.mjs";
 
 const blockSize = 56;
 const slotOffset = 484;
@@ -12,12 +12,12 @@ class ReadPlayerParty {
 
     /**
      * Asks Citra for the current player Pokemon party
-     * @returns {RawPokemon[]} Pokemon party data
+     * @returns {RawPokemonParty[]} Pokemon party data
      */
     async getParty() {
 
         const party = [];
-        const partyAdress = this.#getPartyAdress("XY"); // todo have a game selector
+        const partyAdress = this.#getPartyAdress(current.game);
 
         // of course, we asume there are 6 max player pokemon
         for (let i = 0; i < 6; i++) {
@@ -28,7 +28,7 @@ class ReadPlayerParty {
             // ask citra for some raw data and wait for it
             const partyData = await citra.readMemory(readAdress, slotDataSize);
             const partyStats = await citra.readMemory(readAdress + slotDataSize + statDataOffset, statDataSize);
-            
+
             // if we got everything we need
             if (partyData && partyStats) {
                 
@@ -36,7 +36,7 @@ class ReadPlayerParty {
                 const data = new Uint8Array([...partyData, ...partyStats]);
 
                 // create a new pokemon and push it to the party array
-                party.push(new RawPokemon(data));
+                party.push(new RawPokemonParty(data));
 
             }
 
@@ -59,15 +59,15 @@ class ReadPlayerParty {
             } else if (current.version == "1.5") {
                 return 0x8CE1CF8;
             }
-        } else if ("ORAS") {
+        } else if (game == "ORAS") {
             if (current.version == "1.0") {
                 return 0x8CF727C;
             } else if (current.version == "1.4") {
                 return 0x8CFB26C;
             }
-        } else if ("SM") {
+        } else if (game == "SM") {
             return 0x34195E10;
-        } else if ("USUM") {
+        } else if (game == "USUM") {
             return 0x33F7FA44;
         }
 

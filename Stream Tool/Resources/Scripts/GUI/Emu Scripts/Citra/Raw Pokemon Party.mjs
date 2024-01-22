@@ -2,7 +2,7 @@ import { current } from "../../Globals.mjs";
 import { decryptData } from "./Crypts.mjs";
 import struct from "./struct.mjs";
 
-export class RawPokemon {
+export class RawPokemonParty {
 
     #data;
 
@@ -51,6 +51,8 @@ export class RawPokemon {
         Bit 2 - Genderless
         Bit 3-7 - Alternate Forms */
         const leByte = struct("B").unpack(this.#data.slice(0x1D, 0x1E))[0];
+
+        // gender
         if (leByte &(1 << 1) ) {
             return "F";
         } else if (leByte &(1 << 2)) {
@@ -61,6 +63,15 @@ export class RawPokemon {
     }
 
     /**
+     * Check if this Pokemon has changed its form
+     * @returns {Number}
+     */
+    formIndex() {
+        // this is the same byte used to determine gender
+        return (struct("B").unpack(this.#data.slice(0x1D, 0x1E))[0] & 248) >> 3;
+    }
+
+    /**
      * Returns this pokemon's current level
      * @returns {Number}
      */
@@ -68,27 +79,23 @@ export class RawPokemon {
         return struct("B").unpack(this.#data.slice(0xEC, 0xED))[0];
     }
 
+    /**
+     * Gets the current pokemon's status
+     * @returns {String}
+     */
     status() {
-        /* Bits 0-2 - Asleep (0-7 rounds)
-        Bit 3 - Poisoned
-        Bit 4 - Burned
-        Bit 5 - Frozen
-        Bit 6 - Paralyzed
-        Bit 7 - Toxic */
         const leByte = struct("B").unpack(this.#data.slice(0xE8, 0xE9))[0];
-        
-        if (leByte &(1 << 0 | 1 << 1 | 1 << 2)) {
+        if (leByte == 2) {
             return "Sle";
-        } else if (leByte &(1 << 3 | 1 << 7)) {
+        } else if (leByte == 5) {
             return "Poi";
-        } else if (leByte &(1 << 4)) {
+        } else if (leByte == 4) {
             return "Bur";
-        } else if (leByte &(1 << 5)) {
+        } else if (leByte == 3) {
             return "Fro";
-        } else if (leByte &(1 << 6)) {
+        } else if (leByte == 1) {
             return "Par";
         }
-        
     }
 
     /**

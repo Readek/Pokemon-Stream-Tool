@@ -19,6 +19,7 @@ customElements.define("load-svg", class extends HTMLElement {
 class Pokemon {
 
     #species;
+    #form;
     #lvl;
     #nickname;
     #gender;
@@ -54,6 +55,13 @@ class Pokemon {
     }
     getSpecies() {
         return this.#species;
+    }
+
+    setForm(form) {
+        this.#form = form;
+    }
+    getForm() {
+        return this.#form;
     }
 
     setLvl(lvl) {
@@ -134,9 +142,9 @@ class Pokemon {
         if (current == max) {
             // this one is here for data sent with 0/0 HP
             this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
-        } else if (current <= max/4) {
+        } else if (current <= max*.2) { // 20%
             this.mainEl.style.setProperty("--activeColor", "var(--danger)");
-        } else if (current <= max/2) {
+        } else if (current <= max/2) { // 50%
             this.mainEl.style.setProperty("--activeColor", "var(--warning)");
         } else {
             this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
@@ -272,11 +280,13 @@ async function updateData(data) {
         for (let i = 0; i < data.playerPokemons.length; i++) {
 
             // set species
-            if (data.playerPokemons[i].species != pokemons[i].getSpecies()) {
+            if (data.playerPokemons[i].species != pokemons[i].getSpecies() ||
+                data.playerPokemons[i].form != pokemons[i].getForm()) {
                 if (data.playerPokemons[i].species) {
                     pokemons[i].setSpecies(data.playerPokemons[i].species);
                     pokemons[i].setImg(data.playerPokemons[i].img);
                     pokemons[i].showPoke();
+                    pokemons[i].setForm(data.playerPokemons[i].form);
                 } else {
                     pokemons[i].hidePoke();
                 }
