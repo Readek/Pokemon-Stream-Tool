@@ -6,20 +6,34 @@
 
 <h1 align="center">Pokemon Stream Tool</h1>
 
-This repo is under active WIP! But for now, feature list:
+This repo is under active WIP! Things are usable, although not consumer friendly. But for now, feature list:
 
-- Electron, crossplatform GUI.
+- Electron, **crossplatform** GUI (Windows, Linux).
+- Fully **open-source**! Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/archive/refs/heads/master.zip) and modify the tool to your heart's content.
 - Manage your active pokemon party (species, nickname, lvl...)
-- Manage your player's stats (medals, useless stats...)
-- **Remote GUI** so multiple people can manage the overlay info at the same time.
-- All info is inputted manually, with plans to automate things.
-- All scripts outside of executable, so modifying stuff to your liking is ez.
-- For the moment, focusing on Gen5.
-- Current Overlay looks like this:
+- Manage your player's stats (badges, useless stats...)
+- Store your catches to be displayed on a "Waiting to start" scene.
+- Display stats for current wild encounter.
+- **Gen 6 auto-update** for your current player party, reading directly from Citra.
+- All info can be changed manually, with future plans to automate more things.
+- **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
+- All scripts can be found outside of executable, so modifying stuff to your liking is ez.
+
+For the moment, the tool has overlays for:
+
+- Black and White 2:
 
 <p align="center">
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20BnW2.jpg" alt="GUI Preview">
+  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20BnW2.jpg" alt="BW2 Overlay Preview">
+  
+</p>
+
+- X and Y:
+
+<p align="center">
+
+  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20XY.jpg" alt="XY Overlay Preview">
   
 </p>
 
