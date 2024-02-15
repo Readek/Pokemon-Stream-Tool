@@ -27,6 +27,13 @@ class ReadPlayerParty {
 
             // ask citra for some raw data and wait for it
             const partyData = await citra.readMemory(readAdress, slotDataSize);
+
+            // since this will be the first request of each interval, check if we got data
+            if (!partyData) {
+                return null;
+            }
+
+            // if we got the things, continue getting data
             const partyStats = await citra.readMemory(readAdress + slotDataSize + statDataOffset, statDataSize);
 
             // if we got everything we need

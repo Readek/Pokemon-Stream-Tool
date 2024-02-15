@@ -64,9 +64,19 @@ class Citra {
             socket.send(Buffer.from(finalRequest), port, adress);
 
             // now we wait for an answer
-            const reply = await new Promise((resolve) => {
+            const citraReply = new Promise((resolve) => {
                 theResolve = resolve;
             })
+            // but set a time limit to the request
+            const timeLimit = new Promise((resolve) => {
+                setTimeout(resolve, 900, null);
+            });
+
+            // check if everything is alright
+            const reply = await Promise.race([citraReply, timeLimit]);
+            if (!reply) {
+                return null;
+            }
 
             // check if the data we got is what we expect
             // though it would be rare if it wasnt

@@ -1,3 +1,4 @@
+import { displayNotif } from "../../Notifications.mjs";
 import { pokemons } from "../../Pokemon/Pokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
@@ -41,6 +42,16 @@ async function updatePlayerTeam() {
     
     // get current party info
     const rawPokes = await readPartyData.getParty();
+
+    // before continuing, we need to know if the connection to citra was successful
+    if (!rawPokes) {
+        
+        // if it failed, deactivate auto update
+        displayNotif("Couln't connect to Citra");
+        autoUpdateToggleCitra();
+        return;
+
+    }
 
     // get current correct party order
     const indexes = await readPartyIndexes.getPartyIndexes();
