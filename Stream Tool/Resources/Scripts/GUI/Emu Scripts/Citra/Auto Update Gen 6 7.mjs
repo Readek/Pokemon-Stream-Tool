@@ -1,6 +1,9 @@
+import { current } from "../../Globals.mjs";
+import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
 import { pokemons } from "../../Pokemon/Pokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
+import { getBattleAddress } from "./Battle Addresses.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
 import { readPartyIndexes } from "./Read Party Indexes.mjs";
 import { readPokeBattleData } from "./Read Player Battle.mjs";
@@ -10,18 +13,19 @@ const autoUpdateButt = document.getElementById("citraButt");
 const updateButt = document.getElementById("updateTeamButt");
 
 let readMemoryInterval;
-let autoUpdateBool;
 
 /** Activates or deactivates Citra memory reading interval */
 export function autoUpdateToggleCitra() {
     
-    if (!autoUpdateBool) { // if no auto update is running
+    if (!current.autoStatus) { // if no auto update is running
         
-        autoUpdateBool = true;
+        // update states
+        current.autoStatus = true;
         autoUpdateButt.innerHTML = "🍊 AUTO ON";
         autoUpdateButt.classList.remove("citraButtOff");
         updateButt.disabled = true;
 
+        // fire auto update every 1 second
         readMemoryInterval = setInterval(async () => {
             updatePlayerTeam();
         }, 1000);
@@ -31,10 +35,17 @@ export function autoUpdateToggleCitra() {
         clearInterval(readMemoryInterval);
         autoUpdateButt.innerHTML = "🍊 AUTO OFF";
         autoUpdateButt.classList.add("citraButtOff");
-        autoUpdateBool = false;
+        current.autoStatus = false;
         updateButt.disabled = false;
 
     }
+
+    // send state to remote GUIS
+    sendRemoteDataRaw(JSON.stringify({
+        message: "RemoteUpdateGUI",
+        type: "Auto",
+        value: current.autoStatus
+    }, null, 2));
 
 }
 

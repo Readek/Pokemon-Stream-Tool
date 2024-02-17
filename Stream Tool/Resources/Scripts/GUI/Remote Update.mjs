@@ -1,3 +1,4 @@
+import { setAutoState } from "./Auto Update.mjs";
 import { Catch } from "./Catches/Catch.mjs";
 import { catches } from "./Catches/Catches.mjs";
 import { current } from "./Globals.mjs";
@@ -19,7 +20,6 @@ export async function updateGUI(data, noNotif) {
         
         if (current.generation != data.gen) {
             settings.genSelect.setGen(data.gen);
-
         }
         if (current.game != data.game) {
             settings.gameSelect.setGame(data.game);
@@ -130,11 +130,15 @@ export async function updateGUI(data, noNotif) {
 
         wildEncounter.setInCombat(data.inCombat);
 
+    }
 
+    if (data.type == "Auto") {
+        setAutoState(data.value);
+        displayNotif("Auto-update was remotely toggled");
     }
 
     // let us know
-    if (!noNotif) {
+    if (!noNotif && !current.autoStatus) {
         displayNotif("GUI was remotely updated");
     }
     

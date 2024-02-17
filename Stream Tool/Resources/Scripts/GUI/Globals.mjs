@@ -22,7 +22,8 @@ export const current = {
     game : "",
     version : "",
     pkmnSpecies : dexGens.get(5).species,
-    numToPoke : {} // filled on pokeFinder fill
+    numToPoke : {}, // filled on pokeFinder fill
+    autoStatus : false
 }
 
 export const nameReplacements = { //Some substitutions for presentation sake or translation.

@@ -23,7 +23,6 @@ const data = {
     player : {},
     wild : {}
 }
-let catchesData, teamData, playerData, wildData;
 
 
 // when a new browser connects
@@ -53,17 +52,12 @@ export function sendData(type) {
 export function sendRemoteData(type) {
     ipc.send("sendData", JSON.stringify(remoteID(data[type]), null, 2));
 }
-export function sendRemoteCatchesData() {
-    ipc.send("sendData", JSON.stringify(remoteID(catchesData), null, 2));
-}
-export function sendRemoteTeamData() {
-    ipc.send("sendData", JSON.stringify(remoteID(teamData), null, 2));
-}
-export function sendRemotePlayerData() {
-    ipc.send("sendData", JSON.stringify(remoteID(playerData), null, 2));
-}
-export function sendRemoteWildData() {
-    ipc.send("sendData", JSON.stringify(remoteID(wildData), null, 2));
+/**
+ * Sends non-stored data to remote GUIs
+ * @param {Object} data - Data to be sent
+ */
+export function sendRemoteDataRaw(data) {
+    ipc.send("sendData", JSON.stringify(remoteID(data), null, 2));
 }
 
 /**

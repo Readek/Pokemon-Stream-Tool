@@ -1,33 +1,72 @@
 import { current, inside } from "./Globals.mjs";
+import { sendRemoteData } from "./Remote Requests.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
+const updateButt = document.getElementById("updateTeamButt");
 
 /** Shows or hides auto update button for generations that support it */
 export async function displayAutoButt() {
 
+    // disable everything by default
+    autoUpdateButt.style.display = "none";
+    if (inside.electron) {
+        const autoUpdateToggleCitra = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
+        autoUpdateButt.removeEventListener("click", autoUpdateToggleCitra.autoUpdateToggleCitra);
+    } else {
+        autoUpdateButt.removeEventListener("click", sendToggleAuto);
+    }
+
+    // but some gens have auto support
     if (current.generation == 6 || current.generation == 7) {
 
         autoUpdateButt.style.display = "block";
 
         if (inside.electron) {
         
-            const autoUpdateToggleCitra = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
-            autoUpdateButt.addEventListener("click", autoUpdateToggleCitra.autoUpdateToggleCitra);
+            const citraAuto = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
+            autoUpdateButt.addEventListener("click", citraAuto.autoUpdateToggleCitra);
 
+        } else {
+            autoUpdateButt.addEventListener("click", sendToggleAuto);
         }
+        
+    }
+
+}
+
+/** Sends signal to the GUI to toggle auto update */
+function sendToggleAuto() {
+    sendRemoteData({
+        message: "RemoteUpdateGUI",
+        type: "Auto",
+        value: !current.autoStatus
+    })
+}
+/**
+ * Toggles auto update state
+ * @param {Boolean} value 
+ */
+export async function setAutoState(value) {
+    
+    if (inside.electron) {
+
+        current.autoStatus = !value;
+
+        const citraAuto = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
+        citraAuto.autoUpdateToggleCitra();
         
     } else {
+
+        current.autoStatus = value;
+        updateButt.disabled = value;
         
-        autoUpdateButt.style.display = "none";
-
-        if (inside.electron) {
-
-            const autoUpdateToggleCitra = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
-            autoUpdateButt.removeEventListener("click", autoUpdateToggleCitra.autoUpdateToggleCitra);
-
-        
+        if (value) {
+            autoUpdateButt.innerHTML = "🍊 AUTO ON";
+            autoUpdateButt.classList.remove("citraButtOff");
+        } else {
+            autoUpdateButt.innerHTML = "🍊 AUTO OFF";
+            autoUpdateButt.classList.add("citraButtOff");
         }
-       
 
     }
 
