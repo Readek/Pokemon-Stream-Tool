@@ -1,4 +1,6 @@
-let webSocket;
+import { genRnd } from "../../../Resources/Scripts/Utils/GenRnd.mjs";
+import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
+
 let startup = true;
 
 //animation stuff
@@ -9,22 +11,12 @@ const displayTime = 7.5;
 const countdownTime = 300;
 let countdown;
 
-const whoThatDiv = document.getElementById("whoThatDiv");
 const whoThatProgressBar = document.getElementById("whoThatRevealProgress");
 const whoThatPokeImg = document.getElementById("whoThatPokeImg");
 const whoThatPokeNick = document.getElementById("pokeNick");
 const whoThatPokeGender = document.getElementById("pokeGender");
 const whoThatPokeSpecies = document.getElementById("pokeSpecies");
 const countdownText = document.getElementById("countdownText");
-
-// this is a weird way to have file svg's that can be recolored by css
-customElements.define("load-svg", class extends HTMLElement {
-    async connectedCallback(
-      shadowRoot = this.shadowRoot || this.attachShadow({mode:"open"})
-    ) {
-      shadowRoot.innerHTML = await (await fetch(this.getAttribute("src"))).text()
-    }
-});
 
 class Catch {
 
@@ -35,11 +27,6 @@ class Catch {
     #img;
     #isNone;
 
-    constructor() {
-
-    }
-
-    
     setSpecies(species) {
         this.#species = species;
     }
@@ -86,37 +73,10 @@ class Catch {
 
 const catches = [];
 
-// first we will start by connecting with the GUI with a websocket
-startWebsocket();
-function startWebsocket() {
 
-	// change this to the IP of where the GUI is being used for remote control
-	webSocket = new WebSocket("ws://localhost:8080?id=gameData");
-	webSocket.onopen = () => { // if it connects successfully
-		// everything will update everytime we get data from the server (the GUI)
-		webSocket.onmessage = function (event) {
-			updateData(JSON.parse(event.data));
-		}
-		// hide error message in case it was up
-		document.getElementById('connErrorDiv').style.display = 'none';
-	}
-
-	// if the connection closes, wait for it to reopen
-	webSocket.onclose = () => {errorWebsocket()}
-
-}
-function errorWebsocket() {
-
-	// show error message
-	document.getElementById('connErrorDiv').style.display = 'flex';
-	// delete current webSocket
-	webSocket = null;
-	// we will attempt to reconect every 5 seconds
-	setTimeout(() => {
-		startWebsocket();
-	}, 5000);
-
-}
+// start the connection to the GUI so everything gets
+// updated once the GUI sends back some data
+initWebsocket("gameData", (data) => updateData(data));
 
 
 /**
@@ -261,27 +221,12 @@ function reduceCountdown() {
 
     }
 
-    
-
 }
 
 
 function fadeIn(itemID, delay = 0, dur = fadeInTime) {
 	itemID.style.animation = `fadeIn ${dur}s ${delay}s both`;
 }
-
-//fade out
 function fadeOut(itemID, dur = fadeOutTime) {
 	itemID.style.animation = `fadeOut ${dur}s both`;
-}
-
-
-/**
- * Just a simple random function
- * @param {Number} min 
- * @param {Number} max 
- * @returns {Number}
- */
-function genRnd(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }

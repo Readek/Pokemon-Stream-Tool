@@ -1,8 +1,7 @@
+import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
 import { getJson } from "./Scripts/Get JSON.mjs";
 import { typeToColor } from "./Scripts/Type to Color.mjs";
 import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
-
-let webSocket;
 
 // these are the sprite offsets so their positions are more centered
 const offsets = await getJson("../../Resources/Assets/Pokemon/sprites/offsets.json") || {};
@@ -179,37 +178,9 @@ function initPokemon() {
 }
 
 
-// first we will start by connecting with the GUI with a websocket
-startWebsocket();
-function startWebsocket() {
-
-	// change this to the IP of where the GUI is being used for remote control
-	webSocket = new WebSocket("ws://localhost:8080?id=gameData");
-	webSocket.onopen = () => { // if it connects successfully
-		// everything will update everytime we get data from the server (the GUI)
-		webSocket.onmessage = function (event) {
-			updateData(JSON.parse(event.data));
-		}
-		// hide error message in case it was up
-		document.getElementById('connErrorDiv').style.display = 'none';
-	}
-
-	// if the connection closes, wait for it to reopen
-	webSocket.onclose = () => {errorWebsocket()}
-
-}
-function errorWebsocket() {
-
-	// show error message
-	document.getElementById('connErrorDiv').style.display = 'flex';
-	// delete current webSocket
-	webSocket = null;
-	// we will attempt to reconect every 5 seconds
-	setTimeout(() => {
-		startWebsocket();
-	}, 5000);
-
-}
+// start the connection to the GUI so everything gets
+// updated once the GUI sends back some data
+initWebsocket("gameData", (data) => updateData(data));
 
 
 /**
