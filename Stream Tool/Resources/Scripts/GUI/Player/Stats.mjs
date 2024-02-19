@@ -1,7 +1,6 @@
 class PlayerStats {
 
     #catchesInput = document.getElementById("catchesInput");
-    #killsInput = document.getElementById("killsInput");
     #deathsInput = document.getElementById("deathsInput");
 
     getCatches() {
@@ -9,13 +8,6 @@ class PlayerStats {
     }
     setCatches(value) {
         this.#catchesInput.value = value;
-    }
-
-    getKills() {
-        return this.#killsInput.value;
-    }
-    setKills(value) {
-        this.#killsInput.value = value;
     }
 
     getDeaths() {

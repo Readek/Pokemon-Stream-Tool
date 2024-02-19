@@ -24,7 +24,6 @@ export async function updatePlayer() {
         player : {
             badges : getBadges(),
             catches : playerStats.getCatches(),
-            kills : playerStats.getKills(),
             deaths : playerStats.getDeaths()
         }
     };

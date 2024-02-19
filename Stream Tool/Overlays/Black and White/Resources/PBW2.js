@@ -165,7 +165,6 @@ const pokemons = [];
 const playerInfoDiv = document.getElementById("playerInfo");
 const badges = document.getElementsByClassName("badge");
 const catchesNum = document.getElementById("catchesNumber");
-const killsNum = document.getElementById("killsNumber");
 const deathsNum = document.getElementById("deathsNumber");
 
 const wildDiv = document.getElementById("wildEncounterDiv");
@@ -275,7 +274,6 @@ async function updateData(data) {
 
         // get us those sweet stats
         catchesNum.innerText = data.player.catches;
-        killsNum.innerText = data.player.kills;
         deathsNum.innerText = data.player.deaths;
         
     } else if (data.type == "Wild Encounter") {
