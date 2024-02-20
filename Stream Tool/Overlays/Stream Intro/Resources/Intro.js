@@ -18,6 +18,8 @@ const whoThatPokeGender = document.getElementById("pokeGender");
 const whoThatPokeSpecies = document.getElementById("pokeSpecies");
 const countdownText = document.getElementById("countdownText");
 
+const noCatchesMessage = document.getElementById("noCatchesMessage");
+
 class Catch {
 
     #species;
@@ -48,13 +50,6 @@ class Catch {
         return this.#gender;
     }
 
-    setTypes(types) {
-        this.#types = types;
-    }
-    getTypes() {
-        return this.#types;
-    }
-
     setImg(img) {
         this.#img = img;
     }
@@ -78,6 +73,7 @@ const catches = [];
 // updated once the GUI sends back some data
 initWebsocket("gameData", (data) => updateData(data));
 
+startCountdown();
 
 /**
  * Updates overlay data with a provided object
@@ -87,49 +83,59 @@ async function updateData(data) {
 
     if (data.type == "Catches") {
         
-        // pokemon team update
-        for (let i = 0; i < data.catches.length; i++) {
-
-            // if theres no data on that slot, create a new catch
-            if (!catches[i]) {
-                catches.push(new Catch());
-            }
-
-            // set species
-            if (data.catches[i].species != catches[i].getSpecies()) {
-                if (data.catches[i].species) {
-                    catches[i].setSpecies(data.catches[i].species);
-                    catches[i].setImg(data.catches[i].img);
-                    catches[i].setTypes(data.catches[i].types);
-                    catches[i].setNone(false);
-                } else {
-                    catches[i].setNone(true);
-                }
-            }
-    
-            // set nickname
-            if (data.catches[i].nickName != catches[i].getNickname()) {
-                catches[i].setNickname(data.catches[i].nickName);
-            }
-    
-            // set gender
-            if (data.catches[i].gender != catches[i].getGender()) {
-                catches[i].setGender(data.catches[i].gender);
-            }
+        if (data.catches.length > 0) {
             
+            // pokemon team update
+            for (let i = 0; i < data.catches.length; i++) {
+
+                // if theres no data on that slot, create a new catch
+                if (!catches[i]) {
+                    catches.push(new Catch());
+                }
+
+                // set species
+                if (data.catches[i].species != catches[i].getSpecies()) {
+                    if (data.catches[i].species) {
+                        catches[i].setSpecies(data.catches[i].species);
+                        catches[i].setImg(data.catches[i].img);
+                        catches[i].setNone(false);
+                    } else {
+                        catches[i].setNone(true);
+                    }
+                }
+
+                // set nickname
+                if (data.catches[i].nickName != catches[i].getNickname()) {
+                    catches[i].setNickname(data.catches[i].nickName);
+                }
+
+                // set gender
+                if (data.catches[i].gender != catches[i].getGender()) {
+                    catches[i].setGender(data.catches[i].gender);
+                }
+                
+            }
+
+            if (startup) {
+
+                whosThatPokemon();
+                setInterval(() => {
+                    whosThatPokemon();
+                }, (revealTime + displayTime + (fadeOutTime * 2))*1000);
+                startup = false;
+
+            }
+
+            noCatchesMessage.style.display = "none";
+
+        } else {
+            
+            // if we got no data to work with, display a message
+            noCatchesMessage.style.display = "block";
+
         }
 
-    }
-
-    if (startup) {
         
-        whosThatPokemon();
-        setInterval(() => {
-            whosThatPokemon();
-        }, (revealTime + displayTime + (fadeOutTime * 2))*1000);
-        startup = false;
-
-        startCountdown();
 
     }
 
