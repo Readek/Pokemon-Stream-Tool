@@ -140,7 +140,7 @@ html, body {
 }
 
 #wildPokeImgDiv {
-    transform: translate(-25px, -85px);
+    transform: translate(-25px, -80px);
     z-index: 1;
 }
 

@@ -19,7 +19,6 @@ class WildPokemon {
     #statTextSA = document.getElementById("vsWildStatNumberSA");
     #statTextSD = document.getElementById("vsWildStatNumberSD");
     #statTextSP = document.getElementById("vsWildStatNumberSP");
-    #statTextTS = document.getElementById("vsWildStatNumberTS");
 
     #statMeterHP = document.getElementById("vsWildMeterHP");
     #statMeterAT = document.getElementById("vsWildMeterAT");
@@ -27,7 +26,6 @@ class WildPokemon {
     #statMeterSA = document.getElementById("vsWildMeterSA");
     #statMeterSD = document.getElementById("vsWildMeterSD");
     #statMeterSP = document.getElementById("vsWildMeterSP");
-    #statMeterTS = document.getElementById("vsWildMeterTS");
 
     /**
      * Sets src path for the pokemon's image
@@ -106,7 +104,6 @@ class WildPokemon {
         this.#statTextSA.innerHTML = stats.spa;
         this.#statTextSD.innerHTML = stats.spd;
         this.#statTextSP.innerHTML = stats.spe;
-        this.#statTextTS.innerHTML = stats.bst;
 
         // we wait a tick so the animation plays when coming from display none
         setTimeout(() => {
@@ -116,7 +113,6 @@ class WildPokemon {
             this.#statMeterSA.style.width = this.#calcStatMeter(stats.spa) + "%";
             this.#statMeterSD.style.width = this.#calcStatMeter(stats.spd) + "%";
             this.#statMeterSP.style.width = this.#calcStatMeter(stats.spe) + "%";
-            this.#statMeterTS.style.width = this.#calcStatMeter(stats.bst, true) + "%";
         }, 0);
 
     }
