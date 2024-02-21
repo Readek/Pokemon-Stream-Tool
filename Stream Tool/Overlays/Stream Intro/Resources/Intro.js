@@ -156,6 +156,9 @@ function whosThatPokemon() {
     // nickname
     whoThatPokeNick.innerHTML = chosenPoke.getNickname();
 
+    // species
+    whoThatPokeSpecies.innerHTML = chosenPoke.getSpecies();
+
     // gender
     if (chosenPoke.getGender() == "F") {
         whoThatPokeGender.innerHTML = "la"
@@ -163,9 +166,13 @@ function whosThatPokemon() {
         whoThatPokeGender.innerHTML = "el"
     }
 
-    // species
-    whoThatPokeSpecies.innerHTML = chosenPoke.getSpecies();
-
+    // hide or show sub text depending on if the poke has a nickname or not
+    if (chosenPoke.getNickname() && chosenPoke.getNickname() != chosenPoke.getSpecies()) {
+        whoThatPokeSpecies.parentElement.style.display = "flex";
+    } else {
+        whoThatPokeNick.innerHTML = chosenPoke.getSpecies();
+        whoThatPokeSpecies.parentElement.style.display = "none";
+    }
 
     // on load
     fadeIn(whoThatPokeImg);

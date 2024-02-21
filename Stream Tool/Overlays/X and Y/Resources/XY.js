@@ -72,8 +72,18 @@ class Pokemon {
     }
 
     setNickname(name) {
+
         this.#nickname = name;
         this.nickEl.innerHTML = name;
+
+        // hide or show sub text depending on if the poke has a nickname or not
+        if (name && name != this.getSpecies()) {
+            this.speciesEl.parentElement.style.display = "flex";
+        } else {
+            this.nickEl.innerHTML = this.getSpecies();
+            this.speciesEl.parentElement.style.display = "none";
+        }
+
     }
     getNickname() {
         return this.#nickname;
@@ -306,12 +316,10 @@ async function updateData(data) {
         catchesNum.innerText = data.player.catches;
         deathsNum.innerText = data.player.deaths;
         
-    } else if (data.type == "Wild Encounter") {
+    } else if (data.type == "Wild Encounter" && data.pokemon) {
 
         // wild pokemon image
-        if (data.pokemon) {
-            wildPokemon.setImg(data.pokemon.img);
-        }
+        wildPokemon.setImg(data.pokemon.img);
 
         // set type info
         wildPokemon.setTypes(data.pokemon.type);
