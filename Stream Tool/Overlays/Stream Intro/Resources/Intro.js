@@ -25,7 +25,6 @@ class Catch {
     #species;
     #nickname;
     #gender;
-    #types = [];
     #img;
     #isNone;
 
@@ -84,13 +83,19 @@ async function updateData(data) {
     if (data.type == "Catches") {
         
         if (data.catches.length > 0) {
-            
-            // pokemon team update
+
+            // check if we got a different array
+            if (catches.length != data.catches.length) {
+                // resize it if so
+                catches.length = data.catches.length;
+            }
+
+            // for every incoming catch
             for (let i = 0; i < data.catches.length; i++) {
 
                 // if theres no data on that slot, create a new catch
                 if (!catches[i]) {
-                    catches.push(new Catch());
+                    catches[i] = new Catch();
                 }
 
                 // set species
