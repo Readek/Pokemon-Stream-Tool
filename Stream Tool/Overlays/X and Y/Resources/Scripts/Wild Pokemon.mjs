@@ -1,38 +1,43 @@
+import { pokemons } from "./Player Team/Pokemons.mjs";
+
+const playerInfoDiv = document.getElementById("playerInfo");
+const wildDiv = document.getElementById("wildEncounterDiv");
+
+const wildPokeImg = document.getElementById("wildPokeImg");
+
+const typeDivs = document.getElementsByClassName("vsWildTypeDiv");
+
+const ratioMaleDiv = document.getElementById("vsWildGenderRatioM");
+const ratioFemaleDiv = document.getElementById("vsWildGenderRatioF");
+
+const ability0Div = document.getElementById("vsWildAbility0");
+const ability1Div = document.getElementById("vsWildAbility1");
+const abilityHiddenDiv = document.getElementById("vsWildAbilityH");
+
+const statTextHP = document.getElementById("vsWildStatNumberHP");
+const statTextAT = document.getElementById("vsWildStatNumberAT");
+const statTextDE = document.getElementById("vsWildStatNumberDE");
+const statTextSA = document.getElementById("vsWildStatNumberSA");
+const statTextSD = document.getElementById("vsWildStatNumberSD");
+const statTextSP = document.getElementById("vsWildStatNumberSP");
+
+const statMeterHP = document.getElementById("vsWildMeterHP");
+const statMeterAT = document.getElementById("vsWildMeterAT");
+const statMeterDE = document.getElementById("vsWildMeterDE");
+const statMeterSA = document.getElementById("vsWildMeterSA");
+const statMeterSD = document.getElementById("vsWildMeterSD");
+const statMeterSP = document.getElementById("vsWildMeterSP");
+
+let inCombatPrev, side = "Front";
+
 class WildPokemon {
-
-    #side = "Front";
-
-    #wildPokeImg = document.getElementById("wildPokeImg");
-
-    #typeDivs = document.getElementsByClassName("vsWildTypeDiv");
-
-    #ratioMaleDiv = document.getElementById("vsWildGenderRatioM");
-    #ratioFemaleDiv = document.getElementById("vsWildGenderRatioF");
-
-    #ability0Div = document.getElementById("vsWildAbility0");
-    #ability1Div = document.getElementById("vsWildAbility1");
-    #abilityHiddenDiv = document.getElementById("vsWildAbilityH");
-
-    #statTextHP = document.getElementById("vsWildStatNumberHP");
-    #statTextAT = document.getElementById("vsWildStatNumberAT");
-    #statTextDE = document.getElementById("vsWildStatNumberDE");
-    #statTextSA = document.getElementById("vsWildStatNumberSA");
-    #statTextSD = document.getElementById("vsWildStatNumberSD");
-    #statTextSP = document.getElementById("vsWildStatNumberSP");
-
-    #statMeterHP = document.getElementById("vsWildMeterHP");
-    #statMeterAT = document.getElementById("vsWildMeterAT");
-    #statMeterDE = document.getElementById("vsWildMeterDE");
-    #statMeterSA = document.getElementById("vsWildMeterSA");
-    #statMeterSD = document.getElementById("vsWildMeterSD");
-    #statMeterSP = document.getElementById("vsWildMeterSP");
 
     /**
      * Sets src path for the pokemon's image
      * @param {Object} img - Image object
      */
     setImg(img) {
-        this.#wildPokeImg.src = img["gen5" + this.#side];
+        wildPokeImg.src = img["gen5" + side];
         // TODO offsets
     }
 
@@ -41,17 +46,22 @@ class WildPokemon {
      * @param {Array} types - Array of the pokemon's types
      */
     setTypes(types) {
-        this.#typeDivs[0].firstElementChild.src = `
+
+        typeDivs[0].firstElementChild.src = `
             ../../Resources/Assets/Type Icons/${types[0]}.png`;
-        this.#typeDivs[0].lastElementChild.innerHTML = types[0];
+        typeDivs[0].lastElementChild.innerHTML = types[0];
+
         if (types[1]) { // only if it has a second type
-            this.#typeDivs[1].firstElementChild.src = `
+
+            typeDivs[1].firstElementChild.src = `
                 ../../Resources/Assets/Type Icons/${types[1]}.png`;
-            this.#typeDivs[1].lastElementChild.innerHTML = types[1];
-            this.#typeDivs[1].style.display = "flex";
+            typeDivs[1].lastElementChild.innerHTML = types[1];
+            typeDivs[1].style.display = "flex";
+
         } else { // hide if not
-            this.#typeDivs[1].style.display = "none";
+            typeDivs[1].style.display = "none";
         }
+
     }
 
     /**
@@ -60,8 +70,8 @@ class WildPokemon {
      * @param {Number} ratioF - Female Ratio
      */
     setGenderRatio(ratioM, ratioF) {
-        this.#ratioMaleDiv.innerHTML = `${ratioM * 100}%`;
-        this.#ratioFemaleDiv.innerHTML = `${ratioF * 100}%`;
+        ratioMaleDiv.innerHTML = `${ratioM * 100}%`;
+        ratioFemaleDiv.innerHTML = `${ratioF * 100}%`;
     }
 
     /**
@@ -71,22 +81,22 @@ class WildPokemon {
     setAbilities(abilities) {
 
         // we assume a pokemon always has at least 1 ability
-        this.#ability0Div.innerHTML = abilities[0];
+        ability0Div.innerHTML = abilities[0];
 
         // second ability
         if (abilities[1]) {
-            this.#ability1Div.innerHTML = abilities[1];
-            this.#ability1Div.style.display = "flex";
+            ability1Div.innerHTML = abilities[1];
+            ability1Div.style.display = "flex";
         } else { // hide if non existant
-            this.#ability1Div.style.display = "none";
+            ability1Div.style.display = "none";
         }
 
         // hidden ability
         if (abilities.H) {
-            this.#abilityHiddenDiv.innerHTML = abilities.H;
-            this.#abilityHiddenDiv.style.display = "flex";
+            abilityHiddenDiv.innerHTML = abilities.H;
+            abilityHiddenDiv.style.display = "flex";
         } else {
-            this.#abilityHiddenDiv.style.display = "none";
+            abilityHiddenDiv.style.display = "none";
         }
 
     }
@@ -98,35 +108,87 @@ class WildPokemon {
     updateMeters(stats) {
 
         // base stats
-        this.#statTextHP.innerHTML = stats.hp;
-        this.#statTextAT.innerHTML = stats.atk;
-        this.#statTextDE.innerHTML = stats.def;
-        this.#statTextSA.innerHTML = stats.spa;
-        this.#statTextSD.innerHTML = stats.spd;
-        this.#statTextSP.innerHTML = stats.spe;
+        statTextHP.innerHTML = stats.hp;
+        statTextAT.innerHTML = stats.atk;
+        statTextDE.innerHTML = stats.def;
+        statTextSA.innerHTML = stats.spa;
+        statTextSD.innerHTML = stats.spd;
+        statTextSP.innerHTML = stats.spe;
 
         // we wait a tick so the animation plays when coming from display none
         setTimeout(() => {
-            this.#statMeterHP.style.width = this.#calcStatMeter(stats.hp) + "%";
-            this.#statMeterAT.style.width = this.#calcStatMeter(stats.atk) + "%";
-            this.#statMeterDE.style.width = this.#calcStatMeter(stats.def) + "%";
-            this.#statMeterSA.style.width = this.#calcStatMeter(stats.spa) + "%";
-            this.#statMeterSD.style.width = this.#calcStatMeter(stats.spd) + "%";
-            this.#statMeterSP.style.width = this.#calcStatMeter(stats.spe) + "%";
+            statMeterHP.style.width = this.#calcStatMeter(stats.hp) + "%";
+            statMeterAT.style.width = this.#calcStatMeter(stats.atk) + "%";
+            statMeterDE.style.width = this.#calcStatMeter(stats.def) + "%";
+            statMeterSA.style.width = this.#calcStatMeter(stats.spa) + "%";
+            statMeterSD.style.width = this.#calcStatMeter(stats.spd) + "%";
+            statMeterSP.style.width = this.#calcStatMeter(stats.spe) + "%";
         }, 0);
 
     }
 
-    #calcStatMeter(value, total) {
+    /**
+     * Calculates percentage for the provided stat
+     * @param {Number} value - Current pokemon stat
+     * @returns {Number} Stat % out of max possible stats
+     */
+    #calcStatMeter(value) {
+        return value * 100 / 230 // 230 being max base stat a pokemon can have
+    }
 
-        if (total) {
-            return value * 100 / 720 // 680 being max total base stats a pokemon can have
-        } else {
-            return value * 100 / 230 // 230 being max base stat a pokemon can have
+    /**
+     * Updates current wild pokemon stats
+     * @param {Object} data - Wild pokemon's data
+     */
+    update(data) {
+
+        // wild pokemon image
+        this.setImg(data.pokemon.img);
+
+        // set type info
+        this.setTypes(data.pokemon.type);
+
+        // gender ratio
+        this.setGenderRatio(data.pokemon.ratioM, data.pokemon.ratioF);
+
+        // abilities
+        this.setAbilities(data.pokemon.abilities);
+
+        // stat meters
+        this.updateMeters(data.pokemon.stats);
+
+        // check if the in combat state changed
+        if (inCombatPrev != data.inCombat) {
+
+            // show or hide info if the fight is happening or not
+            if (data.inCombat) {
+                playerInfoDiv.style.animation = "slideOut .5s both";
+                setTimeout(() => {
+                    wildDiv.style.animation = "slideIn .5s both";
+                }, 250);
+            } else {
+                wildDiv.style.animation = "slideOut .5s both";
+                setTimeout(() => {
+                    playerInfoDiv.style.animation = "slideIn .5s both";
+                }, 250);
+            }
+            
+            // if in combat, turn everyone so they get to see this glorious fight
+            for (let i = 0; i < 6; i++) {
+
+                if (pokemons.pokemon(i).getSpecies()) {
+                    pokemons.pokemon(i).turnSprite(data.inCombat);
+                }
+                
+            }
+
         }
+
+        inCombatPrev = data.inCombat;
 
     }
 
 }
 
+/** Wild Pokemon encounter stats */
 export const wildPokemon = new WildPokemon;
