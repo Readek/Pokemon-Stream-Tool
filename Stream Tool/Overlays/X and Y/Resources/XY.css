@@ -136,20 +136,19 @@ html, body {
     text-shadow: 0px 0px 5px black;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    background-color: #5a54676c;
+    border-radius: 20px;
 }
 
 #wildPokeImgDiv {
-    transform: translate(-25px, -80px);
+    transform: translate(-25px, -75px);
     z-index: 1;
 }
 
 
 #wildBackground {
     width: 100%;
-    background-color: #5a54676c;
-    border-radius: 20px;
-    height: 170px;
+    height: 155px;
 }
 
 
@@ -160,8 +159,6 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    padding: 15px;
 }
 
 .vsWildPokeTypeDiv {
@@ -222,7 +219,7 @@ html, body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0px 50px;
+    padding: 0px 50px 10px 50px;
     font-size: 18px;
 }
   
@@ -347,7 +344,7 @@ html, body {
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 30% / 100% 100% 100% 100%;
+    border-radius: 27% / 100% 100% 100% 100%;
     overflow: hidden;
 }
 
