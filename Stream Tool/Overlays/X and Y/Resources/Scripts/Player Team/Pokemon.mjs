@@ -194,14 +194,24 @@ export class Pokemon {
         return this.#img;
     }
 
-    /** Hides this pokemon's entire div */
+    /** Hides this pokemon's div */
     hidePoke() {
-        this.mainEl.style.display = "none";
-        this.setSpecies(null);
+
+        this.mainEl.style.opacity = "0";
+
+        setTimeout(() => {
+            // we use margin here with div width + flex gap
+            this.mainEl.style.marginLeft = "-315px";
+            this.setSpecies(null);
+        }, 250);
+
     }
     /** Shows this pokemon on the list */
     showPoke() {
-        this.mainEl.style.display = "block";
+        this.mainEl.style.marginLeft = "0px";
+        setTimeout(() => {
+            this.mainEl.style.opacity = "1";
+        }, 300);
     }
 
     /**

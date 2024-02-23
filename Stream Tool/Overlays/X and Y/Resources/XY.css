@@ -324,6 +324,7 @@ html, body {
     border: thick double var(--activeColor);
     overflow: visible;
     border-radius: 30% / 100% 100% 100% 100%;
+    transition: opacity .25s, margin-left .6s;
 }
 .pokeDed {
     --activeColor: var(--danger) !important;
