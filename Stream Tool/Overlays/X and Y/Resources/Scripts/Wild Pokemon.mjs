@@ -1,4 +1,5 @@
 import { pokemons } from "./Player Team/Pokemons.mjs";
+import { current } from "./Globals.mjs";
 
 const playerInfoDiv = document.getElementById("playerInfo");
 const wildDiv = document.getElementById("wildEncounterDiv");
@@ -28,7 +29,7 @@ const statMeterSA = document.getElementById("vsWildMeterSA");
 const statMeterSD = document.getElementById("vsWildMeterSD");
 const statMeterSP = document.getElementById("vsWildMeterSP");
 
-let inCombatPrev, side = "Front";
+let side = "Front";
 
 class WildPokemon {
 
@@ -158,7 +159,9 @@ class WildPokemon {
         this.updateMeters(data.pokemon.stats);
 
         // check if the in combat state changed
-        if (inCombatPrev != data.inCombat) {
+        if (current.inCombat != data.inCombat) {
+
+            current.inCombat = data.inCombat;
 
             // show or hide info if the fight is happening or not
             if (data.inCombat) {
@@ -178,13 +181,12 @@ class WildPokemon {
 
                 if (pokemons.pokemon(i).getSpecies()) {
                     pokemons.pokemon(i).turnSprite(data.inCombat);
+                    pokemons.pokemon(i).displayHPBar();
                 }
                 
             }
 
         }
-
-        inCombatPrev = data.inCombat;
 
     }
 

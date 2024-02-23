@@ -1,3 +1,4 @@
+import { current } from "../Globals.mjs";
 import { getJson } from "../Get JSON.mjs";
 import { typeToColor } from "../Type to Color.mjs";
 
@@ -137,30 +138,33 @@ export class Pokemon {
         return this.#hpMax;
     }
     /**
-     * @param {Number} current 
+     * @param {Number} hp 
      * @param {Numner} max 
      */
-    setHp(current, max) {
+    setHp(hp, max) {
         
-        this.#hpCurrent = current;
+        this.#hpCurrent = hp;
         this.#hpMax = max;
-        this.hpEl.innerHTML = current + "/" + max;
+        this.hpEl.innerHTML = hp + "/" + max;
 
         // adjust the health bar
-        const percent = current / max * 100 - 100;
+        const percent = hp / max * 100 - 100;
         this.hpBar.style.transform = "translateX("+percent+"%)";
 
         // and just because its cool, recolor border if in danger
-        if (current == max) {
+        if (hp == max) {
             // this one is here for data sent with 0/0 HP
             this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
-        } else if (current <= max*.2) { // 20%
+        } else if (hp <= max*.2) { // 20%
             this.mainEl.style.setProperty("--activeColor", "var(--danger)");
-        } else if (current <= max/2) { // 50%
+        } else if (hp <= max/2) { // 50%
             this.mainEl.style.setProperty("--activeColor", "var(--warning)");
         } else {
             this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
         }
+
+        // hide or show the health bar if pokemon is hurt (or in combat)
+        this.displayHPBar();
 
     }
 
@@ -237,6 +241,25 @@ export class Pokemon {
     turnSprite(side) {
         this.#side = side ? "Back" : "Front";
         this.setImg(this.getImgSrc());
+    }
+
+
+    /** Shows or hides pokemon's HP bar and adjusts other elements */
+    displayHPBar() {
+
+        // if pokemon is hurt or in combat
+        if (current.inCombat || this.getHpCurrent() < this.getHpMax()) {
+
+            this.hpEl.parentElement.style.transform = "translateY(0px)";
+            this.nickEl.parentElement.style.transform = "translateY(0px)";
+
+        } else {
+
+            this.hpEl.parentElement.style.transform = "translateY(25px)";
+            this.nickEl.parentElement.style.transform = "translateY(10px)";
+
+        }
+
     }
 
 
