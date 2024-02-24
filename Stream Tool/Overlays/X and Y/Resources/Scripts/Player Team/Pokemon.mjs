@@ -17,6 +17,8 @@ export class Pokemon {
 
     #hpCurrent = -1;
     #hpMax = -1;
+    #hpActive = -1;
+    #hpDecreasing = false;
 
     #img = "";
     #side = "Front";
@@ -38,6 +40,10 @@ export class Pokemon {
         this.hpEl = el.getElementsByClassName(`pokeHpText`)[0];
 
         this.imgEl = el.getElementsByClassName(`pokeImg`)[0];
+
+        // initialize status state
+        this.#status = "---";
+        this.mainEl.classList.add("poke---");
         
     }
 
@@ -115,15 +121,11 @@ export class Pokemon {
     /** @param {String} status */
     setStatus(status) {
 
-        this.#status = status;
-
-        if (status != "---") {
-            this.mainEl.style.setProperty("--activeColor", "var(--"+status+")");
-        }
-        if (status == "Fai") {
-            this.mainEl.classList.add("pokeDed");
-        } else {
-            this.mainEl.classList.remove("pokeDed");
+        // if fainted, let HP decide when to set status
+        // if hp is 0/0, we'll assume user is using manual and thus allow fainted status
+        if (status != "Fai" || (this.#hpCurrent == 0 && this.#hpMax == 0)) {
+            this.mainEl.classList.replace("poke" + this.#status, "poke" + status);
+            this.#status = status;
         }
 
     }
@@ -141,30 +143,77 @@ export class Pokemon {
      * @param {Number} hp 
      * @param {Numner} max 
      */
-    setHp(hp, max) {
+    async setHp(hp, max) {
         
         this.#hpCurrent = hp;
         this.#hpMax = max;
-        this.hpEl.innerHTML = hp + "/" + max;
+
+        // hide or show the health bar if pokemon is hurt (or in combat)
+        this.displayHPBar();
+
+        if (this.#hpActive <= hp) {
+
+            // if HP increased, just do everything instantly without animations
+            this.#hpActive = hp;
+            this.#updateHpBar(hp);
+            
+        } else {
+
+            // our boi has been damaged! play some animations
+
+            this.mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
+            await new Promise(resolve => setTimeout(resolve, 500));
+            this.mainEl.style.animation = "";
+            
+            if (!this.#hpDecreasing) {
+
+                this.#hpDecreasing = true;
+
+                while (this.#hpActive >= this.#hpCurrent) {
+
+                    this.#updateHpBar(this.#hpActive);
+    
+                    await new Promise(resolve => setTimeout(resolve, 1000/30));
+        
+                    this.#hpActive--;
+    
+                }
+
+                this.#hpDecreasing = false;
+
+            }
+            
+
+        }        
+
+    }
+
+    /**
+     * Updates the pokemon's health bar along with the HP texts
+     * @param {Number} hp - HP value to display
+     */
+    #updateHpBar (hp) {
+
+        // update hp texts
+        this.hpEl.innerHTML = hp + "/" + this.#hpMax;
 
         // adjust the health bar
-        const percent = hp / max * 100 - 100;
+        const percent = hp / this.#hpMax * 100 - 100;
         this.hpBar.style.transform = "translateX("+percent+"%)";
 
         // and just because its cool, recolor border if in danger
-        if (hp == max) {
+        if (hp == this.#hpMax) {
             // this one is here for data sent with 0/0 HP
             this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
-        } else if (hp <= max*.2) { // 20%
+        } else if (hp <= 0) { // 0%
+            this.setStatus("Ded");
+        } else if (hp <= this.#hpMax*.2) { // 20%
             this.mainEl.style.setProperty("--activeColor", "var(--danger)");
-        } else if (hp <= max/2) { // 50%
+        } else if (hp <= this.#hpMax/2) { // 50%
             this.mainEl.style.setProperty("--activeColor", "var(--warning)");
         } else {
             this.mainEl.style.setProperty("--activeColor", "var(--healthy)");
         }
-
-        // hide or show the health bar if pokemon is hurt (or in combat)
-        this.displayHPBar();
 
     }
 
@@ -308,11 +357,11 @@ export class Pokemon {
             this.setTypes(data.types);
         }
         
-        // set HP
-        this.setHp(data.hpCurrent, data.hpMax);
-
         // set status condition
         this.setStatus(data.status);
+
+        // set HP
+        this.setHp(data.hpCurrent, data.hpMax);
 
     }
 
