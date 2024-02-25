@@ -8,7 +8,7 @@ const offsets = await getJson("../../Resources/Assets/Pokemon/sprites/offsets.js
 export class Pokemon {
 
     #species = "";
-    #form;
+    #form = "";
     #lvl = 0;
     #nickname = "";
     #gender = "";
@@ -19,6 +19,7 @@ export class Pokemon {
     #hpMax = -1;
     #hpActive = -1;
     #hpDecreasing = false;
+    #noHpAnim = false;
 
     #img = "";
     #side = "Front";
@@ -151,7 +152,7 @@ export class Pokemon {
         // hide or show the health bar if pokemon is hurt (or in combat)
         this.displayHPBar();
 
-        if (this.#hpActive <= hp) {
+        if (this.#hpActive <= hp || this.#noHpAnim) {
 
             // if HP increased, just do everything instantly without animations
             this.#hpActive = hp;
@@ -322,11 +323,21 @@ export class Pokemon {
     }
 
 
+    /**
+     * Updates data for this pokemon if its different from previous data
+     * @param {Object} data 
+     */
     update(data) {
+
+        this.#noHpAnim = false;
 
         // set species
         if (data.species != this.getSpecies() ||
             data.form != this.getForm()) {
+
+            // dont animate hp changes if pokemon changed
+            this.#noHpAnim = true;
+
             if (data.species) {
                 this.setSpecies(data.species);
                 this.setImg(data.img);
@@ -335,6 +346,7 @@ export class Pokemon {
             } else {
                 this.hidePoke();
             }
+
         }
 
         // set level
