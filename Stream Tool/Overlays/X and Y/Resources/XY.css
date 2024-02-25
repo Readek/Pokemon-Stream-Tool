@@ -526,3 +526,9 @@ html, body {
     90% { transform: translate(1px, 0px); }
     100% { transform: translate(0px, -1px); }
 }
+
+@keyframes megaAnim {
+    0% { filter: brightness(1);}
+    85% { filter: brightness(15);}
+    100% { filter: brightness(1);}
+}

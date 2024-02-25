@@ -58,8 +58,22 @@ export class Pokemon {
         return this.#species;
     }
 
-    setForm(form) {
+    /**
+     * @param {String} form 
+     * @param {Boolean} megaEvolving 
+     */
+    setForm(form, megaEvolving) {
+
         this.#form = form;
+
+        if (megaEvolving) {
+            this.imgEl.style.animation = "megaAnim 3s linear";
+            setTimeout(() => {
+                this.imgEl.style.animation = "";
+            }, 3000);
+        }
+        
+
     }
     getForm() {
         return this.#form;
@@ -333,7 +347,7 @@ export class Pokemon {
      * Updates data for this pokemon if its different from previous data
      * @param {Object} data 
      */
-    update(data) {
+    async update(data) {
 
         this.#noHpAnim = false;
 
@@ -345,10 +359,24 @@ export class Pokemon {
             this.#noHpAnim = true;
 
             if (data.species) {
+
+                let megaEvolving;
+                if (data.species == this.getSpecies() && data.form.includes("Mega")) {
+                    megaEvolving = true;
+                }
+
                 this.setSpecies(data.species);
-                this.setImg(data.img);
+                this.setForm(data.form, megaEvolving);
+                
                 this.showPoke();
-                this.setForm(data.form);
+
+                // if pokemon is mega evolving, wait for that img update
+                if (megaEvolving) {
+                    setTimeout(() => {this.setImg(data.img);}, 2500);                    
+                } else {
+                    this.setImg(data.img);
+                }
+
             } else {
                 this.hidePoke();
             }
