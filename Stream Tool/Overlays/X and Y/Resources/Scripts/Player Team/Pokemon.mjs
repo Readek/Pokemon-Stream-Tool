@@ -146,13 +146,14 @@ export class Pokemon {
      */
     async setHp(hp, max) {
         
+        const oldHp = this.#hpCurrent;
         this.#hpCurrent = hp;
         this.#hpMax = max;
 
         // hide or show the health bar if pokemon is hurt (or in combat)
         this.displayHPBar();
 
-        if (this.#hpActive <= hp || this.#noHpAnim) {
+        if (oldHp <= hp || this.#noHpAnim) {
 
             // if HP increased, just do everything instantly without animations
             this.#hpActive = hp;
@@ -161,6 +162,11 @@ export class Pokemon {
         } else {
 
             // our boi has been damaged! play some animations
+
+            // we fake a wait here to avoid having the overlay show data
+            // before it happens in game, since data in memory updates
+            // before displaying it in game
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
             this.mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -373,7 +379,9 @@ export class Pokemon {
         this.setStatus(data.status);
 
         // set HP
-        this.setHp(data.hpCurrent, data.hpMax);
+        if (this.getHpCurrent() != data.hpCurrent || this.getHpMax() != data.hpMax) {
+            this.setHp(data.hpCurrent, data.hpMax);
+        }
 
     }
 
