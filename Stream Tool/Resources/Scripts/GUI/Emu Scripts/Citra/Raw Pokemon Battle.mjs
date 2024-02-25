@@ -1,4 +1,5 @@
 import { current } from "../../Globals.mjs";
+import { validateRawPokemon } from "./Utils.mjs";
 import struct from "./struct.mjs";
 
 export class RawPokemonBattle {
@@ -10,7 +11,10 @@ export class RawPokemonBattle {
      * @param {Uint8Array} data Raw pokemon data
      */
     constructor(data) {
+
         this.#data = data.buffer;
+        this.valid = validateRawPokemon(this);
+
     }
 
     /**

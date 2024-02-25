@@ -112,7 +112,6 @@ export async function updateGUI(data, noNotif) {
         // player time
         setBadges(data.player.badges);
         playerStats.setCatches(data.player.catches);
-        playerStats.setKills(data.player.kills);
         playerStats.setDeaths(data.player.deaths);
 
     }

@@ -84,18 +84,22 @@ async function updatePlayerTeam() {
 
         for (let i = 0; i < pokemons.length; i++) {
 
-            // battle memory will use enemy pokemons after the player's pokes
-            // if our team data does not align with battle data, ignore it
-            if (rawPokesIndexed[i].dexNum() == rawBattlePokes[i].dexNum()) {
+            if (rawBattlePokes[i].valid) {
                 
-                if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
-                    pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
+                // battle memory will use enemy pokemons after the player's pokes
+                // if our team data does not align with battle data, ignore it
+                if (rawPokesIndexed[i].dexNum() == rawBattlePokes[i].dexNum()) {
+                    
+                    if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
+                        pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
+                    }
+                    pokemons[i].setLvl(rawBattlePokes[i].level());
+                    pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
+                    pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
+                    pokemons[i].setStatus(rawBattlePokes[i].status());
+                    pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
+
                 }
-                pokemons[i].setLvl(rawBattlePokes[i].level());
-                pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
-                pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
-                pokemons[i].setStatus(rawBattlePokes[i].status());
-                pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
 
             }
 
@@ -106,16 +110,20 @@ async function updatePlayerTeam() {
         // use party data
         for (let i = 0; i < pokemons.length; i++) {
 
-            if (rawPokesIndexed[i].speciesName() != pokemons[i].getSpecies()) {
-                pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
-            }
-            pokemons[i].setNickName(rawPokesIndexed[i].nickname());
-            pokemons[i].setLvl(rawPokesIndexed[i].level());
-            pokemons[i].setGender(rawPokesIndexed[i].gender());
-            pokemons[i].setHpMax(rawPokesIndexed[i].maxHP());
-            pokemons[i].setHpCurrent(rawPokesIndexed[i].currentHP());
-            pokemons[i].setStatus(rawPokesIndexed[i].status());
-            pokemons[i].setFormNumber(rawPokesIndexed[i].formIndex());
+            if (rawPokesIndexed[i].valid) {
+
+                if (rawPokesIndexed[i].speciesName() != pokemons[i].getSpecies()) {
+                    pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
+                }
+                pokemons[i].setNickName(rawPokesIndexed[i].nickname());
+                pokemons[i].setLvl(rawPokesIndexed[i].level());
+                pokemons[i].setGender(rawPokesIndexed[i].gender());
+                pokemons[i].setHpMax(rawPokesIndexed[i].maxHP());
+                pokemons[i].setHpCurrent(rawPokesIndexed[i].currentHP());
+                pokemons[i].setStatus(rawPokesIndexed[i].status());
+                pokemons[i].setFormNumber(rawPokesIndexed[i].formIndex());
+                
+            }           
             
         }
 

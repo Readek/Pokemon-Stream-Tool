@@ -1,5 +1,6 @@
 import { current } from "../../Globals.mjs";
 import { decryptData } from "./Crypts.mjs";
+import { validateRawPokemon } from "./Utils.mjs";
 import struct from "./struct.mjs";
 
 export class RawPokemonParty {
@@ -13,6 +14,7 @@ export class RawPokemonParty {
     constructor(data) {
 
         this.#data = decryptData(data);
+        this.valid = validateRawPokemon(this);
 
     }
 
