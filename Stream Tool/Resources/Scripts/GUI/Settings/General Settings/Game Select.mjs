@@ -7,6 +7,20 @@ import { settings } from "../Settings.mjs";
 const gameSelectSelect = document.getElementById("gameSelect");
 
 const genGameData = {
+    1 : [
+        {value : "RB", name : "Red & Blue"},
+    ],
+    2 : [
+        {value : "GS", name : "Gold & Silver"},
+    ],
+    3 : [
+        {value : "RS", name : "Ruby & Sapphire"},
+        {value : "FRLG", name : "Fire Red & Leaf Green"}
+    ],
+    4 : [
+        {value : "DP", name : "Diamond & Pearl"},
+        {value : "HGSS", name : "Heart Gold & Soul Silver"}
+    ],
     5 : [
         {value : "BW", name : "Black & White"},
         {value : "BW2", name : "Black & White 2"}
@@ -18,6 +32,15 @@ const genGameData = {
     7 : [
         {value : "SM", name : "Sun & Moon"},
         {value : "USUM", name : "Ultra Sun & Ultra Moon"}
+    ],
+    8 : [
+        {value : "SS", name : "Sword & Shield"},
+        {value : "BDSP", name : "Briliant Diamond & Shining Pearl"},
+        {value : "PLA", name : "Legends: Arceus"},
+    ],
+    9 : [
+        {value : "SV", name : "Scarlet & Violet"},
+        {value : "PLZ", name : "Legends: Z-A"}
     ]
 }
 
