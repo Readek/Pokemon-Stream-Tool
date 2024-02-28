@@ -1,5 +1,7 @@
+import { getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
 import { getJson } from "./Scripts/Get JSON.mjs";
+import { current } from "./Scripts/Globals.mjs";
 import { typeToColor } from "./Scripts/Type to Color.mjs";
 import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
 
@@ -76,9 +78,11 @@ class Pokemon {
     setGender(gender) {
         this.#gender = gender;
         if (gender == "F") {
-            this.gendEl.innerHTML = "la";
+            this.gendEl.innerHTML = getLocalizedText("pokePronounF");
+        } else if (gender == "M") {
+            this.gendEl.innerHTML = getLocalizedText("pokePronounM");
         } else {
-            this.gendEl.innerHTML = "el";
+            this.gendEl.innerHTML = getLocalizedText("pokePronounNull");
         }
     }
     getGender() {
@@ -165,6 +169,11 @@ class Pokemon {
         this.#side = side ? "Back" : "Front";
         this.setImg(this.getImgSrc());
 
+    }
+
+    /** Transaltes texts related to this Pokemon */
+    translate() {
+        this.setGender(this.getGender());
     }
 
 }
@@ -302,6 +311,16 @@ async function updateData(data) {
         }
 
         inCombatPrev = data.inCombat;
+
+    } else if (data.type == "Config") {
+
+        if (current.lang != data.lang) {
+            current.lang = data.lang;
+            await setLanguage(data.lang, "overlay");
+            for (let i = 0; i < pokemons.length; i++) {
+                pokemons[i].translate();
+            }
+        }
 
     }
 

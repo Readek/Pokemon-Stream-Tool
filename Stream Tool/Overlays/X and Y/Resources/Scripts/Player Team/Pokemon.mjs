@@ -1,6 +1,7 @@
 import { current } from "../Globals.mjs";
 import { getJson } from "../Get JSON.mjs";
 import { typeToColor } from "../Type to Color.mjs";
+import { getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
 
 // these are the sprite offsets so their positions are more centered
 const offsets = await getJson("../../Resources/Assets/Pokemon/sprites/offsets.json") || {};
@@ -10,7 +11,7 @@ export class Pokemon {
     #species = "";
     #form = "";
     #lvl = 0;
-    #nickname = "";
+    #nickname = "¡";
     #gender = "";
     #types = [];
     #status = "";
@@ -114,9 +115,11 @@ export class Pokemon {
     setGender(gender) {
         this.#gender = gender;
         if (gender == "F") {
-            this.gendEl.innerHTML = "la";
+            this.gendEl.innerHTML = getLocalizedText("pokePronounF");
+        } else if (gender == "M") {
+            this.gendEl.innerHTML = getLocalizedText("pokePronounM");
         } else {
-            this.gendEl.innerHTML = "el";
+            this.gendEl.innerHTML = getLocalizedText("pokePronounNull");
         }
     }
     getGender() {
@@ -411,6 +414,11 @@ export class Pokemon {
             this.setHp(data.hpCurrent, data.hpMax);
         }
 
+    }
+
+    /** Transaltes texts related to this Pokemon */
+    translate() {
+        this.setGender(this.getGender());
     }
 
 }

@@ -1,4 +1,6 @@
+import { setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
+import { current } from "./Scripts/Globals.mjs";
 import { playerInfo } from "./Scripts/Player Info.mjs";
 import { pokemons } from "./Scripts/Player Team/Pokemons.mjs";
 import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
@@ -35,6 +37,14 @@ async function updateData(data) {
     } else if (data.type == "Wild Encounter" && data.pokemon) {
 
         wildPokemon.update(data)
+
+    } else if (data.type == "Config") {
+
+        if (current.lang != data.lang) {
+            current.lang = data.lang;
+            await setLanguage(data.lang, "overlay");
+            pokemons.translate();
+        }
 
     }
 

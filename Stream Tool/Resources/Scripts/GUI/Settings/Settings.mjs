@@ -47,6 +47,15 @@ class Settings {
             ipc.sendData("settings");
             ipc.sendRemoteData("settings");
 
+            // additionally, send some settings data to overlays
+            const configJson = {
+                id : "gameData",
+                type : "Config",
+                lang : current.lang
+            }
+            ipc.updateStoredData("config", JSON.stringify(configJson, null, 2));
+            ipc.sendData("config");
+
         } else { // for remote GUIs
 
             const remote = await import("../Remote Requests.mjs");

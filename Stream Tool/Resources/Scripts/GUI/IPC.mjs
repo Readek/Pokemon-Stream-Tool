@@ -21,7 +21,8 @@ const data = {
     catches : {},
     team : {},
     player : {},
-    wild : {}
+    wild : {},
+    config : {}
 }
 
 
@@ -34,6 +35,7 @@ ipc.on('requestData', () => {
     sendData("team");
     sendData("player");
     sendData("wild");
+    sendData("config");
 
 })
 

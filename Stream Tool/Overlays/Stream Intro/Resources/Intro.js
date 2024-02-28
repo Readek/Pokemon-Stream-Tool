@@ -1,5 +1,7 @@
+import { current } from "./Scripts/Globals.mjs";
 import { genRnd } from "../../../Resources/Scripts/Utils/GenRnd.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
+import { getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
 
 let startup = true;
 
@@ -123,10 +125,13 @@ async function updateData(data) {
 
             if (startup) {
 
-                whosThatPokemon();
-                setInterval(() => {
+                setTimeout(() => {
                     whosThatPokemon();
-                }, (revealTime + displayTime + (fadeOutTime * 2))*1000);
+                    setInterval(() => {
+                        whosThatPokemon();
+                    }, (revealTime + displayTime + (fadeOutTime * 2))*1000);
+                }, 50); // timeout here so lang has time to load
+                
                 startup = false;
 
             }
@@ -140,7 +145,12 @@ async function updateData(data) {
 
         }
 
-        
+    } else if (data.type == "Config") {
+
+        if (current.lang != data.lang) {
+            current.lang = data.lang;
+            await setLanguage(data.lang, "overlay");
+        }
 
     }
 
@@ -161,9 +171,11 @@ function whosThatPokemon() {
 
     // gender
     if (chosenPoke.getGender() == "F") {
-        whoThatPokeGender.innerHTML = "la"
+        whoThatPokeGender.innerHTML = getLocalizedText("pokePronounF");
+    } else if (chosenPoke.getGender() == "M") {
+        whoThatPokeGender.innerHTML = getLocalizedText("pokePronounM");
     } else {
-        whoThatPokeGender.innerHTML = "el"
+        whoThatPokeGender.innerHTML = getLocalizedText("pokePronounNull");
     }
 
     // hide or show sub text depending on if the poke has a nickname or not
@@ -211,7 +223,9 @@ function startCountdown() {
 
     countdown = countdownTime;
 
-    reduceCountdown();
+    setTimeout(() => {
+        reduceCountdown();
+    }, 50); // so lang has time to load
     setInterval(() => {
         reduceCountdown();
     }, 1000);
@@ -229,13 +243,13 @@ function reduceCountdown() {
             seconds = "0" + seconds;
         }
         
-        countdownText.innerHTML = `El stream comienza en ${minutes}:${seconds}`;
+        countdownText.innerHTML = getLocalizedText("cdTextProgress", [minutes, seconds]);
 
         countdown -= 1;
 
     } else {
         
-        countdownText.innerHTML = "¡El stream comienza pronto!";
+        countdownText.innerHTML = getLocalizedText("cdTextFinished");
 
     }
 

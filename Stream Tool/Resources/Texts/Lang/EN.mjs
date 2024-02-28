@@ -2,7 +2,7 @@ export const lang = {
 
     gui : {
 
-        /* Title strings appear as tooltips when hovering over an element /*
+        // title strings appear as tooltips when hovering over an element
 
         /* TOP BAR */
 
@@ -23,6 +23,27 @@ export const lang = {
         topBarSettings : "Settings",
         topBarSettingsTitle : "We all need to tweak something from time to time"
 
-    }    
+    },
+
+    overlay : {
+
+        /* Regular overlays */
+
+        // appears before species name
+        pokePronounF : "the",
+        pokePronounM : "the",
+        pokePronounNull : "the",
+
+
+        /* Intro overlay */
+
+        // bottom text
+        cdTextProgress : "Stream starts in {0}:{1}",
+        cdTextFinished : "Stream will start soon!",
+
+        // appears when user has 0 catches
+        introNoCatches : "There are no catches to work with :("
+
+    }
 
 }
