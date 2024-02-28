@@ -17,7 +17,10 @@ import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 export async function updateGUI(data, noNotif) {
 
     if (data.type == "Settings") {
-        
+
+        if (current.lang != data.lang) {
+            settings.langSelect.setLanguage(data.lang);
+        }
         if (current.generation != data.gen) {
             settings.genSelect.setGen(data.gen);
         }

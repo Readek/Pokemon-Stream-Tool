@@ -836,7 +836,6 @@ button:hover {
   width: 300px;
   display: flex;
   flex-direction: column;
-  margin: 10px;
 }
 
 .settingsTitle {
@@ -894,7 +893,7 @@ button:hover {
   filter: brightness(.8);
 }
 
-#gameSelectDiv, #genSelectDiv {
+#gameSelectDiv, #genSelectDiv, #langSelectDiv {
   gap: 10px;
 }
 
@@ -913,6 +912,9 @@ button:hover {
   border-color: var(--selected);
 }
 
+#langSelect {
+  width: 80px;
+}
 #genSelect {
   width: 40px;
 }

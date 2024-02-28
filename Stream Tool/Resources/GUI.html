@@ -18,25 +18,25 @@
 <div id="viewport"> <!-- so we can move the viewport easily -->
 
   <div id="topBar">
-    <button id="topBarCatches" class="topBarButton" title="Add in your precious collection of friends">
+    <button id="topBarCatches" class="topBarButton" locTitle="topBarCatchesTitle">
       <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
-      <div class="topBarText">Catches</div>
+      <div class="topBarText" locText="topBarCatches"></div>
     </button>
-    <button id="topBarTeam" class="topBarButton topBarSelected" title="Modify your current Pokemon party">
+    <button id="topBarTeam" class="topBarButton topBarSelected" locTitle="topBarTeamTitle">
       <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
-      <div class="topBarText">Team</div>
+      <div class="topBarText" locText="topBarTeam"></div>
     </button>
-    <button id="topBarPlayer" class="topBarButton" title="Modify your badge data (and more)">
+    <button id="topBarPlayer" class="topBarButton" locTitle="topBarPlayerTitle">
       <load-svg src="SVGs/Person.svg" class="personIcon"></load-svg>
-      <div class="topBarText">Player</div>
+      <div class="topBarText" locText="topBarPlayer"></div>
     </button>
-    <button id="topBarVsWild" class="topBarButton" title="Wild Pokemon encounter stats">
+    <button id="topBarVsWild" class="topBarButton" locTitle="topBarVSWildTitle">
       <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
-      <div class="topBarText">VS Wild</div>
+      <div class="topBarText" locText="topBarVSWild"></div>
     </button>
-    <button id="topBarSettings" class="topBarButton" title="We all need to tweak something from time to time">
+    <button id="topBarSettings" class="topBarButton" locTitle="topBarSettingsTitle">
       <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
-      <div class="tobBarText">Settings</div>
+      <div class="tobBarText" locText="topBarSettings"></div>
     </button>
   </div>
 
@@ -269,6 +269,14 @@
   
               <div class="settingsTitle">General Settings</div>
   
+              <div id="langSelectDiv" class="settingBox" title="Sets the GUI's language">
+                <div>Language</div>
+                <select id="langSelect" class="settingsSelect">
+                  <option value="EN">English</option>
+                  <option value="ES">Español (Spanish)</option>
+                </select>
+              </div>
+
               <div id="genSelectDiv" class="settingBox" title="Changes the current generation pokedex data">
                 <div>Gen select</div>
                 <select id="genSelect" class="settingsSelect">

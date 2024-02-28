@@ -1,6 +1,7 @@
 import { current, inside } from "../Globals.mjs";
 import { SettingGameSelect } from "./General Settings/Game Select.mjs";
 import { SettingGenSelect } from "./General Settings/Gen Select.mjs";
+import { SettingLangSelect } from "./General Settings/Language Select.mjs";
 import { SettingVersionSelect } from "./General Settings/Version Select.mjs";
 import { SettingAlwaysOnTop } from "./Window Settings/Always on top.mjs";
 import { SettingResizableWindow } from "./Window Settings/Resizable.mjs";
@@ -10,6 +11,7 @@ class Settings {
 
     constructor() {
 
+        this.langSelect = new SettingLangSelect();
         this.genSelect = new SettingGenSelect();
         this.gameSelect = new SettingGameSelect();
         this.versionSelect = new SettingVersionSelect();
@@ -31,6 +33,7 @@ class Settings {
         const dataJson = {
             id : "guiData",
             type : "Settings",
+            lang : current.lang,
             gen : current.generation,
             game : current.game,
             version : current.version
