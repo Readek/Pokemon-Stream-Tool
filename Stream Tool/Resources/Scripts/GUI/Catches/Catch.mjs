@@ -331,25 +331,25 @@ export class Catch {
         // and now for the big fat text
         element.innerHTML = `
 
-            <button class="catchDeleteButt catchButt" title="Delete Pokemon">-</button>
+            <button class="catchDeleteButt catchButt" locTitle="deleteCatchButtTitle">-</button>
         
             <div class="finderPosition">
-                <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+                <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
                 <img class="pokeSelectorIcon" alt="">
                 <div class="pokeSelectorText"></div>
                 </div>
             </div>
 
-            <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
+            <input type="text" class="pokeNickName textInput mousetrap" locTitle="pokeNickTitle" locPHolder="pokeNickPHolder" spellcheck="false">
 
-            <select class="pokeForm" title="For pokemons that have different forms">
+            <select class="pokeForm" locTitle="pokeFormTitle">
             </select>
 
-            <button class="pokeGenderButton" title="Pokemon gender">
+            <button class="pokeGenderButton" locTitle="pokeGenderTitle">
                 <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
             </button>
 
-            <button class="pokeShinyButton" title="Shiny indicator">
+            <button class="pokeShinyButton" locTitle="pokeShinyTitle">
                 <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
             </button>
 

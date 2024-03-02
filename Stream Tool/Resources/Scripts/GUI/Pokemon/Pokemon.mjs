@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../Utils/Language.mjs";
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, nameReplacements, stPath } from "../Globals.mjs";
 
@@ -372,44 +373,44 @@ export class Pokemon {
         element.innerHTML = `
         
             <div class="finderPosition">
-                <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+                <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
                 <img class="pokeSelectorIcon" alt="">
                 <div class="pokeSelectorText"></div>
                 </div>
             </div>
 
-            <input type="text" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
+            <input type="text" class="pokeNickName textInput mousetrap" spellcheck="false" locTitle="pokeNickTitle" locPHolder="pokeNickPHolder">
 
-            <div class="pokeLvlDiv" title="Pokemon level">
-                <div class="pokeLvlText">Lv.</div>
+            <div class="pokeLvlDiv" locTitle="pokeLvlTitle">
+                <div class="pokeLvlText" locText="pokeLvl"></div>
                 <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
             </div>          
 
-            <select class="pokeForm" title="For pokemons that have different forms">
+            <select class="pokeForm" locTitle="pokeFormTitle">
             </select>
 
-            <button class="pokeGenderButton" title="Pokemon gender">
+            <button class="pokeGenderButton" locTitle="pokeGenderTitle">
                 <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
             </button>
 
-            <button class="pokeShinyButton" title="Shiny indicator">
+            <button class="pokeShinyButton" locTitle="pokeShinyTitle">
                 <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
             </button>
 
-            <div class="pokeHpDiv" title="Pokemon HP">
+            <div class="pokeHpDiv" locTitle="pokeHpTitle">
                 <input class="pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0">
                 /
                 <input class="pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0">
             </div>
 
-            <select class="pokeStatus" title="Current status condition">
+            <select class="pokeStatus" locTitle="pokeStatusTitle">
                 <option value="---">----</option>
-                <option value="Par">Par.</option>
-                <option value="Poi">Poi.</option>
-                <option value="Fro">Fro.</option>
-                <option value="Bur">Bur.</option>
-                <option value="Sle">Sle.</option>
-                <option value="Fai">Fai.</option>
+                <option value="Par" locText="pokeStatusPar"></option>
+                <option value="Poi" locText="pokeStatusPoi"></option>
+                <option value="Fro" locText="pokeStatusFro"></option>
+                <option value="Bur" locText="pokeStatusBur"></option>
+                <option value="Sle" locText="pokeStatusSle"></option>
+                <option value="Fai" locText="pokeStatusFai"></option>
             </select>
 
         `

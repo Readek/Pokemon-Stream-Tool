@@ -18,7 +18,7 @@ export const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
 /** Current values for stuff */
 export const current = {
     focus : -1,
-    lang : "EN",
+    lang : "",
     generation : 0, // most of these will be changed on startup
     game : "",
     version : "",

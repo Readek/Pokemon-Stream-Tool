@@ -59,6 +59,7 @@ async function init() {
         } else {
             // set default values
             catches.push(new Catch());
+            settings.langSelect.setLanguage("EN");
             settings.genSelect.setGen(5); // best gen amarite
             pokeFinder.loadCharacters();
         }

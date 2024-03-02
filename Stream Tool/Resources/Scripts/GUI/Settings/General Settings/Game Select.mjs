@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { displayAutoButt } from "../../Auto Update.mjs";
 import { current } from "../../Globals.mjs";
 import { changeBadges } from "../../Player/Gym Badges.mjs";
@@ -8,39 +9,39 @@ const gameSelectSelect = document.getElementById("gameSelect");
 
 const genGameData = {
     1 : [
-        {value : "RB", name : "Red & Blue"},
+        {value : "RB"},
     ],
     2 : [
-        {value : "GS", name : "Gold & Silver"},
+        {value : "GS"},
     ],
     3 : [
-        {value : "RS", name : "Ruby & Sapphire"},
-        {value : "FRLG", name : "Fire Red & Leaf Green"}
+        {value : "RS"},
+        {value : "FRLG"}
     ],
     4 : [
-        {value : "DP", name : "Diamond & Pearl"},
-        {value : "HGSS", name : "Heart Gold & Soul Silver"}
+        {value : "DP"},
+        {value : "HGSS"}
     ],
     5 : [
-        {value : "BW", name : "Black & White"},
-        {value : "BW2", name : "Black & White 2"}
+        {value : "BW"},
+        {value : "BW2"}
     ],
     6 : [
-        {value : "XY", name : "X & Y"},
-        {value : "ORAS", name : "Omega Ruby & Alpha Saphire"}
+        {value : "XY"},
+        {value : "ORAS"}
     ],
     7 : [
-        {value : "SM", name : "Sun & Moon"},
-        {value : "USUM", name : "Ultra Sun & Ultra Moon"}
+        {value : "SM"},
+        {value : "USUM"}
     ],
     8 : [
-        {value : "SS", name : "Sword & Shield"},
-        {value : "BDSP", name : "Briliant Diamond & Shining Pearl"},
-        {value : "PLA", name : "Legends: Arceus"},
+        {value : "SS"},
+        {value : "BDSP"},
+        {value : "PLA"},
     ],
     9 : [
-        {value : "SV", name : "Scarlet & Violet"},
-        {value : "PLZ", name : "Legends: Z-A"}
+        {value : "SV"},
+        {value : "PLZ"}
     ]
 }
 
@@ -100,7 +101,7 @@ export class SettingGameSelect extends Setting {
         
             // add a new select entry for each game found
             for (let i = 0; i < genGameData[gen].length; i++) {
-                this.#addGameEntry(genGameData[gen][i].value, genGameData[gen][i].name);                
+                this.#addGameEntry(genGameData[gen][i].value);                
             }
             
         }
@@ -113,13 +114,13 @@ export class SettingGameSelect extends Setting {
     /**
      * Adds a new entry on the game select combo
      * @param {String} value - Game acronym
-     * @param {String} name - Game name
      */
-    #addGameEntry(value, name) {
+    #addGameEntry(value) {
 
         const entry = document.createElement("option");
         entry.value = value;
-        entry.text = name;
+        entry.setAttribute("locText", `game${value}`);
+        entry.text = getLocalizedText(`game${value}`);
         gameSelectSelect.add(entry);
 
     }

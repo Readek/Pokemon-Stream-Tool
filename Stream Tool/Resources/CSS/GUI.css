@@ -158,6 +158,9 @@ button:hover {
   gap: 4px;
   transition: border-color 100ms;
 }
+.updateButt {
+  text-transform: uppercase;
+}
 .topBarButton:hover, .updateButt:hover{
   border: solid 2px var(--text2);
 }
@@ -564,6 +567,7 @@ button:hover {
 .pokeStatus {
   outline: none;
   height: 30px;
+  width: 56px;
   color: var(--text1);
   background: var(--bg4);
   border: 1px solid var(--focused);
@@ -826,6 +830,10 @@ button:hover {
 #vsWildInCombatDiv:hover {
   border: 1px solid var(--selected);
   padding: 5px;
+}
+
+#sendCatchButt {
+  text-transform: none;
 }
 
 

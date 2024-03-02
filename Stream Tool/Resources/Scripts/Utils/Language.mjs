@@ -52,4 +52,10 @@ function resetTexts() {
         el.title = getLocalizedText(el.getAttribute("locTitle"));
     }
 
+    // placeholder texts for inputs
+    const pHolders = document.querySelectorAll("*[locPHolder]");
+    for (const el of pHolders) {
+        el.placeholder = getLocalizedText(el.getAttribute("locPHolder"));
+    }
+
 }

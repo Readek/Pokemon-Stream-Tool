@@ -47,11 +47,11 @@
       <div id="catchesRegion" class="region">
 
         <div id="catchesDiv"></div>
-        <button id="addCatchButt" class="catchButt">+</button>
+        <button id="addCatchButt" class="catchButt" locTitle="addCatchButtTitle">+</button>
 
         <button id="updateCatchesButt" class="updateButt">
           <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
-          <div id="updateCatchesText">UPDATE CATCHES</div>
+          <div id="updateCatchesText" locText="updateCatchesButt"></div>
         </button>
 
       </div>
@@ -64,10 +64,10 @@
 
           <button id="updateTeamButt" class="updateButt">
             <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
-            <div id="updateTeamText">UPDATE TEAM</div>
+            <div id="updateTeamText" locText="pokeUpdateButt"></div>
           </button>
 
-          <button class="updateButt citraButtOff" id="citraButt" tabindex="-1" title="Sets auto-update on or off for Gen6/Citra games">
+          <button class="updateButt citraButtOff" id="citraButt" tabindex="-1" locText="autoUpdateButtOff" locTitle="autoUpdateButtTitle">
             🍊 AUTO OFF
           </button>
 
@@ -79,30 +79,30 @@
   
         <div id="gymBadges">
           <div class="gymBadgesWrap">
-            <button class="gymBadgeButton badgeDisabled" id="badge1" title="Gym Badge 1">
+            <button class="gymBadgeButton badgeDisabled" id="badge1" locTitle="badge1Title">
               <img>
             </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge2" title="Gym Badge 2">
+            <button class="gymBadgeButton badgeDisabled" id="badge2" locTitle="badge2Title">
               <img>
             </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge3" title="Gym Badge 3">
+            <button class="gymBadgeButton badgeDisabled" id="badge3" locTitle="badge3Title">
               <img>
             </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge4" title="Gym Badge 4">
+            <button class="gymBadgeButton badgeDisabled" id="badge4" locTitle="badge4Title">
               <img>
             </button>
           </div>
           <div class="gymBadgesWrap">
-            <button class="gymBadgeButton badgeDisabled" id="badge5" title="Gym Badge 5">
+            <button class="gymBadgeButton badgeDisabled" id="badge5" locTitle="badge5Title">
               <img>
             </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge6" title="Gym Badge 6">
+            <button class="gymBadgeButton badgeDisabled" id="badge6" locTitle="badge6Title">
               <img>
             </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge7" title="Gym Badge 7">
+            <button class="gymBadgeButton badgeDisabled" id="badge7" locTitle="badge7Title">
               <img>
             </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge8" title="Gym Badge 8">
+            <button class="gymBadgeButton badgeDisabled" id="badge8" locTitle="badge8Title">
               <img>
             </button>
           </div>
@@ -110,21 +110,21 @@
   
         <div id="playerStats">
   
-          <div class="statDiv" title="Catches">
-            <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon" title="Catches"></load-svg>
-            <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0" title="Catches">
+          <div class="statDiv" locTitle="playerCatchesNumTitle">
+            <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+            <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0">
           </div>
   
-          <div class="statDiv" title="Deaths">
-            <load-svg src="SVGs/Skull.svg" class="skullIcon" title="Deaths"></load-svg>
-            <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0" title="Deaths">
+          <div class="statDiv" locTitle="playerDeathsNumTitle">
+            <load-svg src="SVGs/Skull.svg" class="skullIcon"></load-svg>
+            <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0">
           </div>
   
         </div>
   
         <button id="updatePlayerButt" class="updateButt">
           <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
-          <div id="updatePlayerText">UPDATE PLAYER</div>
+          <div id="updatePlayerText" locText="playerUpdateButt"></div>
         </button>
     
       </div>
@@ -134,20 +134,20 @@
         <div class="vsWildTopRow">
 
           <div class="finderPosition">
-            <div class="selector pokeSelector" tabindex="-1" title="Everyone is here!">
+            <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
             <img class="pokeSelectorIcon" alt="">
             <div class="pokeSelectorText"></div>
             </div>
           </div>
   
-          <select class="pokeForm" title="For pokemons that have different forms">
+          <select class="pokeForm" locTitle="pokeFormTitle">
           </select>
   
-          <button class="pokeGenderButton" title="Pokemon gender">
+          <button class="pokeGenderButton" locTitle="locGenderTitle">
               <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
           </button>
   
-          <button class="pokeShinyButton" title="Shiny indicator">
+          <button class="pokeShinyButton" locTitle="pokeShinyTitle">
               <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
           </button>
 
@@ -155,46 +155,46 @@
 
         <div id="vsWildBotRow">
 
-          <div id="vsWildStatsDiv">
+          <div id="vsWildStatsDiv" locTitle="wildStatsTitle">
 
             <div class="vsWildStat" id="vsWildStatHP">
-              <div class="vsWildStatName vsWildStatText">HP</div>
+              <div class="vsWildStatName vsWildStatText" locText="statsHp"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberHP"></div>
               <div class="vsWildMeter" id="vsWildMeterHP"></div>
             </div>
   
             <div class="vsWildStat" id="vsWildStatAT">
-              <div class="vsWildStatName vsWildStatText">Attack</div>
+              <div class="vsWildStatName vsWildStatText" locText="statsAttack"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberAT"></div>
               <div class="vsWildMeter" id="vsWildMeterAT"></div>
             </div>
   
             <div class="vsWildStat" id="vsWildStatDE">
-              <div class="vsWildStatName vsWildStatText">Defense</div>
+              <div class="vsWildStatName vsWildStatText" locText="statsDefense"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberDE"></div>
               <div class="vsWildMeter" id="vsWildMeterDE"></div>
             </div>
   
             <div class="vsWildStat" id="vsWildStatSA">
-              <div class="vsWildStatName vsWildStatText">Sp. Attack</div>
+              <div class="vsWildStatName vsWildStatText" locText="statsSpAtk"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSA"></div>
               <div class="vsWildMeter" id="vsWildMeterSA"></div>
             </div>
   
             <div class="vsWildStat" id="vsWildStatSD">
-              <div class="vsWildStatName vsWildStatText">Sp. Defense</div>
+              <div class="vsWildStatName vsWildStatText" locText="statsSpDef"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSD"></div>
               <div class="vsWildMeter" id="vsWildMeterSD"></div>
             </div>
   
             <div class="vsWildStat" id="vsWildStatSP">
-              <div class="vsWildStatName vsWildStatText">Speed</div>
+              <div class="vsWildStatName vsWildStatText" locText="statsSpeed">Speed</div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSP"></div>
               <div class="vsWildMeter" id="vsWildMeterSP"></div>
             </div>
   
             <div class="vsWildStat" id="vsWildStatTS">
-              <div class="vsWildStatName vsWildStatText">Total</div>
+              <div class="vsWildStatName vsWildStatText" locText="statsTotal">Total</div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberTS"></div>
               <div class="vsWildMeter" id="vsWildMeterTS"></div>
             </div>
@@ -203,7 +203,7 @@
   
           <div id="vsWildRightDiv">
 
-            <div class="vsWildPokeTypeDiv" title="Pokemon types">
+            <div class="vsWildPokeTypeDiv" locTitle="pokeTypesTitle">
               <div class="vsWildTypeDiv">
                 <img alt="" class="typeIcon typeIcon1">
                 <span></span>
@@ -214,7 +214,7 @@
               </div>
             </div>
 
-            <div id="vsWildGenderRatio" title="Gender Ratio">
+            <div id="vsWildGenderRatio" locTitle="wildGenderRatioTitle">
 
               <div class="vsWildGenderRatioDiv">
                 <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
@@ -230,9 +230,9 @@
 
             <div id="vsWildAbilities">
 
-              <div class="vsWildAbilityText" id="vsWildAbility0" title="Ability 1"></div>
-              <div class="vsWildAbilityText" id="vsWildAbility1" title="Ability 2"></div>
-              <div class="vsWildAbilityText" id="vsWildAbilityH" title="Hidden Ability"></div>
+              <div class="vsWildAbilityText" id="vsWildAbility0" locTitle="wildAbility1Title"></div>
+              <div class="vsWildAbilityText" id="vsWildAbility1" locTitle="wildAbility2Title"></div>
+              <div class="vsWildAbilityText" id="vsWildAbilityH" locTitle="wildAbilityHiddenTitle"></div>
 
             </div>
 
@@ -243,18 +243,18 @@
         <div id="vsWildSendRow">
 
           <div id="vsWildSendCatchDiv">
-            <input type="text" id="vsWildNickInput" class="pokeNickName textInput mousetrap" placeholder="Nickname" spellcheck="false" title="Pokemon Nickname">
-            <button id="sendCatchButt" class="updateButt">Send to Catches</button>
+            <input type="text" id="vsWildNickInput" class="pokeNickName textInput mousetrap" spellcheck="false" locPHolder="pokeNickPHolder" locTitle="pokeNickTitle">
+            <button id="sendCatchButt" class="updateButt" locText="wildSendButt"></button>
           </div>
 
           <div id="vsWildInCombatDiv">
-            <label for="vsWildInCombatCheck">In combat</label>
+            <label for="vsWildInCombatCheck" locText="wildInCombat"></label>
             <input type="checkbox" name="vsWildInCombatCheck" id="vsWildInCombatCheck">
           </div>
 
           <button id="updateWildButt" class="updateButt">
             <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
-            <div id="updateWildText">UPDATE ENCOUNTER</div>
+            <div id="updateWildText" locText="wildUpdateButt"></div>
           </button>
 
         </div>
@@ -267,56 +267,56 @@
   
             <div>
   
-              <div class="settingsTitle">General Settings</div>
+              <div class="settingsTitle" locText="generalSettings"></div>
   
-              <div id="langSelectDiv" class="settingBox" title="Sets the GUI's language">
-                <div>Language</div>
+              <div id="langSelectDiv" class="settingBox" locTitle="languageTitle">
+                <div locText="languageText"></div>
                 <select id="langSelect" class="settingsSelect">
-                  <option value="EN">English</option>
-                  <option value="ES">Español (Spanish)</option>
+                  <option value="EN" locText="languageEN"></option>
+                  <option value="ES" locText="languageES"></option>
                 </select>
               </div>
 
-              <div id="genSelectDiv" class="settingBox" title="Changes the current generation pokedex data">
-                <div>Gen select</div>
+              <div id="genSelectDiv" class="settingBox" locTitle="genTitle">
+                <div locText="genSelect"></div>
                 <select id="genSelect" class="settingsSelect">
-                  <option value="1">1 - Red/Blue</option>
-                  <option value="2">2 - Gold/Silver</option>
-                  <option value="3">3 - Ruby/Saphire</option>
-                  <option value="4">4 - Pearl/Diamond</option>
-                  <option value="5">5 - Black/White</option>
-                  <option value="6">6 - X/Y</option>
-                  <option value="7">7 - Sun/Moon</option>
-                  <option value="8">8 - Sword/Shield</option>
-                  <option value="9">9 - Scarlet/Violet</option>
+                  <option value="1" locText="genSelect1"></option>
+                  <option value="2" locText="genSelect2"></option>
+                  <option value="3" locText="genSelect3"></option>
+                  <option value="4" locText="genSelect4"></option>
+                  <option value="5" locText="genSelect5"></option>
+                  <option value="6" locText="genSelect6"></option>
+                  <option value="7" locText="genSelect7"></option>
+                  <option value="8" locText="genSelect8"></option>
+                  <option value="9" locText="genSelect9"></option>
                 </select>
               </div>
 
-              <div id="gameSelectDiv" class="settingBox" title="Changes the current game data">
-                <div>Game select</div>
-                <select id="gameSelect" class="settingsSelect" title="Determines badges and memory reading"></select>
-                <select id="versionSelect" class="settingsSelect" title="Determines memory reading"></select>
+              <div id="gameSelectDiv" class="settingBox" locTitle="gameTitle">
+                <div locText="gameSelect"></div>
+                <select id="gameSelect" class="settingsSelect" locTitle="gameSelectTitle"></select>
+                <select id="versionSelect" class="settingsSelect" locTitle="gameVersionTitle"></select>
               </div>
   
             </div>
     
             <div id="settingsElectron">
     
-              <div class="settingsTitle">Window Settings</div>
+              <div class="settingsTitle" locText="windowSettings"></div>
     
-              <div class="settingBox" title="Prevents other windows to be displayed on top of this one.">
+              <div class="settingBox" locTitle="alwaysOnTopTitle" title="">
                 <input type="checkbox" id="alwaysOnTop" class="settingsCheck" tabindex="-1">
-                <label for="alwaysOnTop" class="settingsText">Window always on top</span>
+                <label for="alwaysOnTop" class="settingsText" locText="alwaysOnTop"></label>
               </div>
       
-              <div class="settingBox" title="Unlocks window resizing">
+              <div class="settingBox" locTitle="windowResizeTitle">
                 <input type="checkbox" id="resizableWindow" class="settingsCheck" tabindex="-1">
-                <label for="resizableWindow" class="settingsText">Resizable window</span>
+                <label for="resizableWindow" class="settingsText" locText="windowResize"></label>
               </div>
       
               <div class="settingBox">
                 <div id="zoomDiv">
-                  <div id="zoomText">Zoom: </div>
+                  <div id="zoomText" locText="zoom"></div>
                   <div id="zoomButtonsDiv">
                     <button class="settingsButton zoomButton" id="lessZoomButt">-</button>
                     <div id="zoomTextValue">100%</div>
@@ -326,9 +326,7 @@
               </div>
       
               <div id="settingsButtonSection">
-                <button class="settingsButton" id="restoreWindowButt" tabindex="-1" title='Restores the default window width, height, and zoom values'>
-                  Restore default dimensions
-                </button>
+                <button class="settingsButton" id="restoreWindowButt" tabindex="-1" locTitle="restoreWindowTitle" locText="restoreWindow"></button>
               </div>
     
             </div>
