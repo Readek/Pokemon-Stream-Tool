@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../Utils/Language.mjs";
 import { enableCatchesUpdate } from "./Catches/Update Catches.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { enablePlayerUpdate } from "./Player/Update Player.mjs";
@@ -30,7 +31,7 @@ export function startWebsocket() {
 function errorWebsocket() {
 
     // show error message
-    displayNotif("Connection error, please reconnect.");
+    displayNotif(getLocalizedText("notifConnLost"));
     // delete current websocket
     webSocket = null;
     // TODO add a way to reconnect

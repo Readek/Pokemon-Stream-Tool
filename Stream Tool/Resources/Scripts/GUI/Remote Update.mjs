@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../Utils/Language.mjs";
 import { setAutoState } from "./Auto Update.mjs";
 import { Catch } from "./Catches/Catch.mjs";
 import { catches } from "./Catches/Catches.mjs";
@@ -136,12 +137,12 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Auto") {
         setAutoState(data.value);
-        displayNotif("Auto-update was remotely toggled");
+        displayNotif(getLocalizedText("notifRemoteAuto"));
     }
 
     // let us know
     if (!noNotif && !current.autoStatus) {
-        displayNotif("GUI was remotely updated");
+        displayNotif(getLocalizedText("notifRemoteUpdate"));
     }
     
 }

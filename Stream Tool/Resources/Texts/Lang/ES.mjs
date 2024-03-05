@@ -157,7 +157,15 @@ export const lang = {
         zoom : "Zoom: ",
 
         restoreWindowTitle : "Restaura las dimensiones y zoom por defecto de la ventana",
-        restoreWindow : "Dimensiones por defecto"
+        restoreWindow : "Dimensiones por defecto",
+
+
+        /* OTHER STRINGS  */
+
+        notifConnLost : "Connection error, please reconnect",
+        notifRemoteUpdate : "La GUI ha sido actualizada por remoto",
+        notifRemoteAuto : "La auto-actualización ha cambiado por remoto",
+        notifRipCitra : "No se ha podido conectar a Citra"
 
     },
 
@@ -169,6 +177,18 @@ export const lang = {
         pokePronounF : "la",
         pokePronounM : "el",
         pokePronounNull : "el",
+
+        pokeLvl : "Nv.",
+
+        statsHp : "PS",
+        statsAttack : "Ataque",
+        statsDefense : "Defensa",
+        statsSpAtk : "Ataque Esp.",
+        statsSpDef : "Defensa Esp.",
+        statsSpeed : "Velocidad",
+        statsTotal : "Total",
+
+        connError : "No se ha podido conectar con la GUI. Reconectando cada 5 segundos...",
 
 
         /* Intro overlay */

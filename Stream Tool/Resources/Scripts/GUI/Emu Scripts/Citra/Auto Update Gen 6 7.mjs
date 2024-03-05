@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { current } from "../../Globals.mjs";
 import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
@@ -58,7 +59,7 @@ async function updatePlayerTeam() {
     if (!rawPokes) {
         
         // if it failed, deactivate auto update
-        displayNotif("Couln't connect to Citra");
+        displayNotif(getLocalizedText("notifRipCitra"));
         autoUpdateToggleCitra();
         return;
 
