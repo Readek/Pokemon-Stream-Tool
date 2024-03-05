@@ -3,6 +3,9 @@ let lang;
 /** @type {String} View identifier */
 let type;
 
+/** Language to use if current language has a missing text */
+const fallbackLang = (await import("../../Texts/Lang/EN.mjs")).lang;
+
 /**
  * Sets the language object for this view
  * @param {String} language - Language code (EN, ES...)
@@ -25,12 +28,31 @@ export async function setLanguage(language, textType) {
  */
 export function getLocalizedText(key, dyns = []) {
     
-    if (lang && lang[type] && lang[type][key]) {
-        let text = lang[type][key];
-        for (let i = 0; i < dyns.length; i++) {
-            text = text.replace("{" + i + "}", dyns[i]);
+    if (lang && lang[type]) {
+
+        if (lang[type][key]) {
+
+            let text = lang[type][key];
+            for (let i = 0; i < dyns.length; i++) {
+                text = text.replace("{" + i + "}", dyns[i]);
+            }
+
+            return text;
+            
+        } else if (fallbackLang[type][key]) {
+            
+            // if current lang misses a text but fallback lang has it
+            let text = fallbackLang[type][key];
+            for (let i = 0; i < dyns.length; i++) {
+                text = text.replace("{" + i + "}", dyns[i]);
+            }
+
+            return text;
+
         }
-        return text;
+
+        return "((MissingText))";
+
     } else {
         return "((MissingText))";
     }
