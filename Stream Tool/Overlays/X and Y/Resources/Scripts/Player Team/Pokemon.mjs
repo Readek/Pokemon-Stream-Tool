@@ -114,13 +114,8 @@ export class Pokemon {
      */
     setGender(gender) {
         this.#gender = gender;
-        if (gender == "F") {
-            this.gendEl.innerHTML = getLocalizedText("pokePronounF");
-        } else if (gender == "M") {
-            this.gendEl.innerHTML = getLocalizedText("pokePronounM");
-        } else {
-            this.gendEl.innerHTML = getLocalizedText("pokePronounNull");
-        }
+        this.gendEl.innerHTML = getLocalizedText("pokePronoun" + (gender || "Null"));
+        this.gendEl.setAttribute("locText", "pokePronoun" + (gender || "Null"));
     }
     getGender() {
         return this.#gender;
@@ -414,11 +409,6 @@ export class Pokemon {
             this.setHp(data.hpCurrent, data.hpMax);
         }
 
-    }
-
-    /** Transaltes texts related to this Pokemon */
-    translate() {
-        this.setGender(this.getGender());
     }
 
 }

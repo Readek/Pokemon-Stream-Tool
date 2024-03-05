@@ -42,8 +42,7 @@ async function updateData(data) {
 
         if (current.lang != data.lang) {
             current.lang = data.lang;
-            await setLanguage(data.lang, "overlay");
-            pokemons.translate();
+            await setLanguage(data.lang);
         }
 
     }

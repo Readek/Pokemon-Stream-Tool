@@ -22,7 +22,7 @@ class Pokemon {
     #species;
     #lvl;
     #nickname;
-    #gender;
+    #gender = "";
     #types = [];
     #status;
     #img;
@@ -77,13 +77,8 @@ class Pokemon {
 
     setGender(gender) {
         this.#gender = gender;
-        if (gender == "F") {
-            this.gendEl.innerHTML = getLocalizedText("pokePronounF");
-        } else if (gender == "M") {
-            this.gendEl.innerHTML = getLocalizedText("pokePronounM");
-        } else {
-            this.gendEl.innerHTML = getLocalizedText("pokePronounNull");
-        }
+        this.gendEl.innerHTML = getLocalizedText("pokePronoun" + (gender || "Null"));
+        this.gendEl.setAttribute("locText", "pokePronoun" + (gender || "Null"));
     }
     getGender() {
         return this.#gender;
@@ -169,11 +164,6 @@ class Pokemon {
         this.#side = side ? "Back" : "Front";
         this.setImg(this.getImgSrc());
 
-    }
-
-    /** Transaltes texts related to this Pokemon */
-    translate() {
-        this.setGender(this.getGender());
     }
 
 }
@@ -316,10 +306,7 @@ async function updateData(data) {
 
         if (current.lang != data.lang) {
             current.lang = data.lang;
-            await setLanguage(data.lang, "overlay");
-            for (let i = 0; i < pokemons.length; i++) {
-                pokemons[i].translate();
-            }
+            await setLanguage(data.lang);
         }
 
     }

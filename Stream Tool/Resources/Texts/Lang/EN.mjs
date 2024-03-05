@@ -1,206 +1,209 @@
 export const lang = {
 
-    gui : {
+    // Title strings appear as tooltips when hovering over an element
+    // PlaceHolder strings appear as text on an empty text input field
 
-        // Title strings appear as tooltips when hovering over an element
-        // PlaceHolder strings appear as text on an empty text input field
+    /* TOP BAR */
 
-        /* TOP BAR */
+    topBarCatches : "Catches",
+    topBarCatchesTitle : "Manage your precious collection of friends",
 
-        topBarCatches : "Catches",
-        topBarCatchesTitle : "Manage your precious collection of friends",
+    topBarTeam : "Team",
+    topBarTeamTitle : "Modify your current Pokemon party",
 
-        topBarTeam : "Team",
-        topBarTeamTitle : "Modify your current Pokemon party",
-
-        topBarPlayer : "Player",
-        topBarPlayerTitle : "Modify your badge data (and more!)",
+    topBarPlayer : "Player",
+    topBarPlayerTitle : "Modify your badge data (and more!)",
 
 
-        topBarVSWild : "VS Wild",
-        topBarVSWildTitle : "Wild Pokemon encounter stats",
+    topBarVSWild : "VS Wild",
+    topBarVSWildTitle : "Wild Pokemon encounter stats",
 
 
-        topBarSettings : "Settings",
-        topBarSettingsTitle : "We all need to tweak something from time to time",
+    topBarSettings : "Settings",
+    topBarSettingsTitle : "We all need to tweak something from time to time",
 
-        
-        /* CATCHES */
+    
+    /* CATCHES */
 
-        deleteCatchButtTitle : "Delete catch",
-        addCatchButtTitle : "Add new catch",
-        updateCatchesButt : "Update catches",
-
-
-        /* TEAM */
-
-        pokeSelectTitle : "Everyone is here!",
-
-        pokeNickTitle : "Pokemon nickname",
-        pokeNickPHolder : "Nickname",
-
-        pokeLvlTitle : "Pokemon level",
-        pokeLvl : "Lv.",
-
-        pokeFormTitle : "Pokemon form selector",
-
-        pokeGenderTitle : "Pokemon gender",
-
-        pokeShinyTitle : "Shiny indicator",
-
-        pokeHpTitle : "Pokemon HP",
-
-        pokeStatusTitle : "Current status condition",
-        pokeStatusPar : "Par.",
-        pokeStatusPoi : "Poi.",
-        pokeStatusFro : "Fro.",
-        pokeStatusBur : "Bur.",
-        pokeStatusSle : "Sle.",
-        pokeStatusFai : "Fai.",
-
-        pokeUpdateButt : "Update team",
-        autoUpdateButtOff : "🍊 AUTO OFF",
-        autoUpdateButtTitle : "Sets auto-update on or off for Gen6/7 games",
+    deleteCatchButtTitle : "Delete catch",
+    addCatchButtTitle : "Add new catch",
+    updateCatchesButt : "Update catches",
 
 
-        /* PLAYER */
+    /* TEAM */
 
-        badge1Title : "Gym Badge 1",
-        badge2Title : "Gym Badge 2",
-        badge3Title : "Gym Badge 3",
-        badge4Title : "Gym Badge 4",
-        badge5Title : "Gym Badge 5",
-        badge6Title : "Gym Badge 6",
-        badge7Title : "Gym Badge 7",
-        badge8Title : "Gym Badge 8",
+    pokeSelectTitle : "Everyone is here!",
 
-        playerCatchesNumTitle : "Number of pokemon catches",
-        playerDeathsNumTitle : "Number of ally Pokemon deaths",
+    pokeNickTitle : "Pokemon nickname",
+    pokeNickPHolder : "Nickname",
 
-        playerUpdateButt : "Update Player",
+    pokeLvlTitle : "Pokemon level",
+    pokeLvl : "Lv.",
 
-        
-        /* WILD ENCOUNTER */
+    pokeFormTitle : "Pokemon form selector",
 
-        wildStatsTitle : "Pokemon base stats",
-        statsHp : "HP",
-        statsAttack : "Attack",
-        statsDefense : "Defense",
-        statsSpAtk : "Sp. Attack",
-        statsSpDef : "Sp. Defense",
-        statsSpeed : "Speed",
-        statsTotal : "Total",
+    pokeGenderTitle : "Pokemon gender",
 
-        pokeTypesTitle : "Pokemon Types",
+    pokeShinyTitle : "Shiny indicator",
 
-        wildGenderRatioTitle : "Gender Ratio",
+    pokeHpTitle : "Pokemon HP",
 
-        wildAbility1Title : "Ability 1",
-        wildAbility2Title : "Ability 2",
-        wildAbilityHiddenTitle : "Hidden ability",
+    pokeStatusTitle : "Current status condition",
+    pokeStatusPar : "Par.",
+    pokeStatusPoi : "Poi.",
+    pokeStatusFro : "Fro.",
+    pokeStatusBur : "Bur.",
+    pokeStatusSle : "Sle.",
+    pokeStatusFai : "Fai.",
 
-        wildSendButt : "Send to Catches",
-        wildInCombat : "In combat",
-        wildUpdateButt : "Update Encounter",
+    pokeUpdateButt : "Update team",
+    autoUpdateButtOff : "🍊 AUTO OFF",
+    autoUpdateButtTitle : "Sets auto-update on or off for Gen6/7 games",
 
 
-        /* SETTINGS */
+    /* PLAYER */
 
-        generalSettings : "General Settings",
+    badge1Title : "Gym Badge 1",
+    badge2Title : "Gym Badge 2",
+    badge3Title : "Gym Badge 3",
+    badge4Title : "Gym Badge 4",
+    badge5Title : "Gym Badge 5",
+    badge6Title : "Gym Badge 6",
+    badge7Title : "Gym Badge 7",
+    badge8Title : "Gym Badge 8",
 
-        languageTitle : "Sets the language",
-        languageText : "Language",
-        languageEN : "English",
-        languageES : "Español (Spanish)",
+    playerCatchesNumTitle : "Number of pokemon catches",
+    playerDeathsNumTitle : "Number of ally Pokemon deaths",
 
-        genTitle : "Changes the current generation pokedex data",
-        genSelect : "Generation",
-        genSelect1 : "1 - Red/Blue",
-        genSelect2 : "2 - Gold/Silver",
-        genSelect3 : "3 - Ruby/Saphire",
-        genSelect4 : "4 - Pearl/Diamond",
-        genSelect5 : "5 - Black/White",
-        genSelect6 : "6 - X/Y",
-        genSelect7 : "7 - Sun/Moon",
-        genSelect8 : "8 - Sword/Shield",
-        genSelect9 : "9 - Scarlet/Violet",
+    playerUpdateButt : "Update Player",
 
-        gameRB : "Red & Blue",
-        gameGS : "Gold & Silver",
-        gameRS : "Ruby & Sapphire",
-        gameFRLG : "Fire Red & Leaf Green",
-        gameDP : "Diamond & Pearl",
-        gameHGSS : "Heart Gold & Soul Silver",
-        gameBW : "Black & White",
-        gameBW2 : "Black & White 2",
-        gameXY : "X & Y",
-        gameORAS : "Omega Ruby & Alpha sapphire",
-        gameSM : "Sun & Moon",
-        gameUSUM : "Ultra Sun & Ultra Moon",
-        gameSS : "Sword & Shield",
-        gameBDSP : "Brilliant Diamond & Shining Pearl",
-        gamePLA : "Legends: Arceus",
-        gameSV : "Scarlet & Violet",
-        gamePLZ : "Legends: Z-A",
+    
+    /* WILD ENCOUNTER */
 
-        gameTitle : "Changes the current game data",
-        gameSelect : "Game",
-        gameSelectTitle : "Determines badges and memory reading",
-        gameVersionTitle : "Determines memory reading",
+    wildStatsTitle : "Pokemon base stats",
+    statsHp : "HP",
+    statsAttack : "Attack",
+    statsDefense : "Defense",
+    statsSpAtk : "Sp. Attack",
+    statsSpDef : "Sp. Defense",
+    statsSpeed : "Speed",
+    statsTotal : "Total",
 
-        windowSettings : "Window Settings",
+    pokeTypesTitle : "Pokemon Types",
 
-        alwaysOnTopTitle : "Prevents other windows to be displayed on top of this one",
-        alwaysOnTop : "Window always on top",
+    wildGenderRatioTitle : "Gender Ratio",
 
-        windowResizeTitle : "Unlocks window resizing",
-        windowResize : "Resizable window",
+    wildAbility1Title : "Ability 1",
+    wildAbility2Title : "Ability 2",
+    wildAbilityHiddenTitle : "Hidden ability",
 
-        zoom : "Zoom: ",
-
-        restoreWindowTitle : "Restores the default window width, height, and zoom values",
-        restoreWindow : "Restore default dimensions",
+    wildSendButt : "Send to Catches",
+    wildInCombat : "In combat",
+    wildUpdateButt : "Update Encounter",
 
 
-        /* OTHER STRINGS  */
+    /* SETTINGS */
 
-        notifConnLost : "Connection error, please reconnect",
-        notifRemoteUpdate : "GUI was remotely updated",
-        notifRemoteAuto : "Auto-update was remotely toggled",
-        notifRipCitra : "couldn't connect to Citra"
+    generalSettings : "General Settings",
 
-    },
+    languageTitle : "Sets the language",
+    languageText : "Language",
+    languageEN : "English",
+    languageES : "Español (Spanish)",
 
-    overlay : {
+    genTitle : "Changes the current generation pokedex data",
+    genSelect : "Generation",
+    genSelect1 : "1 - Red/Blue",
+    genSelect2 : "2 - Gold/Silver",
+    genSelect3 : "3 - Ruby/Saphire",
+    genSelect4 : "4 - Pearl/Diamond",
+    genSelect5 : "5 - Black/White",
+    genSelect6 : "6 - X/Y",
+    genSelect7 : "7 - Sun/Moon",
+    genSelect8 : "8 - Sword/Shield",
+    genSelect9 : "9 - Scarlet/Violet",
 
-        /* Regular overlays */
+    gameRB : "Red & Blue",
+    gameGS : "Gold & Silver",
+    gameRS : "Ruby & Sapphire",
+    gameFRLG : "Fire Red & Leaf Green",
+    gameDP : "Diamond & Pearl",
+    gameHGSS : "Heart Gold & Soul Silver",
+    gameBW : "Black & White",
+    gameBW2 : "Black & White 2",
+    gameXY : "X & Y",
+    gameORAS : "Omega Ruby & Alpha sapphire",
+    gameSM : "Sun & Moon",
+    gameUSUM : "Ultra Sun & Ultra Moon",
+    gameSS : "Sword & Shield",
+    gameBDSP : "Brilliant Diamond & Shining Pearl",
+    gamePLA : "Legends: Arceus",
+    gameSV : "Scarlet & Violet",
+    gamePLZ : "Legends: Z-A",
 
-        // appears before species name
-        pokePronounF : "the",
-        pokePronounM : "the",
-        pokePronounNull : "the",
+    gameTitle : "Changes the current game data",
+    gameSelect : "Game",
+    gameSelectTitle : "Determines badges and memory reading",
+    gameVersionTitle : "Determines memory reading",
 
-        pokeLvl : "Lv.",
+    windowSettings : "Window Settings",
 
-        statsHp : "HP",
-        statsAttack : "Attack",
-        statsDefense : "Defense",
-        statsSpAtk : "Sp. Attack",
-        statsSpDef : "Sp. Defense",
-        statsSpeed : "Speed",
-        statsTotal : "Total",
+    alwaysOnTopTitle : "Prevents other windows to be displayed on top of this one",
+    alwaysOnTop : "Window always on top",
 
-        connError : "Can't connect with GUI, attempting to reconnect every 5 seconds...",
+    windowResizeTitle : "Unlocks window resizing",
+    windowResize : "Resizable window",
 
-        /* Intro overlay */
+    zoom : "Zoom: ",
 
-        // bottom text
-        cdTextProgress : "Stream starts in {0}:{1}",
-        cdTextFinished : "Stream will start soon!",
+    restoreWindowTitle : "Restores the default window width, height, and zoom values",
+    restoreWindow : "Restore default dimensions",
 
-        // appears when user has 0 catches
-        introNoCatches : "There are no catches to work with :("
 
-    }
+    /* OTHER STRINGS  */
+
+    notifConnLost : "Connection error, please reconnect",
+    notifRemoteUpdate : "GUI was remotely updated",
+    notifRemoteAuto : "Auto-update was remotely toggled",
+    notifRipCitra : "couldn't connect to Citra",
+
+    typeBug : "Bug",
+    typeDark : "Dark",
+    typeDragon : "Dragon",
+    typeElectric : "Electric",
+    typeFairy : "Fairy",
+    typeFighting : "Fighting",
+    typeFire : "Fire",
+    typeFlying : "Flying",
+    typeGhost : "Ghost",
+    typeGrass : "Grass",
+    typeGround : "Ground",
+    typeIce : "Ice",
+    typeNormal : "Normal",
+    typePoison : "Poison",
+    typePsychic : "Psychic",
+    typeRock : "Rock",
+    typeSteel : "Steel",
+    typeWater : "Water",
+
+
+    /* OVERLAYS */
+
+    // appears before species name
+    pokePronounF : "the",
+    pokePronounM : "the",
+    pokePronounNull : "the",
+
+    connError : "Can't connect with GUI, attempting to reconnect every 5 seconds...",
+
+    /* Intro overlay */
+
+    // bottom text
+    cdTextProgress : "Stream starts in {0}:{1}",
+    cdTextFinished : "Stream will start soon!",
+
+    // appears when user has 0 catches
+    introNoCatches : "There are no catches to work with :("
+
 
 }

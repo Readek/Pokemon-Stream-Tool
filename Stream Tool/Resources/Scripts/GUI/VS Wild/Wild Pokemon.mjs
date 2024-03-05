@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../Utils/Language.mjs";
 import { Catch } from "../Catches/Catch.mjs";
 import { catches } from "../Catches/Catches.mjs";
 import { updateCatches } from "../Catches/Update Catches.mjs";
@@ -172,12 +173,14 @@ class WildPokemon {
             let types = this.#pokeData.types;
             this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
             this.typeImg1.style.display = "block";
-            this.typeImg1.parentElement.lastElementChild.innerHTML = types[0];
+            this.typeImg1.parentElement.lastElementChild.innerHTML = getLocalizedText("type"+types[0]);
+            this.typeImg1.parentElement.lastElementChild.setAttribute("locText", "type"+types[0]);
             if (types[1]) {
                 this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
                 this.typeImg2.style.display = "block";
                 this.typeImg2.parentElement.style.display = "flex";
-                this.typeImg2.parentElement.lastElementChild.innerHTML = types[1];
+                this.typeImg2.parentElement.lastElementChild.innerHTML = getLocalizedText("type"+types[1]);
+                this.typeImg2.parentElement.lastElementChild.setAttribute("locText", "type"+types[1]);
             } else {
                 this.typeImg2.parentElement.style.display = "none";
             }

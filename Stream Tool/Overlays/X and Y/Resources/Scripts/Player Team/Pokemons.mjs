@@ -34,15 +34,6 @@ class Pokemons {
 
     }
 
-    /** Translates texts related to team Pokemon */
-    translate() {
-
-        for (let i = 0; i < this.#pokemons.length; i++) {
-            this.#pokemons[i].translate();
-        }
-
-    }
-
 }
 
 /** Player's party pokemons */

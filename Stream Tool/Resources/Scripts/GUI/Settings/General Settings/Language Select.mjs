@@ -38,7 +38,7 @@ export class SettingLangSelect extends Setting {
         // in case function wasn't triggered by the change event
         langSelectSelect.value = current.lang;
 
-        setLanguage(langSelectSelect.value, "gui");
+        setLanguage(langSelectSelect.value);
 
     }
 

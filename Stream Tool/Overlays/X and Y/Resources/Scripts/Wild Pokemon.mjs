@@ -1,5 +1,6 @@
 import { pokemons } from "./Player Team/Pokemons.mjs";
 import { current } from "./Globals.mjs";
+import { getLocalizedText } from "../../../../Resources/Scripts/Utils/Language.mjs";
 
 const playerInfoDiv = document.getElementById("playerInfo");
 const wildDiv = document.getElementById("wildEncounterDiv");
@@ -50,13 +51,15 @@ class WildPokemon {
 
         typeDivs[0].firstElementChild.src = `
             ../../Resources/Assets/Type Icons/${types[0]}.png`;
-        typeDivs[0].lastElementChild.innerHTML = types[0];
+        typeDivs[0].lastElementChild.innerHTML = getLocalizedText("type"+types[0]);
+        typeDivs[0].lastElementChild.setAttribute("locText", "type"+types[0]);
 
         if (types[1]) { // only if it has a second type
 
             typeDivs[1].firstElementChild.src = `
                 ../../Resources/Assets/Type Icons/${types[1]}.png`;
-            typeDivs[1].lastElementChild.innerHTML = types[1];
+            typeDivs[1].lastElementChild.innerHTML = getLocalizedText("type"+types[1]);
+            typeDivs[1].lastElementChild.setAttribute("locText", "type"+types[1]);
             typeDivs[1].style.display = "flex";
 
         } else { // hide if not

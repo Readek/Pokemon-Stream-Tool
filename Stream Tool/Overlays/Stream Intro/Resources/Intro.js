@@ -149,7 +149,7 @@ async function updateData(data) {
 
         if (current.lang != data.lang) {
             current.lang = data.lang;
-            await setLanguage(data.lang, "overlay");
+            await setLanguage(data.lang);
         }
 
     }
@@ -170,13 +170,8 @@ function whosThatPokemon() {
     whoThatPokeSpecies.innerHTML = chosenPoke.getSpecies();
 
     // gender
-    if (chosenPoke.getGender() == "F") {
-        whoThatPokeGender.innerHTML = getLocalizedText("pokePronounF");
-    } else if (chosenPoke.getGender() == "M") {
-        whoThatPokeGender.innerHTML = getLocalizedText("pokePronounM");
-    } else {
-        whoThatPokeGender.innerHTML = getLocalizedText("pokePronounNull");
-    }
+    whoThatPokeGender.innerHTML = getLocalizedText("pokePronoun"+(chosenPoke.getGender() || "Null"));
+    whoThatPokeGender.setAttribute("locText", "pokePronoun"+(chosenPoke.getGender() || "Null"));
 
     // hide or show sub text depending on if the poke has a nickname or not
     if (chosenPoke.getNickname() && chosenPoke.getNickname() != chosenPoke.getSpecies()) {

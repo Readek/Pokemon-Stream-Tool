@@ -1,3 +1,5 @@
+import { getLocalizedText } from "../../../../Resources/Scripts/Utils/Language.mjs";
+
 class WildPokemon {
 
     #side = "Front";
@@ -45,11 +47,13 @@ class WildPokemon {
     setTypes(types) {
         this.#typeDivs[0].firstElementChild.src = `
             ../../Resources/Assets/Type Icons/${types[0]}.png`;
-        this.#typeDivs[0].lastElementChild.innerHTML = types[0];
+        this.#typeDivs[0].lastElementChild.innerHTML = getLocalizedText("type"+types[0]);
+        this.#typeDivs[0].lastElementChild.setAttribute("locText", "type"+types[0]);
         if (types[1]) { // only if it has a second type
             this.#typeDivs[1].firstElementChild.src = `
                 ../../Resources/Assets/Type Icons/${types[1]}.png`;
-            this.#typeDivs[1].lastElementChild.innerHTML = types[1];
+            this.#typeDivs[1].lastElementChild.innerHTML = getLocalizedText("type"+types[1]);
+            this.#typeDivs[1].lastElementChild.setAttribute("locText", "type"+types[1]);
             this.#typeDivs[1].style.display = "flex";
         } else { // hide if not
             this.#typeDivs[1].style.display = "none";

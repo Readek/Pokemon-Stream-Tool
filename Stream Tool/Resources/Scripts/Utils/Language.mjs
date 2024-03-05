@@ -1,7 +1,5 @@
 /** @type {String} Language code */
 let lang;
-/** @type {String} View identifier */
-let type;
 
 /** Language to use if current language has a missing text */
 const fallbackLang = (await import("../../Texts/Lang/EN.mjs")).lang;
@@ -9,12 +7,10 @@ const fallbackLang = (await import("../../Texts/Lang/EN.mjs")).lang;
 /**
  * Sets the language object for this view
  * @param {String} language - Language code (EN, ES...)
- * @param {String} textType - View that requested language (gui, xy...)
  */
-export async function setLanguage(language, textType) {
+export async function setLanguage(language) {
     
     lang = (await import("../../Texts/Lang/"+language+".mjs")).lang;
-    type = textType;
 
     resetTexts();
 
@@ -28,21 +24,21 @@ export async function setLanguage(language, textType) {
  */
 export function getLocalizedText(key, dyns = []) {
     
-    if (lang && lang[type]) {
+    if (lang) {
 
-        if (lang[type][key]) {
+        if (lang[key]) {
 
-            let text = lang[type][key];
+            let text = lang[key];
             for (let i = 0; i < dyns.length; i++) {
                 text = text.replace("{" + i + "}", dyns[i]);
             }
 
             return text;
             
-        } else if (fallbackLang[type][key]) {
+        } else if (fallbackLang[key]) {
             
             // if current lang misses a text but fallback lang has it
-            let text = fallbackLang[type][key];
+            let text = fallbackLang[key];
             for (let i = 0; i < dyns.length; i++) {
                 text = text.replace("{" + i + "}", dyns[i]);
             }
