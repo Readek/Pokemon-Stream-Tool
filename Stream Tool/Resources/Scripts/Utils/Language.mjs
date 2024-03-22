@@ -24,34 +24,28 @@ export async function setLanguage(language) {
  */
 export function getLocalizedText(key, dyns = []) {
     
-    if (lang) {
+    if (lang && lang[key]) {
 
-        if (lang[key]) {
-
-            let text = lang[key];
-            for (let i = 0; i < dyns.length; i++) {
-                text = text.replace("{" + i + "}", dyns[i]);
-            }
-
-            return text;
-            
-        } else if (fallbackLang[key]) {
-            
-            // if current lang misses a text but fallback lang has it
-            let text = fallbackLang[key];
-            for (let i = 0; i < dyns.length; i++) {
-                text = text.replace("{" + i + "}", dyns[i]);
-            }
-
-            return text;
-
+        let text = lang[key];
+        for (let i = 0; i < dyns.length; i++) {
+            text = text.replace("{" + i + "}", dyns[i]);
         }
 
-        return "((MissingText))";
+        return text;
 
-    } else {
-        return "((MissingText))";
+    } else if (fallbackLang[key]) {
+
+        // if current lang misses a text but fallback lang has it
+        let text = fallbackLang[key];
+        for (let i = 0; i < dyns.length; i++) {
+            text = text.replace("{" + i + "}", dyns[i]);
+        }
+
+        return text;
+
     }
+
+    return "((MissingText))";
 
 }
 

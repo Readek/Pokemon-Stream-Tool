@@ -1,5 +1,6 @@
 import { updateCatches } from './Catches/Update Catches.mjs';
 import { saveSettings } from './File System.mjs';
+import { current } from './Globals.mjs';
 import { updatePlayer } from './Player/Update Player.mjs';
 import { updateTeam } from './Pokemon/Update Team.mjs';
 import { updateGUI } from './Remote Update.mjs';
@@ -140,6 +141,12 @@ ipc.on('remoteGuiData', async (event, data) => {
         sendRemoteData("team");
         sendRemoteData("player");
         sendRemoteData("wild");
+
+        sendRemoteDataRaw(JSON.stringify({
+            message: "RemoteUpdateGUI",
+            type: "Auto",
+            value: current.autoStatus
+        }, null, 2));
         
     } else if (jsonData.message == "RemoteSaveJson") {
 
