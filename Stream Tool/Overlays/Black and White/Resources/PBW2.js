@@ -27,6 +27,7 @@ class Pokemon {
     #status;
     #img;
     #side = "Front";
+    shiny = false;
 
     constructor(el) {
 
@@ -209,9 +210,14 @@ async function updateData(data) {
                     pokemons[i].setSpecies(data.playerPokemons[i].species);
                     pokemons[i].setImg(data.playerPokemons[i].img);
                     pokemons[i].showPoke();
+                    pokemons[i].shiny = data.playerPokemons[i].shiny;
                 } else {
                     pokemons[i].hidePoke();
                 }
+            } else if (pokemons[i].shiny != data.playerPokemons[i].shiny) {
+                 // if shiny was toggled, just update the image
+                pokemons[i].setImg(data.playerPokemons[i].img);
+                pokemons[i].shiny = data.playerPokemons[i].shiny;
             }
     
             // set level

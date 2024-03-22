@@ -15,6 +15,7 @@ export class Pokemon {
     #gender = "";
     #types = [];
     #status = "";
+    #shiny = false;
 
     #hpCurrent = -1;
     #hpMax = -1;
@@ -375,10 +376,16 @@ export class Pokemon {
                     this.setImg(data.img);
                 }
 
+                this.#shiny = data.shiny;
+
             } else {
                 this.hidePoke();
             }
 
+        } else if (this.#shiny != data.shiny) {
+            // if shiny was toggled, just update the image
+            this.setImg(data.img);
+            this.#shiny = data.shiny;
         }
 
         // set level
