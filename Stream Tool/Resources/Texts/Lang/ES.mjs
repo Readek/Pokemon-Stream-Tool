@@ -163,7 +163,9 @@ export const lang = {
     notifConnLost : "Connection error, please reconnect",
     notifRemoteUpdate : "La GUI ha sido actualizada por remoto",
     notifRemoteAuto : "La auto-actualización ha cambiado por remoto",
-    notifRipCitra : "No se ha podido conectar a Citra",
+    notifCitraOk : "Se ha conectado con Citra correctamente",
+    notifCitraRip : "No se ha podido conectar con Citra, Auto ha sido desactivado",
+    notifCitraRipLoop : "No se ha podido conectar con Citra, reconectando...",
 
     typeBug : "Bicho",
     typeDark : "Siniestro",

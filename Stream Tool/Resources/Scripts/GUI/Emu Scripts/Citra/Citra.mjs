@@ -69,7 +69,7 @@ class Citra {
             })
             // but set a time limit to the request
             const timeLimit = new Promise((resolve) => {
-                setTimeout(resolve, 900, null);
+                setTimeout(resolve, 2000, null);
             });
 
             // check if everything is alright
