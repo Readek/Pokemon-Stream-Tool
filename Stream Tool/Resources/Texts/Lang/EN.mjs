@@ -33,6 +33,7 @@ export const lang = {
     /* TEAM */
 
     pokeSelectTitle : "Everyone is here!",
+    finderFilterPHolder : "Type to filter...",
 
     pokeNickTitle : "Pokemon nickname",
     pokeNickPHolder : "Nickname",
@@ -168,6 +169,7 @@ export const lang = {
     notifCitraOk : "Connected to Citra successfully",
     notifCitraRip : "Couldn't connect to Citra. Auto has been disabled.",
     notifCitraRipLoop : "Couldn't connect to Citra, reconnecting...",
+    notifCatchSent : "{0} has been sent to Captures.",
 
     typeBug : "Bug",
     typeDark : "Dark",

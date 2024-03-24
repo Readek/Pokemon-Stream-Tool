@@ -24,13 +24,14 @@ export const lang = {
     /* CATCHES */
 
     deleteCatchButtTitle : "Borrar captura",
-    addCatchButtTitle : "Añadir nueva catch",
+    addCatchButtTitle : "Añadir nueva captura",
     updateCatchesButt : "Actualizar capturas",
 
 
     /* TEAM */
 
     pokeSelectTitle : "Selecciona un Pokemon",
+    finderFilterPHolder : "Escribe para filtar...",
 
     pokeNickTitle : "Mote del Pokemon",
     pokeNickPHolder : "Mote",
@@ -166,6 +167,7 @@ export const lang = {
     notifCitraOk : "Se ha conectado con Citra correctamente",
     notifCitraRip : "No se ha podido conectar con Citra, Auto ha sido desactivado",
     notifCitraRipLoop : "No se ha podido conectar con Citra, reconectando...",
+    notifCatchSent : "Se ha mandado a {0} a Capturas.",
 
     typeBug : "Bicho",
     typeDark : "Siniestro",

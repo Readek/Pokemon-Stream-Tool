@@ -1,4 +1,4 @@
-import { current, inside } from "../Globals.mjs";
+import { inside } from "../Globals.mjs";
 import { catches } from "./Catches.mjs";
 
 const updateButt = document.getElementById("updateCatchesButt");

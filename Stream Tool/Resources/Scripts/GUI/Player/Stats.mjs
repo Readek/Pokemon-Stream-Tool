@@ -4,14 +4,14 @@ class PlayerStats {
     #deathsInput = document.getElementById("deathsInput");
 
     getCatches() {
-        return this.#catchesInput.value;
+        return Number(this.#catchesInput.value);
     }
     setCatches(value) {
         this.#catchesInput.value = value;
     }
 
     getDeaths() {
-        return this.#deathsInput.value;
+        return Number(this.#deathsInput.value);
     }
     setDeaths(value) {
         this.#deathsInput.value = value;

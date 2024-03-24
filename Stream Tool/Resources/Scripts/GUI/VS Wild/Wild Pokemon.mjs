@@ -4,6 +4,8 @@ import { catches } from "../Catches/Catches.mjs";
 import { updateCatches } from "../Catches/Update Catches.mjs";
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, nameReplacements, stPath } from "../Globals.mjs";
+import { displayNotif } from "../Notifications.mjs";
+import { playerStats } from "../Player/Stats.mjs";
 import { updateWildEnc } from "./Update Wild.mjs";
 
 class WildPokemon {
@@ -445,6 +447,13 @@ class WildPokemon {
         // automatically exit combat state
         this.setInCombat(false);
         updateWildEnc();
+
+        // +1 to catches counter
+        playerStats.setCatches(playerStats.getCatches() + 1);
+
+        displayNotif(getLocalizedText("notifCatchSent",
+            [dataToSend.nickname || dataToSend.species]) // if no nickname, use species
+        );
 
     }
 

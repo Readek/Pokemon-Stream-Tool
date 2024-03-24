@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../Utils/Language.mjs";
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, nameReplacements, stPath } from "../Globals.mjs";
 import { deleteCatch } from "./Catches.mjs";
@@ -331,25 +332,25 @@ export class Catch {
         // and now for the big fat text
         element.innerHTML = `
 
-            <button class="catchDeleteButt catchButt" locTitle="deleteCatchButtTitle">-</button>
+            <button class="catchDeleteButt catchButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
         
             <div class="finderPosition">
-                <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
+                <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle" title="${getLocalizedText("pokeSelectTitle")}">
                 <img class="pokeSelectorIcon" alt="">
                 <div class="pokeSelectorText"></div>
                 </div>
             </div>
 
-            <input type="text" class="pokeNickName textInput mousetrap" locTitle="pokeNickTitle" locPHolder="pokeNickPHolder" spellcheck="false">
+            <input type="text" class="pokeNickName textInput mousetrap" locTitle="pokeNickTitle" title="${getLocalizedText("pokeNickTitle")}" locPHolder="pokeNickPHolder" placeholder="${getLocalizedText("pokeNickPHolder")}" spellcheck="false">
 
-            <select class="pokeForm" locTitle="pokeFormTitle">
+            <select class="pokeForm" locTitle="pokeFormTitle" title="${getLocalizedText("pokeFormTitle")}">
             </select>
 
-            <button class="pokeGenderButton" locTitle="pokeGenderTitle">
+            <button class="pokeGenderButton" locTitle="pokeGenderTitle" title="${getLocalizedText("pokeGenderTitle")}">
                 <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
             </button>
 
-            <button class="pokeShinyButton" locTitle="pokeShinyTitle">
+            <button class="pokeShinyButton" locTitle="pokeShinyTitle" title="${getLocalizedText("pokeShinyTitle")}">
                 <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
             </button>
 
