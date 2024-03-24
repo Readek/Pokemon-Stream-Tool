@@ -64,7 +64,7 @@ async function autoUpdateLoop() {
         while (current.autoStatus) {
             if (!await updatePlayerTeam()) {
                 itBroke = true;
-                break; // if things fail, break the loop
+                break; // if update failed at any point, get us out of here
             }
         }
 
@@ -77,7 +77,7 @@ async function autoUpdateLoop() {
 
         displayNotif(getLocalizedText("notifCitraRipLoop"));
         // wait a bit just in case
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
         if (await updatePlayerTeam()) {
             // if reconnecting goes alright, re-enable auto loop
@@ -114,7 +114,7 @@ async function updatePlayerTeam() {
 
         // reorder pokemon party
         for (let i = 0; i < rawPokes.length; i++) {
-            rawPokesIndexed.push(rawPokes[indexes[i]]);                    
+            rawPokesIndexed.push(rawPokes[indexes[i]]);
         }
 
         // check if we are on a battle right now
@@ -173,10 +173,9 @@ async function updatePlayerTeam() {
 
         }
 
-        updateTeam();
+        await updateTeam();
 
         return true; // so we all know everything went alright
-
         
     } catch (e) {
         console.log(e);

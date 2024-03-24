@@ -1,4 +1,3 @@
-import { getLocalizedText } from "../../Utils/Language.mjs";
 import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { current, nameReplacements, stPath } from "../Globals.mjs";
 
@@ -11,6 +10,7 @@ export class Pokemon {
     #form = ""; //Short name.
     #formNames = []; //These can be used as identifiers for current.pkmnSpecies.get(); e.g., "Wormadam-Trash".
     #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
+    #status = "";
     #isNone = true;
 
     constructor() {
@@ -163,6 +163,7 @@ export class Pokemon {
         return this.nickInp.value;
     }
     setNickName(name) {
+        if (this.getNickName() == name) return;
         if (name) {
             this.nickInp.value = name;
         } else {
@@ -174,6 +175,7 @@ export class Pokemon {
         return this.lvlInp.value;
     }
     setLvl(value) {
+        if (this.getLvl() == value) return;
         this.lvlInp.value = value;
     }
 
@@ -196,8 +198,12 @@ export class Pokemon {
         //Should we throw an exception if the value doesn't exist or just log it?
     }
     setFormNumber(value) {
-        this.formSel.selectedIndex = value;
-        this.setForm(this.formSel.value);
+
+        if (this.formSel.options[value] && this.formSel.value != this.formSel.options[value].value) {
+            this.formSel.selectedIndex = value;
+            this.setForm(this.formSel.value);
+        }
+        
     }
 
     getFormNames() {
@@ -211,15 +217,17 @@ export class Pokemon {
         return this.#gender;
     }
     setGender(value) {
-        if (value) {
-            this.#gender = value;
-            this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
-        } else {
-            this.#gender = null;
-            this.genderIcon.src = `${stPath.assets}/Gender N.png`;
+        if (this.#gender != value) {
+            if (value) {
+                this.#gender = value;
+                this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
+            } else {
+                this.#gender = null;
+                this.genderIcon.src = `${stPath.assets}/Gender N.png`;
+            }
+            //Update the icon, for things like Jellicent.
+            this.#updateIcon();
         }
-        //Update the icon, for things like Jellicent.
-        this.#updateIcon();
     }
     swapGender() {
         if (this.getGender() == "M") {
@@ -239,12 +247,16 @@ export class Pokemon {
         return this.#shiny;
     }
     setShiny(value) {
+
+        if (this.#shiny == value) return;
+
         this.#shiny = value;
         if (value) {
             this.shinyIcon.style.opacity = 1;
         } else {
             this.shinyIcon.style.opacity = .3;
         }
+
     }
     swapShiny() {
         if (this.#shiny) {
@@ -261,6 +273,8 @@ export class Pokemon {
      * @param {Number} value 
      */
     setHpCurrent(value) {
+
+        if (this.getHpCurrent() == value) return;
 
         this.hpCurrentInp.value = value;
 
@@ -286,6 +300,7 @@ export class Pokemon {
      * @param {Number} value 
      */
     setHpMax(value) {
+        if (this.getHpMax() == value) return;
         this.hpMaxInp.value = value;
     }
 
@@ -302,6 +317,8 @@ export class Pokemon {
         if (this.getHpCurrent() <= 0 && this.getHpMax()) {
             value = "Fai"
         }
+        if (this.#status == value) return;
+        this.#status = value;
         this.statusSel.value = value || "---";
     }
 
