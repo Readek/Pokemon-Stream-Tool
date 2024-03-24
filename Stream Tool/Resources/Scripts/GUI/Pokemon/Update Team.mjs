@@ -30,7 +30,7 @@ export async function updateTeam() {
         dataJson.playerPokemons.push({
             internalSpecies : pokemons[i].getInternalSpecies(),
             species : pokemons[i].getSpecies(),
-            nickName : pokemons[i].getNickName(),
+            nickName : pokemons[i].getNickName() || pokemons[i].getSpecies(),
             lvl : pokemons[i].getLvl(),
             form : pokemons[i].getForm(),
             gender : pokemons[i].getGender(),
