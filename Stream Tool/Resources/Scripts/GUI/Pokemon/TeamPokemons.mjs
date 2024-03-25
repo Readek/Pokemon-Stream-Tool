@@ -1,6 +1,6 @@
-import { Pokemon } from "./Pokemon.mjs";
+import { TeamPokemon } from "./TeamPokemon.mjs";
 
-/** @type {Pokemon[]} */
+/** @type {TeamPokemon[]} */
 export const pokemons = [];
 
 export function clearAllPokemon(){

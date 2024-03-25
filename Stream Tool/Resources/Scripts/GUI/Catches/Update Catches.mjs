@@ -23,6 +23,8 @@ export async function updateCatches() {
         catches: [], // more lines will be added below
     };
 
+    const promises = [];
+
     // add the catches info
     for (let i = 0; i < catches.length; i++) {
 
@@ -38,6 +40,15 @@ export async function updateCatches() {
             img : catches[i].getImgSrc()
         })
 
+        // download images if needed and wait for them
+        promises.push(await catches[i].getImgSrc());
+
+    }
+
+    // once pokemon images are loaded, add them in
+    const pokeImgs = await Promise.all(promises);
+    for (let i = 0; i < catches.length; i++) {
+        dataJson.catches[i].img = pokeImgs[i];
     }
 
     // its time to send the data away

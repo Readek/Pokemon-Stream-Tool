@@ -2,6 +2,6 @@
 Interface Source Code/dist
 
 Stream Tool/Resources/Assets/Pokemon/sprites/*
-!Stream Tool/Resources/Assets/Pokemon/sprites/offsets.json
+!Stream Tool/Resources/Assets/Pokemon/sprites/.gitkeep
 Stream Tool/Resources/Texts/GUI Settings.json
 Stream Tool/Resources/Texts/GUI State.json

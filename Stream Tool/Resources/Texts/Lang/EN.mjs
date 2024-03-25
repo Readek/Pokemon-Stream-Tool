@@ -99,8 +99,11 @@ export const lang = {
     wildAbilityHiddenTitle : "Hidden ability",
 
     wildSendButt : "Send to Catches",
+    wildSendButtTitle : "Sends current wild encounter to Catches tab. Also increases Player's catches counter by 1.",
     wildInCombat : "In combat",
     wildUpdateButt : "Update Encounter",
+
+    notifCatchSent : "{0} has been sent to Captures",
 
 
     /* SETTINGS */
@@ -169,7 +172,6 @@ export const lang = {
     notifCitraOk : "Connected to Citra successfully",
     notifCitraRip : "Couldn't connect to Citra. Auto has been disabled.",
     notifCitraRipLoop : "Couldn't connect to Citra, reconnecting...",
-    notifCatchSent : "{0} has been sent to Captures.",
 
     typeBug : "Bug",
     typeDark : "Dark",

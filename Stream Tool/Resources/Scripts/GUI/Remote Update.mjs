@@ -6,7 +6,7 @@ import { current } from "./Globals.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Gym Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
-import { pokemons } from "./Pokemon/Pokemons.mjs";
+import { pokemons } from "./Pokemon/TeamPokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
 import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 

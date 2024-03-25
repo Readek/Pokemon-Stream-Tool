@@ -1,5 +1,7 @@
-import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
-import { current, nameReplacements, stPath } from "../Globals.mjs";
+import { current, inside, nameReplacements, stPath } from "./Globals.mjs";
+import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
+import { fileExists } from "./File System.mjs";
+import { fetchFile } from "../Utils/Fetch File.mjs";
 
 export class Pokemon {
 
@@ -7,32 +9,29 @@ export class Pokemon {
     #shiny = false;
     #pokeData;
     #baseFormPokeData;
-    #form = ""; //Short name.
-    #formNames = []; //These can be used as identifiers for current.pkmnSpecies.get(); e.g., "Wormadam-Trash".
-    #shortFormNames = []; //These only have the form name and are better suited for the selector; e.g., "Trash".
-    #status = "";
+    #form = ""; // Short name.
+    #formNames = []; // These can be used as identifiers for current.pkmnSpecies.get(); e.g., "Wormadam-Trash".
+    #shortFormNames = []; // These only have the form name and are better suited for the selector; e.g., "Trash".
     #isNone = true;
+    #hasLocalImgs = false;
+    #pokeImgs = {};
+
+    /** @protected {HTMLElement} */
+    el;
 
     constructor() {
 
-        const el = this.generateElement();
+        this.el = this.generateElement();
 
-        this.pokeSel = el.getElementsByClassName(`pokeSelector`)[0];
-        this.nickInp = el.getElementsByClassName(`pokeNickName`)[0];
-        this.lvlInp = el.getElementsByClassName("pokeLvlNumber")[0];
-        this.formSel = el.getElementsByClassName(`pokeForm`)[0];
+        this.pokeSel = this.el.getElementsByClassName(`pokeSelector`)[0];
+        this.nickInp = this.el.getElementsByClassName(`pokeNickName`)[0];
+        this.formSel = this.el.getElementsByClassName(`pokeForm`)[0];
 
-        this.genderButt = el.getElementsByClassName(`pokeGenderButton`)[0];
-        this.genderIcon = el.getElementsByClassName(`pokeGenderIcon`)[0];
+        this.genderButt = this.el.getElementsByClassName(`pokeGenderButton`)[0];
+        this.genderIcon = this.el.getElementsByClassName(`pokeGenderIcon`)[0];
 
-        this.shinyButt = el.getElementsByClassName('pokeShinyButton')[0];
-        this.shinyIcon = el.getElementsByClassName('pokeShinyIcon')[0];
-
-        this.hpCurrentInp = el.getElementsByClassName('pokeHpCurrent')[0];
-        this.hpMaxInp = el.getElementsByClassName('pokeHpMax')[0];
-        
-        this.statusSel = el.getElementsByClassName('pokeStatus')[0];
-
+        this.shinyButt = this.el.getElementsByClassName('pokeShinyButton')[0];
+        this.shinyIcon = this.el.getElementsByClassName('pokeShinyIcon')[0];
         
         // set a listener that will trigger when pokemon selector is clicked
         this.pokeSel.addEventListener("click", () => {
@@ -41,8 +40,9 @@ export class Pokemon {
             pokeFinder.focusFilter();
             pokeFinder.setSpeciesFocus();
         });
+
         // also set an initial pokemon value
-        this.setSpecies();
+        this.setSpecies(null);
 
         this.genderButt.addEventListener("click", () => {this.swapGender()});
 
@@ -71,6 +71,8 @@ export class Pokemon {
      * @param {String} name - Name of the pokemon
      */
     setSpecies(name) {
+
+        this.#hasLocalImgs = false;
 
         // if we select none, just display nothin
         if (!name || name == "None") {
@@ -103,9 +105,7 @@ export class Pokemon {
             // set the pokemon name and icon on the selector
             this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies; //We use the base species name.
             this.#updateIcon();
-            
-            // set types from @pkmn/data Specie object
-            let types = this.#pokeData.types;
+
             // sets the form lists.
             this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
             this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
@@ -169,14 +169,6 @@ export class Pokemon {
         } else {
             this.nickInp.value = "";
         }
-    }
-
-    getLvl() {
-        return this.lvlInp.value;
-    }
-    setLvl(value) {
-        if (this.getLvl() == value) return;
-        this.lvlInp.value = value;
     }
 
     getForm() {
@@ -266,62 +258,6 @@ export class Pokemon {
         }
     }
 
-    getHpCurrent() {
-        return Number(this.hpCurrentInp.value);
-    }
-    /**
-     * @param {Number} value 
-     */
-    setHpCurrent(value) {
-
-        if (this.getHpCurrent() == value) return;
-
-        this.hpCurrentInp.value = value;
-
-        // and just because its cool, recolor border if in danger
-        if (value <= 0 && this.getHpMax() == 0) {
-            // do nothin
-        } else if (value <= 0) {
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--ded)");
-        } else if (value <= this.getHpMax()*.2) { // 20%
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--danger)");
-        } else if (value <= this.getHpMax()/2) { // 50%
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--warning)");
-        } else {
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--healthy)");
-        }
-
-    }
-
-    getHpMax() {
-        return Number(this.hpMaxInp.value);
-    }
-    /**
-     * @param {Number} value 
-     */
-    setHpMax(value) {
-        if (this.getHpMax() == value) return;
-        this.hpMaxInp.value = value;
-    }
-
-    /**
-     * @returns {String}
-     */
-    getStatus() {
-        return this.statusSel.value;
-    }
-    /**
-     * @param {String} value 
-     */
-    setStatus(value) {
-        if (this.getHpCurrent() <= 0 && this.getHpMax()) {
-            value = "Fai"
-        }
-        if (this.#status == value) return;
-        this.#status = value;
-        this.statusSel.value = value || "---";
-    }
-
     getTypes() {
         if(this.#isNone){
             return ["Normal"]; //Placeholder, shouldn't be used for anything but prevents undefined exceptions.
@@ -329,10 +265,12 @@ export class Pokemon {
         return this.#pokeData.types;
     }
 
-    getImgSrc() {
+    async getImgSrc() {
+
+        if (this.#hasLocalImgs) return this.#pokeImgs;
 
         // final data to be sent
-        const img = {
+        this.#pokeImgs = {
             gen5Front : "",
             gen5Back : "",
             aniFront : "",
@@ -340,14 +278,31 @@ export class Pokemon {
         }
 
         if(!this.#isNone){
+
+            // now this is getting promising
+            const promises = [];
+
             // get those actual images!
-            img.gen5Front = this.#findImg("gen5ani", "p2");
-            img.gen5Back = this.#findImg("gen5ani", "p1");
-            img.aniFront = this.#findImg("ani", "p2");
-            img.aniBack = this.#findImg("ani", "p1");
+            promises.push(this.#findImg("gen5ani", "p2"));
+            promises.push(this.#findImg("gen5ani", "p1"));
+            promises.push(this.#findImg("ani", "p2"));
+            promises.push(this.#findImg("ani", "p1"));
+
+            // wait for all images to load properly
+            const results = await Promise.all(promises);
+
+            // add those paths to our class
+            this.#pokeImgs.gen5Front = results[0]
+            this.#pokeImgs.gen5Back = results[1];
+            this.#pokeImgs.aniFront = results[2];
+            this.#pokeImgs.aniBack = results[3];
+
         }
 
-        return img;
+        // if we got them images, no need to run this again
+        this.#hasLocalImgs = true; // goes to false on species change
+
+        return this.#pokeImgs;
 
     }
     /**
@@ -356,7 +311,8 @@ export class Pokemon {
      * @param {String} side If front facing (`p2`) or back facing (`p1`)
      * @returns {Object} Collection of found images
      */
-    #findImg(gen, side) {
+    async #findImg(gen, side) {
+
         let imgData = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {
             gen: gen,
             side: side,
@@ -364,7 +320,23 @@ export class Pokemon {
             shiny: this.#shiny,
             protocol: 'http', domain: "../../Resources/Assets/Pokemon"
         })
-        return imgData.url.replace("http://", ""); //ugly workaround.
+
+        const browserUrl = imgData.url.replace("http://", ""); //ugly workaround.
+        
+        if (inside.electron) {
+
+            const cleanUrl = browserUrl.substr(23);
+            if (!await fileExists(stPath.assets + "/" + cleanUrl)) {
+                await fetchFile(
+                    "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets/-/raw/main/play.pokemonshowdown.com/" + cleanUrl.substr(8),
+                    stPath.assets + "/" + cleanUrl
+                )
+            } 
+            
+        }
+        
+        return browserUrl;
+
     }
 
     getPokeData() {
@@ -384,57 +356,7 @@ export class Pokemon {
     /** Creates the pokemon's HTML element */
     generateElement() {
 
-        const element = document.createElement("div");
-        element.classList.add("pokemonDiv");
-        // and now for the big fat text
-        element.innerHTML = `
-        
-            <div class="finderPosition">
-                <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
-                <img class="pokeSelectorIcon" alt="">
-                <div class="pokeSelectorText"></div>
-                </div>
-            </div>
-
-            <input type="text" class="pokeNickName textInput mousetrap" spellcheck="false" locTitle="pokeNickTitle" locPHolder="pokeNickPHolder">
-
-            <div class="pokeLvlDiv" locTitle="pokeLvlTitle">
-                <div class="pokeLvlText" locText="pokeLvl"></div>
-                <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-            </div>          
-
-            <select class="pokeForm" locTitle="pokeFormTitle">
-            </select>
-
-            <button class="pokeGenderButton" locTitle="pokeGenderTitle">
-                <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
-            </button>
-
-            <button class="pokeShinyButton" locTitle="pokeShinyTitle">
-                <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
-            </button>
-
-            <div class="pokeHpDiv" locTitle="pokeHpTitle">
-                <input class="pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0">
-                /
-                <input class="pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0">
-            </div>
-
-            <select class="pokeStatus" locTitle="pokeStatusTitle">
-                <option value="---">----</option>
-                <option value="Par" locText="pokeStatusPar"></option>
-                <option value="Poi" locText="pokeStatusPoi"></option>
-                <option value="Fro" locText="pokeStatusFro"></option>
-                <option value="Bur" locText="pokeStatusBur"></option>
-                <option value="Sle" locText="pokeStatusSle"></option>
-                <option value="Fai" locText="pokeStatusFai"></option>
-            </select>
-
-        `
-
-        // add it to the GUI
-        document.getElementById("pokeParty").appendChild(element);
-        return element;
+        // to be replaced by children
 
     }
 

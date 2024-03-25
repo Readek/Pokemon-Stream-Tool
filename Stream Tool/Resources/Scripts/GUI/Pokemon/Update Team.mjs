@@ -1,5 +1,5 @@
 import { inside } from "../Globals.mjs";
-import { pokemons } from "./Pokemons.mjs";
+import { pokemons } from "./TeamPokemons.mjs";
 
 const updateButt = document.getElementById("updateTeamButt");
 const updateText = document.getElementById("updateTeamText");
@@ -23,6 +23,8 @@ export async function updateTeam() {
         playerPokemons: [], // more lines will be added below
     };
 
+    const promises = [];
+
     // add the teams's info
     for (let i = 0; i < pokemons.length; i++) {
 
@@ -39,9 +41,17 @@ export async function updateTeam() {
             hpMax : pokemons[i].getHpMax(),
             status : pokemons[i].getStatus(),
             types : pokemons[i].getTypes(),
-            img : pokemons[i].getImgSrc()
         })
 
+        // download images if needed and wait for them
+        promises.push(await pokemons[i].getImgSrc())
+
+    }
+
+    // once pokemon images are loaded, add them in
+    const pokeImgs = await Promise.all(promises);
+    for (let i = 0; i < pokemons.length; i++) {
+        dataJson.playerPokemons[i].img = pokeImgs[i];
     }
 
     // its time to send the data away

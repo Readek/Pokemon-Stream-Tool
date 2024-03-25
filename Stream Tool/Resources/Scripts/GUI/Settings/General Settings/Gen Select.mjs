@@ -1,6 +1,6 @@
 import { pokeFinder } from "../../Finder/Pokemon Finder.mjs";
 import { current, dexGens } from "../../Globals.mjs";
-import { clearAllPokemon } from "../../Pokemon/Pokemons.mjs";
+import { clearAllPokemon } from "../../Pokemon/TeamPokemons.mjs";
 import { Setting } from "../Setting.mjs";
 import { settings } from "../Settings.mjs";
 

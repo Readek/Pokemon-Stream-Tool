@@ -97,8 +97,11 @@ export const lang = {
     wildAbilityHiddenTitle : "Habilidad Oculta",
 
     wildSendButt : "Mandar a Capturas",
+    wildSendButtTitle : "Envía el encuentro actual a Capturas. También incrementa el contador de capturas en 1.",
     wildInCombat : "En Combate",
     wildUpdateButt : "Actualizar Encuentro",
+
+    notifCatchSent : "Se ha mandado a {0} a Capturas",
 
 
     /* SETTINGS */
@@ -167,7 +170,6 @@ export const lang = {
     notifCitraOk : "Se ha conectado con Citra correctamente",
     notifCitraRip : "No se ha podido conectar con Citra, Auto ha sido desactivado",
     notifCitraRipLoop : "No se ha podido conectar con Citra, reconectando...",
-    notifCatchSent : "Se ha mandado a {0} a Capturas.",
 
     typeBug : "Bicho",
     typeDark : "Siniestro",

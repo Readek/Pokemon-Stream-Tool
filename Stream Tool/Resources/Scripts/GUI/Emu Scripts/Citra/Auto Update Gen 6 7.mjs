@@ -2,7 +2,7 @@ import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { current } from "../../Globals.mjs";
 import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
-import { pokemons } from "../../Pokemon/Pokemons.mjs";
+import { pokemons } from "../../Pokemon/TeamPokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
 import { getBattleAddress } from "./Battle Addresses.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
