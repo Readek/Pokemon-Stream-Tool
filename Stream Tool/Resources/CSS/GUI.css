@@ -642,10 +642,25 @@ button:hover {
   width: 60px;
 }
 
-.knifeIcon, .skullIcon {
+.skullIcon {
   width: 20px;
   height: 20px;
   fill: var(--text2);
+}
+.statsPokeballIcon {
+  width: 23px;
+  height: 23px;
+  stroke: var(--text2);
+  fill: none;
+  margin-right: -1px;
+  margin-top: 1px;
+}
+.statIcon {
+  cursor: pointer;
+  transition: filter .2s;
+}
+.statIcon:hover {
+  filter: brightness(1.2);
 }
 
 
