@@ -1,7 +1,7 @@
 import { current, inside, nameReplacements, stPath } from "./Globals.mjs";
 import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
 import { fileExists } from "./File System.mjs";
-import { fetchFile } from "../Utils/Fetch File.mjs";
+import { fetchFile } from "./Fetch File.mjs";
 
 export class Pokemon {
 

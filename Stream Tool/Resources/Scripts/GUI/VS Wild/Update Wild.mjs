@@ -1,4 +1,5 @@
 import { inside } from "../Globals.mjs";
+import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
 import { wildEncounter } from "./Wild Pokemon.mjs";
 
 const updateButt = document.getElementById("updateWildButt");
@@ -6,15 +7,24 @@ const updateText = document.getElementById("updateWildText");
 
 updateButt.addEventListener("click", updateWildEnc);
 
+let loading = false;
+
 /** Generates an object with wild encounter data, then sends it */
 export async function updateWildEnc() {
+
+    // if for any reason we got here while waiting for a current update, do nothing
+    if (loading) return;
 
     // if this is a remote browser, display some visual feedback
     if (!inside.electron) {
        changeUpdateText("SENDING DATA...");
        // disable updating until we get data back
        disableWildUpdate();
-   }
+    } else {
+        // show some feedback if img loading takes too long
+        displayLoadImgsMessage("wild");
+        loading = true;
+    }
 
    // this is what's going to be sent to the browsers
    const dataJson = {
@@ -32,6 +42,8 @@ export async function updateWildEnc() {
         ipc.sendData("wild");
         ipc.sendRemoteData("wild");
 
+        hideLoadImgsMessage("wild");
+
     } else { // for remote GUIs
 
         const remote = await import("../Remote Requests.mjs");
@@ -40,6 +52,8 @@ export async function updateWildEnc() {
         remote.sendRemoteData(dataJson);
 
     }
+
+    loading = false;
 
 }
 

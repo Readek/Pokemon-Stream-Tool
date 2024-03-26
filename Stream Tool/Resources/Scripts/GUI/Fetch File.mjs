@@ -1,4 +1,4 @@
-import { inside } from "../GUI/Globals.mjs";
+import { inside } from "./Globals.mjs";
 
 /**
  * Downloads a given url and stores the file locally

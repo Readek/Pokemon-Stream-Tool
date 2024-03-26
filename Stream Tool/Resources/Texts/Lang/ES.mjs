@@ -190,6 +190,7 @@ export const lang = {
     typeSteel : "Acero",
     typeWater : "Agua",
 
+    loadingImgsMessage : "Cargando sprites...",
 
     /* OVERLAYS */
 

@@ -15,7 +15,7 @@ import { catches } from './GUI/Catches/Catches.mjs';
 import { Catch } from './GUI/Catches/Catch.mjs';
 import { updateCatches } from './GUI/Catches/Update Catches.mjs';
 import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
-import { fetchFile } from './Utils/Fetch File.mjs';
+import { fetchFile } from './GUI/Fetch File.mjs';
 
 
 // this is a weird way to have file svg's that can be recolored by css

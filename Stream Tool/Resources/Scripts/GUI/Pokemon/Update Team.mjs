@@ -1,4 +1,5 @@
 import { inside } from "../Globals.mjs";
+import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
 import { pokemons } from "./TeamPokemons.mjs";
 
 const updateButt = document.getElementById("updateTeamButt");
@@ -6,14 +7,23 @@ const updateText = document.getElementById("updateTeamText");
 
 updateButt.addEventListener("click", updateTeam);
 
+let loading = false;
+
 /** Generates an object with game data, then sends it */
 export async function updateTeam() {
+
+    // if for any reason we got here while waiting for a current update, do nothing
+    if (loading) return;
 
      // if this is a remote browser, display some visual feedback
      if (!inside.electron) {
         changeUpdateText("SENDING DATA...");
         // disable updating until we get data back
         disableTeamUpdate();
+    } else {
+        // show some feedback if img loading takes too long
+        displayLoadImgsMessage("team");
+        loading = true;
     }
 
     // this is what's going to be sent to the browsers
@@ -62,6 +72,8 @@ export async function updateTeam() {
         ipc.sendData("team");
         ipc.sendRemoteData("team");
 
+        hideLoadImgsMessage("team");
+
     } else { // for remote GUIs
 
         const remote = await import("../Remote Requests.mjs");
@@ -71,6 +83,8 @@ export async function updateTeam() {
 
     }
     
+    loading = false;
+
 }
 
 /** removes click event listener from update button */

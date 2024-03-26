@@ -974,6 +974,23 @@ button:hover {
   animation: notifAnim 2.5s both;
 }
 
+
+#loadingImgsMessage {
+  display: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 100;
+  padding: 5px;
+  margin: 10px;
+  background-color: var(--bg4);
+  border: 2px solid var(--focused);
+  border-radius: 5px;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+  animation: notifAnim 2.5s both;
+}
+
+
 @keyframes notifAnim {
   0% {
     opacity: 0px;
@@ -983,6 +1000,16 @@ button:hover {
   20% {border-color: var(--focused);}
   75% {opacity: 1;}
   100% {opacity: 0;}
+}
+
+@keyframes notifAnim {
+  0% {
+    opacity: 0px;
+    border-color: var(--selected);
+  }
+  10% {opacity: 1;}
+  20% {border-color: var(--focused);}
+  100% {opacity: 1;}
 }
 
 
