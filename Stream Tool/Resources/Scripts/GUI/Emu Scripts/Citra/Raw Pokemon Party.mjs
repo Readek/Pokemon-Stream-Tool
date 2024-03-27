@@ -1,4 +1,4 @@
-import { current } from "../../Globals.mjs";
+import { current, dexGens } from "../../Globals.mjs";
 import { decryptData } from "./Crypts.mjs";
 import { validateRawPokemon } from "./Utils.mjs";
 import struct from "./struct.mjs";
@@ -101,19 +101,128 @@ export class RawPokemonParty {
     }
 
     /**
-     * Returns this pokemon's current HP value
+     * Gets this pokemon's current total experience points
      * @returns {Number}
      */
-    currentHP() {
-        return struct("<H").unpack(this.#data.slice(0xF0, 0xF2))[0];
+    experience() {
+        return struct("<H").unpack(this.#data.slice(0x10, 0x13))[0];
     }
 
     /**
-     * Returns this pokemon's max HP value
-     * @returns {Number}
+     * Gets this pokemon's ability id then translates it to text
+     * @returns {String}
      */
+    ability() {
+
+        const abNum = struct("B").unpack(this.#data.slice(0x14, 0x15))[0];
+        return current.abilities[abNum].name;
+
+    }
+
+    /**
+     * Gets this pokemon's held item id then translates it to text
+     * @returns {String}
+     */
+    item() {
+
+        const itemNum = struct("<H").unpack(this.#data.slice(0x0A, 0x0C))[0];
+        if (itemNum == 0) return;
+        return current.items[itemNum].name;
+
+    }
+
+    /**
+     * Gets this pokemon's move info
+     * @param {Number} num - Move slot
+     * @returns {{name: String, type: String, pp: Number}}
+     */
+    move(num) {
+
+        const move = {};
+
+        const moveAdd = 0x5A + (num * 2);
+        const ppAdd = 0x62 + (num);
+
+        const moveNum = struct("<H").unpack(this.#data.slice(moveAdd, moveAdd+2))[0];
+        move.name = current.moves[moveNum].name;
+        move.type = current.moves[moveNum].type;
+
+        move.pp = struct("B").unpack(this.#data.slice(ppAdd, ppAdd+1))[0];
+
+        return move;
+
+    }
+
+
+
+    /** Current HP value @returns {Number} */
+    currentHP() {
+        return struct("<H").unpack(this.#data.slice(0xF0, 0xF2))[0];
+    }
+    /** Current max HP value @returns {Number} */
     maxHP() {
         return struct("<H").unpack(this.#data.slice(0xF2, 0xF4))[0];
     }
+
+    /** Current Attack value @returns {Number} */
+    attack() {
+        return struct("<H").unpack(this.#data.slice(0xF4, 0xF6))[0];
+    }
+    /** Current Defense value @returns {Number} */
+    defense() {
+        return struct("<H").unpack(this.#data.slice(0xF6, 0xF8))[0];
+    }
+    /** Current Special Attack value @returns {Number} */
+    spAttack() {
+        return struct("<H").unpack(this.#data.slice(0xFA, 0xFC))[0];
+    }
+    /** Current Special Defense value @returns {Number} */
+    spDefense() {
+        return struct("<H").unpack(this.#data.slice(0xFC, 0xFE))[0];
+    }
+    /** Current Speed value @returns {Number} */
+    speed() {
+        return struct("<H").unpack(this.#data.slice(0xF8, 0xFA))[0];
+    }
+
+    /**
+     * Gets this pokemon's Effort Values
+     * @returns {{hp: Number, atk: Number, def: Number, spa: Number, spd: Number, spe: Number}}
+     */
+    ev() {
+
+        const ev = {};
+
+        ev.hp = struct("B").unpack(this.#data.slice(0x1E, 0x1F))[0];
+        ev.atk = struct("B").unpack(this.#data.slice(0x1F, 0x20))[0];
+        ev.def = struct("B").unpack(this.#data.slice(0x20, 0x21))[0];
+        ev.spa = struct("B").unpack(this.#data.slice(0x22, 0x23))[0];
+        ev.spd = struct("B").unpack(this.#data.slice(0x23, 0x24))[0];
+        ev.spe = struct("B").unpack(this.#data.slice(0x21, 0x22))[0];
+
+        return ev;
+
+    }
+
+    /**
+     * Gets this pokemon's Individual Values
+     * @returns {{hp: Number, atk: Number, def: Number, spa: Number, spd: Number, spe: Number}}
+     */
+    iv() {
+
+        const iv = {};
+
+        const ivs = struct("<I").unpack(this.#data.slice(0x74, 0x78))[0];
+
+        iv.hp = (ivs >> 0) & 31;
+        iv.atk = (ivs >> 5) & 31;
+        iv.def = (ivs >> 10) & 31;
+        iv.spa = (ivs >> 15) & 31;
+        iv.spd = (ivs >> 20) & 31;
+        iv.spe = (ivs >> 25) & 31;
+
+        return iv;
+
+    }    
 
 }

@@ -24,6 +24,9 @@ export const current = {
     version : "",
     pkmnSpecies : dexGens.get(5).species,
     numToPoke : {}, // filled on pokeFinder fill
+    abilities : {},
+    items : {},
+    moves : {},
     autoStatus : false
 }
 

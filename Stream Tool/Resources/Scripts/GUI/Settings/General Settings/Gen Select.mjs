@@ -43,6 +43,9 @@ export class SettingGenSelect extends Setting {
 
         // update that pokedex data
         current.pkmnSpecies = dexGens.get(value).species;
+        current.abilities = Object.fromEntries([...dexGens.get(value).abilities].map(a => [a.num, a]));
+        current.items = Object.fromEntries([...dexGens.get(value).items].map(a => [a.num, a]));
+        current.moves = Object.fromEntries([...dexGens.get(value).moves].map(a => [a.num, a]));
 
         // resets the player's pokemon team just in case theres a null poke on this gen
         pokeFinder.loadCharacters();
