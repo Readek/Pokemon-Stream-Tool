@@ -353,7 +353,10 @@ export class Pokemon {
     }
 
 
-    /** Creates the pokemon's HTML element */
+    /**
+     * Creates the pokemon's HTML element
+     * @returns {HTMLElement}
+     */
     generateElement() {
 
         // to be replaced by children

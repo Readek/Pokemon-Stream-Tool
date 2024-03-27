@@ -21,6 +21,7 @@ export const lang = {
     topBarSettings : "Ajustes",
     topBarSettingsTitle : "Todos necesitamos ajustar cosas de vez en cuando",
 
+
     /* CATCHES */
 
     deleteCatchButtTitle : "Borrar captura",
@@ -45,8 +46,6 @@ export const lang = {
 
     pokeShinyTitle : "Indicador de variocolor",
 
-    pokeHpTitle : "PS del Pokemon",
-
     pokeStatusTitle : "Estado alterado actual",
     pokeStatusPar : "Par.",
     pokeStatusPoi : "Ven.",
@@ -54,6 +53,22 @@ export const lang = {
     pokeStatusBur : "Que.",
     pokeStatusSle : "Dor.",
     pokeStatusFai : "Deb.",
+
+    pokeDetailsTitle : "Muestra o esconde los detalles",
+
+    pokeHpTitle : "PS del Pokemon",
+    pokeHp : "PS:",
+
+    pokeExpTitle : "Experiencia total actual del pokemon",
+    pokeExp : "Exp.",
+
+    pokeAbilityTitle : "La habilidad to guapa y probablemente competitiva del pokemon",
+    pokeAbility : "Habilidad: ",
+    pokeAbilityPHolder : "Ninguna?",
+
+    pokeItemTitle : "Objeto del pokemon",
+    pokeItem : "Objeto: ",
+    pokeItemPHolder : "Nada?",
 
     pokeUpdateButt : "Actualizar Equipo",
     autoUpdateButtOff : "🍊 AUTO OFF",
@@ -164,7 +179,7 @@ export const lang = {
 
     /* OTHER STRINGS  */
 
-    notifConnLost : "Connection error, please reconnect",
+    notifConnLost : "Error de conexión. Por favor, recarga la página.",
     notifRemoteUpdate : "La GUI ha sido actualizada por remoto",
     notifRemoteAuto : "La auto-actualización ha cambiado por remoto",
     notifCitraOk : "Se ha conectado con Citra correctamente",

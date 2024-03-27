@@ -1,7 +1,6 @@
 export const lang = {
 
     // Title strings appear as tooltips when hovering over an element
-    // PlaceHolder strings appear as text on an empty text input field
 
     /* TOP BAR */
 
@@ -47,8 +46,6 @@ export const lang = {
 
     pokeShinyTitle : "Shiny indicator",
 
-    pokeHpTitle : "Pokemon HP",
-
     pokeStatusTitle : "Current status condition",
     pokeStatusPar : "Par.",
     pokeStatusPoi : "Poi.",
@@ -56,6 +53,22 @@ export const lang = {
     pokeStatusBur : "Bur.",
     pokeStatusSle : "Sle.",
     pokeStatusFai : "Fai.",
+
+    pokeDetailsTitle : "Show or hide details",
+
+    pokeHpTitle : "Pokemon HP",
+    pokeHp : "HP:",
+
+    pokeExpTitle : "Pokemon's current total experience",
+    pokeExp : "Exp.",
+
+    pokeAbilityTitle : "Pokemon's Super Cool And Maybe Competitive pasive ability",
+    pokeAbility : "Ability: ",
+    pokeAbilityPHolder : "None?",
+
+    pokeItemTitle : "Pokemon's held item",
+    pokeItem : "Held Item: ",
+    pokeItemPHolder : "None?",
 
     pokeUpdateButt : "Update team",
     autoUpdateButtOff : "🍊 AUTO OFF",
@@ -211,6 +224,5 @@ export const lang = {
 
     // appears when user has 0 catches
     introNoCatches : "There are no catches to work with :("
-
 
 }

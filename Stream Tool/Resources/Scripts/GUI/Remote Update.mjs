@@ -82,30 +82,19 @@ export async function updateGUI(data, noNotif) {
             if (pokemons[i].getInternalSpecies() != data.playerPokemons[i].internalSpecies) {
                 pokemons[i].setSpecies(data.playerPokemons[i].internalSpecies);
             }
-            if (pokemons[i].getNickName() != data.playerPokemons[i].nickName) {
-                pokemons[i].setNickName(data.playerPokemons[i].nickName);
-            }
-            if (pokemons[i].getLvl() != data.playerPokemons[i].lvl) {
-                pokemons[i].setLvl(data.playerPokemons[i].lvl)
-            }
+            pokemons[i].setNickName(data.playerPokemons[i].nickName);
+            pokemons[i].setLvl(data.playerPokemons[i].lvl);
             if (pokemons[i].getForm() != data.playerPokemons[i].form) {
                 pokemons[i].setForm(data.playerPokemons[i].form);
             }
-            if (pokemons[i].getGender() != data.playerPokemons[i].gender) {
-                pokemons[i].setGender(data.playerPokemons[i].gender);
-            }
-            if (pokemons[i].getShiny() != data.playerPokemons[i].shiny) {
-                pokemons[i].setShiny(data.playerPokemons[i].shiny);
-            }
-            if (pokemons[i].getHpMax() != data.playerPokemons[i].hpMax) {
-                pokemons[i].setHpMax(data.playerPokemons[i].hpMax);
-            }
-            if (pokemons[i].getHpCurrent() != data.playerPokemons[i].hpCurrent) {
-                pokemons[i].setHpCurrent(data.playerPokemons[i].hpCurrent);
-            }
-            if (pokemons[i].getStatus() != data.playerPokemons[i].status) {
-                pokemons[i].setStatus(data.playerPokemons[i].status);
-            }
+            pokemons[i].setGender(data.playerPokemons[i].gender);
+            pokemons[i].setShiny(data.playerPokemons[i].shiny);
+            pokemons[i].setStatus(data.playerPokemons[i].status);
+            pokemons[i].setHpMax(data.playerPokemons[i].hpMax);
+            pokemons[i].setHpCurrent(data.playerPokemons[i].hpCurrent);
+            pokemons[i].setExp(data.playerPokemons[i].exp);
+            pokemons[i].setAbility(data.playerPokemons[i].ability);
+            pokemons[i].setItem(data.playerPokemons[i].item);
 
         };
 

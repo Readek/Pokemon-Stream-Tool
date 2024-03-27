@@ -47,10 +47,13 @@ export async function updateTeam() {
             form : pokemons[i].getForm(),
             gender : pokemons[i].getGender(),
             shiny : pokemons[i].getShiny(),
-            hpCurrent : pokemons[i].getHpCurrent(),
-            hpMax : pokemons[i].getHpMax(),
             status : pokemons[i].getStatus(),
             types : pokemons[i].getTypes(),
+            hpCurrent : pokemons[i].getHpCurrent(),
+            hpMax : pokemons[i].getHpMax(),
+            exp : pokemons[i].getExp(),
+            ability : pokemons[i].getAbility(),
+            item : pokemons[i].getItem()
         })
 
         // download images if needed and wait for them

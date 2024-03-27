@@ -4,22 +4,43 @@ export class TeamPokemon extends Pokemon {
 
     #status = "";
 
+    #exp = 0;
+    #expInp;
+
+    #ability = "";
+    #abilityInp;
+
+    #item = "";
+    #itemInp;
+
     constructor() {
 
         super();
 
         this.lvlInp = this.el.getElementsByClassName("pokeLvlNumber")[0];
+        
+        this.statusSel = this.el.getElementsByClassName('pokeStatus')[0];
+
+        // show or hide details with button
+        const detailsButt = this.el.getElementsByClassName('pokeDetailsButt')[0];
+        const detailsDiv = this.el.getElementsByClassName('pokeDetails')[0];
+        detailsButt.addEventListener("click", () => {
+            detailsDiv.classList.toggle("pokeDetailsShow");
+        });
 
         this.hpCurrentInp = this.el.getElementsByClassName('pokeHpCurrent')[0];
         this.hpMaxInp = this.el.getElementsByClassName('pokeHpMax')[0];
-        
-        this.statusSel = this.el.getElementsByClassName('pokeStatus')[0];
+
+        this.#expInp = this.el.getElementsByClassName('pokeExpCurrent')[0];
+        this.#abilityInp = this.el.getElementsByClassName('pokeAbility')[0];
+        this.#itemInp = this.el.getElementsByClassName('pokeItem')[0];
 
     }
 
     getLvl() {
-        return this.lvlInp.value;
+        return Number(this.lvlInp.value);
     }
+    /** @param {Number} value  */
     setLvl(value) {
         if (this.getLvl() == value) return;
         this.lvlInp.value = value;
@@ -28,9 +49,7 @@ export class TeamPokemon extends Pokemon {
     getHpCurrent() {
         return Number(this.hpCurrentInp.value);
     }
-    /**
-     * @param {Number} value 
-     */
+    /** @param {Number} value  */
     setHpCurrent(value) {
 
         if (this.getHpCurrent() == value) return;
@@ -52,26 +71,11 @@ export class TeamPokemon extends Pokemon {
 
     }
 
-    getHpMax() {
-        return Number(this.hpMaxInp.value);
-    }
-    /**
-     * @param {Number} value 
-     */
-    setHpMax(value) {
-        if (this.getHpMax() == value) return;
-        this.hpMaxInp.value = value;
-    }
-
-    /**
-     * @returns {String}
-     */
+    /** @returns {String} */
     getStatus() {
         return this.statusSel.value;
     }
-    /**
-     * @param {String} value 
-     */
+    /** @param {String} value */
     setStatus(value) {
         if (this.getHpCurrent() <= 0 && this.getHpMax()) {
             value = "Fai"
@@ -81,7 +85,50 @@ export class TeamPokemon extends Pokemon {
         this.statusSel.value = value || "---";
     }
 
-    /** Creates the pokemon's HTML element */
+
+    getHpMax() {
+        return Number(this.hpMaxInp.value);
+    }
+    /** @param {Number} value */
+    setHpMax(value) {
+        if (this.getHpMax() == value) return;
+        this.hpMaxInp.value = value;
+    }
+
+    getExp() {
+        return this.#exp;
+    }
+    /** @param {Number} value - Total experience points */
+    setExp(value) {
+        if (this.#exp == value) return;
+        this.#exp = value;
+        this.#expInp.value = value;
+    }
+
+    getAbility() {
+        return this.#ability;
+    }
+    /** @param {String} value - Ability name */
+    setAbility(value) {
+        if (this.#ability == value) return;
+        this.#ability = value;
+        this.#abilityInp.value = value || "";
+    }
+
+    getItem() {
+        return this.#item;
+    }
+    /** @param {String} value - Ability name */
+    setItem(value) {
+        if (this.#item == value) return;
+        this.#item = value;
+        this.#itemInp.value = value || "";
+    }
+
+    /**
+     * Creates the pokemon's HTML element
+     * @returns {HTMLElement}
+     */
     generateElement() {
 
         const element = document.createElement("div");
@@ -89,6 +136,7 @@ export class TeamPokemon extends Pokemon {
         // and now for the big fat text
         element.innerHTML = `
         
+        <div class="teamPokeMainInfo">
             <div class="finderPosition">
                 <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
                 <img class="pokeSelectorIcon" alt="">
@@ -114,12 +162,6 @@ export class TeamPokemon extends Pokemon {
                 <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
             </button>
 
-            <div class="pokeHpDiv" locTitle="pokeHpTitle">
-                <input class="pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0">
-                /
-                <input class="pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0">
-            </div>
-
             <select class="pokeStatus" locTitle="pokeStatusTitle">
                 <option value="---">----</option>
                 <option value="Par" locText="pokeStatusPar"></option>
@@ -129,6 +171,38 @@ export class TeamPokemon extends Pokemon {
                 <option value="Sle" locText="pokeStatusSle"></option>
                 <option value="Fai" locText="pokeStatusFai"></option>
             </select>
+
+            <button class="pokeDetailsButt" locTitle="pokeDetailsTitle">
+                ...
+            </button>
+
+        </div>
+
+        <div class="pokeDetails">
+
+            <div class="pokeHpDiv pokeDetailsBlock" locTitle="pokeHpTitle">
+                <div class="pokeDetailsText" locText="pokeHp"></div>
+                <input class="pokeDetailsInput pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0" placeholder="0">
+                /
+                <input class="pokeDetailsInput pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0" placeholder="0">
+            </div>
+
+            <div class="pokeDetailsBlock" locTitle="pokeExpTitle">
+                <div class="pokeDetailsText" locText="pokeExp"></div>
+                <input class="pokeDetailsInput pokeExpCurrent" type="number" min="0" value="0" placeholder="0">
+            </div>
+
+            <div class="pokeDetailsBlock" locTitle="pokeAbilityTitle">
+                <div class="pokeDetailsText" locText="pokeAbility"></div>
+                <input class="pokeDetailsInput pokeAbility" type="text" locPHolder="pokeAbilityPHolder">
+            </div>
+
+            <div class="pokeDetailsBlock" locTitle="pokeItemTitle">
+                <div class="pokeDetailsText" locText="pokeItem"></div>
+                <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
+            </div>
+
+        </div>
 
         `
 

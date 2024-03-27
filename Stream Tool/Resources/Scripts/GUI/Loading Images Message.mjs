@@ -2,6 +2,8 @@ const loadings = {};
 
 const loadingMessageEl = document.getElementById("loadingImgsMessage");
 
+const timeouts = {};
+
 /**
  * Displays a "Loading Sprites" text on screen
  * @param {String} id - Type of images loading
@@ -11,7 +13,9 @@ export function displayLoadImgsMessage(id) {
     loadings[id] = true;
 
     // wait a tick so we dont display the message if the function finishes fast enough
-    setTimeout(() => {
+    timeouts[id] = setTimeout(() => {
+        console.log(loadings[id]);
+        
         if (loadings[id]) {
             loadingMessageEl.style.display = "block";
         }
@@ -35,5 +39,7 @@ export function hideLoadImgsMessage(id) {
     }
 
     loadingMessageEl.style.display = "none";
+
+    clearTimeout(timeouts[id]);
     
 }
