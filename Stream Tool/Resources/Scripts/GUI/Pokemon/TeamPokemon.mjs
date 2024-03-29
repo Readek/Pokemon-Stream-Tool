@@ -1,5 +1,11 @@
 import { Pokemon } from "../Pokemon.mjs";
 
+const statKeys = ["hp", "atk", "def", "spa", "spd", "spe"];
+const statKeysUpper = ["Hp", "Atk", "Def", "SpA", "SpD", "Spe"];
+const statKeyValues = ["num", "ev", "iv"];
+
+const pokePartyDiv = document.getElementById("pokeParty");
+
 export class TeamPokemon extends Pokemon {
 
     #status = "";
@@ -12,6 +18,9 @@ export class TeamPokemon extends Pokemon {
 
     #item = "";
     #itemInp;
+
+    #stat = { hp: {}, atk: {}, def: {}, spa: {}, spd: {}, spe: {} };
+    #statInp = { hp: {}, atk: {}, def: {}, spa: {}, spd: {}, spe: {} };
 
     constructor() {
 
@@ -34,6 +43,12 @@ export class TeamPokemon extends Pokemon {
         this.#expInp = this.el.getElementsByClassName('pokeExpCurrent')[0];
         this.#abilityInp = this.el.getElementsByClassName('pokeAbility')[0];
         this.#itemInp = this.el.getElementsByClassName('pokeItem')[0];
+        
+        for (let i = 0; i < statKeys.length; i++) {
+            this.#statInp[statKeys[i]].num = this.el.getElementsByClassName('poke'+statKeysUpper[i])[0];
+            this.#statInp[statKeys[i]].ev = this.el.getElementsByClassName('poke'+statKeysUpper[i]+"EV")[0];
+            this.#statInp[statKeys[i]].iv = this.el.getElementsByClassName('poke'+statKeysUpper[i]+"IV")[0];
+        }        
 
     }
 
@@ -125,6 +140,44 @@ export class TeamPokemon extends Pokemon {
         this.#itemInp.value = value || "";
     }
 
+
+    /**
+     * @typedef {{num: Number, ev: Number, iv: Number}} StatKey
+     * @typedef {{
+     *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
+     * }} Stats
+     */
+    /**
+     * @returns {Stats}
+     */
+    getStats() {
+        return this.#stat;
+    }
+    /**
+     * Sets current stats, EVs, and IVs for this pokemon
+     * @param {Stats} stats
+     */
+    setStats(stats) {
+
+        if (!stats) return;
+
+        // for each different stat
+        for (let i = 0; i < statKeys.length; i++) {
+
+            // stat actual value, ev, and iv
+            for (let j = 0; j < statKeyValues.length; j++) {
+                
+                if (this.#stat[statKeys[i]][statKeyValues[j]] != stats[statKeys[i]][statKeyValues[j]]) {
+                    this.#stat[statKeys[i]][statKeyValues[j]] = stats[statKeys[i]][statKeyValues[j]];
+                    this.#statInp[statKeys[i]][statKeyValues[j]].value = stats[statKeys[i]][statKeyValues[j]];
+                }
+                
+            }
+            
+        }
+
+    }
+
     /**
      * Creates the pokemon's HTML element
      * @returns {HTMLElement}
@@ -180,34 +233,89 @@ export class TeamPokemon extends Pokemon {
 
         <div class="pokeDetails">
 
-            <div class="pokeHpDiv pokeDetailsBlock" locTitle="pokeHpTitle">
-                <div class="pokeDetailsText" locText="pokeHp"></div>
-                <input class="pokeDetailsInput pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0" placeholder="0">
-                /
-                <input class="pokeDetailsInput pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0" placeholder="0">
+            <div class="detailsGeneral">
+
+                <div class="detailsHpExp">
+
+                    <div class="pokeHpDiv pokeDetailsBlock" locTitle="pokeHpTitle">
+                        <div class="pokeDetailsText" locText="pokeHp"></div>
+                        <input class="pokeDetailsInput pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0" placeholder="0">
+                        /
+                        <input class="pokeDetailsInput pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0" placeholder="0">
+                    </div>
+
+                    <div class="pokeDetailsBlock" locTitle="pokeExpTitle">
+                        <div class="pokeDetailsText" locText="pokeExp"></div>
+                        <input class="pokeDetailsInput pokeExpCurrent" type="number" min="0" value="0" placeholder="0">
+                    </div>
+
+                </div>
+
+                <div class="detailsAbiItem">
+
+                    <div class="pokeDetailsBlock" locTitle="pokeAbilityTitle">
+                        <div class="pokeDetailsText" locText="pokeAbility"></div>
+                        <input class="pokeDetailsInput pokeAbility" type="text" locPHolder="pokeAbilityPHolder">
+                    </div>
+
+                    <div class="pokeDetailsBlock" locTitle="pokeItemTitle">
+                        <div class="pokeDetailsText" locText="pokeItem"></div>
+                        <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="pokeDetailsBlock" locTitle="pokeExpTitle">
-                <div class="pokeDetailsText" locText="pokeExp"></div>
-                <input class="pokeDetailsInput pokeExpCurrent" type="number" min="0" value="0" placeholder="0">
-            </div>
-
-            <div class="pokeDetailsBlock" locTitle="pokeAbilityTitle">
-                <div class="pokeDetailsText" locText="pokeAbility"></div>
-                <input class="pokeDetailsInput pokeAbility" type="text" locPHolder="pokeAbilityPHolder">
-            </div>
-
-            <div class="pokeDetailsBlock" locTitle="pokeItemTitle">
-                <div class="pokeDetailsText" locText="pokeItem"></div>
-                <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
+            <div class="detailsStats">
+            
             </div>
 
         </div>
 
         `
 
+        // add stats elements
+        const detailsStatsEl = element.getElementsByClassName("detailsStats")[0];
+        for (let i = 0; i < statKeysUpper.length; i++) {
+            const statEl = this.createStatElement(statKeysUpper[i]);
+            detailsStatsEl.appendChild(statEl);
+        }
+
         // add it to the GUI
-        document.getElementById("pokeParty").appendChild(element);
+        pokePartyDiv.appendChild(element);
+        return element;
+
+    }
+
+    /**
+     * Generates a stat HTML element
+     * @param {String} statKey - Name of stat to use
+     * @returns {HTMLElement}
+     */
+    createStatElement(statKey) {
+
+        const element = document.createElement("div");
+        element.classList.add("pokeDetailsBlock", "pokeDetailsStatBlock");
+        element.innerHTML = `
+
+        <div class="pokeDetailsStatDiv" locTitle="poke${statKey}Title">
+            <div class="pokeDetailsText pokeDetailsStatName" locText="poke${statKey}"></div>
+            <input class="pokeDetailsInput pokeStatsNumber poke${statKey}" type="number" min="0" max="999" placeholder="0">
+        </div>
+        
+        <div class="pokeDetailsStatDiv" locTitle="pokeEVTitle">
+            <div class="pokeDetailsText" locText="pokeEV"></div>
+            <input class="pokeDetailsInput pokeStatsNumber poke${statKey}EV" type="number" min="0" max="999" placeholder="0">
+        </div>
+
+        <div class="pokeDetailsStatDiv" locTitle="pokeIVTitle">
+            <div class="pokeDetailsText" locText="pokeIV"></div>
+            <input class="pokeDetailsInput pokeStatsNumber poke${statKey}IV" type="number" min="0" max="999" placeholder="0">
+        </div>
+
+        `
+
         return element;
 
     }

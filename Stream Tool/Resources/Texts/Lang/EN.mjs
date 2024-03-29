@@ -57,7 +57,7 @@ export const lang = {
     pokeDetailsTitle : "Show or hide details",
 
     pokeHpTitle : "Pokemon HP",
-    pokeHp : "HP:",
+    pokeHp : "HP",
 
     pokeExpTitle : "Pokemon's current total experience",
     pokeExp : "Exp.",
@@ -69,6 +69,22 @@ export const lang = {
     pokeItemTitle : "Pokemon's held item",
     pokeItem : "Held Item: ",
     pokeItemPHolder : "None?",
+
+    pokeEVTitle : "Effort Value",
+    pokeIVTitle : "Individual Value",
+    pokeEV : "EV",
+    pokeIV : "IV",
+
+    pokeAtkTitle : "Attack",
+    pokeDefTitle : "Defense",
+    pokeSpATitle : "Special Attack",
+    pokeSpDTitle : "Special Defense",
+    pokeSpeTitle : "Speed",
+    pokeAtk : "Atk",
+    pokeDef : "Def",
+    pokeSpA : "SpA",
+    pokeSpD : "SpD",
+    pokeSpe : "Spe",
 
     pokeUpdateButt : "Update team",
     autoUpdateButtOff : "🍊 AUTO OFF",

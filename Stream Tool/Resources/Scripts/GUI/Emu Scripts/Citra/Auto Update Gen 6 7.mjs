@@ -171,6 +171,8 @@ async function updatePlayerTeam() {
                     pokemons[i].setExp(rawPokesIndexed[i].experience());
                     pokemons[i].setAbility(rawPokesIndexed[i].ability());
                     pokemons[i].setItem(rawPokesIndexed[i].item());
+
+                    pokemons[i].setStats(rawPokesIndexed[i].stats());
                     
                 }           
                 

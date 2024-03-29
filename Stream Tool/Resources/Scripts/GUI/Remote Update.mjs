@@ -95,6 +95,7 @@ export async function updateGUI(data, noNotif) {
             pokemons[i].setExp(data.playerPokemons[i].exp);
             pokemons[i].setAbility(data.playerPokemons[i].ability);
             pokemons[i].setItem(data.playerPokemons[i].item);
+            pokemons[i].setStats(data.playerPokemons[i].stats);
 
         };
 

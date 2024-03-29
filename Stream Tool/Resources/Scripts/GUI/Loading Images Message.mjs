@@ -13,9 +13,7 @@ export function displayLoadImgsMessage(id) {
     loadings[id] = true;
 
     // wait a tick so we dont display the message if the function finishes fast enough
-    timeouts[id] = setTimeout(() => {
-        console.log(loadings[id]);
-        
+    timeouts[id] = setTimeout(() => {        
         if (loadings[id]) {
             loadingMessageEl.style.display = "block";
         }

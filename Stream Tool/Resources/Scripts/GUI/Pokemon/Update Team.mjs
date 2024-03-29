@@ -53,7 +53,8 @@ export async function updateTeam() {
             hpMax : pokemons[i].getHpMax(),
             exp : pokemons[i].getExp(),
             ability : pokemons[i].getAbility(),
-            item : pokemons[i].getItem()
+            item : pokemons[i].getItem(),
+            stats : pokemons[i].getStats(),
         })
 
         // download images if needed and wait for them

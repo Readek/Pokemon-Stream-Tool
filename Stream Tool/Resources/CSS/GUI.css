@@ -584,9 +584,14 @@ button:hover {
   align-items: center;
   background-color: var(--bg5);
   border-radius: 0px 0px 10px 10px;
-  padding: 5px;
+  padding: 10px 5px;
 }
 .pokeDetailsShow {
+  display: flex;
+}
+
+
+.detailsGeneral {
   display: flex;
 }
 
@@ -594,7 +599,7 @@ button:hover {
 .pokeDetailsBlock {
   display: flex;
   align-items: center;
-  height: 30px;
+  height: 28px;
   color: var(--text1);
   background: var(--bg4);
   border: 1px solid var(--focused);
@@ -643,6 +648,25 @@ button:hover {
 
 .pokeItem {
   width: 80px;
+}
+
+.detailsStats {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pokeDetailsStatBlock {
+  padding: 0 6px 0 6px;
+  gap: 10px;
+}
+.pokeDetailsStatDiv {
+  display: flex;
+}
+.pokeDetailsStatName {
+  width: 35px;
+}
+.pokeStatsNumber {
+  width: 27px;
 }
 
 

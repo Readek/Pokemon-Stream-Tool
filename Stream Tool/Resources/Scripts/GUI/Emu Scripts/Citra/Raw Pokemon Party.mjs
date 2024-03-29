@@ -185,9 +185,16 @@ export class RawPokemonParty {
         return struct("<H").unpack(this.#data.slice(0xF8, 0xFA))[0];
     }
 
+
+    /**
+     * @typedef {{
+     *  hp: Number, atk: Number, def: Number, spa: Number, spd: Number, spe: Number
+     * }} Stats
+     */
+
     /**
      * Gets this pokemon's Effort Values
-     * @returns {{hp: Number, atk: Number, def: Number, spa: Number, spd: Number, spe: Number}}
+     * @returns {Stats}
      */
     ev() {
 
@@ -206,7 +213,7 @@ export class RawPokemonParty {
 
     /**
      * Gets this pokemon's Individual Values
-     * @returns {{hp: Number, atk: Number, def: Number, spa: Number, spd: Number, spe: Number}}
+     * @returns {Stats}
      */
     iv() {
 
@@ -223,6 +230,40 @@ export class RawPokemonParty {
 
         return iv;
 
-    }    
+    }
+
+    /**
+     * @typedef {{num: Number, ev: Number, iv: Number}} StatKey
+     */
+
+    /**
+     * Gathers all stats from this pokemon and returns an object
+     * @returns {{
+     *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
+     * }}
+     */
+    stats() {
+
+        const num = {
+            hp : this.maxHP(),
+            atk : this.attack(),
+            def : this.defense(),
+            spa : this.spAttack(),
+            spd : this.spDefense(),
+            spe : this.speed(),
+        }
+        const ev = this.ev();
+        const iv = this.iv();
+
+        return {
+            hp: {num : num.hp, ev: ev.hp, iv: iv.hp},
+            atk: {num : num.atk, ev: ev.atk, iv: iv.atk},
+            def: {num : num.def, ev: ev.def, iv: iv.def},
+            spa: {num : num.spa, ev: ev.spa, iv: iv.spa},
+            spd: {num : num.spd, ev: ev.spd, iv: iv.spd},
+            spe: {num : num.spe, ev: ev.spe, iv: iv.spe},
+        }
+
+    }
 
 }
