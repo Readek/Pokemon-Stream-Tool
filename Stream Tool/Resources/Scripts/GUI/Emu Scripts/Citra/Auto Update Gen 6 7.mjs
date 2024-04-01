@@ -13,8 +13,6 @@ import { readPartyData } from "./Read Player Party.mjs";
 const autoUpdateButt = document.getElementById("citraButt");
 const updateButt = document.getElementById("updateTeamButt");
 
-let readMemoryInterval;
-
 /** Activates or deactivates Citra memory reading interval */
 export async function autoUpdateToggleCitra() {
     
@@ -28,7 +26,6 @@ export async function autoUpdateToggleCitra() {
 
     } else { // if theres a loop running, stop it
         
-        clearInterval(readMemoryInterval);
         autoUpdateButt.innerHTML = "🍊 AUTO OFF";
         autoUpdateButt.classList.add("citraButtOff");
         current.autoStatus = false;

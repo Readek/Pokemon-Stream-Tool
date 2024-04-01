@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { current, dexGens } from "../../Globals.mjs";
 import { decryptData } from "./Crypts.mjs";
 import { validateRawPokemon } from "./Utils.mjs";
@@ -115,7 +116,10 @@ export class RawPokemonParty {
     ability() {
 
         const abNum = struct("B").unpack(this.#data.slice(0x14, 0x15))[0];
-        return current.abilities[abNum].name;
+        if (current.abilities[abNum]) {
+            return current.abilities[abNum].name;
+        }
+        return getLocalizedText("UnknownAbility");
 
     }
 
@@ -127,7 +131,10 @@ export class RawPokemonParty {
 
         const itemNum = struct("<H").unpack(this.#data.slice(0x0A, 0x0C))[0];
         if (itemNum == 0) return;
-        return current.items[itemNum].name;
+        if (current.items[itemNum]) {
+            return current.items[itemNum].name;
+        }
+        return getLocalizedText("UnknownItem");
 
     }
 
@@ -142,18 +149,26 @@ export class RawPokemonParty {
 
         const moveAdd = 0x5A + (num * 2);
         const ppAdd = 0x62 + (num);
-
         const moveNum = struct("<H").unpack(this.#data.slice(moveAdd, moveAdd+2))[0];
-        move.name = current.moves[moveNum].name;
-        move.type = current.moves[moveNum].type;
 
-        move.pp = struct("B").unpack(this.#data.slice(ppAdd, ppAdd+1))[0];
+        if (current.moves[moveNum]) {
+            
+            move.name = current.moves[moveNum].name;
+            move.type = current.moves[moveNum].type;
+    
+            move.pp = struct("B").unpack(this.#data.slice(ppAdd, ppAdd+1))[0];
+    
+            return move;
 
-        return move;
+        }
+
+        return {
+            name : getLocalizedText("UnknownMove"),
+            type : "",
+            pp : 0
+        }
 
     }
-
-
 
     /** Current HP value @returns {Number} */
     currentHP() {

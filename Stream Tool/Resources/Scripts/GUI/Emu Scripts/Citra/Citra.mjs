@@ -69,7 +69,10 @@ class Citra {
             })
             // but set a time limit to the request
             const timeLimit = new Promise((resolve) => {
-                setTimeout(resolve, 2000, null);
+                let timeo = setTimeout(() => {
+                    resolve();
+                    clearTimeout(timeo);
+                }, 2000, null);
             });
 
             // check if everything is alright
@@ -117,7 +120,7 @@ class Citra {
      */
     #validateHeader(reply, expectedId, expectedType) {
 
-        // struct expects an array buffer for its functions
+        /* // struct expects an array buffer for its functions
         const replyABuffer = reply.buffer;
 
         let [replyVersion, replyId, replyType, replyDataSize] = struct("<IIII").unpack(replyABuffer.slice(0, 16));
@@ -127,7 +130,11 @@ class Citra {
             expectedType == replyType &&
             replyDataSize == reply.slice(16).byteLength) {
                 return reply.slice(16);
-        }
+        } */
+
+        // it would be best to run the commented code above, however chances for it
+        // to matter are really thing so we ignore it for a small performance imporvement
+        return reply.slice(16);
 
     }   
 

@@ -223,6 +223,10 @@ export const lang = {
 
     loadingImgsMessage : "Cargando sprites...",
 
+    unknonwAbility : "Habilidad desconocida",
+    unknownItem : "Objeto desconocido",
+    unknownMove : "Movimiento desconocido",
+
     /* OVERLAYS */
 
     // appears before species name
