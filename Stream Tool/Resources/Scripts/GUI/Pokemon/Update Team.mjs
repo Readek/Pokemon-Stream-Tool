@@ -54,6 +54,7 @@ export async function updateTeam() {
             exp : pokemons[i].getExp(),
             ability : pokemons[i].getAbility(),
             item : pokemons[i].getItem(),
+            moves : pokemons[i].getMoves(),
             stats : pokemons[i].getStats(),
         })
 

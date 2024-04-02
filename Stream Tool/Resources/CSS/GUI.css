@@ -593,6 +593,13 @@ button:hover {
 
 .detailsGeneral {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detailsTopRow {
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -623,6 +630,27 @@ button:hover {
   font-family: 'Roboto-Medium';
   font-size: 14px;
   text-align: right;
+}
+
+.detailsBotRow {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.detailsMoves {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pokeDetailsMove {
+  display: flex;
+  justify-content: space-around;
+}
+.pokeMoveName {
+  width: 105px;
+  text-align: left;
+  font-weight: bold;
 }
 
 

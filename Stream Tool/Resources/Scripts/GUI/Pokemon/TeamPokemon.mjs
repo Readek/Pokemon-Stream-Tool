@@ -1,4 +1,5 @@
 import { Pokemon } from "../Pokemon.mjs";
+import { typeToColor } from "../Type to Color.mjs";
 
 const statKeys = ["hp", "atk", "def", "spa", "spd", "spe"];
 const statKeysUpper = ["Hp", "Atk", "Def", "SpA", "SpD", "Spe"];
@@ -18,6 +19,9 @@ export class TeamPokemon extends Pokemon {
 
     #item = "";
     #itemInp;
+
+    #move = [{},{},{},{}];
+    #moveInp = [{},{},{},{}];
 
     #stat = { hp: {}, atk: {}, def: {}, spa: {}, spd: {}, spe: {} };
     #statInp = { hp: {}, atk: {}, def: {}, spa: {}, spd: {}, spe: {} };
@@ -43,11 +47,19 @@ export class TeamPokemon extends Pokemon {
         this.#expInp = this.el.getElementsByClassName('pokeExpCurrent')[0];
         this.#abilityInp = this.el.getElementsByClassName('pokeAbility')[0];
         this.#itemInp = this.el.getElementsByClassName('pokeItem')[0];
+
+        // moves
+        for (let i = 0; i < 4; i++) {
+            this.#moveInp[i].name = this.el.getElementsByClassName(`pokeMove${i}`)[0];
+            this.#moveInp[i].pp = this.el.getElementsByClassName(`pokeMove${i}PP`)[0];
+            this.#moveInp[i].parent = this.#moveInp[i].name.parentElement;
+        }
         
+        // stats
         for (let i = 0; i < statKeys.length; i++) {
-            this.#statInp[statKeys[i]].num = this.el.getElementsByClassName('poke'+statKeysUpper[i])[0];
-            this.#statInp[statKeys[i]].ev = this.el.getElementsByClassName('poke'+statKeysUpper[i]+"EV")[0];
-            this.#statInp[statKeys[i]].iv = this.el.getElementsByClassName('poke'+statKeysUpper[i]+"IV")[0];
+            this.#statInp[statKeys[i]].num = this.el.getElementsByClassName(`poke${statKeysUpper[i]}`)[0];
+            this.#statInp[statKeys[i]].ev = this.el.getElementsByClassName(`poke${statKeysUpper[i]}EV`)[0];
+            this.#statInp[statKeys[i]].iv = this.el.getElementsByClassName(`poke${statKeysUpper[i]}IV`)[0];
         }        
 
     }
@@ -140,6 +152,29 @@ export class TeamPokemon extends Pokemon {
         this.#itemInp.value = value || "";
     }
 
+    /** @typedef {[{name: String, type: String, pp: Number}]} Moves */
+    /** @returns {Moves} */
+    getMoves() {
+        return this.#move;
+    }
+    /**
+     * @param {Moves} moves 
+     */
+    setMoves(moves) {
+
+        if (!moves) return;
+        for (let i = 0; i < moves.length; i++) {
+            if (moves[i].name != this.#move[i].name) {
+                this.#move[i].name = moves[i].name;
+                this.#moveInp[i].name.value = moves[i].name || "";
+                this.#move[i].pp = moves[i].pp;
+                this.#moveInp[i].pp.value = moves[i].pp;
+                this.#move[i].type = moves[i].type;
+                this.#moveInp[i].parent.style.backgroundColor = `${typeToColor(moves[i].type)}80`;
+            }
+        }
+
+    }
 
     /**
      * @typedef {{num: Number, ev: Number, iv: Number}} StatKey
@@ -235,33 +270,44 @@ export class TeamPokemon extends Pokemon {
 
             <div class="detailsGeneral">
 
-                <div class="detailsHpExp">
+                <div class="detailsTopRow">
 
-                    <div class="pokeHpDiv pokeDetailsBlock" locTitle="pokeHpTitle">
-                        <div class="pokeDetailsText" locText="pokeHp"></div>
-                        <input class="pokeDetailsInput pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0" placeholder="0">
-                        /
-                        <input class="pokeDetailsInput pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0" placeholder="0">
+                    <div class="detailsHpExp">
+
+                        <div class="pokeHpDiv pokeDetailsBlock" locTitle="pokeHpTitle">
+                            <div class="pokeDetailsText" locText="pokeHp"></div>
+                            <input class="pokeDetailsInput pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0" placeholder="0">
+                            /
+                            <input class="pokeDetailsInput pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0" placeholder="0">
+                        </div>
+
+                        <div class="pokeDetailsBlock" locTitle="pokeExpTitle">
+                            <div class="pokeDetailsText" locText="pokeExp"></div>
+                            <input class="pokeDetailsInput pokeExpCurrent" type="number" min="0" value="0" placeholder="0">
+                        </div>
+
                     </div>
 
-                    <div class="pokeDetailsBlock" locTitle="pokeExpTitle">
-                        <div class="pokeDetailsText" locText="pokeExp"></div>
-                        <input class="pokeDetailsInput pokeExpCurrent" type="number" min="0" value="0" placeholder="0">
+                    <div class="detailsAbiItem">
+
+                        <div class="pokeDetailsBlock" locTitle="pokeAbilityTitle">
+                            <div class="pokeDetailsText" locText="pokeAbility"></div>
+                            <input class="pokeDetailsInput pokeAbility" type="text" locPHolder="pokeAbilityPHolder">
+                        </div>
+
+                        <div class="pokeDetailsBlock" locTitle="pokeItemTitle">
+                            <div class="pokeDetailsText" locText="pokeItem"></div>
+                            <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
+                        </div>
+
                     </div>
 
                 </div>
 
-                <div class="detailsAbiItem">
+                <div class="detailsBotRow" locTitle="pokeMoves">
 
-                    <div class="pokeDetailsBlock" locTitle="pokeAbilityTitle">
-                        <div class="pokeDetailsText" locText="pokeAbility"></div>
-                        <input class="pokeDetailsInput pokeAbility" type="text" locPHolder="pokeAbilityPHolder">
-                    </div>
-
-                    <div class="pokeDetailsBlock" locTitle="pokeItemTitle">
-                        <div class="pokeDetailsText" locText="pokeItem"></div>
-                        <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
-                    </div>
+                    <div class="detailsMovesTop detailsMoves"></div>
+                    <div class="detailsMovesBot detailsMoves"></div>
 
                 </div>
 
@@ -275,7 +321,19 @@ export class TeamPokemon extends Pokemon {
 
         `
 
-        // add stats elements
+        // add move elements
+        const detailsMovesTopEl = element.getElementsByClassName("detailsMovesTop")[0];
+        const detailsMovesBotEl = element.getElementsByClassName("detailsMovesBot")[0];
+        for (let i = 0; i < 4; i++) {
+            const moveEl = this.createMoveElement(i);
+            if (i < 2) {
+                detailsMovesTopEl.appendChild(moveEl);
+            } else {
+                detailsMovesBotEl.appendChild(moveEl);
+            }
+        }
+
+        // add stat elements
         const detailsStatsEl = element.getElementsByClassName("detailsStats")[0];
         for (let i = 0; i < statKeysUpper.length; i++) {
             const statEl = this.createStatElement(statKeysUpper[i]);
@@ -284,6 +342,29 @@ export class TeamPokemon extends Pokemon {
 
         // add it to the GUI
         pokePartyDiv.appendChild(element);
+        return element;
+
+    }
+
+    /**
+     * Generates a movement HTML element
+     * @param {Number} num - Movement number slot
+     * @returns {HTMLElement}
+     */
+    createMoveElement(num) {
+
+        const element = document.createElement("div");
+        element.classList.add("pokeDetailsBlock", "pokeDetailsMove");
+        element.innerHTML = `
+
+        <input class="pokeDetailsInput pokeMoveName pokeMove${num}" type="text" placeholder="-" spellcheck="false">
+        <div class="pokeDetailsStatDiv">
+            <input class="pokeDetailsInput pokeStatsNumber pokeMove${num}PP" type="number" min="0" max="99" placeholder="0">
+            <div class="" locText="pokePP"></div>
+        </div>
+
+        `
+
         return element;
 
     }

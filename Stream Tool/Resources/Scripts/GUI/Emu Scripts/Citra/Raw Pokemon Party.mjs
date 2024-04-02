@@ -119,7 +119,7 @@ export class RawPokemonParty {
         if (current.abilities[abNum]) {
             return current.abilities[abNum].name;
         }
-        return getLocalizedText("UnknownAbility");
+        return getLocalizedText("unknownAbility");
 
     }
 
@@ -134,7 +134,7 @@ export class RawPokemonParty {
         if (current.items[itemNum]) {
             return current.items[itemNum].name;
         }
-        return getLocalizedText("UnknownItem");
+        return getLocalizedText("unknownItem");
 
     }
 
@@ -161,13 +161,29 @@ export class RawPokemonParty {
             return move;
 
         }
-
+        
+        if (moveNum == 0) {
+            return {
+                name : "",
+                type : "None",
+                pp : "0"
+            }
+        }
+        
         return {
-            name : getLocalizedText("UnknownMove"),
+            name : getLocalizedText("unknownMove"),
             type : "",
             pp : 0
         }
 
+    }
+
+    moves() {
+        const moves = [];
+        for (let i = 0; i < 4; i++) {
+            moves.push(this.move(i));
+        }
+        return moves;
     }
 
     /** Current HP value @returns {Number} */

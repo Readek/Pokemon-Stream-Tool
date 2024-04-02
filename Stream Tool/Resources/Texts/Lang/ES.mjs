@@ -70,6 +70,9 @@ export const lang = {
     pokeItem : "Objeto: ",
     pokeItemPHolder : "Nada?",
 
+    pokeMoves : "Movimientos del pokemon",
+    pokePP : "PP",
+
     pokeEVTitle : "Effort Value",
     pokeIVTitle : "Individual Value",
     pokeEV : "EV",
@@ -223,9 +226,9 @@ export const lang = {
 
     loadingImgsMessage : "Cargando sprites...",
 
-    unknonwAbility : "Habilidad desconocida",
-    unknownItem : "Objeto desconocido",
-    unknownMove : "Movimiento desconocido",
+    unknonwAbility : "Desconocida",
+    unknownItem : "Desconocido",
+    unknownMove : "Desconocido",
 
     /* OVERLAYS */
 
