@@ -90,8 +90,8 @@ export async function updateGUI(data, noNotif) {
             pokemons[i].setGender(data.playerPokemons[i].gender);
             pokemons[i].setShiny(data.playerPokemons[i].shiny);
             pokemons[i].setStatus(data.playerPokemons[i].status);
-            pokemons[i].setHpMax(data.playerPokemons[i].hpMax);
             pokemons[i].setHpCurrent(data.playerPokemons[i].hpCurrent);
+            pokemons[i].setHpMax(data.playerPokemons[i].hpMax);
             pokemons[i].setExp(data.playerPokemons[i].exp);
             pokemons[i].setAbility(data.playerPokemons[i].ability);
             pokemons[i].setItem(data.playerPokemons[i].item);

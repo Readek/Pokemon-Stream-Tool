@@ -11,13 +11,14 @@ export class TeamPokemon extends Pokemon {
 
     #status = "";
 
-    #exp = 0;
+    #hpCurrentInp;
+    #hpMaxInp;
+    #hpBar;
+
     #expInp;
 
-    #ability = "";
     #abilityInp;
 
-    #item = "";
     #itemInp;
 
     #move = [{},{},{},{}];
@@ -41,8 +42,9 @@ export class TeamPokemon extends Pokemon {
             detailsDiv.classList.toggle("pokeDetailsShow");
         });
 
-        this.hpCurrentInp = this.el.getElementsByClassName('pokeHpCurrent')[0];
-        this.hpMaxInp = this.el.getElementsByClassName('pokeHpMax')[0];
+        this.#hpCurrentInp = this.el.getElementsByClassName('pokeHpCurrent')[0];
+        this.#hpMaxInp = this.el.getElementsByClassName('pokeHpMax')[0];
+        this.#hpBar = this.el.getElementsByClassName('pokeHpBarActive')[0];       
 
         this.#expInp = this.el.getElementsByClassName('pokeExpCurrent')[0];
         this.#abilityInp = this.el.getElementsByClassName('pokeAbility')[0];
@@ -73,31 +75,6 @@ export class TeamPokemon extends Pokemon {
         this.lvlInp.value = value;
     }
 
-    getHpCurrent() {
-        return Number(this.hpCurrentInp.value);
-    }
-    /** @param {Number} value  */
-    setHpCurrent(value) {
-
-        if (this.getHpCurrent() == value) return;
-
-        this.hpCurrentInp.value = value;
-
-        // and just because its cool, recolor border if in danger
-        if (value <= 0 && this.getHpMax() == 0) {
-            // do nothin
-        } else if (value <= 0) {
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--ded)");
-        } else if (value <= this.getHpMax()*.2) { // 20%
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--danger)");
-        } else if (value <= this.getHpMax()/2) { // 50%
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--warning)");
-        } else {
-            this.hpCurrentInp.parentElement.style.setProperty("--activeColor", "var(--healthy)");
-        }
-
-    }
-
     /** @returns {String} */
     getStatus() {
         return this.statusSel.value;
@@ -113,43 +90,67 @@ export class TeamPokemon extends Pokemon {
     }
 
 
+    getHpCurrent() {
+        return Number(this.#hpCurrentInp.value);
+    }
+    /** @param {Number} value  */
+    setHpCurrent(value) {
+
+        if (this.getHpCurrent == value) return;
+
+        this.#hpCurrentInp.value = value;
+
+        // update HP bar on the pokemon's details
+        const percent = value / this.getHpMax() * 100 - 100;
+        this.#hpBar.style.transform = "translateX("+percent+"%)";
+
+        // and just because its cool, recolor health bar if in danger
+        if (value <= 0 && this.getHpMax() == 0) {
+            // do nothin
+        } else if (value <= this.getHpMax()*.2) { // 20%
+            this.#hpBar.style.setProperty("--activeColor", "var(--danger)");
+        } else if (value <= this.getHpMax()/2) { // 50%
+            this.#hpBar.style.setProperty("--activeColor", "var(--warning)");
+        } else {
+            this.#hpBar.style.setProperty("--activeColor", "var(--healthy)");
+        }
+
+    }
+
     getHpMax() {
-        return Number(this.hpMaxInp.value);
+        return Number(this.#hpMaxInp.value);
     }
     /** @param {Number} value */
     setHpMax(value) {
         if (this.getHpMax() == value) return;
-        this.hpMaxInp.value = value;
+        this.#hpMaxInp.value = value;
     }
 
     getExp() {
-        return this.#exp;
+        return Number(this.#expInp.value);
     }
     /** @param {Number} value - Total experience points */
     setExp(value) {
-        if (this.#exp == value) return;
-        this.#exp = value;
+        if (this.getExp() == value) return;
         this.#expInp.value = value;
     }
 
     getAbility() {
-        return this.#ability;
+        return this.#abilityInp.value;
     }
     /** @param {String} value - Ability name */
     setAbility(value) {
-        if (this.#ability == value) return;
-        this.#ability = value;
-        this.#abilityInp.value = value || "";
+        if (this.getAbility() == value) return;
+        this.#abilityInp.value = value;
     }
 
     getItem() {
-        return this.#item;
+        return this.#itemInp.value;
     }
     /** @param {String} value - Ability name */
     setItem(value) {
-        if (this.#item == value) return;
-        this.#item = value;
-        this.#itemInp.value = value || "";
+        if (this.getItem() == value) return;
+        this.#itemInp.value = value;
     }
 
     /** @typedef {[{name: String, type: String, pp: Number}]} Moves */
@@ -166,11 +167,13 @@ export class TeamPokemon extends Pokemon {
         for (let i = 0; i < moves.length; i++) {
             if (moves[i].name != this.#move[i].name) {
                 this.#move[i].name = moves[i].name;
-                this.#moveInp[i].name.value = moves[i].name || "";
-                this.#move[i].pp = moves[i].pp;
-                this.#moveInp[i].pp.value = moves[i].pp;
+                this.#moveInp[i].name.value = moves[i].name;
                 this.#move[i].type = moves[i].type;
                 this.#moveInp[i].parent.style.backgroundColor = `${typeToColor(moves[i].type)}80`;
+            }
+            if (this.#move[i].pp != moves[i].pp) {
+                this.#move[i].pp = moves[i].pp;
+                this.#moveInp[i].pp.value = moves[i].pp;
             }
         }
 
@@ -274,29 +277,39 @@ export class TeamPokemon extends Pokemon {
 
                     <div class="detailsHpExp">
 
-                        <div class="pokeHpDiv pokeDetailsBlock" locTitle="pokeHpTitle">
-                            <div class="pokeDetailsText" locText="pokeHp"></div>
-                            <input class="pokeDetailsInput pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0" placeholder="0">
-                            /
-                            <input class="pokeDetailsInput pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0" placeholder="0">
+                        <div class="pokeDetailsDiv" locTitle="pokeHpTitle">
+                            <div class="pokeTopRowText pokeHpText" locText="pokeHp"></div>
+                            <div>
+                                <input class="pokeDetailsInput pokeHpNumber pokeHpCurrent" type="number" min="0" max="999" value="0" placeholder="0">
+                                /
+                                <input class="pokeDetailsInput pokeHpNumber pokeHpMax" type="number" min="0" max="999" value="0" placeholder="0">
+                            </div>
+                            <div class="pokeHpBarDiv">
+                                <div class="pokeHpBarBg pokeHpBar"></div>
+                                <div class="pokeHpBarActive pokeHpBar"></div>
+                            </div>
                         </div>
 
-                        <div class="pokeDetailsBlock" locTitle="pokeExpTitle">
-                            <div class="pokeDetailsText" locText="pokeExp"></div>
+                        <div class="pokeDetailsDiv" locTitle="pokeExpTitle">
+                            <div class="pokeTopRowText pokeExpText" locText="pokeExp"></div>
                             <input class="pokeDetailsInput pokeExpCurrent" type="number" min="0" value="0" placeholder="0">
+                            <div class="pokeExpBarDiv">
+                                <div class="pokeExpBarBg pokeExpBar"></div>
+                                <div class="pokeExpBarActive pokeExpBar"></div>
+                            </div>
                         </div>
 
                     </div>
 
                     <div class="detailsAbiItem">
 
-                        <div class="pokeDetailsBlock" locTitle="pokeAbilityTitle">
-                            <div class="pokeDetailsText" locText="pokeAbility"></div>
+                        <div class="pokeDetailsDiv" locTitle="pokeAbilityTitle">
+                            <div class="pokeTopRowText pokeAbilityText" locText="pokeAbility"></div>
                             <input class="pokeDetailsInput pokeAbility" type="text" locPHolder="pokeAbilityPHolder">
                         </div>
 
-                        <div class="pokeDetailsBlock" locTitle="pokeItemTitle">
-                            <div class="pokeDetailsText" locText="pokeItem"></div>
+                        <div class="pokeDetailsDiv" locTitle="pokeItemTitle">
+                            <div class="pokeTopRowText pokeItemText" locText="pokeItem"></div>
                             <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
                         </div>
 

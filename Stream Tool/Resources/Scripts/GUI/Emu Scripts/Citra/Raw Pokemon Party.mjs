@@ -130,7 +130,7 @@ export class RawPokemonParty {
     item() {
 
         const itemNum = struct("<H").unpack(this.#data.slice(0x0A, 0x0C))[0];
-        if (itemNum == 0) return;
+        if (itemNum == 0) return "";
         if (current.items[itemNum]) {
             return current.items[itemNum].name;
         }
@@ -166,13 +166,13 @@ export class RawPokemonParty {
             return {
                 name : "",
                 type : "None",
-                pp : "0"
+                pp : 0
             }
         }
         
         return {
             name : getLocalizedText("unknownMove"),
-            type : "",
+            type : "None",
             pp : 0
         }
 

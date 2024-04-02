@@ -60,14 +60,14 @@ export const lang = {
     pokeHp : "PS",
 
     pokeExpTitle : "Experiencia total actual del pokemon",
-    pokeExp : "Exp.",
+    pokeExp : "Experiencia",
 
     pokeAbilityTitle : "La habilidad to guapa y probablemente competitiva del pokemon",
-    pokeAbility : "Habilidad: ",
+    pokeAbility : "Habilidad ",
     pokeAbilityPHolder : "Ninguna?",
 
     pokeItemTitle : "Objeto del pokemon",
-    pokeItem : "Objeto: ",
+    pokeItem : "Objeto ",
     pokeItemPHolder : "Nada?",
 
     pokeMoves : "Movimientos del pokemon",

@@ -600,8 +600,15 @@ button:hover {
 .detailsTopRow {
   display: flex;
   justify-content: center;
+  gap: 5px;
 }
 
+.detailsHpExp {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0px 10px;
+}
 
 .pokeDetailsBlock {
   display: flex;
@@ -654,28 +661,83 @@ button:hover {
 }
 
 
-.pokeHpDiv {
-  --healthy: var(--focused);
-  --warning: #7e7c11;
-  --danger: #7e1111;
-  --ded: #460404;
-  --activeColor: var(--healthy);
-  border: 1px solid var(--activeColor);
+.pokeDetailsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pokeTopRowText {
+  border-bottom: solid 1px var(--text2);
+  margin-bottom: 2px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.pokeHpText {
+  width: 40px;
 }
 .pokeHpNumber {
   width: 27px;
 }
+.pokeHpMax {
+  text-align: left;
+}
+.pokeHpBarDiv, .pokeExpBarDiv {
+  position: relative;
+  width: 100px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.pokeHpBar, .pokeExpBar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.pokeHpBarBg, .pokeExpBarBg {
+  background-color: var(--focused);
+}
+.pokeHpBarActive {
+  --healthy: #237e11;
+  --warning: #7e7c11;
+  --danger: #7e1111;
+  --activeColor: var(--healthy);
+  background-color: var(--activeColor);
+}
 
+.pokeExpText {
+  width: 90px;
+}
 .pokeExpCurrent {
-  width: 50px;
+  width: 70px;
+  text-align: center;
+}
+.pokeExpBarActive {
+  background-color: #1c93b8;
 }
 
+.detailsAbiItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pokeAbilityText {
+  width: 90px;
+}
 .pokeAbility {
-  width: 80px;
+  width: 150px;
+  text-align: center;
 }
 
+.pokeItemText {
+  width: 90px;
+}
 .pokeItem {
-  width: 80px;
+  width: 150px;
+  text-align: center;
 }
 
 .detailsStats {

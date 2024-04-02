@@ -60,14 +60,14 @@ export const lang = {
     pokeHp : "HP",
 
     pokeExpTitle : "Pokemon's current total experience",
-    pokeExp : "Exp.",
+    pokeExp : "Experience",
 
     pokeAbilityTitle : "Pokemon's Super Cool And Maybe Competitive pasive ability",
-    pokeAbility : "Ability: ",
+    pokeAbility : "Ability ",
     pokeAbilityPHolder : "None?",
 
     pokeItemTitle : "Pokemon's held item",
-    pokeItem : "Held Item: ",
+    pokeItem : "Held Item ",
     pokeItemPHolder : "None?",
 
     pokeMoves : "Pokemon's current movements",
