@@ -73,10 +73,7 @@ export const lang = {
     pokeMoves : "Pokemon's current movements",
     pokePP : "PP",
 
-    pokeEVTitle : "Effort Value",
-    pokeIVTitle : "Individual Value",
-    pokeEV : "EV",
-    pokeIV : "IV",
+    pokeEVIV : "Current stat (EV) (IV)",
 
     pokeAtkTitle : "Attack",
     pokeDefTitle : "Defense",

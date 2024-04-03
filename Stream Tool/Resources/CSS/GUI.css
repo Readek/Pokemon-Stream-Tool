@@ -579,7 +579,7 @@ button:hover {
 
 .pokeDetails {
   display: none;
-  gap: 5px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   background-color: var(--bg5);
@@ -610,20 +610,7 @@ button:hover {
   padding: 0px 10px;
 }
 
-.pokeDetailsBlock {
-  display: flex;
-  align-items: center;
-  height: 28px;
-  color: var(--text1);
-  background: var(--bg4);
-  border: 1px solid var(--focused);
-  transition: border-color 100ms;
-  border-radius: 5px;
-  padding: 0 4px 0 4px;
-}
-.pokeDetailsBlock:hover {
-  border-color: var(--selected);
-}
+
 .pokeDetailsText {
   padding-right: 5px;
   font-weight: bold;
@@ -644,22 +631,6 @@ button:hover {
   justify-content: center;
   gap: 5px;
 }
-.detailsMoves {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.pokeDetailsMove {
-  display: flex;
-  justify-content: space-around;
-}
-.pokeMoveName {
-  width: 105px;
-  text-align: left;
-  font-weight: bold;
-}
-
 
 .pokeDetailsDiv {
   display: flex;
@@ -684,7 +655,7 @@ button:hover {
 }
 .pokeHpBarDiv, .pokeExpBarDiv {
   position: relative;
-  width: 100px;
+  width: 120px;
   height: 3px;
   overflow: hidden;
   border-radius: 5px;
@@ -740,23 +711,98 @@ button:hover {
   text-align: center;
 }
 
+.detailsMoves {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.pokeMoveBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 28px;
+  color: var(--text1);
+  background: var(--bg4);
+  border: 1px solid var(--focused);
+  transition: border-color 100ms;
+  border-radius: 5px;
+  padding: 0 4px 0 4px;
+}
+.pokeMoveName {
+  width: 105px;
+  text-align: left;
+  font-weight: bold;
+}
+.pokeDetailsMoveDiv {
+  display: flex;
+}
+
 .detailsStats {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-}
-.pokeDetailsStatBlock {
-  padding: 0 6px 0 6px;
-  gap: 10px;
+  gap: 8px;
+  width: 175px;
 }
 .pokeDetailsStatDiv {
   display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-.pokeDetailsStatName {
-  width: 35px;
+
+.pokeStatTexts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 5px;
 }
+.pokeStatNums {
+  display: flex;
+  gap: 3px;
+  font-size: 15px;
+}
+.pokeStatNum {
+  font-weight: bold;
+}
+.pokeStatNumEVIV {
+  font-size: 13px;
+}
+
+
 .pokeStatsNumber {
   width: 27px;
+}
+.pokeStatBars {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.pokeStatBar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.pokeStatBarBg {
+  background-color: var(--focused);
+}
+.pokeStatHpBar {
+  background-color: #C7312A;
+}
+.pokeStatAtkBar {
+  background-color: #F77F32;
+}
+.pokeStatDefBar {
+  background-color: #FFA40A;
+}
+.pokeStatSpABar {
+  background-color: #5F92ED;
+}
+.pokeStatSpDBar {
+  background-color: #72C34D;
+}
+.pokeStatSpeBar {
+  background-color: #EB527D;
 }
 
 

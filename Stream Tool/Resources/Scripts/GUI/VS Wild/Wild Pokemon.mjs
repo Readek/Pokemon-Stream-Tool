@@ -2,7 +2,6 @@ import { getLocalizedText } from "../../Utils/Language.mjs";
 import { Catch } from "../Catches/Catch.mjs";
 import { catches } from "../Catches/Catches.mjs";
 import { updateCatches } from "../Catches/Update Catches.mjs";
-import { pokeFinder } from "../Finder/Pokemon Finder.mjs";
 import { stPath } from "../Globals.mjs";
 import { displayNotif } from "../Notifications.mjs";
 import { playerStats } from "../Player/Stats.mjs";
