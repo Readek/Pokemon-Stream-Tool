@@ -11,7 +11,7 @@
 Pokemon ST is a tool that manages dynamic overlays with the help of a GUI. But what can it really do? Let me show you a feature list:
 
 - Manage your active pokemon party (species, nickname, lvl, health...).
-- Manage your player's stats (badges, stats...).
+- Manage your player's info (badges, stats...).
 - Display stats for current wild encounter.
 - Store your catches to be displayed on a "Waiting to start" scene.
 - **Gen 6 auto-update** for your current player party, reading directly from Citra (or Citra-likes).
@@ -42,7 +42,7 @@ For the moment, the tool comes with overlays included for:
 
 <p align="center">
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20Intro.jpg" alt="Intro Overlay Preview">
+  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20Intro.gif" alt="Intro Overlay Preview">
   
 </p>
 
