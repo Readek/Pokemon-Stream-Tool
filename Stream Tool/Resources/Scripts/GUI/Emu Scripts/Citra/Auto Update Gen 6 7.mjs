@@ -5,6 +5,7 @@ import { displayNotif } from "../../Notifications.mjs";
 import { pokemons } from "../../Pokemon/TeamPokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
 import { getBattleAddress } from "./Battle Addresses.mjs";
+import { debugCitraMemory } from "./Debug Read.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
 import { readPartyIndexes } from "./Read Party Indexes.mjs";
 import { readPokeBattleData } from "./Read Player Battle.mjs";
@@ -93,6 +94,12 @@ async function autoUpdateLoop() {
 async function updatePlayerTeam() {
 
     try { // the amount of possible errors Citra can give are a bit too much
+
+        /* 
+        // MEMORY DEBUG, uncomment to use
+        await debugCitraMemory();
+        return true;
+         */
 
         // get current party info
         const rawPokes = await readPartyData.getParty();
