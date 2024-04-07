@@ -1,5 +1,5 @@
-import { RawPokemonBattle } from "./Raw Pokemon Battle.mjs";
-import { RawPokemonParty } from "./Raw Pokemon Party.mjs";
+import { RawPokemonBattle } from "./Raw Pokes/Raw Pokemon Battle.mjs";
+import { RawPokemonParty } from "./Raw Pokes/Raw Pokemon Party.mjs";
 
 /**
  * Creates a new ArrayBuffer from concatenating two existing ones

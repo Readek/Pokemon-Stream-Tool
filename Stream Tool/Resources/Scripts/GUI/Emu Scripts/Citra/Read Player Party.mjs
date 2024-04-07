@@ -1,6 +1,6 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
-import { RawPokemonParty } from "./Raw Pokemon Party.mjs";
+import { rawPartyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 
 const blockSize = 56;
 const slotOffset = 484;
@@ -12,16 +12,15 @@ class ReadPlayerParty {
 
     /**
      * Asks Citra for the current player Pokemon party
-     * @returns {RawPokemonParty[]} Pokemon party data
+     * @returns {Boolean} True if everything went alright! :)
      */
     async getParty() {
 
-        const party = [];
         const partyAdress = this.#getPartyAdress(current.game);
 
         // of course, we asume there are 6 max player pokemon
         for (let i = 0; i < 6; i++) {
-            
+
             // add an offset every time we run this loop
             const readAdress = partyAdress + (i * slotOffset);
 
@@ -38,18 +37,18 @@ class ReadPlayerParty {
 
             // if we got everything we need
             if (partyData && partyStats) {
-                
+
                 // merge the datas together
                 const data = new Uint8Array([...partyData, ...partyStats]);
 
-                // create a new pokemon and push it to the party array
-                party.push(new RawPokemonParty(data));
+                // create a new pokemon with this new data
+                rawPartyPokes[i].newData(data);
 
             }
 
         }
 
-        return party;
+        return true;
 
     }
 

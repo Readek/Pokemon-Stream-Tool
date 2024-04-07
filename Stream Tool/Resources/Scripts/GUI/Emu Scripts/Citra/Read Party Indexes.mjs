@@ -7,7 +7,7 @@ class ReadPartyIndexes {
 
     /**
      * Asks Citra for the current player Pokemon positions
-     * @returns {Array} - Positions for each pokemon in the party
+     * @returns {Number[]} Positions for each pokemon in the party
      */
     async getPartyIndexes() {
 

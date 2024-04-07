@@ -6,6 +6,7 @@ import { pokemons } from "../../Pokemon/TeamPokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
 import { getBattleAddress } from "./Battle Addresses.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
+import { indexRawParty, rawBattlePokes } from "./Raw Pokes/Raw Pokes.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
 import { readPartyIndexes } from "./Read Party Indexes.mjs";
 import { readPokeBattleData } from "./Read Player Battle.mjs";
@@ -129,13 +130,7 @@ async function updatePlayerTeam() {
         }
 
         // get current correct party order
-        const indexes = await readPartyIndexes.getPartyIndexes();
-        const rawPokesIndexed = [];
-
-        // reorder pokemon party
-        for (let i = 0; i < rawPokes.length; i++) {
-            rawPokesIndexed.push(rawPokes[indexes[i]]);
-        }
+        const rawPokesIndexed = indexRawParty(await readPartyIndexes.getPartyIndexes());
 
         // check if we are on a battle right now
         const battleType = await readBattleType.getBattleType(rawPokesIndexed[0].dexNum());
@@ -144,11 +139,11 @@ async function updatePlayerTeam() {
         if (battleType) {
             
             const addressToRead = getBattleAddress(battleType, current.game);
-            const rawBattlePokes = await readPokeBattleData.getPokeBattle(addressToRead);
+            const battlePokes = await readPokeBattleData.getPokeBattle(addressToRead);
 
             for (let i = 0; i < pokemons.length; i++) {
 
-                if (rawBattlePokes[i] && rawBattlePokes[i].valid) {
+                if (battlePokes && rawBattlePokes[i].valid) {
                     
                     // battle memory will use enemy pokemons after the player's pokes
                     // if our team data does not align with battle data, ignore it
