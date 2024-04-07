@@ -60,10 +60,26 @@ async function autoUpdateLoop() {
 
         // fire auto update as soon as each request is finished
         while (current.autoStatus) {
-            if (!await updatePlayerTeam()) {
+
+            // trigger the auto update code
+            const autoUpdate = updatePlayerTeam();
+            // but set a max time so we dont request it more than every game frame
+            const timeLimit = new Promise((resolve) => {
+                let timeo = setTimeout(() => {
+                    resolve();
+                    clearTimeout(timeo);
+                }, 1000/30, null); // assuming 30 fps
+            });
+
+            // when both update and time limit finish
+            await Promise.all([autoUpdate, timeLimit]);
+
+            // if update failed at any point, get us out of here
+            if (!autoUpdate) {
                 itBroke = true;
-                break; // if update failed at any point, get us out of here
+                break;
             }
+
         }
 
     } else {
