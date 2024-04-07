@@ -144,6 +144,7 @@ async function updatePlayerTeam() {
             for (let i = 0; i < pokemons.length; i++) {
 
                 if (battlePokes && rawBattlePokes[i].valid) {
+
                     
                     // battle memory will use enemy pokemons after the player's pokes
                     // if our team data does not align with battle data, ignore it

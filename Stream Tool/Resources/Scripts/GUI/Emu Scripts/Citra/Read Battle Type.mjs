@@ -32,6 +32,14 @@ class ReadBattleType {
             return "Trainer";
         }
 
+        const multiAdress = getBattleAddress("Multi", current.game);
+
+        const multiData = await citra.readMemory(multiAdress + 4, 2);
+
+        if (partyReference == multiData[0] + multiData[1]*256) {
+            return "Multi";
+        }
+
     }
 
 }
