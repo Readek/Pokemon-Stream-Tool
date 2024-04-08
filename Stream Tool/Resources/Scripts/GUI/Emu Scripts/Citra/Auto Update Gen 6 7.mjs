@@ -6,7 +6,7 @@ import { pokemons } from "../../Pokemon/TeamPokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
 import { getBattleAddress } from "./Battle Addresses.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
-import { indexRawParty, rawBattlePokes } from "./Raw Pokes/Raw Pokes.mjs";
+import { indexRawParty, rawBattlePokes, rawPartyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
 import { readPartyIndexes } from "./Read Party Indexes.mjs";
 import { readPokeBattleData } from "./Read Player Battle.mjs";
@@ -14,6 +14,8 @@ import { readPartyData } from "./Read Player Party.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 const updateButt = document.getElementById("updateTeamButt");
+
+let inCombat = false;
 
 /** Activates or deactivates Citra memory reading interval */
 export async function autoUpdateToggleCitra() {
@@ -135,6 +137,15 @@ async function updatePlayerTeam() {
         // check if we are on a battle right now
         const battleType = await readBattleType.getBattleType(rawPokesIndexed[0].dexNum());
 
+        // clear changed states if going in or out of combat
+        if (inCombat != battleType) {
+            for (let i = 0; i < 6; i++) {
+                rawPartyPokes[i].hasChanged();
+                rawBattlePokes[i].hasChanged();
+            }
+            inCombat = battleType;
+        }
+
         // if we currently are in a battle
         if (battleType) {
             
@@ -154,11 +165,17 @@ async function updatePlayerTeam() {
                             pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
                         }
                         pokemons[i].setLvl(rawBattlePokes[i].level());
+                        pokemons[i].setGender(rawBattlePokes[i].gender());
                         pokemons[i].setStatus(rawBattlePokes[i].status());
                         pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
-
+                        
+                        pokemons[i].setExp(rawBattlePokes[i].experience());
+                        pokemons[i].setAbility(rawBattlePokes[i].ability());
+                        pokemons[i].setItem(rawBattlePokes[i].item());
+                        pokemons[i].setMoves(rawBattlePokes[i].moves());
                         pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
                         pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
+                        pokemons[i].setStats(rawBattlePokes[i].stats());
 
                     }
 
@@ -182,12 +199,12 @@ async function updatePlayerTeam() {
                     pokemons[i].setStatus(rawPokesIndexed[i].status());
                     pokemons[i].setFormNumber(rawPokesIndexed[i].formIndex());
 
-                    pokemons[i].setHpMax(rawPokesIndexed[i].maxHP());
-                    pokemons[i].setHpCurrent(rawPokesIndexed[i].currentHP());
                     pokemons[i].setExp(rawPokesIndexed[i].experience());
                     pokemons[i].setAbility(rawPokesIndexed[i].ability());
                     pokemons[i].setItem(rawPokesIndexed[i].item());
                     pokemons[i].setMoves(rawPokesIndexed[i].moves());
+                    pokemons[i].setHpMax(rawPokesIndexed[i].maxHP());
+                    pokemons[i].setHpCurrent(rawPokesIndexed[i].currentHP());
                     pokemons[i].setStats(rawPokesIndexed[i].stats());
                     
                 }           

@@ -46,6 +46,11 @@ export class RawPokemonParty {
             
     }
 
+    /** Changes hasChanged status from the outside */
+    hasChanged() {
+        this.#hasChanged = true;
+    }
+
     /**
      * Returns this pokemon's Pokedex number
      * @returns {Number}
@@ -79,6 +84,32 @@ export class RawPokemonParty {
     }
 
     /**
+     * Returns this pokemon's current level
+     * @returns {Number}
+     */
+    level() {
+        if (this.#hasChanged) {
+            this.levelValue = struct("B").unpack(this.#data.slice(0xEC, 0xED))[0];
+        }
+        return this.levelValue;
+    }    
+
+    /**
+     * Check if this Pokemon has changed its form
+     * @returns {Number}
+     */
+    formIndex() {
+
+        if (this.#hasChanged) {
+            // this is the same byte used to determine gender
+            this.formIndexValue =
+                (struct("B").unpack(this.#data.slice(0x1D, 0x1E))[0] & 248) >> 3;
+        }
+        return this.formIndexValue;
+        
+    }
+
+    /**
      * Returns this pokemon's gender
      * @returns {String}
      */
@@ -100,32 +131,6 @@ export class RawPokemonParty {
 
         return this.genderValue;
         
-    }
-
-    /**
-     * Check if this Pokemon has changed its form
-     * @returns {Number}
-     */
-    formIndex() {
-
-        if (this.#hasChanged) {
-            // this is the same byte used to determine gender
-            this.formIndexValue =
-                (struct("B").unpack(this.#data.slice(0x1D, 0x1E))[0] & 248) >> 3;
-        }
-        return this.formIndexValue;
-      
-    }
-
-    /**
-     * Returns this pokemon's current level
-     * @returns {Number}
-     */
-    level() {
-        if (this.#hasChanged) {
-            this.levelValue = struct("B").unpack(this.#data.slice(0xEC, 0xED))[0];
-        }
-        return this.levelValue;
     }
 
     /**
@@ -159,7 +164,7 @@ export class RawPokemonParty {
      */
     experience() {
         if (this.#hasChanged) {
-            this.experienceValue = struct("<H").unpack(this.#data.slice(0x10, 0x13))[0];
+            this.experienceValue = struct("<i").unpack(this.#data.slice(0x10, 0x14))[0];
         }
         return this.experienceValue;
     }
@@ -248,8 +253,11 @@ export class RawPokemonParty {
 
     }
 
+    /**
+     * Gets this pokemon's moves
+     * @returns {[{name: String, type: String, pp: Number}]} Movement data
+     */
     moves() {
-
         if (this.#hasChanged) {
             this.movesValue = [];
             for (let i = 0; i < 4; i++) {
@@ -348,7 +356,7 @@ export class RawPokemonParty {
      */
 
     /**
-     * Gathers all stats from this pokemon and returns an object
+     * Gathers all stats from this pokemon
      * @returns {{
      *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
      * }}
@@ -356,25 +364,19 @@ export class RawPokemonParty {
     stats() {
 
         if (this.#hasChanged) {
-            const num = {
-                hp : this.maxHP(),
-                atk : this.attack(),
-                def : this.defense(),
-                spa : this.spAttack(),
-                spd : this.spDefense(),
-                spe : this.speed(),
-            }
+
             const ev = this.ev();
             const iv = this.iv();
     
             this.statsValue = {
-                hp: {num : num.hp, ev: ev.hp, iv: iv.hp},
-                atk: {num : num.atk, ev: ev.atk, iv: iv.atk},
-                def: {num : num.def, ev: ev.def, iv: iv.def},
-                spa: {num : num.spa, ev: ev.spa, iv: iv.spa},
-                spd: {num : num.spd, ev: ev.spd, iv: iv.spd},
-                spe: {num : num.spe, ev: ev.spe, iv: iv.spe},
+                hp: {num : this.maxHP(), ev: ev.hp, iv: iv.hp},
+                atk: {num : this.attack(), ev: ev.atk, iv: iv.atk},
+                def: {num : this.defense(), ev: ev.def, iv: iv.def},
+                spa: {num : this.spAttack(), ev: ev.spa, iv: iv.spa},
+                spd: {num : this.spDefense(), ev: ev.spd, iv: iv.spd},
+                spe: {num : this.speed(), ev: ev.spe, iv: iv.spe},
             }
+
         }
         
         return this.statsValue;

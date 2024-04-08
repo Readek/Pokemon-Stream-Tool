@@ -224,7 +224,11 @@ export class TeamPokemon extends Pokemon {
                 this.#stat[statKeys[i]].iv = stats[statKeys[i]].iv;
 
                 // update displayed text
-                this.#statEl[statKeys[i]].eviv.innerHTML = `(${stats[statKeys[i]].ev}) (${stats[statKeys[i]].iv})`;
+                if (stats[statKeys[i]].ev != undefined && stats[statKeys[i]].iv != undefined) {
+                    this.#statEl[statKeys[i]].eviv.innerHTML = `(${stats[statKeys[i]].ev}) (${stats[statKeys[i]].iv})`;   
+                } else {
+                    this.#statEl[statKeys[i]].eviv.innerHTML = "";
+                }
 
             }
 

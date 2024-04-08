@@ -27,6 +27,7 @@ export function getBattleAddress(type, game) {
         }
 
     } else if (type == "Multi") {
+        
         if (game == "XY") {
             return 0x8209D98;
         }
