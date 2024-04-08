@@ -73,6 +73,8 @@ export const lang = {
     pokeMoves : "Movimientos del pokemon",
     pokePP : "PP",
 
+    pokeBoost : "Multiplicador de stat",
+
     pokeEVIV : "Stat actual (EV) (IV)",
 
     pokeAtkTitle : "Ataque",

@@ -292,26 +292,51 @@ export class RawPokemonBattle {
     /**
      * Gathers base stats from this pokemon
      * @returns {{
-    *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
-    * }}
-    */
-   stats() {
+     *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
+     * }}
+     */
+    stats() {
 
-       if (this.#hasChanged) {
-   
-           this.statsValue = {
-               hp: {num : this.maxHP()},
-               atk: {num : this.attack()},
-               def: {num : this.defense()},
-               spa: {num : this.spAttack()},
-               spd: {num : this.spDefense()},
-               spe: {num : this.speed()},
-           }
-           
-       }
-       
-       return this.statsValue;
+        if (this.#hasChanged) {
+    
+            this.statsValue = {
+                hp: {num : this.maxHP()},
+                atk: {num : this.attack()},
+                def: {num : this.defense()},
+                spa: {num : this.spAttack()},
+                spd: {num : this.spDefense()},
+                spe: {num : this.speed()},
+            }
 
-   }
+        }
+        
+        return this.statsValue;
+
+    }
+
+    /**
+     * Gathers stat boosts from this pokemon
+     * @returns {{
+     *  atk: Number, def: Number, spa: Number, spd: Number, spe: Number, pre: Number, eva: Number
+     * }}
+     */
+    boosts() {
+
+        if (this.#hasChanged) {
+
+            this.statBoostsValue = {
+                atk: struct("B").unpack(this.#data.slice(0xfc, 0xfd))[0] - 6,
+                def: struct("B").unpack(this.#data.slice(0xfd, 0xfe))[0] - 6,
+                spa: struct("B").unpack(this.#data.slice(0xfe, 0xff))[0] - 6,
+                spd: struct("B").unpack(this.#data.slice(0xff, 0x100))[0] - 6,
+                spe: struct("B").unpack(this.#data.slice(0x100, 0x101))[0] - 6,
+                acc: struct("B").unpack(this.#data.slice(0x101, 0x102))[0] - 6,
+                eva: struct("B").unpack(this.#data.slice(0x102, 0x103))[0] - 6,
+            }
+
+        }
+        return this.statBoostsValue;
+
+    }
 
 }

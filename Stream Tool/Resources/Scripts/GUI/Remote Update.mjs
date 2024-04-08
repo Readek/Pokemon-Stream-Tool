@@ -97,6 +97,7 @@ export async function updateGUI(data, noNotif) {
             pokemons[i].setItem(data.playerPokemons[i].item);
             pokemons[i].setMoves(data.playerPokemons[i].moves);
             pokemons[i].setStats(data.playerPokemons[i].stats);
+            pokemons[i].setBoosts(data.playerPokemons[i].boosts);
 
         };
 

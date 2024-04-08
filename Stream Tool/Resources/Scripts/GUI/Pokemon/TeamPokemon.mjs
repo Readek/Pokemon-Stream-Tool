@@ -3,6 +3,8 @@ import { typeToColor } from "../Type to Color.mjs";
 
 const statKeys = ["hp", "atk", "def", "spa", "spd", "spe"];
 const statKeysUpper = ["Hp", "Atk", "Def", "SpA", "SpD", "Spe"];
+const boostKeys = ["atk", "def", "spa", "spd", "spe", "pre", "acc"];
+const boostKeysUpper = ["Atk", "Def", "SpA", "SpD", "Spe", "Pre", "Acc"];
 
 const pokePartyDiv = document.getElementById("pokeParty");
 
@@ -25,6 +27,9 @@ export class TeamPokemon extends Pokemon {
 
     #stat = { hp: {}, atk: {}, def: {}, spa: {}, spd: {}, spe: {} };
     #statEl = { hp: {}, atk: {}, def: {}, spa: {}, spd: {}, spe: {} };
+
+    #boost = {};
+    #boostEl = {};
 
     constructor() {
 
@@ -61,7 +66,12 @@ export class TeamPokemon extends Pokemon {
             this.#statEl[statKeys[i]].num = this.el.getElementsByClassName(`poke${statKeysUpper[i]}`)[0];
             this.#statEl[statKeys[i]].eviv = this.el.getElementsByClassName(`poke${statKeysUpper[i]}EVIV`)[0];
             this.#statEl[statKeys[i]].bar = this.el.getElementsByClassName(`pokeStat${statKeysUpper[i]}Bar`)[0];
-        }        
+        }
+
+        // boosts
+        for (let i = 0; i < 5 ; i++) {
+            this.#boostEl[boostKeys[i]] = this.el.getElementsByClassName(`poke${boostKeysUpper[i]}Boost`)[0];
+        }
 
     }
 
@@ -232,6 +242,67 @@ export class TeamPokemon extends Pokemon {
 
             }
 
+            
+        }
+
+    }
+
+
+    /**
+     * @typedef {{
+    *  atk: Number, def: Number, spa: Number, spd: Number, spe: Number, acc: Number, eva: Number
+    * }} Boosts
+    */
+    /** @returns {Boosts} */
+    getBoosts() {
+        return this.#boost;
+    }
+    /**
+     * Sets current stat boosts
+     * @param {Boosts} boosts 
+     */
+    setBoosts(boosts) {
+
+        if (!boosts) return;
+
+        for (let i = 0; i < boostKeys.length; i++) {
+            
+            if (this.#boost[boostKeys[i]] != boosts[boostKeys[i]]) {
+                
+                this.#boost[boostKeys[i]] = boosts[boostKeys[i]];
+
+                if (this.#boostEl[boostKeys[i]]) {
+                    if (this.#boost[boostKeys[i]] != 0 && this.#boost[boostKeys[i]] != undefined) {
+
+                        let divi;
+                        if (this.#boost[boostKeys[i]] != "eva" || this.#boost[boostKeys[i]] != "acc") {
+                            
+                            if (this.#boost[boostKeys[i]] > 0) {
+                                divi = (2 + this.#boost[boostKeys[i]]) / 2;
+                            } else {
+                                divi = 2 / (2 - this.#boost[boostKeys[i]]);
+                            }
+
+                        } else {
+                            
+                            if (this.#boost[boostKeys[i]] > 0) {
+                                divi = (3 + this.#boost[boostKeys[i]]) / 3;
+                            } else {
+                                divi = 3 / (3 - this.#boost[boostKeys[i]]);
+                            }
+
+                        }
+                        const multNum = Number(divi.toFixed(2));
+
+                        this.#boostEl[boostKeys[i]].style.display = "block";
+                        this.#boostEl[boostKeys[i]].innerHTML = `x${multNum}`;
+                    
+                    } else {
+                        this.#boostEl[boostKeys[i]].style.display = "none";
+                    }
+                }
+
+            }
             
         }
 
@@ -416,6 +487,7 @@ export class TeamPokemon extends Pokemon {
 
         <div class="pokeStatTexts">
             <div class="pokeStatName" locText="poke${statKey}" locTitle="poke${statKey}Title"></div>
+            <div class="pokeBoostNum poke${statKey}Boost" locTitle="pokeBoost"></div>
             <div class="pokeStatNums" locTitle="pokeEVIV">
                 <div class="pokeStatNum poke${statKey}"></div>
                 <div class="pokeStatNumEVIV poke${statKey}EVIV"></div>

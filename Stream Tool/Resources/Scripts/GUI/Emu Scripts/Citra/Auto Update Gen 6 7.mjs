@@ -142,6 +142,11 @@ async function updatePlayerTeam() {
             for (let i = 0; i < 6; i++) {
                 rawPartyPokes[i].hasChanged();
                 rawBattlePokes[i].hasChanged();
+                if (!battleType) { // reset boost texts
+                    pokemons[i].setBoosts({
+                        atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
+                    })
+                }
             }
             inCombat = battleType;
         }
@@ -176,6 +181,7 @@ async function updatePlayerTeam() {
                         pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
                         pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
                         pokemons[i].setStats(rawBattlePokes[i].stats());
+                        pokemons[i].setBoosts(rawBattlePokes[i].boosts());
 
                     }
 
