@@ -8,12 +8,12 @@ import { playerStats } from "../Player/Stats.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { updateWildEnc } from "./Update Wild.mjs";
 
-class WildPokemon extends Pokemon {
+const infoDiv = document.getElementById("vsWildBotRow");
+const sendInp = document.getElementById("vsWildNickInput");
+const sendBut = document.getElementById("sendCatchButt");
+const inComCheck = document.getElementById("vsWildInCombatCheck");
 
-    #infoDiv = document.getElementById("vsWildBotRow");
-    #sendInp = document.getElementById("vsWildNickInput");
-    #sendBut = document.getElementById("sendCatchButt");
-    #inComCheck = document.getElementById("vsWildInCombatCheck");
+class WildPokemon extends Pokemon {
 
     #statTextHP;
     #statTextAT;
@@ -68,15 +68,8 @@ class WildPokemon extends Pokemon {
         this.#abilityText1 = document.getElementById("vsWildAbility1");
         this.#abilityTextH = document.getElementById("vsWildAbilityH");
 
-        this.genderButt.addEventListener("click", () => {this.swapGender()});
-
-        this.shinyButt.addEventListener("click", () => {this.swapShiny()});
-
-        // event listener for the form selector.
-        this.formSel.addEventListener("change", () => {this.setForm(this.formSel.value)});
-
         // send catch listener
-        this.#sendBut.addEventListener("click", () => {this.#sendCatch()})
+        sendBut.addEventListener("click", () => {this.#sendCatch()})
 
         this.displayWildStats();
 
@@ -99,23 +92,23 @@ class WildPokemon extends Pokemon {
     displayWildStats() {
         if (this.getSpecies()) {
             // show them stats and fill them
-            this.#infoDiv.style.display = "flex";
+            infoDiv.style.display = "flex";
             document.getElementById("vsWildSendCatchDiv").style.display = "flex";
             document.getElementById("vsWildInCombatDiv").style.display = "flex";
             this.#fillInfo();
         } else {
             // hide them stats
-            this.#infoDiv.style.display = "none";
+            infoDiv.style.display = "none";
             document.getElementById("vsWildSendCatchDiv").style.display = "none";
             document.getElementById("vsWildInCombatDiv").style.display = "none";
         }
     }
 
     getInCombat() {
-        return this.#inComCheck.checked;
+        return inComCheck.checked;
     }
     setInCombat(value) {
-        this.#inComCheck.checked = value;
+        inComCheck.checked = value;
     }
 
     #fillInfo() {
@@ -195,7 +188,7 @@ class WildPokemon extends Pokemon {
         const dataToSend = {
             species : this.getSpecies(),
             form : this.getForm(),
-            nickname : this.#sendInp.value,
+            nickname : sendInp.value,
             gender : this.getGender(),
             shiny : this.getShiny(),
         }
