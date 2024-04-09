@@ -5,6 +5,7 @@ import { updateCatches } from "../Catches/Update Catches.mjs";
 import { stPath } from "../Globals.mjs";
 import { displayNotif } from "../Notifications.mjs";
 import { playerStats } from "../Player/Stats.mjs";
+import { updatePlayer } from "../Player/Update Player.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { updateWildEnc } from "./Update Wild.mjs";
 
@@ -202,6 +203,7 @@ class WildPokemon extends Pokemon {
 
         // +1 to catches counter
         playerStats.setCatches(playerStats.getCatches() + 1);
+        updatePlayer();
 
         displayNotif(getLocalizedText("notifCatchSent",
             [dataToSend.nickname || dataToSend.species]) // if no nickname, use species
