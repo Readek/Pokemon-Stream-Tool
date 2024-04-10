@@ -1,4 +1,3 @@
-import { genRnd } from "../../../Utils/GenRnd.mjs";
 import { concatArrayBuffers } from "./Utils.mjs";
 import struct from "./struct.mjs";
 
@@ -52,7 +51,9 @@ class Citra {
             const requestData = struct("<II").pack(readAdress, tempReadSize);
 
             // generate a random id for the individual package
-            const requestId = genRnd(0, 4000000000);
+            // const requestId = genRnd(0, 4000000000);
+            // since we are sending messages synchrounously, message id can be whatever
+            const requestId = 0;
             // generate proper header info or else Citra wont even bother answering
             let request = this.#generateHeader(requestId, readMemory, requestData.byteLength);
 
@@ -133,7 +134,7 @@ class Citra {
         } */
 
         // it would be best to run the commented code above, however chances for it
-        // to matter are really thing so we ignore it for a small performance imporvement
+        // to matter are really thin so we ignore it for a small performance imporvement
         return reply.slice(16);
 
     }   

@@ -1,12 +1,10 @@
 import { getLocalizedText } from "../../../../Utils/Language.mjs";
 import { current } from "../../../Globals.mjs";
 import { validateRawPokemon } from "../Utils.mjs";
-import struct from "../struct.mjs";
 
 export class RawPokemonBattle {
 
-    #data;
-    #dataUnbuffered = [];
+    #data = [];
     #hasChanged = false;
 
     /**
@@ -18,27 +16,23 @@ export class RawPokemonBattle {
         // check if new data is same as last to save on performance
         this.#hasChanged = false;
 
-        if (this.#dataUnbuffered.length != data.length) { // mostly for first time
+        if (this.#data.length != data.length) { // mostly for first time
             this.#hasChanged = true
         } else {
 
             // check if anything missmatches between old data and new data
-            for (let i = 0; i < this.#dataUnbuffered.length; i++) {
-                if (data[i] != this.#dataUnbuffered[i]) {
+            for (let i = 0; i < this.#data.length; i++) {
+                if (data[i] != this.#data[i]) {
                     this.#hasChanged = true;
                     break;
                 }
-                
             }
 
         }
 
         if (this.#hasChanged) {
-
-            this.#dataUnbuffered = data;
-            this.#data = data.buffer;
+            this.#data = data;
             this.valid = validateRawPokemon(this);
-
         }
             
     }
@@ -54,7 +48,7 @@ export class RawPokemonBattle {
      */
     dexNum() {
         if (this.#hasChanged) {
-            this.dexNumValue = struct("<H").unpack(this.#data.slice(0x4, 0x6))[0];
+            this.dexNumValue = this.#data[0x4] + this.#data[0x5]*256;
         }
         return this.dexNumValue;
     }
@@ -73,7 +67,7 @@ export class RawPokemonBattle {
      */
     level() {
         if (this.#hasChanged) {
-            this.levelValue = struct("B").unpack(this.#data.slice(0x10, 0x11))[0];
+            this.levelValue = this.#data[0x10];
         }
         return this.levelValue;
     }
@@ -85,7 +79,7 @@ export class RawPokemonBattle {
      */
     formIndex() {
         if (this.#hasChanged) {
-            this.formIndexValue = struct("B").unpack(this.#data.slice(0x14B, 0x14C))[0];
+            this.formIndexValue = this.#data[0x14B];
         }
         return this.formIndexValue;
     }
@@ -98,7 +92,7 @@ export class RawPokemonBattle {
     
         if (this.#hasChanged) {
 
-            const leByte = struct("B").unpack(this.#data.slice(0xfb, 0xfc))[0];
+            const leByte = this.#data[0xfb];
 
             if (leByte == 1 ) {
                 this.genderValue = "F";
@@ -121,15 +115,15 @@ export class RawPokemonBattle {
     status() {
         
         if (this.#hasChanged) {
-            if (struct("B").unpack(this.#data.slice(0x18, 0x19))[0]) {
+            if (this.#data[0x18]) {
                 this.statusValue = "Par";
-            } else if (struct("B").unpack(this.#data.slice(0x1C, 0x1D))[0]) {
+            } else if (this.#data[0x1C]) {
                 this.statusValue = "Sle";
-            } else if (struct("B").unpack(this.#data.slice(0x20, 0x21))[0]) {
+            } else if (this.#data[0x20]) {
                 this.statusValue = "Fro";
-            } else if (struct("B").unpack(this.#data.slice(0x24, 0x25))[0]) {
+            } else if (this.#data[0x24]) {
                 this.statusValue = "Bur";
-            } else if (struct("B").unpack(this.#data.slice(0x28, 0x29))[0]) {
+            } else if (this.#data[0x28]) {
                 this.statusValue = "Poi";
             }
         }
@@ -143,7 +137,10 @@ export class RawPokemonBattle {
      */
     experience() {
         if (this.#hasChanged) {
-            this.experienceValue = struct("<i").unpack(this.#data.slice(0x0, 0x4))[0];
+            this.experienceValue = this.#data[0x0]
+                + this.#data[0x1]*256
+                + this.#data[0x2]*256
+                + this.#data[0x3]*256;
         }
         return this.experienceValue;
     }
@@ -156,7 +153,7 @@ export class RawPokemonBattle {
 
         if (this.#hasChanged) {
 
-            const abNum = struct("B").unpack(this.#data.slice(0xE, 0xF))[0];
+            const abNum = this.#data[0xE];
             if (current.abilities[abNum]) {
                 this.abilityValue = current.abilities[abNum].name;
             } else {
@@ -176,7 +173,7 @@ export class RawPokemonBattle {
 
         if (this.#hasChanged) {
 
-            const itemNum = struct("<H").unpack(this.#data.slice(0xA, 0xC))[0];
+            const itemNum = this.#data[0xA] + this.#data[0xB]*256;
             if (itemNum == 0) {
                 this.itemValue = "";
             } else if (current.items[itemNum]) {
@@ -197,14 +194,14 @@ export class RawPokemonBattle {
 
         const moveAdd = 0x10e + (14 * num);
         const ppAdd = 0x110 + (14 * num);
-        const moveNum = struct("<H").unpack(this.#data.slice(moveAdd, moveAdd+2))[0];
+        const moveNum = this.#data[moveAdd] + this.#data[moveAdd+1]*256;
 
         if (current.moves[moveNum]) {
             
             move.name = current.moves[moveNum].name;
             move.type = current.moves[moveNum].type;
     
-            move.pp = struct("B").unpack(this.#data.slice(ppAdd, ppAdd+1))[0];
+            move.pp = this.#data[ppAdd];
     
             return move;
 
@@ -248,7 +245,7 @@ export class RawPokemonBattle {
      */
     currentHP() {
         if (this.#hasChanged) {
-            this.currentHPValue = struct("<H").unpack(this.#data.slice(0x8, 0xA))[0];
+            this.currentHPValue = this.#data[0x8] + this.#data[0x9]*256;
         }
         return this.currentHPValue;
     }
@@ -259,30 +256,30 @@ export class RawPokemonBattle {
      */
     maxHP() {
         if (this.#hasChanged) {
-            this.maxHPValue = struct("<H").unpack(this.#data.slice(0x6, 0x8))[0];
+            this.maxHPValue = this.#data[0x6] + this.#data[0x7]*256;
         }
         return this.maxHPValue;
     }
 
     /** Current Attack value @returns {Number} */
     attack() {
-        return struct("<H").unpack(this.#data.slice(0xEE, 0xF0))[0];
+        return this.#data[0xEE] + this.#data[0xEF]*256;
     }
     /** Current Defense value @returns {Number} */
     defense() {
-        return struct("<H").unpack(this.#data.slice(0xF0, 0xF2))[0];
+        return this.#data[0xF0] + this.#data[0xF1]*256;
     }
     /** Current Special Attack value @returns {Number} */
     spAttack() {
-        return struct("<H").unpack(this.#data.slice(0xF2, 0xF4))[0];
+        return this.#data[0xF2] + this.#data[0xF3]*256;
     }
     /** Current Special Defense value @returns {Number} */
     spDefense() {
-        return struct("<H").unpack(this.#data.slice(0xF4, 0xF6))[0];
+        return this.#data[0xF4] + this.#data[0xF5]*256;
     }
     /** Current Speed value @returns {Number} */
     speed() {
-        return struct("<H").unpack(this.#data.slice(0xF6, 0xF8))[0];
+        return this.#data[0xF6] + this.#data[0xF7]*256;
     }
 
     /**
@@ -325,13 +322,13 @@ export class RawPokemonBattle {
         if (this.#hasChanged) {
 
             this.statBoostsValue = {
-                atk: struct("B").unpack(this.#data.slice(0xfc, 0xfd))[0] - 6,
-                def: struct("B").unpack(this.#data.slice(0xfd, 0xfe))[0] - 6,
-                spa: struct("B").unpack(this.#data.slice(0xfe, 0xff))[0] - 6,
-                spd: struct("B").unpack(this.#data.slice(0xff, 0x100))[0] - 6,
-                spe: struct("B").unpack(this.#data.slice(0x100, 0x101))[0] - 6,
-                acc: struct("B").unpack(this.#data.slice(0x101, 0x102))[0] - 6,
-                eva: struct("B").unpack(this.#data.slice(0x102, 0x103))[0] - 6,
+                atk: this.#data[0xFC] - 6,
+                def: this.#data[0xFD] - 6,
+                spa: this.#data[0xFE] - 6,
+                spd: this.#data[0xFF] - 6,
+                spe: this.#data[0x100] - 6,
+                acc: this.#data[0x101] - 6,
+                eva: this.#data[0x102] - 6,
             }
 
         }
