@@ -1,6 +1,3 @@
-import { concatArrayBuffers } from "./Utils.mjs";
-import struct from "./struct.mjs";
-
 const dgram = require('node:dgram');
 
 // this will connect us to the emulator
@@ -11,13 +8,17 @@ const adress = "localhost";
 // this do be citra's port
 const port = 45987;
 
-const currentRequestVersion = 1;
 const maxRequestDataSize = 32;
-const readMemory = 1;
 
 let theResolve = null;
 
 class Citra {
+
+    #header;
+
+    #toutInterval;
+    #toutTick = 0;
+    #toutPromise;
 
     constructor() {
 
@@ -29,6 +30,9 @@ class Citra {
             }
         })
     
+        this.#header = this.#prepareHeader();
+        this.#startInterval();
+
     }
 
     /**
@@ -40,76 +44,55 @@ class Citra {
     async readMemory(readAdress, readSize) {
 
         // this will be the final return
-        let result = new Uint8Array();
+        let result = new Uint8Array(readSize);
+        let resCounter = 0;
 
         // we need to send small packages to Citra, so we will be reading
         // small chunks until we have nothing else to read
         while (readSize > 0) {
-            
+
             // block to read
             const tempReadSize = Math.min(readSize, maxRequestDataSize);
-            const requestData = struct("<II").pack(readAdress, tempReadSize);
 
-            // generate a random id for the individual package
-            // const requestId = genRnd(0, 4000000000);
-            // since we are sending messages synchrounously, message id can be whatever
-            const requestId = 0;
-            // generate proper header info or else Citra wont even bother answering
-            let request = this.#generateHeader(requestId, readMemory, requestData.byteLength);
-
-            // add the data to the header we will send
-            const finalRequest = concatArrayBuffers(request, requestData);
+            // we need to generate a header for Citra to listen to us
+            this.#header[4] = readAdress;
+            this.#header[5] = tempReadSize;
+            const request = this.#header.buffer;
 
             // send that data to the socket
             // if the data is wrong somehow, Citra will just not answer back
-            socket.send(Buffer.from(finalRequest), port, adress);
+            socket.send(Buffer.from(request), port, adress);
 
             // now we wait for an answer
             const citraReply = new Promise((resolve) => {
                 theResolve = resolve;
             })
             // but set a time limit to the request
+            this.#toutTick = 4; // roughly 2 seconds
             const timeLimit = new Promise((resolve) => {
-                let timeo = setTimeout(() => {
-                    resolve();
-                    clearTimeout(timeo);
-                }, 2000, null);
-            });
+                this.#toutPromise = resolve;
+            })
 
             // check if everything is alright
             const reply = await Promise.race([citraReply, timeLimit]);
-            if (!reply) {
-                return null;
+            if (!reply) return null;
+
+            // remove the header because we dont really need it
+            const replyData = reply.slice(16);
+
+            // add new data to the end result
+            for (let i = 0; i < replyData.length; i++) {
+                result[resCounter] = replyData[i];
+                resCounter++;
             }
-
-            // check if the data we got is what we expect
-            // though it would be rare if it wasnt
-            const replyData = this.#validateHeader(reply, requestId, readMemory);
-
-            // if the data we got is correct, add it to the end result
-            if (replyData) {
-                result = new Uint8Array([...result, ...replyData]);
-                readSize -= replyData.byteLength;
-                readAdress += replyData.byteLength;
-            } else {
-                return null;
-            }
-
+            // prepare stuff for the next loop
+            readSize -= replyData.byteLength;
+            readAdress += replyData.byteLength;
+            
         }
 
         return result;
 
-    }
-
-    /**
-     * Generates a header for a request
-     * @param {Number} requestId - Request identifier
-     * @param {Number} requestType 
-     * @param {Number} dataSize - Size of data to request
-     * @returns {ArrayBuffer}
-     */
-    #generateHeader(requestId, requestType, dataSize) {
-        return struct("<IIII").pack(currentRequestVersion, requestId, requestType, dataSize);
     }
 
     /**
@@ -121,7 +104,14 @@ class Citra {
      */
     #validateHeader(reply, expectedId, expectedType) {
 
-        /* // struct expects an array buffer for its functions
+        // it would be best to run the commented code below, however chances for it
+        // to matter are really thin so we ignore it for a small performance imporvement
+        // just leaving code here in case it becomes relevant some day
+
+        /*
+        const currentRequestVersion = 1;
+
+        // struct expects an array buffer for its functions
         const replyABuffer = reply.buffer;
 
         let [replyVersion, replyId, replyType, replyDataSize] = struct("<IIII").unpack(replyABuffer.slice(0, 16));
@@ -131,13 +121,39 @@ class Citra {
             expectedType == replyType &&
             replyDataSize == reply.slice(16).byteLength) {
                 return reply.slice(16);
-        } */
+        }
+        */
 
-        // it would be best to run the commented code above, however chances for it
-        // to matter are really thin so we ignore it for a small performance imporvement
-        return reply.slice(16);
+    }
+    
+    /** Prepares header to be sent out to Citra with static data */
+    #prepareHeader() {
 
-    }   
+        const result = new Uint32Array(6);
+        result[0] = 1; // Request Version
+        result[1] = 0; // Request ID
+        result[2] = 1; // Request Type
+        result[3] = 8; // Request Data Size
+        return result;
+
+    }
+
+    /** Starts the internal citra request timeout limit */
+    #startInterval() {
+
+        this.#toutInterval = setInterval(() => {
+            
+            this.#toutTick--;
+
+            // if it reaches 0 or if the promise resolves
+            if (this.#toutPromise && this.#toutTick <= 0) {
+                this.#toutPromise();
+                this.#toutPromise = null;
+            }
+
+        }, 500); // if tick is 4, will take roughly 2 seconds
+
+    }
 
 }
 

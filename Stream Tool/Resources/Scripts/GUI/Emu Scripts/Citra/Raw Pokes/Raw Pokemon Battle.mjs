@@ -34,7 +34,7 @@ export class RawPokemonBattle {
             this.#data = data;
             this.valid = validateRawPokemon(this);
         }
-            
+
     }
 
     /** Changes hasChanged status from the outside */

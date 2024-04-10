@@ -1,6 +1,6 @@
 import { current } from "../../Globals.mjs";
-import { getBattleAddress } from "./Battle Addresses.mjs";
 import { citra } from "./Citra.mjs";
+import { getBattleAddress } from "./Read Player Battle.mjs";
 
 let oldArr = [];
 

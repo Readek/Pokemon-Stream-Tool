@@ -4,7 +4,6 @@ import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
 import { pokemons } from "../../Pokemon/TeamPokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
-import { getBattleAddress } from "./Battle Addresses.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
 import { indexRawParty, rawBattlePokes, rawPartyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
@@ -153,19 +152,17 @@ async function updatePlayerTeam() {
 
         // if we currently are in a battle
         if (battleType) {
-            
-            const addressToRead = getBattleAddress(battleType, current.game);
-            const battlePokes = await readPokeBattleData.getPokeBattle(addressToRead);
+
+            const battlePokes = await readPokeBattleData.getPokeBattle(battleType);
 
             for (let i = 0; i < pokemons.length; i++) {
 
                 if (battlePokes && rawBattlePokes[i].valid) {
 
-                    
                     // battle memory will use enemy pokemons after the player's pokes
                     // if our team data does not align with battle data, ignore it
                     if (rawPokesIndexed[i].dexNum() == rawBattlePokes[i].dexNum()) {
-                        
+
                         if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
                             pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
                         }
@@ -173,7 +170,7 @@ async function updatePlayerTeam() {
                         pokemons[i].setGender(rawBattlePokes[i].gender());
                         pokemons[i].setStatus(rawBattlePokes[i].status());
                         pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
-                        
+
                         pokemons[i].setExp(rawBattlePokes[i].experience());
                         pokemons[i].setAbility(rawBattlePokes[i].ability());
                         pokemons[i].setItem(rawBattlePokes[i].item());
