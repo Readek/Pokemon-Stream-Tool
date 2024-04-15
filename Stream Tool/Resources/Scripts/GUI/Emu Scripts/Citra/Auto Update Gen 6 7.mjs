@@ -119,6 +119,9 @@ async function updatePlayerTeam() {
         return true;
          */
 
+        // first of all, keep track of updates
+        current.autoUpdated = false;
+
         // get current party info
         const rawPokes = await readPartyData.getParty();
 
@@ -139,8 +142,8 @@ async function updatePlayerTeam() {
         // clear changed states if going in or out of combat
         if (inCombat != battleType) {
             for (let i = 0; i < 6; i++) {
-                rawPartyPokes[i].hasChanged();
-                rawBattlePokes[i].hasChanged();
+                rawPartyPokes[i].changeHasChanged();
+                rawBattlePokes[i].changeHasChanged();
                 if (!battleType) { // reset boost texts
                     pokemons[i].setBoosts({
                         atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
@@ -157,7 +160,7 @@ async function updatePlayerTeam() {
 
             for (let i = 0; i < pokemons.length; i++) {
 
-                if (battlePokes && rawBattlePokes[i].valid) {
+                if (battlePokes && rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
 
                     // battle memory will use enemy pokemons after the player's pokes
                     // if our team data does not align with battle data, ignore it
@@ -191,7 +194,7 @@ async function updatePlayerTeam() {
             // use party data
             for (let i = 0; i < pokemons.length; i++) {
 
-                if (rawPokesIndexed[i].valid) {
+                if (rawPokesIndexed[i].hasChanged() && rawPokesIndexed[i].valid) {
 
                     if (rawPokesIndexed[i].speciesName() != pokemons[i].getSpecies()) {
                         pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
@@ -216,7 +219,10 @@ async function updatePlayerTeam() {
 
         }
 
-        await updateTeam();
+        // if something was updated at all
+        if (current.autoUpdated) {
+            await updateTeam();
+        }
 
         return true; // so we all know everything went alright
         

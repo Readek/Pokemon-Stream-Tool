@@ -42,12 +42,20 @@ export class RawPokemonParty {
             this.#data = decryptData(data);
             this.valid = validateRawPokemon(this);
 
+            if (this.valid) {
+                current.autoUpdated = true;
+            }
+
         }
             
     }
 
-    /** Changes hasChanged status from the outside */
+    /** @returns {Boolean} */
     hasChanged() {
+        return this.#hasChanged;
+    }
+    /** Changes hasChanged status from the outside */
+    changeHasChanged() {
         this.#hasChanged = true;
     }
 
@@ -151,6 +159,8 @@ export class RawPokemonParty {
                 this.statusValue = "Bur";
             } else if (leByte == 5) {
                 this.statusValue = "Poi";
+            } else {
+                this.statusValue = null;
             }
         }
 

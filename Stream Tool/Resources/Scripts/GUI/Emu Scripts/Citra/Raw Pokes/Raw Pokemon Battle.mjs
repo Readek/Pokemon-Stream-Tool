@@ -31,14 +31,24 @@ export class RawPokemonBattle {
         }
 
         if (this.#hasChanged) {
+
             this.#data = data;
             this.valid = validateRawPokemon(this);
+
+            if (this.valid) {
+                current.autoUpdated = true;
+            }
+
         }
 
     }
 
-    /** Changes hasChanged status from the outside */
+    /** @returns {Boolean} */
     hasChanged() {
+        return this.#hasChanged;
+    }
+    /** Changes hasChanged status from the outside */
+    changeHasChanged() {
         this.#hasChanged = true;
     }
 

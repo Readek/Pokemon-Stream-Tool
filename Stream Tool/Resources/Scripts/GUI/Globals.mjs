@@ -27,7 +27,8 @@ export const current = {
     abilities : {},
     items : {},
     moves : {},
-    autoStatus : false
+    autoStatus : false,
+    autoUpdated : false
 }
 
 export const nameReplacements = { //Some substitutions for presentation sake or translation.
