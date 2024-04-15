@@ -63,7 +63,7 @@ html, body {
     z-index: 2;
 }
 #whoThatRevealProgress {
-    background-color: #3466B0;
+    background-color: #3877d6;
     z-index: 3;
 }
 
@@ -126,10 +126,9 @@ html, body {
 
 
 #countdownDiv {
-    border-top: #4a7b08 thick double;
     width: 100%;
-    height: 124px;
-    min-height: 124px;
+    height: 100px;
+    min-height: 100px;
     box-sizing: content-box;
     flex-shrink: 0;
     filter: drop-shadow(0px 0px 10px black);
@@ -137,11 +136,9 @@ html, body {
 
 #countdownBg {
     position: absolute;
-    width: 3072px;
+    width: 100%;
     height: 100%;
-    background-image: url(Images/Countdown\ BG.png);
-    background-repeat: repeat;
-    animation: anibg 9s linear infinite;
+    background-image: linear-gradient(to bottom, #00000000, #000000CC);
 }
 
 #countdownTextDiv {
@@ -150,11 +147,12 @@ html, body {
     gap: 16px;
     font-family: "Aero";
     color: #f8f8f8;
-    font-size: 62px;
+    font-size: 52px;
     text-shadow: 0px 0px 10px black;
     width: 100%;
     height: 100%;
-    justify-content: center;
+    justify-content: right;
+    padding-right: 30px;
     align-items: center;
 }
 
@@ -195,9 +193,4 @@ html, body {
 @keyframes barRevealnt {
     from { transform: translateX(0%); }
     to { transform: translateX(-100%); }
-}
-
-@keyframes anibg {
-    from { transform: translateX(0%); }
-    to { transform: translateX(-25%); }
 }
