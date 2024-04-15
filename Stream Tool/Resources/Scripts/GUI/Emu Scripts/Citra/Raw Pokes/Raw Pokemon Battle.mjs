@@ -125,6 +125,8 @@ export class RawPokemonBattle {
                 this.statusValue = "Bur";
             } else if (this.#data[0x28]) {
                 this.statusValue = "Poi";
+            } else {
+                this.statusValue = null;
             }
         }
         return this.statusValue;
