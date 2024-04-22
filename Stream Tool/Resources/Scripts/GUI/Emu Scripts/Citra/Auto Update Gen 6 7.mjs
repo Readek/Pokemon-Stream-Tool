@@ -151,6 +151,7 @@ async function updatePlayerTeam() {
                 }
             }
             inCombat = battleType;
+            current.autoUpdated = true;
         }
 
         // if we currently are in a battle

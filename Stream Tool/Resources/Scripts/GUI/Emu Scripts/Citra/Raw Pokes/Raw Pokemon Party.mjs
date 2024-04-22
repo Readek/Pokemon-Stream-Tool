@@ -188,7 +188,9 @@ export class RawPokemonParty {
         if (this.#hasChanged) {
 
             const abNum = struct("B").unpack(this.#data.slice(0x14, 0x15))[0];
-            if (current.abilities[abNum]) {
+            if (abNum == 0) {
+                this.abilityValue = "";
+            } else if (current.abilities[abNum]) {
                 this.abilityValue = current.abilities[abNum].name;
             } else {
                 this.abilityValue = getLocalizedText("unknownAbility");

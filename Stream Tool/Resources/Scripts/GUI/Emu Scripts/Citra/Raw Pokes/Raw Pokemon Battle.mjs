@@ -166,7 +166,9 @@ export class RawPokemonBattle {
         if (this.#hasChanged) {
 
             const abNum = this.#data[0xE];
-            if (current.abilities[abNum]) {
+            if (abNum == 0) {
+                this.abilityValue = "";
+            } else if (current.abilities[abNum]) {
                 this.abilityValue = current.abilities[abNum].name;
             } else {
                 this.abilityValue = getLocalizedText("unknownAbility");
