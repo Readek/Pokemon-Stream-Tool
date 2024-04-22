@@ -56,7 +56,7 @@ async function autoUpdateLoop() {
     let itBroke;
 
     // check if we can stablish a connection to citra
-    if (await updatePlayerTeam()) { // if first update succeeds
+    if (await updatePlayerTeam(true)) { // if first update succeeds
 
         displayNotif(getLocalizedText("notifCitraOk"));
 
@@ -109,7 +109,12 @@ async function autoUpdateLoop() {
 
 }
 
-async function updatePlayerTeam() {
+/**
+ * Asks Citra for memory data and translates it to local pokemon classes
+ * @param {Boolean} firstLoop If this is first loop after auto toggle
+ * @returns {Boolean} False if something went wrong
+ */
+async function updatePlayerTeam(firstLoop) {
 
     try { // the amount of possible errors Citra can give are a bit too much
 
@@ -119,8 +124,8 @@ async function updatePlayerTeam() {
         return true;
          */
 
-        // first of all, keep track of updates
-        current.autoUpdated = false;
+        // first of all, keep track of updates, unless on first loop after toggle
+        current.autoUpdated = firstLoop ? true : false;
 
         // get current party info
         const rawPokes = await readPartyData.getParty();
