@@ -12,6 +12,7 @@ export async function getJson(jPath) {
         // the electron version
         const fs = require('fs');
         if (fs.existsSync(jPath + ".json")) {
+            console.log(jPath);
             return JSON.parse(fs.readFileSync(jPath + ".json"));
         } else {
             return null;

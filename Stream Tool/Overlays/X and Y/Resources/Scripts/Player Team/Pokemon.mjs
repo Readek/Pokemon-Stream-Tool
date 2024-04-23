@@ -1,10 +1,6 @@
 import { current } from "../Globals.mjs";
-import { getJson } from "../Get JSON.mjs";
 import { typeToColor } from "../Type to Color.mjs";
 import { getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
-
-// these are the sprite offsets so their positions are more centered
-const offsets = await getJson("../../Resources/Assets/Pokemon/sprites/offsets.json") || {};
 
 export class Pokemon {
 
@@ -245,9 +241,7 @@ export class Pokemon {
         
         this.#img = img;
         this.imgEl.src = img["gen5" + this.#side];
-        let filename = img["gen5" + this.#side]
-            .replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
-        
+
         // We compensate to account for the cases where the gif center is skewed
         // towards a place where the Pokémon doesn't spend that much time;
         // e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their
@@ -255,7 +249,7 @@ export class Pokemon {
         // The offsets are the difference between the actual center of the gif
         // and the mean of the bounding boxes of each gif frame, and are precalculated
         // using a Python script included in the assets repo.
-        let offset = offsets[filename] ?? [0, 0];
+        const offset = img["gen5" + this.#side + "Offs"];
         this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
     
     }

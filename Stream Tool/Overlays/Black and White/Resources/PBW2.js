@@ -1,12 +1,8 @@
 import { getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
-import { getJson } from "./Scripts/Get JSON.mjs";
 import { current } from "./Scripts/Globals.mjs";
 import { typeToColor } from "./Scripts/Type to Color.mjs";
 import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
-
-// these are the sprite offsets so their positions are more centered
-const offsets = await getJson("../../Resources/Assets/Pokemon/sprites/offsets.json") || {};
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -106,14 +102,20 @@ class Pokemon {
     }
 
     setImg(img) {
+
         this.#img = img;
         this.imgEl.src = img["gen5" + this.#side];
-        let filename = img["gen5" + this.#side].replace("\\", "/").replace(/.*sprites\//, ""); //"gen5ani/lugia.gif"
-        let offset = offsets[filename] ?? [0, 0];
+
+        // We compensate to account for the cases where the gif center is skewed
+        // towards a place where the Pokémon doesn't spend that much time;
+        // e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their
+        // body (Thundurus-Therian, Timburr).
+        // The offsets are the difference between the actual center of the gif
+        // and the mean of the bounding boxes of each gif frame, and are precalculated
+        // using a Python script included in the assets repo.
+        const offset = img["gen5" + this.#side + "Offs"];
         this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
-        //We compensate to account for the cases where the gif center is skewed towards a place where the Pokémon
-        //doesn't spend that much time; e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their body (Thundurus-Therian, Timburr).
-        //The offsets are the difference between the actual center of the gif and the mean of the bounding boxes of each gif frame, and are precalculated using a Python script included in the repo.
+
     }
     getImgSrc() {
         return this.#img;

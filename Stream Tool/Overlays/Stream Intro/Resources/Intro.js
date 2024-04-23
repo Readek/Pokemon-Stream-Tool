@@ -161,7 +161,12 @@ function whosThatPokemon() {
     const chosenPoke = catches[genRnd(0, catches.length-1)];
 
     // image
-    whoThatPokeImg.src = Object.values(chosenPoke.getImg())[genRnd(0, 3)];
+    const chosenImg = genRnd(0, 3);
+    whoThatPokeImg.src = Object.values(chosenPoke.getImg())[chosenImg];
+    // position offsets
+    const offset = Object.values(chosenPoke.getImg())[chosenImg+4];
+    whoThatPokeImg.style.transform = `scale(4) translate(
+        ${offset[0]}px, ${offset[1]}px)`;
 
     // nickname
     whoThatPokeNick.innerHTML = chosenPoke.getNickname();

@@ -39,8 +39,13 @@ class WildPokemon {
      * @param {Object} img - Image object
      */
     setImg(img) {
+
+        // actual image
         wildPokeImg.src = img["gen5" + side];
-        // TODO offsets
+
+        // position offsets
+        const offset = img["gen5" + side + "Offs"];
+        wildPokeImg.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
     }
 
     /**

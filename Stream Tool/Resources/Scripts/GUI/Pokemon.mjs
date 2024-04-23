@@ -1,7 +1,10 @@
 import { current, inside, nameReplacements, stPath } from "./Globals.mjs";
 import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
-import { fileExists } from "./File System.mjs";
+import { fileExists, getJson } from "./File System.mjs";
 import { fetchFile } from "./Fetch File.mjs";
+
+// this will sightly move sprite positions on the overlays
+const offsets = await getJson(stPath.poke + "/sprites/offsets");
 
 export class Pokemon {
 
@@ -274,7 +277,11 @@ export class Pokemon {
             gen5Front : "",
             gen5Back : "",
             aniFront : "",
-            aniBack : ""
+            aniBack : "",
+            gen5FrontOffs : [], // position offsets for overlay
+            gen5BackOffs : [],
+            aniFrontOffs : [],
+            aniBackOffs : []
         }
 
         if(!this.#isNone){
@@ -296,6 +303,12 @@ export class Pokemon {
             this.#pokeImgs.gen5Back = results[1];
             this.#pokeImgs.aniFront = results[2];
             this.#pokeImgs.aniBack = results[3];
+
+            // also add position offsets (substr removes up until "gen5ani/lugia.gif")
+            this.#pokeImgs.gen5FrontOffs = offsets[results[0].substr(39)] || [0, 0];
+            this.#pokeImgs.gen5BackOffs = offsets[results[1].substr(39)] || [0, 0];
+            this.#pokeImgs.aniFrontOffs = offsets[results[2].substr(39)] || [0, 0];
+            this.#pokeImgs.aniBackOffs = offsets[results[3].substr(39)] || [0, 0];
 
         }
 
