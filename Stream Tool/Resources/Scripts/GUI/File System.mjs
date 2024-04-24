@@ -1,4 +1,4 @@
-import { inside, stPath } from './Globals.mjs';
+import { inside } from './Globals.mjs';
 
 /**
  * Returns parsed json data from a local file
@@ -12,7 +12,6 @@ export async function getJson(jPath) {
         // the electron version
         const fs = require('fs');
         if (fs.existsSync(jPath + ".json")) {
-            console.log(jPath);
             return JSON.parse(fs.readFileSync(jPath + ".json"));
         } else {
             return null;

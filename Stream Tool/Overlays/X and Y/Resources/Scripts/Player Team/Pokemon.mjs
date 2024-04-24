@@ -65,10 +65,10 @@ export class Pokemon {
         this.#form = form;
 
         if (megaEvolving) {
-            this.imgEl.style.animation = "megaAnim 3s linear";
+            this.imgEl.style.animation = "megaAnim 3.5s linear";
             setTimeout(() => {
                 this.imgEl.style.animation = "";
-            }, 3000);
+            }, 3500);
         }
         
 
@@ -238,9 +238,6 @@ export class Pokemon {
      * @param {String[]} img 
      */
     setImg(img) {
-        
-        this.#img = img;
-        this.imgEl.src = img["gen5" + this.#side];
 
         // We compensate to account for the cases where the gif center is skewed
         // towards a place where the Pokémon doesn't spend that much time;
@@ -251,6 +248,10 @@ export class Pokemon {
         // using a Python script included in the assets repo.
         const offset = img["gen5" + this.#side + "Offs"];
         this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
+        
+        // actual image change
+        this.#img = img;
+        this.imgEl.src = img["gen5" + this.#side];
     
     }
     getImgSrc() {
@@ -365,7 +366,7 @@ export class Pokemon {
 
                 // if pokemon is mega evolving, wait for that img update
                 if (megaEvolving) {
-                    setTimeout(() => {this.setImg(data.img);}, 2500);                    
+                    setTimeout(() => {this.setImg(data.img);}, 2900);                    
                 } else {
                     this.setImg(data.img);
                 }

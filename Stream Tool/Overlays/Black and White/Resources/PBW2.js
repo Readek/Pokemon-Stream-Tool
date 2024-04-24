@@ -103,9 +103,6 @@ class Pokemon {
 
     setImg(img) {
 
-        this.#img = img;
-        this.imgEl.src = img["gen5" + this.#side];
-
         // We compensate to account for the cases where the gif center is skewed
         // towards a place where the Pokémon doesn't spend that much time;
         // e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their
@@ -115,6 +112,10 @@ class Pokemon {
         // using a Python script included in the assets repo.
         const offset = img["gen5" + this.#side + "Offs"];
         this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
+
+        // actual image change
+        this.#img = img;
+        this.imgEl.src = img["gen5" + this.#side];
 
     }
     getImgSrc() {

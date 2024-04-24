@@ -40,12 +40,13 @@ class WildPokemon {
      */
     setImg(img) {
 
-        // actual image
-        wildPokeImg.src = img["gen5" + side];
-
         // position offsets
         const offset = img["gen5" + side + "Offs"];
         wildPokeImg.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
+
+        // actual image
+        wildPokeImg.src = img["gen5" + side];
+
     }
 
     /**

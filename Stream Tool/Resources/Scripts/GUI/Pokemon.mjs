@@ -4,7 +4,8 @@ import { fileExists, getJson } from "./File System.mjs";
 import { fetchFile } from "./Fetch File.mjs";
 
 // this will sightly move sprite positions on the overlays
-const offsets = await getJson(stPath.poke + "/sprites/offsets");
+let offsets = {};
+let firstBoot = true;
 
 export class Pokemon {
 
@@ -271,6 +272,13 @@ export class Pokemon {
     async getImgSrc() {
 
         if (this.#hasLocalImgs) return this.#pokeImgs;
+
+        // only check for this once, fetching the file before this could
+        // result in null if the user has to download it
+        if (firstBoot) {
+            firstBoot = false;
+            offsets = await getJson(stPath.poke + "/sprites/offsets");
+        }
 
         // final data to be sent
         this.#pokeImgs = {
