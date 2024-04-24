@@ -177,7 +177,6 @@ async function updatePlayerTeam(firstLoop) {
                         }
                         pokemons[i].setLvl(rawBattlePokes[i].level());
                         pokemons[i].setGender(rawBattlePokes[i].gender());
-                        pokemons[i].setStatus(rawBattlePokes[i].status());
                         pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
 
                         pokemons[i].setExp(rawBattlePokes[i].experience());
@@ -188,6 +187,8 @@ async function updatePlayerTeam(firstLoop) {
                         pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
                         pokemons[i].setStats(rawBattlePokes[i].stats());
                         pokemons[i].setBoosts(rawBattlePokes[i].boosts());
+
+                        pokemons[i].setStatus(rawBattlePokes[i].status());
 
                     }
 
@@ -208,7 +209,6 @@ async function updatePlayerTeam(firstLoop) {
                     pokemons[i].setNickName(rawPokesIndexed[i].nickname());
                     pokemons[i].setLvl(rawPokesIndexed[i].level());
                     pokemons[i].setGender(rawPokesIndexed[i].gender());
-                    pokemons[i].setStatus(rawPokesIndexed[i].status());
                     pokemons[i].setFormNumber(rawPokesIndexed[i].formIndex());
 
                     pokemons[i].setExp(rawPokesIndexed[i].experience());
@@ -218,6 +218,8 @@ async function updatePlayerTeam(firstLoop) {
                     pokemons[i].setHpMax(rawPokesIndexed[i].maxHP());
                     pokemons[i].setHpCurrent(rawPokesIndexed[i].currentHP());
                     pokemons[i].setStats(rawPokesIndexed[i].stats());
+
+                    pokemons[i].setStatus(rawPokesIndexed[i].status());
                     
                 }           
                 
