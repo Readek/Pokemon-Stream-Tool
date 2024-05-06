@@ -139,12 +139,12 @@ async function updatePlayerTeam(firstLoop) {
         }
 
         // clear changed states if going in or out of combat
+        let hasChanged = false;
         if (inCombat != battleType) {
 
-            for (let i = 0; i < rawPartyPokes.length; i++) {
+            hasChanged = true;
 
-                rawPartyPokes[i].changeHasChanged();
-                rawBattlePokes[i].changeHasChanged();
+            for (let i = 0; i < 6; i++) {
 
                 // reset boost texts
                 if (battleType == "None") {
@@ -161,7 +161,7 @@ async function updatePlayerTeam(firstLoop) {
         }
 
 
-        // if we currently are in a battle
+        // check what type of memory we need to read from
         if (battleType == "None") {
 
             // get current party info
@@ -169,6 +169,13 @@ async function updatePlayerTeam(firstLoop) {
 
             // get current correct party order
             const rawPokesIndexed = indexRawParty(await readPartyIndexes.getPartyIndexes());
+
+            // to force update
+            for (let i = 0; i < rawPokesIndexed.length; i++) {
+                if (hasChanged) {
+                    rawPokesIndexed[i].changeHasChanged();
+                };
+            }
 
             // use party data
             for (let i = 0; i < pokemons.length; i++) {
@@ -202,17 +209,29 @@ async function updatePlayerTeam(firstLoop) {
 
             await readPokeBattleData.getPokeBattle(battleType);
 
+            // to force update
+            for (let i = 0; i < readPokeBattleData.length; i++) {
+                if (hasChanged) {
+                    readPokeBattleData[i].changeHasChanged();
+                };
+            }
+
+            let readCount = 0;
+
             for (let i = 0; i < pokemons.length; i++) {
 
                 if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
 
                     // battle memory will place enemy pokemons after the player's
                     // if this poke's slot exceeds 5, then its not a player's poke
-                    if (rawBattlePokes[i].slot >= 6) {
+                    if (rawBattlePokes[i].slot() >= 6) {
                         break;
                     }
 
+                    // we cant check for a nickname in battle, so if the species
+                    // doesnt match, we better just leave the nickname empty
                     if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
+                        pokemons[i].setNickName("");
                         pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
                     }
                     pokemons[i].setLvl(rawBattlePokes[i].level());
@@ -232,6 +251,15 @@ async function updatePlayerTeam(firstLoop) {
 
                 }
 
+                readCount++;
+
+            }
+
+            // in case player party doesnt have 6 pokemon, clear empty slots
+            if (readCount != 0) {
+                for (let i = readCount; i < 6; i++) {
+                    pokemons[i].clear();
+                }
             }
 
         }

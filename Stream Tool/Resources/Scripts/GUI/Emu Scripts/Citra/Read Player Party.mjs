@@ -2,7 +2,6 @@ import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
 import { rawPartyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 
-const blockSize = 56;
 const slotOffset = 484;
 const statDataOffset = 112;
 const slotDataSize = 232;
