@@ -5,7 +5,7 @@ import { rawPartyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 const blockSize = 56;
 const slotOffset = 484;
 const statDataOffset = 112;
-const slotDataSize = (8 + (4 * blockSize));
+const slotDataSize = 232;
 const statDataSize = 22;
 
 class ReadPlayerParty {
@@ -26,11 +26,6 @@ class ReadPlayerParty {
 
             // ask citra for some raw data and wait for it
             const partyData = await citra.readMemory(readAdress, slotDataSize);
-
-            // since this will be the first request of each interval, check if we got data
-            if (!partyData) {
-                return null;
-            }
 
             // if we got the things, continue getting data
             const partyStats = await citra.readMemory(readAdress + slotDataSize + statDataOffset, statDataSize);

@@ -127,77 +127,49 @@ async function updatePlayerTeam(firstLoop) {
         // first of all, keep track of updates, unless on first loop after toggle
         current.autoUpdated = firstLoop ? true : false;
 
-        // get current party info
-        const rawPokes = await readPartyData.getParty();
+        // check if we are on a battle right now
+        const battleType = await readBattleType.getBattleType();
 
         // before continuing, we need to know if the connection to citra was successful
-        if (!rawPokes) {
+        if (!battleType) {
 
             // if it failed, just return false
             return;
 
         }
 
-        // get current correct party order
-        const rawPokesIndexed = indexRawParty(await readPartyIndexes.getPartyIndexes());
-
-        // check if we are on a battle right now
-        const battleType = await readBattleType.getBattleType(rawPokesIndexed[0].dexNum());
-
         // clear changed states if going in or out of combat
         if (inCombat != battleType) {
-            for (let i = 0; i < 6; i++) {
+
+            for (let i = 0; i < rawPartyPokes.length; i++) {
+
                 rawPartyPokes[i].changeHasChanged();
                 rawBattlePokes[i].changeHasChanged();
-                if (!battleType) { // reset boost texts
+
+                // reset boost texts
+                if (battleType == "None") {
                     pokemons[i].setBoosts({
                         atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
                     })
                 }
+
             }
+
             inCombat = battleType;
             current.autoUpdated = true;
+
         }
 
+
         // if we currently are in a battle
-        if (battleType) {
+        if (battleType == "None") {
 
-            const battlePokes = await readPokeBattleData.getPokeBattle(battleType);
+            // get current party info
+            await readPartyData.getParty();
 
-            for (let i = 0; i < pokemons.length; i++) {
+            // get current correct party order
+            const rawPokesIndexed = indexRawParty(await readPartyIndexes.getPartyIndexes());
 
-                if (battlePokes && rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
-
-                    // battle memory will use enemy pokemons after the player's pokes
-                    // if our team data does not align with battle data, ignore it
-                    if (rawPokesIndexed[i].dexNum() == rawBattlePokes[i].dexNum()) {
-
-                        if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
-                            pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
-                        }
-                        pokemons[i].setLvl(rawBattlePokes[i].level());
-                        pokemons[i].setGender(rawBattlePokes[i].gender());
-                        pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
-
-                        pokemons[i].setExp(rawBattlePokes[i].experience());
-                        pokemons[i].setAbility(rawBattlePokes[i].ability());
-                        pokemons[i].setItem(rawBattlePokes[i].item());
-                        pokemons[i].setMoves(rawBattlePokes[i].moves());
-                        pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
-                        pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
-                        pokemons[i].setStats(rawBattlePokes[i].stats());
-                        pokemons[i].setBoosts(rawBattlePokes[i].boosts());
-
-                        pokemons[i].setStatus(rawBattlePokes[i].status());
-
-                    }
-
-                }
-
-            }
-
-        } else {
-            
             // use party data
             for (let i = 0; i < pokemons.length; i++) {
 
@@ -226,6 +198,42 @@ async function updatePlayerTeam(firstLoop) {
                 
             }
 
+        } else {
+
+            await readPokeBattleData.getPokeBattle(battleType);
+
+            for (let i = 0; i < pokemons.length; i++) {
+
+                if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
+
+                    // battle memory will place enemy pokemons after the player's
+                    // if this poke's slot exceeds 5, then its not a player's poke
+                    if (rawBattlePokes[i].slot >= 6) {
+                        break;
+                    }
+
+                    if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
+                        pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
+                    }
+                    pokemons[i].setLvl(rawBattlePokes[i].level());
+                    pokemons[i].setGender(rawBattlePokes[i].gender());
+                    pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
+
+                    pokemons[i].setExp(rawBattlePokes[i].experience());
+                    pokemons[i].setAbility(rawBattlePokes[i].ability());
+                    pokemons[i].setItem(rawBattlePokes[i].item());
+                    pokemons[i].setMoves(rawBattlePokes[i].moves());
+                    pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
+                    pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
+                    pokemons[i].setStats(rawBattlePokes[i].stats());
+                    pokemons[i].setBoosts(rawBattlePokes[i].boosts());
+
+                    pokemons[i].setStatus(rawBattlePokes[i].status());
+
+                }
+
+            }
+
         }
 
         // if something was updated at all
@@ -234,7 +242,7 @@ async function updatePlayerTeam(firstLoop) {
         }
 
         return true; // so we all know everything went alright
-        
+
     } catch (e) {
         console.log(e);
         return;

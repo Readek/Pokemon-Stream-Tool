@@ -52,6 +52,27 @@ export class RawPokemonBattle {
         this.#hasChanged = true;
     }
 
+
+    /**
+     * Gets this pokemon's battle slot
+     * @returns {Number}
+     */
+    slot() {
+
+        // this adress will tell us this pokemon's slot in battle
+        // which is useful to determine if this is an enemy poke or not
+        // for player pokemon, those will be 0 ~ 5
+        // enemy pokemon will begin at 12 through 17
+        // 6 ~ 11 are believed to be for allies?
+        // multibattle positions are untested
+
+        if (this.#hasChanged) {
+            this.slotValue = this.#data[0x11];
+        }
+        return this.slotValue;
+
+    }
+
     /**
      * Returns this pokemon's Pokedex number
      * @returns {Number}
