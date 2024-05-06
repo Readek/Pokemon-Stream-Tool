@@ -209,6 +209,7 @@ async function updatePlayerTeam(firstLoop) {
                     pokemons[i].setNickName(rawPokesIndexed[i].nickname());
                     pokemons[i].setLvl(rawPokesIndexed[i].level());
                     pokemons[i].setGender(rawPokesIndexed[i].gender());
+                    pokemons[i].setShiny(rawPokesIndexed[i].shiny());
                     pokemons[i].setFormNumber(rawPokesIndexed[i].formIndex());
 
                     pokemons[i].setExp(rawPokesIndexed[i].experience());

@@ -142,6 +142,33 @@ export class RawPokemonParty {
     }
 
     /**
+     * Returns if this pokemon is shiny
+     * @returns {Boolean}
+     */
+    shiny() {
+
+        if (this.#hasChanged) {
+
+            const trainerID = struct("<H").unpack(this.#data.slice(0xC, 0xE))[0];
+            const secretID = struct("<H").unpack(this.#data.slice(0xE, 0x10))[0];
+            
+            const personality = struct("<I").unpack(this.#data.slice(0x18, 0x1C))[0];
+            const persH = (personality >> 16) & 0xFFFF;
+            const persL = personality & 0xFFFF;
+
+            if (((trainerID ^ secretID ^ persH ^ persL) >> 4) == 0) {
+                this.shinyValue = true;
+            } else {
+                this.shinyValue = false;
+            }
+
+        }
+
+        return this.shinyValue;
+
+    }
+
+    /**
      * Gets the current pokemon's status
      * @returns {String}
      */
@@ -174,7 +201,7 @@ export class RawPokemonParty {
      */
     experience() {
         if (this.#hasChanged) {
-            this.experienceValue = struct("<i").unpack(this.#data.slice(0x10, 0x14))[0];
+            this.experienceValue = struct("<I").unpack(this.#data.slice(0x10, 0x14))[0];
         }
         return this.experienceValue;
     }
