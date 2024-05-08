@@ -73,8 +73,14 @@ export class Pokemon {
     /**
      * Sets a new pokemon based on the name
      * @param {String} name - Name of the pokemon
+     * @param {Boolean} force - Force update regardless of previous species
      */
-    setSpecies(name) {
+    setSpecies(name, force) {
+
+        // if this is the same poke as we already got, dont bother
+        if (this.speciesName == name && !force) return;
+
+        this.speciesName = name;
 
         this.#hasLocalImgs = false;
 
@@ -186,7 +192,7 @@ export class Pokemon {
         if(this.#shortFormNames.includes(value)){
             let form = this.#formNames[this.#shortFormNames.indexOf(value)]; //We get the form's fullname.
             //We should probably consider making an object with both the short and full name as properties.
-            this.setSpecies(form);
+            this.setSpecies(form, true);
             return true;
         }
         console.log(`"${value}" isn't a valid form name for ${this.#pokeData.name}.`);
@@ -364,9 +370,13 @@ export class Pokemon {
         return this.#pokeData;
     }
 
+    /** Resets all data for this pokemon */
     clear() {
-        this.setSpecies("None");
+        this.setSpecies();
+        this.setNickName("");
+        this.setShiny(false);
     }
+
     randomize() {
         let fullSpeciesList = [...current.pkmnSpecies];
         let randomSpecies = fullSpeciesList[Math.floor(Math.random()*fullSpeciesList.length)];

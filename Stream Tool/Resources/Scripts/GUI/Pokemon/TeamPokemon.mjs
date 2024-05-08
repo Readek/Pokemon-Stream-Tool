@@ -505,4 +505,11 @@ export class TeamPokemon extends Pokemon {
 
     }
 
+    /** Resets all data for this pokemon */
+    clear() {
+        super.clear();
+        this.setLvl(1);
+        this.setStatus(null);
+    }
+
 }

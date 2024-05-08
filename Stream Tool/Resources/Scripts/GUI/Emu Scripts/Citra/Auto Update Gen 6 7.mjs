@@ -182,9 +182,14 @@ async function updatePlayerTeam(firstLoop) {
 
                 if (rawPokesIndexed[i].hasChanged() && rawPokesIndexed[i].valid) {
 
-                    if (rawPokesIndexed[i].speciesName() != pokemons[i].getSpecies()) {
-                        pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
+                    pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
+
+                    // if there's no pokemon, just clear all data and move on
+                    if (!pokemons[i].getSpecies()) {
+                        pokemons[i].clear();
+                        continue;
                     }
+
                     pokemons[i].setNickName(rawPokesIndexed[i].nickname());
                     pokemons[i].setLvl(rawPokesIndexed[i].level());
                     pokemons[i].setGender(rawPokesIndexed[i].gender());
@@ -223,8 +228,8 @@ async function updatePlayerTeam(firstLoop) {
                 if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
 
                     // battle memory will place enemy pokemons after the player's
-                    // if this poke's slot exceeds 5, then its not a player's poke
-                    if (rawBattlePokes[i].slot() >= 6) {
+                    // if slot doesnt match party order, thats not a player poke
+                    if (rawBattlePokes[i].slot() != i) {
                         break;
                     }
 
@@ -232,8 +237,9 @@ async function updatePlayerTeam(firstLoop) {
                     // doesnt match, we better just leave the nickname empty
                     if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
                         pokemons[i].setNickName("");
-                        pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
                     }
+
+                    pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
                     pokemons[i].setLvl(rawBattlePokes[i].level());
                     pokemons[i].setGender(rawBattlePokes[i].gender());
                     pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
