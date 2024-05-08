@@ -10,32 +10,25 @@ class ReadPlayerBattle {
     /**
      * Asks Citra for the player's Pokemon data in a battle
      * @param {String} type - Type of battle
-     * @returns {Boolean}  True if everything went alright! :)
+     * @param {Number} pokeNum - What pokemon to read
      */
-    async getPokeBattle(type) {
+    async getPokeBattle(type, pokeNum) {
 
         const addressToRead = getBattleAddress(type);
 
-        // of course, we asume there are 6 max player pokemon
-        for (let i = 0; i < 6; i++) {
-            
-            // add an offset every time we run this loop
-            const readAdress = addressToRead + (i * slotOffset);
+        // add an offset every time we run this loop
+        const readAdress = addressToRead + ((pokeNum) * slotOffset);
 
-            // ask citra for some raw data and wait for it
-            const pokeData = await citra.readMemory(readAdress, blockSize);
+        // ask citra for some raw data and wait for it
+        const pokeData = await citra.readMemory(readAdress, blockSize);
 
-            // if we got everything we need
-            if (pokeData) {
-                
-                // create a new pokemon with this new data
-                rawBattlePokes[i].newData(pokeData);
+        // if we got everything we need
+        if (pokeData) {
 
-            }
+            // create a new pokemon with this new data
+            rawBattlePokes[pokeNum].newData(pokeData);
 
         }
-
-        return true;
 
     }
 

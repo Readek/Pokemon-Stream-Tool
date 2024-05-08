@@ -162,7 +162,7 @@ async function updatePlayerTeam(firstLoop) {
 
 
         // check what type of memory we need to read from
-        if (battleType == "None") {
+        if (battleType == "None") { // out of combat
 
             // get current party info
             await readPartyData.getParty();
@@ -210,28 +210,25 @@ async function updatePlayerTeam(firstLoop) {
                 
             }
 
-        } else {
-
-            await readPokeBattleData.getPokeBattle(battleType);
-
-            // to force update
-            for (let i = 0; i < readPokeBattleData.length; i++) {
-                if (hasChanged) {
-                    readPokeBattleData[i].changeHasChanged();
-                };
-            }
+        } else { // in combat
 
             let readCount = 0;
 
             for (let i = 0; i < pokemons.length; i++) {
 
-                if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
+                // go read that pokemon
+                await readPokeBattleData.getPokeBattle(battleType, i);
 
-                    // battle memory will place enemy pokemons after the player's
-                    // if slot doesnt match party order, thats not a player poke
-                    if (rawBattlePokes[i].slot() != i) {
-                        break;
-                    }
+                // to force update if needed
+                if (hasChanged) {rawBattlePokes[i].changeHasChanged()};
+
+                // battle memory will place enemy pokemons after the player's
+                // if slot doesnt match party order, thats not a player poke
+                if (rawBattlePokes[i].slot() != i && rawBattlePokes[i].valid) {
+                    break;
+                }
+
+                if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
 
                     // we cant check for a nickname in battle, so if the species
                     // doesnt match, we better just leave the nickname empty
@@ -261,7 +258,7 @@ async function updatePlayerTeam(firstLoop) {
 
             }
 
-            // in case player party doesnt have 6 pokemon, clear empty slots
+            // in case player party doesnt have 6 pokemon, clear empty remaining slots
             if (readCount != 0) {
                 for (let i = readCount; i < 6; i++) {
                     pokemons[i].clear();
