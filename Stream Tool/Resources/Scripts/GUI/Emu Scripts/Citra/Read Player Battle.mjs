@@ -1,6 +1,6 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
-import { rawBattlePokes } from "./Raw Pokes/Raw Pokes.mjs";
+import { rawBattlePokes, rawEnemyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 
 const slotOffset = 580;
 const blockSize = 332;
@@ -10,14 +10,16 @@ class ReadPlayerBattle {
     /**
      * Asks Citra for the player's Pokemon data in a battle
      * @param {String} type - Type of battle
-     * @param {Number} pokeNum - What pokemon to read
+     * @param {Number} pokeOffset - What pokemon to read
+     * @param {Number} pokeNum - What pokemon to save to
+     * @param {Boolean} enemy - If this is an enemy pokemon
      */
-    async getPokeBattle(type, pokeNum) {
+    async getPokeBattle(type, pokeOffset, pokeNum, enemy) {
 
         const addressToRead = getBattleAddress(type);
 
         // add an offset every time we run this loop
-        const readAdress = addressToRead + ((pokeNum) * slotOffset);
+        const readAdress = addressToRead + ((pokeOffset) * slotOffset);
 
         // ask citra for some raw data and wait for it
         const pokeData = await citra.readMemory(readAdress, blockSize);
@@ -26,7 +28,11 @@ class ReadPlayerBattle {
         if (pokeData) {
 
             // create a new pokemon with this new data
-            rawBattlePokes[pokeNum].newData(pokeData);
+            if (enemy) {
+                rawEnemyPokes[pokeNum].newData(pokeData);
+            } else {
+                rawBattlePokes[pokeNum].newData(pokeData);
+            }
 
         }
 

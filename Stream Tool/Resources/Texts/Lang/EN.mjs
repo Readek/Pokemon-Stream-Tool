@@ -13,10 +13,11 @@ export const lang = {
     topBarPlayer : "Player",
     topBarPlayerTitle : "Modify your badge data (and more!)",
 
-
     topBarVSWild : "VS Wild",
     topBarVSWildTitle : "Wild Pokemon encounter stats",
 
+    topBarVSTrainer : "VS Trainer",
+    topBarVSTrainerTitle : "View current enemy trainer Pokemon info",
 
     topBarSettings : "Settings",
     topBarSettingsTitle : "We all need to tweak something from time to time",
@@ -135,6 +136,11 @@ export const lang = {
     wildUpdateButt : "Update Encounter",
 
     notifCatchSent : "{0} has been sent to Captures",
+
+
+    /* VS TRAINER */
+
+    trainerUpdateButt : "Update Trainer",
 
 
     /* SETTINGS */

@@ -3,6 +3,7 @@ import { saveSettings } from './File System.mjs';
 import { current } from './Globals.mjs';
 import { updatePlayer } from './Player/Update Player.mjs';
 import { updateTeam } from './Pokemon/Update Team.mjs';
+import { updateTrainer } from './Pokemon/Update Trainer.mjs';
 import { updateGUI } from './Remote Update.mjs';
 import { updateWildEnc } from './VS Wild/Update Wild.mjs';
 
@@ -23,6 +24,7 @@ const data = {
     team : {},
     player : {},
     wild : {},
+    trainer : {},
     config : {}
 }
 
@@ -36,6 +38,7 @@ ipc.on('requestData', () => {
     sendData("team");
     sendData("player");
     sendData("wild");
+    sendData("trainer");
     sendData("config");
 
 })
@@ -131,6 +134,8 @@ ipc.on('remoteGuiData', async (event, data) => {
             updatePlayer();
         } else if (jsonData.type == "Wild Encounter") {
             updateWildEnc();
+        } else if ((jsonData.type == "Trainer")) {
+            updateTrainer();
         }
 
     } else if (jsonData.message == "RemoteRequestData") {
@@ -141,6 +146,7 @@ ipc.on('remoteGuiData', async (event, data) => {
         sendRemoteData("team");
         sendRemoteData("player");
         sendRemoteData("wild");
+        sendRemoteData("trainer");
 
         sendRemoteDataRaw(JSON.stringify({
             message: "RemoteUpdateGUI",

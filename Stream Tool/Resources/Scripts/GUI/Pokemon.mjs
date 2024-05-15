@@ -23,7 +23,9 @@ export class Pokemon {
     /** @protected {HTMLElement} */
     el;
 
-    constructor() {
+    constructor(enemy) {
+
+        this.enemy = enemy; // only relevant for vs trainer pokemons
 
         this.el = this.generateElement();
 
@@ -46,7 +48,7 @@ export class Pokemon {
         });
 
         // also set an initial pokemon value
-        this.setSpecies(null);
+        this.setSpecies("None");
 
         this.genderButt.addEventListener("click", () => {this.swapGender()});
 

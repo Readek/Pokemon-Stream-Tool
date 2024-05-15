@@ -34,6 +34,10 @@
       <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
       <div class="topBarText" locText="topBarVSWild"></div>
     </button>
+    <button id="topBarVsTrainer" class="topBarButton" locTitle="topBarVSTrainerTitle">
+      <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+      <div class="topBarText" locText="topBarVSTrainer"></div>
+    </button>
     <button id="topBarSettings" class="topBarButton" locTitle="topBarSettingsTitle">
       <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
       <div class="tobBarText" locText="topBarSettings"></div>
@@ -259,6 +263,25 @@
 
         </div>
     
+      </div>
+
+      <div id="vsTrainerRegion" class="region">
+  
+        <div id=trainerParty></div>
+  
+        <div class="teamButtRegion">
+
+          <button id="updateTrainerButt" class="updateButt">
+            <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+            <div id="updateTrainerText" locText="trainerUpdateButt"></div>
+          </button>
+
+          <!-- <button class="updateButt citraButtOff" id="citraButt" tabindex="-1" locText="autoUpdateButtOff" locTitle="autoUpdateButtTitle">
+            🍊 AUTO OFF
+          </button> -->
+
+        </div>
+  
       </div>
   
       <div id="settingsRegion" class="region">

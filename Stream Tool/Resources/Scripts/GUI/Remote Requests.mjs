@@ -3,6 +3,7 @@ import { enableCatchesUpdate } from "./Catches/Update Catches.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { enablePlayerUpdate } from "./Player/Update Player.mjs";
 import { enableTeamUpdate } from "./Pokemon/Update Team.mjs";
+import { enableTrainerUpdate } from "./Pokemon/Update Trainer.mjs";
 import { updateGUI } from "./Remote Update.mjs";
 import { enableWildUpdate } from "./VS Wild/Update Wild.mjs";
 
@@ -51,6 +52,8 @@ async function getData(data) {
             enablePlayerUpdate();
         } else if (data.type == "Wild Encounter") {
             enableWildUpdate();
+        } else if (data.type == "Trainer") {
+            enableTrainerUpdate();
         }
 
     }

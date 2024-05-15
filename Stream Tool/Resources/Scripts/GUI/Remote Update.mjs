@@ -7,6 +7,7 @@ import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Gym Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
 import { pokemons } from "./Pokemon/TeamPokemons.mjs";
+import { trainerPokemons } from "./Pokemon/TrainerPokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
 import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 
@@ -79,9 +80,7 @@ export async function updateGUI(data, noNotif) {
         // poketeam time
         for (let i = 0; i < data.playerPokemons.length; i++) {
 
-            if (pokemons[i].getInternalSpecies() != data.playerPokemons[i].internalSpecies) {
-                pokemons[i].setSpecies(data.playerPokemons[i].internalSpecies);
-            }
+            pokemons[i].setSpecies(data.playerPokemons[i].internalSpecies);
             pokemons[i].setNickName(data.playerPokemons[i].nickName);
             pokemons[i].setLvl(data.playerPokemons[i].lvl);
             if (pokemons[i].getForm() != data.playerPokemons[i].form) {
@@ -124,6 +123,32 @@ export async function updateGUI(data, noNotif) {
         }
 
         wildEncounter.setInCombat(data.inCombat);
+
+    }
+
+    if (data.type == "Trainer") {
+
+        // enemy trainer
+        for (let i = 0; i < data.trainerPokemons.length; i++) {
+
+            trainerPokemons[i].setSpecies(data.trainerPokemons[i].internalSpecies);
+            trainerPokemons[i].setNickName(data.trainerPokemons[i].nickName);
+            trainerPokemons[i].setLvl(data.trainerPokemons[i].lvl);
+            if (trainerPokemons[i].getForm() != data.trainerPokemons[i].form) {
+                trainerPokemons[i].setForm(data.trainerPokemons[i].form);
+            }
+            trainerPokemons[i].setGender(data.trainerPokemons[i].gender);
+            trainerPokemons[i].setShiny(data.trainerPokemons[i].shiny);
+            trainerPokemons[i].setStatus(data.trainerPokemons[i].status);
+            trainerPokemons[i].setHpCurrent(data.trainerPokemons[i].hpCurrent);
+            trainerPokemons[i].setHpMax(data.trainerPokemons[i].hpMax);
+            trainerPokemons[i].setAbility(data.trainerPokemons[i].ability);
+            trainerPokemons[i].setItem(data.trainerPokemons[i].item);
+            trainerPokemons[i].setMoves(data.trainerPokemons[i].moves);
+            trainerPokemons[i].setStats(data.trainerPokemons[i].stats);
+            trainerPokemons[i].setBoosts(data.trainerPokemons[i].boosts);
+
+        };
 
     }
 

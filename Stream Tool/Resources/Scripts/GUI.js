@@ -16,6 +16,8 @@ import { Catch } from './GUI/Catches/Catch.mjs';
 import { updateCatches } from './GUI/Catches/Update Catches.mjs';
 import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
 import { fetchFile } from './GUI/Fetch File.mjs';
+import { trainerPokemons } from './GUI/Pokemon/TrainerPokemons.mjs';
+import { updateTrainer } from './GUI/Pokemon/Update Trainer.mjs';
 
 
 // this is a weird way to have file svg's that can be recolored by css
@@ -60,7 +62,8 @@ async function init() {
     
     // initialize our pokemon class
     for (let i = 0; i < 6; i++) {
-        pokemons.push(new TeamPokemon())
+        pokemons.push(new TeamPokemon());
+        trainerPokemons.push(new TeamPokemon(true));
     }
 
     // get those keybinds running
@@ -79,6 +82,7 @@ async function init() {
             updateGUI(storedData.catches, true);
             updateGUI(storedData.team, true);
             updateGUI(storedData.player, true);
+            updateGUI(storedData.trainer, true);
         } else {
             // set default values
             catches.push(new Catch());
@@ -93,6 +97,7 @@ async function init() {
         updatePlayer();
         updateTeam();
         updateWildEnc();
+        updateTrainer();
 
     } else { // remote GUIs will ask about the current main GUI state
         const remote = await import("./GUI/Remote Requests.mjs");

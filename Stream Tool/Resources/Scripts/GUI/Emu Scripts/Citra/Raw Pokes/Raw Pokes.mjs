@@ -18,7 +18,16 @@ export const rawBattlePokes = [
     new RawPokemonBattle,
     new RawPokemonBattle,
     new RawPokemonBattle
-]
+];
+
+export const rawEnemyPokes = [
+    new RawPokemonBattle,
+    new RawPokemonBattle,
+    new RawPokemonBattle,
+    new RawPokemonBattle,
+    new RawPokemonBattle,
+    new RawPokemonBattle
+];
 
 // to check if order changed
 let prevIndexes = [0, 0, 0, 0, 0, 0]

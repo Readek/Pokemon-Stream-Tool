@@ -267,7 +267,7 @@ button:hover {
   display: flex;
 }
 
-#pokeParty {
+#pokeParty, #trainerParty {
   display: flex;
   flex-direction: column;
   gap: 10px;

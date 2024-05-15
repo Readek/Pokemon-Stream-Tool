@@ -3,9 +3,11 @@ import { current } from "../../Globals.mjs";
 import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
 import { pokemons } from "../../Pokemon/TeamPokemons.mjs";
+import { trainerPokemons } from "../../Pokemon/TrainerPokemons.mjs";
 import { updateTeam } from "../../Pokemon/Update Team.mjs";
+import { updateTrainer } from "../../Pokemon/Update Trainer.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
-import { indexRawParty, rawBattlePokes, rawPartyPokes } from "./Raw Pokes/Raw Pokes.mjs";
+import { indexRawParty, rawBattlePokes, rawEnemyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 import { readBattleType } from "./Read Battle Type.mjs";
 import { readPartyIndexes } from "./Read Party Indexes.mjs";
 import { readPokeBattleData } from "./Read Player Battle.mjs";
@@ -217,7 +219,7 @@ async function updatePlayerTeam(firstLoop) {
             for (let i = 0; i < pokemons.length; i++) {
 
                 // go read that pokemon
-                await readPokeBattleData.getPokeBattle(battleType, i);
+                await readPokeBattleData.getPokeBattle(battleType, i, i);
 
                 // to force update if needed
                 if (hasChanged) {rawBattlePokes[i].changeHasChanged()};
@@ -263,6 +265,57 @@ async function updatePlayerTeam(firstLoop) {
                 for (let i = readCount; i < 6; i++) {
                     pokemons[i].clear();
                 }
+            }
+
+            // now for enemies
+            let enemyCount = 0;
+            for (let i = 0; i < trainerPokemons.length; i++) {
+
+                // go read that pokemon
+                await readPokeBattleData.getPokeBattle(battleType, i + readCount, i, true);
+
+                // to force update if needed
+                if (hasChanged) {rawEnemyPokes[i].changeHasChanged()};
+
+                // battle memory will place enemy pokemons after the player's
+                // enemy slots start at slot 12
+                if (rawEnemyPokes[i].slot() != i + 12 && rawEnemyPokes[i].valid) {
+                    break;
+                }
+
+                if (rawEnemyPokes[i].hasChanged() && rawEnemyPokes[i].valid) {
+
+                    trainerPokemons[i].setSpecies(rawEnemyPokes[i].speciesName());
+                    trainerPokemons[i].setLvl(rawEnemyPokes[i].level());
+                    trainerPokemons[i].setGender(rawEnemyPokes[i].gender());
+                    trainerPokemons[i].setFormNumber(rawEnemyPokes[i].formIndex());
+
+                    trainerPokemons[i].setAbility(rawEnemyPokes[i].ability());
+                    trainerPokemons[i].setItem(rawEnemyPokes[i].item());
+                    trainerPokemons[i].setMoves(rawEnemyPokes[i].moves());
+                    trainerPokemons[i].setHpMax(rawEnemyPokes[i].maxHP());
+                    trainerPokemons[i].setHpCurrent(rawEnemyPokes[i].currentHP());
+                    trainerPokemons[i].setStats(rawEnemyPokes[i].stats());
+                    trainerPokemons[i].setBoosts(rawEnemyPokes[i].boosts());
+
+                    trainerPokemons[i].setStatus(rawEnemyPokes[i].status());
+
+                }
+
+                enemyCount++;
+
+            }
+
+            // in case enemy party doesnt have 6 pokemon, clear empty remaining slots
+            if (enemyCount != 0) {
+                for (let i = enemyCount; i < 6; i++) {
+                    trainerPokemons[i].clear();
+                }
+            }
+
+            // if something was updated at all
+            if (current.autoUpdated) {
+                await updateTrainer();
             }
 
         }

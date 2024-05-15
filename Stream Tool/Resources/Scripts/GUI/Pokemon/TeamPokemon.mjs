@@ -7,6 +7,7 @@ const boostKeys = ["atk", "def", "spa", "spd", "spe", "pre", "acc"];
 const boostKeysUpper = ["Atk", "Def", "SpA", "SpD", "Spe", "Pre", "Acc"];
 
 const pokePartyDiv = document.getElementById("pokeParty");
+const trainerPartyDiv = document.getElementById("trainerParty");
 
 export class TeamPokemon extends Pokemon {
 
@@ -31,9 +32,9 @@ export class TeamPokemon extends Pokemon {
     #boost = {};
     #boostEl = {};
 
-    constructor() {
+    constructor(enemy) {
 
-        super();
+        super(enemy);
 
         this.lvlInp = this.el.getElementsByClassName("pokeLvlNumber")[0];
         
@@ -446,7 +447,12 @@ export class TeamPokemon extends Pokemon {
         }
 
         // add it to the GUI
-        pokePartyDiv.appendChild(element);
+        if (this.enemy) {
+            trainerPartyDiv.appendChild(element);
+        } else {
+            pokePartyDiv.appendChild(element);
+        }
+
         return element;
 
     }

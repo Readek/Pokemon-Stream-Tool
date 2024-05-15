@@ -13,10 +13,11 @@ export const lang = {
     topBarPlayer : "Perfil",
     topBarPlayerTitle : "Modifica tus medallas (¡y mas!)",
 
-
     topBarVSWild : "VS Salvaje",
     topBarVSWildTitle : "Muestra las estadísticas de un Pokemon salvaje",
 
+    topBarVSTrainer : "VS Entrenador",
+    topBarVSTrainerTitle : "Consulta la información del enemigo actual",
 
     topBarSettings : "Ajustes",
     topBarSettingsTitle : "Todos necesitamos ajustar cosas de vez en cuando",
@@ -135,6 +136,11 @@ export const lang = {
     wildUpdateButt : "Actualizar Encuentro",
 
     notifCatchSent : "Se ha mandado a {0} a Capturas",
+
+
+    /* VS TRAINER */
+
+    trainerUpdateButt : "Actualizar enemigo",
 
 
     /* SETTINGS */
