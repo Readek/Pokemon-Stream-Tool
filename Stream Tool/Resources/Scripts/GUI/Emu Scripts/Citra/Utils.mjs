@@ -32,7 +32,13 @@ export function validateRawPokemon(rawPokemon) {
     const currentHP = rawPokemon.currentHP();
     const maxHP = rawPokemon.maxHP();
 
-    return currentHP <= maxHP && currentHP <= 999 && maxHP <= 999
+    let result = true;
+    if (rawPokemon.nickname) {
+        result = !rawPokemon.corruptNickname() && rawPokemon.nickname().length <= 12;
+    }
+
+    return result
+        && currentHP <= maxHP && currentHP <= 999 && maxHP <= 999
         && rawPokemon.level() <= 100
         && rawPokemon.dexNum() <= 809 // max gen 7 dex number
 

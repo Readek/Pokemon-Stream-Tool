@@ -269,7 +269,7 @@ async function updatePlayerTeam(firstLoop) {
 
             // now for enemies
             let enemyCount = 0;
-            for (let i = 0; i < trainerPokemons.length; i++) {
+            for (let i = 0; i < trainerPokemons.length && battleType == "Trainer"; i++) {
 
                 // go read that pokemon
                 await readPokeBattleData.getPokeBattle(battleType, i + readCount, i, true);

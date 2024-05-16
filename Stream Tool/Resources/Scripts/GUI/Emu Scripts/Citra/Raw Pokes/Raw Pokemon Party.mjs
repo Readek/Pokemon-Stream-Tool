@@ -64,6 +64,7 @@ export class RawPokemonParty {
      * @returns {Number}
      */
     dexNum() {
+
         if (this.#hasChanged) {
             this.dexNumValue = struct("<H").unpack(this.#data.slice(0x8, 0xA))[0];
         }
@@ -89,6 +90,15 @@ export class RawPokemonParty {
                 .split(`\0\0`)[0].replace(/\0/g, '');
         }
         return this.nicknameValue;
+    }
+    /**
+     * Weird way to check if the nickname is invalid
+     * @returns {Boolean} True if corrupt
+     */
+    corruptNickname() {
+        if (struct("B").unpack(this.#data.slice(0x59, 0x5A))[0]) {
+            return true;
+        }
     }
 
     /**
