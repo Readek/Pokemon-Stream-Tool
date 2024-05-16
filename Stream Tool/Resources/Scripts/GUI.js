@@ -82,7 +82,6 @@ async function init() {
             updateGUI(storedData.catches, true);
             updateGUI(storedData.team, true);
             updateGUI(storedData.player, true);
-            updateGUI(storedData.trainer, true);
         } else {
             // set default values
             catches.push(new Catch());

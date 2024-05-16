@@ -12,7 +12,6 @@ const storedGuiData = {
     catches : {},
     team : {},
     player : {},
-    trainer : {}
 }
 
 module.exports = function initExec(rPath, gPath, wSocket) {
@@ -229,8 +228,6 @@ function createWindow() {
                 storedGuiData.team = jsonData;
             } else if (jsonData.type == "Player") {
                 storedGuiData.player = jsonData;
-            } else if (jsonData.type == "Trainer") {
-                storedGuiData.trainer = jsonData;
             }
         } else if (jsonData.id == "guiData") {
             storedGuiData.settings = jsonData;

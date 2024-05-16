@@ -175,12 +175,16 @@ export class Pokemon {
         return this.nickInp.value;
     }
     setNickName(name) {
+
         if (this.getNickName() == name) return;
-        if (name) {
+
+        // if name equals poke species just leave the field empty
+        if (name && name != this.getSpecies()) {
             this.nickInp.value = name;
         } else {
             this.nickInp.value = "";
         }
+
     }
 
     getForm() {
