@@ -1,6 +1,6 @@
-import { current } from "../../Globals.mjs";
-import { citra } from "./Citra.mjs";
-import { rawPartyPokes } from "./Raw Pokes/Raw Pokes.mjs";
+import { current } from "../../../Globals.mjs";
+import { citra } from "../Citra.mjs";
+import { rawPartyPokes } from "../Raw Pokes/Raw Pokes.mjs";
 
 const slotOffset = 484;
 const statDataOffset = 112;

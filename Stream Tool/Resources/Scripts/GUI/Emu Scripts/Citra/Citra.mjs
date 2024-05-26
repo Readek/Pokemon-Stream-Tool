@@ -39,7 +39,7 @@ class Citra {
      * Sends a request to Citra via socket to read from the game's memory
      * @param {Number} readAdress - Memory adress to read
      * @param {Number} readSize - Size of that memory adress
-     * @returns {Uint8Array} - Requested raw data
+     * @returns {Uint8Array} Requested raw data
      */
     async readMemory(readAdress, readSize) {
 

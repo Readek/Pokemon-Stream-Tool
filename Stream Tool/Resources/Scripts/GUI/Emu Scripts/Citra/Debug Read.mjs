@@ -1,6 +1,6 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
-import { getBattleAddress } from "./Read Player Battle.mjs";
+import { getBattleAddress } from "./Memory Locations/Battle Pokemon.mjs";
 
 let oldArr = [];
 

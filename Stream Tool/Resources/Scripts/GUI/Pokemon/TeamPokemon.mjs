@@ -32,6 +32,8 @@ export class TeamPokemon extends Pokemon {
     #boost = {};
     #boostEl = {};
 
+    #inCombat = false;
+
     constructor(enemy) {
 
         super(enemy);
@@ -307,6 +309,13 @@ export class TeamPokemon extends Pokemon {
             
         }
 
+    }
+
+    getInCombat() {
+        return this.#inCombat;
+    }
+    setInCombat(value) {
+        this.#inCombat = value;
     }
 
     /**

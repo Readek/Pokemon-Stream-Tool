@@ -8,10 +8,11 @@ import { updateTeam } from "../../Pokemon/Update Team.mjs";
 import { updateTrainer } from "../../Pokemon/Update Trainer.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
 import { indexRawParty, rawBattlePokes, rawEnemyPokes } from "./Raw Pokes/Raw Pokes.mjs";
-import { readBattleType } from "./Read Battle Type.mjs";
-import { readPartyIndexes } from "./Read Party Indexes.mjs";
-import { readPokeBattleData } from "./Read Player Battle.mjs";
-import { readPartyData } from "./Read Player Party.mjs";
+import { getBattleType } from "./Read Battle Type.mjs";
+import { getPartyIndexes } from "./Memory Locations/Party Indexes.mjs";
+import { getPokeBattle } from "./Memory Locations/Battle Pokemon.mjs";
+import { readPartyData } from "./Memory Locations/Party Pokemon.mjs";
+import { getActivePokemon } from "./Memory Locations/Active Pokemon.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 const updateButt = document.getElementById("updateTeamButt");
@@ -118,161 +119,181 @@ async function autoUpdateLoop() {
  */
 async function updatePlayerTeam(firstLoop) {
 
-    try { // the amount of possible errors Citra can give are a bit too much
+    /* 
+    // MEMORY DEBUG, uncomment to use
+    await debugCitraMemory();
+    return true;
+    */
 
-        /* 
-        // MEMORY DEBUG, uncomment to use
-        await debugCitraMemory();
-        return true;
-         */
+    // first of all, keep track of updates, unless on first loop after toggle
+    current.autoUpdated = firstLoop ? true : false;
 
-        // first of all, keep track of updates, unless on first loop after toggle
-        current.autoUpdated = firstLoop ? true : false;
+    // check if we are on a battle right now
+    const battleType = await getBattleType();
 
-        // check if we are on a battle right now
-        const battleType = await readBattleType.getBattleType();
+    // before continuing, we need to know if the connection to citra was successful
+    if (!battleType) {
 
-        // before continuing, we need to know if the connection to citra was successful
-        if (!battleType) {
+        // if it failed, just return false
+        return;
 
-            // if it failed, just return false
-            return;
+    }
+
+    // clear changed states if going in or out of combat
+    let hasChanged = false;
+    if (inCombat != battleType) {
+
+        hasChanged = true;
+
+        for (let i = 0; i < 6; i++) {
+
+            // reset boost texts
+            if (battleType == "None") {
+                pokemons[i].setBoosts({
+                    atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
+                })
+            }
 
         }
 
-        // clear changed states if going in or out of combat
-        let hasChanged = false;
-        if (inCombat != battleType) {
+        inCombat = battleType;
+        current.autoUpdated = true;
 
-            hasChanged = true;
+    }
 
-            for (let i = 0; i < 6; i++) {
 
-                // reset boost texts
-                if (battleType == "None") {
-                    pokemons[i].setBoosts({
-                        atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
-                    })
-                }
+    // check what type of memory we need to read from
+    if (battleType == "None") { // out of combat
 
-            }
+        // get current party info
+        await readPartyData.getParty();
 
-            inCombat = battleType;
-            current.autoUpdated = true;
+        // get current correct party order
+        const rawPokesIndexed = indexRawParty(await getPartyIndexes());
 
+        // to force update
+        for (let i = 0; i < rawPokesIndexed.length; i++) {
+            if (hasChanged) {
+                rawPokesIndexed[i].changeHasChanged();
+            };
         }
 
+        // use party data
+        for (let i = 0; i < pokemons.length; i++) {
 
-        // check what type of memory we need to read from
-        if (battleType == "None") { // out of combat
+            if (rawPokesIndexed[i].hasChanged() && rawPokesIndexed[i].valid) {
 
-            // get current party info
-            await readPartyData.getParty();
+                pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
 
-            // get current correct party order
-            const rawPokesIndexed = indexRawParty(await readPartyIndexes.getPartyIndexes());
-
-            // to force update
-            for (let i = 0; i < rawPokesIndexed.length; i++) {
-                if (hasChanged) {
-                    rawPokesIndexed[i].changeHasChanged();
-                };
-            }
-
-            // use party data
-            for (let i = 0; i < pokemons.length; i++) {
-
-                if (rawPokesIndexed[i].hasChanged() && rawPokesIndexed[i].valid) {
-
-                    pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
-
-                    // if there's no pokemon, just clear all data and move on
-                    if (!pokemons[i].getSpecies()) {
-                        pokemons[i].clear();
-                        continue;
-                    }
-
-                    pokemons[i].setNickName(rawPokesIndexed[i].nickname());
-                    pokemons[i].setLvl(rawPokesIndexed[i].level());
-                    pokemons[i].setGender(rawPokesIndexed[i].gender());
-                    pokemons[i].setShiny(rawPokesIndexed[i].shiny());
-                    pokemons[i].setFormNumber(rawPokesIndexed[i].formIndex());
-
-                    pokemons[i].setExp(rawPokesIndexed[i].experience());
-                    pokemons[i].setAbility(rawPokesIndexed[i].ability());
-                    pokemons[i].setItem(rawPokesIndexed[i].item());
-                    pokemons[i].setMoves(rawPokesIndexed[i].moves());
-                    pokemons[i].setHpMax(rawPokesIndexed[i].maxHP());
-                    pokemons[i].setHpCurrent(rawPokesIndexed[i].currentHP());
-                    pokemons[i].setStats(rawPokesIndexed[i].stats());
-
-                    pokemons[i].setStatus(rawPokesIndexed[i].status());
-                    
-                }           
-                
-            }
-
-        } else { // in combat
-
-            let readCount = 0;
-
-            for (let i = 0; i < pokemons.length; i++) {
-
-                // go read that pokemon
-                await readPokeBattleData.getPokeBattle(battleType, i, i);
-
-                // to force update if needed
-                if (hasChanged) {rawBattlePokes[i].changeHasChanged()};
-
-                // battle memory will place enemy pokemons after the player's
-                // if slot doesnt match party order, thats not a player poke
-                if (rawBattlePokes[i].slot() != i && rawBattlePokes[i].valid) {
-                    break;
-                }
-
-                if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
-
-                    // we cant check for a nickname in battle, so if the species
-                    // doesnt match, we better just leave the nickname empty
-                    if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
-                        pokemons[i].setNickName("");
-                    }
-
-                    pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
-                    pokemons[i].setLvl(rawBattlePokes[i].level());
-                    pokemons[i].setGender(rawBattlePokes[i].gender());
-                    pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
-
-                    pokemons[i].setExp(rawBattlePokes[i].experience());
-                    pokemons[i].setAbility(rawBattlePokes[i].ability());
-                    pokemons[i].setItem(rawBattlePokes[i].item());
-                    pokemons[i].setMoves(rawBattlePokes[i].moves());
-                    pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
-                    pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
-                    pokemons[i].setStats(rawBattlePokes[i].stats());
-                    pokemons[i].setBoosts(rawBattlePokes[i].boosts());
-
-                    pokemons[i].setStatus(rawBattlePokes[i].status());
-
-                }
-
-                readCount++;
-
-            }
-
-            // in case player party doesnt have 6 pokemon, clear empty remaining slots
-            if (readCount != 0) {
-                for (let i = readCount; i < 6; i++) {
+                // if there's no pokemon, just clear all data and move on
+                if (!pokemons[i].getSpecies()) {
                     pokemons[i].clear();
+                    continue;
                 }
+
+                pokemons[i].setNickName(rawPokesIndexed[i].nickname());
+                pokemons[i].setLvl(rawPokesIndexed[i].level());
+                pokemons[i].setGender(rawPokesIndexed[i].gender());
+                pokemons[i].setShiny(rawPokesIndexed[i].shiny());
+                pokemons[i].setFormNumber(rawPokesIndexed[i].formIndex());
+
+                pokemons[i].setExp(rawPokesIndexed[i].experience());
+                pokemons[i].setAbility(rawPokesIndexed[i].ability());
+                pokemons[i].setItem(rawPokesIndexed[i].item());
+                pokemons[i].setMoves(rawPokesIndexed[i].moves());
+                pokemons[i].setHpMax(rawPokesIndexed[i].maxHP());
+                pokemons[i].setHpCurrent(rawPokesIndexed[i].currentHP());
+                pokemons[i].setStats(rawPokesIndexed[i].stats());
+
+                pokemons[i].setStatus(rawPokesIndexed[i].status());
+                
+            }           
+            
+        }
+
+    } else { // in combat
+
+        let readCount = 0;
+
+        for (let i = 0; i < pokemons.length; i++) {
+
+            // go read that pokemon
+            await getPokeBattle(battleType, i, i);
+
+            // to force update if needed
+            if (hasChanged) {rawBattlePokes[i].changeHasChanged()};
+
+            // battle memory will place enemy pokemons after the player's
+            // if slot doesnt match party order, thats not a player poke
+            if (rawBattlePokes[i].slot() != i && rawBattlePokes[i].valid) {
+                break;
             }
 
-            // now for enemies
+            if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
+
+                // we cant check for a nickname in battle, so if the species
+                // doesnt match, we better just leave the nickname empty
+                if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
+                    pokemons[i].setNickName("");
+                }
+
+                pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
+                pokemons[i].setLvl(rawBattlePokes[i].level());
+                pokemons[i].setGender(rawBattlePokes[i].gender());
+                pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
+
+                pokemons[i].setExp(rawBattlePokes[i].experience());
+                pokemons[i].setAbility(rawBattlePokes[i].ability());
+                pokemons[i].setItem(rawBattlePokes[i].item());
+                pokemons[i].setMoves(rawBattlePokes[i].moves());
+                pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
+                pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
+                pokemons[i].setStats(rawBattlePokes[i].stats());
+                pokemons[i].setBoosts(rawBattlePokes[i].boosts());
+
+                pokemons[i].setStatus(rawBattlePokes[i].status());
+
+            }
+
+            readCount++;
+
+        }
+
+        // in case player party doesnt have 6 pokemon, clear empty remaining slots
+        if (readCount != 0) {
+            for (let i = readCount; i < 6; i++) {
+                pokemons[i].clear();
+            }
+        }
+
+        // get a list of pokemon currently actively fighting
+        const onFieldPokes = await getActivePokemon();
+
+        // match dex num with our pokes to know if a pokemon is in combat rn
+        if (onFieldPokes) {
+            for (let i = 0; i < onFieldPokes.player.length; i++) {
+
+                const pokeName = current.numToPoke[onFieldPokes.player[i]];
+    
+                for (let i = 0; i < pokemons.length; i++) {
+                    if (pokeName == pokemons[i].getSpecies()) {
+                        pokemons[i].setInCombat(true);
+                    } else {
+                        pokemons[i].setInCombat(false);
+                    }
+                }
+
+            }
+        }
+
+        // now for enemies
+        if (battleType == "Trainer") {
+            
             let enemyCount = 0;
-            for (let i = 0; i < trainerPokemons.length && battleType == "Trainer"; i++) {
+            for (let i = 0; i < trainerPokemons.length; i++) {
 
                 // go read that pokemon
-                await readPokeBattleData.getPokeBattle(battleType, i + readCount, i, true);
+                await getPokeBattle(battleType, i + readCount, i, true);
 
                 // to force update if needed
                 if (hasChanged) {rawEnemyPokes[i].changeHasChanged()};
@@ -313,6 +334,23 @@ async function updatePlayerTeam(firstLoop) {
                 }
             }
 
+            // match dex num with our pokes to know if a pokemon is in combat rn
+            if (onFieldPokes) {
+                for (let i = 0; i < onFieldPokes.enemy.length; i++) {
+
+                    const pokeName = current.numToPoke[onFieldPokes.enemy[i]];
+        
+                    for (let i = 0; i < trainerPokemons.length; i++) {
+                        if (pokeName == trainerPokemons[i].getSpecies()) {
+                            trainerPokemons[i].setInCombat(true);
+                        } else {
+                            trainerPokemons[i].setInCombat(false);
+                        }
+                    }
+
+                }
+            }
+
             // if something was updated at all
             if (current.autoUpdated) {
                 await updateTrainer();
@@ -320,16 +358,13 @@ async function updatePlayerTeam(firstLoop) {
 
         }
 
-        // if something was updated at all
-        if (current.autoUpdated) {
-            await updateTeam();
-        }
-
-        return true; // so we all know everything went alright
-
-    } catch (e) {
-        console.log(e);
-        return;
     }
+
+    // if something was updated at all
+    if (current.autoUpdated) {
+        await updateTeam();
+    }
+
+    return true; // so we all know everything went alright
 
 }

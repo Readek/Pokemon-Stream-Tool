@@ -1,41 +1,37 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
-import { getBattleAddress } from "./Read Player Battle.mjs";
+import { getBattleAddress } from "./Memory Locations/Battle Pokemon.mjs";
 
 const battleTypes = ["Wild", "Trainer", "Multi"];
 const dataBegin = 4; // where to start to read
 const dataLenght = 6; // max data to read
 
-class ReadBattleType {
+/**
+ * Compares data to determine if the player is currently in a battle
+ * @returns {String} "Wild", "Trainer", "Multi", or "None"
+ */
+export async function getBattleType() {
 
-    /**
-     * Compares data to determine if the player is currently in a battle
-     * @returns {String} "Wild", "Trainer", "Multi", or "None"
-     */
-    async getBattleType() {
+    // battle data memory is used for other stuff when outside battle
+    // because of this, we need to check if the memory is what we expect
+    // so we check if the data we get has a valid dex ID and valid HP values
 
-        // battle data memory is used for other stuff when outside battle
-        // because of this, we need to check if the memory is what we expect
-        // so we check if the data we get has a valid dex ID and valid HP values
+    for (let i = 0; i < battleTypes.length; i++) {
 
-        for (let i = 0; i < battleTypes.length; i++) {
+        const address = getBattleAddress(battleTypes[i], current.game);
+        const data = await citra.readMemory(address + dataBegin, dataLenght);
 
-            const address = getBattleAddress(battleTypes[i], current.game);
-            const data = await citra.readMemory(address + dataBegin, dataLenght);
-
-            if (!data) { // if we lost connection with the emu
-                return;
-            }
-
-            if (checkData(data)) { // if the data is an actual poke
-                return battleTypes[i];
-            }
-
+        if (!data) { // if we lost connection with the emu
+            return;
         }
 
-        return "None";
+        if (checkData(data)) { // if the data is an actual poke
+            return battleTypes[i];
+        }
 
     }
+
+    return "None";
 
 }
 
@@ -55,5 +51,3 @@ function checkData(data) {
         && dexNum <= 809 // max gen 7 dex number
 
 }
-
-export const readBattleType = new ReadBattleType;
