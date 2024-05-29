@@ -34,7 +34,7 @@ async function updateData(data) {
 
         playerInfo.update(data.player);
         
-    } else if (data.type == "Wild Encounter" && data.pokemon) {
+    } else if (data.type == "Wild Encounter") {
 
         wildPokemon.update(data)
 

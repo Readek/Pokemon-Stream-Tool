@@ -31,7 +31,6 @@ export async function updateWildEnc() {
        id : "gameData",
        type : "Wild Encounter",
        pokemon : await wildEncounter.sendData(),
-       inCombat : wildEncounter.getInCombat()
    };
 
    // its time to send the data away

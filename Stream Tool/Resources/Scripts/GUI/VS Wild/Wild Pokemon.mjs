@@ -12,7 +12,6 @@ import { updateWildEnc } from "./Update Wild.mjs";
 const infoDiv = document.getElementById("vsWildBotRow");
 const sendInp = document.getElementById("vsWildNickInput");
 const sendBut = document.getElementById("sendCatchButt");
-const inComCheck = document.getElementById("vsWildInCombatCheck");
 
 class WildPokemon extends Pokemon {
 
@@ -95,21 +94,12 @@ class WildPokemon extends Pokemon {
             // show them stats and fill them
             infoDiv.style.display = "flex";
             document.getElementById("vsWildSendCatchDiv").style.display = "flex";
-            document.getElementById("vsWildInCombatDiv").style.display = "flex";
             this.#fillInfo();
         } else {
             // hide them stats
             infoDiv.style.display = "none";
             document.getElementById("vsWildSendCatchDiv").style.display = "none";
-            document.getElementById("vsWildInCombatDiv").style.display = "none";
         }
-    }
-
-    getInCombat() {
-        return inComCheck.checked;
-    }
-    setInCombat(value) {
-        inComCheck.checked = value;
     }
 
     #fillInfo() {
@@ -198,7 +188,6 @@ class WildPokemon extends Pokemon {
         updateCatches();
 
         // automatically exit combat state
-        this.setInCombat(false);
         updateWildEnc();
 
         // +1 to catches counter

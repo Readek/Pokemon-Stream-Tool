@@ -281,6 +281,7 @@ button:hover {
 
 .teamPokeMainInfo {
   display: flex;
+  align-items: center;
   gap: 5px;
 }
 
@@ -374,6 +375,9 @@ button:hover {
 .pokeSelector {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
+}
+.pokeSelectorInCombat {
+  background-color: var(--focused);
 }
 .pokeSelectorIcon {
   width: 40px;
@@ -811,10 +815,8 @@ button:hover {
   gap: 8px;
 }
 
-#updateTeamButt:disabled {
-  filter: grayscale(.8);
-  opacity: .5;
-  pointer-events: none;
+#bTypeButt {
+  text-transform: none;
 }
 
 .citraButtOff {
@@ -1056,24 +1058,10 @@ button:hover {
 }
 #sendCatchButt {
   border: 1px solid var(--focused);
+  text-transform: none;
 }
 #sendCatchButt:hover {
   border: 1px solid var(--selected);
-}
-
-#vsWildInCombatDiv {
-  padding: 6px;
-  background-color: var(--bg4);
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-#vsWildInCombatDiv:hover {
-  border: 1px solid var(--selected);
-  padding: 5px;
-}
-
-#sendCatchButt {
-  text-transform: none;
 }
 
 

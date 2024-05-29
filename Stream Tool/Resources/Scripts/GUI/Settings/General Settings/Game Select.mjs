@@ -2,6 +2,7 @@ import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { displayAutoButt } from "../../Auto Update.mjs";
 import { current } from "../../Globals.mjs";
 import { changeBadges } from "../../Player/Gym Badges.mjs";
+import { displayBattleStateButt } from "../../Team/Battle State.mjs";
 import { Setting } from "../Setting.mjs";
 import { settings } from "../Settings.mjs";
 
@@ -82,7 +83,8 @@ export class SettingGameSelect extends Setting {
         // set game versions if any
         settings.versionSelect.addVersions(value);
 
-        // show or hide auto update button
+        // show or hide extra buttons
+        displayBattleStateButt();
         displayAutoButt();
 
     }

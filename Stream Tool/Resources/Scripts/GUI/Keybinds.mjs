@@ -1,6 +1,6 @@
 import { pokeFinder } from './Finder/Pokemon Finder.mjs';
 import { current } from './Globals.mjs';
-import { randomizeAllPokemon } from './Pokemon/TeamPokemons.mjs';
+import { randomizeAllPokemon } from './Team/TeamPokemons.mjs';
 
 export function loadKeybinds() {
 

@@ -233,6 +233,17 @@ export class Pokemon {
 
     }
 
+    setInCombat(value) {
+
+        if (this.inCombat == value) return;
+
+        this.inCombat = value;
+
+        this.turnSprite(value);
+        this.displayHPBar(value);         
+
+    }
+
     /**
      * Group of image src's for this pokemon
      * @param {String[]} img 
@@ -314,6 +325,7 @@ export class Pokemon {
      */
     turnSprite(side) {
         this.#side = side ? "Back" : "Front";
+        console.log(side, this.#side);
         this.setImg(this.getImgSrc());
     }
 
@@ -322,7 +334,7 @@ export class Pokemon {
     displayHPBar() {
 
         // if pokemon is hurt or in combat
-        if (current.inCombat || this.getHpCurrent() < this.getHpMax()) {
+        if (this.inCombat || this.getHpCurrent() < this.getHpMax()) {
 
             this.hpEl.parentElement.style.transform = "translateY(0px)";
             this.nickEl.parentElement.style.transform = "translateY(0px)";
@@ -366,7 +378,7 @@ export class Pokemon {
 
                 // if pokemon is mega evolving, wait for that img update
                 if (megaEvolving) {
-                    setTimeout(() => {this.setImg(data.img);}, 2900);                    
+                    setTimeout(() => {this.setImg(data.img)}, 2900);                    
                 } else {
                     this.setImg(data.img);
                 }
@@ -410,6 +422,9 @@ export class Pokemon {
         if (this.getHpCurrent() != data.hpCurrent || this.getHpMax() != data.hpMax) {
             this.setHp(data.hpCurrent, data.hpMax);
         }
+
+        // in combat status
+        this.setInCombat(data.inCombat);
 
     }
 

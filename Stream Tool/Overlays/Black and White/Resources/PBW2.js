@@ -265,28 +265,32 @@ async function updateData(data) {
         catchesNum.innerText = data.player.catches;
         deathsNum.innerText = data.player.deaths;
         
-    } else if (data.type == "Wild Encounter" && data.pokemon) {
+    } else if (data.type == "Wild Encounter") {
 
-        // wild pokemon image
-        wildPokemon.setImg(data.pokemon.img);
+        if (data.pokemon) {
+            
+            // wild pokemon image
+            wildPokemon.setImg(data.pokemon.img);
 
-        // set type info
-        wildPokemon.setTypes(data.pokemon.type);
+            // set type info
+            wildPokemon.setTypes(data.pokemon.type);
 
-        // gender ratio
-        wildPokemon.setGenderRatio(data.pokemon.ratioM, data.pokemon.ratioF);
+            // gender ratio
+            wildPokemon.setGenderRatio(data.pokemon.ratioM, data.pokemon.ratioF);
 
-        // abilities
-        wildPokemon.setAbilities(data.pokemon.abilities);
+            // abilities
+            wildPokemon.setAbilities(data.pokemon.abilities);
 
-        // stat meters
-        wildPokemon.updateMeters(data.pokemon.stats);
+            // stat meters
+            wildPokemon.updateMeters(data.pokemon.stats);
+
+        }        
 
         // check if the in combat state changed
-        if (inCombatPrev != data.inCombat) {
+        if (inCombatPrev != data.pokemon) {
 
             // show or hide info if the fight is happening or not
-            if (data.inCombat) {
+            if (data.pokemon) {
                 playerInfoDiv.style.animation = "slideOut .5s both";
                 setTimeout(() => {
                     wildDiv.style.animation = "slideIn .5s both";
@@ -302,14 +306,14 @@ async function updateData(data) {
             for (let i = 0; i < pokemons.length; i++) {
 
                 if (pokemons[i].getSpecies()) {
-                    pokemons[i].turnSprite(data.inCombat);
+                    pokemons[i].turnSprite(data.pokemon);
                 }
                 
             }
 
         }
 
-        inCombatPrev = data.inCombat;
+        inCombatPrev = data.pokemon;
 
     } else if (data.type == "Config") {
 

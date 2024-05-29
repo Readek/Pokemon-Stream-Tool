@@ -2,8 +2,8 @@ import { updateCatches } from './Catches/Update Catches.mjs';
 import { saveSettings } from './File System.mjs';
 import { current } from './Globals.mjs';
 import { updatePlayer } from './Player/Update Player.mjs';
-import { updateTeam } from './Pokemon/Update Team.mjs';
-import { updateTrainer } from './Pokemon/Update Trainer.mjs';
+import { updateTeam } from './Team/Update Team.mjs';
+import { updateTrainer } from './VS Trainer/Update Trainer.mjs';
 import { updateGUI } from './Remote Update.mjs';
 import { updateWildEnc } from './VS Wild/Update Wild.mjs';
 

@@ -2,8 +2,8 @@ import { getLocalizedText } from "../Utils/Language.mjs";
 import { enableCatchesUpdate } from "./Catches/Update Catches.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { enablePlayerUpdate } from "./Player/Update Player.mjs";
-import { enableTeamUpdate } from "./Pokemon/Update Team.mjs";
-import { enableTrainerUpdate } from "./Pokemon/Update Trainer.mjs";
+import { enableTeamUpdate } from "./Team/Update Team.mjs";
+import { enableTrainerUpdate } from "./VS Trainer/Update Trainer.mjs";
 import { updateGUI } from "./Remote Update.mjs";
 import { enableWildUpdate } from "./VS Wild/Update Wild.mjs";
 

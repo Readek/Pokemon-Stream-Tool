@@ -6,10 +6,11 @@ import { current } from "./Globals.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Gym Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
-import { pokemons } from "./Pokemon/TeamPokemons.mjs";
-import { trainerPokemons } from "./Pokemon/TrainerPokemons.mjs";
+import { pokemons } from "./Team/TeamPokemons.mjs";
+import { trainerPokemons } from "./VS Trainer/TrainerPokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
 import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
+import { setBattleState } from "./Team/Battle State.mjs";
 
 /**
  * Updates the entire GUI with values sent remotely
@@ -89,8 +90,11 @@ export async function updateGUI(data, noNotif) {
             pokemons[i].setMoves(data.playerPokemons[i].moves);
             pokemons[i].setStats(data.playerPokemons[i].stats);
             pokemons[i].setBoosts(data.playerPokemons[i].boosts);
+            pokemons[i].setInCombat(data.playerPokemons[i].inCombat);
 
         };
+
+        setBattleState(data.battleType);
 
     }
 

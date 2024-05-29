@@ -32,7 +32,7 @@ export const lang = {
 
     /* TEAM */
 
-    pokeSelectTitle : "Selecciona un Pokemon",
+    pokeSelectTitle : "Selecciona un Pokemon.\nHaz click derecho para forzar en combate.",
     finderFilterPHolder : "Escribe para filtar...",
 
     pokeNickTitle : "Mote del Pokemon",
@@ -89,9 +89,16 @@ export const lang = {
     pokeSpD : "SpD",
     pokeSpe : "Spe",
 
+    bTypeButtTitle : "Cambia el estado actual de 'En combate'",
+    bTypeButtNone : "Fuera de combate",
+    bTypeButtWild : "En combate (VS Salvaje)",
+    bTypeButtTrainer : "En combate (Entrenador)",
+    bTypeButtMulti : "En Combate (Múltiple)",
+
     pokeUpdateButt : "Actualizar Equipo",
+
     autoUpdateButtOff : "🍊 AUTO OFF",
-    autoUpdateButtTitle : "Activa el actualizado automático para juegos de Gen6/7",
+    autoUpdateButtTitle : "Activa el actualizado automático",
 
 
     /* PLAYER */

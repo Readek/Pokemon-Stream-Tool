@@ -1,5 +1,6 @@
 import { inside } from "../Globals.mjs";
 import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
+import { getBattleState } from "./Battle State.mjs";
 import { pokemons } from "./TeamPokemons.mjs";
 
 const updateButt = document.getElementById("updateTeamButt");
@@ -30,7 +31,8 @@ export async function updateTeam() {
     const dataJson = {
         id : "gameData",
         type : "Team",
-        playerPokemons: [], // more lines will be added below
+        playerPokemons: [], // more lines will be added below,
+        battleType: getBattleState()
     };
 
     const promises = [];
@@ -57,6 +59,7 @@ export async function updateTeam() {
             moves : pokemons[i].getMoves(),
             stats : pokemons[i].getStats(),
             boosts : pokemons[i].getBoosts(),
+            inCombat : pokemons[i].getInCombat()
         })
 
         // download images if needed and wait for them

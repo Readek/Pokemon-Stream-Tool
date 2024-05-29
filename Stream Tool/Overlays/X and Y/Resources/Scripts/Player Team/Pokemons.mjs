@@ -2,7 +2,7 @@ import { Pokemon } from "./Pokemon.mjs";
 
 class Pokemons {
 
-    /** @type {Pokemon} */
+    /** @type {Pokemon[]} */
     #pokemons = [];
 
     constructor() {

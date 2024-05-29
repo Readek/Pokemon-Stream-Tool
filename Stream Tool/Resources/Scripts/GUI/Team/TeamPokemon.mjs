@@ -42,6 +42,12 @@ export class TeamPokemon extends Pokemon {
         
         this.statusSel = this.el.getElementsByClassName('pokeStatus')[0];
 
+        // if right click on species, manually toggle in combat status
+        this.pokeSel.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            this.setInCombat(!this.getInCombat());
+        })
+
         // show or hide details with button
         const detailsButt = this.el.getElementsByClassName('pokeDetailsButt')[0];
         const detailsDiv = this.el.getElementsByClassName('pokeDetails')[0];
@@ -314,8 +320,20 @@ export class TeamPokemon extends Pokemon {
     getInCombat() {
         return this.#inCombat;
     }
+    /** @param {Boolean} value */
     setInCombat(value) {
+
+        if (this.#inCombat == value) return;
+        
         this.#inCombat = value;
+
+        // add some visual indicator to the GUI
+        if (value) {
+            this.pokeSel.classList.add("pokeSelectorInCombat");
+        } else {
+            this.pokeSel.classList.remove("pokeSelectorInCombat");
+        }
+
     }
 
     /**

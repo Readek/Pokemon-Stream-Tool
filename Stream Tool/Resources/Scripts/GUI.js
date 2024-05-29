@@ -3,12 +3,12 @@ import './GUI/Top Bar.mjs';
 import { restoreWindowDefaults } from './GUI/Settings/Window Settings/Restore Window Defaults.mjs';
 import { loadKeybinds } from './GUI/Keybinds.mjs';
 import { inside, stPath } from './GUI/Globals.mjs';
-import { pokemons } from './GUI/Pokemon/TeamPokemons.mjs'
-import { TeamPokemon } from './GUI/Pokemon/TeamPokemon.mjs';
+import { pokemons } from './GUI/Team/TeamPokemons.mjs'
+import { TeamPokemon } from './GUI/Team/TeamPokemon.mjs';
 import { updateGUI } from './GUI/Remote Update.mjs';
 import { fileExists, getJson } from './GUI/File System.mjs';
 import { updatePlayer } from './GUI/Player/Update Player.mjs';
-import { updateTeam } from './GUI/Pokemon/Update Team.mjs';
+import { updateTeam } from './GUI/Team/Update Team.mjs';
 import { settings } from './GUI/Settings/Settings.mjs';
 import { pokeFinder } from './GUI/Finder/Pokemon Finder.mjs';
 import { catches } from './GUI/Catches/Catches.mjs';
@@ -16,8 +16,8 @@ import { Catch } from './GUI/Catches/Catch.mjs';
 import { updateCatches } from './GUI/Catches/Update Catches.mjs';
 import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
 import { fetchFile } from './GUI/Fetch File.mjs';
-import { trainerPokemons } from './GUI/Pokemon/TrainerPokemons.mjs';
-import { updateTrainer } from './GUI/Pokemon/Update Trainer.mjs';
+import { trainerPokemons } from './GUI/VS Trainer/TrainerPokemons.mjs';
+import { updateTrainer } from './GUI/VS Trainer/Update Trainer.mjs';
 
 
 // this is a weird way to have file svg's that can be recolored by css

@@ -1,5 +1,4 @@
 import { pokemons } from "./Player Team/Pokemons.mjs";
-import { current } from "./Globals.mjs";
 import { getLocalizedText } from "../../../../Resources/Scripts/Utils/Language.mjs";
 
 const playerInfoDiv = document.getElementById("playerInfo");
@@ -30,7 +29,7 @@ const statMeterSA = document.getElementById("vsWildMeterSA");
 const statMeterSD = document.getElementById("vsWildMeterSD");
 const statMeterSP = document.getElementById("vsWildMeterSP");
 
-let side = "Front";
+let isPoke = false;
 
 class WildPokemon {
 
@@ -41,11 +40,11 @@ class WildPokemon {
     setImg(img) {
 
         // position offsets
-        const offset = img["gen5" + side + "Offs"];
+        const offset = img["gen5FrontOffs"];
         wildPokeImg.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
 
         // actual image
-        wildPokeImg.src = img["gen5" + side];
+        wildPokeImg.src = img["gen5Front"];
 
     }
 
@@ -152,38 +151,53 @@ class WildPokemon {
      */
     update(data) {
 
-        // wild pokemon image
-        this.setImg(data.pokemon.img);
+        if (data.pokemon) {
 
-        // set type info
-        this.setTypes(data.pokemon.type);
+            // wild pokemon image
+            this.setImg(data.pokemon.img);
 
-        // gender ratio
-        this.setGenderRatio(data.pokemon.ratioM, data.pokemon.ratioF);
+            // set type info
+            this.setTypes(data.pokemon.type);
 
-        // abilities
-        this.setAbilities(data.pokemon.abilities);
+            // gender ratio
+            this.setGenderRatio(data.pokemon.ratioM, data.pokemon.ratioF);
 
-        // stat meters
-        this.updateMeters(data.pokemon.stats);
+            // abilities
+            this.setAbilities(data.pokemon.abilities);
 
-        // check if the in combat state changed
-        if (current.inCombat != data.inCombat) {
+            // stat meters
+            this.updateMeters(data.pokemon.stats);
 
-            current.inCombat = data.inCombat;
-
-            // show or hide info if the fight is happening or not
-            if (data.inCombat) {
+            // if there previously was no poke displayed
+            if (!isPoke) {
+                
+                // slide out badges and slide in poke info
                 playerInfoDiv.style.animation = "slideOut .5s both";
                 setTimeout(() => {
                     wildDiv.style.animation = "slideIn .5s both";
                 }, 250);
-            } else {
+
+            }
+
+            isPoke = true;
+
+        } else { // if no pokemon is sent, hide the stuff
+
+            if (isPoke) {
+
                 wildDiv.style.animation = "slideOut .5s both";
                 setTimeout(() => {
                     playerInfoDiv.style.animation = "slideIn .5s both";
                 }, 250);
+
             }
+
+            isPoke = false;
+
+        }
+
+        // check if the in combat state changed
+        /* if (data.pokemon) {
             
             // if in combat, turn everyone so they get to see this glorious fight
             for (let i = 0; i < 6; i++) {
@@ -195,7 +209,7 @@ class WildPokemon {
                 
             }
 
-        }
+        } */
 
     }
 

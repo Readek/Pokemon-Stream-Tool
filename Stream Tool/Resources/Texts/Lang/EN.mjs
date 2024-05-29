@@ -32,7 +32,7 @@ export const lang = {
 
     /* TEAM */
 
-    pokeSelectTitle : "Everyone is here!",
+    pokeSelectTitle : "Everyone is here!\nRick click to force in combat status.",
     finderFilterPHolder : "Type to filter...",
 
     pokeNickTitle : "Pokemon nickname",
@@ -89,9 +89,16 @@ export const lang = {
     pokeSpD : "SpD",
     pokeSpe : "Spe",
 
+    bTypeButtTitle : "Change current battle state",
+    bTypeButtNone : "Not in battle",
+    bTypeButtWild : "In battle (VS Wild)",
+    bTypeButtTrainer : "In battle (Trainer)",
+    bTypeButtMulti : "In (Multi)battle",
+
     pokeUpdateButt : "Update team",
+
     autoUpdateButtOff : "🍊 AUTO OFF",
-    autoUpdateButtTitle : "Sets auto-update on or off for Gen6/7 games",
+    autoUpdateButtTitle : "Sets auto-update on or off",
 
 
     /* PLAYER */

@@ -2,10 +2,10 @@ import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { current } from "../../Globals.mjs";
 import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
-import { pokemons } from "../../Pokemon/TeamPokemons.mjs";
-import { trainerPokemons } from "../../Pokemon/TrainerPokemons.mjs";
-import { updateTeam } from "../../Pokemon/Update Team.mjs";
-import { updateTrainer } from "../../Pokemon/Update Trainer.mjs";
+import { pokemons } from "../../Team/TeamPokemons.mjs";
+import { trainerPokemons } from "../../VS Trainer/TrainerPokemons.mjs";
+import { updateTeam } from "../../Team/Update Team.mjs";
+import { updateTrainer } from "../../VS Trainer/Update Trainer.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
 import { indexRawParty, rawBattlePokes, rawEnemyPokes } from "./Raw Pokes/Raw Pokes.mjs";
 import { getBattleType } from "./Read Battle Type.mjs";
@@ -13,6 +13,7 @@ import { getPartyIndexes } from "./Memory Locations/Party Indexes.mjs";
 import { getPokeBattle } from "./Memory Locations/Battle Pokemon.mjs";
 import { readPartyData } from "./Memory Locations/Party Pokemon.mjs";
 import { getActivePokemon } from "./Memory Locations/Active Pokemon.mjs";
+import { setBattleState } from "../../Team/Battle State.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 const updateButt = document.getElementById("updateTeamButt");
@@ -28,14 +29,12 @@ export async function autoUpdateToggleCitra() {
         current.autoStatus = true;
         autoUpdateButt.innerHTML = "🍊 AUTO ON";
         autoUpdateButt.classList.remove("citraButtOff");
-        updateButt.disabled = true;
 
     } else { // if theres a loop running, stop it
         
         autoUpdateButt.innerHTML = "🍊 AUTO OFF";
         autoUpdateButt.classList.add("citraButtOff");
         current.autoStatus = false;
-        updateButt.disabled = false;
 
     }
 
@@ -151,12 +150,14 @@ async function updatePlayerTeam(firstLoop) {
             if (battleType == "None") {
                 pokemons[i].setBoosts({
                     atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
-                })
+                });
+                pokemons[i].setInCombat(false);
             }
 
         }
 
         inCombat = battleType;
+        setBattleState(battleType);
         current.autoUpdated = true;
 
     }
@@ -271,6 +272,7 @@ async function updatePlayerTeam(firstLoop) {
 
         // match dex num with our pokes to know if a pokemon is in combat rn
         if (onFieldPokes) {
+
             for (let i = 0; i < onFieldPokes.player.length; i++) {
 
                 const pokeName = current.numToPoke[onFieldPokes.player[i]];
@@ -284,6 +286,9 @@ async function updatePlayerTeam(firstLoop) {
                 }
 
             }
+
+            current.autoUpdated = true;
+
         }
 
         // now for enemies
