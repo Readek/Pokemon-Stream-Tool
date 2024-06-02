@@ -56,6 +56,7 @@ export async function updateTrainer() {
             moves : trainerPokemons[i].getMoves(),
             stats : trainerPokemons[i].getStats(),
             boosts : trainerPokemons[i].getBoosts(),
+            inCombat : trainerPokemons[i].getInCombat()
         })
 
         // download images if needed and wait for them

@@ -61,6 +61,14 @@ export async function getActivePokemon() {
 
 }
 
+/** Resets stored active pokemon states */
+export function resetActivePokemon() {
+    prevPokes = {
+        player : [],
+        enemy : []
+    }
+}
+
 function getActiveAdress(game) {
 
     if (game == "XY") {

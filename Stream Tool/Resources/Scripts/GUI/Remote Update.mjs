@@ -118,8 +118,6 @@ export async function updateGUI(data, noNotif) {
             wildEncounter.setSpecies("None");
         }
 
-        wildEncounter.setInCombat(data.inCombat);
-
     }
 
     if (data.type == "Trainer") {
@@ -143,6 +141,7 @@ export async function updateGUI(data, noNotif) {
             trainerPokemons[i].setMoves(data.trainerPokemons[i].moves);
             trainerPokemons[i].setStats(data.trainerPokemons[i].stats);
             trainerPokemons[i].setBoosts(data.trainerPokemons[i].boosts);
+            trainerPokemons[i].setInCombat(data.trainerPokemons[i].inCombat);
 
         };
 

@@ -12,7 +12,7 @@ import { getBattleType } from "./Read Battle Type.mjs";
 import { getPartyIndexes } from "./Memory Locations/Party Indexes.mjs";
 import { getPokeBattle } from "./Memory Locations/Battle Pokemon.mjs";
 import { readPartyData } from "./Memory Locations/Party Pokemon.mjs";
-import { getActivePokemon } from "./Memory Locations/Active Pokemon.mjs";
+import { getActivePokemon, resetActivePokemon } from "./Memory Locations/Active Pokemon.mjs";
 import { setBattleState } from "../../Team/Battle State.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
@@ -125,7 +125,17 @@ async function updatePlayerTeam(firstLoop) {
     */
 
     // first of all, keep track of updates, unless on first loop after toggle
-    current.autoUpdated = firstLoop ? true : false;
+    if (firstLoop) {
+
+        current.autoUpdated = true;
+        
+        // also reset inCombat state
+        inCombat = false;
+
+    } else {
+        current.autoUpdated = false;
+    }
+    
 
     // check if we are on a battle right now
     const battleType = await getBattleType();
@@ -158,7 +168,12 @@ async function updatePlayerTeam(firstLoop) {
 
         inCombat = battleType;
         setBattleState(battleType);
+        resetActivePokemon();
         current.autoUpdated = true;
+
+        // we force an await here because sometimes, when swapping from
+        // memory locations, memory wont be fully filled up by the game yet
+        await new Promise(resolve => setTimeout(resolve, 500));
 
     }
 
@@ -272,16 +287,22 @@ async function updatePlayerTeam(firstLoop) {
 
         // match dex num with our pokes to know if a pokemon is in combat rn
         if (onFieldPokes) {
+            
+            // set everyone as not in combat
+            for (let i = 0; i < pokemons.length; i++) {
+                pokemons[i].setInCombat(false);
+            }
 
+            // for each in combat pokemon found
             for (let i = 0; i < onFieldPokes.player.length; i++) {
 
+                // get an actual name
                 const pokeName = current.numToPoke[onFieldPokes.player[i]];
     
+                // look for matches within the current team
                 for (let i = 0; i < pokemons.length; i++) {
                     if (pokeName == pokemons[i].getSpecies()) {
                         pokemons[i].setInCombat(true);
-                    } else {
-                        pokemons[i].setInCombat(false);
                     }
                 }
 
@@ -341,15 +362,22 @@ async function updatePlayerTeam(firstLoop) {
 
             // match dex num with our pokes to know if a pokemon is in combat rn
             if (onFieldPokes) {
+
+                // set everyone as not in combat
+                for (let i = 0; i < trainerPokemons.length; i++) {
+                    trainerPokemons[i].setInCombat(false);
+                }
+
+                // for each in combat pokemon found
                 for (let i = 0; i < onFieldPokes.enemy.length; i++) {
 
+                    // get an actual name
                     const pokeName = current.numToPoke[onFieldPokes.enemy[i]];
         
+                    // look for matches within the current enemy team
                     for (let i = 0; i < trainerPokemons.length; i++) {
                         if (pokeName == trainerPokemons[i].getSpecies()) {
                             trainerPokemons[i].setInCombat(true);
-                        } else {
-                            trainerPokemons[i].setInCombat(false);
                         }
                     }
 
