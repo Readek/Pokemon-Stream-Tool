@@ -14,6 +14,8 @@ import { getPokeBattle } from "./Memory Locations/Battle Pokemon.mjs";
 import { readPartyData } from "./Memory Locations/Party Pokemon.mjs";
 import { getActivePokemon, resetActivePokemon } from "./Memory Locations/Active Pokemon.mjs";
 import { setBattleState } from "../../Team/Battle State.mjs";
+import { wildEncounter } from "../../VS Wild/Wild Pokemon.mjs";
+import { updateWildEnc } from "../../VS Wild/Update Wild.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 const updateButt = document.getElementById("updateTeamButt");
@@ -173,7 +175,14 @@ async function updatePlayerTeam(firstLoop) {
 
         // we force an await here because sometimes, when swapping from
         // memory locations, memory wont be fully filled up by the game yet
-        await new Promise(resolve => setTimeout(resolve, 500));
+        if (battleType == "Trainer" || battleType == "Multi" || battleType == "Wild") {
+            // 2500 being the time a wild pokemon takes to appear on screen :)
+            await new Promise(resolve => setTimeout(resolve, 2500));
+        } else {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            wildEncounter.setSpecies("None");
+            updateWildEnc();
+        }
 
     }
 
@@ -387,6 +396,32 @@ async function updatePlayerTeam(firstLoop) {
             // if something was updated at all
             if (current.autoUpdated) {
                 await updateTrainer();
+            }
+
+        }
+
+        // we will only read first enemy pokemon of a wild battle
+        if (battleType == "Wild") {
+
+            // only read whenever inBattle pokes change
+            if (onFieldPokes) {
+                
+                // go read that pokemon
+                await getPokeBattle(battleType, readCount, 0, true);
+
+                // to force update if needed
+                if (hasChanged) {rawEnemyPokes[0].changeHasChanged()};
+
+                if (rawEnemyPokes[0].hasChanged() && rawEnemyPokes[0].valid) {
+
+                    wildEncounter.setSpecies(rawEnemyPokes[0].speciesName());
+                    wildEncounter.setGender(rawEnemyPokes[0].gender());
+                    wildEncounter.setFormNumber(rawEnemyPokes[0].formIndex());
+
+                    await updateWildEnc();
+
+                }
+
             }
 
         }
