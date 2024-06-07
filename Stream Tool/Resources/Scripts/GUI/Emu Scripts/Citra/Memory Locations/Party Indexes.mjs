@@ -1,5 +1,6 @@
 import { current } from "../../../Globals.mjs";
 import { citra } from "../Citra.mjs";
+import { decryptData } from "../Crypts.mjs";
 
 const indexSize = 4;
 
@@ -65,6 +66,20 @@ function getIndexAddress(game) {
  * @returns {Number} Party index
  */
 function translateIndex(value) {
+    
+    if (value == 178) {
+        return 0;
+    } else if (value == 180) {
+        return 1;
+    } else if (value == 181) {
+        return 2;
+    } else if (value == 183) {
+        return 3;
+    } else if (value == 185) {
+        return 4;
+    } else if (value == 187) {
+        return 5;
+    }
 
     if (value == 28) {
         return 0;

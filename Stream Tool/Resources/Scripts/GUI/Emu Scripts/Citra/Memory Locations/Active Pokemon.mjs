@@ -73,6 +73,8 @@ function getActiveAdress(game) {
 
     if (game == "XY") {
         return 0x83E7098;
+    } else if (game == "ORAS") {
+        return 0x83F9550;
     }
 
 }
