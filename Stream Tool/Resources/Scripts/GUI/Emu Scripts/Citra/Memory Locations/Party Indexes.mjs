@@ -11,22 +11,15 @@ const indexSize = 4;
 export async function getPartyIndexes() {
 
     const indexes = [];
-    const indexData = [];
     const indexAddress = getIndexAddress(current.game);
 
-    for (let i = 0; i < 6; i++) {
-        
-        // add an offset every time we run this loop
-        const readAddress = indexAddress + i * indexSize;
-
-        // ask citra for some raw data and wait for it
-        indexData.push(await citra.readMemory(readAddress, indexSize));
-        
-    }
+    // ask citra for some raw data and wait for it
+    const data = await citra.readMemory(indexAddress, indexSize * 6);
 
     // create an array with the actual party order
-    for (let i = 0; i < indexData.length; i++) {
-        indexes.push(translateIndex(indexData[i][1]))
+    for (let i = 0; i < 6; i++) {
+        const indexData = data.slice(i * indexSize, i * indexSize + indexSize);
+        indexes.push(translateIndex(indexData[1]));
     }
 
     return indexes;
@@ -66,21 +59,11 @@ function getIndexAddress(game) {
  * @returns {Number} Party index
  */
 function translateIndex(value) {
-    
-    if (value == 178) {
-        return 0;
-    } else if (value == 180) {
-        return 1;
-    } else if (value == 181) {
-        return 2;
-    } else if (value == 183) {
-        return 3;
-    } else if (value == 185) {
-        return 4;
-    } else if (value == 187) {
-        return 5;
-    }
 
+    // this should be properly decrypted, however i have no idea
+    // how decrypting works so this ugly wall will have to do
+
+    // XY
     if (value == 28) {
         return 0;
     } else if (value == 30) {
@@ -92,6 +75,36 @@ function translateIndex(value) {
     } else if (value == 36) {
         return 4;
     } else if (value == 38) {
+        return 5;
+    }
+
+    // ORAS 1.0
+    if (value == 114) {
+        return 0;
+    } else if (value == 116) {
+        return 1;
+    } else if (value == 118) {
+        return 2;
+    } else if (value == 119) {
+        return 3;
+    } else if (value == 121) {
+        return 4;
+    } else if (value == 123) {
+        return 5;
+    }
+
+    // ORAS 1.4
+    if (value == 178) {
+        return 0;
+    } else if (value == 180) {
+        return 1;
+    } else if (value == 181) {
+        return 2;
+    } else if (value == 183) {
+        return 3;
+    } else if (value == 185) {
+        return 4;
+    } else if (value == 187) {
         return 5;
     }
 
