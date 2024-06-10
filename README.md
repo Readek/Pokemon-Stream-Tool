@@ -16,7 +16,7 @@ Pokemon ST is a tool that manages dynamic overlays with the help of a GUI. But w
 - Store your catches to be displayed on a "Waiting to start" scene.
 - **Gen 6 auto-update** for your current player party, reading directly from Citra (or Citra-likes).
 - **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
-- Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/archive/refs/heads/master.zip)! No need to join any Discord server.
+- Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)! No need to join any Discord server.
 - **Crossplatform** GUI (Windows, Linux), built on Electron.
 - Made to be customized! Just dive into the folders and modify the tool to your heart's content.
 
