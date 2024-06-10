@@ -48,7 +48,7 @@ module.exports = function initExec(rPath, gPath, wSocket) {
         guiHeight = storedSettings.guiHeight;
         if (process.platform == "win32") {
             guiWidth = guiWidth + 4; // windows why cant you be normal
-            guiHeight = guiHeight + 30;
+            guiHeight = guiHeight + 36;
         }
 
         // initialize them servers
@@ -183,7 +183,7 @@ function createWindow() {
     ipcMain.on('defaultWindow', (event) => {
         // windows includes frame borders on the window dimensions and i hate it
         if (process.platform == "win32") {
-            win.setBounds({width: 651, height: 382});
+            win.setBounds({width: 651, height: 390});
         } else {
             win.setBounds({width: 647, height: 352});
         }
@@ -262,7 +262,7 @@ app.on('window-all-closed', () => {
         // this is to determine proper window size because Windows sucks
         if (process.platform == "win32") {
             data.guiWidth = guiWidth - 4;
-            data.guiHeight = guiHeight - 30;
+            data.guiHeight = guiHeight - 36;
         } else {
             data.guiWidth = guiWidth;
             data.guiHeight = guiHeight;

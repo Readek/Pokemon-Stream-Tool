@@ -6,10 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oh no</title>
 </head>
-<body>
-    <h1>Path error</h1>
 
-    <p>Couldn't find the Resources folder.</p>
-    <p>Make sure the Resources folder is next to the executable.</p>
+<style>
+
+    body {
+        color: white;
+    }
+
+    #centerDiv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #rPathDiv {
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        padding: 1px;
+        margin: 10px;
+    }
+
+    #rPathInput {
+        background: none;
+        border: none;
+        width: 400px;
+        color: white;
+    }
+
+    #rPathButt {
+        background: none;
+        cursor: pointer;
+    }
+
+</style>
+
+<body>
+
+<div id="centerDiv">
+    
+    <h1>Couldn't find the Resources folder</h1>
+
+    <p>By default, that folder is next to the executable.</p>
+    
+    <p>If needed, you can change the Resources folder's path to one of your choosing.</p>
+
+    <div id="rPathDiv">
+        Open file picker and select a folder. Or don't, to use default path. ->
+        <button id="rPathButt">📁</button>
+    </div>
+
+    <p>When you're done, close the app and open it again.</p>
+
+</div>
+   
 </body>
+
+<script>
+
+const rPathInp = document.getElementById("rPathInput");
+
+document.getElementById("rPathButt").addEventListener("click", async () => {
+
+    window.postMessage({
+        type: 'select-dirs'
+    })
+
+})
+
+</script>
+
 </html>
