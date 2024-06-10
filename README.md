@@ -48,9 +48,9 @@ For the moment, the tool comes with overlays included for:
 
 ## How to
 
-There are no public official releases yet, but if you really want to try this out, you can start by getting the [latest dev build](https://github.com/Readek/Pokemon-Stream-Tool/archive/refs/heads/master.zip).
+There are no public official releases yet, but if you really want to try this out, you can start by getting the [latest dev build](https://github.com/Readek/Pokemon-Stream-Tool/releases).
 
-Once you got the thing downloaded, open the `Stream Tool` folder and simply start the executable (`.exe` for Windows and `.AppImage` for Linux), and play around!
+Once you got the thing downloaded, open the `Stream Tool` folder and simply start the executable, and play around!
 
 To add overlays to your stream, go into the `Stream Tool/Overlays/` folder and select the one you want, then simply drag and drop the `.html` file found on that folder onto OBS. As long as the GUI is open, everything should be already connected!
 
