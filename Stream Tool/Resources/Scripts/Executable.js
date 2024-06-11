@@ -138,6 +138,7 @@ function createWindow() {
         icon: path.join(nodePath, 'icon.png'),
 
         webPreferences: {
+            backgroundThrottling: false,
             // this is almost deprecated functionallity as of electron 15, however
             // i have not found a better way to make files external to the insides
             // of the exe work with electron, todo find a more updated way to do so
