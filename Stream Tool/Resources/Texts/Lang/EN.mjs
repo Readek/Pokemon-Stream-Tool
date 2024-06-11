@@ -147,6 +147,8 @@ export const lang = {
 
     /* VS TRAINER */
 
+    hiddenHover : "Click to reveal",
+
     trainerUpdateButt : "Update Trainer",
 
 

@@ -280,6 +280,7 @@ button:hover {
 }
 
 .teamPokeMainInfo {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -359,7 +360,7 @@ button:hover {
   font-family: 'Roboto-Regular';
   white-space: nowrap;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 .selector:hover {
   border-color: var(--selected);
@@ -372,10 +373,6 @@ button:hover {
   display: flex;
 }
 
-.pokeSelector {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
 .pokeSelectorInCombat {
   background-color: var(--focused);
 }
@@ -610,7 +607,8 @@ button:hover {
 .detailsHpExp {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  gap: 5px;
   padding: 0px 10px;
 }
 
@@ -637,6 +635,7 @@ button:hover {
 }
 
 .pokeDetailsDiv {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -721,6 +720,7 @@ button:hover {
   gap: 5px;
 }
 .pokeMoveBlock {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -742,6 +742,7 @@ button:hover {
 }
 
 .detailsStats {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -821,6 +822,31 @@ button:hover {
 
 .citraButtOff {
   filter: grayscale(.8);
+}
+
+
+/* hidden stuff only apply to enemy trainer tab */
+.hiddenElement {
+  position: absolute;
+  display: none;
+  background-color: var(--bg1);
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.hiddenElementHover {
+  display: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+.hiddenElement:hover .hiddenElementEye {
+  display: none;
+}
+.hiddenElement:hover .hiddenElementHover {
+  display: flex;
 }
 
 

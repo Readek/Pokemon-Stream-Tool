@@ -18,7 +18,6 @@ import { wildEncounter } from "../../VS Wild/Wild Pokemon.mjs";
 import { updateWildEnc } from "../../VS Wild/Update Wild.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
-const updateButt = document.getElementById("updateTeamButt");
 
 let inCombat = false;
 
@@ -158,12 +157,13 @@ async function updatePlayerTeam(firstLoop) {
 
         for (let i = 0; i < 6; i++) {
 
-            // reset boost texts
             if (battleType == "None") {
+                // reset some stuffs
                 pokemons[i].setBoosts({
                     atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
                 });
                 pokemons[i].setInCombat(false);
+                trainerPokemons[i].clear();
             }
 
         }

@@ -1,3 +1,5 @@
+import { getLocalizedText } from "../../Utils/Language.mjs";
+import { current } from "../Globals.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { typeToColor } from "../Type to Color.mjs";
 
@@ -82,6 +84,20 @@ export class TeamPokemon extends Pokemon {
             this.#boostEl[boostKeys[i]] = this.el.getElementsByClassName(`poke${boostKeysUpper[i]}Boost`)[0];
         }
 
+        // to hide enemy stuff from view
+        if (enemy) {
+            this.createHideEls();
+            this.#expInp.parentElement.style.display = "none";
+        }
+
+    }
+
+    setSpecies(name) {
+        // if enemy
+        if (this.enemy && name && !this.speciesName && current.autoStatus) {
+            this.hideRevealInfo(true);
+        }
+        super.setSpecies(name);
     }
 
     getLvl() {
@@ -133,6 +149,11 @@ export class TeamPokemon extends Pokemon {
             this.#hpBar.style.setProperty("--activeColor", "var(--healthy)");
         }
 
+        // while we're at it, if pokemon is dead, reveal all info
+        if (this.enemy && value == 0) {
+           this.hideRevealInfo(false);
+       }
+
     }
 
     getHpMax() {
@@ -183,16 +204,27 @@ export class TeamPokemon extends Pokemon {
 
         if (!moves) return;
         for (let i = 0; i < moves.length; i++) {
+
             if (moves[i].name != this.#move[i].name) {
+
                 this.#move[i].name = moves[i].name;
                 this.#moveInp[i].name.value = moves[i].name;
                 this.#move[i].type = moves[i].type;
                 this.#moveInp[i].parent.style.backgroundColor = `${typeToColor(moves[i].type)}80`;
+
             }
             if (this.#move[i].pp != moves[i].pp) {
+
+                // if enemy, reveal this move
+                if (this.enemy && this.#move[i].pp > moves[i].pp) {
+                    this.hideMoveEls[i].style.display = "none";
+                }
+
                 this.#move[i].pp = moves[i].pp;
                 this.#moveInp[i].pp.value = moves[i].pp;
+                
             }
+
         }
 
     }
@@ -327,9 +359,17 @@ export class TeamPokemon extends Pokemon {
         
         this.#inCombat = value;
 
-        // add some visual indicator to the GUI
+        // if in combat
         if (value) {
+
+            // add some visual indicator to the GUI
             this.pokeSel.classList.add("pokeSelectorInCombat");
+
+            // if enemy, reveal basic pokemon info
+            if (this.enemy) {
+                this.hideAllEl.style.display = "none";
+            }
+
         } else {
             this.pokeSel.classList.remove("pokeSelectorInCombat");
         }
@@ -423,12 +463,12 @@ export class TeamPokemon extends Pokemon {
 
                     <div class="detailsAbiItem">
 
-                        <div class="pokeDetailsDiv" locTitle="pokeAbilityTitle">
+                        <div class="pokeDetailsDiv pokeAbilityDiv" locTitle="pokeAbilityTitle">
                             <div class="pokeTopRowText pokeAbilityText" locText="pokeAbility"></div>
                             <input class="pokeDetailsInput pokeAbility" type="text" locPHolder="pokeAbilityPHolder">
                         </div>
 
-                        <div class="pokeDetailsDiv" locTitle="pokeItemTitle">
+                        <div class="pokeDetailsDiv pokeItemDiv" locTitle="pokeItemTitle">
                             <div class="pokeTopRowText pokeItemText" locText="pokeItem"></div>
                             <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
                         </div>
@@ -492,7 +532,7 @@ export class TeamPokemon extends Pokemon {
     createMoveElement(num) {
 
         const element = document.createElement("div");
-        element.classList.add("pokeMoveBlock");
+        element.classList.add("pokeMoveBlock", "pokeMoveDiv" + num);
         element.innerHTML = `
 
         <input class="pokeDetailsInput pokeMoveName pokeMove${num}" type="text" placeholder="-" spellcheck="false">
@@ -538,11 +578,84 @@ export class TeamPokemon extends Pokemon {
 
     }
 
+    /** Creates all hide elements for enemy trainer pokemon */
+    createHideEls() {
+
+        // the entire thing
+        this.hideAllEl = document.createElement("div");
+        this.createHideEl(this.hideAllEl, "teamPokeMainInfo");
+
+        // details stuff
+        this.hideAbiEl = document.createElement("div");
+        this.createHideEl(this.hideAbiEl, "pokeAbilityDiv");
+        this.hideItemEl = document.createElement("div");
+        this.createHideEl(this.hideItemEl, "pokeItemDiv");
+        this.hideStatEl = document.createElement("div");
+        this.createHideEl(this.hideStatEl, "detailsStats");
+
+        this.hideMoveEls = [];
+        for (let i = 0; i < 4; i++) {
+            this.hideMoveEls.push(document.createElement("div"));
+            this.createHideEl(this.hideMoveEls[i], "pokeMoveDiv" + i);        
+        }
+
+    }
+
+    /**
+     * Creates an element to hide enemy trainer info
+     * @param {HTMLElement} el - Element to cover parent element
+     * @param {HTMLElement} parentEl - Element to be covered by THE EYE
+     */
+    createHideEl(el, parentEl) {
+
+        el.classList.add("hiddenElement");
+        
+        // what to show when not hovering
+        const theEye = document.createElement("div");
+        theEye.classList.add("hiddenElementEye")
+        theEye.innerHTML = "👁️"; // 👁️
+        el.append(theEye);
+
+        // what to show when hovering
+        const hoverText = document.createElement("div");
+        hoverText.classList.add("hiddenElementHover")
+        hoverText.innerHTML = getLocalizedText("hiddenHover");
+        el.append(hoverText);
+
+        // click to force show
+        el.addEventListener("click", () => {el.style.display = "none"});
+
+        // add it to parent element
+        this.el.getElementsByClassName(parentEl)[0].append(el);
+
+    }
+
+    /**
+     * Hides info from enemy trainer pokemon
+     * @param {Boolean} value True for hide, false to reveal
+     */
+    hideRevealInfo(value) {
+        const style = value ? "flex" : "none";
+        this.hideAllEl.style.display = style;
+        this.hideAbiEl.style.display = style;
+        this.hideItemEl.style.display = style;
+        this.hideStatEl.style.display = style;
+        for (let i = 0; i < 4; i++) {
+            this.hideMoveEls[i].style.display = style;
+        }
+    }
+
     /** Resets all data for this pokemon */
     clear() {
         super.clear();
         this.setLvl(1);
         this.setStatus(null);
+        const emptyMove = {
+            name: "",
+            type: "None",
+            pp: 0
+        }
+        this.setMoves([emptyMove, emptyMove, emptyMove, emptyMove])
     }
 
 }
