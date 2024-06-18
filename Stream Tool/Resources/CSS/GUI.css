@@ -714,6 +714,11 @@ button:hover {
   text-align: center;
 }
 
+.pokeAbilityDiv, .pokeItemDiv {
+  position: relative;
+  display: flex;
+}
+
 .detailsMoves {
   display: flex;
   flex-direction: column;

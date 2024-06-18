@@ -69,7 +69,7 @@ export const lang = {
 
     pokeItemTitle : "Objeto del pokemon",
     pokeItem : "Objeto ",
-    pokeItemPHolder : "Nada?",
+    pokeItemPHolder : "Ninguno",
 
     pokeMoves : "Movimientos del pokemon",
     pokePP : "PP",

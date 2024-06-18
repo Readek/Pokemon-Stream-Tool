@@ -142,6 +142,7 @@ export async function updateGUI(data, noNotif) {
             trainerPokemons[i].setStats(data.trainerPokemons[i].stats);
             trainerPokemons[i].setBoosts(data.trainerPokemons[i].boosts);
             trainerPokemons[i].setInCombat(data.trainerPokemons[i].inCombat);
+            trainerPokemons[i].setReveals(data.trainerPokemons[i].reveals);
 
         };
 

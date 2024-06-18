@@ -158,12 +158,17 @@ async function updatePlayerTeam(firstLoop) {
         for (let i = 0; i < 6; i++) {
 
             if (battleType == "None") {
+
                 // reset some stuffs
                 pokemons[i].setBoosts({
                     atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0
                 });
                 pokemons[i].setInCombat(false);
+
+                // clear enemy trainer states
                 trainerPokemons[i].clear();
+                updateTrainer();
+
             }
 
         }
