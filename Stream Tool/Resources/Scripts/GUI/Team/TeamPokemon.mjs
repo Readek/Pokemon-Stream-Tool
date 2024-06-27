@@ -482,10 +482,7 @@ export class TeamPokemon extends Pokemon {
 
                 </div>
 
-                <div class="detailsBotRow" locTitle="pokeMoves">
-
-                    <div class="detailsMovesTop detailsMoves"></div>
-                    <div class="detailsMovesBot detailsMoves"></div>
+                <div class="detailsMoveRow" locTitle="pokeMoves">
 
                 </div>
 
@@ -500,15 +497,10 @@ export class TeamPokemon extends Pokemon {
         `
 
         // add move elements
-        const detailsMovesTopEl = element.getElementsByClassName("detailsMovesTop")[0];
-        const detailsMovesBotEl = element.getElementsByClassName("detailsMovesBot")[0];
+        const detailsMoves = element.getElementsByClassName("detailsMoveRow")[0];
         for (let i = 0; i < 4; i++) {
             const moveEl = this.createMoveElement(i);
-            if (i < 2) {
-                detailsMovesTopEl.appendChild(moveEl);
-            } else {
-                detailsMovesBotEl.appendChild(moveEl);
-            }
+                detailsMoves.appendChild(moveEl);
         }
 
         // add stat elements

@@ -628,9 +628,9 @@ button:hover {
   text-align: right;
 }
 
-.detailsBotRow {
-  display: flex;
-  justify-content: center;
+.detailsMoveRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 5px;
 }
 
@@ -719,11 +719,6 @@ button:hover {
   display: flex;
 }
 
-.detailsMoves {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
 .pokeMoveBlock {
   position: relative;
   display: flex;
