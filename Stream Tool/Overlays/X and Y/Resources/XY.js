@@ -3,6 +3,7 @@ import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
 import { current } from "./Scripts/Globals.mjs";
 import { playerInfo } from "./Scripts/Player Info.mjs";
 import { pokemons } from "./Scripts/Player Team/Pokemons.mjs";
+import { battlePokemons } from "./Scripts/Trainer Battle/Battle Pokemons.mjs";
 import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
 
 // this is a weird way to have file svg's that can be recolored by css
@@ -27,8 +28,16 @@ initWebsocket("gameData", (data) => updateData(data));
 async function updateData(data) {
 
     if (data.type == "Team") {
-        
-        pokemons.update(data.playerPokemons);
+
+        if (data.battleType != "Trainer") {
+            pokemons.update(data.playerPokemons);
+            pokemons.show();
+            battlePokemons.hide();
+        } else {
+            battlePokemons.update(data.playerPokemons, true);
+            pokemons.hide();
+            battlePokemons.show();
+        }
 
     } else if (data.type == "Player") {
 
@@ -37,6 +46,10 @@ async function updateData(data) {
     } else if (data.type == "Wild Encounter") {
 
         wildPokemon.update(data)
+
+    } else if (data.type == "Trainer") {
+
+        battlePokemons.update(data.trainerPokemons);
 
     } else if (data.type == "Config") {
 

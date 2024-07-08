@@ -1,5 +1,7 @@
 import { Pokemon } from "./Pokemon.mjs";
 
+const pokesDiv = document.getElementById("botPokes");
+
 class Pokemons {
 
     /** @type {Pokemon[]} */
@@ -32,6 +34,14 @@ class Pokemons {
             this.#pokemons[i].update(data[i]);            
         }
 
+    }
+
+    show() {
+        pokesDiv.style.display = "flex";
+    }
+
+    hide() {
+        pokesDiv.style.display = "none";
     }
 
 }

@@ -660,11 +660,7 @@ export class TeamPokemon extends Pokemon {
     }
 
 
-    /**
-     * 
-     * @param {String[]} reveals 
-     * @returns 
-     */
+    /** @param {String[]} reveals */
     setReveals(reveals) {
 
         // no reveals? skip

@@ -1,4 +1,3 @@
-import { current } from "../Globals.mjs";
 import { typeToColor } from "../Type to Color.mjs";
 import { getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
 
@@ -71,7 +70,6 @@ export class Pokemon {
             }, 3500);
         }
         
-
     }
     getForm() {
         return this.#form;
@@ -250,6 +248,8 @@ export class Pokemon {
      */
     setImg(img) {
 
+        if (!img) return;
+
         // We compensate to account for the cases where the gif center is skewed
         // towards a place where the Pokémon doesn't spend that much time;
         // e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their
@@ -325,7 +325,6 @@ export class Pokemon {
      */
     turnSprite(side) {
         this.#side = side ? "Back" : "Front";
-        console.log(side, this.#side);
         this.setImg(this.getImgSrc());
     }
 
@@ -378,7 +377,7 @@ export class Pokemon {
 
                 // if pokemon is mega evolving, wait for that img update
                 if (megaEvolving) {
-                    setTimeout(() => {this.setImg(data.img)}, 2900);                    
+                    setTimeout(() => {this.setImg(data.img)}, 2700);                    
                 } else {
                     this.setImg(data.img);
                 }

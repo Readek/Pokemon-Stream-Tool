@@ -59,7 +59,8 @@ export async function updateTeam() {
             moves : pokemons[i].getMoves(),
             stats : pokemons[i].getStats(),
             boosts : pokemons[i].getBoosts(),
-            inCombat : pokemons[i].getInCombat()
+            inCombat : pokemons[i].getInCombat(),
+            iconCoords : pokemons[i].getIconCoords()
         })
 
         // download images if needed and wait for them

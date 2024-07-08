@@ -54,6 +54,8 @@ html, body {
 }
 
 
+/** Side Player Info */
+
 #playerInfo {
     position: absolute;
     top: 370px;
@@ -472,6 +474,241 @@ html, body {
     image-rendering: pixelated;
 }
 
+
+
+/** Battle Bottom Bar */
+
+#battleDiv {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 175px;
+    bottom: 0px;
+    font-family: "Aero";
+    color: #f8f8f8;
+}
+
+.battleTeam {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    padding: 7px;
+    gap: 5px;
+}
+#battleEnemyTeam {
+    transform: scaleX(-1);
+}
+
+
+/** Active Battle Pokes */
+
+.battleActiveBar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: end;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+}
+
+.activePokemon {
+    display: flex;
+    gap: 10px;
+}
+
+.activeMainInfo {
+
+    --healthy: #337E11;
+    --warning: #7e7c11;
+    --danger: #7e1111;
+    --Par: var(--warning);
+    --Poi: #56117e;
+    --Fro: #1a8fa3;
+    --Bur: #7e4611;
+    --Sle: grey;
+    --activeColor: var(--healthy);
+
+    position: relative;
+    height: 120px;
+    width: 300px;
+    border: thick double var(--activeColor);
+    overflow: visible;
+    border-radius: 10% / 100% 100% 100% 100%;
+    transition: opacity .25s, margin-left .6s;
+
+}
+
+.activePokeImgDiv {
+    position: absolute;
+    right: 25px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    clip-path: inset(-100px -100px 0px -100px);
+    width: 200px;
+    height: 100%;
+}
+.activePokeImg {
+    transform: scale(2);
+    image-rendering: pixelated;
+}
+
+.activeDivMask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 7% / 100% 100% 100% 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.activeLvlDiv {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 4px double var(--activeColor);
+    border-right: 4px double var(--activeColor);
+    padding: 6px 12px 0px 12px;
+    border-radius: 0% 0% 12% / 100% 0%;
+    background-color: #00000030;
+}
+.activeLvlTexts {
+    display: flex;
+    gap: 3px;
+    filter: drop-shadow(0px 0px 2px black);
+    padding-right: 2px;
+}
+
+.activeTypeIcon {
+    width: 20px;
+    height: 20px;
+    margin-top: -7px;
+    filter: drop-shadow(0px 0px 2px black);
+    transform: scale(1.25);
+}
+
+.activeMainTexts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-left: 10px;
+    text-shadow: 0px 0px 5px black;
+}
+.activeName {
+    font-size: 28px;
+}
+.activeSubText {
+    display: flex;
+    gap: 6px;
+    font-size: 20px;
+}
+
+.activeHpDiv {
+    display: flex;
+    bottom: 0px;
+    width: 100%;
+    --bacColor: #363636;
+}
+.activeHpBefore {
+    background-color: var(--bacColor);
+    width: 10px;
+    flex-shrink: 0;
+}
+.activeHpText {
+    display: flex;
+    justify-content: center;
+    width: 55px;
+    background-color: var(--bacColor);
+    padding: 5px 0px 1px 0px;
+    z-index: 2;
+    flex-shrink: 0;
+    text-wrap: nowrap;
+    color: #b6b6b6;
+    font-size: 16px;
+}
+
+
+/** Bottom Battle Bar */
+
+.battleBotBar {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+    flex-direction: row-reverse;
+    padding-right: 8px;
+}
+
+.standbyPokemon {
+    
+    --healthy: #337E11;
+    --warning: #7e7c11;
+    --danger: #7e1111;
+    --Par: var(--warning);
+    --Poi: #56117e;
+    --Fro: #1a8fa3;
+    --Bur: #7e4611;
+    --Sle: grey;
+    --activeColor: var(--healthy);
+
+    height: 100%;
+    width: 200px;
+    /* overflow: hidden; */
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background-color: #00000060;
+    border: 2px solid var(--activeColor);
+    border-radius: 10% / 100% 100% 100% 100%;
+
+}
+
+.standbyPokeIconDiv {
+    width: 40px;
+    height: 30px;
+    object-fit: none;
+    image-rendering: pixelated;
+    display: inline-block;
+    flex-shrink: 0;
+    transform: scaleX(-2) scaleY(2) translate(-5px, -4px);
+}
+
+.standbyNameHp {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    padding-right: 12px;
+    padding-left: 22px;
+}
+
+.standbyName {
+    font-size: 22px;
+    text-shadow: 0px 0px 5px black;
+}
+
+.standbyHpDiv {
+    position: relative;
+    display: flex;
+    width: 96%;
+    height: 3px;
+    border-radius: 10px;
+    overflow: hidden;
+    filter: drop-shadow(0px 0px 2px black);
+}
+
+
+/** Other */
+
+.flipBack {
+    transform: scaleX(-1);
+}
 
 #connErrorDiv {
     display: none;

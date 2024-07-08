@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Poke BnW Overlay</title>
+    <title>Poke XY Overlay</title>
     <script src="Resources/XY.js" type="module"></script>
     <link rel="stylesheet" href="Resources/XY.css">
 </head>
@@ -11,7 +11,7 @@
 
 <div id="content">
 
-    <img src="Resources/Images/Overlay.png" class="absol">
+    <img src="Resources/Images/Background.png" class="absol">
 
     <div id="borderMainScreenExtra" class="mainScreen"></div>
     <div id="borderMainScreen" class="mainScreen"></div>
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-        </div>        
+        </div>
 
         <div id="playerStats">
 
@@ -111,15 +111,15 @@
                       <img class="pokeGenderIcon" src="../../Resources/Assets/Gender F.png" alt="">
                       <span class="vsWildGenderRatioText" id="vsWildGenderRatioF"></span>
                     </div>
-      
+
                 </div>
-      
+
                 <div id="vsWildAbilities">
       
                     <div class="vsWildAbilityText" id="vsWildAbility0"></div>
                     <div class="vsWildAbilityText" id="vsWildAbility1"></div>
                     <div class="vsWildAbilityText" id="vsWildAbilityH"></div>
-      
+
                 </div>
     
             </div>
@@ -133,37 +133,37 @@
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberHP"></div>
               <div class="vsWildMeter" id="vsWildMeterHP"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatAT">
               <div class="vsWildStatName vsWildStatText" locText="statsAttack"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberAT"></div>
               <div class="vsWildMeter" id="vsWildMeterAT"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatDE">
               <div class="vsWildStatName vsWildStatText" locText="statsDefense"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberDE"></div>
               <div class="vsWildMeter" id="vsWildMeterDE"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatSA">
               <div class="vsWildStatName vsWildStatText" locText="statsSpAtk"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSA"></div>
               <div class="vsWildMeter" id="vsWildMeterSA"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatSD">
               <div class="vsWildStatName vsWildStatText" locText="statsSpDef"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSD"></div>
               <div class="vsWildMeter" id="vsWildMeterSD"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatSP">
               <div class="vsWildStatName vsWildStatText" locText="statsSpeed"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSP"></div>
               <div class="vsWildMeter" id="vsWildMeterSP"></div>
             </div>
-  
+
           </div>
 
     </div>
@@ -208,7 +208,7 @@
                     <div class="pokeSpecies"></div>
                 </div>
 
-            </div>            
+            </div>
 
         </div>
 
@@ -250,7 +250,7 @@
                     <div class="pokeSpecies"></div>
                 </div>
 
-            </div>            
+            </div>
 
         </div>
 
@@ -292,7 +292,7 @@
                     <div class="pokeSpecies"></div>
                 </div>
 
-            </div>            
+            </div>
 
         </div>
 
@@ -334,7 +334,7 @@
                     <div class="pokeSpecies"></div>
                 </div>
 
-            </div>            
+            </div>
 
         </div>
 
@@ -376,7 +376,7 @@
                     <div class="pokeSpecies"></div>
                 </div>
 
-            </div>            
+            </div>
 
         </div>
 
@@ -418,8 +418,21 @@
                     <div class="pokeSpecies"></div>
                 </div>
 
-            </div>            
+            </div>
 
+        </div>
+
+    </div>
+
+    <div id="battleDiv">
+
+        <div id="battlePlayerTeam" class="battleTeam">
+            <div class="battleActiveBar" id="battleActiveBarPlayer"></div>
+            <div class="battleBotBar" id="battleStandbyBarPlayer"></div>
+        </div>
+        <div id="battleEnemyTeam" class="battleTeam">
+            <div class="battleActiveBar" id="battleActiveBarEnemy"></div>
+            <div class="battleBotBar" id="battleStandbyBarEnemy"></div>
         </div>
 
     </div>
@@ -429,6 +442,6 @@
 <div id="connErrorDiv" locText="connError">
     Can't connect with GUI, attempting to reconnect every 5 seconds...
 </div>
-    
+
 </body>
 </html>

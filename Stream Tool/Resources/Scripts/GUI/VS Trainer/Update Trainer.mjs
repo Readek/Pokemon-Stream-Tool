@@ -57,6 +57,7 @@ export async function updateTrainer() {
             stats : trainerPokemons[i].getStats(),
             boosts : trainerPokemons[i].getBoosts(),
             inCombat : trainerPokemons[i].getInCombat(),
+            iconCoords : trainerPokemons[i].getIconCoords(),
             reveals : trainerPokemons[i].getReveals()
         })
 

@@ -425,7 +425,7 @@ button:hover {
   height: 30px;
   object-fit: none;
   image-rendering: pixelated;
-  display:inline-block;
+  display: inline-block;
 }
 
 

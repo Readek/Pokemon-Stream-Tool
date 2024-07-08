@@ -19,6 +19,7 @@ export class Pokemon {
     #isNone = true;
     #hasLocalImgs = false;
     #pokeImgs = {};
+    #iconCoords = [];
 
     /** @protected {HTMLElement} */
     el;
@@ -158,17 +159,34 @@ export class Pokemon {
 
     }
     
+    /** Updates this poke pixel art icon and stores its coordinates */
     #updateIcon() {
+
         if(this.#isNone){
-            this.pokeSel.children[0].alt = "None";
+
+            // show a simple pokeball icon
             this.pokeSel.children[0].src = `${stPath.assets}/None.png`;
-            this.pokeSel.children[0].style.objectPosition = `-0px -0px`;
-            return;
+            this.#iconCoords = [0, 0];
+            
+        } else {
+
+            // go fetch positions for the big ass spritesheet file
+            this.pokeSel.children[0].src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
+            const imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {
+                side: 'p2', gender: this.getGender(), protocol: 'http', domain: stPath.poke
+            });
+            this.#iconCoords = [imgInfo.left, imgInfo.top];
+
         }
-        let imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {side: 'p2', gender: this.getGender(), protocol: 'http', domain: stPath.poke});
-        this.pokeSel.children[0].alt = this.#pokeData.name;
-        this.pokeSel.children[0].src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
-        this.pokeSel.children[0].style.objectPosition = `${imgInfo.left}px ${imgInfo.top}px`;
+
+        // actual image translate
+        this.pokeSel.children[0].style.objectPosition = `
+            ${this.#iconCoords[0]}px ${this.#iconCoords[1]}px
+        `;
+        
+    }
+    getIconCoords() {
+        return this.#iconCoords;
     }
 
     getNickName() {
