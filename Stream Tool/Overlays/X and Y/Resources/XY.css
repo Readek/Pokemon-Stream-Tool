@@ -330,7 +330,7 @@ html, body {
 }
 .pokeFai, .pokeDed {
     --activeColor: var(--danger) !important;
-    filter: grayscale(.8) !important;
+    filter: grayscale(.8) brightness(.8) !important;
 }
 .pokePar {
     --activeColor: var(--warning) !important;
@@ -641,8 +641,8 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 4px;
-    font-size: 18px;
+    gap: 1px;
+    font-size: 19px;
 }
 
 .activeMoveDiv {

@@ -535,4 +535,9 @@ export class ActiveMainInfo {
 
     }
 
+    /** Deletes the entirety of this pokemon */
+    delet() {
+        this.#mainEl.remove();
+    }
+
 }

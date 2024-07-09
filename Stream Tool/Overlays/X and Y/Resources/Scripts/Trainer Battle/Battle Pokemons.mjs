@@ -22,7 +22,7 @@ class BattlePokemons {
 
     /**
      * Removes the last battle pokemon from the desired array
-     * @param {Array} team - Team array to modify
+     * @param {BattlePokemon[]} team - Team array to modify
      */
     #removePoke(team) {
         
@@ -50,25 +50,25 @@ class BattlePokemons {
         if (incPokeLength != homePokeLength) {
 
             if (homePokeLength < incPokeLength) {
-        
+
                 // if more pokes than previously, add that many pokes
                 for (let i = 0; i < incPokeLength - homePokeLength; i++) {
                     this.#addPoke(team, playerOrEnemy);
                 }
-    
+
             } else {
-    
+
                 // if less pokes than previously, remove that many pokes
                 for (let i = 0; i < homePokeLength - incPokeLength; i++) {
                     this.#removePoke(team);
                 }
-    
+
             }
 
         }
 
         for (let i = 0; i < data.length; i++) {
-            team[i].update(data[i]);            
+            team[i].update(data[i]);
         }
 
     }
@@ -78,7 +78,17 @@ class BattlePokemons {
     }
 
     hide() {
+
         pokesDiv.style.display = "none";
+
+        // also delet all current pokes
+        for (let i = this.#playerBPokemons.length; i > 0; i--) {
+            this.#removePoke(this.#playerBPokemons);
+        }
+        for (let i = this.#enemyBPokemons.length; i > 0; i--) {
+            this.#removePoke(this.#enemyBPokemons);
+        }
+
     }
 
 }

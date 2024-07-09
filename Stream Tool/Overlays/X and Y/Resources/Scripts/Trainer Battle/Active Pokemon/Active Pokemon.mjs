@@ -89,4 +89,11 @@ export class ActivePokemon {
 
     }
 
+    /** Deletes the entirety of this pokemon */
+    delet() {
+        this.#fullEl.remove();
+        this.#mainInfo.delet();
+        this.#moveInfo.delet();
+    }
+
 }

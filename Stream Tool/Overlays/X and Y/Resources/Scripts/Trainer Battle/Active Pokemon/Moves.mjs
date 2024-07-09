@@ -190,4 +190,9 @@ export class ActiveMoves {
 
     }
 
+    /** Deletes the entirety of this pokemon */
+    delet() {
+        this.#movesEl.remove();
+    }
+
 }

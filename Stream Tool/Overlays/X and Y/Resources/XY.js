@@ -20,6 +20,7 @@ customElements.define("load-svg", class extends HTMLElement {
 // updated once the GUI sends back some data
 initWebsocket("gameData", (data) => updateData(data));
 
+let battleTypePrev;
 
 /**
  * Updates overlay data with the provided object
@@ -31,13 +32,23 @@ async function updateData(data) {
 
         if (data.battleType != "Trainer") {
             pokemons.update(data.playerPokemons);
-            pokemons.show();
-            battlePokemons.hide();
         } else {
             battlePokemons.update(data.playerPokemons, true);
-            pokemons.hide();
-            battlePokemons.show();
         }
+
+        if (battleTypePrev != data.battleType) {
+            
+            if (data.battleType != "Trainer") {
+                pokemons.show();
+                battlePokemons.hide();
+            } else {
+                pokemons.hide();
+                battlePokemons.show();
+            }            
+
+        }
+        
+        battleTypePrev = data.battleType;
 
     } else if (data.type == "Player") {
 
