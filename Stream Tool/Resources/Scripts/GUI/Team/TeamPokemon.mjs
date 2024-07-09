@@ -500,7 +500,7 @@ export class TeamPokemon extends Pokemon {
         const detailsMoves = element.getElementsByClassName("detailsMoveRow")[0];
         for (let i = 0; i < 4; i++) {
             const moveEl = this.createMoveElement(i);
-                detailsMoves.appendChild(moveEl);
+            detailsMoves.appendChild(moveEl);
         }
 
         // add stat elements

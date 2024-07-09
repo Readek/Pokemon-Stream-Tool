@@ -514,8 +514,11 @@ html, body {
 
 .activePokemon {
     display: flex;
-    gap: 10px;
+    flex-direction: row-reverse;
+    gap: 6px;
 }
+
+/** Main Info */
 
 .activeMainInfo {
 
@@ -630,6 +633,36 @@ html, body {
     text-wrap: nowrap;
     color: #b6b6b6;
     font-size: 16px;
+}
+
+/** Active Moves */
+
+.activeMoveInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    font-size: 18px;
+}
+
+.activeMoveDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    text-shadow: 0px 0px 5px black;
+    border: 1px solid lightgray;
+    padding: 2px 10px;
+    border-radius: 10% / 100% 100% 100% 100%;
+}
+
+.activeMoveName {
+    transform: translateY(1px);
+}
+.activeMoveRight {
+    display: flex;
+    gap: 2px;
+    transform: translateY(1px);
 }
 
 

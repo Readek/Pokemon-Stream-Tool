@@ -1,4 +1,5 @@
 import { ActiveMainInfo } from "./Main Info.mjs";
+import { ActiveMoves } from "./Moves.mjs";
 
 const playerActiveDiv = document.getElementById("battleActiveBarPlayer");
 const enemyActiveDiv = document.getElementById("battleActiveBarEnemy");
@@ -10,6 +11,7 @@ export class ActivePokemon {
     #fullEl;
 
     #mainInfo;
+    #moveInfo;
 
     /**
      * Manages active combat overlay elements for this pokemon
@@ -20,7 +22,8 @@ export class ActivePokemon {
         const el = this.#createElement(side);
         this.#fullEl = el;
 
-        this.#mainInfo = new ActiveMainInfo(side, el);
+        this.#mainInfo = new ActiveMainInfo(side, el, this);
+        this.#moveInfo = new ActiveMoves(side, el);
 
     }
 
@@ -55,6 +58,11 @@ export class ActivePokemon {
         this.#fullEl.style.display = "flex";
     }
 
+    /** Reveals all hidden enemy info */
+    revealAll() {
+        this.#moveInfo.revealAll();
+    }
+
     update(data) {
 
         // if pokemon is not in combat right now, hide it
@@ -77,6 +85,7 @@ export class ActivePokemon {
 
         // send the data to each class
         this.#mainInfo.update(data);
+        this.#moveInfo.update(data.moves, data.reveals);
 
     }
 

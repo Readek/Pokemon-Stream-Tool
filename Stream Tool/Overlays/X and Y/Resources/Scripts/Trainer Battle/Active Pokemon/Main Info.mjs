@@ -1,9 +1,10 @@
 import { getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
+import { ActivePokemon } from "./Active Pokemon.mjs";
 
 export class ActiveMainInfo {
 
-    #player = true;
+    #player;
 
     #species = "";
     #form = "";
@@ -37,12 +38,15 @@ export class ActiveMainInfo {
 
     #reveals = [];
 
+    #parent;
+
     /**
      * Manages active combat overlay elements for this pokemon
      * @param {Boolean} side - True if player, false if enemy
      * @param {HTMLElement} fullEl - Element to append to
+     * @param {ActivePokemon} parent - Parent class for some calls
      */
-    constructor(side, fullEl) {
+    constructor(side, fullEl, parent) {
 
         this.#player = side;
 
@@ -67,6 +71,8 @@ export class ActiveMainInfo {
 
         // get correct lvl text
         el.getElementsByClassName("activeLvlText")[0].innerHTML = getLocalizedText("pokeLvl");
+
+        this.#parent = parent;
 
     }
 
@@ -398,6 +404,7 @@ export class ActiveMainInfo {
             this.setStatus("Ded");
             this.setAbility(this.#ability, true);
             this.setItem(this.#item, true);
+            this.#parent.revealAll();
         } else if (hp <= this.#hpMax*.2) { // 20%
             this.#mainEl.style.setProperty("--activeColor", "var(--danger)");
         } else if (hp <= this.#hpMax/2) { // 50%
@@ -435,7 +442,7 @@ export class ActiveMainInfo {
 
     /**
      * Changes the background color depending on the pokemons type
-     * @param {Array} types - Names of types (Strings)
+     * @param {String[]} types - Names of types
      */
     #setBackgroundColor(types) {
         if (types.length == 2) {
