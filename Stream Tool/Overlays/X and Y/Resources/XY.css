@@ -711,6 +711,10 @@ html, body {
     flex-shrink: 0;
     transform: scaleX(-2) scaleY(2) translate(-5px, -4px);
 }
+.standbyUnrevealed {
+    transform: scaleX(-1.4) scaleY(1.4) translate(-9px, -2px);
+    opacity: .75;
+}
 
 .standbyNameHp {
     display: flex;

@@ -22,6 +22,9 @@ export class StandbyPokemon {
     #nameText;
     #hpBar;
 
+    #reveal = false;
+    #reveals = [];
+
     /**
      * Manages standby combat overlay elements for this pokemon
      * @param {Boolean} side - True if player, false if enemy
@@ -54,7 +57,7 @@ export class StandbyPokemon {
 
         element.innerHTML = `
 
-            <img class="standbyPokeIconDiv">
+            <img class="standbyPokeIconDiv" src="../../Resources/Assets/Pokemon/sprites/pokemonicons-sheet.png">
 
             <div class="standbyNameHp">
         
@@ -103,22 +106,28 @@ export class StandbyPokemon {
 
     /**
      * Set the icon path for this pokemon, as well as position offsets
-     * @param {String[]} iconCoords 
+     * @param {String[]} iconCoords
      */
     setIcon(iconCoords) {
 
+        // check if coords are the same as last time
+        if (!this.#reveal && this.#iconCoords[0] == iconCoords[0]
+            && this.#iconCoords[1] == iconCoords[1]) {
+            return;
+        }
+
         this.#iconCoords = iconCoords;
 
-        if (true) {
-            this.#iconEl.src = "../../Resources/Assets/Pokemon/sprites/pokemonicons-sheet.png"
+        if (this.#player || this.#reveal) {
+            this.#iconEl.classList.remove("standbyUnrevealed");
         } else {
-            // default pokeball image
-            this.#iconEl.src = "../../Resources/Assets/None.png";
+            // default question mark image for unrevealed enemies
+            this.#iconEl.classList.add("standbyUnrevealed");
             iconCoords = [0, 0];
         }
 
         this.#iconEl.style.objectPosition = `${iconCoords[0]}px ${iconCoords[1]}px`;
-    
+
     }
 
     getName() {
@@ -127,10 +136,16 @@ export class StandbyPokemon {
     /** @param {String} name */
     setName(name) {
 
-        if (name == this.#name) return;
+        if (!this.#reveal && name == this.#name) return;
 
         this.#name = name;
-        this.#nameText.innerHTML = name;
+
+        if (!this.#player && !this.#reveal) {
+            // enemies yet to be revealed will hide their names
+            this.#nameText.innerHTML = "???";
+        } else {
+            this.#nameText.innerHTML = name;
+        }
 
     }
 
@@ -184,6 +199,30 @@ export class StandbyPokemon {
 
     }
 
+    /** @param {String[]} reveals */
+    #setReveals(reveals) {
+
+        // no reveals? skip
+        if (!reveals) return;
+
+        let diff = false;
+        for (let i = 0; i < reveals.length; i++) {
+            if (this.#reveals[i] != reveals[i]) {
+                diff = true;
+            }
+        }
+        if (!diff) return; // save reveals as last time? skip
+
+        for (let i = 0; i < reveals.length; i++) {
+            if (reveals[i] == "Full") {
+                this.#reveal = true;
+                this.setName(this.#name);
+                this.setIcon(this.#iconCoords);
+            }
+        }
+
+    }
+
 
     /** Hides this pokemon's div */
     hidePoke() {
@@ -199,9 +238,19 @@ export class StandbyPokemon {
 
         // if pokemon is not in combat right now, hide it
         if (data.inCombat || !data.species) {
+
             this.hidePoke();
             this.#inCombat = this.#inCombat;
+
+            // reveal poke info if poke has been in combat before
+            if (!this.#player && data.inCombat) {
+                this.#reveal = true;
+                this.setName(this.#name);
+                this.setIcon(this.#iconCoords);
+            }
+
             return;
+
         }
 
         // first loop in combat, display show animation
@@ -237,6 +286,8 @@ export class StandbyPokemon {
         if (this.getHpCurrent() != data.hpCurrent || this.getHpMax() != data.hpMax) {
             this.setHp(data.hpCurrent, data.hpMax);
         }
+
+        this.#setReveals(data.reveals);
 
     }
 
