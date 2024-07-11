@@ -89,6 +89,14 @@ export class ActivePokemon {
 
     }
 
+    /**
+     * Determines gamemode to display or hide some poke info
+     * @param {Number} num - Number of active pokes on the field
+     */
+    setGamemode(num) {
+        this.#moveInfo.setGamemode(num);
+    }
+
     /** Deletes the entirety of this pokemon */
     delet() {
         this.#fullEl.remove();

@@ -190,6 +190,26 @@ export class ActiveMoves {
 
     }
 
+    /**
+     * Determines gamemode to shrink or hide movement info
+     * @param {Number} num - Number of active pokes on the field
+     */
+    setGamemode(num) {
+
+        if (num == 1) {
+            this.#movesEl.classList.add("activeMoveDiv1v1");
+            this.#movesEl.classList.remove("activeMoveDiv2v2", "activeMoveDiv3v3");
+        } else if (num == 2) {
+            this.#movesEl.classList.add("activeMoveDiv2v2");
+            this.#movesEl.classList.remove("activeMoveDiv1v1", "activeMoveDiv3v3");
+        } else {
+            this.#movesEl.classList.add("activeMoveDiv3v3");
+        }
+
+
+
+    }
+
     /** Deletes the entirety of this pokemon */
     delet() {
         this.#movesEl.remove();

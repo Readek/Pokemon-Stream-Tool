@@ -3,9 +3,10 @@ import { StandbyPokemon } from "./Standby Pokemon.mjs";
 
 export class BattlePokemon {
 
-
     #active;
     #standby;
+
+    #gamemode = 0;
 
     /**
      * Manages combat overlay elements for this pokemon
@@ -22,6 +23,18 @@ export class BattlePokemon {
 
         this.#active.update(data);
         this.#standby.update(data);
+
+    }
+
+    /**
+     * Determines gamemode to display or hide some poke info
+     * @param {Number} num - Number of active pokes on the field
+     */
+    setGamemode(num) {
+
+        if (this.#gamemode == num) return;
+
+        this.#active.setGamemode(num);
 
     }
 

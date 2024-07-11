@@ -67,8 +67,20 @@ class BattlePokemons {
 
         }
 
+        let actPokeCount = 0;
         for (let i = 0; i < data.length; i++) {
+
+            // time to update everything everywhere all at once
             team[i].update(data[i]);
+
+            // get an active mon count to determine battle mode
+            if (data[i].inCombat) actPokeCount++;
+
+        }
+
+        // notify teams of gamemode
+        for (let i = 0; i < team.length; i++) {
+            team[i].setGamemode(actPokeCount);
         }
 
     }
