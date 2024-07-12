@@ -186,7 +186,7 @@ export class RawPokemonBattle {
 
         if (this.#hasChanged) {
 
-            const abNum = this.#data[0xE];
+            const abNum = this.#data[0x146];
             if (abNum == 0) {
                 this.abilityValue = "";
             } else if (current.abilities[abNum]) {

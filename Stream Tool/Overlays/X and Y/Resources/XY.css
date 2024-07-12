@@ -672,6 +672,7 @@ html, body {
 .activeMoveName {
     transform: translateY(1px);
     font-size: 20px;
+    text-wrap: nowrap;
 }
 .activeMoveRight {
     display: flex;
