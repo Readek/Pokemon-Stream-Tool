@@ -148,8 +148,8 @@ export class Pokemon {
         return this.#hpMax;
     }
     /**
-     * @param {Number} hp 
-     * @param {Numner} max 
+     * @param {Number} hp
+     * @param {Numner} max
      */
     async setHp(hp, max) {
         
@@ -350,11 +350,12 @@ export class Pokemon {
 
     /**
      * Updates data for this pokemon if its different from previous data
-     * @param {Object} data 
+     * @param {Object} data - Full data for this pokemon
+     * @param {Boolean} bTypeChanged - If we just swapped battle type
      */
-    async update(data) {
+    async update(data, bTypeChanged) {
 
-        this.#noHpAnim = false;
+        this.#noHpAnim = bTypeChanged;
 
         // set species
         if (data.species != this.getSpecies() ||
@@ -419,7 +420,7 @@ export class Pokemon {
 
         // set HP
         if (this.getHpCurrent() != data.hpCurrent || this.getHpMax() != data.hpMax) {
-            this.setHp(data.hpCurrent, data.hpMax);
+            this.setHp(data.hpCurrent, data.hpMax, bTypeChanged);
         }
 
         // in combat status

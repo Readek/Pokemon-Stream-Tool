@@ -471,6 +471,16 @@ export class ActiveMainInfo {
     }
 
 
+    /** Sets intro animation for this poke */
+    showIntro() {
+
+        const aniTime = .4;
+        this.#mainEl.style.animation = `slideIn ${aniTime}s both`;
+        // this will also fire every time pokemon swaps into combat
+
+    }
+
+
     update(data) {
 
         this.#noHpAnim = false;

@@ -27,21 +27,24 @@ class Pokemons {
     /**
      * Updates all pokemon info with the provided data
      * @param {Object} data - Data for all pokemons
+     * @param {Boolean} bTypeChanged - If we just swapped battle type
      */
-    update(data) {
+    update(data, bTypeChanged) {
         
         for (let i = 0; i < this.#pokemons.length; i++) {
-            this.#pokemons[i].update(data[i]);            
+            this.#pokemons[i].update(data[i], bTypeChanged);            
         }
 
     }
 
     show() {
-        pokesDiv.style.display = "flex";
+        pokesDiv.style.animation = "showPokes .7s both";
     }
 
-    hide() {
-        pokesDiv.style.display = "none";
+    async hide() {
+        const fadeTime = .7
+        pokesDiv.style.animation = `hidePokes ${fadeTime}s both`;
+        await new Promise(resolve => setTimeout(resolve, fadeTime*1000));
     }
 
 }

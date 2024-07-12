@@ -107,9 +107,15 @@ export class ActiveMoves {
                     reveal = true;
                 }
 
-                // for enemies, if the move wasn't revealed, display ??
                 this.#move[i].pp = moves[i].pp;
-                this.#moveEl[i].pp.innerHTML = !this.#player && !reveal ? "??" : moves[i].pp;
+                this.#moveEl[i].pp.innerHTML = moves[i].pp;
+
+                // for enemies, if the move wasn't revealed, hide pps
+                if (!this.#player && !reveal) {
+                    this.#moveEl[i].pp.parentElement.classList.add("activeMoveHidePP");
+                } else {
+                    this.#moveEl[i].pp.parentElement.classList.remove("activeMoveHidePP");
+                }
 
             }
 
@@ -179,6 +185,27 @@ export class ActiveMoves {
 
     }
 
+
+    /** Sets intro animation for this poke */
+    showIntro() {
+
+        let aniTime = .4;
+        let delTime = .15;
+
+        for (let i = 0; i < this.#moveEl.length; i++) {
+
+            this.#moveEl[i].name.parentElement.style.animation = `
+                slideIn ${aniTime}s ${delTime}s both`;
+
+            // add an extra delay for the next move
+            delTime += .2;
+        }
+
+        // this will also fire every time pokemon swaps into combat
+
+    }
+
+
     /**
      * @param {Moves} moves
      * @param {String[]} reveals
@@ -205,8 +232,6 @@ export class ActiveMoves {
         } else {
             this.#movesEl.classList.add("activeMoveDiv3v3");
         }
-
-
 
     }
 

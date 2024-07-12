@@ -30,25 +30,46 @@ async function updateData(data) {
 
     if (data.type == "Team") {
 
+        let bTypeChanged = false;
+        const promises = [];
+
+        // if battle type has changed
+        if (battleTypePrev != data.battleType) {
+
+            bTypeChanged = true;
+            battleTypePrev = data.battleType;
+            
+            // hide current poke bar
+            if (data.battleType != "Trainer") {
+                promises.push(battlePokemons.hide());
+            } else {
+                promises.push(pokemons.hide());
+            }            
+
+        }
+
+        // update that data
         if (data.battleType != "Trainer") {
-            pokemons.update(data.playerPokemons);
+            pokemons.update(data.playerPokemons, bTypeChanged);
         } else {
             battlePokemons.update(data.playerPokemons, true);
         }
 
-        if (battleTypePrev != data.battleType) {
-            
+        // show that next poke bar
+        if (bTypeChanged) {
+
+            // wait for all promises so everything is properly loaded
+            await Promise.all(promises);
+
             if (data.battleType != "Trainer") {
                 pokemons.show();
-                battlePokemons.hide();
             } else {
-                pokemons.hide();
                 battlePokemons.show();
-            }            
+            }
 
         }
         
-        battleTypePrev = data.battleType;
+        
 
     } else if (data.type == "Player") {
 

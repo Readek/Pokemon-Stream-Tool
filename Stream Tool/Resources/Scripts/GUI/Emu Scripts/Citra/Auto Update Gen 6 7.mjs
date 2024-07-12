@@ -167,7 +167,6 @@ async function updatePlayerTeam(firstLoop) {
 
                 // clear enemy trainer states
                 trainerPokemons[i].clear();
-                updateTrainer();
 
             }
 

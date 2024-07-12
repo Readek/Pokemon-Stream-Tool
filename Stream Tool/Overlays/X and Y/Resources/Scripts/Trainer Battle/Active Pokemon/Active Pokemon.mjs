@@ -58,6 +58,14 @@ export class ActivePokemon {
         this.#fullEl.style.display = "flex";
     }
 
+    /** Sets intro animation for this poke */
+    showIntro() {
+
+        this.#mainInfo.showIntro();
+        this.#moveInfo.showIntro();
+
+    }
+
     /** Reveals all hidden enemy info */
     revealAll() {
         this.#moveInfo.revealAll();

@@ -86,12 +86,37 @@ class BattlePokemons {
     }
 
     show() {
-        pokesDiv.style.display = "flex";
+
+        pokesDiv.style.animation = "";
+
+        // we check for in combat status so we can animate standby bar progressively
+        let nonCombatCount = 0;
+        for (let i = 0; i < this.#playerBPokemons.length; i++) {
+            if (!this.#playerBPokemons[i].getInCombat()) {
+                nonCombatCount++;
+                this.#playerBPokemons[i].show(nonCombatCount);
+            } else {
+                this.#playerBPokemons[i].show();
+            }
+        }
+
+        nonCombatCount = 0;
+        for (let i = 0; i < this.#enemyBPokemons.length; i++) {
+            if (!this.#enemyBPokemons[i].getInCombat()) {
+                nonCombatCount++;
+                this.#enemyBPokemons[i].show(nonCombatCount);
+            } else {
+                this.#enemyBPokemons[i].show();
+            }
+        }
+
     }
 
-    hide() {
+    async hide() {
 
-        pokesDiv.style.display = "none";
+        const fadeTime = .5
+        pokesDiv.style.animation = `iDontFeelSoGood ${fadeTime}s both`;
+        await new Promise(resolve => setTimeout(resolve, fadeTime*1000));
 
         // also delet all current pokes
         for (let i = this.#playerBPokemons.length; i > 0; i--) {

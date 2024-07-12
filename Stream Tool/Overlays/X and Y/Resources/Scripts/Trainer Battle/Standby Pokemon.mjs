@@ -233,6 +233,19 @@ export class StandbyPokemon {
         this.#mainEl.style.display = "flex";
     }
 
+    /** Sets intro animation for this poke */
+    showIntro(num) {
+
+        const aniTime = .4;
+        const delTime = num ? num *2 / 10 : .3;
+        this.#mainEl.style.animation = `slideIn ${aniTime}s ${delTime}s both`;
+
+        // after animation finishes, remove animation to prevent anomalies
+        setTimeout(() => {
+            this.#mainEl.style.animation = ``;
+        }, (aniTime+delTime)*1000);
+
+    }
 
     update(data) {
 

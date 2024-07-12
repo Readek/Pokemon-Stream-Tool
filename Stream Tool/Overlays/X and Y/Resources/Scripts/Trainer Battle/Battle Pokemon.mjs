@@ -7,6 +7,7 @@ export class BattlePokemon {
     #standby;
 
     #gamemode = 0;
+    #inCombat = null;
 
     /**
      * Manages combat overlay elements for this pokemon
@@ -19,10 +20,17 @@ export class BattlePokemon {
 
     }
 
+    /** @returns {Boolean} */
+    getInCombat() {
+        return this.#inCombat;
+    }
+
     update(data) {
 
         this.#active.update(data);
         this.#standby.update(data);
+
+        this.#inCombat = data.inCombat;
 
     }
 
@@ -35,6 +43,13 @@ export class BattlePokemon {
         if (this.#gamemode == num) return;
 
         this.#active.setGamemode(num);
+
+    }
+
+    show(num) {
+
+        this.#active.showIntro();
+        this.#standby.showIntro(num);
 
     }
 
