@@ -1,5 +1,6 @@
 import { getLocalizedText } from "../../../../Utils/Language.mjs";
 import { current } from "../../../Globals.mjs";
+import { indexToType } from "../Type Indexes.mjs";
 import { validateRawPokemon } from "../Utils.mjs";
 
 export class RawPokemonBattle {
@@ -368,6 +369,22 @@ export class RawPokemonBattle {
 
         }
         return this.statBoostsValue;
+
+    }
+
+    /**
+     * Some pokemon may change types during battle
+     * @returns {String[]}
+     */
+    types() {
+
+        const type1 = indexToType(this.#data[0xF8]);
+        const type2 = indexToType(this.#data[0xF9]);
+
+        const types = [type1];
+        if (type2 != type1) types.push(type2);
+
+        return types;
 
     }
 

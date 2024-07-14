@@ -11,6 +11,7 @@ export class Pokemon {
 
     #gender = "M";
     #shiny = false;
+    #types = [];
     #pokeData;
     #baseFormPokeData;
     #form = ""; // Short name.
@@ -157,6 +158,8 @@ export class Pokemon {
 
         }
 
+        this.setTypes();
+
     }
     
     /** Updates this poke pixel art icon and stores its coordinates */
@@ -293,10 +296,27 @@ export class Pokemon {
     }
 
     getTypes() {
-        if(this.#isNone){
-            return ["Normal"]; //Placeholder, shouldn't be used for anything but prevents undefined exceptions.
+        return this.#types
+    }
+    /**
+     * @param {String[]} types - Only used for in-battle type changes
+     */
+    setTypes(types = null) {
+
+        if (types) {
+
+            this.#types = types;
+
+        } else {
+
+            if(this.#isNone){
+                this.#types = ["Normal"]; // just for safety
+            } else {
+                this.#types = this.#pokeData.types;
+            }
+
         }
-        return this.#pokeData.types;
+        
     }
 
     async getImgSrc() {

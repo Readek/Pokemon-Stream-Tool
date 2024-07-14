@@ -279,6 +279,7 @@ async function updatePlayerTeam(firstLoop) {
                 pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
                 pokemons[i].setStats(rawBattlePokes[i].stats());
                 pokemons[i].setBoosts(rawBattlePokes[i].boosts());
+                pokemons[i].setTypes(rawBattlePokes[i].types());
 
                 pokemons[i].setStatus(rawBattlePokes[i].status());
 
@@ -357,6 +358,7 @@ async function updatePlayerTeam(firstLoop) {
                     trainerPokemons[i].setHpCurrent(rawEnemyPokes[i].currentHP());
                     trainerPokemons[i].setStats(rawEnemyPokes[i].stats());
                     trainerPokemons[i].setBoosts(rawEnemyPokes[i].boosts());
+                    trainerPokemons[i].setTypes(rawEnemyPokes[i].types());
 
                     trainerPokemons[i].setStatus(rawEnemyPokes[i].status());
 
