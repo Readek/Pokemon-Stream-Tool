@@ -545,6 +545,20 @@ export class ActiveMainInfo {
 
     }
 
+    /**
+     * Determines gamemode to shrink main info
+     * @param {Number} num - Number of active pokes on the field
+     */
+    setGamemode(num) {
+
+        if (num == 1) {
+            this.#mainEl.classList.remove("activeMainInfoTiny");
+        } else if (num >= 2) {
+            this.#mainEl.classList.add("activeMainInfoTiny");
+        }
+
+    }
+
     /** Deletes the entirety of this pokemon */
     delet() {
         this.#mainEl.remove();

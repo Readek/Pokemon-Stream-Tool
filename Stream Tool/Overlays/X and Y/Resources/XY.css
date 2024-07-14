@@ -534,12 +534,15 @@ html, body {
 
     position: relative;
     height: 126px;
-    width: 300px;
+    width: 340px;
     border: thick double var(--activeColor);
     overflow: visible;
     border-radius: 10% / 100% 100% 100% 100%;
     transition: opacity .25s, margin-left .6s;
 
+}
+.activeMainInfoTiny {
+    width: 307px;
 }
 
 .activePokeImgDiv {
@@ -658,12 +661,11 @@ html, body {
     width: 200px;
 }
 .activeMoveDiv2v2 {
-    width: 162px;
+    width: 150px;
 }
-.activeMoveDiv2v2 .activeMoveName {
-    font-size: 19px;
-    max-width: 96px;
-    overflow: hidden;
+
+.activeMoveDiv2v2 .activeMoveRight {
+    display: none;
 }
 .activeMoveDiv3v3 {
     display: none;

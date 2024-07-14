@@ -102,6 +102,7 @@ export class ActivePokemon {
      * @param {Number} num - Number of active pokes on the field
      */
     setGamemode(num) {
+        this.#mainInfo.setGamemode(num);
         this.#moveInfo.setGamemode(num);
     }
 
