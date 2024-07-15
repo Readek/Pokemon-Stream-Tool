@@ -1,5 +1,6 @@
 import { typeToColor } from "../Type to Color.mjs";
 import { getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
+import { current } from "../Globals.mjs";
 
 export class Pokemon {
 
@@ -64,10 +65,10 @@ export class Pokemon {
         this.#form = form;
 
         if (megaEvolving) {
-            this.imgEl.style.animation = "megaAnim 3.5s linear";
+            this.imgEl.style.animation = `megaAnim 3.5s ${current.megaTime / 1000}s linear`;
             setTimeout(() => {
                 this.imgEl.style.animation = "";
-            }, 3500);
+            }, 3500 + current.megaTime);
         }
         
     }
@@ -378,7 +379,8 @@ export class Pokemon {
 
                 // if pokemon is mega evolving, wait for that img update
                 if (megaEvolving) {
-                    setTimeout(() => {this.setImg(data.img)}, 2700);                    
+                    setTimeout(() => {this.setImg(data.img)}, 2700 + (current.megaTime));
+                    current.megaTime = 0;                    
                 } else {
                     this.setImg(data.img);
                 }

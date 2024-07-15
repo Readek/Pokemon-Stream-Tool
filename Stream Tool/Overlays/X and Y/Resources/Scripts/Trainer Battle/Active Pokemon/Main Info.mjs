@@ -1,4 +1,5 @@
 import { getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
+import { current } from "../../Globals.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
 
@@ -162,11 +163,13 @@ export class ActiveMainInfo {
 
         this.#form = form;
 
+        const megaTime = this.#player ? current.megaTime : 0;
+
         if (megaEvolving) {
-            this.#imgEl.style.animation = "megaAnim 3.5s linear";
+            this.#imgEl.style.animation = `megaAnim 3.5s ${megaTime / 1000}s linear`;
             setTimeout(() => {
                 this.#imgEl.style.animation = "";
-            }, 3500);
+            }, 3500 + megaTime);
         }
 
     }
@@ -502,7 +505,9 @@ export class ActiveMainInfo {
             
             // if pokemon is mega evolving, wait for that img update
             if (megaEvolving) {
-                setTimeout(() => {this.setImg(data.img)}, 2700);                    
+                const megatime = this.#player ? current.megaTime : 0;
+                setTimeout(() => {this.setImg(data.img)}, 2700 + (megatime)); 
+                if (this.#player) current.megaTime = 0;
             } else {
                 this.setImg(data.img);
             }
