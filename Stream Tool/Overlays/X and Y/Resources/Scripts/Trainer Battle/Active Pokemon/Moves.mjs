@@ -111,7 +111,8 @@ export class ActiveMoves {
                 this.#moveEl[i].pp.innerHTML = moves[i].pp;
 
                 // for enemies, if the move wasn't revealed, hide pps
-                if (!this.#player && !reveal) {
+                // if no move, also hide pps
+                if (!this.#player && !reveal || !moves[i].name) {
                     this.#moveEl[i].pp.parentElement.classList.add("activeMoveHidePP");
                 } else {
                     this.#moveEl[i].pp.parentElement.classList.remove("activeMoveHidePP");
@@ -123,7 +124,10 @@ export class ActiveMoves {
             if (moves[i].name != this.#move[i].name || reveal) {
 
                 // for enemies, if the move wasn't revealed, display ???
-                this.#move[i].name = moves[i].name;
+                this.#move[i].name = moves[i].name || "Hola";
+                // if no move
+                if (moves[i].name == "") moves[i].name = "-";
+                
                 this.#moveEl[i].name.innerHTML = !this.#player && !reveal ? "???" : moves[i].name;
 
                 // for enemies, if the move wasn't revealed, just display Normal colors

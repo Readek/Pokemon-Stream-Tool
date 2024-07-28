@@ -25,5 +25,5 @@ const colors = {
  * @returns {String} 
  */
 export function typeToColor(type) {
-    return colors[type];
+    return colors[type] || colors["Normal"];
 }
