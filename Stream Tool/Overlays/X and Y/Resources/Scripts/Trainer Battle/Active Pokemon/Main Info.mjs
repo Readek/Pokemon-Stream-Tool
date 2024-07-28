@@ -396,7 +396,14 @@ export class ActiveMainInfo {
             this.#hpText.innerHTML = hp + "/" + this.#hpMax;
         } else {
             // enemies only have perecents
-            this.#hpText.innerHTML = Math.round(percent) + "%";
+            let percentText;
+            if (percent < 1) {
+                // if below 1%, show decimals for extra drama
+                percentText = percent.toFixed(1);
+            } else {
+                percentText = Math.round(percent);
+            }
+            this.#hpText.innerHTML = percentText + "%";
         }
 
         // and just because its cool, recolor border if in danger
