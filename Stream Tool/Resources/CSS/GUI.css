@@ -201,7 +201,7 @@ button:hover {
   margin-top: auto;
   margin-bottom: auto;
   width: 100%;
-  padding: 10px;
+  height: 100%;
 }
 
 
@@ -212,15 +212,25 @@ button:hover {
   flex-direction: column;
   height: 100%;
   gap: 10px;
+  padding: 8px 0px;
   display: none;
 }
 
 
 /* catches stuff */
+#catchesContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  overflow-y: auto;
+  width: 100%;
+}
+
 #catchesDiv {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
 }
 
 .catchDiv {
@@ -242,6 +252,7 @@ button:hover {
   padding: 0px 8px;
   font-size: 18px;
   height: 30px;
+  flex-shrink: 0;
 }
 .catchDeleteButt {
   padding: 0px 8px;
@@ -277,7 +288,10 @@ button:hover {
 #pokeParty, #trainerParty {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
+  overflow-y: auto;
+  width: 100%;
 }
 
 .pokemonDiv {
@@ -1276,11 +1290,6 @@ button:hover {
 
 @media (max-width: 590px) {
 
-  #botBar {
-    height: 40px;
-  }
-  #settingsRegion, #botBarBracket {
-    width: 50px;
-  }
+  
 
 }

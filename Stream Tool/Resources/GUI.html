@@ -39,7 +39,7 @@
       <div class="topBarText" locText="topBarVSTrainer"></div>
     </button>
     <button id="topBarSettings" class="topBarButton" locTitle="topBarSettingsTitle">
-      <load-svg src="SVGs/Settings.svg" id="configIcon"></load-svg>
+      <load-svg src="SVGs/Settings.svg" class="svgIcon"></load-svg>
       <div class="tobBarText" locText="topBarSettings"></div>
     </button>
   </div>
@@ -50,9 +50,11 @@
 
       <div id="catchesRegion" class="region">
 
-        <div id="catchesDiv"></div>
-        <button id="addCatchButt" class="catchButt" locTitle="addCatchButtTitle">+</button>
-
+        <div id="catchesContent">
+          <div id="catchesDiv"></div>
+          <button id="addCatchButt" class="catchButt" locTitle="addCatchButtTitle">+</button>  
+        </div>
+        
         <div class="catchesButtRow">
 
           <button id="clearCatchesButt" class="updateButt">
