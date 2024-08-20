@@ -184,7 +184,7 @@ button:hover {
   fill: var(--text2);
   margin-right: -2px;
 }
-#configIcon, #checkIcon {
+.svgIcon {
   width: 20px;
   height: 20px;
   fill: var(--text2);
@@ -260,6 +260,13 @@ button:hover {
   filter: brightness(.8);
 }
 
+.catchesButtRow {
+  display: flex;
+  gap: 8px;
+}
+#clearCatchesButt:hover {
+  border-color: lightcoral;
+}
 
 
 /* team stuff */

@@ -53,10 +53,19 @@
         <div id="catchesDiv"></div>
         <button id="addCatchButt" class="catchButt" locTitle="addCatchButtTitle">+</button>
 
-        <button id="updateCatchesButt" class="updateButt">
-          <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
-          <div id="updateCatchesText" locText="updateCatchesButt"></div>
-        </button>
+        <div class="catchesButtRow">
+
+          <button id="clearCatchesButt" class="updateButt">
+            <load-svg src="SVGs/Cross.svg" class="svgIcon"></load-svg>
+            <div id="updateCatchesText" locText="deleteCatchesButt"></div>
+          </button>
+
+          <button id="updateCatchesButt" class="updateButt">
+            <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
+            <div id="updateCatchesText" locText="updateCatchesButt"></div>
+          </button>
+
+        </div>
 
       </div>
 
@@ -69,7 +78,7 @@
           <button class="updateButt battleTypeButt" id="bTypeButt" tabindex="-1" locText="bTypeButtNone" locTitle="bTypeButtTitle"></button>
 
           <button id="updateTeamButt" class="updateButt">
-            <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+            <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
             <div id="updateTeamText" locText="pokeUpdateButt"></div>
           </button>
 
@@ -127,7 +136,7 @@
         </div>
   
         <button id="updatePlayerButt" class="updateButt">
-          <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+          <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
           <div id="updatePlayerText" locText="playerUpdateButt"></div>
         </button>
     
@@ -252,7 +261,7 @@
           </div>
 
           <button id="updateWildButt" class="updateButt">
-            <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+            <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
             <div id="updateWildText" locText="wildUpdateButt"></div>
           </button>
 
@@ -267,7 +276,7 @@
         <div class="teamButtRegion">
 
           <button id="updateTrainerButt" class="updateButt">
-            <load-svg src="SVGs/Check.svg" id="checkIcon"></load-svg>
+            <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
             <div id="updateTrainerText" locText="trainerUpdateButt"></div>
           </button>
 

@@ -27,6 +27,8 @@ export const lang = {
 
     deleteCatchButtTitle : "Delete catch",
     addCatchButtTitle : "Add new catch",
+
+    deleteCatchesButt : "Delete all catches",
     updateCatchesButt : "Update catches",
 
 

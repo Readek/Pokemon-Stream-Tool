@@ -27,6 +27,8 @@ export const lang = {
 
     deleteCatchButtTitle : "Borrar captura",
     addCatchButtTitle : "Añadir nueva captura",
+
+    deleteCatchesButt : "Borrar capturas",
     updateCatchesButt : "Actualizar capturas",
 
 
