@@ -15,6 +15,7 @@ Pokemon ST is a tool that manages dynamic overlays with the help of a GUI. But w
 - Display stats for current wild encounter.
 - Store your catches to be displayed on a "Waiting to start" scene.
 - **Gen 6 auto-update** for your current player party, reading directly from Citra (or Citra-likes).
+  - Also reads battle enemies, revealing hidden info as it's shown in-game, automatically.
 - **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
 - Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)! No need to join any Discord server.
 - **Crossplatform** GUI (Windows, Linux), built on Electron.
@@ -22,11 +23,19 @@ Pokemon ST is a tool that manages dynamic overlays with the help of a GUI. But w
 
 For the moment, the tool comes with overlays included for:
 
-- X and Y:
+- X and Y (regular overlay):
 
 <p align="center">
 
   <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20XY.jpg" alt="XY Overlay Preview">
+  
+</p>
+
+- X and Y (trainer battle)
+
+<p align="center">
+
+  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20XY%20Trainer.jpg" alt="XY Trainer Overlay Preview">
   
 </p>
 
