@@ -1,7 +1,7 @@
 import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { displayAutoButt } from "../../Auto Update.mjs";
 import { current } from "../../Globals.mjs";
-import { changeBadges } from "../../Player/Gym Badges.mjs";
+import { changeBadges } from "../../Player/Badges.mjs";
 import { displayBattleStateButt } from "../../Team/Battle State.mjs";
 import { Setting } from "../Setting.mjs";
 import { settings } from "../Settings.mjs";
@@ -9,41 +9,51 @@ import { settings } from "../Settings.mjs";
 const gameSelectSelect = document.getElementById("gameSelect");
 
 const genGameData = {
-    1 : [
-        {value : "RB"},
-    ],
-    2 : [
-        {value : "GS"},
-    ],
-    3 : [
-        {value : "RS"},
-        {value : "FRLG"}
-    ],
-    4 : [
-        {value : "DP"},
-        {value : "HGSS"}
-    ],
-    5 : [
-        {value : "BW"},
-        {value : "BW2"}
-    ],
-    6 : [
-        {value : "XY"},
-        {value : "ORAS"}
-    ],
-    7 : [
-        {value : "SM"},
-        {value : "USUM"}
-    ],
-    8 : [
-        {value : "SS"},
-        {value : "BDSP"},
-        {value : "PLA"},
-    ],
-    9 : [
-        {value : "SV"},
-        {value : "PLZ"}
-    ]
+    1 : {
+        RB : {}
+    },
+    2 : {
+        GS : {
+            badges : {
+                Johto : 8,
+                Kanto : 8
+            }
+        }
+    },
+    3 : {
+        RS : {},
+        FRLG : {}
+    },
+    4 : {
+        DP : {},
+        HGSS : {
+            badges : {
+                Johto : 8,
+                Kanto : 8
+            }
+        }
+    },
+    5 : {
+        BW : {},
+        BW2 : {}
+    },
+    6 : {
+        XY : {},
+        ORAS : {}
+    },
+    7 : {
+        SM : {},
+        USUM : {},
+    },
+    8 : {
+        SS : {},
+        BDSP : {},
+        PLA : {}
+    },
+    9 : {
+        SV : {},
+        PLZ : {}
+    }
 }
 
 export class SettingGameSelect extends Setting {
@@ -78,7 +88,7 @@ export class SettingGameSelect extends Setting {
         current.game = value;
 
         // change player badges
-        changeBadges(value);
+        changeBadges(genGameData[current.generation][value].badges);
 
         // set game versions if any
         settings.versionSelect.addVersions(value);
@@ -102,8 +112,8 @@ export class SettingGameSelect extends Setting {
         if (genGameData[gen]) {
         
             // add a new select entry for each game found
-            for (let i = 0; i < genGameData[gen].length; i++) {
-                this.#addGameEntry(genGameData[gen][i].value);                
+            for (const key in genGameData[gen]) {
+                this.#addGameEntry(key);
             }
             
         }

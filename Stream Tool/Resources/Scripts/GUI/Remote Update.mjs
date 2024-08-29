@@ -4,7 +4,7 @@ import { Catch } from "./Catches/Catch.mjs";
 import { catches } from "./Catches/Catches.mjs";
 import { current } from "./Globals.mjs";
 import { displayNotif } from "./Notifications.mjs";
-import { setBadges } from "./Player/Gym Badges.mjs";
+import { setBadges } from "./Player/Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
 import { pokemons } from "./Team/TeamPokemons.mjs";
 import { trainerPokemons } from "./VS Trainer/TrainerPokemons.mjs";

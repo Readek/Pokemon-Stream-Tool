@@ -1,5 +1,5 @@
 import { inside } from "../Globals.mjs";
-import { getBadges } from "./Gym Badges.mjs";
+import { getBadges } from "./Badges.mjs";
 import { playerStats } from "./Stats.mjs";
 
 const updateButt = document.getElementById("updatePlayerButt");

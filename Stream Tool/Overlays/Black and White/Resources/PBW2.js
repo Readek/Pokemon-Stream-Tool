@@ -253,8 +253,8 @@ async function updateData(data) {
     } else if (data.type == "Player") {
 
         // display those shiny gym badges
-        for (let i = 0; i < data.player.badges.length; i++) {
-            if (data.player.badges[i]) {
+        for (let i = 0; i < data.player.badges.gymBadges.length; i++) {
+            if (data.player.badges.gymBadges[i]) {
                 badges[i].style.opacity = 1;
             } else {
                 badges[i].style.opacity = 0;

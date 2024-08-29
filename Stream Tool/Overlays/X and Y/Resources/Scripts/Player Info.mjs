@@ -11,8 +11,8 @@ class PlayerInfo {
     update(data) {
 
         // display those shiny gym badges
-        for (let i = 0; i < data.badges.length; i++) {
-            if (data.badges[i]) {
+        for (let i = 0; i < data.badges.gymBadges.length; i++) {
+            if (data.badges.gymBadges[i]) {
                 badges[i].style.opacity = 1;
             } else {
                 badges[i].style.opacity = 0;

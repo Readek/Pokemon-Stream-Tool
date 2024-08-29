@@ -54,7 +54,7 @@
           <div id="catchesDiv"></div>
           <button id="addCatchButt" class="catchButt" locTitle="addCatchButtTitle">+</button>  
         </div>
-        
+
         <div class="catchesButtRow">
 
           <button id="clearCatchesButt" class="updateButt">
@@ -72,9 +72,9 @@
       </div>
 
       <div id="teamRegion" class="region">
-  
+
         <div id=pokeParty></div>
-  
+
         <div class="teamButtRegion">
 
           <button class="updateButt battleTypeButt" id="bTypeButt" tabindex="-1" locText="bTypeButtNone" locTitle="bTypeButtTitle"></button>
@@ -87,61 +87,32 @@
           <button class="updateButt citraButtOff" id="citraButt" tabindex="-1" locText="autoUpdateButtOff" locTitle="autoUpdateButtTitle"></button>
 
         </div>
-  
+
       </div>
-  
+
       <div id="playerInfoRegion" class="region">
-  
-        <div id="gymBadges">
-          <div class="gymBadgesWrap">
-            <button class="gymBadgeButton badgeDisabled" id="badge1" locTitle="badge1Title">
-              <img>
-            </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge2" locTitle="badge2Title">
-              <img>
-            </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge3" locTitle="badge3Title">
-              <img>
-            </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge4" locTitle="badge4Title">
-              <img>
-            </button>
-          </div>
-          <div class="gymBadgesWrap">
-            <button class="gymBadgeButton badgeDisabled" id="badge5" locTitle="badge5Title">
-              <img>
-            </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge6" locTitle="badge6Title">
-              <img>
-            </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge7" locTitle="badge7Title">
-              <img>
-            </button>
-            <button class="gymBadgeButton badgeDisabled" id="badge8" locTitle="badge8Title">
-              <img>
-            </button>
-          </div>
-        </div>
-  
+
+        <div id="badges"></div>
+
         <div id="playerStats">
-  
+
           <div class="statDiv" locTitle="playerCatchesNumTitle">
             <load-svg src="SVGs/Pokeball.svg" class="statsPokeballIcon statIcon" id="statsCatchesIcon"></load-svg>
             <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0">
           </div>
-  
+
           <div class="statDiv" locTitle="playerDeathsNumTitle">
             <load-svg src="SVGs/Skull.svg" class="skullIcon statIcon" id="statsDeathsIcon"></load-svg>
             <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0">
           </div>
-  
+
         </div>
-  
+
         <button id="updatePlayerButt" class="updateButt">
           <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
           <div id="updatePlayerText" locText="playerUpdateButt"></div>
         </button>
-    
+
       </div>
 
       <div id="vsWildRegion" class="region">
@@ -154,14 +125,14 @@
             <div class="pokeSelectorText"></div>
             </div>
           </div>
-  
+
           <select class="pokeForm" locTitle="pokeFormTitle">
           </select>
-  
+
           <button class="pokeGenderButton" locTitle="pokeGenderTitle">
               <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
           </button>
-  
+
           <button class="pokeShinyButton" locTitle="pokeShinyTitle">
               <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
           </button>
@@ -177,45 +148,45 @@
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberHP"></div>
               <div class="vsWildMeter" id="vsWildMeterHP"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatAT">
               <div class="vsWildStatName vsWildStatText" locText="statsAttack"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberAT"></div>
               <div class="vsWildMeter" id="vsWildMeterAT"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatDE">
               <div class="vsWildStatName vsWildStatText" locText="statsDefense"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberDE"></div>
               <div class="vsWildMeter" id="vsWildMeterDE"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatSA">
               <div class="vsWildStatName vsWildStatText" locText="statsSpAtk"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSA"></div>
               <div class="vsWildMeter" id="vsWildMeterSA"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatSD">
               <div class="vsWildStatName vsWildStatText" locText="statsSpDef"></div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSD"></div>
               <div class="vsWildMeter" id="vsWildMeterSD"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatSP">
               <div class="vsWildStatName vsWildStatText" locText="statsSpeed">Speed</div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSP"></div>
               <div class="vsWildMeter" id="vsWildMeterSP"></div>
             </div>
-  
+
             <div class="vsWildStat" id="vsWildStatTS">
               <div class="vsWildStatName vsWildStatText" locText="statsTotal">Total</div>
               <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberTS"></div>
               <div class="vsWildMeter" id="vsWildMeterTS"></div>
             </div>
-  
+
           </div>
-  
+
           <div id="vsWildRightDiv">
 
             <div class="vsWildPokeTypeDiv" locTitle="pokeTypesTitle">
@@ -268,13 +239,13 @@
           </button>
 
         </div>
-    
+
       </div>
 
       <div id="vsTrainerRegion" class="region">
-  
+
         <div id=trainerParty></div>
-  
+
         <div class="teamButtRegion">
 
           <button id="updateTrainerButt" class="updateButt">
@@ -285,15 +256,15 @@
         </div>
   
       </div>
-  
+
       <div id="settingsRegion" class="region">
-      
+
           <div id="settingsList">
-  
+
             <div>
-  
+
               <div class="settingsTitle" locText="generalSettings"></div>
-  
+
               <div id="langSelectDiv" class="settingBox" locTitle="languageTitle">
                 <div locText="languageText"></div>
                 <select id="langSelect" class="settingsSelect">
@@ -324,21 +295,21 @@
               </div>
   
             </div>
-    
+
             <div id="settingsElectron">
-    
+
               <div class="settingsTitle" locText="windowSettings"></div>
-    
+
               <div class="settingBox" locTitle="alwaysOnTopTitle" title="">
                 <input type="checkbox" id="alwaysOnTop" class="settingsCheck" tabindex="-1">
                 <label for="alwaysOnTop" class="settingsText" locText="alwaysOnTop"></label>
               </div>
-      
+
               <div class="settingBox" locTitle="windowResizeTitle">
                 <input type="checkbox" id="resizableWindow" class="settingsCheck" tabindex="-1">
                 <label for="resizableWindow" class="settingsText" locText="windowResize"></label>
               </div>
-      
+
               <div class="settingBox">
                 <div id="zoomDiv">
                   <div id="zoomText" locText="zoom"></div>
@@ -349,30 +320,26 @@
                   </div>            
                 </div>
               </div>
-      
+
               <div id="settingsButtonSection">
                 <button class="settingsButton" id="restoreWindowButt" tabindex="-1" locTitle="restoreWindowTitle" locText="restoreWindow"></button>
               </div>
-    
+
             </div>
-    
+
           </div>
-      
+
       </div>
-  
+
     </div>
 
   </div>
-
-  
 
 </div>
 
 
 <!-- stuff that will get overlayed on the entire screen -->
-<div id="notifDiv">
-  
-</div>
+<div id="notifDiv"></div>
 <div id="loadingImgsMessage" locText="loadingImgsMessage"></div>
 
 
@@ -381,6 +348,6 @@
   <input type="text" class="listSearch mousetrap" locPHolder="finderFilterPHolder" spellcheck="false" tabindex="-1">
   <div class="searchList" id="pokeSearchList"></div>
 </div>
-  
+
 </body>
 </html>

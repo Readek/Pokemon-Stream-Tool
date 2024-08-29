@@ -872,7 +872,7 @@ button:hover {
 
 
 /* Player Info stuff */
-#gymBadges {
+#badges {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -881,7 +881,7 @@ button:hover {
   image-rendering: pixelated;
   flex-wrap: wrap;
 }
-.gymBadgesWrap {
+.badgesWrap {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -892,10 +892,10 @@ button:hover {
   filter: grayscale(1);
   opacity: .5;
 }
-.gymBadgeButton {
+.badgeButton {
   transition: transform 100ms;
 }
-.gymBadgeButton:hover {
+.badgeButton:hover {
   transform: scale(1.1);
   filter: brightness(1.1);
 }

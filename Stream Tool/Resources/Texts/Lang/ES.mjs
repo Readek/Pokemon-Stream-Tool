@@ -105,14 +105,7 @@ export const lang = {
 
     /* PLAYER */
 
-    badge1Title : "Medalla 1",
-    badge2Title : "Medalla 2",
-    badge3Title : "Medalla 3",
-    badge4Title : "Medalla 4",
-    badge5Title : "Medalla 5",
-    badge6Title : "Medalla 6",
-    badge7Title : "Medalla 7",
-    badge8Title : "Medalla 8",
+    gymBadgeTitle : "Medalla de gimnasio",
 
     playerCatchesNumTitle : "Número de capturas",
     playerDeathsNumTitle : "Número de muertes aliadas",
