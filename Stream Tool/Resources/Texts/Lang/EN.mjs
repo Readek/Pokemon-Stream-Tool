@@ -105,7 +105,9 @@ export const lang = {
 
     /* PLAYER */
 
-    gymBadgeTitle : "Gym Badge",
+    badgeGymTitle : "Gym Badge",
+    badgeJohtoTitle : "Johto Badge",
+    badgeKantoTitle : "Kanto Badge",
 
     playerCatchesNumTitle : "Number of pokemon catches",
     playerDeathsNumTitle : "Number of ally Pokemon deaths",

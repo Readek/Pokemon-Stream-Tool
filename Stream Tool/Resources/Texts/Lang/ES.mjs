@@ -105,7 +105,9 @@ export const lang = {
 
     /* PLAYER */
 
-    gymBadgeTitle : "Medalla de gimnasio",
+    badgeGymTitle : "Medalla de gimnasio",
+    badgeJohtoTitle : "Medalla de Johto",
+    badgeKantoTitle : "Medalla de Kanto",
 
     playerCatchesNumTitle : "Número de capturas",
     playerDeathsNumTitle : "Número de muertes aliadas",

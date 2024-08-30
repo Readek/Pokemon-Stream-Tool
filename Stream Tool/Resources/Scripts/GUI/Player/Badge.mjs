@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../Utils/Language.mjs";
 import { current, stPath } from "../Globals.mjs";
 
 export class Badge {
@@ -14,7 +15,7 @@ export class Badge {
      * @param {HTMLElement} parentEl - Element to revceive badge button
      * @param {String} badgeType - Name of the badge type (gym by default)
      */
-    constructor(id, parentEl, badgeType = "gym") {
+    constructor(id, parentEl, badgeType = "Gym") {
 
         this.#id = id;
         this.#badgeType = badgeType;
@@ -32,14 +33,15 @@ export class Badge {
         // create that badge html
         this.#badgeEl = document.createElement("button");
         this.#badgeEl.classList.add("badgeButton", "badgeDisabled");
-        this.#badgeEl.setAttribute("locTitle", this.#badgeType + "BadgeTitle");
+        this.#badgeEl.setAttribute("locTitle", `badge${this.#badgeType}Title`);
+        this.#badgeEl.setAttribute("title", getLocalizedText(`badge${this.#badgeType}Title`));
 
         // do something when clicked
         this.#badgeEl.addEventListener("click", () => {this.#toggleBadge()});
 
         // create an image inside badge button
         this.#imgEl = document.createElement("img");
-        if (this.#badgeType == "gym") {
+        if (this.#badgeType == "Gym") {
             this.#imgEl.src = `${stPath.assets}/Badges/${current.generation}/${current.game}`
                 + `/${this.#id}.png`;
         } else {
