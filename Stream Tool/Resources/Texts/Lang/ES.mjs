@@ -108,6 +108,10 @@ export const lang = {
     badgeGymTitle : "Medalla de gimnasio",
     badgeJohtoTitle : "Medalla de Johto",
     badgeKantoTitle : "Medalla de Kanto",
+    badgeMelemeleTitle : "Cristales Z de Melemele",
+    badgeAkalaTitle : "Cristales Z de Akala",
+    badgeUlaulaTitle : "Cristales Z de Ula-Ula",
+    badgePoniTitle : "Cristales Z de Poni",
 
     playerCatchesNumTitle : "Número de capturas",
     playerDeathsNumTitle : "Número de muertes aliadas",

@@ -64,6 +64,8 @@ export function changeBadges(badgeData) {
 
         }
 
+        badgesDiv.classList.add("badgesColumns");
+
     } else {
 
         // we asume a standard 8 badges for every game without extra data
@@ -77,6 +79,8 @@ export function changeBadges(badgeData) {
         for (let i = 0; i < 4; i++) {
             badges.gymBadges.push(new Badge(i+5, wrap2));
         }
+
+        badgesDiv.classList.remove("badgesColumns");
 
     }    
 

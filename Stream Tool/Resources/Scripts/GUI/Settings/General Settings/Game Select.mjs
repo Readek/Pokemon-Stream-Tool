@@ -42,8 +42,22 @@ const genGameData = {
         ORAS : {}
     },
     7 : {
-        SM : {},
-        USUM : {},
+        SM : {
+            badges : {
+                Melemele : 3,
+                Akala : 4,
+                Ulaula : 7,
+                Poni : 4
+            },
+        },
+        USUM : {
+            badges : {
+                Melemele : 3,
+                Akala : 4,
+                Ulaula : 7,
+                Poni : 4
+            },
+        },
     },
     8 : {
         SS : {},

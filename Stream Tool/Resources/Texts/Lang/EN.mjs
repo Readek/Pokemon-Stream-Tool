@@ -108,6 +108,10 @@ export const lang = {
     badgeGymTitle : "Gym Badge",
     badgeJohtoTitle : "Johto Badge",
     badgeKantoTitle : "Kanto Badge",
+    badgeMelemeleTitle : "Melemele Z-Crystals",
+    badgeAkalaTitle : "Akala Z-Crystals",
+    badgeUlaulaTitle : "Ula'ula Z-Crystals",
+    badgePoniTitle : "Poni Z-Crystals",
 
     playerCatchesNumTitle : "Number of pokemon catches",
     playerDeathsNumTitle : "Number of ally Pokemon deaths",
