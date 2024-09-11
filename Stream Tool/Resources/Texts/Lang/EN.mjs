@@ -195,7 +195,7 @@ export const lang = {
     gameTitle : "Changes the current game data",
     gameSelect : "Game",
     gameSelectTitle : "Determines badges and memory reading",
-    gameVersionTitle : "Determines memory reading",
+    gameVersionTitle : "Determines memory reading and medals in some games",
 
     windowSettings : "Window Settings",
 

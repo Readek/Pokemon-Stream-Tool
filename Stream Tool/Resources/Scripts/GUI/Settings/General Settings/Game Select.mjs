@@ -38,8 +38,12 @@ const genGameData = {
         BW2 : {}
     },
     6 : {
-        XY : {},
-        ORAS : {}
+        XY : {
+            versions : ["1.0", "1.5"]
+        },
+        ORAS : {
+            versions : ["1.0", "1.4"]
+        }
     },
     7 : {
         SM : {
@@ -60,7 +64,9 @@ const genGameData = {
         },
     },
     8 : {
-        SS : {},
+        SS : {
+            versions : ["Sword", "Shield"]
+        },
         BDSP : {},
         PLA : {}
     },
@@ -105,7 +111,7 @@ export class SettingGameSelect extends Setting {
         changeBadges(genGameData[current.generation][value].badges);
 
         // set game versions if any
-        settings.versionSelect.addVersions(value);
+        settings.versionSelect.addVersions(genGameData[current.generation][value].versions);
 
         // show or hide extra buttons
         displayBattleStateButt();

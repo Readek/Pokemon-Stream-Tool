@@ -82,7 +82,7 @@ export function changeBadges(badgeData) {
 
         badgesDiv.classList.remove("badgesColumns");
 
-    }    
+    }
 
 }
 

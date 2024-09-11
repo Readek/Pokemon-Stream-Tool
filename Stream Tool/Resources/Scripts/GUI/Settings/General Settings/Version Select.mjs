@@ -4,11 +4,6 @@ import { settings } from "../Settings.mjs";
 
 const versionSelectSelect = document.getElementById("versionSelect");
 
-const versionData = {
-    "XY" : ["1.0", "1.5"],
-    "ORAS" : ["1.0", "1.4"]
-}
-
 export class SettingVersionSelect extends Setting {
 
     constructor() {
@@ -43,19 +38,18 @@ export class SettingVersionSelect extends Setting {
     }
 
     /**
-     * Clears the version list and adds entries from provided game
-     * @param {Number} game - Name of chosen game
+     * Clears the version list and adds entries from provided array
+     * @param {String[]} versions - Versions for current game
      */
-    addVersions(game) {
+    addVersions(versions) {        
 
-        if (game == "XY" || game == "ORAS") {
+        if (versions) {
 
-            // fill version select and display it
             versionSelectSelect.innerHTML = "";
 
-            for (let i = 0; i < versionData[game].length; i++) {
-                this.#addVersionEntry(versionData[game][i], versionData[game][i]);
-                
+            // fill version select and display it
+            for (let i = 0; i < versions.length; i++) {
+                this.#addVersionEntry(versions[i], versions[i]);
             }
 
             versionSelectSelect.style.display = "block";

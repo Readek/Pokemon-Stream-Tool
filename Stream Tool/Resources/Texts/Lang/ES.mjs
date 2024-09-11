@@ -193,7 +193,7 @@ export const lang = {
     gameTitle : "Cambia los datos determinados por el juego",
     gameSelect : "Juego",
     gameSelectTitle : "Determina las medallas y el actualizado automático",
-    gameVersionTitle : "Determina el actualizado automático",
+    gameVersionTitle : "Determina el actualizado automático y medallas en algunos juegos",
 
     windowSettings : "Ajustes de la ventana",
 
