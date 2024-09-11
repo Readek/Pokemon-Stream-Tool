@@ -92,3 +92,15 @@ function createBadgeWrap() {
     badgesDiv.appendChild(newEl);
     return newEl;
 }
+
+/**
+ * Updates badge images depending on game being played
+ * @param {String} game - Sword, or Shield
+ */
+export function badgeSwordShieldUpdate(game) {
+    for (const key in badges) {
+        for (let i = 0; i < badges[key].length; i++) {
+            badges[key][i].swordShieldUpdate(game);
+        }
+    }
+}

@@ -876,7 +876,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
   image-rendering: pixelated;
   flex-wrap: wrap;

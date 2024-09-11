@@ -1,4 +1,5 @@
 import { current } from "../../Globals.mjs";
+import { badgeSwordShieldUpdate } from "../../Player/Badges.mjs";
 import { Setting } from "../Setting.mjs";
 import { settings } from "../Settings.mjs";
 
@@ -34,6 +35,10 @@ export class SettingVersionSelect extends Setting {
         versionSelectSelect.value = value;
 
         current.version = value;
+
+        if (value == "Sword" || value == "Shield") {
+            badgeSwordShieldUpdate(value);
+        }
 
     }
 

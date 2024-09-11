@@ -81,4 +81,17 @@ export class Badge {
 
     }
 
+    /**
+     * Updates badge images depending on game being played
+     * @param {String} game - Sword, or Shield
+     */
+    swordShieldUpdate(game) {   
+
+        if (this.#id == 4 || this.#id == 6) {            
+            this.#imgEl.src = `${stPath.assets}/Badges/${current.generation}/${current.game}`
+                + `/${this.#id} ${game}.png`;
+        }
+
+    }
+
 }
