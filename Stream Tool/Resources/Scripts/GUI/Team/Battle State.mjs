@@ -1,5 +1,6 @@
 import { getLocalizedText } from "../../Utils/Language.mjs";
 import { current } from "../Globals.mjs";
+import { clearAllTrainerPokemon } from "../VS Trainer/TrainerPokemons.mjs";
 
 const bTypeButt = document.getElementById("bTypeButt");
 
@@ -45,7 +46,11 @@ export function setBattleState(value) {
 
     // change button text
     bTypeButt.innerHTML = getLocalizedText("bTypeButt" + value);
-    bTypeButt.setAttribute("locText", "bTypeButt" + value)
+    bTypeButt.setAttribute("locText", "bTypeButt" + value);
+
+    if (value != "Trainer") {
+        clearAllTrainerPokemon();
+    }
 
 }
 
