@@ -6,20 +6,23 @@ const { app, BrowserWindow } = require('electron')
 // define the Resources folder, where all GUI code actually is
 let resourcesPath;
 
-// check if we got a custom Resources folder path
-const dataPath = app.getPath('userData');
-if (fs.existsSync(dataPath + "/rPath.json")) {
-    // read path previously stored by the user
-    resourcesPath = JSON.parse(fs.readFileSync(dataPath + "/rPath.json")).rPath;
+// look for a Resources folder next to the executable
+if (process.platform == "win32") { // if on Windows
+    resourcesPath = path.resolve(process.env.PORTABLE_EXECUTABLE_DIR, 'Resources');
+} else { // if on Linux
+    resourcesPath = path.resolve('.', 'Resources');
 }
 
-// if no rPath, search for the Resources folder next to the executable
-if (!resourcesPath) {
-    if (process.platform == "win32") { // if on Windows
-        resourcesPath = path.resolve(process.env.PORTABLE_EXECUTABLE_DIR, 'Resources');
-    } else { // if on Linux
-        resourcesPath = path.resolve('.', 'Resources');
-    }
+// take not if the executable file does not exist where it should be
+if (!fs.existsSync(`${resourcesPath}/Scripts/Executable.js`)) {
+    resourcesPath = null;
+}
+
+// if no Resources folder next to exe, check if we got a custom Resources folder path
+const dataPath = app.getPath('userData');
+if (!resourcesPath && fs.existsSync(dataPath + "/rPath.json")) {
+    // read path previously stored by the user
+    resourcesPath = JSON.parse(fs.readFileSync(dataPath + "/rPath.json")).rPath;
 }
 
 

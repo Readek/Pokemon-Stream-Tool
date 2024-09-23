@@ -3,6 +3,12 @@ const fs = require('fs')
 const path = require('path')
 const http = require('http')
 
+// this script is where everything starts
+// however, there is a part of the code that runs before this script
+// since its inside the executable, you wont be able to
+// modify it unless youre able to build a new exe on your own
+// you can find this code in the git's folder "Interface Source Code"
+
 let resourcesPath, nodePath;
 let httpPort, wsPort, guiWidth, guiHeight, failed;
 let wsServer, sockets = [];

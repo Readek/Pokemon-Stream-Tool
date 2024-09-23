@@ -1,6 +1,9 @@
 #just in case we build a new exe
 Interface Source Code/dist
 
+Stream Tool/Poke Stream Tool.exe
+Stream Tool/Poke Stream Tool.AppImage
+
 Stream Tool/Resources/Assets/Pokemon/sprites/*
 !Stream Tool/Resources/Assets/Pokemon/sprites/.gitkeep
 Stream Tool/Resources/Texts/GUI Settings.json
