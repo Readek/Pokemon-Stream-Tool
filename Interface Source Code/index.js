@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const WebSocket = require('ws')
 const { app, BrowserWindow } = require('electron')
 
 // define the Resources folder, where all GUI code actually is
@@ -33,10 +32,7 @@ async function loadExecFile() {
     if (fs.existsSync(`${resourcesPath}/Scripts/Executable.js`)) {
         
         const executable = require(resourcesPath + "/Scripts/Executable.js");
-        // we pass the WebSocket class because i coudnt figure out
-        // a better way to load it there
-        // im blaming electron on this one
-        executable(resourcesPath, __dirname, WebSocket);
+        executable(resourcesPath, __dirname);
 
     } else { // if executable code is not found
 

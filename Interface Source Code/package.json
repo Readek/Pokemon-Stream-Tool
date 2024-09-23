@@ -8,22 +8,29 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^30.1.0",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^25.0.5"
   },
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder"
   },
   "build": {
-    "appId": "poke.st.gui",
+    "appId": "Readek.PokeStreamTool.PokeStreamToolGUI",
+    "productName": "Pokemon Stream Tool",
+    "executableName": "Poke Stream Tool",
     "linux": {
-      "target": "AppImage"
+      "target": "AppImage",
+      "category": "Game",
+      "desktop": {
+        "Name": "Pokemon Stream Tool",
+        "GenericName": "Stream Tool"
+      }
     },
     "win": {
       "target": "portable"
     }
   },
   "dependencies": {
-    "ws": "^8.17.0"
+    "ws": "^8.18.0"
   }
 }

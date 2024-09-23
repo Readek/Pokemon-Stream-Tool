@@ -10,7 +10,7 @@ const http = require('http')
 // you can find this code in the git's folder "Interface Source Code"
 
 let resourcesPath, nodePath;
-let httpPort, wsPort, guiWidth, guiHeight, failed;
+let httpPort, wsPort, guiWidth, guiHeight;
 let wsServer, sockets = [];
 let storedSettings;
 const storedGuiData = {
@@ -20,66 +20,58 @@ const storedGuiData = {
     player : {},
 }
 
-module.exports = function initExec(rPath, gPath, wSocket) {
+// called from script inside executable
+module.exports = function initExec(rPath, nPath) {    
     
     // set the resources path
     resourcesPath = rPath;
-    nodePath = gPath; // this is the path from within the executable
+    nodePath = nPath; // this is the path from within the executable
 
-    if (fs.existsSync(resourcesPath)) {
-
-        if (fs.existsSync(`${resourcesPath}/Texts/GUI Settings.json`)) {
-            // get some settings from our local settings file (if it exists)
-            storedSettings = JSON.parse(fs.readFileSync(`${resourcesPath}/Texts/GUI Settings.json`));
-        } else {
-            // create default data
-            storedSettings = {
-                guiWidth: 647,
-                guiHeight: 352,
-                gameGen: 5,
-                alwaysOnTop: false,
-                resizable: false,
-                zoom: 100,
-                remoteUpdatePort: 1111,
-                webSocketPort: 8080
-            }
-            // write down to a file
-            fs.writeFileSync(`${resourcesPath}/Texts/GUI Settings.json`, JSON.stringify(storedSettings, null, 2));
-        }
-        
-        // appoly that data to current state
-        httpPort = storedSettings.remoteUpdatePort;
-        wsPort = storedSettings.webSocketPort;
-        guiWidth = storedSettings.guiWidth;
-        guiHeight = storedSettings.guiHeight;
-        if (process.platform == "win32") {
-            guiWidth = guiWidth + 4; // windows why cant you be normal
-            guiHeight = guiHeight + 36;
-        }
-
-        // initialize them servers
-        initHttpServer();
-        initWsServer(wSocket);
-
+    // get some settings from our local settings file (if it exists)
+    const guiSettsJsonPath = `${resourcesPath}/Texts/GUI Settings.json`;
+    if (fs.existsSync(guiSettsJsonPath)) {
+        storedSettings = JSON.parse(fs.readFileSync(guiSettsJsonPath));
     } else {
-        console.log("The resources folder could not be found!!");
-        console.log(e);
-        failed = true;
-        httpPort = 7070;
-        wsPort = 8080;
-        guiWidth = 600;
-        guiHeight = 300;
+        // if it doesnt, create default data
+        storedSettings = {
+            guiWidth: 647,
+            guiHeight: 352,
+            gameGen: 5,
+            alwaysOnTop: false,
+            resizable: false,
+            zoom: 100,
+            remoteUpdatePort: 1111,
+            webSocketPort: 8080
+        }
+        // and write it down to a file
+        fs.writeFileSync(guiSettsJsonPath, JSON.stringify(storedSettings, null, 2));
     }
+    
+    // apply that data to current state
+    httpPort = storedSettings.remoteUpdatePort;
+    wsPort = storedSettings.webSocketPort;
+    guiWidth = storedSettings.guiWidth;
+    guiHeight = storedSettings.guiHeight;
+
+    // Windows seems to consider frame pixels in the window proportions :(
+    if (process.platform == "win32") {
+        guiWidth = guiWidth + 4;
+        guiHeight = guiHeight + 36;
+    }
+
+    // initialize them servers
+    initHttpServer();
+    initWsServer();
 
 }
 
-
+/** Starts Http server used by remote GUIs */
 function initHttpServer() {
-    // start an http server on boot for remote update
+
     http.createServer((request, response) => {
         if (request.method === "GET" || request.method === "HEAD") {
             let fname;
-            if (request.url == "/") { // main remote update page
+            if (request.url == "/") { // main remote GUI page
                 fname = resourcesPath + "/GUI.html";
             } else { // every other request will just send the file
                 fname = resourcesPath + request.url;
@@ -121,14 +113,16 @@ function initHttpServer() {
     }).listen(httpPort);
 }
 
-/**
- * Starts the web socket server
- * @param {WebSocket} wSocket - Im sorry this is wrong
- */
-function initWsServer(wSocket) {
-    wsServer = new wSocket.Server({ port: wsPort });
+/** Starts the web socket server, connecting GUI with overlays and other remote GUIs */
+function initWsServer() {
+    const WebSocket = require(path.join(nodePath, 'node_modules', 'ws', 'index.js'));
+    wsServer = new WebSocket.Server({ port: wsPort });
 }
 
+// create main window on startup
+app.whenReady().then(() => {
+    createWindow()
+});
 
 function createWindow() {
 
@@ -138,18 +132,24 @@ function createWindow() {
         height: guiHeight,
         resizable: false,
 
+        // will be overwitten by css
+        // however this prevents a brief flashbang when first loading
         backgroundColor: "#383838",
 
-        title: "Pokemon Stream Tool", // will get overwitten by gui html title
+        title: "Pokemon Stream Tool", // will get overwitten by GUI html title
         icon: path.join(nodePath, 'icon.png'),
 
         webPreferences: {
+
+            // prevents GUI not updating when minimized
             backgroundThrottling: false,
-            // this is almost deprecated functionallity as of electron 15, however
-            // i have not found a better way to make files external to the insides
-            // of the exe work with electron, todo find a more updated way to do so
+
+            // this could mean a potential? security risk, however there are many
+            // scripts using node functions within the GUI window in this project
+            // TODO research how to do this properly, maybe someday
             nodeIntegration: true,
             contextIsolation: false
+
         },
 
     })
@@ -158,12 +158,8 @@ function createWindow() {
     win.removeMenu()
 
     // load the main page
-    if (failed) { // in case something failed earlier
-        win.loadFile(path.join(nodePath, 'failed.html'));
-    } else {
-        win.loadFile(resourcesPath + "/GUI.html");
-    }
-    
+    win.loadFile(resourcesPath + "/GUI.html");
+
     // keyboard shortcuts!
     win.webContents.on('before-input-event', (event, input) => {
         if (input.key === 'F5') { // refresh the page
@@ -181,7 +177,7 @@ function createWindow() {
         win.setAlwaysOnTop(arg)
     })
 
-    // window settings
+    // window resize GUI toggle
     ipcMain.on('resizable', (event, arg) => {
         win.setResizable(arg)
     })
@@ -197,7 +193,6 @@ function createWindow() {
     })
 
     wsServer.on('connection', (socket, req) => {
-
 
         // add this new connection to the array to keep track of them
         sockets.push({ws: socket, id: req.url.substring(5)})
@@ -217,11 +212,12 @@ function createWindow() {
     
     });
 
-    // when the GUI is ready to send data to browsers
+    // when a request to update data is sent
     ipcMain.on('sendData', (event, data) => {
 
         const jsonData = JSON.parse(data);
         sockets.forEach(socket => {
+            // only send this data to matching ids
             if (jsonData.id == socket.id) {
                 socket.ws.send(data)
             }
@@ -255,11 +251,6 @@ function createWindow() {
     
 }
 
-// create window on startup
-app.whenReady().then(() => {
-    createWindow()
-});
-
 // close electron when all windows close (for Windows and Linux)
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -285,4 +276,8 @@ app.on('window-all-closed', () => {
     }
 });
 
-// todo close electron for mac, if there ever is support for it that is
+// todo close electron for mac
+// in theory, everything works on mac, however even if code to close
+// windows was added, I would still need a mac myself to create the exec
+// if you're interested in adding support for mac, please submit a pull request
+// or hit me up on any of my social media (links on GitHub)
