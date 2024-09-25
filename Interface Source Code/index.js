@@ -12,7 +12,7 @@ if (process.platform == "win32") { // if on Windows
     resourcesPath = path.resolve('.', 'Resources');
 }
 
-// take not if the executable file does not exist where it should be
+// take note if the executable file does not exist where it should be
 if (!fs.existsSync(`${resourcesPath}/Scripts/Executable.js`)) {
     resourcesPath = null;
 }

@@ -3,7 +3,7 @@ import { inside } from './Globals.mjs';
 /**
  * Returns parsed json data from a local file
  * @param {String} jPath - Path to local file
- * @returns {Object?} - Parsed json object
+ * @returns {Object?} Parsed json object
 */
 export async function getJson(jPath) {
 
@@ -58,15 +58,16 @@ export async function saveSettings(data) {
 
     if (inside.electron) {
         
-        // send signal to update remote GUIs
         const ipc = await import("./IPC.mjs");
         ipc.refreshSettingsStore(data);
 
     } else {
+
         const remote = await import("./Remote Requests.mjs");
-        data.message = "RemoteSaveJson"; // TODO
+        data.message = "RemoteSaveJson";
         data.path = path;
         remote.sendRemoteData(data);
+
     }
     
 }

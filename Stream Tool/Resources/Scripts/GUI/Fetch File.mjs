@@ -3,7 +3,7 @@ import { inside } from "./Globals.mjs";
 /**
  * Downloads a given url and stores the file locally
  * @param {string} url - Site to download from
- * @param {string} dest - Final file path
+ * @param {string} dest - Final file destination path
  * @returns {Promise<void>}
  */
 export function fetchFile(url, dest) {
@@ -16,8 +16,8 @@ export function fetchFile(url, dest) {
         return new Promise((res) => {
             http.get(url, (response) => {
                 if (response.statusCode == 302) {
-                    // if the response is a redirection, we call again the method with the new location
-                    wget(String(response.headers.location), dest);
+                    // if the response is a redirection, we call the method again with the new location
+                    fetchFile(String(response.headers.location), dest);
                 } else {
                     
                     // create folders if needed

@@ -39,7 +39,6 @@ class Settings {
             version : current.version
         };
 
-        // its time to send the data away
         if (inside.electron) {
 
             const ipc = await import("../IPC.mjs");

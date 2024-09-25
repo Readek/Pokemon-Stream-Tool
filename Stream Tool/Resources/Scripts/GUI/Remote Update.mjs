@@ -70,7 +70,6 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Team") {
 
-        // poketeam time
         for (let i = 0; i < data.playerPokemons.length; i++) {
 
             pokemons[i].setSpecies(data.playerPokemons[i].internalSpecies);
@@ -100,7 +99,6 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Player") {
 
-        // player time
         setBadges(data.player.badges);
         playerStats.setCatches(data.player.catches);
         playerStats.setDeaths(data.player.deaths);
@@ -112,7 +110,7 @@ export async function updateGUI(data, noNotif) {
         if (data.pokemon) {
             wildEncounter.setSpecies(data.pokemon.species);
             wildEncounter.setForm(data.pokemon.form);
-            wildEncounter.setGender(data.pokemon.gender),
+            wildEncounter.setGender(data.pokemon.gender);
             wildEncounter.setShiny(data.pokemon.shiny);
         } else {
             wildEncounter.setSpecies("None");

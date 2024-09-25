@@ -20,7 +20,7 @@ import { trainerPokemons } from './GUI/VS Trainer/TrainerPokemons.mjs';
 import { updateTrainer } from './GUI/VS Trainer/Update Trainer.mjs';
 
 
-// this is a weird way to have file svg's that can be recolored by css
+// this is a weird way to have local file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
     async connectedCallback(
       shadowRoot = this.shadowRoot || this.attachShadow({mode:"open"})
@@ -37,8 +37,7 @@ init();
 /** It all starts here */
 async function init() {
 
-
-    if (inside.electron) {
+    if (inside.electron) { // remote GUIs will skip this
 
         // if the user doesnt have these assets, remote download them
 
@@ -69,21 +68,19 @@ async function init() {
     // get those keybinds running
     loadKeybinds();
 
-
     // update the GUI on startup so we have something to send to browsers
     if (inside.electron) {
 
         // load previous gui state
         const storedData = await getJson(`${stPath.text}/GUI State`);
 
-        // don't do this if we got no data to restore
         if (storedData) {
             updateGUI(storedData.settings, true)
             updateGUI(storedData.catches, true);
             updateGUI(storedData.team, true);
             updateGUI(storedData.player, true);
         } else {
-            // set default values
+            // if we got no data to restore, set default values
             catches.push(new Catch());
             settings.langSelect.setLanguage("EN");
             settings.genSelect.setGen(5); // best gen amarite

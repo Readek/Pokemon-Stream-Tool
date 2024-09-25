@@ -1,4 +1,4 @@
-const notifSpan = document.getElementById("notifText");
+const notifDiv = document.getElementById("notifDiv");
 
 /**
  * Displays a notification on screen

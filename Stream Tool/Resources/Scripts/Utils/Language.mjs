@@ -26,7 +26,9 @@ export function getLocalizedText(key, dyns = []) {
     
     if (lang && lang[key]) {
 
+        // if we have both an actual lang and the string key matches
         let text = lang[key];
+        // dynamically change some text if needed
         for (let i = 0; i < dyns.length; i++) {
             text = text.replace("{" + i + "}", dyns[i]);
         }
@@ -45,6 +47,7 @@ export function getLocalizedText(key, dyns = []) {
 
     }
 
+    // if the called string key just doesn't exist
     return "((MissingText))";
 
 }

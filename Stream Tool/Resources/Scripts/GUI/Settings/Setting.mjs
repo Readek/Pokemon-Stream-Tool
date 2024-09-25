@@ -27,6 +27,7 @@ export class Setting {
 
             // save the file
             saveSettings(this.guiSettings);
+
         }
 
     }
