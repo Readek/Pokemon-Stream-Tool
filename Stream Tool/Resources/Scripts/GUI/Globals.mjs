@@ -16,21 +16,23 @@ export const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
 
 /** Current values for stuff */
 export const current = {
-    focus : -1,
-    lang : "",
-    generation : 0, // most of these will be changed on startup
+    lang : "", // most of these will change on startup
+    generation : 0,
     game : "",
     version : "",
     pkmnSpecies : dexGens.get(5).species,
+    focus : -1, // used for pokeFinder navigation
     numToPoke : {}, // filled on pokeFinder fill
-    abilities : {},
-    items : {},
-    moves : {},
+    abilities : {}, // filled on gen update, used for auto id matching
+    items : {}, // ^^
+    moves : {}, // ^^
     autoStatus : false,
     autoUpdated : false
 }
 
-export const nameReplacements = { //Some substitutions for presentation sake or translation.
+// some substitutions for presentation sake of translation
+// TODO do this on lang scripts
+export const nameReplacements = {
     "Nidoran-F": "Nidoran♀",
     "Nidoran-M": "Nidoran♂",
     "Type: Null": "Código Cero",

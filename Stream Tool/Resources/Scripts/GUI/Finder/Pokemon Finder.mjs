@@ -1,9 +1,13 @@
 import { current, nameReplacements, stPath } from '../Globals.mjs';
+import { Pokemon } from '../Pokemon.mjs';
 import { FinderSelect } from './Finder Select.mjs';
 
-class PokeFinder extends FinderSelect {
+// numbers relative to poke's position on list, not on dex (dexit was a mistake)
+let pokeToNum = {};
+/** @type {Pokemon} */
+let currentPokemon;
 
-    #curPokemon;
+class PokeFinder extends FinderSelect {
 
     constructor() {
         super(document.getElementById("pokeFinder"));
@@ -22,6 +26,7 @@ class PokeFinder extends FinderSelect {
 
         // some other script may need this
         const numToPoke = {};
+        let pokeCount = 1;
 
         // add entries to the pokemon list
         for (let pokemon of speciesList) {
@@ -55,6 +60,9 @@ class PokeFinder extends FinderSelect {
 
             // add a dex number to pokemon name translation for future scripts
             numToPoke[pokemon.num] = pokemon.name;
+            // store the poke's position on the list regardless of dexits
+            pokeToNum[pokemon.name] = pokeCount;
+            pokeCount++;
 
         }
 
@@ -90,18 +98,18 @@ class PokeFinder extends FinderSelect {
         this._finderEl.firstElementChild.value = "";
 
         // our pokemon class will take things from here
-        this.#curPokemon.setSpecies(pokeName);
+        currentPokemon.setSpecies(pokeName);
 
     }
 
     setCurrentPokemon(pokemon) {
-        this.#curPokemon = pokemon;
+        currentPokemon = pokemon;
     }
 
     /** Focuses the Finder to the currently selected pokemon */
     setSpeciesFocus() {
-        if (this.#curPokemon.getSpecies()) {
-            current.focus = this.#curPokemon.getPokeData().num - 2;
+        if (currentPokemon.getSpecies()) {
+            current.focus = pokeToNum[currentPokemon.getSpecies()] - 2;
             this.addActive(true);
         }
     }
