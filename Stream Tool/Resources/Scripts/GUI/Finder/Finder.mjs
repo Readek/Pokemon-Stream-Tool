@@ -1,5 +1,8 @@
 import { current } from "../Globals.mjs";
 
+/** @type {HTMLElement} */
+let currentCaller;
+
 export class Finder {
 
     /** @protected finderEl */
@@ -16,6 +19,13 @@ export class Finder {
         this._finderEl = el;
         this._list = el.getElementsByClassName("searchList")[0];
 
+        // set a listener to clear selected state of last caller when pokeFinder hides
+        this._finderEl.addEventListener("toggle", (event) => {
+            if (event.newState === "closed") {
+                this.#removeSelectorFeedback();
+            }
+        })
+
     }
 
     /**
@@ -26,6 +36,13 @@ export class Finder {
 
         // display the finder element
         this._finderEl.showPopover();
+
+        // just in case a selector was clicked but popower was never hidden
+        this.#removeSelectorFeedback();
+
+        // force add visual indicator to caller
+        callEl.classList.add("selectorSelected");
+        currentCaller = callEl;
 
         // set up some global variables for other functions
         current.focus = -1;
@@ -178,6 +195,11 @@ export class Finder {
         for (let i = 0; i < entries.length; i++) {
             entries[i].classList.remove("finderEntry-active");
         }
+    }
+
+    /** Removes visual feedback of last called selector */
+    #removeSelectorFeedback() {
+        if (currentCaller) currentCaller.classList.remove("selectorSelected");
     }
 
 }

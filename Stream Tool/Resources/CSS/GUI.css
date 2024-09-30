@@ -377,11 +377,16 @@ button:hover {
   white-space: nowrap;
   overflow: hidden;
   border-radius: 5px;
+  outline: none;
 }
 .selector:hover {
   border-color: var(--selected);
 }
 .selector:active {
+  background-color: var(--bg2);
+}
+.selectorSelected {
+  border-color: var(--selected);
   background-color: var(--bg2);
 }
 
