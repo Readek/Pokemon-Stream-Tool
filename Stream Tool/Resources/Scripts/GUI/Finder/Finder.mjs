@@ -1,21 +1,20 @@
-import { current, inside } from "../Globals.mjs";
-
+import { current } from "../Globals.mjs";
 
 export class Finder {
 
-    /** @protected {HTMLElement} finderEl */
+    /** @protected finderEl */
     _finderEl;
     /** @protected {HTMLElement} list */
     _list;
-    
+
+    /**
+     * Popover list that helps you find something
+     * @param {HTMLElement} el - Finder element
+     */
     constructor(el) {
-        
+
         this._finderEl = el;
         this._list = el.getElementsByClassName("searchList")[0];
-
-        // flags to know if cursor is above the finder
-        this._finderEl.addEventListener("mouseenter", () => { inside.finder = true });
-        this._finderEl.addEventListener("mouseleave", () => { inside.finder = false });
 
     }
 
@@ -25,28 +24,29 @@ export class Finder {
      */
     open(callEl) {
 
-        // move the dropdown menu under the selected element
-        callEl.appendChild(this._finderEl);
+        // display the finder element
+        this._finderEl.showPopover();
 
         // set up some global variables for other functions
         current.focus = -1;
 
-        // reset the dropdown position
-        this._finderEl.style.top = "100%";
-        this._finderEl.style.left = "0";
-
         // get some data to calculate if it goes offscreen
         const finderPos = this._finderEl.getBoundingClientRect();
-        const selectPos = this._finderEl.parentElement.getBoundingClientRect();
+        const selectPos = callEl.getBoundingClientRect();
+
+        // move it under the element that called it
+        this._finderEl.style.top = selectPos.bottom + "px";
+        this._finderEl.style.left = selectPos.left + "px";
 
         // vertical check
-        if (selectPos.bottom + finderPos.height > window.innerHeight) {
-            this._finderEl.style.top = `calc(100% + ${window.innerHeight - finderPos.bottom - 10}px)`;
-            this._finderEl.style.left = "100%";
-        }
-        // horizontal check
-        if (selectPos.left + finderPos.width > window.innerWidth) {
-            this._finderEl.style.left = `calc(${window.innerWidth - (selectPos.left + finderPos.width) - 5}px)`;
+        if (selectPos.y + selectPos.height + finderPos.height > window.innerHeight) {
+
+            // move it to the right side
+            this._finderEl.style.left = selectPos.right + "px";
+            // vertically adjust
+            const offPixels = selectPos.y + finderPos.height - window.innerHeight;
+            this._finderEl.style.top = selectPos.top - offPixels - 10 + "px";
+
         }
 
     }
@@ -64,13 +64,13 @@ export class Finder {
      * @returns {Boolean} - Visible (true) or not (false)
      */
     isVisible() {
-        const displayValue = window.getComputedStyle(this._finderEl).getPropertyValue("display");
-        return (displayValue == "block" && this.getFinderEntries().length > 0);
+        const displayValue = this._finderEl.matches(':popover-open');
+        return (displayValue && this.getFinderEntries().length > 0);
     }
 
-    /** I will let you assume what this function does */
+    /** Force hides this finder */
     hide() {
-        this._finderEl.style.display = "none";
+        this._finderEl.hidePopover(false);
     }
 
     /**
@@ -95,7 +95,7 @@ export class Finder {
      * @param {Boolean} direction - Up (true) or down (false)
      */
     addActive(direction) {
-    
+
         // this will make our code easier to read
         const entries = this.getFinderEntries();
 

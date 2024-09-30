@@ -83,8 +83,8 @@ class PokeFinder extends FinderSelect {
 
     #entryClick(pokeName) {
 
-        // clear focus to hide pokemon select menu
-        document.activeElement.blur();
+        // hide menu on click
+        this.hide();
 
         // clear filter box
         this._finderEl.firstElementChild.value = "";
@@ -102,7 +102,7 @@ class PokeFinder extends FinderSelect {
     setSpeciesFocus() {
         if (this.#curPokemon.getSpecies()) {
             current.focus = this.#curPokemon.getPokeData().num - 2;
-            this.addActive(true);   
+            this.addActive(true);
         }
     }
 

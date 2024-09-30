@@ -44,7 +44,7 @@ export class Catch extends Pokemon {
 
             <button class="catchDeleteButt catchButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
         
-            <div class="finderPosition">
+            <div>
                 <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle" title="${getLocalizedText("pokeSelectTitle")}">
                 <img class="pokeSelectorIcon" alt="">
                 <div class="pokeSelectorText"></div>

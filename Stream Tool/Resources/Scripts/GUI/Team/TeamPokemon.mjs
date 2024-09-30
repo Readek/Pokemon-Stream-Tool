@@ -389,10 +389,10 @@ export class TeamPokemon extends Pokemon {
         element.innerHTML = `
         
         <div class="teamPokeMainInfo">
-            <div class="finderPosition">
+            <div>
                 <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
-                <img class="pokeSelectorIcon" alt="">
-                <div class="pokeSelectorText"></div>
+                    <img class="pokeSelectorIcon" alt="">
+                    <div class="pokeSelectorText"></div>
                 </div>
             </div>
 

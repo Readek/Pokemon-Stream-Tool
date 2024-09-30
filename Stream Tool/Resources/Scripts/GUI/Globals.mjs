@@ -1,7 +1,6 @@
 /** these are set when their respective views are visible */
 export const inside = {
     settings : false,
-    finder : false,
     electron : typeof process !== 'undefined' // if in executable or remote gui
 };
 
