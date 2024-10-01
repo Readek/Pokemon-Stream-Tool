@@ -84,6 +84,9 @@ class PokeFinder extends FinderSelect {
         newDiv.appendChild(spanName);
         this.addEntry(newDiv);
 
+        // store this list for later use
+        this._storeFinderEntries();
+
         // send this to global variables for other scripts
         current.numToPoke = numToPoke;
 
@@ -93,9 +96,6 @@ class PokeFinder extends FinderSelect {
 
         // hide menu on click
         this.hide();
-
-        // clear filter box
-        this._finderEl.firstElementChild.value = "";
 
         // our pokemon class will take things from here
         currentPokemon.setSpecies(pokeName);

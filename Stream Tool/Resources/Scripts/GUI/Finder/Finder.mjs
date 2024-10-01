@@ -1,14 +1,14 @@
 import { current } from "../Globals.mjs";
 
-/** @type {HTMLElement} */
-let currentCaller;
-
 export class Finder {
 
     /** @protected finderEl */
     _finderEl;
-    /** @protected {HTMLElement} list */
-    _list;
+    #list;
+    /** @type {HTMLCollection} finderEntries */
+    #finderEntries;
+    /** @type {HTMLElement} currentCaller */
+    #currentCaller;
 
     /**
      * Popover list that helps you find something
@@ -17,7 +17,7 @@ export class Finder {
     constructor(el) {
 
         this._finderEl = el;
-        this._list = el.getElementsByClassName("searchList")[0];
+        this.#list = el.getElementsByClassName("searchList")[0];
 
         // set a listener to clear selected state of last caller when pokeFinder hides
         this._finderEl.addEventListener("toggle", (event) => {
@@ -38,11 +38,13 @@ export class Finder {
         this._finderEl.showPopover();
 
         // just in case a selector was clicked but popower was never hidden
-        this.#removeSelectorFeedback();
+        if (this.isVisible()) {
+            this.#removeSelectorFeedback();
+        }
 
         // force add visual indicator to caller
         callEl.classList.add("selectorSelected");
-        currentCaller = callEl;
+        this.#currentCaller = callEl;
 
         // set up some global variables for other functions
         current.focus = -1;
@@ -70,15 +72,23 @@ export class Finder {
 
     /**
      * Scans for all current entries, then returns them
-     * @returns {HTMLCollectionOf}
+     * @returns {HTMLCollection}
     */
     getFinderEntries() {
-        return this._list.getElementsByClassName("finderEntry");
+        return this.#finderEntries;
+    }
+
+    /**
+     * Scans for each entry on this finder and stores them
+     * @protected storeFinderEntries
+     */
+    _storeFinderEntries() {
+        this.#finderEntries = this.#list.getElementsByClassName("finderEntry");
     }
 
     /**
      * Checks for the current finder's display status
-     * @returns {Boolean} - Visible (true) or not (false)
+     * @returns {Boolean} Visible (true) or not (false)
      */
     isVisible() {
         const displayValue = this._finderEl.matches(':popover-open');
@@ -95,7 +105,7 @@ export class Finder {
      * @param {HTMLElement} newEl - Element to append to the list
      */
     addEntry(newEl) {
-        this._list.appendChild(newEl);
+        this.#list.appendChild(newEl);
     }
 
     /** 
@@ -103,7 +113,7 @@ export class Finder {
      * @protected clearList
      */
     _clearList() {
-        this._list.innerHTML = "";
+        this.#list.innerHTML = "";
     }
 
     
@@ -199,7 +209,9 @@ export class Finder {
 
     /** Removes visual feedback of last called selector */
     #removeSelectorFeedback() {
-        if (currentCaller) currentCaller.classList.remove("selectorSelected");
+        if (this.#currentCaller) {
+            this.#currentCaller.classList.remove("selectorSelected");
+        }
     }
 
 }

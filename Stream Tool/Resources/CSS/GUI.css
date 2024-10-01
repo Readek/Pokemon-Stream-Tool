@@ -82,7 +82,6 @@ input[type="text"] {
 .textInput:hover {
   border-color: var(--selected);
 }
-
 .textInput:focus {
   border-color: var(--focused);
 }
@@ -101,7 +100,7 @@ button {
   text-shadow: inherit;
 }
 button, [type="button"] {
-  -webkit-appearance: button;
+  appearance: button;
 }
 button:hover {
   cursor: pointer;
@@ -311,12 +310,8 @@ button:hover {
 .finderEntry {
   display: flex;
   align-items: center;
-  height: 30px;
   width: 100%;
-  z-index: 30;
   cursor: pointer;
-}
-.finderEntry:not(:first-child) {
   border-top: 1px solid var(--bg2);
 }
 .finderEntry:hover {
@@ -326,40 +321,11 @@ button:hover {
   background-color: var(--bg2);
 }
 
-.pfTag {
-  color: var(--text2);
-  font-size: 13px;
-  margin-left: 5px;
-  z-index: 32;
-}
 .pfName {
   font-family: "Roboto-Medium";
   margin-right: 5px;
   margin-left: 5px;
   z-index: 32;
-}
-.pfChar {
-  font-style: italic;
-  font-size: 13px;
-  margin-right: 5px;
-  z-index: 32;
-}
-.pfCharImgBox {
-  position: absolute;
-  height: 30px;
-  width: 100%;
-  transform: scaleX(-1);
-  overflow: hidden;
-  opacity: .8;
-}
-.pfCharImg {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  object-fit: contain;
-  height: 40px;
-  opacity: .8;
-  z-index: 31;
 }
 
 
@@ -440,7 +406,6 @@ button:hover {
   text-shadow: 0px 0px 3px black;
   overflow: auto;
   max-height: 140px;
-  position: relative;
 }
 
 .fIconImg {
