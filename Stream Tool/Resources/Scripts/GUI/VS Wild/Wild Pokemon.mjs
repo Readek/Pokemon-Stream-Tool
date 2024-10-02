@@ -7,7 +7,6 @@ import { displayNotif } from "../Notifications.mjs";
 import { playerStats } from "../Player/Stats.mjs";
 import { updatePlayer } from "../Player/Update Player.mjs";
 import { Pokemon } from "../Pokemon.mjs";
-import { updateWildEnc } from "./Update Wild.mjs";
 
 const infoDiv = document.getElementById("vsWildBotRow");
 const sendInp = document.getElementById("vsWildNickInput");
@@ -38,6 +37,7 @@ class WildPokemon extends Pokemon {
     #abilityText1;
     #abilityTextH;
 
+    /** Wild pokemon data for info and stat display */
     constructor() {
 
         super();
@@ -68,10 +68,8 @@ class WildPokemon extends Pokemon {
         this.#abilityText1 = document.getElementById("vsWildAbility1");
         this.#abilityTextH = document.getElementById("vsWildAbilityH");
 
-        // send catch listener
+        // send poke to catches listener
         sendBut.addEventListener("click", () => {this.#sendCatch()})
-
-        this.displayWildStats();
 
     }
 
@@ -82,23 +80,21 @@ class WildPokemon extends Pokemon {
     setSpecies(name) {
 
         super.setSpecies(name);
-
-        if (name) {
-            this.displayWildStats();
-        }
+        if (name) this.displayWildStats();
 
     }
 
+    /** Shows or hides stats and info about selected pokemon */
     displayWildStats() {
         if (this.getSpecies()) {
             // show them stats and fill them
             infoDiv.style.display = "flex";
-            document.getElementById("vsWildSendCatchDiv").style.display = "flex";
+            sendBut.parentElement.style.display = "flex";
             this.#fillInfo();
         } else {
             // hide them stats
             infoDiv.style.display = "none";
-            document.getElementById("vsWildSendCatchDiv").style.display = "none";
+            sendBut.parentElement.style.display = "none";
         }
     }
 
@@ -133,7 +129,6 @@ class WildPokemon extends Pokemon {
         this.typeImg1.parentElement.lastElementChild.setAttribute("locText", "type"+types[0]);
         if (types[1]) {
             this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
-            this.typeImg2.style.display = "block";
             this.typeImg2.parentElement.style.display = "flex";
             this.typeImg2.parentElement.lastElementChild.innerHTML = getLocalizedText("type"+types[1]);
             this.typeImg2.parentElement.lastElementChild.setAttribute("locText", "type"+types[1]);
@@ -164,6 +159,12 @@ class WildPokemon extends Pokemon {
 
     }
 
+    /**
+     * Calculates stat percentage for the stat bar
+     * @param {Number} value - Poke stat value
+     * @param {boolean} total - If calculating Base Stat Total
+     * @returns {Number} Percent
+     */
     #calcStatMeter(value, total) {
 
         if (total) {
@@ -174,6 +175,7 @@ class WildPokemon extends Pokemon {
 
     }
 
+    /** Sends currently displayed wild pokemon to Catches */
     #sendCatch() {
 
         const dataToSend = {
@@ -186,9 +188,6 @@ class WildPokemon extends Pokemon {
 
         catches.push(new Catch(dataToSend));
         updateCatches();
-
-        // automatically exit combat state
-        updateWildEnc();
 
         // +1 to catches counter
         playerStats.setCatches(playerStats.getCatches() + 1);

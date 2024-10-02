@@ -1,11 +1,13 @@
 import { current, inside, nameReplacements, stPath } from "./Globals.mjs";
+import { genRnd } from "../Utils/GenRnd.mjs";
 import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
 import { fileExists, getJson } from "./File System.mjs";
 import { fetchFile } from "./Fetch File.mjs";
 
 // this will sightly move sprite positions on the overlays
-let offsets = {};
-let firstBoot = true;
+const offsets = await getJson(stPath.poke + "/sprites/offsets");
+// for external asset downloading
+const assRepoUrl = "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets/-/raw/main/play.pokemonshowdown.com/";
 
 export class Pokemon {
 
@@ -14,17 +16,21 @@ export class Pokemon {
     #types = [];
     #pokeData;
     #baseFormPokeData;
-    #form = ""; // Short name.
-    #formNames = []; // These can be used as identifiers for current.pkmnSpecies.get(); e.g., "Wormadam-Trash".
-    #shortFormNames = []; // These only have the form name and are better suited for the selector; e.g., "Trash".
+    #form = ""; // Short name
+    #formNames = []; // These can be used as identifiers for current.pkmnSpecies.get(); e.g., "Wormadam-Trash"
+    #shortFormNames = []; // These only have the form name and are better suited for the selector; e.g., "Trash"
     #isNone = true;
-    #hasLocalImgs = false;
+    #localImgsLoaded = false;
     #pokeImgs = {};
     #iconCoords = [];
 
     /** @protected {HTMLElement} */
     el;
 
+    /**
+     * Main pokemon class
+     * @param {Boolean} enemy - True if this is an enemy pokemon 
+     */
     constructor(enemy) {
 
         this.enemy = enemy; // only relevant for vs trainer pokemons
@@ -52,27 +58,38 @@ export class Pokemon {
         // also set an initial pokemon value
         this.setSpecies("None");
 
-        this.genderButt.addEventListener("click", () => {this.swapGender()});
+        // set toggle click listeners
+        this.genderButt.addEventListener("click", () => {this.#swapGender()});
+        this.shinyButt.addEventListener("click", () => {this.#toggleShiny()});
 
-        this.shinyButt.addEventListener("click", () => {this.swapShiny()});
-
-        // event listener for the form selector.
-        this.formSel.addEventListener("change", () => {this.setForm(this.formSel.value)});
+        // event listener for the form selector
+        this.formSel.addEventListener("change", () => {
+            this.setForm(this.formSel.value, true)
+        });
 
     }
 
+    /**
+     * Returns unique species identifier
+     * @returns {String}
+     */
     getInternalSpecies() {
         if(this.#isNone) return "";
         return this.#pokeData.name;
     }
 
+    /**
+     * Gives human-readable values; for example, it localizes names ("Type: Null"
+     * becomes "Código Cero"), and ignores forms ("Arceus-Dark" becomes "Arceus")
+     * @returns {String}
+     */
     getSpecies() {
-        //This doesn't return unique identifiers, but human-readable values; for example, it localizes names ("Type: Null" becomes "Código Cero"), and ignores forms ("Arceus-Dark" becomes "Arceus").
-        if(this.#isNone){
-            return "";
-        }
+
+        if(this.#isNone) return "";
+
         let baseSpecies = this.#pokeData.baseSpecies;
-        return nameReplacements[baseSpecies] ?? baseSpecies; //We return the replacement if it exists in the dict; otherwise, the first term is undefined and we return the normal name.
+        return nameReplacements[baseSpecies] ?? baseSpecies;
+
     }
     /**
      * Sets a new pokemon based on the name
@@ -86,83 +103,86 @@ export class Pokemon {
 
         this.speciesName = name;
 
-        this.#hasLocalImgs = false;
+        // since this is a new species, we will reload poke images later
+        this.#localImgsLoaded = false;
+
+        // reset the form selector
+        this.formSel.replaceChildren();
 
         // if we select none, just display nothin
         if (!name || name == "None") {
+
             this.#isNone = true;
             this.pokeSel.children[1].innerHTML = "";
-            this.#updateIcon();
-            // We reset and disable the form selector, to prevent some visual bugs in edge cases. 
-            let formEl = document.createElement("option");
-            formEl.textContent = "Base";
-            formEl.value = "Base";
-            this.formSel.replaceChildren(formEl);
+            
+            // add a default "Base" option
+            this.#addFormOption("Base");
+            // switch to this value, and disable the selector
             this.formSel.value = "Base";
             this.formSel.disabled = true;
-            //In case you select a gender-locked Pokémon before and you want to pre-select another Pokémon's gender.
-            //Alternatively, we could disable everything but the Pokémon selector, in order to remain consistent.
-            this.enableGenderButt();
+
+            // set gender as null
+            this.setGender();
+
         } else {
 
             this.#isNone = false;
+
             // this will fetch us all the data we will ever need
-            // We should consider migrating this logic to another class.
             this.#pokeData = current.pkmnSpecies.get(name);
+            // if this poke does not exist, force "None"
             if(!this.#pokeData){
                 console.log(`Something went wrong: "${name}" is not a valid species name.`);
                 this.setSpecies("None");
                 return;
             }
-            this.#baseFormPokeData = current.pkmnSpecies.get(this.#pokeData.baseSpecies); //Only the base species has data about forms.
+            // only the base species has data about forms
+            this.#baseFormPokeData = current.pkmnSpecies.get(this.#pokeData.baseSpecies);
 
-            // set the pokemon name and icon on the selector
-            this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies; //We use the base species name.
-            this.#updateIcon();
+            // set the pokemon name in the selector
+            this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies;
 
-            // sets the form lists.
+            // set the form lists
+            // some pokes have exclusive default forms so we default to those if any
             this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
             this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
             this.#shortFormNames = this.#formNames.map( (speciesName) => {
-                let forme = current.pkmnSpecies.get(speciesName);
-                return forme.forme || forme.baseForme || "Base"; //Either the correct form name or "Base".
+                const forme = current.pkmnSpecies.get(speciesName);
+                return forme.forme || forme.baseForme || "Base";
             });
 
-            // populate the form selector.
-            // We could consider adding an icon for each form, similar to the Finder.
-            this.formSel.replaceChildren(); // First, we remove all the previous child nodes, if any.
+            // populate the form selector
             for(let formName of this.#shortFormNames){
-                let el = document.createElement("option");
-                el.textContent = formName;
-                el.value = formName;
-                this.formSel.appendChild(el);
+                this.#addFormOption(formName)
             }
+            // switch to an initial form value
             this.formSel.value = this.#form;
-            this.formSel.disabled = (this.#formNames.length <= 1); //If there is only one form, we disable the form selector.
+            // if there is only one form, disable the form selector
+            this.formSel.disabled = (this.#formNames.length <= 1);
             
-
             // gender locking
             if (this.#pokeData.genderRatio.M == 1) {
                 this.setGender("M");
-                this.disableGenderButt();
+                this.#disableGenderButt(true);
             } else if (this.#pokeData.genderRatio.F == 1) {
                 this.setGender("F");
-                this.disableGenderButt();
+                this.#disableGenderButt(true);
             } else if (this.#pokeData.genderRatio.M == 0 && this.#pokeData.genderRatio.F == 0) {
                 this.setGender();
-                this.disableGenderButt();
-            } else { // defaulting to male if gender neutral selected
+            } else {
+                this.#disableGenderButt(false);
+                // defaulting to male if gender neutral was previously selected
                 if(!this.getGender()) this.setGender('M');
-                this.enableGenderButt();
             }
 
         }
 
+        this.#updateIcon();
         this.setTypes();
 
     }
     
-    /** Updates this poke pixel art icon and stores its coordinates */
+    /** Updates this poke's icon and stores its coordinates */
     #updateIcon() {
 
         if(this.#isNone){
@@ -178,6 +198,7 @@ export class Pokemon {
             const imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {
                 side: 'p2', gender: this.getGender(), protocol: 'http', domain: stPath.poke
             });
+            // TODO also store opposite side for the few 'p1' icons for battle overlays
             this.#iconCoords = [imgInfo.left, imgInfo.top];
 
         }
@@ -188,13 +209,22 @@ export class Pokemon {
         `;
         
     }
+    /**
+     * Pokemon icon coordinates for the icon spritesheet
+     * @returns {Number[]} [0] for left, [1] for top
+     */
     getIconCoords() {
         return this.#iconCoords;
     }
 
+    /** @returns {String} */
     getNickName() {
         return this.nickInp.value;
     }
+    /**
+     * Sets this pokemon's nickname
+     * @param {String} name
+     */
     setNickName(name) {
 
         if (this.getNickName() == name) return;
@@ -208,98 +238,128 @@ export class Pokemon {
 
     }
 
+    /** @returns {String} */
     getForm() {
         return this.formSel.value;
     }
-    setForm(value) {
-        if(this.#isNone){
-            return false;
-        }
-        //value = formName
-        if(this.#shortFormNames.includes(value)){
-            let form = this.#formNames[this.#shortFormNames.indexOf(value)]; //We get the form's fullname.
-            //We should probably consider making an object with both the short and full name as properties.
+    /** 
+     * Updates the pokemon's form, also updating species data
+     * @param {String} value - Name of form
+     * @param {boolean} force - Force form update
+     */
+    setForm(value, force = false) {
+
+        if(this.#isNone) return;        
+
+        if (!force && this.getForm() == value) return;
+
+        if (this.#shortFormNames.includes(value)) {
+            
+            let form = this.#formNames[this.#shortFormNames.indexOf(value)];
             this.setSpecies(form, true);
-            return true;
+
+        } else { // this can be useful for memory reading shenanigans
+
+            console.log(`"${value}" isn't a valid form name for ${this.getSpecies()}`);
+
         }
-        console.log(`"${value}" isn't a valid form name for ${this.#pokeData.name}.`);
-        return false;
-        //Should we throw an exception if the value doesn't exist or just log it?
+
     }
+
+    /** 
+     * Sets form via index, usually for game memory values
+     * @param {Number} value - Form index 
+     */
     setFormNumber(value) {
 
+        // check if value exists and if it isnt the same as prev
         if (this.formSel.options[value] && this.formSel.value != this.formSel.options[value].value) {
             this.formSel.selectedIndex = value;
-            this.setForm(this.formSel.value);
+            this.setForm(this.formSel.value, true);
         }
         
     }
 
+    /** @returns {String[]} */
     getFormNames() {
-        if(this.#isNone){
-            return ["Base"];
-        }
+        if(this.#isNone) return ["Base"];
         return this.#shortFormNames;
     }
 
+    /**
+     * Adds a new option to the forms select
+     * @param {String} formName - Name of the form to add
+     */
+    #addFormOption(formName) {
+
+        const optionEl = document.createElement("option");
+        optionEl.textContent = formName;
+        optionEl.value = formName;
+        this.formSel.appendChild(optionEl);
+
+    }
+
+    /** @returns {"M" | "F" | null} */
     getGender() {
         return this.#gender;
     }
-    setGender(value) {
-        if (this.#gender != value) {
-            if (value) {
-                this.#gender = value;
-                this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
-            } else {
-                this.#gender = null;
-                this.genderIcon.src = `${stPath.assets}/Gender N.png`;
-            }
-            //Update the icon, for things like Jellicent.
-            this.#updateIcon();
-        }
-    }
-    swapGender() {
-        if (this.getGender() == "M") {
-            this.setGender("F");
+    /** @param {String} value - Can be null for genderless */
+    setGender(value = null) {
+
+        if (this.#gender == value) return;
+
+        if (value) {
+            this.#gender = value;
+            this.genderIcon.src = `${stPath.assets}/Gender ${value}.png`;
         } else {
-            this.setGender("M");
+            this.#gender = null;
+            this.genderIcon.src = `${stPath.assets}/Gender N.png`;
+            this.#disableGenderButt(true);
         }
+
+        // update icon, for things like Jellicent
+        this.#updateIcon();
+
     }
-    disableGenderButt() {
-        this.genderButt.disabled = true;
+    /** Oh if only it were that easy */
+    #swapGender() {
+        const gender = this.getGender() == "M" ? "F" : "M"
+        this.setGender(gender);
     }
-    enableGenderButt() {
-        this.genderButt.disabled = false;
+    /**
+     * Locks or unlocks gender button
+     * @param {boolean} value 
+     */
+    #disableGenderButt(value) {
+        this.genderButt.disabled = value;
     }
 
+    /** @returns {boolean} */
     getShiny() {
         return this.#shiny;
     }
+    /** @param {Boolean} value */
     setShiny(value) {
 
         if (this.#shiny == value) return;
 
         this.#shiny = value;
-        if (value) {
-            this.shinyIcon.style.opacity = 1;
-        } else {
-            this.shinyIcon.style.opacity = .3;
-        }
+        // set lower opacity if non-shiny
+        const opValue = value ? 1 : .3;
+        this.shinyIcon.style.opacity = opValue;
 
     }
-    swapShiny() {
-        if (this.#shiny) {
-            this.setShiny(false);
-        } else {
-            this.setShiny(true);
-        }
+    #toggleShiny() {
+        this.setShiny(!this.getShiny());
     }
 
+    /** @returns {String[]} */
     getTypes() {
-        return this.#types
+        return this.#types;
     }
     /**
-     * @param {String[]} types - Only used for in-battle type changes
+     * Sets this poke's types
+     * @param {String[]} types - This param is only used for in-battle type changes
      */
     setTypes(types = null) {
 
@@ -319,16 +379,14 @@ export class Pokemon {
         
     }
 
+    /**
+     * Generates poke image srcs, downloading images first if necessary
+     * @returns {Object} Img paths and coords
+     */
     async getImgSrc() {
 
-        if (this.#hasLocalImgs) return this.#pokeImgs;
-
-        // only check for this once, fetching the file before this could
-        // result in null if the user has to download it
-        if (firstBoot) {
-            firstBoot = false;
-            offsets = await getJson(stPath.poke + "/sprites/offsets");
-        }
+        // if images have already been loaded, skip it all
+        if (this.#localImgsLoaded) return this.#pokeImgs;
 
         // final data to be sent
         this.#pokeImgs = {
@@ -336,7 +394,8 @@ export class Pokemon {
             gen5Back : "",
             aniFront : "",
             aniBack : "",
-            gen5FrontOffs : [], // position offsets for overlay
+            // position offsets for overlay
+            gen5FrontOffs : [],
             gen5BackOffs : [],
             aniFrontOffs : [],
             aniBackOffs : []
@@ -356,8 +415,8 @@ export class Pokemon {
             // wait for all images to load properly
             const results = await Promise.all(promises);
 
-            // add those paths to our class
-            this.#pokeImgs.gen5Front = results[0]
+            // add those paths to our object
+            this.#pokeImgs.gen5Front = results[0];
             this.#pokeImgs.gen5Back = results[1];
             this.#pokeImgs.aniFront = results[2];
             this.#pokeImgs.aniBack = results[3];
@@ -371,16 +430,16 @@ export class Pokemon {
         }
 
         // if we got them images, no need to run this again
-        this.#hasLocalImgs = true; // goes to false on species change
+        this.#localImgsLoaded = true; // goes to false on species change
 
         return this.#pokeImgs;
 
     }
     /**
      * Finds a requested image depending on current Pokemon data
-     * @param {String} gen Generation of sprites ( `gen?`, `gen?ani`, and `ani`)
-     * @param {String} side If front facing (`p2`) or back facing (`p1`)
-     * @returns {Object} Collection of found images
+     * @param {String} gen - Generation of sprites ( `gen?`, `gen?ani`, and `ani`)
+     * @param {"p1" | "p2"} side - If front facing (`p2`) or back facing (`p1`)
+     * @returns {String} Image path
      */
     async #findImg(gen, side) {
 
@@ -399,7 +458,7 @@ export class Pokemon {
             const cleanUrl = browserUrl.substr(23);
             if (!await fileExists(stPath.assets + "/" + cleanUrl)) {
                 await fetchFile(
-                    "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets/-/raw/main/play.pokemonshowdown.com/" + cleanUrl.substr(8),
+                    assRepoUrl + cleanUrl.substr(8),
                     stPath.assets + "/" + cleanUrl
                 )
             } 
@@ -421,9 +480,10 @@ export class Pokemon {
         this.setShiny(false);
     }
 
+    /** Sets a random species from current dex */
     randomize() {
         let fullSpeciesList = [...current.pkmnSpecies];
-        let randomSpecies = fullSpeciesList[Math.floor(Math.random()*fullSpeciesList.length)];
+        let randomSpecies = fullSpeciesList[genRnd(0, fullSpeciesList.length)];
         this.setSpecies(randomSpecies.name);
     }
 

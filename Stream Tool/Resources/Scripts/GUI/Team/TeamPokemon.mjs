@@ -37,6 +37,10 @@ export class TeamPokemon extends Pokemon {
 
     #inCombat = false;
 
+    /**
+     * Class for team and enemy pokemon
+     * @param {Boolean} enemy - True if this is an enemy pokemon
+     */
     constructor(enemy) {
 
         super(enemy);
@@ -93,6 +97,7 @@ export class TeamPokemon extends Pokemon {
 
     }
 
+    /** @param {String} name - Name of the pokemon */
     setSpecies(name) {
         // if enemy
         if (this.enemy && name && (!this.speciesName || this.speciesName == "None") && current.autoStatus) {
@@ -175,6 +180,7 @@ export class TeamPokemon extends Pokemon {
         this.#expInp.value = value;
     }
 
+    /** @returns {String} */
     getAbility() {
         return this.#abilityInp.value;
     }
@@ -184,6 +190,7 @@ export class TeamPokemon extends Pokemon {
         this.#abilityInp.value = value;
     }
 
+    /** @returns {String} */
     getItem() {
         return this.#itemInp.value;
     }
@@ -387,13 +394,12 @@ export class TeamPokemon extends Pokemon {
         element.classList.add("pokemonDiv");
         // and now for the big fat text
         element.innerHTML = `
-        
+
         <div class="teamPokeMainInfo">
-            <div>
-                <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
-                    <img class="pokeSelectorIcon" alt="">
-                    <div class="pokeSelectorText"></div>
-                </div>
+
+            <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
+                <img class="pokeSelectorIcon" alt="">
+                <div class="pokeSelectorText"></div>
             </div>
 
             <input type="text" class="pokeNickName textInput mousetrap" spellcheck="false" locTitle="pokeNickTitle" locPHolder="pokeNickPHolder">
@@ -401,10 +407,9 @@ export class TeamPokemon extends Pokemon {
             <div class="pokeLvlDiv" locTitle="pokeLvlTitle">
                 <div class="pokeLvlText" locText="pokeLvl"></div>
                 <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
-            </div>          
+            </div>
 
-            <select class="pokeForm" locTitle="pokeFormTitle">
-            </select>
+            <select class="pokeForm" locTitle="pokeFormTitle"></select>
 
             <button class="pokeGenderButton" locTitle="pokeGenderTitle">
                 <img class="pokeGenderIcon" src="Assets/Gender M.png" alt="">
@@ -489,7 +494,7 @@ export class TeamPokemon extends Pokemon {
             </div>
 
             <div class="detailsStats">
-            
+
             </div>
 
         </div>

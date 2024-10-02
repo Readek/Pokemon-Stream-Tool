@@ -58,9 +58,7 @@ export async function updateGUI(data, noNotif) {
 
             catches[i].setSpecies(data.catches[i].internalSpecies);
             catches[i].setNickName(data.catches[i].nickName);
-            if (catches[i].getForm() != data.catches[i].form) {
-                catches[i].setForm(data.catches[i].form);
-            }
+            catches[i].setForm(data.catches[i].form);
             catches[i].setGender(data.catches[i].gender);
             catches[i].setShiny(data.catches[i].shiny);
             
@@ -75,9 +73,7 @@ export async function updateGUI(data, noNotif) {
             pokemons[i].setSpecies(data.playerPokemons[i].internalSpecies);
             pokemons[i].setNickName(data.playerPokemons[i].nickName);
             pokemons[i].setLvl(data.playerPokemons[i].lvl);
-            if (pokemons[i].getForm() != data.playerPokemons[i].form) {
-                pokemons[i].setForm(data.playerPokemons[i].form);
-            }
+            pokemons[i].setForm(data.playerPokemons[i].form);
             pokemons[i].setGender(data.playerPokemons[i].gender);
             pokemons[i].setShiny(data.playerPokemons[i].shiny);
             pokemons[i].setStatus(data.playerPokemons[i].status);
@@ -126,9 +122,7 @@ export async function updateGUI(data, noNotif) {
             trainerPokemons[i].setSpecies(data.trainerPokemons[i].internalSpecies);
             trainerPokemons[i].setNickName(data.trainerPokemons[i].nickName);
             trainerPokemons[i].setLvl(data.trainerPokemons[i].lvl);
-            if (trainerPokemons[i].getForm() != data.trainerPokemons[i].form) {
-                trainerPokemons[i].setForm(data.trainerPokemons[i].form);
-            }
+            trainerPokemons[i].setForm(data.trainerPokemons[i].form);
             trainerPokemons[i].setGender(data.trainerPokemons[i].gender);
             trainerPokemons[i].setShiny(data.trainerPokemons[i].shiny);
             trainerPokemons[i].setStatus(data.trainerPokemons[i].status);

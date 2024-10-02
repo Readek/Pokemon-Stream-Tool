@@ -2,12 +2,18 @@ import { getLocalizedText } from "../../Utils/Language.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { deleteCatch } from "./Catches.mjs";
 
+const catchesDiv = document.getElementById("catchesDiv")
+
 let idCounter = 1; // used to find pokemon on an array
 
 export class Catch extends Pokemon {
 
     #id = 0;
 
+    /**
+     * Catch class for pokemons
+     * @param {Object} data - Data of pokemon
+     */
     constructor(data) {
 
         super();
@@ -39,16 +45,13 @@ export class Catch extends Pokemon {
 
         const element = document.createElement("div");
         element.classList.add("catchDiv");
-        // and now for the big fat text
         element.innerHTML = `
 
             <button class="catchDeleteButt catchButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
-        
-            <div>
-                <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle" title="${getLocalizedText("pokeSelectTitle")}">
+
+            <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle" title="${getLocalizedText("pokeSelectTitle")}">
                 <img class="pokeSelectorIcon" alt="">
                 <div class="pokeSelectorText"></div>
-                </div>
             </div>
 
             <input type="text" class="pokeNickName textInput mousetrap" locTitle="pokeNickTitle" title="${getLocalizedText("pokeNickTitle")}" locPHolder="pokeNickPHolder" placeholder="${getLocalizedText("pokeNickPHolder")}" spellcheck="false">
@@ -67,7 +70,7 @@ export class Catch extends Pokemon {
         `
 
         // add it to the GUI
-        document.getElementById("catchesDiv").appendChild(element);
+        catchesDiv.appendChild(element);
         return element;
 
     }

@@ -1,17 +1,18 @@
-/** these are set when their respective views are visible */
 export const inside = {
-    settings : false,
-    electron : typeof process !== 'undefined' // if in executable or remote gui
+    /** If in executable (true) or remote gui (false) */
+    electron : typeof process !== 'undefined'
 };
 
+/** Local file path of executable or project */
+const realPath = inside.electron ? __dirname : "";
 /** Paths used for all of the Stream Tool */
-const realPath = inside.electron ? __dirname : ""; // local file path if in executable
 export const stPath = {
-    poke: realPath + "/Assets/Pokemon", //The "sprites" part will be completed by @pkmn/img.
+    poke: realPath + "/Assets/Pokemon", // the "sprites" part will be completed by @pkmn/img
     assets: realPath + "/Assets",
     text : realPath + '/Texts',
 };
 
+/** Holds all relevant pokemon data of current generation */
 export const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
 
 /** Current values for stuff */
