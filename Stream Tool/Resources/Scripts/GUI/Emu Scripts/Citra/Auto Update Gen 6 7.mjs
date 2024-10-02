@@ -260,10 +260,11 @@ async function updatePlayerTeam(firstLoop) {
 
             if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
 
-                // we cant check for a nickname in battle, so if the species
-                // doesnt match, we better just leave the nickname empty
+                // theres some data that we dont know where to get in battle
+                // if the species doesnt match non battle data, clear this info
                 if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
                     pokemons[i].setNickName("");
+                    pokemons[i].setShiny(false);
                 }
 
                 pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
