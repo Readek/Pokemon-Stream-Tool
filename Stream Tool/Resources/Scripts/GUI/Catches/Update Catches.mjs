@@ -38,6 +38,8 @@ export async function updateCatches() {
     // add the catches info
     for (let i = 0; i < catches.length; i++) {
 
+        if (!catches[i].getSpecies()) continue;
+
         // add it to the main json
         dataJson.catches.push({
             internalSpecies : catches[i].getInternalSpecies(),
@@ -57,7 +59,7 @@ export async function updateCatches() {
 
     // once pokemon images are loaded, add them in
     const pokeImgs = await Promise.all(promises);
-    for (let i = 0; i < catches.length; i++) {
+    for (let i = 0; i < pokeImgs.length; i++) {
         dataJson.catches[i].img = pokeImgs[i];
     }
 
