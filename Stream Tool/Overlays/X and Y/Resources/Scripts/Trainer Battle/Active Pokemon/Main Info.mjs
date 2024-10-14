@@ -1,4 +1,4 @@
-import { getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
 import { current } from "../../Globals.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
@@ -270,7 +270,8 @@ export class ActiveMainInfo {
 
         }
 
-        this.#abilityText.innerHTML = ability;
+        this.#abilityText.innerHTML = getLocalizedPokeText(ability, "Ability", current.generation);
+        this.#abilityText.setAttribute("locAbility", this.#ability);
 
     }
 

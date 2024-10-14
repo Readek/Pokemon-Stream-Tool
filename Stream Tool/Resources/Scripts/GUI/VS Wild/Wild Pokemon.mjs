@@ -1,8 +1,8 @@
-import { getLocalizedText } from "../../Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs";
 import { Catch } from "../Catches/Catch.mjs";
 import { catches } from "../Catches/Catches.mjs";
 import { updateCatches } from "../Catches/Update Catches.mjs";
-import { stPath } from "../Globals.mjs";
+import { current, stPath } from "../Globals.mjs";
 import { displayNotif } from "../Notifications.mjs";
 import { playerStats } from "../Player/Stats.mjs";
 import { updatePlayer } from "../Player/Update Player.mjs";
@@ -141,17 +141,20 @@ class WildPokemon extends Pokemon {
         this.#genderRatioTextF.innerHTML = pokeData.genderRatio.F * 100 + "%";
 
         // abilities
-        this.#abilityText0.innerHTML = pokeData.abilities[0];
+        this.#abilityText0.innerHTML = getLocalizedPokeText(pokeData.abilities[0], "Ability", current.generation);
+        this.#abilityText0.setAttribute("locAbility", pokeData.abilities[0]);
 
         if (pokeData.abilities[1]) {
-            this.#abilityText1.innerHTML = pokeData.abilities[1];
+            this.#abilityText1.innerHTML = getLocalizedPokeText(pokeData.abilities[1], "Ability", current.generation);
+            this.#abilityText1.setAttribute("locAbility", pokeData.abilities[1]);
             this.#abilityText1.style.display = "flex";
         } else {
             this.#abilityText1.style.display = "none";
         }
 
         if (pokeData.abilities.H) {
-            this.#abilityTextH.innerHTML = pokeData.abilities.H;
+            this.#abilityTextH.innerHTML = getLocalizedPokeText(pokeData.abilities.H, "Ability", current.generation)
+            this.#abilityTextH.setAttribute("locAbility", pokeData.abilities.H);
             this.#abilityTextH.style.display = "flex";
         } else {
             this.#abilityTextH.style.display = "none";

@@ -22,7 +22,7 @@ export async function updateGUI(data, noNotif) {
     if (data.type == "Settings") {
 
         if (current.lang != data.lang) {
-            settings.langSelect.setLanguage(data.lang);
+            settings.langSelect.setLang(data.lang);
         }
         if (current.generation != data.gen) {
             settings.genSelect.setGen(data.gen);

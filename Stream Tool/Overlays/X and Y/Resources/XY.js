@@ -1,4 +1,4 @@
-import { setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
+import { resetPokeLocTexts, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
 import { current } from "./Scripts/Globals.mjs";
 import { playerInfo } from "./Scripts/Player Info.mjs";
@@ -68,8 +68,6 @@ async function updateData(data) {
             }
 
         }
-        
-        
 
     } else if (data.type == "Player") {
 
@@ -83,11 +81,15 @@ async function updateData(data) {
 
         battlePokemons.update(data.trainerPokemons);
 
-    } else if (data.type == "Config") {
+    } else if (data.type == "Config") {        
 
         if (current.lang != data.lang) {
             current.lang = data.lang;
-            await setLanguage(data.lang);
+            current.generation = data.gen;
+            await setLanguage(data.lang, data.gen);
+        } else if (current.generation != data.gen) {            
+            current.generation = data.gen;
+            resetPokeLocTexts(data.gen);
         }
 
     }

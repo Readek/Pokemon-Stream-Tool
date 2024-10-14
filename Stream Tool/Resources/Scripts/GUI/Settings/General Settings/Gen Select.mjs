@@ -1,3 +1,4 @@
+import { resetPokeLocTexts } from "../../../Utils/Language.mjs";
 import { pokeFinder } from "../../Finder/Pokemon Finder.mjs";
 import { current, dexGens } from "../../Globals.mjs";
 import { clearAllPokemon } from "../../Team/TeamPokemons.mjs";
@@ -53,6 +54,9 @@ export class SettingGenSelect extends Setting {
 
         // updates the game select's entries
         settings.gameSelect.addGames(value);
+
+        // some localizations change between gens
+        resetPokeLocTexts(value);
 
     }
 

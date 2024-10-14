@@ -18,7 +18,7 @@ export class SettingLangSelect extends Setting {
 
         langSelectSelect.addEventListener("change", () => {
 
-            this.setLanguage(langSelectSelect.value);
+            this.setLang(langSelectSelect.value);
 
             // send the data to remote guis
             settings.update();
@@ -31,14 +31,14 @@ export class SettingLangSelect extends Setting {
      * Changes all texts to desired language
      * @param {String} value - Language code
      */
-    setLanguage(value) {
+    setLang(value) {
 
         current.lang = value || "EN";
 
         // in case function wasn't triggered by the change event
         langSelectSelect.value = current.lang;
 
-        setLanguage(langSelectSelect.value);
+        setLanguage(langSelectSelect.value, current.generation);
 
     }
 

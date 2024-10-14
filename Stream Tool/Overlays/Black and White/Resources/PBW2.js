@@ -319,7 +319,11 @@ async function updateData(data) {
 
         if (current.lang != data.lang) {
             current.lang = data.lang;
-            await setLanguage(data.lang);
+            current.generation = data.gen;
+            await setLanguage(data.lang, data.gen);
+        } else if (current.generation != data.gen) {
+            current.generation = data.gen;
+            resetPokeLocTexts(data.gen);
         }
 
     }

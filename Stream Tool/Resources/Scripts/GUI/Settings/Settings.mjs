@@ -50,7 +50,8 @@ class Settings {
             const configJson = {
                 id : "gameData",
                 type : "Config",
-                lang : current.lang
+                lang : current.lang,
+                gen : current.generation
             }
             ipc.updateStoredData("config", JSON.stringify(configJson, null, 2));
             ipc.sendData("config");

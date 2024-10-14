@@ -1,4 +1,4 @@
-import { getLocalizedText } from "../../Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs";
 import { current } from "../Globals.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { typeToColor } from "../Type to Color.mjs";
@@ -22,6 +22,7 @@ export class TeamPokemon extends Pokemon {
 
     #expInp;
 
+    #ability = "";
     #abilityInp;
 
     #itemInp;
@@ -182,12 +183,15 @@ export class TeamPokemon extends Pokemon {
 
     /** @returns {String} */
     getAbility() {
-        return this.#abilityInp.value;
+        return this.#ability;
     }
     /** @param {String} value - Ability name */
     setAbility(value) {
         if (this.getAbility() == value) return;
-        this.#abilityInp.value = value;
+        this.#ability = value;
+        this.#abilityInp.value = getLocalizedPokeText(value, "Ability", current.generation);
+        // this is so it reloads when swapping lang
+        this.#abilityInp.setAttribute("locAbility", value);
     }
 
     /** @returns {String} */
