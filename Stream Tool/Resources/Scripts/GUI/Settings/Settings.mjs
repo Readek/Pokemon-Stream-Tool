@@ -1,4 +1,5 @@
 import { current, inside } from "../Globals.mjs";
+import { restoreWindowDefaults } from './Window Settings/Restore Window Defaults.mjs';
 import { SettingGameSelect } from "./General Settings/Game Select.mjs";
 import { SettingGenSelect } from "./General Settings/Gen Select.mjs";
 import { SettingLangSelect } from "./General Settings/Language Select.mjs";

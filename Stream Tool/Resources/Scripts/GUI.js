@@ -1,6 +1,4 @@
-// so it loads the listeners
-import './GUI/Top Bar.mjs';
-import { restoreWindowDefaults } from './GUI/Settings/Window Settings/Restore Window Defaults.mjs';
+import './GUI/Top Bar.mjs'; // so it loads the listeners
 import { loadKeybinds } from './GUI/Keybinds.mjs';
 import { inside, stPath } from './GUI/Globals.mjs';
 import { pokemons } from './GUI/Team/TeamPokemons.mjs'

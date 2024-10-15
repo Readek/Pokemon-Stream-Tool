@@ -1,4 +1,5 @@
 import { locAbilities } from "./Loc Pokemon Strings/Localized Abilites.mjs";
+import { locItems } from "./Loc Pokemon Strings/Localized Items.mjs";
 
 /** Localized strings from current language */
 let lang;
@@ -77,7 +78,7 @@ export function getLocalizedPokeText(text, type, gen) {
     if (type == "Ability") {
         locsOfType = locAbilities;
     } else if (type == "Item") {
-        
+        locsOfType = locItems;
     } else if (type == "Move") {
 
     } else {

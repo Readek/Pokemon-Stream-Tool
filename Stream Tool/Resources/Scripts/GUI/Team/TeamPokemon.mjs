@@ -25,6 +25,7 @@ export class TeamPokemon extends Pokemon {
     #ability = "";
     #abilityInp;
 
+    #item = "";
     #itemInp;
 
     #move = [{},{},{},{}];
@@ -196,12 +197,14 @@ export class TeamPokemon extends Pokemon {
 
     /** @returns {String} */
     getItem() {
-        return this.#itemInp.value;
+        return this.#item;
     }
     /** @param {String} value - Ability name */
     setItem(value) {
         if (this.getItem() == value) return;
-        this.#itemInp.value = value;
+        this.#item = value
+        this.#itemInp.value = getLocalizedPokeText(value, "Item", current.generation);
+        this.#itemInp.setAttribute("locItem", value);
     }
 
     /** @typedef {[{name: String, type: String, pp: Number}]} Moves */

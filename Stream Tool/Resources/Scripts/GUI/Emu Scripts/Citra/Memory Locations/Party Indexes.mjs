@@ -1,6 +1,5 @@
 import { current } from "../../../Globals.mjs";
 import { citra } from "../Citra.mjs";
-import { decryptData } from "../Crypts.mjs";
 
 const indexSize = 4;
 

@@ -296,7 +296,8 @@ export class ActiveMainInfo {
 
         }
 
-        this.#itemText.innerHTML = item;
+        this.#itemText.innerHTML = getLocalizedPokeText(item, "Item", current.generation);
+        this.#itemText.setAttribute("locItem", this.#item);
 
         // hide pipe if no item
         if (!item) {

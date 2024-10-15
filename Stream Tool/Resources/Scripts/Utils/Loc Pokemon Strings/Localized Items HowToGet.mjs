@@ -7,16 +7,19 @@ import { stPath } from "../../GUI/Globals.mjs";
 
 // this raw string is an example
 // you will find a full list on bulbapedia (viewing source)
-// https://bulbapedia.bulbagarden.net/wiki/List_of_Abilities_in_other_languages
+// https://bulbapedia.bulbagarden.net/wiki/List_of_items_in_other_languages
 const rawString = `
-{{Langlist|ability|1|Stench|あくしゅう|Akushū|Puanteur|Duftnote|Tanfo|Hedor|악취|Akchwi|惡臭 / 恶臭|Èchòu / Okchau|color=poison}}
-{{Langlist|ability|2|Drizzle|あめふらし|Amefurashi|Crachin|Niesel|Piovischio|Llovizna|잔비|Janbi|降雨|Jiàngyǔ / Gongyúh|color=water}}
-{{Langlist|ability|3|Speed Boost|かそく|Kasoku|Turbo|Temposchub|Acceleratore|Impulso|가속|Gasok|加速|Jiāsù / Gāchūk|color=speed}}
-{{Langlist|ability|4|Battle Armor|カブトアーマー|Kabuto Āmā|Armurbaston|Kampfpanzer|Lottascudo|Armadura Batalla{{Armad. Bat. (Generation III - V)}}|전투 무장|Jeontu Mujang|戰鬥盔甲 / 战斗盔甲|Zhàndòu Kuījiǎ / Jindau Kwāigaap|color=rock}}
+{{langlist|item||Berry|きのみ|Kino Mi|Baie|Beere|Bacca|Baya|나무열매|Namu Yeolmae|bagsprite=None|link=Berry (item)}}
+{{langlist|item||Gold Berry|おうごんのみ|Ōgon no Mi|Baie Doree|Goldbeere|Bacca Oro|Baya Dorada|황금 열매|Hwanggeum Yeolmae|bagsprite=None}}
+{{langlist|item||PSNCureBerry|どくけしのみ|Dokukeshi no Mi|Baie Antidot|Ggngiftbeere|Baccantivel.|Bayantídoto|해독열매|Haedok Yeolmae|bagsprite=None}}
+{{langlist|item||PRZCureBerry|まひなおしのみ|Mahinaoshi no Mi|Baie AntiPAR|AntiPARBeere|Baccantipar.|Antiparabaya|마비치료열매|Mabi Chiryo Yeolmae|bagsprite=None}}
 `
 
 const rawLines = rawString.split(`\n`);
-// "{{tt|*|", "{{tt|--|" and "{{tt|76|" were manually changed to "{{" or removed
+// Only berries and held items were considered
+// Gen II Berry comments were manually removed
+// "{{tt|*|" instances were manually changed to "{{"
+// "{{tt|" instances were manually removed
 // TODO add regex for this... and TODO learn regex
 
 const langOrder = ["EN", "JA", null, "FR", "DE", "ITA", "ES"];
