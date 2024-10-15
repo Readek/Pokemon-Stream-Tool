@@ -1,6 +1,7 @@
 /** @typedef {[{name: String, type: String, pp: Number}]} Moves */
 
-import { getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
+import { current } from "../../Globals.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
 
 export class ActiveMoves {
@@ -128,7 +129,9 @@ export class ActiveMoves {
                 // if no move
                 if (moves[i].name == "") moves[i].name = "-";
                 
-                this.#moveEl[i].name.innerHTML = !this.#player && !reveal ? "???" : moves[i].name;
+                const textToDisplay = !this.#player && !reveal ? "???" : moves[i].name;
+                this.#moveEl[i].name.innerHTML = getLocalizedPokeText(textToDisplay, "Move", current.generation);
+                this.#moveEl[i].name.setAttribute("locMove", textToDisplay);
 
                 // for enemies, if the move wasn't revealed, just display Normal colors
                 this.#move[i].type = moves[i].type;

@@ -21,12 +21,13 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Settings") {
 
-        if (current.lang != data.lang) {
-            settings.langSelect.setLang(data.lang);
-        }
         if (current.generation != data.gen) {
             settings.genSelect.setGen(data.gen);
         }
+        if (current.lang != data.lang) {
+            settings.langSelect.setLang(data.lang);
+        }
+        
         if (current.game != data.game) {
             settings.gameSelect.setGame(data.game);
         }

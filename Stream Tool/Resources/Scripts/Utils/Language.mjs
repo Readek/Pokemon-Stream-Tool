@@ -1,5 +1,6 @@
 import { locAbilities } from "./Loc Pokemon Strings/Localized Abilites.mjs";
 import { locItems } from "./Loc Pokemon Strings/Localized Items.mjs";
+import { locMoves } from "./Loc Pokemon Strings/Localized Moves.mjs";
 
 /** Localized strings from current language */
 let lang;
@@ -80,7 +81,7 @@ export function getLocalizedPokeText(text, type, gen) {
     } else if (type == "Item") {
         locsOfType = locItems;
     } else if (type == "Move") {
-
+        locsOfType = locMoves;
     } else {
         
     }
@@ -126,7 +127,7 @@ function handleOldLoc(text, gen) {
     const firstGen = romanToInt(generationNums[0]);
     const lastGen = romanToInt(generationNums[1]);
 
-    if (gen <= lastGen || gen == firstGen) {
+    if (gen <= lastGen || gen <= firstGen) {
         return oldName;
     }
 
@@ -184,7 +185,7 @@ function resetTexts() {
  */
 export function resetPokeLocTexts(gen) {
     // localized poke strings
-    const pokeKeys = ["Ability", "Items", "Moves", "Pokemon"];
+    const pokeKeys = ["Ability", "Item", "Move", "Pokemon"];
     pokeKeys.forEach(key => {
         const els = document.querySelectorAll(`*[loc${key}]`);
         for (const el of els) {

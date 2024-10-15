@@ -73,7 +73,7 @@ async function init() {
         const storedData = await getJson(`${stPath.text}/GUI State`);
 
         if (storedData) {
-            updateGUI(storedData.settings, true)
+            await updateGUI(storedData.settings, true)
             updateGUI(storedData.catches, true);
             updateGUI(storedData.team, true);
             updateGUI(storedData.player, true);
@@ -81,7 +81,7 @@ async function init() {
             // if we got no data to restore, set default values
             catches.push(new Catch());
             settings.genSelect.setGen(5); // best gen amarite
-            settings.langSelect.setLanguage("EN");
+            settings.langSelect.setLanguage("EN", 5);
             pokeFinder.loadCharacters();
         }
 
