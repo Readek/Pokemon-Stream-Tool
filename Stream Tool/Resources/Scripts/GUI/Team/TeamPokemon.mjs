@@ -223,7 +223,8 @@ export class TeamPokemon extends Pokemon {
             if (moves[i].name != this.#move[i].name) {
 
                 this.#move[i].name = moves[i].name;
-                this.#moveInp[i].name.value = moves[i].name;
+                this.#moveInp[i].name.value = getLocalizedPokeText(moves[i].name, "Move", current.generation);
+                this.#moveInp[i].name.setAttribute("locMove", moves[i].name);
                 this.#move[i].type = moves[i].type;
                 this.#moveInp[i].parent.style.backgroundColor = `${typeToColor(moves[i].type)}80`;
 
