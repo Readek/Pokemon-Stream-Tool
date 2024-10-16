@@ -1,7 +1,7 @@
 import { current } from "./Scripts/Globals.mjs";
 import { genRnd } from "../../../Resources/Scripts/Utils/GenRnd.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
-import { getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
 
 let startup = true;
 
@@ -173,7 +173,8 @@ function whosThatPokemon() {
         ${offset[0]}px, ${offset[1]}px)`;
 
     // nickname
-    whoThatPokeNick.innerHTML = chosenPoke.getNickname();
+    whoThatPokeNick.innerHTML = getLocalizedPokeText(chosenPoke.getNickname(), "Pokemon", current.generation);
+    whoThatPokeNick.setAttribute("locPokemon", chosenPoke.getNickname());
 
     // species
     whoThatPokeSpecies.innerHTML = chosenPoke.getSpecies();

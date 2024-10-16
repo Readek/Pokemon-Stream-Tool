@@ -1,3 +1,6 @@
+import { getLocalizedPokeText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
+import { current } from "../Globals.mjs";
+
 const playerActiveDiv = document.getElementById("battleStandbyBarPlayer");
 const enemyActiveDiv = document.getElementById("battleStandbyBarEnemy");
 
@@ -143,8 +146,10 @@ export class StandbyPokemon {
         if (!this.#player && !this.#reveal) {
             // enemies yet to be revealed will hide their names
             this.#nameText.innerHTML = "???";
+            this.#nameText.setAttribute("locPokemon", "???");
         } else {
-            this.#nameText.innerHTML = name;
+            this.#nameText.innerHTML = getLocalizedPokeText(name, "Pokemon", current.generation);
+            this.#nameText.setAttribute("locPokemon", name);
         }
 
     }

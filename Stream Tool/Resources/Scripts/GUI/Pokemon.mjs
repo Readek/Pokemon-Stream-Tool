@@ -1,8 +1,9 @@
-import { current, inside, nameReplacements, stPath } from "./Globals.mjs";
+import { current, inside, stPath } from "./Globals.mjs";
 import { genRnd } from "../Utils/GenRnd.mjs";
 import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
 import { fileExists, getJson } from "./File System.mjs";
 import { fetchFile } from "./Fetch File.mjs";
+import { getLocalizedPokeText } from "../Utils/Language.mjs";
 
 // this will sightly move sprite positions on the overlays
 const offsets = await getJson(stPath.poke + "/sprites/offsets");
@@ -79,16 +80,14 @@ export class Pokemon {
     }
 
     /**
-     * Gives human-readable values; for example, it localizes names ("Type: Null"
-     * becomes "Código Cero"), and ignores forms ("Arceus-Dark" becomes "Arceus")
+     * Gives human-readable values
      * @returns {String}
      */
     getSpecies() {
 
         if(this.#isNone) return "";
 
-        let baseSpecies = this.#pokeData.baseSpecies;
-        return nameReplacements[baseSpecies] ?? baseSpecies;
+        return this.#pokeData.baseSpecies;
 
     }
     /**
@@ -114,6 +113,7 @@ export class Pokemon {
 
             this.#isNone = true;
             this.pokeSel.children[1].innerHTML = "";
+            this.pokeSel.children[1].setAttribute("locPokemon", "");
             
             // add a default "Base" option
             this.#addFormOption("Base");
@@ -140,7 +140,8 @@ export class Pokemon {
             this.#baseFormPokeData = current.pkmnSpecies.get(this.#pokeData.baseSpecies);
 
             // set the pokemon name in the selector
-            this.pokeSel.children[1].innerHTML = nameReplacements[this.#pokeData.baseSpecies] ?? this.#pokeData.baseSpecies;
+            this.pokeSel.children[1].innerHTML = getLocalizedPokeText(this.#pokeData.baseSpecies, "Pokemon", current.generation);
+            this.pokeSel.children[1].setAttribute("locPokemon", this.#pokeData.baseSpecies);
 
             // set the form lists
             // some pokes have exclusive default forms so we default to those if any

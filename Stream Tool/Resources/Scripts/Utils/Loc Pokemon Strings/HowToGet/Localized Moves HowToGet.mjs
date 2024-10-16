@@ -1,7 +1,6 @@
 import { generateLocJson } from "./Generate Loc Json.mjs";
 
 // below you will find the way the Loc files were generated
-// you can try and uncomment in order to generate new files
 // leaving it here in case files get outdated
 
 // this raw string is an example

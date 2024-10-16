@@ -1,5 +1,5 @@
 import { typeToColor } from "../Type to Color.mjs";
-import { getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
 import { current } from "../Globals.mjs";
 
 export class Pokemon {
@@ -50,7 +50,8 @@ export class Pokemon {
     /** @param {String} species */
     setSpecies(species) {
         this.#species = species;
-        this.speciesEl.innerHTML = species;
+        this.speciesEl.innerHTML = getLocalizedPokeText(species, "Pokemon", current.generation);
+        this.speciesEl.setAttribute("locPokemon", species);
     }
     getSpecies() {
         return this.#species;

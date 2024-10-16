@@ -1,6 +1,7 @@
 import { locAbilities } from "./Loc Pokemon Strings/Localized Abilites.mjs";
 import { locItems } from "./Loc Pokemon Strings/Localized Items.mjs";
 import { locMoves } from "./Loc Pokemon Strings/Localized Moves.mjs";
+import { locPokemon } from "./Loc Pokemon Strings/Localized Pokemon.mjs";
 
 /** Localized strings from current language */
 let lang;
@@ -72,7 +73,7 @@ export function getLocalizedText(key, dyns = []) {
 export function getLocalizedPokeText(text, type, gen) {
 
     // if we're in english just dont bother lmao
-    // if text is hidden in battle overlays, skip
+    // if text is hidden in battle overlays, skip    
     if (langCode == "EN" || !text || text == "???") return text;
 
     let locsOfType;
@@ -83,22 +84,36 @@ export function getLocalizedPokeText(text, type, gen) {
     } else if (type == "Move") {
         locsOfType = locMoves;
     } else {
-        
+        locsOfType = locPokemon;
+        // as far as i know, these 2 are the only ones with a name missmatch within the apis
+        if (text == "Nidoran-F") text = "Nidoran♀";
+        if (text == "Nidoran-M") text = "Nidoran♂";
     }
 
     // find a string that matches in english
     for (let i = 0; i < locsOfType.length; i++) {
 
-        if (text == locsOfType[i].EN.name) {
+        if (type == "Pokemon") {
 
-            // see if we got an old string from an old gen
-            if (locsOfType[i][langCode].old) {
-                const oldString = handleOldLoc(locsOfType[i][langCode].old, gen);
-                if (oldString) return oldString;
+            if (text == locsOfType[i].EN) {
+                if (!locsOfType[i][langCode]) break;                
+                return locsOfType[i][langCode];
             }
 
-            // if no old, use localization from last released gen
-            return locsOfType[i][langCode].name;
+        } else {
+
+            if (text == locsOfType[i].EN.name) {
+
+                // see if we got an old string from an old gen
+                if (locsOfType[i][langCode].old) {
+                    const oldString = handleOldLoc(locsOfType[i][langCode].old, gen);
+                    if (oldString) return oldString;
+                }
+    
+                // if no old, use localization from last released gen
+                return locsOfType[i][langCode].name;
+    
+            }
 
         }
 

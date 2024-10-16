@@ -30,27 +30,3 @@ export const current = {
     autoStatus : false,
     autoUpdated : false
 }
-
-// some substitutions for presentation sake of translation
-// TODO do this on lang scripts
-export const nameReplacements = {
-    "Nidoran-F": "Nidoran♀",
-    "Nidoran-M": "Nidoran♂",
-    "Type: Null": "Código Cero",
-    "Great Tusk": "Colmilargo",
-    "Scream Tail": "Colagrito",
-    "Brute Bonnet": "Furioseta",
-    "Flutter Mane": "Melenaleteo",
-    "Slither Wing": "Reptalada",
-    "Sandy Shocks": "Pelarena",
-    "Iron Treads": "Ferrodada",
-    "Iron Bundle": "Ferrosaco",
-    "Iron Hands": "Ferropalmas",
-    "Iron Jugulis": "Ferrocuello",
-    "Iron Moth": "Ferropolilla",
-    "Iron Thorns": "Ferropúas",
-    "Roaring Moon": "Bramaluna",
-    "Iron Valiant": "Ferropaladín",
-    "Walking Wake": "Ondulagua",
-    "Iron Leaves": "Ferroverdor",
-}

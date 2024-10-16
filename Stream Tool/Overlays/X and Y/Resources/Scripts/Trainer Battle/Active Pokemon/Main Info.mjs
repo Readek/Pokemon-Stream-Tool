@@ -245,7 +245,8 @@ export class ActiveMainInfo {
         if (name == this.#name) return;
 
         this.#name = name;
-        this.#nameText.innerHTML = name;
+        this.#nameText.innerHTML = getLocalizedPokeText(name, "Pokemon", current.generation);
+        this.#nameText.setAttribute("locPokemon", name);
 
     }
 

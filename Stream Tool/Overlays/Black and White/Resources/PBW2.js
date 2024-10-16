@@ -1,4 +1,4 @@
-import { getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
 import { current } from "./Scripts/Globals.mjs";
 import { typeToColor } from "./Scripts/Type to Color.mjs";
@@ -40,7 +40,8 @@ class Pokemon {
     
     setSpecies(species) {
         this.#species = species;
-        this.speciesEl.innerHTML = species;
+        this.speciesEl.innerHTML = getLocalizedPokeText(species, "Pokemon", current.generation);
+        this.speciesEl.setAttribute("locPokemon", species);
     }
     getSpecies() {
         return this.#species;

@@ -1,4 +1,5 @@
-import { current, nameReplacements, stPath } from '../Globals.mjs';
+import { getLocalizedPokeText } from '../../Utils/Language.mjs';
+import { current, stPath } from '../Globals.mjs';
 import { Pokemon } from '../Pokemon.mjs';
 import { FinderSelect } from './Finder Select.mjs';
 
@@ -14,7 +15,7 @@ class PokeFinder extends FinderSelect {
     }
 
     /** Fills the Pokemon Finder list with current pokedex data */
-    async loadCharacters() {
+    async loadCharacters() {        
 
         this._clearList();
 
@@ -48,7 +49,8 @@ class PokeFinder extends FinderSelect {
 
             // pokemon name
             const spanName = document.createElement('span');
-            spanName.innerHTML = nameReplacements[pokemon.name] ?? pokemon.name; // replace the name if it exists in the dict
+            spanName.innerHTML = getLocalizedPokeText(pokemon.name, "Pokemon", current.generation);
+            spanName.setAttribute("locPokemon", pokemon.name);
             spanName.className = "pfName";
 
             // add them to the div we created before

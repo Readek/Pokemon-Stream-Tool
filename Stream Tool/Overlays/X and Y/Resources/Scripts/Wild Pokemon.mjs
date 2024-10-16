@@ -1,5 +1,6 @@
 import { pokemons } from "./Player Team/Pokemons.mjs";
-import { getLocalizedText } from "../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../../../Resources/Scripts/Utils/Language.mjs";
+import { current } from "./Globals.mjs";
 
 const playerInfoDiv = document.getElementById("playerInfo");
 const wildDiv = document.getElementById("wildEncounterDiv");
@@ -90,11 +91,13 @@ class WildPokemon {
     setAbilities(abilities) {
 
         // we assume a pokemon always has at least 1 ability
-        ability0Div.innerHTML = abilities[0];
+        ability0Div.innerHTML = getLocalizedPokeText(abilities[0], "Ability", current.generation);
+        ability0Div.setAttribute("locAbility", abilities[0]);
 
         // second ability
         if (abilities[1]) {
-            ability1Div.innerHTML = abilities[1];
+            ability1Div.innerHTML = getLocalizedPokeText(abilities[1], "Ability", current.generation);
+            ability1Div.setAttribute("locAbility", abilities[1]);
             ability1Div.style.display = "flex";
         } else { // hide if non existant
             ability1Div.style.display = "none";
@@ -102,7 +105,8 @@ class WildPokemon {
 
         // hidden ability
         if (abilities.H) {
-            abilityHiddenDiv.innerHTML = abilities.H;
+            abilityHiddenDiv.innerHTML = getLocalizedPokeText(abilities.H, "Ability", current.generation);
+            abilityHiddenDiv.setAttribute("locAbility", abilities.H);
             abilityHiddenDiv.style.display = "flex";
         } else {
             abilityHiddenDiv.style.display = "none";
@@ -195,21 +199,6 @@ class WildPokemon {
             isPoke = false;
 
         }
-
-        // check if the in combat state changed
-        /* if (data.pokemon) {
-            
-            // if in combat, turn everyone so they get to see this glorious fight
-            for (let i = 0; i < 6; i++) {
-
-                if (pokemons.pokemon(i).getSpecies()) {
-                    pokemons.pokemon(i).turnSprite(data.inCombat);
-                    pokemons.pokemon(i).displayHPBar();
-                }
-                
-            }
-
-        } */
 
     }
 
