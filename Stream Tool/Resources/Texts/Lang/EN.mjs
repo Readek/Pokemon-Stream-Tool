@@ -161,6 +161,10 @@ export const lang = {
     languageText : "Language",
     languageEN : "English",
     languageES : "Español (Spanish)",
+    languageFR : "FR",
+    languageDE : "DE",
+    languageITA : "ITA",
+    languageJA : "JA",
 
     genTitle : "Changes the current generation pokedex data",
     genSelect : "Generation",
