@@ -400,7 +400,7 @@ export class ActiveMainInfo {
         } else {
             // enemies only have perecents
             let percentText;
-            if (percent < 1) {
+            if (percent < 10) {
                 // if below 1%, show decimals for extra drama
                 percentText = percent.toFixed(1);
             } else {
@@ -516,7 +516,11 @@ export class ActiveMainInfo {
             // if pokemon is mega evolving, wait for that img update
             if (megaEvolving) {
                 const megatime = this.#player ? current.megaTime : 0;
-                setTimeout(() => {this.setImg(data.img)}, 2700 + (megatime)); 
+                setTimeout(() => {
+                    this.setImg(data.img);
+                    this.setAbility(data.ability, true);
+                    this.setItem(data.item, true);
+                }, 2700 + (megatime)); 
                 if (this.#player) current.megaTime = 0;
             } else {
                 this.setImg(data.img);
