@@ -2,7 +2,7 @@ import { getLocalizedText } from "../Utils/Language.mjs";
 import { setAutoState } from "./Auto Update.mjs";
 import { Catch } from "./Catches/Catch.mjs";
 import { catches } from "./Catches/Catches.mjs";
-import { current } from "./Globals.mjs";
+import { current, inside } from "./Globals.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
@@ -27,13 +27,14 @@ export async function updateGUI(data, noNotif) {
         if (current.lang != data.lang) {
             settings.langSelect.setLang(data.lang);
         }
-        
         if (current.game != data.game) {
             settings.gameSelect.setGame(data.game);
         }
         if (current.version != data.version) {
             settings.versionSelect.setVersion(data.version);
         }
+
+        if (inside.electron) settings.update();
 
     }
 

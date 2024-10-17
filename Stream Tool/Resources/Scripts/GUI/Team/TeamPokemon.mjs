@@ -1,5 +1,5 @@
 import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs";
-import { current } from "../Globals.mjs";
+import { current, inside } from "../Globals.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { typeToColor } from "../Type to Color.mjs";
 import { updateTrainer } from "../VS Trainer/Update Trainer.mjs";
@@ -685,7 +685,7 @@ export class TeamPokemon extends Pokemon {
                 diff = true;
             }
         }
-        if (!diff) return; // save reveals as last time? skip
+        if (!diff) return; // same reveals as last time? skip
 
         // now, for each possible reveal
         for (let i = 0; i < reveals.length; i++) {
@@ -706,6 +706,9 @@ export class TeamPokemon extends Pokemon {
                 this.hideStatEl.style.display = "none";
             }
         }
+
+        // since there was a reveal, update enemies
+        if (inside.electron) updateTrainer();
 
     }
 
