@@ -707,6 +707,8 @@ export class TeamPokemon extends Pokemon {
             }
         }
 
+        this.reveals = reveals;
+
         // since there was a reveal, update enemies
         if (inside.electron) updateTrainer();
 
