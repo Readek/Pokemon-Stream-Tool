@@ -1,7 +1,7 @@
-import { locAbilities } from "./Loc Pokemon Strings/Localized Abilites.mjs";
-import { locItems } from "./Loc Pokemon Strings/Localized Items.mjs";
-import { locMoves } from "./Loc Pokemon Strings/Localized Moves.mjs";
-import { locPokemon } from "./Loc Pokemon Strings/Localized Pokemon.mjs";
+import { locAbilities, locAbilitiesIndexes } from "./Loc Pokemon Strings/Localized Abilites.mjs";
+import { locItems, locItemsIndexes } from "./Loc Pokemon Strings/Localized Items.mjs";
+import { locMoves, locMovesIndexes } from "./Loc Pokemon Strings/Localized Moves.mjs";
+import { locPokemon, locPokemonIndexes } from "./Loc Pokemon Strings/Localized Pokemon.mjs";
 
 /** Localized strings from current language */
 let lang;
@@ -76,50 +76,50 @@ export function getLocalizedPokeText(text, type, gen) {
     // if text is hidden in battle overlays, skip    
     if (langCode == "EN" || !text || text == "???") return text;
 
-    let locsOfType;
+    let locToUse, locIndexesToUse;
     if (type == "Ability") {
-        locsOfType = locAbilities;
+        locToUse = locAbilities;
+        locIndexesToUse = locAbilitiesIndexes;
     } else if (type == "Item") {
-        locsOfType = locItems;
+        locToUse = locItems;
+        locIndexesToUse = locItemsIndexes;
     } else if (type == "Move") {
-        locsOfType = locMoves;
+        locToUse = locMoves;
+        locIndexesToUse = locMovesIndexes;
     } else {
-        locsOfType = locPokemon;
+        locToUse = locPokemon;
+        locIndexesToUse = locPokemonIndexes;
         // as far as i know, these 2 are the only ones with a name missmatch within the apis
         if (text == "Nidoran-F") text = "Nidoran♀";
         if (text == "Nidoran-M") text = "Nidoran♂";
     }
 
     // find a string that matches in english
-    for (let i = 0; i < locsOfType.length; i++) {
+    const foundIndex = locIndexesToUse[text];    
 
-        if (type == "Pokemon") {
+    // if no match, just return original text
+    if (!foundIndex) return text;
 
-            if (text == locsOfType[i].EN) {
-                if (!locsOfType[i][langCode]) break;                
-                return locsOfType[i][langCode];
-            }
+    // find that localized strig
+    if (type == "Pokemon") {
 
-        } else {
+        const finalText = locToUse[foundIndex][langCode];
+        // some languages don't change most pokemon names
+        if (finalText) return finalText;
 
-            if (text == locsOfType[i].EN.name) {
+    } else {
 
-                // see if we got an old string from an old gen
-                if (locsOfType[i][langCode].old) {
-                    const oldString = handleOldLoc(locsOfType[i][langCode].old, gen);
-                    if (oldString) return oldString;
-                }
-    
-                // if no old, use localization from last released gen
-                return locsOfType[i][langCode].name;
-    
-            }
-
+        // see if we got an old string from an old gen
+        if (locToUse[foundIndex][langCode].old) {
+            const oldString = handleOldLoc(locToUse[foundIndex][langCode].old, gen);
+            if (oldString) return oldString;
         }
+
+        // if no old, use localization from last released gen
+        return locToUse[foundIndex][langCode].name;
 
     }
 
-    // if no match, just return original text
     return text;
 
 }

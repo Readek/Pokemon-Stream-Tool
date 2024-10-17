@@ -1,3 +1,4 @@
+export const locAbilitiesIndexes = {}; // generated below
 export const locAbilities = [
   {
     "EN": {
@@ -6165,3 +6166,11 @@ export const locAbilities = [
     }
   }
 ]
+
+// we do this to save some resources when searching keys
+generateLocIndexes();
+function generateLocIndexes() {
+  for (let i = 0; i < locAbilities.length; i++) {
+    locAbilitiesIndexes[locAbilities[i].EN.name] = i;
+  }
+}

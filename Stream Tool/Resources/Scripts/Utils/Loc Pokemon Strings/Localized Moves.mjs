@@ -1,3 +1,4 @@
+export const locMovesIndexes = {}; // generated below
 export const locMoves = [
   {
     "EN": {
@@ -18806,3 +18807,11 @@ export const locMoves = [
     }
   },
 ]
+
+// we do this to save some resources when searching keys
+generateLocIndexes();
+function generateLocIndexes() {
+  for (let i = 0; i < locMoves.length; i++) {
+    locMovesIndexes[locMoves[i].EN.name] = i;
+  }
+}

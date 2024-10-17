@@ -1,3 +1,4 @@
+export const locPokemonIndexes = {}; // generated below
 export const locPokemon = [
   {
     "EN": "Bulbasaur",
@@ -6201,3 +6202,11 @@ export const locPokemon = [
     "DE": "Infamomo"
   },
 ]
+
+// we do this to save some resources when searching keys
+generateLocIndexes();
+function generateLocIndexes() {
+  for (let i = 0; i < locPokemon.length; i++) {
+    locPokemonIndexes[locPokemon[i].EN] = i;
+  }
+}
