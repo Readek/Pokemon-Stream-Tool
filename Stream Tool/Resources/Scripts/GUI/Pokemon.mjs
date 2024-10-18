@@ -345,7 +345,12 @@ export class Pokemon {
         if (this.#shiny == value) return;
 
         this.#shiny = value;
-        // set lower opacity if non-shiny
+
+        // update images to be sent
+        this.#localImgsLoaded = false;
+        this.getImgSrc();
+
+        // set lower button opacity if non-shiny
         const opValue = value ? 1 : .3;
         this.shinyIcon.style.opacity = opValue;
 
