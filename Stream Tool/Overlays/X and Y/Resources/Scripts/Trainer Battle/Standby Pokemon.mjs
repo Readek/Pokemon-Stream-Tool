@@ -1,6 +1,8 @@
 import { getLocalizedPokeText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
 import { current } from "../Globals.mjs";
 
+/** @typedef {{p1: {left: Number, top: Number}, p2: {left: Number, top: Number}}} IconCoords */
+
 const playerActiveDiv = document.getElementById("battleStandbyBarPlayer");
 const enemyActiveDiv = document.getElementById("battleStandbyBarEnemy");
 
@@ -12,13 +14,13 @@ export class StandbyPokemon {
     #form = "";
     #name = "¡";
     #status = "";
-    #shiny = false;
     #inCombat = false;
 
     #hpCurrent = -1;
     #hpMax = -1;
 
-    #iconCoords = [];
+    /** @type {IconCoords} */
+    #iconCoords = {p1: {left: 0, top: 0}, p2: {left: 0, top: 0}};;
 
     #mainEl;
     #iconEl;
@@ -108,14 +110,14 @@ export class StandbyPokemon {
     }
 
     /**
-     * Set the icon path for this pokemon, as well as position offsets
-     * @param {String[]} iconCoords
+     * Set icon coordinates for this pokemon
+     * @param {IconCoords} iconCoords
      */
     setIcon(iconCoords) {
 
         // check if coords are the same as last time
-        if (!this.#reveal && this.#iconCoords[0] == iconCoords[0]
-            && this.#iconCoords[1] == iconCoords[1]) {
+        if (!this.#reveal && this.#iconCoords.p2.left == iconCoords.p2.left
+            && this.#iconCoords.p2.top == iconCoords.p2.top) {
             return;
         }
 
@@ -126,10 +128,14 @@ export class StandbyPokemon {
         } else {
             // default question mark image for unrevealed enemies
             this.#iconEl.classList.add("standbyUnrevealed");
-            iconCoords = [0, 0];
+            iconCoords = {p1: {left: 0, top: 0}, p2: {left: 0, top: 0}};
         }
 
-        this.#iconEl.style.objectPosition = `${iconCoords[0]}px ${iconCoords[1]}px`;
+        // a few icons are different on p1's side
+        const sideToUse = this.#player ? "p1" : "p2"; 
+
+        this.#iconEl.style.objectPosition = `
+            ${iconCoords[sideToUse].left}px ${iconCoords[sideToUse].top}px`;
 
     }
 
@@ -216,7 +222,7 @@ export class StandbyPokemon {
                 diff = true;
             }
         }
-        if (!diff) return; // save reveals as last time? skip
+        if (!diff) return; // same reveals as last time? skip
 
         for (let i = 0; i < reveals.length; i++) {
             if (reveals[i] == "Full") {
@@ -276,7 +282,6 @@ export class StandbyPokemon {
             this.showPoke();
         }
 
-
         // set species
         if (data.species != this.getSpecies() ||
             data.form != this.getForm()) {
@@ -286,17 +291,11 @@ export class StandbyPokemon {
             
             this.setIcon(data.iconCoords);
 
-            this.#shiny = data.shiny;
-
-        } else if (this.#shiny != data.shiny) {
-            // if shiny was toggled, just update the image
-            this.setIcon(data.iconCoords);
-            this.#shiny = data.shiny;
         }
 
         // set name
-        this.setName(data.nickName);        
-        
+        this.setName(data.nickName);
+
         // set status condition
         this.setStatus(data.status);
 

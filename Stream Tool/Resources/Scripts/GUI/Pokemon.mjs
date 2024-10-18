@@ -5,6 +5,8 @@ import { fileExists, getJson } from "./File System.mjs";
 import { fetchFile } from "./Fetch File.mjs";
 import { getLocalizedPokeText } from "../Utils/Language.mjs";
 
+/** @typedef {{p1: {left: Number, top: Number}, p2: {left: Number, top: Number}}} IconCoords */
+
 // this will sightly move sprite positions on the overlays
 const offsets = await getJson(stPath.poke + "/sprites/offsets");
 // for external asset downloading
@@ -23,7 +25,8 @@ export class Pokemon {
     #isNone = true;
     #localImgsLoaded = false;
     #pokeImgs = {};
-    #iconCoords = [];
+    /** @type {IconCoords} */
+    #iconCoords = {};
 
     /** @protected {HTMLElement} */
     el;
@@ -190,29 +193,42 @@ export class Pokemon {
 
             // show a simple pokeball icon
             this.pokeSel.children[0].src = `${stPath.assets}/None.png`;
-            this.#iconCoords = [0, 0];
+            this.#iconCoords = {p1: {left: 0, top: 0}, p2: {left: 0, top: 0}};
             
         } else {
 
             // go fetch positions for the big ass spritesheet file
             this.pokeSel.children[0].src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
             const imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {
-                side: 'p2', gender: this.getGender(), protocol: 'http', domain: stPath.poke
+                side: 'p2',
+                gender: this.getGender(),
+                protocol: 'http',
+                domain: stPath.poke
             });
-            // TODO also store opposite side for the few 'p1' icons for battle overlays
-            this.#iconCoords = [imgInfo.left, imgInfo.top];
+            this.#iconCoords.p2.left = imgInfo.left;
+            this.#iconCoords.p2.top = imgInfo.top;
+
+            // do it again but for "p1" in case icon is different
+            const imgInfoP1 = pkmn.img.Icons.getPokemon(this.#pokeData.name, {
+                side: 'p1',
+                gender: this.getGender(),
+                protocol: 'http',
+                domain: stPath.poke
+            });
+            this.#iconCoords.p1.left = imgInfoP1.left;
+            this.#iconCoords.p1.top = imgInfoP1.top;
 
         }
 
         // actual image translate
         this.pokeSel.children[0].style.objectPosition = `
-            ${this.#iconCoords[0]}px ${this.#iconCoords[1]}px
+            ${this.#iconCoords.p2.left}px ${this.#iconCoords.p2.top}px
         `;
-        
+
     }
     /**
      * Pokemon icon coordinates for the icon spritesheet
-     * @returns {Number[]} [0] for left, [1] for top
+     * @returns {IconCoords}
      */
     getIconCoords() {
         return this.#iconCoords;
