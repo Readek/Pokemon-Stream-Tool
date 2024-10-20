@@ -98,7 +98,7 @@ export function getLocalizedPokeText(text, type, gen) {
     const foundIndex = locIndexesToUse[text];    
 
     // if no match, just return original text
-    if (!foundIndex) return text;
+    if (foundIndex === undefined) return text;
 
     // find that localized strig
     if (type == "Pokemon") {

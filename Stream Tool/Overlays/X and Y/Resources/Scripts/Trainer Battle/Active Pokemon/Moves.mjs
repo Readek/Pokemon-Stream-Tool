@@ -125,7 +125,7 @@ export class ActiveMoves {
             if (moves[i].name != this.#move[i].name || reveal) {
 
                 // for enemies, if the move wasn't revealed, display ???
-                this.#move[i].name = moves[i].name || "Hola";
+                this.#move[i].name = moves[i].name || "???";
                 // if no move
                 if (moves[i].name == "") moves[i].name = "-";
                 
