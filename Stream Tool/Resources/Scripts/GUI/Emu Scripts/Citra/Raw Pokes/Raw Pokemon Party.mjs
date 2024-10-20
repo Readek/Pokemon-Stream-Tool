@@ -85,11 +85,24 @@ export class RawPokemonParty {
      * @returns {String}
      */
     nickname() {
+
         if (this.#hasChanged) {
-            this.nicknameValue = struct("<24s").unpack(this.#data.slice(0x40, 0x58))[0]
-                .split(`\0\0`)[0].replace(/\0/g, '');
+
+            const textRaw = struct("<12h").unpack(this.#data.slice(0x40, 0x58));
+
+            // stop reading when the game says so
+            const textStop = textRaw.slice(0, textRaw.indexOf(0));
+
+            const textUtf = Encoding.convert(textStop, {
+                to: "UTF32",
+                from: "UNICODE"
+            });
+            
+            this.nicknameValue = Encoding.codeToString(textUtf);
         }
+
         return this.nicknameValue;
+
     }
     /**
      * Weird way to check if the nickname is invalid
