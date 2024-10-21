@@ -2,7 +2,6 @@ import { current } from "../../../Globals.mjs";
 import { citra } from "../Citra.mjs";
 import { rawBattlePokes, rawEnemyPokes } from "../Raw Pokes/Raw Pokes.mjs";
 
-const slotOffset = 580;
 const blockSize = 332;
 
 /**
@@ -14,13 +13,18 @@ const blockSize = 332;
  */
 export async function getPokeBattle(type, pokeOffset, pokeNum, enemy) {
 
+    const offSet = current.generation == 6 ? 580 : 816;
+
     const addressToRead = getBattleAddress(type);
 
     // add an offset every time we run this loop
-    const readAdress = addressToRead + ((pokeOffset) * slotOffset);
+    const readAdress = addressToRead + ((pokeOffset) * offSet);
 
     // ask citra for some raw data and wait for it
-    const pokeData = await citra.readMemory(readAdress, blockSize);
+    let pokeData;
+
+    pokeData = await citra.readMemory(readAdress, blockSize);
+
 
     // if we got everything we need
     if (pokeData) {
