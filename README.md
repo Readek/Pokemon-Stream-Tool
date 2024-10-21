@@ -8,14 +8,14 @@
 
 <h1 align="center">Pokemon Stream Tool</h1>
 
-Pokemon ST is a tool that manages dynamic overlays with the help of a GUI. But what can it really do? Let me show you a feature list:
+Pokemon ST is a tool that manages dynamic overlays with the help of a GUI, with features like:
 
 - Manage your active pokemon party (species, nickname, lvl, health...).
 - Manage your player's info (badges, stats...).
-- Display stats for current wild encounter.
-- Store your catches to be displayed on a "Waiting to start" scene.
 - **Gen 6 auto-update** for your current player party, reading directly from Citra (or Citra-likes).
   - Also reads battle enemies, revealing hidden info as it's shown in-game, automatically.
+- Display stats for current wild encounter.
+- Store your catches to be displayed on a "Waiting to start" scene.
 - **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
 - Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)! No need to join any Discord server.
 - **Crossplatform** GUI (Windows, Linux), built on Electron.
@@ -61,10 +61,26 @@ There are no public official releases yet, but if you really want to try this ou
 
 Once you got the thing downloaded, open the `Stream Tool` folder and simply start the executable, and play around!
 
-To add overlays to your stream, go into the `Stream Tool/Overlays/` folder and select the one you want, then simply drag and drop the `.html` file found on that folder onto OBS. As long as the GUI is open, everything should be already connected!
+To add overlays to your stream, go into the `Stream Tool/Overlays/` folder and select the one you want, then simply drag the `.html` file found on that folder and drop it onto OBS. As long as the GUI is open, everything should be already connected!
 
 Check here to learn how to use the [Remote GUI](https://github.com/Readek/RoA-Stream-Tool/wiki/8.-Remote-GUI).
 
 ## Pokémon sprites repo
 
 The overlay uses sprites from Pokémon Showdown, which aren't included in this repo. Instead of depending on Showdown, these are fetched from another repository entirely. The tool will automatically download sprites to be used locally, but if for any reason that fails, you can head over to the resources' [own repository](https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets). More info about assets can be found there.
+
+---
+
+### Used libraries
+
+- [@pkmn](https://github.com/pkmn/ps), main Pokemon data library used.
+- [encoding.js](https://github.com/polygonplanet/encoding.js), to translate Unicode to regular text.
+- [Mousetrap](https://github.com/ccampbell/mousetrap), to handle some hotkeys.
+- [Electron](https://www.electronjs.org/), duh.
+
+### References
+
+- [PokeStreamer Tools](https://github.com/EverOddish/PokeStreamer-Tools) for being the spark that initiated the hard and arduous journey of gen6/7 memory reading.
+- [PKM Structure](https://projectpokemon.org/home/docs/gen-6/pkm-structure-xy-r66/) for providing most of gen6 party memory data.
+- [Pokelink](https://www.patreon.com/pokelink)'s `Nimbus Fox` for helping me with some gen 6/7 memory addresses making that journey a hell of a lot easier.
+- [Bulbapedia](https://bulbapedia.bulbagarden.net/) for providing a list of Pokemon's names, moves, items and abilities in different languages.
