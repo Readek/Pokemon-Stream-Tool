@@ -4,7 +4,7 @@
   
 </p>
 
-**This project is under active WIP! Things are usable, although not consumer friendly.** Join our [Discord Server](https://discord.gg/EX22CTBNrM) to stay up to date!
+**This project is under active WIP! Things are usable, although not consumer friendly.** Join our [Discord Server](https://discord.gg/Pjput49g42) to stay up to date!
 
 <h1 align="center">Pokemon Stream Tool</h1>
 
