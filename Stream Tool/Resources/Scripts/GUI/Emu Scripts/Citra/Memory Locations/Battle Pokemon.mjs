@@ -67,11 +67,13 @@ export function getBattleAddress(type) {
         }
 
     } else if (type == "Multi") {
-        
+
         if (game == "XY") {
             return 0x8209D98;
+        } else if (game == "ORAS") {
+            return 0x82097B4;
         }
-        
+
     }
 
 }
