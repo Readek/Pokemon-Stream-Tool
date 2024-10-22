@@ -122,10 +122,11 @@ export class RawPokemonBattle {
      * @returns {String}
      */
     gender() {
-    
+
         if (this.#hasChanged) {
 
-            const leByte = this.#data[0xfb];
+            const address = current.generation == 6 ? 0xfb : 0x1df;
+            const leByte = this.#data[address];
 
             if (leByte == 1 ) {
                 this.genderValue = "F";
@@ -138,7 +139,7 @@ export class RawPokemonBattle {
         }
 
         return this.genderValue;
-        
+
     }
 
     /**
