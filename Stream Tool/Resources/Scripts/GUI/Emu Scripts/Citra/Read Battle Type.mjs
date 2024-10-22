@@ -26,7 +26,12 @@ export async function getBattleType() {
         }
 
         if (checkData(data)) { // if the data is an actual poke
+
+            // as of now, i havent found a way to determine battle type for gen7
+            if (current.generation == 7) return "Trainer";
+
             return battleTypes[i];
+
         }
 
     }

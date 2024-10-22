@@ -1,8 +1,6 @@
 import { current } from "../../../Globals.mjs";
 import { citra } from "../Citra.mjs";
 
-const blockSize = 235568;
-
 let prevPokes = {
     player : [],
     enemy : []
@@ -18,10 +16,12 @@ export async function getActivePokemon() {
         player : [],
         enemy : []
     }
-    
+
     const baseAdress = getActiveAdress(current.game);
 
     for (let i = 0; i < 6; i++) { // 6 as its max number of active pokes (3v3)
+
+        const blockSize = current.generation == 6 ? 235568 : 20528
         
         // add an offset every time we run this loop
         const readAddress = baseAdress + i * blockSize;
@@ -40,9 +40,9 @@ export async function getActivePokemon() {
         } else {
             pokes.player.push(dexNum);
         }
-        
+
     }
-    
+
     // check if data changed from previous time
     let changed = false;
     for (let i = 0; i < pokes.player.length; i++) {
@@ -69,12 +69,15 @@ export function resetActivePokemon() {
     }
 }
 
+/** Im gonna be honest I don't know what these point at, but it works */
 function getActiveAdress(game) {
 
     if (game == "XY") {
         return 0x83E7098;
     } else if (game == "ORAS") {
         return 0x83F9550;
+    } else if (game == "SM") {
+        return 0x30e93f98;
     }
 
 }

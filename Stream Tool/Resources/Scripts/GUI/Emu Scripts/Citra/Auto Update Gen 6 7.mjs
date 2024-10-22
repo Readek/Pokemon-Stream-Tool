@@ -297,6 +297,9 @@ async function updatePlayerTeam(firstLoop) {
             }
         }
 
+        // gen 7 poke positions are fixed, while gen 6 are not
+        readCount = current.generation == 7 ? 12 : readCount;
+
         // get a list of pokemon currently actively fighting
         const onFieldPokes = await getActivePokemon();
 
@@ -341,7 +344,7 @@ async function updatePlayerTeam(firstLoop) {
 
         // now for enemies
         if (battleType == "Trainer") {
-            
+
             let enemyCount = 0;
             for (let i = 0; i < trainerPokemons.length; i++) {
 

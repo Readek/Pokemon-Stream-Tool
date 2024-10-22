@@ -111,7 +111,8 @@ export class RawPokemonBattle {
      */
     formIndex() {
         if (this.#hasChanged) {
-            this.formIndexValue = this.#data[0x14B];
+            const address = current.generation == 6 ? 0x14B : 0x231;
+            this.formIndexValue = this.#data[address];
         }
         return this.formIndexValue;
     }
@@ -145,24 +146,42 @@ export class RawPokemonBattle {
      * @returns {String}
      */
     status() {
-        
+
         if (this.#hasChanged) {
-            if (this.#data[0x18]) {
-                this.statusValue = "Par";
-            } else if (this.#data[0x1C]) {
-                this.statusValue = "Sle";
-            } else if (this.#data[0x20]) {
-                this.statusValue = "Fro";
-            } else if (this.#data[0x24]) {
-                this.statusValue = "Bur";
-            } else if (this.#data[0x28]) {
-                this.statusValue = "Poi";
+            if (current.generation == 6) {
+                if (this.#data[0x18]) {
+                    this.statusValue = "Par";
+                } else if (this.#data[0x1C]) {
+                    this.statusValue = "Sle";
+                } else if (this.#data[0x20]) {
+                    this.statusValue = "Fro";
+                } else if (this.#data[0x24]) {
+                    this.statusValue = "Bur";
+                } else if (this.#data[0x28]) {
+                    this.statusValue = "Poi";
+                } else {
+                    this.statusValue = null;
+                }
             } else {
-                this.statusValue = null;
+                // gen 7 will assign "248" to other status when one is active
+                if (this.#data[0x20] && this.#data[0x20] != 248) {
+                    this.statusValue = "Par";
+                } else if (this.#data[0x28] && this.#data[0x28] != 248) {
+                    this.statusValue = "Sle";
+                } else if (this.#data[0x30] && this.#data[0x30] != 248) {
+                    this.statusValue = "Fro";
+                } else if (this.#data[0x38] && this.#data[0x38] != 248) {
+                    this.statusValue = "Bur";
+                } else if (this.#data[0x40] && this.#data[0x40] != 248) {
+                    this.statusValue = "Poi";
+                } else {
+                    this.statusValue = null;
+                }
             }
+
         }
         return this.statusValue;
-        
+
     }
 
     /**
@@ -187,7 +206,9 @@ export class RawPokemonBattle {
 
         if (this.#hasChanged) {
 
-            const abNum = this.#data[0x146];
+            const address = current.generation == 6 ? 0x146 : 0x22C;
+
+            const abNum = this.#data[address];
             if (abNum == 0) {
                 this.abilityValue = "";
             } else if (current.abilities[abNum]) {
@@ -227,9 +248,10 @@ export class RawPokemonBattle {
     move(num) {
 
         const move = {};
+        const address = current.generation == 6 ? 0x10E : 0x1F4;
 
-        const moveAdd = 0x10e + (14 * num);
-        const ppAdd = 0x110 + (14 * num);
+        const moveAdd = address + (14 * num);
+        const ppAdd = address + 2 + (14 * num);
         const moveNum = this.#data[moveAdd] + this.#data[moveAdd+1]*256;
 
         if (current.moves[moveNum]) {
@@ -299,23 +321,28 @@ export class RawPokemonBattle {
 
     /** Current Attack value @returns {Number} */
     attack() {
-        return this.#data[0xEE] + this.#data[0xEF]*256;
+        const address = current.generation == 6 ? 0xEE : 0x1D2;
+        return this.#data[address] + this.#data[address+1]*256;
     }
     /** Current Defense value @returns {Number} */
     defense() {
-        return this.#data[0xF0] + this.#data[0xF1]*256;
+        const address = current.generation == 6 ? 0xF0 : 0x1D4;
+        return this.#data[address] + this.#data[address+1]*256;
     }
     /** Current Special Attack value @returns {Number} */
     spAttack() {
-        return this.#data[0xF2] + this.#data[0xF3]*256;
+        const address = current.generation == 6 ? 0xF2 : 0x1D6;
+        return this.#data[address] + this.#data[address+1]*256;
     }
     /** Current Special Defense value @returns {Number} */
     spDefense() {
-        return this.#data[0xF4] + this.#data[0xF5]*256;
+        const address = current.generation == 6 ? 0xF4 : 0x1D8;
+        return this.#data[address] + this.#data[address+1]*256;
     }
     /** Current Speed value @returns {Number} */
     speed() {
-        return this.#data[0xF6] + this.#data[0xF7]*256;
+        const address = current.generation == 6 ? 0xF6 : 0x1DA;
+        return this.#data[address] + this.#data[address+1]*256;
     }
 
     /**
@@ -357,14 +384,16 @@ export class RawPokemonBattle {
 
         if (this.#hasChanged) {
 
+            const address = current.generation == 6 ? 0XFC : 0x1E2;
+
             this.statBoostsValue = {
-                atk: this.#data[0xFC] - 6,
-                def: this.#data[0xFD] - 6,
-                spa: this.#data[0xFE] - 6,
-                spd: this.#data[0xFF] - 6,
-                spe: this.#data[0x100] - 6,
-                acc: this.#data[0x101] - 6,
-                eva: this.#data[0x102] - 6,
+                atk: this.#data[address] - 6,
+                def: this.#data[address+1] - 6,
+                spa: this.#data[address+2] - 6,
+                spd: this.#data[address+3] - 6,
+                spe: this.#data[address+4] - 6,
+                acc: this.#data[address+5] - 6,
+                eva: this.#data[address+6] - 6,
             }
 
         }
@@ -378,8 +407,10 @@ export class RawPokemonBattle {
      */
     types() {
 
-        const type1 = indexToType(this.#data[0xF8]);
-        const type2 = indexToType(this.#data[0xF9]);
+        const address = current.generation == 6 ? 0xF8 : 0x1DC;
+
+        const type1 = indexToType(this.#data[address]);
+        const type2 = indexToType(this.#data[address+1]);
 
         const types = [type1];
         if (type2 != type1) types.push(type2);
