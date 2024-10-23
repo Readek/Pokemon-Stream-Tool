@@ -7,7 +7,7 @@ import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
 import { pokemons } from "./Team/TeamPokemons.mjs";
-import { trainerPokemons } from "./VS Trainer/TrainerPokemons.mjs";
+import { setEnemyTrainerName, trainerPokemons } from "./VS Trainer/TrainerPokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
 import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 import { setBattleState } from "./Team/Battle State.mjs";
@@ -139,6 +139,8 @@ export async function updateGUI(data, noNotif) {
             trainerPokemons[i].setReveals(data.trainerPokemons[i].reveals);
 
         };
+
+        setEnemyTrainerName(data.trainerName);
 
     }
 

@@ -1086,6 +1086,11 @@ button:hover {
 }
 
 
+/* VS Trainer stuff */
+#trainerNameInp {
+  width: 150px;
+}
+
 /* Settings stuff */
 #settingsList {
   overflow-y: auto;

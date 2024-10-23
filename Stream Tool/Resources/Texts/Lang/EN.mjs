@@ -150,6 +150,8 @@ export const lang = {
 
     hiddenHover : "Click to reveal",
 
+    trainerNamePHolder : "Enemy trainer's name",
+    trainerNameTitle : "Enemy trainer's name",
     trainerUpdateButt : "Update Trainer",
 
 

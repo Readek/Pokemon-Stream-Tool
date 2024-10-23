@@ -148,6 +148,10 @@ export const lang = {
 
     /* VS TRAINER */
 
+    hiddenHover : "Click para revelar",
+
+    trainerNamePHolder : "Nombre del entrenador",
+    trainerNameTitle : "Nombre del entrenador",
     trainerUpdateButt : "Actualizar enemigo",
 
 

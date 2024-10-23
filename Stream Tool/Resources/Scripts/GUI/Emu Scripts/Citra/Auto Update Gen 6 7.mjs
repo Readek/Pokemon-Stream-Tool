@@ -3,7 +3,7 @@ import { current } from "../../Globals.mjs";
 import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
 import { pokemons } from "../../Team/TeamPokemons.mjs";
-import { trainerPokemons } from "../../VS Trainer/TrainerPokemons.mjs";
+import { setEnemyTrainerName, trainerPokemons } from "../../VS Trainer/TrainerPokemons.mjs";
 import { updateTeam } from "../../Team/Update Team.mjs";
 import { updateTrainer } from "../../VS Trainer/Update Trainer.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
@@ -16,6 +16,7 @@ import { getActivePokemon, resetActivePokemon } from "./Memory Locations/Active 
 import { setBattleState } from "../../Team/Battle State.mjs";
 import { wildEncounter } from "../../VS Wild/Wild Pokemon.mjs";
 import { updateWildEnc } from "../../VS Wild/Update Wild.mjs";
+import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 
@@ -155,9 +156,9 @@ async function autoUpdateData(firstLoop) {
 
         hasChanged = true;
 
-        for (let i = 0; i < 6; i++) {
+        if (battleType == "None") {
 
-            if (battleType == "None") {
+            for (let i = 0; i < 6; i++) {
 
                 // reset some stuffs
                 pokemons[i].setBoosts({
@@ -186,6 +187,11 @@ async function autoUpdateData(firstLoop) {
             await new Promise(resolve => setTimeout(resolve, 100));
             wildEncounter.setSpecies("None");
             updateWildEnc();
+        }
+
+        // get us the trainer's name, just once
+        if (battleType == "Trainer") {
+            setEnemyTrainerName(await getEnemyTrainerName());
         }
 
     }

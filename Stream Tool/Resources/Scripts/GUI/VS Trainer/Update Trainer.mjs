@@ -1,6 +1,6 @@
 import { inside } from "../Globals.mjs";
 import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
-import { trainerPokemons } from "./TrainerPokemons.mjs";
+import { getEnemyTrainerName, trainerPokemons } from "./TrainerPokemons.mjs";
 
 const updateButt = document.getElementById("updateTrainerButt");
 const updateText = document.getElementById("updateTrainerText");
@@ -31,6 +31,7 @@ export async function updateTrainer() {
         id : "gameData",
         type : "Trainer",
         trainerPokemons: [], // more lines will be added below
+        trainerName : getEnemyTrainerName()
     };
 
     const promises = [];
