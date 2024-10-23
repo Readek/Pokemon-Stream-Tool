@@ -4,22 +4,27 @@
   
 </p>
 
-**This project is under active WIP! Things are usable, although not consumer friendly.** Join our [Discord Server](https://discord.gg/Pjput49g42) to stay up to date!
+**This project is under active WIP! Things are usable, but there will be bugs!** Join our [Discord Server](https://discord.gg/Pjput49g42) to stay up to date!
 
 <h1 align="center">Pokemon Stream Tool</h1>
 
 Pokemon ST is a tool that manages dynamic overlays with the help of a GUI, with features like:
 
-- Manage your active pokemon party (species, nickname, lvl, health...).
-- Manage your player's info (badges, stats...).
-- **Gen 6 auto-update** for your current player party, reading directly from Citra (or Citra-likes).
-  - Also reads battle enemies, revealing hidden info as it's shown in-game, automatically.
-- Display stats for current wild encounter.
-- Store your catches to be displayed on a "Waiting to start" scene.
+- Manage your game's info
+  - **Player's party**, with info for nickname, lvl, health values...
+  - Your **badges** and stats like Pokemon catched or allied Pokemon deaths.
+  - **Enemy data** that gets revealed as the battle goes on.
+  - Current **wild encounter** with its possible stats and abilities.
+  - Store your **catches** to be displayed on a "Waiting to start" scene.
+- **Gen 6 auto-update** for player party and enemy data, reading directly from Citra (or Citra-likes).
+  - **Gen 7** is also supported, though it hasn't been tested as much.
+- No auto for your game? Worry not, everything can be done manually within the GUI.
+- You can use the **included overlays** for OBS with minimal setup, or make your own.
+  - Screenshots included below.
 - **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
-- Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)! No need to join any Discord server.
+- Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)! *No need to join any Discord server.*
 - **Crossplatform** GUI (Windows, Linux), built on Electron.
-- Made to be customized! Just dive into the folders and modify the tool to your heart's content.
+- Made to be customized! Just dive into the folders and modify the entirety of the tool to your heart's content.
 
 For the moment, the tool comes with overlays included for:
 
@@ -32,6 +37,7 @@ For the moment, the tool comes with overlays included for:
 </p>
 
 - X and Y (trainer battle)
+  - Enemy info is hidden until the move gets revealed in-game.
 
 <p align="center">
 
