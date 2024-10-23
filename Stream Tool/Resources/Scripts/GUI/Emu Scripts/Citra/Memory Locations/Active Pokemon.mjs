@@ -8,7 +8,7 @@ let prevPokes = {
 
 /**
  * Looks for pokemon currently actively fighting
- * @returns {{player:[], enemy:[]}} Dexnums for currently on the field pokemon
+ * @returns {{player:[], enemy:[]} | undefined} Dexnums for current on the field pokemon
  */
 export async function getActivePokemon() {
 
@@ -22,7 +22,7 @@ export async function getActivePokemon() {
     for (let i = 0; i < 6; i++) { // 6 as its max number of active pokes (3v3)
 
         const blockSize = current.generation == 6 ? 235568 : 20528
-        
+
         // add an offset every time we run this loop
         const readAddress = baseAdress + i * blockSize;
 
@@ -69,7 +69,11 @@ export function resetActivePokemon() {
     }
 }
 
-/** Im gonna be honest I don't know what these point at, but it works */
+/** 
+ * Im gonna be honest I don't know what these point at, but it works 
+ * @param {"XY" | "ORAS" | "SM"} game
+ * @returns {Number} Address pointing at a dex number
+ */
 function getActiveAdress(game) {
 
     if (game == "XY") {

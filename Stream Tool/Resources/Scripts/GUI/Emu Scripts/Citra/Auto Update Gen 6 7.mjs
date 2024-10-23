@@ -25,7 +25,7 @@ let inCombat = false;
 export async function autoUpdateToggleCitra() {
     
     if (!current.autoStatus) { // if no auto update is running
-        
+
         // update states
         current.autoStatus = true;
         autoUpdateButt.innerHTML = "🍊 AUTO ON";
@@ -39,7 +39,7 @@ export async function autoUpdateToggleCitra() {
 
     }
 
-    // send state to remote GUIS
+    // send state to remote GUIs
     sendRemoteDataRaw(JSON.stringify({
         message: "RemoteUpdateGUI",
         type: "Auto",
@@ -49,7 +49,7 @@ export async function autoUpdateToggleCitra() {
     if (current.autoStatus) {
 
         autoUpdateLoop();
-       
+
     }
 
 }
@@ -59,7 +59,7 @@ async function autoUpdateLoop() {
     let itBroke;
 
     // check if we can stablish a connection to citra
-    if (await updatePlayerTeam(true)) { // if first update succeeds
+    if (await autoUpdateData(true)) { // if first update succeeds
 
         displayNotif(getLocalizedText("notifCitraOk"));
 
@@ -67,7 +67,7 @@ async function autoUpdateLoop() {
         while (current.autoStatus) {
 
             // trigger the auto update code
-            const autoUpdate = updatePlayerTeam();
+            const autoUpdate = autoUpdateData();
             // but set a max time so we dont request it more than every game frame
             const timeLimit = new Promise((resolve) => {
                 let timeo = setTimeout(() => {
@@ -98,7 +98,7 @@ async function autoUpdateLoop() {
         // wait a bit just in case
         await new Promise(resolve => setTimeout(resolve, 1500));
 
-        if (await updatePlayerTeam()) {
+        if (await autoUpdateData()) {
             // if reconnecting goes alright, re-enable auto loop
             autoUpdateLoop();
         } else {
@@ -117,7 +117,7 @@ async function autoUpdateLoop() {
  * @param {Boolean} firstLoop If this is first loop after auto toggle
  * @returns {Boolean} False if something went wrong
  */
-async function updatePlayerTeam(firstLoop) {
+async function autoUpdateData(firstLoop) {
 
     /* 
     // MEMORY DEBUG, uncomment to use
@@ -235,8 +235,8 @@ async function updatePlayerTeam(firstLoop) {
                 pokemons[i].setStats(rawPokesIndexed[i].stats());
 
                 pokemons[i].setStatus(rawPokesIndexed[i].status());
-                
-            }           
+
+            }
             
         }
 
@@ -305,7 +305,7 @@ async function updatePlayerTeam(firstLoop) {
 
         // match dex num with our pokes to know if a pokemon is in combat rn
         if (onFieldPokes) {
-            
+
             // set everyone as not in combat
             for (let i = 0; i < pokemons.length; i++) {
                 pokemons[i].setInCombat(false);
@@ -391,6 +391,10 @@ async function updatePlayerTeam(firstLoop) {
                 }
             }
 
+            // there could be some cases where inCombat regions cant be read
+            // like multibattles or the final XY battle vs AZ
+            let someCombat;
+
             // match dex num with our pokes to know if a pokemon is in combat rn
             if (onFieldPokes) {
 
@@ -399,16 +403,12 @@ async function updatePlayerTeam(firstLoop) {
                     trainerPokemons[i].setInCombat(false);
                 }
 
-                // there could be some cases where inCombat regions cant be read
-                // like multibattles or the final XY battle vs AZ
-                let someCombat;
-
                 // for each in combat pokemon found
                 for (let i = 0; i < onFieldPokes.enemy.length; i++) {
 
                     // get an actual name
                     const pokeName = current.numToPoke[onFieldPokes.enemy[i]];
-        
+
                     // look for matches within the current enemy team
                     for (let i = 0; i < trainerPokemons.length; i++) {
                         // also check if poke is already in combat, for dupes
@@ -422,14 +422,13 @@ async function updatePlayerTeam(firstLoop) {
 
                 }
 
-                // if we couldnt find any inCombat pokes, just set the first one and carry on
-                if (!someCombat) {
-                    pokemons[0].setInCombat(true);
-                }
-
             }
 
-            
+            // if we couldnt find any inCombat pokes, just set the first one and carry on
+            if (!someCombat) {
+                pokemons[0].setInCombat(true);
+                trainerPokemons[0].setInCombat(true);
+            }
 
             // if something was updated at all
             if (current.autoUpdated) {
@@ -443,7 +442,7 @@ async function updatePlayerTeam(firstLoop) {
 
             // only read whenever inBattle pokes change
             if (onFieldPokes) {
-                
+
                 // go read that pokemon
                 await getPokeBattle(battleType, readCount, 0, true);
 
