@@ -311,10 +311,6 @@ async function autoUpdateData(firstLoop) {
                 pokemons[i].setInCombat(false);
             }
 
-            // there could be some cases where inCombat regions cant be read
-            // like multibattles or the final XY battle vs AZ
-            let someCombat;
-
             // for each in combat pokemon found
             for (let i = 0; i < onFieldPokes.player.length; i++) {
 
@@ -326,16 +322,10 @@ async function autoUpdateData(firstLoop) {
                     // also check if poke is already in combat, for dupes
                     if (pokeName == pokemons[i].getSpecies() && !pokemons[i].getInCombat()) {
                         pokemons[i].setInCombat(true);
-                        someCombat = true;
                         break;
                     }
                 }
 
-            }
-
-            // if we couldnt find any inCombat pokes, just set the first one and carry on
-            if (!someCombat) {
-                pokemons[0].setInCombat(true);
             }
 
             current.autoUpdated = true;
@@ -391,10 +381,6 @@ async function autoUpdateData(firstLoop) {
                 }
             }
 
-            // there could be some cases where inCombat regions cant be read
-            // like multibattles or the final XY battle vs AZ
-            let someCombat;
-
             // match dex num with our pokes to know if a pokemon is in combat rn
             if (onFieldPokes) {
 
@@ -415,19 +401,35 @@ async function autoUpdateData(firstLoop) {
                         if (pokeName == trainerPokemons[i].getSpecies()
                             && !trainerPokemons[i].getInCombat()) {
                             trainerPokemons[i].setInCombat(true);
-                            someCombat = true;
                             break;
                         }
                     }
 
                 }
 
-            }
+            } else {
 
-            // if we couldnt find any inCombat pokes, just set the first one and carry on
-            if (!someCombat) {
-                pokemons[0].setInCombat(true);
-                trainerPokemons[0].setInCombat(true);
+                // there could be some cases where inCombat regions cant be read
+                // like multibattles or the final XY battle vs AZ
+                let someCombat;
+
+                // check for in combat state for each poke
+                for (let i = 0; i < pokemons.length; i++) {
+                    if (pokemons[i].getInCombat()) someCombat = true;
+                }
+
+                // if we couldnt find any inCombat pokes, just set the first one and carry on
+                if (!someCombat) pokemons[0].setInCombat(true);
+
+                // now same for enemies
+                someCombat = false;
+
+                for (let i = 0; i < trainerPokemons.length; i++) {
+                    if (trainerPokemons[i].getInCombat()) someCombat = true;
+                }
+
+                if (!someCombat) trainerPokemons[0].setInCombat(true);
+
             }
 
             // if something was updated at all
