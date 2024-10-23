@@ -1,6 +1,7 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
 import { getBattleAddress } from "./Memory Locations/Battle Pokemon.mjs";
+import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
 
 const battleTypes = ["Wild", "Trainer", "Multi"];
 const dataBegin = 4; // where to start to read
@@ -8,7 +9,7 @@ const dataLenght = 6; // max data to read
 
 /**
  * Compares data to determine if the player is currently in a battle
- * @returns {String} "Wild", "Trainer", "Multi", or "None"
+ * @returns {"Wild"|"Trainer"|"Multi"|"None"}
  */
 export async function getBattleType() {
 
@@ -27,8 +28,13 @@ export async function getBattleType() {
 
         if (checkData(data)) { // if the data is an actual poke
 
-            // as of now, i havent found a way to determine battle type for gen7
-            if (current.generation == 7) return "Trainer";
+            // we need more checks for gen7
+            if (current.generation == 7) {
+                // if there is no trainer name, this will be a wild battle
+                const trainerName = await getEnemyTrainerName();
+                if (!trainerName) return "Wild";
+                return "Trainer";
+            }
 
             return battleTypes[i];
 
