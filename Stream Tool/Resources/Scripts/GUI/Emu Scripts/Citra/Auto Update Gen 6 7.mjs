@@ -250,7 +250,7 @@ async function autoUpdateData(firstLoop) {
         const onFieldPokes = await getActivePokemon();
 
         // update player battle data
-        let readCount = updateBattlePokemon(battleType, hasChanged, onFieldPokes, 0, false);
+        let readCount = await updateBattlePokemon(battleType, hasChanged, onFieldPokes, 0, false);
         
         // now same as above but for enemies
         if (battleType == "Trainer") {
@@ -260,7 +260,7 @@ async function autoUpdateData(firstLoop) {
             readCount = current.generation == 7 ? 12 : readCount;
 
             // update enemy battle data
-            updateBattlePokemon(battleType, hasChanged, onFieldPokes, readCount, true);
+            await updateBattlePokemon(battleType, hasChanged, onFieldPokes, readCount, true);
 
             // there could be some cases where inCombat regions cant be read
             // like multibattles or the final XY battle vs AZ
