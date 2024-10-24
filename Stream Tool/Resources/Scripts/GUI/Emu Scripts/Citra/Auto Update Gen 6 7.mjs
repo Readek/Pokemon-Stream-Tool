@@ -208,9 +208,7 @@ async function autoUpdateData(firstLoop) {
 
         // to force update
         for (let i = 0; i < rawPokesIndexed.length; i++) {
-            if (hasChanged) {
-                rawPokesIndexed[i].changeHasChanged();
-            };
+            if (hasChanged) rawPokesIndexed[i].changeHasChanged();
         }
 
         // use party data
@@ -248,175 +246,26 @@ async function autoUpdateData(firstLoop) {
 
     } else { // in combat
 
-        let readCount = 0;
-
-        for (let i = 0; i < pokemons.length; i++) {
-
-            // go read that pokemon
-            await getPokeBattle(battleType, i, i);
-
-            // to force update if needed
-            if (hasChanged) {rawBattlePokes[i].changeHasChanged()};
-
-            // battle memory will place enemy pokemons after the player's
-            // if slot doesnt match party order, thats not a player poke
-            if (rawBattlePokes[i].slot() != i && rawBattlePokes[i].valid) {
-                break;
-            }
-
-            if (rawBattlePokes[i].hasChanged() && rawBattlePokes[i].valid) {
-
-                // theres some data that we dont know where to get in battle
-                // if the species doesnt match non battle data, clear this info
-                if (rawBattlePokes[i].speciesName() != pokemons[i].getSpecies()) {
-                    pokemons[i].setNickName("");
-                    pokemons[i].setShiny(false);
-                }
-
-                pokemons[i].setSpecies(rawBattlePokes[i].speciesName());
-                pokemons[i].setLvl(rawBattlePokes[i].level());
-                pokemons[i].setGender(rawBattlePokes[i].gender());
-                pokemons[i].setFormNumber(rawBattlePokes[i].formIndex());
-
-                pokemons[i].setExp(rawBattlePokes[i].experience());
-                pokemons[i].setAbility(rawBattlePokes[i].ability());
-                pokemons[i].setItem(rawBattlePokes[i].item());
-                pokemons[i].setMoves(rawBattlePokes[i].moves());
-                pokemons[i].setHpMax(rawBattlePokes[i].maxHP());
-                pokemons[i].setHpCurrent(rawBattlePokes[i].currentHP());
-                pokemons[i].setStats(rawBattlePokes[i].stats());
-                pokemons[i].setBoosts(rawBattlePokes[i].boosts());
-                pokemons[i].setTypes(rawBattlePokes[i].types());
-
-                pokemons[i].setStatus(rawBattlePokes[i].status());
-
-            }
-
-            readCount++;
-
-        }
-
-        // in case player party doesnt have 6 pokemon, clear empty remaining slots
-        if (readCount != 0) {
-            for (let i = readCount; i < 6; i++) {
-                pokemons[i].clear();
-            }
-        }
-
-        // gen 7 poke positions are fixed, while gen 6 are not
-        readCount = current.generation == 7 ? 12 : readCount;
-
         // get a list of pokemon currently actively fighting
         const onFieldPokes = await getActivePokemon();
 
-        // match dex num with our pokes to know if a pokemon is in combat rn
-        if (onFieldPokes) {
-
-            // set everyone as not in combat
-            for (let i = 0; i < pokemons.length; i++) {
-                pokemons[i].setInCombat(false);
-            }
-
-            // for each in combat pokemon found
-            for (let i = 0; i < onFieldPokes.player.length; i++) {
-
-                // get an actual name
-                const pokeName = current.numToPoke[onFieldPokes.player[i]];
-    
-                // look for matches within the current team
-                for (let i = 0; i < pokemons.length; i++) {
-                    // also check if poke is already in combat, for dupes
-                    if (pokeName == pokemons[i].getSpecies() && !pokemons[i].getInCombat()) {
-                        pokemons[i].setInCombat(true);
-                        break;
-                    }
-                }
-
-            }
-
-            current.autoUpdated = true;
-
-        }
-
-        // now for enemies
+        // update player battle data
+        let readCount = updateBattlePokemon(battleType, hasChanged, onFieldPokes, 0, false);
+        
+        // now same as above but for enemies
         if (battleType == "Trainer") {
 
-            let enemyCount = 0;
-            for (let i = 0; i < trainerPokemons.length; i++) {
+            // gen 7 poke positions are fixed, while gen 6 are not
+            // in gen 7, enemy slots start at slot 12
+            readCount = current.generation == 7 ? 12 : readCount;
 
-                // go read that pokemon
-                await getPokeBattle(battleType, i + readCount, i, true);
+            // update enemy battle data
+            updateBattlePokemon(battleType, hasChanged, onFieldPokes, readCount, true);
 
-                // to force update if needed
-                if (hasChanged) {rawEnemyPokes[i].changeHasChanged()};
+            // there could be some cases where inCombat regions cant be read
+            // like multibattles or the final XY battle vs AZ
+            if (!onFieldPokes) {
 
-                // battle memory will place enemy pokemons after the player's
-                // enemy slots start at slot 12
-                if (rawEnemyPokes[i].slot() != i + 12 && rawEnemyPokes[i].valid) {
-                    break;
-                }
-
-                if (rawEnemyPokes[i].hasChanged() && rawEnemyPokes[i].valid) {
-
-                    trainerPokemons[i].setSpecies(rawEnemyPokes[i].speciesName());
-                    trainerPokemons[i].setLvl(rawEnemyPokes[i].level());
-                    trainerPokemons[i].setGender(rawEnemyPokes[i].gender());
-                    trainerPokemons[i].setFormNumber(rawEnemyPokes[i].formIndex());
-
-                    trainerPokemons[i].setAbility(rawEnemyPokes[i].ability());
-                    trainerPokemons[i].setItem(rawEnemyPokes[i].item());
-                    trainerPokemons[i].setMoves(rawEnemyPokes[i].moves());
-                    trainerPokemons[i].setHpMax(rawEnemyPokes[i].maxHP());
-                    trainerPokemons[i].setHpCurrent(rawEnemyPokes[i].currentHP());
-                    trainerPokemons[i].setStats(rawEnemyPokes[i].stats());
-                    trainerPokemons[i].setBoosts(rawEnemyPokes[i].boosts());
-                    trainerPokemons[i].setTypes(rawEnemyPokes[i].types());
-
-                    trainerPokemons[i].setStatus(rawEnemyPokes[i].status());
-
-                }
-
-                enemyCount++;
-
-            }
-
-            // in case enemy party doesnt have 6 pokemon, clear empty remaining slots
-            if (enemyCount != 0) {
-                for (let i = enemyCount; i < 6; i++) {
-                    trainerPokemons[i].clear();
-                }
-            }
-
-            // match dex num with our pokes to know if a pokemon is in combat rn
-            if (onFieldPokes) {
-
-                // set everyone as not in combat
-                for (let i = 0; i < trainerPokemons.length; i++) {
-                    trainerPokemons[i].setInCombat(false);
-                }
-
-                // for each in combat pokemon found
-                for (let i = 0; i < onFieldPokes.enemy.length; i++) {
-
-                    // get an actual name
-                    const pokeName = current.numToPoke[onFieldPokes.enemy[i]];
-
-                    // look for matches within the current enemy team
-                    for (let i = 0; i < trainerPokemons.length; i++) {
-                        // also check if poke is already in combat, for dupes
-                        if (pokeName == trainerPokemons[i].getSpecies()
-                            && !trainerPokemons[i].getInCombat()) {
-                            trainerPokemons[i].setInCombat(true);
-                            break;
-                        }
-                    }
-
-                }
-
-            } else {
-
-                // there could be some cases where inCombat regions cant be read
-                // like multibattles or the final XY battle vs AZ
                 let someCombat;
 
                 // check for in combat state for each poke
@@ -429,11 +278,9 @@ async function autoUpdateData(firstLoop) {
 
                 // now same for enemies
                 someCombat = false;
-
                 for (let i = 0; i < trainerPokemons.length; i++) {
                     if (trainerPokemons[i].getInCombat()) someCombat = true;
                 }
-
                 if (!someCombat) trainerPokemons[0].setInCombat(true);
 
             }
@@ -479,5 +326,112 @@ async function autoUpdateData(firstLoop) {
     }
 
     return true; // so we all know everything went alright
+
+}
+
+/**
+ * Asks emu for battle data and updates ally or enemy pokemon
+ * @param {"Wild"|"Trainer"|"Multi"|"None"} battleType - Region to read
+ * @param {Boolean} hasChanged - To force updates
+ * @param {{player:[], enemy:[]} | undefined} onFieldPokes - To set active status
+ * @param {Number} pokeCount - Slot to read from
+ * @param {Boolean} enemy - If this is an enemy pokemon
+ * @returns {Number} How many pokes were properly read
+ */
+async function updateBattlePokemon(battleType, hasChanged, onFieldPokes, pokeCount, enemy) {
+
+    // determine which class we're gonna use
+    const rawPokes = !enemy ? rawBattlePokes : rawEnemyPokes;
+    const pokes = !enemy ? pokemons : trainerPokemons;
+
+    // ally pokemon have slots 0-5, enemies have slots 12-17
+    const slotOffset = !enemy ? 0 : 12;
+
+    let readCount = 0;
+
+    for (let i = 0; i < pokes.length; i++) {
+
+        // go read that pokemon
+        await getPokeBattle(battleType, i + pokeCount, i, enemy);
+
+        // to force update if needed
+        if (hasChanged) rawPokes[i].changeHasChanged();
+
+        // in gen6, battle memory will place enemy pokemons after the player's
+        // if slot doesnt match party order, thats not a player poke
+        if (rawPokes[i].slot() != i + slotOffset && rawPokes[i].valid) {
+            break;
+        }
+
+        if (rawPokes[i].hasChanged() && rawPokes[i].valid) {
+
+            // theres some data that we dont know where to get in battle
+            // if the species doesnt match non battle data, clear this info
+            if (!enemy && rawPokes[i].speciesName() != pokes[i].getSpecies()) {
+                pokes[i].setNickName("");
+                pokes[i].setShiny(false);
+            }
+
+            pokes[i].setSpecies(rawPokes[i].speciesName());
+            pokes[i].setLvl(rawPokes[i].level());
+            pokes[i].setGender(rawPokes[i].gender());
+            pokes[i].setFormNumber(rawPokes[i].formIndex());
+
+            if (!enemy) pokes[i].setExp(rawPokes[i].experience());
+            pokes[i].setAbility(rawPokes[i].ability());
+            pokes[i].setItem(rawPokes[i].item());
+            pokes[i].setMoves(rawPokes[i].moves());
+            pokes[i].setHpMax(rawPokes[i].maxHP());
+            pokes[i].setHpCurrent(rawPokes[i].currentHP());
+            pokes[i].setStats(rawPokes[i].stats());
+            pokes[i].setBoosts(rawPokes[i].boosts());
+            pokes[i].setTypes(rawPokes[i].types());
+
+            pokes[i].setStatus(rawPokes[i].status());
+
+        }
+
+        readCount++;
+
+    }
+
+    // in case we didnt read all 6 pokemon, clear empty remaining slots
+    if (readCount != 0) {
+        for (let i = readCount; i < 6; i++) {
+            pokes[i].clear();
+        }
+    }
+
+    // match dex num with our pokes to know if a pokemon is in combat rn
+    if (onFieldPokes) {
+
+        // set everyone as not in combat
+        for (let i = 0; i < pokes.length; i++) {
+            pokes[i].setInCombat(false);
+        }
+
+        // for each in combat pokemon found
+        for (let i = 0; i < onFieldPokes.player.length; i++) {
+
+            // get an actual name
+            const pokeName = current.numToPoke[onFieldPokes.player[i]];
+
+            // look for matches within the current team
+            for (let i = 0; i < pokes.length; i++) {
+                // also check if poke is already in combat, for dupes
+                if (pokeName == pokes[i].getSpecies() && !pokes[i].getInCombat()) {
+                    pokes[i].setInCombat(true);
+                    break;
+                }
+            }
+
+        }
+
+        current.autoUpdated = true;
+
+    }
+
+    // so we know where to start reading enemies when reading them
+    return readCount;
 
 }

@@ -12,7 +12,7 @@ import { rawBattlePokes, rawEnemyPokes } from "../Raw Pokes/Raw Pokes.mjs";
 export async function getPokeBattle(type, pokeOffset, pokeNum, enemy) {
 
     const offSet = current.generation == 6 ? 580 : 816;
-    const blockSize = current.generation == 6 ? 332 : 816;
+    const blockSize = current.generation == 6 ? 332 : 562;
 
     const addressToRead = getBattleAddress(type);
 
