@@ -411,10 +411,11 @@ async function updateBattlePokemon(battleType, hasChanged, onFieldPokes, pokeCou
         }
 
         // for each in combat pokemon found
-        for (let i = 0; i < onFieldPokes.player.length; i++) {
+        const playerOrEnemy = !enemy ? "player" : "enemy";
+        for (let i = 0; i < onFieldPokes[playerOrEnemy].length; i++) {
 
             // get an actual name
-            const pokeName = current.numToPoke[onFieldPokes.player[i]];
+            const pokeName = current.numToPoke[onFieldPokes[playerOrEnemy][i]];
 
             // look for matches within the current team
             for (let i = 0; i < pokes.length; i++) {
