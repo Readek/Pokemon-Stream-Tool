@@ -17,6 +17,8 @@ import { setBattleState } from "../../Team/Battle State.mjs";
 import { wildEncounter } from "../../VS Wild/Wild Pokemon.mjs";
 import { updateWildEnc } from "../../VS Wild/Update Wild.mjs";
 import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
+import { setBadges } from "../../Player/Badges.mjs";
+import { getRawBadges } from "./Memory Locations/Badges.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 
@@ -181,17 +183,28 @@ async function autoUpdateData(firstLoop) {
         // we force an await here because sometimes, when swapping from
         // memory locations, memory wont be fully filled up by the game yet
         if (battleType == "Trainer" || battleType == "Multi" || battleType == "Wild") {
+
             // 2500 being the time a wild pokemon takes to appear on screen :)
             await new Promise(resolve => setTimeout(resolve, 2500));
+
         } else {
+            
+            // a tiny wait just in case
             await new Promise(resolve => setTimeout(resolve, 100));
+
             wildEncounter.setSpecies("None");
             updateWildEnc();
+
         }
 
         // get us the trainer's name, just once
         if (battleType == "Trainer") {
             setEnemyTrainerName(await getEnemyTrainerName());
+        }
+
+        // gym badges (no known data for gen7 yet)
+        if (current.generation == 6) {                
+            setBadges(await getRawBadges());
         }
 
     }
