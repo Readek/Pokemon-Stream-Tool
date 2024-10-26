@@ -81,7 +81,9 @@ function getActiveAdress(game) {
     } else if (game == "ORAS") {
         return 0x83F9550;
     } else if (game == "SM") {
-        return 0x30e93f98;
+        return 0x30E93F98;
+    } else if (game== "USUM") {
+        return 0x3093EF7C;
     }
 
 }

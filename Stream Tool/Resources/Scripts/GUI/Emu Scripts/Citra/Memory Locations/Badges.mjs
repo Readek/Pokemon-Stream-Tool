@@ -43,7 +43,6 @@ function getBadgeAddress(game, version) {
     } else if (game == "ORAS") {
         if (version == "1.0") return 0x8C6DDD4;
         if (version == "1.4") return 0x8C71DC4;
-        return 0x8C71DC4;
     } else if (game == "SM") {
         return 0;
     } else if (game == "USUM") {
