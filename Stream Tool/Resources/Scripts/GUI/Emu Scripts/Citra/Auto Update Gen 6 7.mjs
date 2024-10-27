@@ -13,7 +13,7 @@ import { getPartyIndexes } from "./Memory Locations/Party Indexes.mjs";
 import { getPokeBattle } from "./Memory Locations/Battle Pokemon.mjs";
 import { readPartyData } from "./Memory Locations/Party Pokemon.mjs";
 import { getActivePokemon, resetActivePokemon } from "./Memory Locations/Active Pokemon.mjs";
-import { setBattleState } from "../../Team/Battle State.mjs";
+import { getBattleState, setBattleState } from "../../Team/Battle State.mjs";
 import { wildEncounter } from "../../VS Wild/Wild Pokemon.mjs";
 import { updateWildEnc } from "../../VS Wild/Update Wild.mjs";
 import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
@@ -132,14 +132,14 @@ async function autoUpdateData(firstLoop) {
     if (firstLoop) {
 
         current.autoUpdated = true;
-        
+
         // also reset inCombat state
         inCombat = false;
 
     } else {
         current.autoUpdated = false;
     }
-    
+
 
     // check if we are on a battle right now
     const battleType = await getBattleType();
@@ -172,6 +172,9 @@ async function autoUpdateData(firstLoop) {
                 trainerPokemons[i].clear();
 
             }
+
+            // clear trainer name
+            setEnemyTrainerName("");
 
         }
 
@@ -265,12 +268,12 @@ async function autoUpdateData(firstLoop) {
         // update player battle data
         let readCount = await updateBattlePokemon(battleType, hasChanged, onFieldPokes, 0, false);
         
+        // gen 7 poke positions are fixed, while gen 6 are not
+        // in gen 7, enemy slots start at slot 12
+        readCount = current.generation == 7 ? 12 : readCount;
+
         // now same as above but for enemies
         if (battleType == "Trainer") {
-
-            // gen 7 poke positions are fixed, while gen 6 are not
-            // in gen 7, enemy slots start at slot 12
-            readCount = current.generation == 7 ? 12 : readCount;
 
             // update enemy battle data
             await updateBattlePokemon(battleType, hasChanged, onFieldPokes, readCount, true);
