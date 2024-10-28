@@ -19,7 +19,7 @@ export async function getActivePokemon() {
 
     const baseAdress = getActiveAdress(current.game);
 
-    for (let i = 0; i < 6; i++) { // 6 as its max number of active pokes (3v3)
+    for (let i = 0; i < 6; i++) { // 6 as it's max number of active pokes (3v3)
 
         const blockSize = current.generation == 6 ? 235568 : 20528
 
@@ -71,10 +71,10 @@ export function resetActivePokemon() {
 
 /** 
  * Im gonna be honest I don't know what these point at, but it works 
- * @param {"XY" | "ORAS" | "SM"} game
+ * @param {"XY" | "ORAS" | "SM" | "USUM"} game
  * @returns {Number} Address pointing at a dex number
  */
-function getActiveAdress(game) {
+export function getActiveAdress(game) {
 
     if (game == "XY") {
         return 0x83E7098;

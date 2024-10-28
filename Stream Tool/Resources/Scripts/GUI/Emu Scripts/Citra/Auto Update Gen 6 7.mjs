@@ -13,7 +13,7 @@ import { getPartyIndexes } from "./Memory Locations/Party Indexes.mjs";
 import { getPokeBattle } from "./Memory Locations/Battle Pokemon.mjs";
 import { readPartyData } from "./Memory Locations/Party Pokemon.mjs";
 import { getActivePokemon, resetActivePokemon } from "./Memory Locations/Active Pokemon.mjs";
-import { getBattleState, setBattleState } from "../../Team/Battle State.mjs";
+import { setBattleState } from "../../Team/Battle State.mjs";
 import { wildEncounter } from "../../VS Wild/Wild Pokemon.mjs";
 import { updateWildEnc } from "../../VS Wild/Update Wild.mjs";
 import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";

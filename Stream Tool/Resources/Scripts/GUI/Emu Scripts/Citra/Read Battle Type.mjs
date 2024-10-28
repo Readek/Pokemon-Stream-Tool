@@ -1,5 +1,6 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
+import { getActiveAdress } from "./Memory Locations/Active Pokemon.mjs";
 import { getBattleAddress } from "./Memory Locations/Battle Pokemon.mjs";
 import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
 
@@ -22,18 +23,28 @@ export async function getBattleType() {
         const address = getBattleAddress(battleTypes[i], current.game);
         const data = await citra.readMemory(address + dataBegin, dataLenght);
 
-        if (!data) { // if we lost connection with the emu
-            return;
-        }
+        // if we lost connection with the emu
+        if (!data) return;
 
         if (checkData(data)) { // if the data is an actual poke
 
-            // we need more checks for gen7
+            // in gen7, battle memory doesn't get flushed out after a battle
+            // this means that we need to make aditional checks
             if (current.generation == 7) {
+
+                // i have literally no idea what this is
+                // but its 0 out of combat and 1 in combat
+                const someAdd = current.game == "SM" ? 0x341c8ccd : 0x33fc1f65;
+                const pokeData = await citra.readMemory(someAdd, 1);
+                
+                if (!pokeData[0]) return "None";
+
+                // also, in gen7 every type ofbattle happens on the same memory locations
                 // if there is no trainer name, this will be a wild battle
                 const trainerName = await getEnemyTrainerName();
                 if (!trainerName) return "Wild";
                 return "Trainer";
+
             }
 
             return battleTypes[i];
