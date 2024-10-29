@@ -15,10 +15,6 @@ export async function getEnemyTrainerName() {
 
     // get the trainer's name
     const nameData = await citra.readMemory(address, length);
-
-    // if first character is empty, we are sure we arent in a fight currently
-    if (!nameData[0]) return "";
-
     const nameRaw = struct(`<${length/2}h`).unpack(nameData.buffer);
 
     // convert it to something readable

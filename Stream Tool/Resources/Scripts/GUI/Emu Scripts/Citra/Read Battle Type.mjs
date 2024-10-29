@@ -1,8 +1,6 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
-import { getActiveAdress } from "./Memory Locations/Active Pokemon.mjs";
 import { getBattleAddress } from "./Memory Locations/Battle Pokemon.mjs";
-import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
 
 const battleTypes = ["Wild", "Trainer", "Multi"];
 const dataBegin = 4; // where to start to read
@@ -34,15 +32,15 @@ export async function getBattleType() {
 
                 // i have literally no idea what this is
                 // but its 0 out of combat and 1 in combat
-                const someAdd = current.game == "SM" ? 0x341c8ccd : 0x33fc1f65;
-                const pokeData = await citra.readMemory(someAdd, 1);
-                
-                if (!pokeData[0]) return "None";
+                const someAdd = current.game == "SM" ? 0x341C8CCD : 0x33FC1F65;
+                const someData = await citra.readMemory(someAdd, 1);
+                if (!someData[0]) return "None";
 
-                // also, in gen7 every type ofbattle happens on the same memory locations
-                // if there is no trainer name, this will be a wild battle
-                const trainerName = await getEnemyTrainerName();
-                if (!trainerName) return "Wild";
+                // also, in gen7 every battle type happens on the same memory location
+                // and again, i have no idea what this is, but 0 for wilds 1 for trainers
+                const otherAdd = current.game == "SM" ? 0x3421BD74 : 0x340178B9;
+                const otherData = await citra.readMemory(otherAdd, 1);
+                if (!otherData[0]) return "Wild";
                 return "Trainer";
 
             }

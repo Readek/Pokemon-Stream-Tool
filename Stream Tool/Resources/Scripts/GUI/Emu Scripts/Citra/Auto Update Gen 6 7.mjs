@@ -187,8 +187,10 @@ async function autoUpdateData(firstLoop) {
         // memory locations, memory wont be fully filled up by the game yet
         if (battleType == "Trainer" || battleType == "Multi" || battleType == "Wild") {
 
-            // 2500 being the time a wild pokemon takes to appear on screen :)
-            await new Promise(resolve => setTimeout(resolve, 2500));
+            // delay being the time a wild pokemon takes to appear on screen :)
+            // gen 7 has longer delay because we know battle state earlier there
+            const delayTime = current.generation == 6 ? 2500 : 4500;
+            await new Promise(resolve => setTimeout(resolve, delayTime));
 
         } else {
             
