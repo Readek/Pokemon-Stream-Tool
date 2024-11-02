@@ -1,4 +1,5 @@
 import { BattlePokemon } from "./Battle Pokemon.mjs";
+import { setTrainerPokeCount } from "./Trainer Name Intro.mjs";
 
 const pokesDiv = document.getElementById("battleDiv");
 
@@ -35,7 +36,7 @@ class BattlePokemons {
     }
 
     /**
-     * 
+     * Updates pokemon battle data
      * @param {Object} data - Team battle data
      * @param {Boolean} playerOrEnemy - True if player, false if enemy
      */
@@ -68,6 +69,7 @@ class BattlePokemons {
         }
 
         let actPokeCount = 0;
+        let pokeCount = 0;
         for (let i = 0; i < data.length; i++) {
 
             // time to update everything everywhere all at once
@@ -76,7 +78,12 @@ class BattlePokemons {
             // get an active mon count to determine battle mode
             if (data[i].inCombat) actPokeCount++;
 
+            // send a poke count for trainer intro
+            if (!playerOrEnemy && data[i].species) pokeCount++;
+
         }
+
+        setTrainerPokeCount(pokeCount);
 
         // notify teams of gamemode
         for (let i = 0; i < team.length; i++) {

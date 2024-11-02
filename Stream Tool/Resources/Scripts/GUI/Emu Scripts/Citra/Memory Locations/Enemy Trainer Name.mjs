@@ -4,7 +4,7 @@ import struct from "../struct.mjs";
 
 /**
  * Gets the current battle enemy's trainer name and title
- * @returns {String} Title + Name
+ * @returns {{title: String, name: String}}
  */
 export async function getEnemyTrainerName() {
 
@@ -19,22 +19,19 @@ export async function getEnemyTrainerName() {
 
     // convert it to something readable
     const nameUtf = Encoding.convert(nameRaw, {
-        to: "UTF32",
-        from: "UNICODE"
+        to: "UTF32", from: "UNICODE"
     });
     const name = Encoding.codeToString(nameUtf);
 
     // do the same for the trainer's title
     const titleData = await citra.readMemory(address + offset, length + 10);
     const titleRaw = struct(`<${(length+10)/2}h`).unpack(titleData.buffer);
-
     const titleUtf = Encoding.convert(titleRaw, {
-        to: "UTF32",
-        from: "UNICODE"
+        to: "UTF32", from: "UNICODE"
     });
     const title = Encoding.codeToString(titleUtf);
 
-    return title + " " + name;
+    return {title: title, name: name};
 
 }
 

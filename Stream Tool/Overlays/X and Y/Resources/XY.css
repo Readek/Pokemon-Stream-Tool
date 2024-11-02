@@ -476,7 +476,7 @@ html, body {
 }
 
 
-/** Battle Bottom Bar */
+/** Battle Overlay Bottom Section */
 
 #battleDiv {
     position: absolute;
@@ -762,6 +762,76 @@ html, body {
 }
 
 
+/* Enemy Trainer Intro */
+
+#enemyNameIntroDiv {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 181px;
+    bottom: 3px;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0px 0px 3px black);
+    font-family: "Aero";
+    color: #f8f8f8;
+    animation: trainerIntroFull 3.5s both;
+}
+#enemyNameIntroContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+}
+#enemyNameIntroTexts {
+    margin-bottom: -5px;
+    animation: trainerIntroTexts 3.5s both;
+    padding: 0px 30px;
+}
+#enemyNameIntroVs {
+    font-size: 40px;
+}
+#enemyNameIntroTitle {
+    font-size: 56px;
+    -webkit-text-stroke: 1px rgb(129, 54, 54);
+    margin: 0px 10px;
+}
+#enemyNameIntroName {
+    font-size: 64px;
+    font-weight: bold;
+    -webkit-text-stroke: 2px rgb(122, 30, 30);
+}
+
+.enemyNameIntroBar {
+    height: 4px;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+#enemyNameIntroTopBar {
+    animation: trainerIntroTopBar 3.5s both;
+}
+#enemyNameIntroBotBar {
+    animation: trainerIntroBotBar 3.5s both;
+}
+
+#enemyNameIntroPokeCountDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    animation: trainerIntroCount 3.5s both;
+}
+#enemyNameIntroPokeImg {
+    filter: invert(1);
+}
+#enemyNameIntroEqual {
+    margin-right: 8px;
+}
+#enemyNameIntroPokeCount {
+    transform: translateY(2px);
+}
+
 /** Other */
 
 .flipBack {
@@ -849,7 +919,42 @@ html, body {
 }
 
 @keyframes megaAnim {
-    0% { filter: brightness(1);}
-    85% { filter: brightness(15);}
-    100% { filter: brightness(1);}
+    0% {filter: brightness(1);}
+    85% {filter: brightness(15);}
+    100% {filter: brightness(1);}
+}
+
+
+@keyframes trainerIntroFull {
+    0% {transform: translateY(20px);}
+    35% {transform: translateY(20px);}
+    45% {transform: translateY(0px);}
+}
+@keyframes trainerIntroTopBar {
+    0% {transform: translateX(-100%);}
+    15% {transform: translateX(0%);}
+    85% {transform: translateX(0%);}
+    100% {transform: translateX(100%);}
+}
+@keyframes trainerIntroBotBar {
+    0% {transform: translateX(100%);}
+    15% {transform: translateX(0%);}
+    85% {transform: translateX(0%);}
+    100% {transform: translateX(-100%);}
+}
+@keyframes trainerIntroTexts {
+    0% {transform: translateX(40px); opacity: 0;}
+    5% {transform: translateX(40px); opacity: 0;}
+    15% {transform: translateX(0px); opacity: 1;}
+    85% {transform: translateX(0px); opacity: 1;}
+    95% {transform: translateX(-40px); opacity: 0;}
+    100% {transform: translateX(-40px); opacity: 0;}
+}
+
+@keyframes trainerIntroCount {
+    0% {opacity: 0;}
+    35% {opacity: 0;}
+    45% {opacity: 1;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
 }

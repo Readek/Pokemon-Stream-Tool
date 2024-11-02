@@ -1,17 +1,27 @@
 import { TeamPokemon } from "../Team/TeamPokemon.mjs";
 
 const trainerNameInp = document.getElementById("trainerNameInp");
+const trainerName = {};
 
 /**
  * Updates the Enemy Trainer's name input field
- * @param {String} name - Name of the trainer
+ * @param {{title: String, name: String}} nameData - Name of the trainer
  */
-export function setEnemyTrainerName(name) {
-    trainerNameInp.value = name;
+export function setEnemyTrainerName(nameData) {
+
+    trainerName.title = nameData.title;
+    trainerName.name = nameData.name;
+
+    if (nameData.name) {
+        trainerNameInp.value = nameData.title + " " + nameData.name;
+    } else {
+        trainerNameInp.value = "";
+    }
+
 }
-/** @returns {String} */
+/** @returns {{title: String, name: String}} */
 export function getEnemyTrainerName() {
-    return trainerNameInp.value;
+    return trainerName;
 }
 
 /** @type {TeamPokemon[]} */

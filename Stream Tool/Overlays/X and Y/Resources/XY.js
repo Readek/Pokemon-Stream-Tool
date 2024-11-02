@@ -4,6 +4,7 @@ import { current } from "./Scripts/Globals.mjs";
 import { playerInfo } from "./Scripts/Player Info.mjs";
 import { pokemons } from "./Scripts/Player Team/Pokemons.mjs";
 import { battlePokemons } from "./Scripts/Trainer Battle/Battle Pokemons.mjs";
+import { setTrainerName, showTrainerNameIntro } from "./Scripts/Trainer Battle/Trainer Name Intro.mjs";
 import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
 
 // this is a weird way to have file svg's that can be recolored by css
@@ -64,6 +65,7 @@ async function updateData(data) {
             if (data.battleType != "Trainer") {
                 pokemons.show();
             } else {
+                await showTrainerNameIntro();
                 battlePokemons.show();
             }
 
@@ -79,6 +81,7 @@ async function updateData(data) {
 
     } else if (data.type == "Trainer") {
 
+        setTrainerName(data.trainerName);
         battlePokemons.update(data.trainerPokemons);
 
     } else if (data.type == "Config") {        

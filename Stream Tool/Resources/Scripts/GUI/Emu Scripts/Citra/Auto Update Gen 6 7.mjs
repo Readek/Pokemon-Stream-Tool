@@ -174,7 +174,7 @@ async function autoUpdateData(firstLoop) {
             }
 
             // clear trainer name
-            setEnemyTrainerName("");
+            setEnemyTrainerName({title: "", name: ""});
 
         }
 
