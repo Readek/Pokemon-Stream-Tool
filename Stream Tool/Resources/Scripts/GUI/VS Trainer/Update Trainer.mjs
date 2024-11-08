@@ -54,6 +54,7 @@ export async function updateTrainer() {
             hpMax : trainerPokemons[i].getHpMax(),
             ability : trainerPokemons[i].getAbility(),
             item : trainerPokemons[i].getItem(),
+            itemCoords : trainerPokemons[i].getItemCoords(),
             moves : trainerPokemons[i].getMoves(),
             stats : trainerPokemons[i].getStats(),
             boosts : trainerPokemons[i].getBoosts(),

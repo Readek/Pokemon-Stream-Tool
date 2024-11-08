@@ -1,8 +1,10 @@
 import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs";
-import { current, inside } from "../Globals.mjs";
+import { current, inside, stPath } from "../Globals.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { typeToColor } from "../Type to Color.mjs";
 import { updateTrainer } from "../VS Trainer/Update Trainer.mjs";
+
+/** @typedef {{left: Number, top: Number}} ItemCoords */
 
 const statKeys = ["hp", "atk", "def", "spa", "spd", "spe"];
 const statKeysUpper = ["Hp", "Atk", "Def", "SpA", "SpD", "Spe"];
@@ -25,7 +27,10 @@ export class TeamPokemon extends Pokemon {
     #ability = "";
     #abilityInp;
 
-    #item = "";
+    #item;
+    #itemImg;
+    /** @type {ItemCoords} */
+    #itemCoords;
     #itemInp;
 
     #move = [{},{},{},{}];
@@ -70,7 +75,11 @@ export class TeamPokemon extends Pokemon {
 
         this.#expInp = this.el.getElementsByClassName('pokeExpCurrent')[0];
         this.#abilityInp = this.el.getElementsByClassName('pokeAbility')[0];
+
+        // item
+        this.#itemImg = this.el.getElementsByClassName('pokeItemIcon')[0];
         this.#itemInp = this.el.getElementsByClassName('pokeItem')[0];
+        this.setItem("");
 
         // moves
         for (let i = 0; i < 4; i++) {
@@ -200,11 +209,41 @@ export class TeamPokemon extends Pokemon {
         return this.#item;
     }
     /** @param {String} value - Ability name */
-    setItem(value) {
+    setItem(value) {        
+
         if (this.getItem() == value) return;
-        this.#item = value
-        this.#itemInp.value = getLocalizedPokeText(value, "Item", current.generation);
-        this.#itemInp.setAttribute("locItem", value);
+        this.#item = value;
+
+        // localize this item to current language
+        if (value) {            
+            this.#itemInp.innerHTML = getLocalizedPokeText(value, "Item", current.generation);
+            this.#itemInp.setAttribute("locItem", value);
+            this.#itemInp.removeAttribute("locText");
+        } else {
+            this.#itemInp.innerHTML = getLocalizedText("pokeItemNone");
+            this.#itemInp.setAttribute("locText", "pokeItemNone");
+            this.#itemInp.removeAttribute("locItem");
+        }
+        
+
+        // set the item's icon
+        this.#itemCoords = pkmn.img.Icons.getItem(value, {domain: stPath.poke});
+        const imgSrc = this.#itemCoords.left != -0 // if no icon found, display a placeholder
+            ? `${stPath.assets}/Items/itemicons-sheet.png`
+            : `${stPath.assets}/Items/None.png`;
+        
+        this.#itemImg.src = imgSrc;
+        this.#itemImg.style.objectPosition = `
+            ${this.#itemCoords.left}px ${this.#itemCoords.top}px
+        `;
+        
+    }
+    /**
+     * Item icon coordinates for the icon spritesheet
+     * @returns {ItemCoords}
+    */
+    getItemCoords() {
+        return this.#itemCoords;
     }
 
     /** @typedef {[{name: String, type: String, pp: Number}]} Moves */
@@ -486,8 +525,10 @@ export class TeamPokemon extends Pokemon {
 
                         <div class="pokeDetailsDiv" locTitle="pokeItemTitle">
                             <div class="pokeTopRowText pokeItemText" locText="pokeItem"></div>
+
                             <div class="pokeItemDiv">
-                                <input class="pokeDetailsInput pokeItem" type="text" locPHolder="pokeItemPHolder">
+                                <img class="pokeItemIcon"/>
+                                <div class="pokeDetailsInput pokeItem"></div>
                             </div>
                         </div>
 

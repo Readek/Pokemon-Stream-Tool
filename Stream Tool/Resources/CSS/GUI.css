@@ -694,17 +694,25 @@ button:hover {
   text-align: center;
 }
 
+.pokeItemIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: none;
+  image-rendering: pixelated;
+  display: inline-block;
+}
 .pokeItemText {
   width: 90px;
 }
 .pokeItem {
-  width: 150px;
   text-align: center;
 }
 
 .pokeAbilityDiv, .pokeItemDiv {
   position: relative;
   display: flex;
+  align-items: end;
+  gap: 2px;
 }
 
 .pokeMoveBlock {

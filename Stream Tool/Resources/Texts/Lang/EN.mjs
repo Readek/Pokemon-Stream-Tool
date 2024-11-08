@@ -70,8 +70,8 @@ export const lang = {
     pokeAbilityPHolder : "None?",
 
     pokeItemTitle : "Pokemon's held item",
-    pokeItem : "Held Item ",
-    pokeItemPHolder : "None",
+    pokeItem : "Held Item",
+    pokeItemNone : "No item",
 
     pokeMoves : "Pokemon's current movements",
     pokePP : "PP",

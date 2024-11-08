@@ -202,7 +202,6 @@ export class Pokemon {
             const imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {
                 side: 'p2',
                 gender: this.getGender(),
-                protocol: 'http',
                 domain: stPath.poke
             });
             this.#iconCoords.p2.left = imgInfo.left;
