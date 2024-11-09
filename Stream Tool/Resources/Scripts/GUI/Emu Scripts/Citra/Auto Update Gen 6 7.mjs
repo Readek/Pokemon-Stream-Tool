@@ -19,6 +19,7 @@ import { updateWildEnc } from "../../VS Wild/Update Wild.mjs";
 import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
 import { setBadges } from "../../Player/Badges.mjs";
 import { getRawBadges } from "./Memory Locations/Badges.mjs";
+import { updatePlayer } from "../../Player/Update Player.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 
@@ -210,6 +211,7 @@ async function autoUpdateData(firstLoop) {
         // gym badges (no known data for gen7 yet)
         if (current.generation == 6) {                
             setBadges(await getRawBadges());
+            updatePlayer();
         }
 
     }

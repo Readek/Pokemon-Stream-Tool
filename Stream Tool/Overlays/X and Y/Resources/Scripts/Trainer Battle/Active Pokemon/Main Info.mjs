@@ -3,6 +3,8 @@ import { current } from "../../Globals.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
 
+/** @typedef {{left: Number, top: Number}} ItemCoords */
+
 export class ActiveMainInfo {
 
     #player;
@@ -32,8 +34,12 @@ export class ActiveMainInfo {
     #typeImg2;
     #nameText;
     #abilityText;
+    #itemImg;
+    #itemQue;
+    /** @type {ItemCoords} */
+    #itemCoords;
     #itemText;
-    #itemPipe;
+    #itemDiv;
     #hpText;
     #hpBar;
 
@@ -54,15 +60,24 @@ export class ActiveMainInfo {
         const el = this.#createElement(fullEl);
 
         this.#mainEl = el;
+
         this.#imgEl = el.getElementsByClassName(`activePokeImg`)[0];
+
         this.#lvlText = el.getElementsByClassName("activeLvlNum")[0];
+
         const typeImgs = el.getElementsByClassName("activeTypeIcon");
         this.#typeImg1 = typeImgs[0];
         this.#typeImg2 = typeImgs[1];
+
         this.#nameText = el.getElementsByClassName("activeName")[0];
+
         this.#abilityText = el.getElementsByClassName("activeAbility")[0];
+
+        this.#itemImg = el.getElementsByClassName("activeItemImg")[0];
+        this.#itemQue = el.getElementsByClassName("activeItemImgQue")[0];
         this.#itemText = el.getElementsByClassName("activeItem")[0];
-        this.#itemPipe = el.getElementsByClassName("activeItemPipe")[0];
+        this.#itemDiv = el.getElementsByClassName("activeItemDiv")[0];
+
         this.#hpText = el.getElementsByClassName("activeHpText")[0];
         this.#hpBar = el.getElementsByClassName("pokeHpBarCurrent")[0];
 
@@ -113,8 +128,16 @@ export class ActiveMainInfo {
                     <div class="activeName ${flipBack}"></div>
                     <div class="activeSubText">
                         <div class="activeAbility ${flipBack}"></div>
-                        <div class="activeItemPipe">|</div>
-                        <div class="activeItem ${flipBack}"></div>
+                        <div class="activeItemDiv">
+                            <div class="activeItemPipe">|</div>
+                            <div class="activeItemImgDiv">
+                                <div class="activeItemImgBg"></div>
+                                <div class="activeItemImgQue ${flipBack}">?</div>
+                                <img class="activeItemImg" src="../../Resources/Assets/Items/itemicons-sheet.png"/>
+                            </div>
+                            <div class="activeItem ${flipBack}"></div>
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -280,31 +303,39 @@ export class ActiveMainInfo {
         return this.#item;
     }
     /**
-     * @param {String} item 
+     * @param {String} item
+     * @param {ItemCoords} coords 
      * @param {Boolean} reveal
      */
-    setItem(item, reveal) {
+    setItem(item, coords, reveal) {
 
         if (item == this.#item && !reveal) return;
 
         this.#item = item;
+        if (coords) this.#itemCoords = coords;
 
         // if this is an enemy
         if (!this.#player) {
 
             // hide item unless it is revealed
             item = reveal ? item : "???";
+            this.#itemQue.style.display = reveal ? "none" : "flex";
+            this.#itemImg.style.display = reveal ? "block" : "none"
 
         }
 
         this.#itemText.innerHTML = getLocalizedPokeText(item, "Item", current.generation);
         this.#itemText.setAttribute("locItem", this.#item);
 
-        // hide pipe if no item
+        this.#itemImg.style.objectPosition = `
+            ${this.#itemCoords.left}px ${this.#itemCoords.top}px
+        `
+
+        // hide div if no item
         if (!item) {
-            this.#itemPipe.style.display = "none";
+            this.#itemDiv.style.display = "none";
         } else {
-            this.#itemPipe.style.display = "block";
+            this.#itemDiv.style.display = "flex";
         }
 
     }
@@ -416,7 +447,7 @@ export class ActiveMainInfo {
         } else if (hp <= 0) { // 0% and also reveal info for enemies
             this.setStatus("Ded");
             this.setAbility(this.#ability, true);
-            this.setItem(this.#item, true);
+            this.setItem(this.#item, null, true);
             this.#parent.revealAll();
         } else if (hp <= this.#hpMax*.2) { // 20%
             this.#mainEl.style.setProperty("--activeColor", "var(--danger)");
@@ -447,7 +478,7 @@ export class ActiveMainInfo {
                 this.setAbility(this.#ability, true)
             }
             if (reveals[i] == "Item") {
-                this.setItem(this.#item, true);
+                this.setItem(this.#item, null, true);
             }
         }
 
@@ -519,7 +550,7 @@ export class ActiveMainInfo {
                 setTimeout(() => {
                     this.setImg(data.img);
                     this.setAbility(data.ability, true);
-                    this.setItem(data.item, true);
+                    this.setItem(data.item, null, true);
                 }, 2700 + (megatime)); 
                 if (this.#player) current.megaTime = 0;
             } else {
@@ -547,7 +578,7 @@ export class ActiveMainInfo {
         this.setAbility(data.ability);
 
         // set item
-        this.setItem(data.item);
+        this.setItem(data.item, data.itemCoords);
         
         // set status condition
         this.setStatus(data.status);
