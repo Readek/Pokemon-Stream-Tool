@@ -15,7 +15,8 @@ export class ActiveMainInfo {
     #types = [];
     #name = "¡";
     #ability = "";
-    #item = " ";
+    /** @type {String} */
+    #item;
     #status = "";
     #shiny = false;
 
@@ -284,10 +285,14 @@ export class ActiveMainInfo {
 
         if (ability == this.#ability && !reveal) return;
 
+        const oldAbi = this.#ability;
         this.#ability = ability;
 
         // if this is an enemy
         if (!this.#player) {
+
+            // if ability changed, reveal it (unset ability is falsy)
+            if (oldAbi) reveal = true;
 
             // hide ability unless it is revealed
             ability = reveal ? ability : "???";
@@ -304,18 +309,22 @@ export class ActiveMainInfo {
     }
     /**
      * @param {String} item
-     * @param {ItemCoords} coords 
+     * @param {ItemCoords | null} coords 
      * @param {Boolean} reveal
      */
     setItem(item, coords, reveal) {
 
         if (item == this.#item && !reveal) return;
 
+        const oldItem = this.#item;
         this.#item = item;
         if (coords) this.#itemCoords = coords;
 
         // if this is an enemy
         if (!this.#player) {
+
+            // if item changed, reveal it (unset item is falsy)
+            if (oldItem) reveal = true;
 
             // hide item unless it is revealed
             item = reveal ? item : "???";
@@ -528,6 +537,7 @@ export class ActiveMainInfo {
     update(data) {
 
         this.#noHpAnim = false;
+        let megaEvolving;
 
         // set species
         if (data.species != this.getSpecies() ||
@@ -536,7 +546,6 @@ export class ActiveMainInfo {
             // dont animate hp changes if pokemon changed
             this.#noHpAnim = true;
 
-            let megaEvolving;
             if (data.species == this.getSpecies() && data.form.includes("Mega")) {
                 megaEvolving = true;
             }
@@ -574,8 +583,8 @@ export class ActiveMainInfo {
         // set name
         this.setName(data.nickName);
 
-        // set ability
-        this.setAbility(data.ability);
+        // set ability, if mega we will just reveal it on a timer up there
+        if (!megaEvolving) this.setAbility(data.ability);
 
         // set item
         this.setItem(data.item, data.itemCoords);
