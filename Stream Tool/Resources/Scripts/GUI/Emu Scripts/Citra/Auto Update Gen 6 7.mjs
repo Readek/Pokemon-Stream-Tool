@@ -193,6 +193,12 @@ async function autoUpdateData(firstLoop) {
             const delayTime = current.generation == 6 ? 2500 : 4500;
             await new Promise(resolve => setTimeout(resolve, delayTime));
 
+            // gym badges (no known data for gen7 yet)
+            if (current.generation == 6) {                
+                setBadges(await getRawBadges());
+                updatePlayer();
+            }
+
         } else {
             
             // a tiny wait just in case
@@ -206,12 +212,6 @@ async function autoUpdateData(firstLoop) {
         // get us the trainer's name, just once
         if (battleType == "Trainer") {
             setEnemyTrainerName(await getEnemyTrainerName());
-        }
-
-        // gym badges (no known data for gen7 yet)
-        if (current.generation == 6) {                
-            setBadges(await getRawBadges());
-            updatePlayer();
         }
 
     }
@@ -261,7 +261,13 @@ async function autoUpdateData(firstLoop) {
                 pokemons[i].setStatus(rawPokesIndexed[i].status());
 
             }
-            
+
+        }
+
+        // gym badges (no known data for gen7 yet)
+        if (current.generation == 6) {                
+            setBadges(await getRawBadges());
+            updatePlayer();
         }
 
     } else { // in combat
