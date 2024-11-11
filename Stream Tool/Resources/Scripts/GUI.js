@@ -47,6 +47,14 @@ async function init() {
            )
         }
 
+        // items icons spritesheet
+        if (!await fileExists(stPath.assets + "/Items/itemicons-sheet.png")) {
+            await fetchFile(
+             "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets/-/raw/main/play.pokemonshowdown.com/sprites/itemicons-sheet.png",
+             stPath.assets + "/Items/itemicons-sheet.png"
+            )
+        }
+
         // offsets
         if (!await fileExists(stPath.assets + "/Pokemon/sprites/offsets.json")) {
             await fetchFile(
@@ -56,7 +64,7 @@ async function init() {
         }
 
     }
-    
+
     // initialize our pokemon class
     for (let i = 0; i < 6; i++) {
         pokemons.push(new TeamPokemon());
