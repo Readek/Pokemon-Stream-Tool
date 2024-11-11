@@ -75,7 +75,7 @@ export function getBattleAddress(type) {
         if (game == "XY") {
             return 0x8209D98;
         } else if (game == "ORAS") {
-            return 0x82097B4;
+            return 0x820932C;
         }
 
     }
