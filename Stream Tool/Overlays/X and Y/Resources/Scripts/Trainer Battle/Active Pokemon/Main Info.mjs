@@ -323,8 +323,8 @@ export class ActiveMainInfo {
         // if this is an enemy
         if (!this.#player) {
 
-            // if item changed, reveal it (unset item is falsy)
-            if (oldItem) reveal = true;
+            // if item changed, reveal it
+            if (oldItem != undefined) reveal = true;
 
             // hide item unless it is revealed
             item = reveal ? item : "???";
