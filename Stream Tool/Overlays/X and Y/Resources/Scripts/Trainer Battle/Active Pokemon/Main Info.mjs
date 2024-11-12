@@ -4,6 +4,12 @@ import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
 
 /** @typedef {{left: Number, top: Number}} ItemCoords */
+/**
+ * @typedef {{
+ *  gen5Front: String, gen5Back: String, aniFront: String, aniBack: String,
+ *  gen5FrontOffs: Number[], gen5BackOffs: Number[], aniFrontOffs: Number[], aniBackOffs: Number[]
+ * }} ImgData
+ */
 
 export class ActiveMainInfo {
 
@@ -25,8 +31,6 @@ export class ActiveMainInfo {
     #hpActive = -1;
     #hpDecreasing = false;
     #noHpAnim = false;
-
-    #img = "";
 
     #mainEl;
     #imgEl;
@@ -200,30 +204,34 @@ export class ActiveMainInfo {
 
     /**
      * Set the image path for this pokemon, as well as position offsets
-     * @param {String[]} img 
+     * @param {ImgData} imgData 
      */
-    setImg(img) {
+    setImg(imgData) {
 
-        // We compensate to account for the cases where the gif center is skewed
-        // towards a place where the Pokémon doesn't spend that much time;
-        // e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their
-        // body (Thundurus-Therian, Timburr).
-        // The offsets are the difference between the actual center of the gif
-        // and the mean of the bounding boxes of each gif frame, and are precalculated
-        // using a Python script included in the assets repo.
-        const offset = img["gen5FrontOffs"];
-        this.#imgEl.style.transform = `
-            scaleX(-2) scaleY(2)
-            translate(${offset[0]}px, ${offset[1]}px)
-        `;
-        
-        // actual image change
-        this.#img = img;
-        this.#imgEl.src = img["gen5Front"];
-    
-    }
-    getImgSrc() {
-        return this.#img;
+        // load up the next new image
+        const newImg = new Image();
+        newImg.src = imgData.gen5Front;
+        // decoding here is done so img swap and offset changes sync up
+        newImg.decode().then(() => {
+
+            // change the actual image
+            this.#imgEl.src = newImg.src;
+
+            // We compensate to account for the cases where the gif center is skewed
+            // towards a place where the Pokémon doesn't spend that much time;
+            // e.g., Pokémon that jump (Rotom-Heat, Weavile) or extend their
+            // body (Thundurus-Therian, Timburr).
+            // The offsets are the difference between the actual center of the gif
+            // and the mean of the bounding boxes of each gif frame, and are precalculated
+            // using a Python script included in the assets repo.
+            const offset = imgData.gen5FrontOffs;
+            this.#imgEl.style.transform = `
+                scaleX(-2) scaleY(2)
+                translate(${offset[0]}px, ${offset[1]}px)
+            `;
+
+        })
+
     }
 
     /** @param {Number} lvl */
