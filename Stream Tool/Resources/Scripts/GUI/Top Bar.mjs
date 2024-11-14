@@ -1,65 +1,42 @@
-const catchesButton = document.getElementById("topBarCatches");
-const teamButton = document.getElementById("topBarTeam");
-const playerButton = document.getElementById("topBarPlayer");
-const vsWildButton = document.getElementById("topBarVsWild");
-const vsTrainerButton = document.getElementById("topBarVsTrainer");
-const settingsButton = document.getElementById("topBarSettings");
-
-const catchesDiv = document.getElementById("catchesRegion");
-const teamDiv = document.getElementById("teamRegion");
-const playerDiv = document.getElementById("playerInfoRegion");
-const vsWildDiv = document.getElementById("vsWildRegion");
-const vsTrainerDiv = document.getElementById("vsTrainerRegion");
-const settingsDiv = document.getElementById("settingsRegion");
-
-const buttons = document.getElementsByClassName("topBarButton");
-const regions = document.getElementsByClassName("region");
-
-catchesButton.addEventListener("click", showCatchesRegion);
-teamButton.addEventListener("click", showTeamRegion);
-playerButton.addEventListener("click", showPlayerRegion);
-vsWildButton.addEventListener("click", showVsWildRegion);
-vsTrainerButton.addEventListener("click", showVsTrainerRegion);
-settingsButton.addEventListener("click", showSettingsRegion);
-
-
-function showCatchesRegion() {
-    hideAll();
-    catchesDiv.style.display = "flex";
-    catchesButton.classList.add("topBarSelected");
+const buttons = {
+    catches: document.getElementById("topBarCatches"),
+    team: document.getElementById("topBarTeam"),
+    player: document.getElementById("topBarPlayer"),
+    wild: document.getElementById("topBarVsWild"),
+    trainer: document.getElementById("topBarVsTrainer"),
+    settings: document.getElementById("topBarSettings")
 }
-function showTeamRegion() {
-    hideAll();
-    teamDiv.style.display = "flex";
-    teamButton.classList.add("topBarSelected");
+const regions = {
+    catches: document.getElementById("catchesRegion"),
+    team: document.getElementById("teamRegion"),
+    player: document.getElementById("playerInfoRegion"),
+    wild: document.getElementById("vsWildRegion"),
+    trainer: document.getElementById("vsTrainerRegion"),
+    settings: document.getElementById("settingsRegion")
 }
-function showPlayerRegion() {
-    hideAll();
-    playerDiv.style.display = "flex";
-    playerButton.classList.add("topBarSelected");
+
+for (const key in buttons) {
+    buttons[key].addEventListener("click", () => {showRegion(key)});
 }
-function showVsWildRegion() {
+
+/**
+ * Displays the requested region and styles selected button
+ * @param {String} key - Name of region
+ */
+function showRegion(key) {
     hideAll();
-    vsWildDiv.style.display = "flex";
-    vsWildButton.classList.add("topBarSelected");
-}
-function showVsTrainerRegion() {
-    hideAll();
-    vsTrainerDiv.style.display = "flex";
-    vsTrainerButton.classList.add("topBarSelected");
-}
-function showSettingsRegion() {
-    hideAll();
-    settingsDiv.style.display = "flex";
-    settingsButton.classList.add("topBarSelected");
+    regions[key].style.display = "flex";
+    buttons[key].classList.add("topBarSelected");
 }
 
 /** Hides all region divs and removes selected button style */
 function hideAll() {
 
-    for (let i = 0; i < regions.length; i++) {
-        regions[i].style.display = "none";
-        buttons[i].classList.remove("topBarSelected");        
+    for (const key in regions) {
+        regions[key].style.display = "none";
+    }
+    for (const key in buttons) {
+        buttons[key].classList.remove("topBarSelected");
     }
 
 }

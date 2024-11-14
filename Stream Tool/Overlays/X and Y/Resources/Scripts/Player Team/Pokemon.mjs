@@ -1,6 +1,7 @@
 import { typeToColor } from "../Type to Color.mjs";
 import { getLocalizedPokeText, getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
 import { current } from "../Globals.mjs";
+/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 export class Pokemon {
 
@@ -352,7 +353,7 @@ export class Pokemon {
 
     /**
      * Updates data for this pokemon if its different from previous data
-     * @param {Object} data - Full data for this pokemon
+     * @param {PokemonSentData} data - Full data for this pokemon
      * @param {Boolean} bTypeChanged - If we just swapped battle type
      */
     async update(data, bTypeChanged) {

@@ -1,11 +1,12 @@
 import { TeamPokemon } from "../Team/TeamPokemon.mjs";
+/** @import { EnemyTrainerName } from "../../Utils/Type Definitions.mjs" */
 
 const trainerNameInp = document.getElementById("trainerNameInp");
 const trainerName = {};
 
 /**
  * Updates the Enemy Trainer's name input field
- * @param {{title: String, name: String}} nameData - Name of the trainer
+ * @param {EnemyTrainerName} nameData - Name of the trainer
  */
 export function setEnemyTrainerName(nameData) {
 
@@ -19,7 +20,7 @@ export function setEnemyTrainerName(nameData) {
     }
 
 }
-/** @returns {{title: String, name: String}} */
+/** @returns {EnemyTrainerName} */
 export function getEnemyTrainerName() {
     return trainerName;
 }

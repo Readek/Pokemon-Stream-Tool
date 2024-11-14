@@ -1,3 +1,5 @@
+/** @import { PokeType } from "../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+
 const colors = {
     "Bug": "#91c12c",
     "Dark": "#5a5467",
@@ -21,7 +23,7 @@ const colors = {
 
 /**
  * Returns a hex color code for a given type
- * @param {String} type
+ * @param {PokeType} type
  * @returns {String} 
  */
 export function typeToColor(type) {

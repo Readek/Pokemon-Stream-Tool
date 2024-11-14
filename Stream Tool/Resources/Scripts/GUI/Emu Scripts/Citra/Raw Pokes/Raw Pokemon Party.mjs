@@ -3,6 +3,7 @@ import { current } from "../../../Globals.mjs";
 import { decryptData } from "../Crypts.mjs";
 import { validateRawPokemon } from "../Utils.mjs";
 import struct from "../struct.mjs";
+/** @import {Stats} from "../../../../Utils/Type Definitions.mjs" */
 
 export class RawPokemonParty {
 
@@ -370,12 +371,12 @@ export class RawPokemonParty {
     /**
      * @typedef {{
      *  hp: Number, atk: Number, def: Number, spa: Number, spd: Number, spe: Number
-     * }} Stats
+     * }} EvIvStats
      */
 
     /**
      * Gets this pokemon's Effort Values
-     * @returns {Stats}
+     * @returns {EvIvStats}
      */
     ev() {
 
@@ -394,7 +395,7 @@ export class RawPokemonParty {
 
     /**
      * Gets this pokemon's Individual Values
-     * @returns {Stats}
+     * @returns {EvIvStats}
      */
     iv() {
 
@@ -414,14 +415,8 @@ export class RawPokemonParty {
     }
 
     /**
-     * @typedef {{num: Number, ev: Number, iv: Number}} StatKey
-     */
-
-    /**
      * Gathers all stats from this pokemon
-     * @returns {{
-     *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
-     * }}
+     * @returns {Stats}
      */
     stats() {
 
@@ -440,7 +435,7 @@ export class RawPokemonParty {
             }
 
         }
-        
+
         return this.statsValue;
 
     }

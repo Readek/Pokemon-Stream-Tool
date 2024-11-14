@@ -2,6 +2,7 @@ import { getLocalizedText } from "../../../../Utils/Language.mjs";
 import { current } from "../../../Globals.mjs";
 import { indexToType } from "../Type Indexes.mjs";
 import { validateRawPokemon } from "../Utils.mjs";
+/** @import { Boosts } from "../../../../Utils/Type Definitions.mjs" */
 
 export class RawPokemonBattle {
 
@@ -346,16 +347,7 @@ export class RawPokemonBattle {
         return this.#data[address] + this.#data[address+1]*256;
     }
 
-    /**
-     * @typedef {{num: Number} StatKey
-     */
-
-    /**
-     * Gathers base stats from this pokemon
-     * @returns {{
-     *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
-     * }}
-     */
+    /** Gathers base stats from this pokemon */
     stats() {
 
         if (this.#hasChanged) {
@@ -377,9 +369,7 @@ export class RawPokemonBattle {
 
     /**
      * Gathers stat boosts from this pokemon
-     * @returns {{
-     *  atk: Number, def: Number, spa: Number, spd: Number, spe: Number, pre: Number, eva: Number
-     * }}
+     * @returns {Boosts}
      */
     boosts() {
 

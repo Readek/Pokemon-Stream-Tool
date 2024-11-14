@@ -1,6 +1,7 @@
 import { getLocalizedText } from "../../Utils/Language.mjs";
 import { current } from "../Globals.mjs";
 import { clearAllTrainerPokemon } from "../VS Trainer/TrainerPokemons.mjs";
+/** @import { BattleType } from "../../Utils/Type Definitions.mjs" */
 
 const bTypeButt = document.getElementById("bTypeButt");
 
@@ -27,7 +28,7 @@ function toggleBattleState() {
 
 /**
  * Returns current team battle state
- * @returns {String}
+ * @returns {BattleType}
  */
 export function getBattleState() {
     return battleType;
@@ -35,7 +36,7 @@ export function getBattleState() {
 
 /**
  * Sets the current team battle state
- * @param {String} value - Battle type to swap to
+ * @param {BattleType} value - Battle type to swap to
  */
 export function setBattleState(value) {
     

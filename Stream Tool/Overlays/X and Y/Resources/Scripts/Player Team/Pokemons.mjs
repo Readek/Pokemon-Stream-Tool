@@ -1,4 +1,5 @@
 import { Pokemon } from "./Pokemon.mjs";
+/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 const pokesDiv = document.getElementById("botPokes");
 
@@ -26,7 +27,7 @@ class Pokemons {
 
     /**
      * Updates all pokemon info with the provided data
-     * @param {Object} data - Data for all pokemons
+     * @param {PokemonSentData[]} data - Data for all pokemons
      * @param {Boolean} bTypeChanged - If we just swapped battle type
      */
     update(data, bTypeChanged) {

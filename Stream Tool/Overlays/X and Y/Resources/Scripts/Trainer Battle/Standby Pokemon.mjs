@@ -1,7 +1,6 @@
 import { getLocalizedPokeText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
 import { current } from "../Globals.mjs";
-
-/** @typedef {{p1: {left: Number, top: Number}, p2: {left: Number, top: Number}}} IconCoords */
+/** @import { IconCoords } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 const playerActiveDiv = document.getElementById("battleStandbyBarPlayer");
 const enemyActiveDiv = document.getElementById("battleStandbyBarEnemy");

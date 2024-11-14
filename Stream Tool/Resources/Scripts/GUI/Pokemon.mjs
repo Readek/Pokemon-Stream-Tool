@@ -4,8 +4,7 @@ import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
 import { fileExists, getJson } from "./File System.mjs";
 import { fetchFile } from "./Fetch File.mjs";
 import { getLocalizedPokeText } from "../Utils/Language.mjs";
-
-/** @typedef {{p1: {left: Number, top: Number}, p2: {left: Number, top: Number}}} IconCoords */
+/** @import { PokeType, IconCoords, PokeGender, PokeImgData } from "../Utils/Type Definitions.mjs" */
 
 // this will sightly move sprite positions on the overlays
 const offsets = await getJson(stPath.poke + "/sprites/offsets");
@@ -14,8 +13,10 @@ const assRepoUrl = "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-a
 
 export class Pokemon {
 
+    /** @type {PokeGender}*/
     #gender = "M";
     #shiny = false;
+    /** @type {PokeType[]} */
     #types = [];
     #pokeData;
     #baseFormPokeData;
@@ -315,11 +316,11 @@ export class Pokemon {
 
     }
 
-    /** @returns {"M" | "F" | null} */
+    /** @returns {PokeGender} */
     getGender() {
         return this.#gender;
     }
-    /** @param {String} value - Can be null for genderless */
+    /** @param {PokeGender} value - Can be null for genderless */
     setGender(value = null) {
 
         if (this.#gender == value) return;
@@ -374,13 +375,13 @@ export class Pokemon {
         this.setShiny(!this.getShiny());
     }
 
-    /** @returns {String[]} */
+    /** @returns {PokeType[]} */
     getTypes() {
         return this.#types;
     }
     /**
      * Sets this poke's types
-     * @param {String[]} types - This param is only used for in-battle type changes
+     * @param {PokeType[]} types - This param is only used for in-battle type changes
      */
     setTypes(types = null) {
 
@@ -402,7 +403,7 @@ export class Pokemon {
 
     /**
      * Generates poke image srcs, downloading images first if necessary
-     * @returns {Object} Img paths and coords
+     * @returns {PokeImgData} Img paths and coords
      */
     async getImgSrc() {
 

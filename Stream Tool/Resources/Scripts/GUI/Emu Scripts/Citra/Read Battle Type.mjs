@@ -1,6 +1,7 @@
 import { current } from "../../Globals.mjs";
 import { citra } from "./Citra.mjs";
 import { getBattleAddress } from "./Memory Locations/Battle Pokemon.mjs";
+/** @import { BattleType } from "../../../Utils/Type Definitions.mjs" */
 
 const battleTypes = ["Wild", "Trainer", "Multi"];
 const dataBegin = 4; // where to start to read
@@ -8,7 +9,7 @@ const dataLenght = 6; // max data to read
 
 /**
  * Compares data to determine if the player is currently in a battle
- * @returns {"Wild"|"Trainer"|"Multi"|"None"}
+ * @returns {BattleType}
  */
 export async function getBattleType() {
 

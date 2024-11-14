@@ -3,8 +3,7 @@ import { current, inside, stPath } from "../Globals.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { typeToColor } from "../Type to Color.mjs";
 import { updateTrainer } from "../VS Trainer/Update Trainer.mjs";
-
-/** @typedef {{left: Number, top: Number}} ItemCoords */
+/** @import { Moves, Coords, Stats, Boosts, Reveals } from "../../Utils/Type Definitions.mjs" */
 
 const statKeys = ["hp", "atk", "def", "spa", "spd", "spe"];
 const statKeysUpper = ["Hp", "Atk", "Def", "SpA", "SpD", "Spe"];
@@ -29,7 +28,7 @@ export class TeamPokemon extends Pokemon {
 
     #item;
     #itemImg;
-    /** @type {ItemCoords} */
+    /** @type {Coords} */
     #itemCoords;
     #itemInp;
 
@@ -240,13 +239,12 @@ export class TeamPokemon extends Pokemon {
     }
     /**
      * Item icon coordinates for the icon spritesheet
-     * @returns {ItemCoords}
+     * @returns {Coords}
     */
     getItemCoords() {
         return this.#itemCoords;
     }
 
-    /** @typedef {[{name: String, type: String, pp: Number}]} Moves */
     /** @returns {Moves} */
     getMoves() {
         return this.#move;
@@ -284,15 +282,7 @@ export class TeamPokemon extends Pokemon {
 
     }
 
-    /**
-     * @typedef {{num: Number, ev: Number, iv: Number}} StatKey
-     * @typedef {{
-     *  hp: StatKey, atk: StatKey, def: StatKey, spa: StatKey, spd: StatKey, spe: StatKey
-     * }} Stats
-     */
-    /**
-     * @returns {Stats}
-     */
+    /** @returns {Stats} */
     getStats() {
         return this.#stat;
     }
@@ -344,11 +334,6 @@ export class TeamPokemon extends Pokemon {
     }
 
 
-    /**
-     * @typedef {{
-    *  atk: Number, def: Number, spa: Number, spd: Number, spe: Number, acc: Number, eva: Number
-    * }} Boosts
-    */
     /** @returns {Boosts} */
     getBoosts() {
         return this.#boost;
@@ -713,8 +698,7 @@ export class TeamPokemon extends Pokemon {
         return this.reveals;
     }
 
-
-    /** @param {String[]} reveals */
+    /** @param {Reveals[]} reveals */
     setReveals(reveals) {
 
         // no reveals? skip

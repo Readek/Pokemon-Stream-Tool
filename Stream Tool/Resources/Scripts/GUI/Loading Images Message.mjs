@@ -1,8 +1,6 @@
-const loadings = {};
-
 const loadingMessageEl = document.getElementById("loadingImgsMessage");
 
-const timeouts = {};
+const loadings = {}, timeouts = {};
 
 /**
  * Displays a "Loading Sprites" text on screen

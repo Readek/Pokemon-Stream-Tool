@@ -214,12 +214,10 @@ class WildPokemon extends Pokemon {
             return null;
         } else {
             return {
-                // these are only for remote updating
                 species : this.getSpecies(),
                 form : this.getForm(),
                 gender : this.getGender(),
                 shiny : this.getShiny(),
-                // and this is the data for browsers
                 type : this.getTypes(),
                 img : await this.getImgSrc(),
                 stats : {

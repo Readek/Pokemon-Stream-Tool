@@ -11,10 +11,11 @@ import { setEnemyTrainerName, trainerPokemons } from "./VS Trainer/TrainerPokemo
 import { settings } from "./Settings/Settings.mjs";
 import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 import { setBattleState } from "./Team/Battle State.mjs";
+/** @import {SentData} from "../Utils/Type Definitions.mjs" */
 
 /**
  * Updates the entire GUI with values sent remotely
- * @param {Object} data GUI info
+ * @param {SentData} data GUI info
  * @param {boolean} noNotif Disables update notification
  */
 export async function updateGUI(data, noNotif) {

@@ -2,10 +2,11 @@ import { locAbilities, locAbilitiesIndexes } from "./Loc Pokemon Strings/Localiz
 import { locItems, locItemsIndexes } from "./Loc Pokemon Strings/Localized Items.mjs";
 import { locMoves, locMovesIndexes } from "./Loc Pokemon Strings/Localized Moves.mjs";
 import { locPokemon, locPokemonIndexes } from "./Loc Pokemon Strings/Localized Pokemon.mjs";
+/** @import { LangCode } from "./Type Definitions.mjs" */
 
 /** Localized strings from current language */
 let lang;
-/** Language code (EN, ES...) */
+/** @type {LangCode} */
 let langCode = "EN";
 
 /** Language to use if current language has a missing text */
@@ -13,7 +14,7 @@ const fallbackLang = (await import("../../Texts/Lang/EN.mjs")).lang;
 
 /**
  * Sets the language object for this view
- * @param {String} language - Language code (EN, ES...)
+ * @param {LangCode} language - Language code (EN, ES...)
  * @param {Number} gen - Current generation
  */
 export async function setLanguage(language, gen) {

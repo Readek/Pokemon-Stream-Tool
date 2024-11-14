@@ -27,9 +27,6 @@ customElements.define("load-svg", class extends HTMLElement {
     }
 });
 
-// just in case we somehow go out of view
-window.onscroll = () => { window.scroll(0, 0) };
-
 
 init();
 /** It all starts here */

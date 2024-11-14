@@ -6,6 +6,7 @@ import { pokemons } from "./Scripts/Player Team/Pokemons.mjs";
 import { battlePokemons } from "./Scripts/Trainer Battle/Battle Pokemons.mjs";
 import { setTrainerName, showTrainerNameIntro } from "./Scripts/Trainer Battle/Trainer Name Intro.mjs";
 import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
+/** @import { SentData } from "../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -25,7 +26,7 @@ let battleTypePrev;
 
 /**
  * Updates overlay data with the provided object
- * @param {Object} data 
+ * @param {SentData} data 
  */
 async function updateData(data) {
 

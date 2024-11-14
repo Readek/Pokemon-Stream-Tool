@@ -1,8 +1,7 @@
-/** @typedef {[{name: String, type: String, pp: Number}]} Moves */
-
 import { current } from "../../Globals.mjs";
 import { getLocalizedPokeText, getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
+/** @import { Moves } from "../../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 export class ActiveMoves {
 
