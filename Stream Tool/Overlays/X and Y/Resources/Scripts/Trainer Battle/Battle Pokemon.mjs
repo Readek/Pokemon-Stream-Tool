@@ -1,5 +1,6 @@
 import { ActivePokemon } from "./Active Pokemon/Active Pokemon.mjs";
 import { StandbyPokemon } from "./Standby Pokemon.mjs";
+/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 export class BattlePokemon {
 
@@ -25,6 +26,10 @@ export class BattlePokemon {
         return this.#inCombat;
     }
 
+    /**
+     * Updates this battle pokemon active and standby states
+     * @param {PokemonSentData} data 
+     */
     update(data) {
 
         this.#active.update(data);
@@ -46,6 +51,10 @@ export class BattlePokemon {
 
     }
 
+    /**
+     * Fires up intro animation for this poke
+     * @param {Number} num - Pokemon to animate
+     */
     show(num) {
 
         this.#active.showIntro();

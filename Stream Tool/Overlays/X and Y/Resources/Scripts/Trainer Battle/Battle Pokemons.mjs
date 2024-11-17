@@ -1,5 +1,6 @@
 import { BattlePokemon } from "./Battle Pokemon.mjs";
 import { setTrainerPokeCount } from "./Trainer Name Intro.mjs";
+/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 const pokesDiv = document.getElementById("battleDiv");
 
@@ -37,7 +38,7 @@ class BattlePokemons {
 
     /**
      * Updates pokemon battle data
-     * @param {Object} data - Team battle data
+     * @param {PokemonSentData[]} data - Team battle data
      * @param {Boolean} playerOrEnemy - True if player, false if enemy
      */
     update(data, playerOrEnemy) {

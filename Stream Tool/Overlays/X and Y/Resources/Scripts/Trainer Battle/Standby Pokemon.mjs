@@ -1,6 +1,6 @@
 import { getLocalizedPokeText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
 import { current } from "../Globals.mjs";
-/** @import { IconCoords } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { IconCoords, PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 const playerActiveDiv = document.getElementById("battleStandbyBarPlayer");
 const enemyActiveDiv = document.getElementById("battleStandbyBarEnemy");
@@ -257,13 +257,14 @@ export class StandbyPokemon {
 
     }
 
+    /** @param {PokemonSentData} data  */
     update(data) {
 
         // if pokemon is not in combat right now, hide it
         if (data.inCombat || !data.species) {
 
             this.hidePoke();
-            this.#inCombat = this.#inCombat;
+            this.#inCombat = data.inCombat;
 
             // reveal poke info if poke has been in combat before
             if (!this.#player && data.inCombat) {
@@ -276,9 +277,10 @@ export class StandbyPokemon {
 
         }
 
-        // first loop in combat, display show animation
-        if (this.#inCombat != data.incombat) {
+        // first loop in combat, display the element
+        if (this.#inCombat != data.inCombat) {
             this.showPoke();
+            this.#inCombat = data.inCombat;
         }
 
         // set species

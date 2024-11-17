@@ -46,6 +46,22 @@
 
 /**
  * @typedef {{
+ *  gymBadges?: Boolean[],
+ *  Johto?: Boolean[], Kanto?: Boolean[],
+ *  Akala?: Boolean[], Melemele?: Boolean[], Poni?: Boolean[], Ulaula?: Boolean[]
+ * }} BadgeData - Just "gymBadges" for most games
+ */
+
+/**
+ * @typedef {{
+ *  badges: BadgeData,
+ *  catches: Number,
+ *  deaths: Number
+ * }} PlayerData
+*/
+
+/**
+ * @typedef {{
  *  id: String,
  *  type: "Settings" | "Catches" | "Team" | "Player" | "Wild Encounter" | "Trainer" | "Auto"
  *  playerPokemons?: PokemonSentData[],
@@ -56,11 +72,7 @@
  *  gen?: Number,
  *  game?: String,
  *  version?: "String",
- *  player?: {
- *      badges: Object,
- *      catches: Number,
- *      deaths: Number
- *  },
+ *  player?: PlayerData,
  *  trainerName?: EnemyTrainerName,
  *  trainerPokemons?: PokemonSentData[]
  * }} SentData

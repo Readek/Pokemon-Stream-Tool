@@ -78,7 +78,7 @@ async function updateData(data) {
         
     } else if (data.type == "Wild Encounter") {
 
-        wildPokemon.update(data)
+        wildPokemon.update(data.pokemon)
 
     } else if (data.type == "Trainer") {
 

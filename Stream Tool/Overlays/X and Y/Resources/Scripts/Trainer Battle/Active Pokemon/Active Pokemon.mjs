@@ -1,12 +1,13 @@
 import { ActiveMainInfo } from "./Main Info.mjs";
 import { ActiveMoves } from "./Moves.mjs";
+/** @import { PokemonSentData } from "../../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 const playerActiveDiv = document.getElementById("battleActiveBarPlayer");
 const enemyActiveDiv = document.getElementById("battleActiveBarEnemy");
 
 export class ActivePokemon {
 
-    #inCombat = false;
+    #inCombat = true;
 
     #fullEl;
 
@@ -71,24 +72,26 @@ export class ActivePokemon {
         this.#moveInfo.revealAll();
     }
 
+    /** @param {PokemonSentData} data  */
     update(data) {
 
         // if pokemon is not in combat right now, hide it
         if (!data.inCombat) {
 
             // run only once
-            if (this.#inCombat != data.incombat) {
+            if (this.#inCombat != data.inCombat) {
                 this.hidePoke();
-                this.#inCombat = this.#inCombat;
+                this.#inCombat = data.inCombat;
             }
 
             return; // if ooc skip everything else
 
         }
 
-        // first loop in combat, display show animation
-        if (this.#inCombat != data.incombat) {
+        // first loop in combat, display element
+        if (this.#inCombat != data.inCombat) {
             this.showPoke();
+            this.#inCombat = data.inCombat;
         }
 
         // send the data to each class

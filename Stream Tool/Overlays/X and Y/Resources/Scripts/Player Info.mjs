@@ -1,22 +1,19 @@
 const badges = document.getElementsByClassName("badge");
 const catchesNum = document.getElementById("catchesNumber");
 const deathsNum = document.getElementById("deathsNumber");
+/** @import { PlayerData } from "../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 class PlayerInfo {
 
     /**
      * Updates player's badges and stats
-     * @param {Object} data - Player data
+     * @param {PlayerData} data - Player data
      */
     update(data) {
 
         // display those shiny gym badges
         for (let i = 0; i < data.badges.gymBadges.length; i++) {
-            if (data.badges.gymBadges[i]) {
-                badges[i].style.opacity = 1;
-            } else {
-                badges[i].style.opacity = 0;
-            }
+            badges[i].style.opacity = data.badges.gymBadges[i] ? 1 : 0;
         }
 
         // get us those sweet stats

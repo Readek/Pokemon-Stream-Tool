@@ -1,4 +1,5 @@
 import { Badge } from "./Badge.mjs";
+/** @import { BadgeData } from "../../Utils/Type Definitions.mjs" */
 
 const badgesDiv = document.getElementById("badges");
 
@@ -6,7 +7,7 @@ let badges = {};
 
 /**
  * Sets the state of badges given an object of arrays of states
- * @param {Object} states - Badge states
+ * @param {BadgeData} states - Badge states
  */
 export function setBadges(states) {
     
@@ -22,7 +23,7 @@ export function setBadges(states) {
 
 /**
  * Retuns arrays of truthies/falsies of badge states for each badge type
- * @returns {Object} Badge states
+ * @returns {BadgeData} Badge states
  */
 export function getBadges() {
 
@@ -44,7 +45,7 @@ export function getBadges() {
 
 /**
  * Updates badge assets
- * @param {Object} badgeData - How this game's badges should work
+ * @param {BadgeData} badgeData - How this game's badges should work
  */
 export function changeBadges(badgeData) {
 

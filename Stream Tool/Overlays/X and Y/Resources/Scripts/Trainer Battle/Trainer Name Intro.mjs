@@ -2,13 +2,14 @@ const trainerIntroDiv = document.getElementById("enemyNameIntroDiv");
 const titleText = document.getElementById("enemyNameIntroTitle");
 const nameText = document.getElementById("enemyNameIntroName");
 const countText = document.getElementById("enemyNameIntroPokeCount");
+/** @import { EnemyTrainerName } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 let name = "";
 let pokeCount = 0;
 
 /**
  * Changes enemy trainer's name for the battle intro
- * @param {{title: String, name: String}} nameData 
+ * @param {EnemyTrainerName} nameData 
  */
 export function setTrainerName(nameData) {
 
@@ -19,9 +20,13 @@ export function setTrainerName(nameData) {
 
 }
 
-/** Sets enemy trainer's intro pokemon count */
+/** 
+ * Sets enemy trainer's intro pokemon count 
+ * @param {Number} num - Number of enemy pokemon
+ */
 export function setTrainerPokeCount(num) {
     if (pokeCount == num) return;
+    pokeCount = num;
     countText.innerHTML = num;
 }
 

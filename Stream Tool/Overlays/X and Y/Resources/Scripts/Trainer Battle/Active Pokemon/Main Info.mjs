@@ -2,14 +2,8 @@ import { getLocalizedPokeText, getLocalizedText } from "../../../../../../Resour
 import { current } from "../../Globals.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
+/** @import { Coords, PokeImgData } from "../../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
-/** @typedef {{left: Number, top: Number}} ItemCoords */
-/**
- * @typedef {{
- *  gen5Front: String, gen5Back: String, aniFront: String, aniBack: String,
- *  gen5FrontOffs: Number[], gen5BackOffs: Number[], aniFrontOffs: Number[], aniBackOffs: Number[]
- * }} ImgData
- */
 
 export class ActiveMainInfo {
 
@@ -41,7 +35,7 @@ export class ActiveMainInfo {
     #abilityText;
     #itemImg;
     #itemQue;
-    /** @type {ItemCoords} */
+    /** @type {Coords} */
     #itemCoords;
     #itemText;
     #itemDiv;
@@ -204,7 +198,7 @@ export class ActiveMainInfo {
 
     /**
      * Set the image path for this pokemon, as well as position offsets
-     * @param {ImgData} imgData 
+     * @param {PokeImgData} imgData 
      */
     setImg(imgData) {
 
@@ -317,7 +311,7 @@ export class ActiveMainInfo {
     }
     /**
      * @param {String} item
-     * @param {ItemCoords | null} coords 
+     * @param {Coords?} coords 
      * @param {Boolean} reveal
      */
     setItem(item, coords, reveal) {

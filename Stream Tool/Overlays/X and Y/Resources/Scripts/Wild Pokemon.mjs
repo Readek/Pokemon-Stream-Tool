@@ -1,6 +1,6 @@
-import { pokemons } from "./Player Team/Pokemons.mjs";
 import { getLocalizedPokeText, getLocalizedText } from "../../../../Resources/Scripts/Utils/Language.mjs";
 import { current } from "./Globals.mjs";
+/** @import { PokemonSentData, PokeType, PokeImgData } from "../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 const playerInfoDiv = document.getElementById("playerInfo");
 const wildDiv = document.getElementById("wildEncounterDiv");
@@ -36,7 +36,7 @@ class WildPokemon {
 
     /**
      * Sets src path for the pokemon's image
-     * @param {Object} img - Image object
+     * @param {PokeImgData} img - Image object
      */
     setImg(img) {
 
@@ -51,7 +51,7 @@ class WildPokemon {
 
     /**
      * Changes shown type info
-     * @param {Array} types - Array of the pokemon's types
+     * @param {PokeType[]} types - Array of the pokemon's types
      */
     setTypes(types) {
 
@@ -151,26 +151,26 @@ class WildPokemon {
 
     /**
      * Updates current wild pokemon stats
-     * @param {Object} data - Wild pokemon's data
+     * @param {PokemonSentData} data - Wild pokemon's data
      */
     update(data) {
 
-        if (data.pokemon) {
+        if (data) {
 
             // wild pokemon image
-            this.setImg(data.pokemon.img);
+            this.setImg(data.img);
 
             // set type info
-            this.setTypes(data.pokemon.type);
+            this.setTypes(data.type);
 
             // gender ratio
-            this.setGenderRatio(data.pokemon.ratioM, data.pokemon.ratioF);
+            this.setGenderRatio(data.ratioM, data.ratioF);
 
             // abilities
-            this.setAbilities(data.pokemon.abilities);
+            this.setAbilities(data.abilities);
 
             // stat meters
-            this.updateMeters(data.pokemon.stats);
+            this.updateMeters(data.stats);
 
             // if there previously was no poke displayed
             if (!isPoke) {
