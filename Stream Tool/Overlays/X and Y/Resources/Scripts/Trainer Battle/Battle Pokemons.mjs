@@ -84,7 +84,7 @@ class BattlePokemons {
 
         }
 
-        setTrainerPokeCount(pokeCount);
+        if (!playerOrEnemy) setTrainerPokeCount(pokeCount);
 
         // notify teams of gamemode
         for (let i = 0; i < team.length; i++) {
