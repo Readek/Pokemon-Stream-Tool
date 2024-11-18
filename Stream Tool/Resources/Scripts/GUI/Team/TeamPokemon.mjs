@@ -257,6 +257,10 @@ export class TeamPokemon extends Pokemon {
         if (!moves) return;
         for (let i = 0; i < moves.length; i++) {
 
+            // hidden power includes type in its name when getting read from in-game
+            // this is to be able properly localize the move
+            if (moves[i].name.includes("Hidden Power")) moves[i].name = "Hidden Power";
+
             if (moves[i].name != this.#move[i].name) {
 
                 this.#move[i].name = moves[i].name;
