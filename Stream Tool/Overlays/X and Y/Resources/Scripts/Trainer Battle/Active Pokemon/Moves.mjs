@@ -76,11 +76,13 @@ export class ActiveMoves {
         element.classList.add("activeMoveDiv");
         element.innerHTML = `
 
+        <div class="activeMoveTexts">
             <div class="activeMoveName ${flipBack}"></div>
             <div class="activeMoveRight ${flipBack}">
                 <div class="activeMovePPNum"></div>
                 <div class="activeMovePPText" locText="pokePP"></div>
             </div>
+        </div>
 
         `
 
@@ -136,7 +138,7 @@ export class ActiveMoves {
                 this.#move[i].type = moves[i].type;
                 const typeCol = !this.#player && !reveal ? "Normal" : moves[i].type;
                 const bacCol = `${typeToColor(typeCol)}80`;
-                this.#moveEl[i].name.parentElement.style.backgroundColor = bacCol;
+                this.#moveEl[i].name.parentElement.parentElement.style.backgroundColor = bacCol;
 
             }
 
@@ -200,7 +202,7 @@ export class ActiveMoves {
 
         for (let i = 0; i < this.#moveEl.length; i++) {
 
-            this.#moveEl[i].name.parentElement.style.animation = `
+            this.#moveEl[i].name.parentElement.parentElement.style.animation = `
                 slideIn ${aniTime}s ${delTime}s both`;
 
             // add an extra delay for the next move

@@ -689,14 +689,16 @@ html, body {
 }
 
 .activeMoveDiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
-    text-shadow: 0px 0px 5px black;
     border: 1px solid lightgray;
     padding: 2px 10px;
     border-radius: 10% / 100% 100% 100% 100%;
+}
+.activeMoveTexts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    filter: drop-shadow(0px 0px 2px black);
 }
 .activeMoveDiv1v1 {
     width: 200px;
@@ -717,6 +719,8 @@ html, body {
     font-size: 20px;
     text-wrap: nowrap;
     white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
 }
 .activeMoveRight {
     display: flex;
