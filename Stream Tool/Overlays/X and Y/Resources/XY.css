@@ -295,7 +295,7 @@ html, body {
 }
 
 
-/* Bottom Pokemon Section */
+/* Non-Trainer battle pokemon Section */
 
 #botPokes {
     position: absolute;
@@ -716,6 +716,7 @@ html, body {
     transform: translateY(1px);
     font-size: 20px;
     text-wrap: nowrap;
+    white-space: nowrap;
 }
 .activeMoveRight {
     display: flex;
