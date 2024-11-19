@@ -247,7 +247,8 @@ export class Pokemon {
         if (this.getNickName() == name) return;
 
         // if name equals poke species just leave the field empty
-        if (name && name != this.getSpecies()) {
+        if (name &&
+            name != getLocalizedPokeText(this.getSpecies(), "Pokemon", current.generation)) {
             this.nickInp.value = name;
         } else {
             this.nickInp.value = "";

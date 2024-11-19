@@ -63,8 +63,11 @@ class Pokemon {
         // hide or show sub text depending on if the poke has a nickname or not
         if (name && name != this.getSpecies()) {
             this.speciesEl.parentElement.style.display = "flex";
+            this.nickEl.removeAttribute("locPokemon");
         } else {
-            this.nickEl.innerHTML = this.getSpecies();
+            this.nickEl.innerHTML = getLocalizedPokeText(
+                this.getSpecies(), "Pokemon", current.generation);
+            this.nickEl.setAttribute("locPokemon", this.getSpecies());
             this.speciesEl.parentElement.style.display = "none";
         }
 
