@@ -23,6 +23,8 @@ export class Pokemon {
     #img = "";
     #side = "Front";
 
+    #showHideTimeout;
+
     /**
      * Manages all info related to a player's pokemon
      * @param {HTMLElement} el 
@@ -51,6 +53,7 @@ export class Pokemon {
     /** @param {String} species */
     setSpecies(species) {
         this.#species = species;
+        if (!species) return; // we dont need to continue if no poke
         this.speciesEl.innerHTML = getLocalizedPokeText(species, "Pokemon", current.generation);
         this.speciesEl.setAttribute("locPokemon", species);
     }
@@ -277,7 +280,10 @@ export class Pokemon {
 
         this.mainEl.style.opacity = "0";
 
-        setTimeout(() => {
+        // this prevents bugs if a pokemon hides and shows fast enough
+        clearTimeout(this.#showHideTimeout);
+
+        this.#showHideTimeout = setTimeout(() => {
             // we use margin here with div width + flex gap
             this.mainEl.style.marginLeft = "-315px";
             this.setSpecies(null);
@@ -286,8 +292,12 @@ export class Pokemon {
     }
     /** Shows this pokemon on the list */
     showPoke() {
+
         this.mainEl.style.marginLeft = "0px";
-        setTimeout(() => {
+
+        clearTimeout(this.#showHideTimeout);
+
+        this.#showHideTimeout = setTimeout(() => {
             this.mainEl.style.opacity = "1";
         }, 300);
     }
