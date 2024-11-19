@@ -86,7 +86,7 @@ async function init() {
             // if we got no data to restore, set default values
             catches.push(new Catch());
             settings.genSelect.setGen(5); // best gen amarite
-            settings.langSelect.setLanguage("EN", 5);
+            settings.langSelect.setLang("EN", 5);
             pokeFinder.loadCharacters();
         }
 
