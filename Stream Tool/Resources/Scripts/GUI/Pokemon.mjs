@@ -8,6 +8,8 @@ import { getLocalizedPokeText } from "../Utils/Language.mjs";
 
 // this will sightly move sprite positions on the overlays
 const offsets = await getJson(stPath.poke + "/sprites/offsets");
+console.log(offsets);
+
 // for external asset downloading
 const assRepoUrl = "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets/-/raw/main/play.pokemonshowdown.com/";
 
