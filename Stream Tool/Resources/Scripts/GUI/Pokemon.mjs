@@ -429,6 +429,23 @@ export class Pokemon {
                 fetchPokeImg(this.getInternalSpecies(), "ani", "p2", this.getGender(), this.getShiny()),
             );
 
+            // also download possible mega evolution assets
+            // this is done so we can properly sync up megaevos on the overlays later
+            if (!this.getInternalSpecies().includes("Mega")) { // dont if already mega
+
+                // pre-download mega assets (we dont need to store or wait for them)
+                for (let i = 0; i < this.#formNames.length; i++) {
+                    if (this.#formNames[i].includes("Mega")) {
+                        fetchPokeImg(this.#formNames[i], "gen5ani", "p2", this.getGender(), this.getShiny());
+                        fetchPokeImg(this.#formNames[i], "gen5ani", "p1", this.getGender(), this.getShiny());
+                        fetchPokeImg(this.#formNames[i], "ani", "p2", this.getGender(), this.getShiny());
+                        fetchPokeImg(this.#formNames[i], "ani", "p2", this.getGender(), this.getShiny());
+                    }
+                    
+                }
+
+            }
+
             // wait for all images to load properly
             const results = await Promise.all(promises);
 
