@@ -4,11 +4,12 @@ import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
 import { fileExists, getJson } from "./File System.mjs";
 import { fetchFile } from "./Fetch File.mjs";
 import { getLocalizedPokeText } from "../Utils/Language.mjs";
+import { fetchOffsets } from "./Asset Download.mjs";
 /** @import { PokeType, IconCoords, PokeGender, PokeImgData } from "../Utils/Type Definitions.mjs" */
 
-// this will sightly move sprite positions on the overlays
-const offsets = await getJson(stPath.poke + "/sprites/offsets");
-console.log(offsets);
+// these will sightly center sprite positions on the overlays
+await fetchOffsets();
+const offsets = await getJson(stPath.poke + "/offsets");
 
 // for external asset downloading
 const assRepoUrl = "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets/-/raw/main/play.pokemonshowdown.com/";
@@ -201,7 +202,7 @@ export class Pokemon {
         } else {
 
             // go fetch positions for the big ass spritesheet file
-            this.pokeSel.children[0].src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
+            this.pokeSel.children[0].src = `${stPath.poke}/pokemonicons-sheet.png`;
             const imgInfo = pkmn.img.Icons.getPokemon(this.#pokeData.name, {
                 side: 'p2',
                 gender: this.getGender(),
@@ -447,10 +448,12 @@ export class Pokemon {
             this.#pokeImgs.aniBack = results[3];
 
             // also add position offsets (substr removes up until "gen5ani/lugia.gif")
-            this.#pokeImgs.gen5FrontOffs = offsets[results[0].substr(39)] || [0, 0];
-            this.#pokeImgs.gen5BackOffs = offsets[results[1].substr(39)] || [0, 0];
-            this.#pokeImgs.aniFrontOffs = offsets[results[2].substr(39)] || [0, 0];
-            this.#pokeImgs.aniBackOffs = offsets[results[3].substr(39)] || [0, 0];
+            this.#pokeImgs.gen5FrontOffs = offsets[results[0].substring(39)] || [0, 0];
+            this.#pokeImgs.gen5BackOffs = offsets[results[1].substring(39)] || [0, 0];
+            this.#pokeImgs.aniFrontOffs = offsets[results[2].substring(39)] || [0, 0];
+            this.#pokeImgs.aniBackOffs = offsets[results[3].substring(39)] || [0, 0];
+            console.log(this.#pokeImgs);
+            
 
         }
 
@@ -477,19 +480,19 @@ export class Pokemon {
         })
 
         const browserUrl = imgData.url.replace("http://", ""); //ugly workaround.
-        
+
         if (inside.electron) {
 
-            const cleanUrl = browserUrl.substr(23);
+            const cleanUrl = browserUrl.substring(23);
             if (!await fileExists(stPath.assets + "/" + cleanUrl)) {
                 await fetchFile(
-                    assRepoUrl + cleanUrl.substr(8),
+                    assRepoUrl + cleanUrl.substring(8),
                     stPath.assets + "/" + cleanUrl
                 )
             } 
-            
+
         }
-        
+
         return browserUrl;
 
     }

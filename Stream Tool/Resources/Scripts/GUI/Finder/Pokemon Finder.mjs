@@ -44,7 +44,7 @@ class PokeFinder extends FinderSelect {
             // all icons are on the same spritesheet, this gets us the positions we want
             let imgInfo = pkmn.img.Icons.getPokemon(pokemon.name, {side: 'p2', protocol: 'http', domain: stPath.poke});
             imgIcon.alt = pokemon.name;
-            imgIcon.src = `${stPath.poke}/sprites/pokemonicons-sheet.png`;
+            imgIcon.src = `${stPath.poke}/pokemonicons-sheet.png`;
             imgIcon.style.objectPosition = `${imgInfo.left}px ${imgInfo.top}px`;
 
             // pokemon name

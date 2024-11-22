@@ -61,7 +61,7 @@ export class StandbyPokemon {
 
         element.innerHTML = `
 
-            <img class="standbyPokeIconDiv" src="../../Resources/Assets/Pokemon/sprites/pokemonicons-sheet.png">
+            <img class="standbyPokeIconDiv" src="../../Resources/Assets/Pokemon/pokemonicons-sheet.png">
 
             <div class="standbyNameHp">
         
