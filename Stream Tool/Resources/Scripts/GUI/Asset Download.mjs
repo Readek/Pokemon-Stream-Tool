@@ -33,5 +33,37 @@ export async function fetchOffsets() {
             stPath.assets + "/Pokemon/offsets.json"
         )
     }
+}
+
+/**
+ * Finds a requested image depending on current Pokemon data
+ * @param {String} name - Pokemon name
+ * @param {"gen5ani" | "ani"} sprType - Type of sprites
+ * @param {"p1" | "p2"} side - If front facing (`p2`) or back facing (`p1`)
+ * @param {"M" | "F" | null} gender
+ * @param {Boolean} shiny
+ * @returns {String} Image path
+ */
+export async function fetchPokeImg(name, sprType, side, gender, shiny) {
+
+    let imgData = pkmn.img.Sprites.getPokemon(name, {
+        gen: sprType,
+        side: side,
+        gender: gender,
+        shiny: shiny,
+        domain: "../../Resources/Assets/Pokemon"
+    })
+
+    const browserUrl = imgData.url.replace("https://", ""); // we dont need this
+    const cleanUrl = browserUrl.substring(23); // removes until "Pokemon/Sprites/.."
+    
+    if (!await fileExists(`${stPath.assets}/${cleanUrl}`)) {
+        await fetchFile(
+            `${url}play.pokemonshowdown.com/${cleanUrl.substring(8)}`,
+            stPath.assets + "/" + cleanUrl
+        )
+    } 
+
+    return browserUrl;
 
 }

@@ -49,22 +49,21 @@ export async function updateCatches() {
             gender : catches[i].getGender(),
             shiny : catches[i].getShiny(),
             types : catches[i].getTypes(),
-            img : catches[i].getImgSrc()
         })
 
         // download images if needed and wait for them
-        promises.push(await catches[i].getImgSrc());
+        if (inside.electron) promises.push(await catches[i].getImgSrc());
 
-    }
-
-    // once pokemon images are loaded, add them in
-    const pokeImgs = await Promise.all(promises);
-    for (let i = 0; i < pokeImgs.length; i++) {
-        dataJson.catches[i].img = pokeImgs[i];
     }
 
     // its time to send the data away
     if (inside.electron) {
+
+        // once pokemon images are loaded, add them in
+        const pokeImgs = await Promise.all(promises);
+        for (let i = 0; i < pokeImgs.length; i++) {
+            dataJson.catches[i].img = pokeImgs[i];
+        }
 
         const ipc = await import("../IPC.mjs");
         ipc.updateStoredData("catches", JSON.stringify(dataJson, null, 2));

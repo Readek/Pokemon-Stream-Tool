@@ -65,18 +65,18 @@ export async function updateTeam() {
         })
 
         // download images if needed and wait for them
-        promises.push(await pokemons[i].getImgSrc())
+        if (inside.electron) promises.push(await pokemons[i].getImgSrc())
 
-    }
-
-    // once pokemon images are loaded, add them in
-    const pokeImgs = await Promise.all(promises);
-    for (let i = 0; i < pokemons.length; i++) {
-        dataJson.playerPokemons[i].img = pokeImgs[i];
     }
 
     // its time to send the data away
     if (inside.electron) {
+
+        // once pokemon images are loaded, add them in
+        const pokeImgs = await Promise.all(promises);
+        for (let i = 0; i < pokemons.length; i++) {
+            dataJson.playerPokemons[i].img = pokeImgs[i];
+        }
 
         const ipc = await import("../IPC.mjs");
         ipc.updateStoredData("team", JSON.stringify(dataJson, null, 2));

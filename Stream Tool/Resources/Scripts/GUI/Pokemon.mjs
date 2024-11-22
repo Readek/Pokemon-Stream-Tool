@@ -1,18 +1,14 @@
-import { current, inside, stPath } from "./Globals.mjs";
+import { current, stPath } from "./Globals.mjs";
 import { genRnd } from "../Utils/GenRnd.mjs";
 import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
-import { fileExists, getJson } from "./File System.mjs";
-import { fetchFile } from "./Fetch File.mjs";
+import { getJson } from "./File System.mjs";
 import { getLocalizedPokeText } from "../Utils/Language.mjs";
-import { fetchOffsets } from "./Asset Download.mjs";
+import { fetchOffsets, fetchPokeImg } from "./Asset Download.mjs";
 /** @import { PokeType, IconCoords, PokeGender, PokeImgData } from "../Utils/Type Definitions.mjs" */
 
 // these will sightly center sprite positions on the overlays
 await fetchOffsets();
 const offsets = await getJson(stPath.poke + "/offsets");
-
-// for external asset downloading
-const assRepoUrl = "https://gitlab.com/pokemon-stream-tool/pokemon-stream-tool-assets/-/raw/main/play.pokemonshowdown.com/";
 
 export class Pokemon {
 
@@ -368,7 +364,6 @@ export class Pokemon {
 
         // update images to be sent
         this.#localImgsLoaded = false;
-        this.getImgSrc();
 
         // set lower button opacity if non-shiny
         const opValue = value ? 1 : .3;
@@ -416,15 +411,9 @@ export class Pokemon {
 
         // final data to be sent
         this.#pokeImgs = {
-            gen5Front : "",
-            gen5Back : "",
-            aniFront : "",
-            aniBack : "",
+            gen5Front : "", gen5Back : "", aniFront : "", aniBack : "",
             // position offsets for overlay
-            gen5FrontOffs : [],
-            gen5BackOffs : [],
-            aniFrontOffs : [],
-            aniBackOffs : []
+            gen5FrontOffs : [], gen5BackOffs : [], aniFrontOffs : [], aniBackOffs : []
         }
 
         if(!this.#isNone){
@@ -433,10 +422,12 @@ export class Pokemon {
             const promises = [];
 
             // get those actual images!
-            promises.push(this.#findImg("gen5ani", "p2"));
-            promises.push(this.#findImg("gen5ani", "p1"));
-            promises.push(this.#findImg("ani", "p2"));
-            promises.push(this.#findImg("ani", "p1"));
+            promises.push(
+                fetchPokeImg(this.getInternalSpecies(), "gen5ani", "p2", this.getGender(), this.getShiny()),
+                fetchPokeImg(this.getInternalSpecies(), "gen5ani", "p1", this.getGender(), this.getShiny()),
+                fetchPokeImg(this.getInternalSpecies(), "ani", "p2", this.getGender(), this.getShiny()),
+                fetchPokeImg(this.getInternalSpecies(), "ani", "p2", this.getGender(), this.getShiny()),
+            );
 
             // wait for all images to load properly
             const results = await Promise.all(promises);
@@ -452,8 +443,6 @@ export class Pokemon {
             this.#pokeImgs.gen5BackOffs = offsets[results[1].substring(39)] || [0, 0];
             this.#pokeImgs.aniFrontOffs = offsets[results[2].substring(39)] || [0, 0];
             this.#pokeImgs.aniBackOffs = offsets[results[3].substring(39)] || [0, 0];
-            console.log(this.#pokeImgs);
-            
 
         }
 
@@ -461,39 +450,6 @@ export class Pokemon {
         this.#localImgsLoaded = true; // goes to false on species change
 
         return this.#pokeImgs;
-
-    }
-    /**
-     * Finds a requested image depending on current Pokemon data
-     * @param {String} gen - Generation of sprites ( `gen?`, `gen?ani`, and `ani`)
-     * @param {"p1" | "p2"} side - If front facing (`p2`) or back facing (`p1`)
-     * @returns {String} Image path
-     */
-    async #findImg(gen, side) {
-
-        let imgData = pkmn.img.Sprites.getPokemon(this.#pokeData.name, {
-            gen: gen,
-            side: side,
-            gender: this.getGender(),
-            shiny: this.#shiny,
-            protocol: 'http', domain: "../../Resources/Assets/Pokemon"
-        })
-
-        const browserUrl = imgData.url.replace("http://", ""); //ugly workaround.
-
-        if (inside.electron) {
-
-            const cleanUrl = browserUrl.substring(23);
-            if (!await fileExists(stPath.assets + "/" + cleanUrl)) {
-                await fetchFile(
-                    assRepoUrl + cleanUrl.substring(8),
-                    stPath.assets + "/" + cleanUrl
-                )
-            } 
-
-        }
-
-        return browserUrl;
 
     }
 

@@ -2,7 +2,7 @@ import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs
 import { Catch } from "../Catches/Catch.mjs";
 import { catches } from "../Catches/Catches.mjs";
 import { updateCatches } from "../Catches/Update Catches.mjs";
-import { current, stPath } from "../Globals.mjs";
+import { current, inside, stPath } from "../Globals.mjs";
 import { displayNotif } from "../Notifications.mjs";
 import { playerStats } from "../Player/Stats.mjs";
 import { updatePlayer } from "../Player/Update Player.mjs";
@@ -219,7 +219,7 @@ class WildPokemon extends Pokemon {
                 gender : this.getGender(),
                 shiny : this.getShiny(),
                 type : this.getTypes(),
-                img : await this.getImgSrc(),
+                img : inside.electron ? await this.getImgSrc() : null,
                 stats : {
                     hp : pokedata.baseStats.hp,
                     atk : pokedata.baseStats.atk,
