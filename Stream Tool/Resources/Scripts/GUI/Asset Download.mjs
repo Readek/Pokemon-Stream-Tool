@@ -46,6 +46,9 @@ export async function fetchOffsets() {
  */
 export async function fetchPokeImg(name, sprType, side, gender, shiny) {
 
+    // totem forms dont have any assets for gen5 sprites
+    if (name.includes("Totem")) name = name.substring(0, name.length - 6);
+
     let imgData = pkmn.img.Sprites.getPokemon(name, {
         gen: sprType,
         side: side,
