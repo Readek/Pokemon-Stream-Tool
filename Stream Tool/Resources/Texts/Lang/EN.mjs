@@ -258,9 +258,12 @@ export const lang = {
     pokePronounM : "the",
     pokePronounNull : "the",
 
+    // gen 7 forced wild fights will replace this as enemy trainer title
+    pokeBattleIntroWild: "Wild Pokemon",
+
     connError : "Can't connect with GUI, attempting to reconnect every 5 seconds...",
 
-    /* Intro overlay */
+    /* Starting Soon Overlay */
 
     // bottom text
     cdTextProgress : "Stream starts in {0}:{1}",

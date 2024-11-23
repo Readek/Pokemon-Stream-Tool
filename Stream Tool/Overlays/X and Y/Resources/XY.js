@@ -82,7 +82,7 @@ async function updateData(data) {
 
     } else if (data.type == "Trainer") {
 
-        setTrainerName(data.trainerName);
+        setTrainerName(data.trainerName, data.trainerPokemons[0].species);
         battlePokemons.update(data.trainerPokemons);
 
     } else if (data.type == "Config") {        
