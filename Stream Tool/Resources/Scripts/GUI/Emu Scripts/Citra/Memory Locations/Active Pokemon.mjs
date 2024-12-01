@@ -12,6 +12,10 @@ let prevPokes = {
  */
 export async function getActivePokemon() {
 
+    const blockSize = current.generation == 6 ? 235568 : 20528;
+    // on gen6, a maximum of 6 pokes can be active at once, while gen7 is max 4
+    const maxPokeCount = current.generation == 6 ? 6 : 4;
+
     const pokes = {
         player : [],
         enemy : []
@@ -19,9 +23,7 @@ export async function getActivePokemon() {
 
     const baseAdress = getActiveAdress(current.game);
 
-    for (let i = 0; i < 6; i++) { // 6 as it's max number of active pokes (3v3)
-
-        const blockSize = current.generation == 6 ? 235568 : 20528
+    for (let i = 0; i < maxPokeCount; i++) {
 
         // add an offset every time we run this loop
         const readAddress = baseAdress + i * blockSize;
@@ -33,7 +35,14 @@ export async function getActivePokemon() {
         const dexNum = data[0] + data[1]*256;
 
         // if theres nothing there stop the loop
-        if (dexNum == 0) break;
+        if (dexNum == 0) {
+            // on gen 7, some battles have 1 player active poke, but enemy side has 2
+            if (current.generation == 7 && i % 2 == false) {
+                continue;
+            } else {
+                break;
+            }
+        } 
 
         if (i % 2) {
             pokes.enemy.push(dexNum);
@@ -46,18 +55,22 @@ export async function getActivePokemon() {
     // check if data changed from previous time
     let changed = false;
     for (let i = 0; i < pokes.player.length; i++) {
-
-        if (pokes.player[i] != prevPokes.player[i] || pokes.enemy[i] != prevPokes.enemy[i]) {
+        if (pokes.player[i] != prevPokes.player[i]) {
             changed = true;
             break;
         }
-
+    }
+    for (let i = 0; i < pokes.enemy.length; i++) {
+        if (pokes.enemy[i] != prevPokes.enemy[i]) {
+            changed = true;
+            break;
+        }
     }
 
     if (changed) {
         prevPokes = pokes;
         return pokes;
-    } 
+    }
 
 }
 
