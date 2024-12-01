@@ -19,7 +19,7 @@ export function setTrainerName(nameData, species) {
     if (nameData.name == name || nameData.name == species) return;
 
     // in gen7, battle overlay can activate for forced wild fights
-    if (!nameData.name) {
+    if (nameData.name.startsWith("\u0000")) {
         
         // in those cases, we will use first enemy poke as name
         nameData.name = species;
@@ -29,6 +29,8 @@ export function setTrainerName(nameData, species) {
 
     titleText.innerHTML = nameData.title;
     nameText.innerHTML = nameData.name;
+
+    name = nameData.name;
 
 }
 
