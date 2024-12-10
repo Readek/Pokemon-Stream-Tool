@@ -356,6 +356,19 @@ html, body {
     image-rendering: pixelated;
 }
 
+.pokeDivMask {
+    display: none;
+}
+
+
+#battleDiv {
+    display: none;
+}
+
+
+#enemyNameIntroDiv {
+    display: none;
+}
 
 
 #connErrorDiv {

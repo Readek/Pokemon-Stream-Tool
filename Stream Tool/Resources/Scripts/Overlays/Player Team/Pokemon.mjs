@@ -348,6 +348,9 @@ export class Pokemon {
     /** Shows or hides pokemon's HP bar and adjusts other elements */
     displayHPBar() {
 
+        // support for hp stuff isnt there for old gens yet
+        if (current.generation <= 5) return;
+
         // if pokemon is hurt or in combat
         if (this.inCombat || this.getHpCurrent() < this.getHpMax()) {
 

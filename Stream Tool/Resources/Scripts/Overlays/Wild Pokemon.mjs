@@ -22,6 +22,7 @@ const statTextDE = document.getElementById("vsWildStatNumberDE");
 const statTextSA = document.getElementById("vsWildStatNumberSA");
 const statTextSD = document.getElementById("vsWildStatNumberSD");
 const statTextSP = document.getElementById("vsWildStatNumberSP");
+const statTextTS = document.getElementById("vsWildStatNumberTS");
 
 const statMeterHP = document.getElementById("vsWildMeterHP");
 const statMeterAT = document.getElementById("vsWildMeterAT");
@@ -29,6 +30,7 @@ const statMeterDE = document.getElementById("vsWildMeterDE");
 const statMeterSA = document.getElementById("vsWildMeterSA");
 const statMeterSD = document.getElementById("vsWildMeterSD");
 const statMeterSP = document.getElementById("vsWildMeterSP");
+const statMeterTS = document.getElementById("vsWildMeterTS");
 
 let isPoke = false;
 
@@ -127,6 +129,7 @@ class WildPokemon {
         statTextSA.innerHTML = stats.spa;
         statTextSD.innerHTML = stats.spd;
         statTextSP.innerHTML = stats.spe;
+        statTextTS.innerHTML = stats.bst;
 
         // we wait a tick so the animation plays when coming from display none
         setTimeout(() => {
@@ -136,6 +139,7 @@ class WildPokemon {
             statMeterSA.style.width = this.#calcStatMeter(stats.spa) + "%";
             statMeterSD.style.width = this.#calcStatMeter(stats.spd) + "%";
             statMeterSP.style.width = this.#calcStatMeter(stats.spe) + "%";
+            statMeterTS.style.width = this.#calcStatMeter(stats.bst, true) + "%";
         }, 0);
 
     }
@@ -143,10 +147,17 @@ class WildPokemon {
     /**
      * Calculates percentage for the provided stat
      * @param {Number} value - Current pokemon stat
+     * @param {Boolean} total - True if calculating total base stats
      * @returns {Number} Stat % out of max possible stats
      */
-    #calcStatMeter(value) {
-        return value * 100 / 230 // 230 being max base stat a pokemon can have
+    #calcStatMeter(value, total) {
+
+        if (total) {
+            return value * 100 / 720 // 680 being max total base stats a pokemon can have
+        } else {
+            return value * 100 / 230 // 230 being max base stat a pokemon can have
+        }
+
     }
 
     /**

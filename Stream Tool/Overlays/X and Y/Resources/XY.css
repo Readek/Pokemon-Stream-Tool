@@ -242,6 +242,9 @@ html, body {
     z-index: 3;
     padding: 0px 5px;
 }
+#vsWildStatTS {
+    display: none;
+}
   
 .vsWildMeter {
     position: absolute;
