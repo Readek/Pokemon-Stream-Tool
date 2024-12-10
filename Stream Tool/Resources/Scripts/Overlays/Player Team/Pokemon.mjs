@@ -346,9 +346,12 @@ export class Pokemon {
 
 
     /** Shows or hides pokemon's HP bar and adjusts other elements */
-    displayHPBar() {
+    async displayHPBar() {
 
         // support for hp stuff isnt there for old gens yet
+        // theres a race condition where gen will be 0 on first update
+        // TODO add HP CSS for BW overlay so we can remove this
+        if (current.generation == 0) await new Promise(resolve => setTimeout(resolve, 100));
         if (current.generation <= 5) return;
 
         // if pokemon is hurt or in combat
