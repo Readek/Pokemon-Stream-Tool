@@ -1,6 +1,6 @@
-import { getLocalizedPokeText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText } from "../../Utils/Language.mjs";
 import { current } from "../Globals.mjs";
-/** @import { IconCoords, PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { IconCoords, PokemonSentData } from "../../Utils/Type Definitions.mjs" */
 
 const playerActiveDiv = document.getElementById("battleStandbyBarPlayer");
 const enemyActiveDiv = document.getElementById("battleStandbyBarEnemy");

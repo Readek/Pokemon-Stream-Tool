@@ -1,5 +1,5 @@
 import { Pokemon } from "./Pokemon.mjs";
-/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData } from "../../Utils/Type Definitions.mjs" */
 
 const pokesDiv = document.getElementById("botPokes");
 

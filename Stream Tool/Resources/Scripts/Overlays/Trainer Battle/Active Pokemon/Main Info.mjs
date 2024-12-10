@@ -1,8 +1,8 @@
-import { getLocalizedPokeText, getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../../Utils/Language.mjs";
 import { current } from "../../Globals.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
-/** @import { Coords, PokeImgData } from "../../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { Coords, PokeImgData } from "../../../Utils/Type Definitions.mjs" */
 
 
 export class ActiveMainInfo {

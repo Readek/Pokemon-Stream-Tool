@@ -1,6 +1,6 @@
 import { ActiveMainInfo } from "./Main Info.mjs";
 import { ActiveMoves } from "./Moves.mjs";
-/** @import { PokemonSentData } from "../../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData } from "../../../Utils/Type Definitions.mjs" */
 
 const playerActiveDiv = document.getElementById("battleActiveBarPlayer");
 const enemyActiveDiv = document.getElementById("battleActiveBarEnemy");

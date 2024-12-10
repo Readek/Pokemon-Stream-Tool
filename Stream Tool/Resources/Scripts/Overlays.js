@@ -1,12 +1,12 @@
-import { resetPokeLocTexts, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
-import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
-import { current } from "./Scripts/Globals.mjs";
-import { playerInfo } from "./Scripts/Player Info.mjs";
-import { pokemons } from "./Scripts/Player Team/Pokemons.mjs";
-import { battlePokemons } from "./Scripts/Trainer Battle/Battle Pokemons.mjs";
-import { setTrainerName, showTrainerNameIntro } from "./Scripts/Trainer Battle/Trainer Name Intro.mjs";
-import { wildPokemon } from "./Scripts/Wild Pokemon.mjs";
-/** @import { SentData } from "../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+import { resetPokeLocTexts, setLanguage } from "./Utils/Language.mjs";
+import { initWebsocket } from "./Utils/WebSocket.mjs";
+import { current } from "./Overlays/Globals.mjs";
+import { playerInfo } from "./Overlays/Player Info.mjs";
+import { pokemons } from "./Overlays/Player Team/Pokemons.mjs";
+import { battlePokemons } from "./Overlays/Trainer Battle/Battle Pokemons.mjs";
+import { setTrainerName, showTrainerNameIntro } from "./Overlays/Trainer Battle/Trainer Name Intro.mjs";
+import { wildPokemon } from "./Overlays/Wild Pokemon.mjs";
+/** @import { SentData } from "./Utils/Type Definitions.mjs" */
 
 // this is a weird way to have file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {

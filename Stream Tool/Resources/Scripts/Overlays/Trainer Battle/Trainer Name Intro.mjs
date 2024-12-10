@@ -1,10 +1,10 @@
-import { getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedText } from "../../Utils/Language.mjs";
+/** @import { EnemyTrainerName } from "../../Utils/Type Definitions.mjs" */
 
 const trainerIntroDiv = document.getElementById("enemyNameIntroDiv");
 const titleText = document.getElementById("enemyNameIntroTitle");
 const nameText = document.getElementById("enemyNameIntroName");
 const countText = document.getElementById("enemyNameIntroPokeCount");
-/** @import { EnemyTrainerName } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 let name = "";
 let pokeCount = 0;
@@ -16,11 +16,11 @@ let pokeCount = 0;
  */
 export function setTrainerName(nameData, species) {
 
-    if (nameData.name == name || nameData.name == species) return;
+    if (!nameData.name || nameData.name == name || nameData.name == species) return;
 
     // in gen7, battle overlay can activate for forced wild fights
     if (nameData.name.startsWith("\u0000")) {
-        
+
         // in those cases, we will use first enemy poke as name
         nameData.name = species;
         nameData.title = getLocalizedText("pokeBattleIntroWild");

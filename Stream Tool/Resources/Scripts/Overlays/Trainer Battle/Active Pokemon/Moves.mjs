@@ -1,7 +1,7 @@
 import { current } from "../../Globals.mjs";
-import { getLocalizedPokeText, getLocalizedText } from "../../../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../../Utils/Language.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
-/** @import { Moves } from "../../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { Moves } from "../../../Utils/Type Definitions.mjs" */
 
 export class ActiveMoves {
 

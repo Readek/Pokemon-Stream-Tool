@@ -1,6 +1,6 @@
 import { BattlePokemon } from "./Battle Pokemon.mjs";
 import { setTrainerPokeCount } from "./Trainer Name Intro.mjs";
-/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData } from "../../Utils/Type Definitions.mjs" */
 
 const pokesDiv = document.getElementById("battleDiv");
 

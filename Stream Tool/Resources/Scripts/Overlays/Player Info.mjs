@@ -1,7 +1,8 @@
+/** @import { PlayerData } from "../Utils/Type Definitions.mjs" */
+
 const badges = document.getElementsByClassName("badge");
 const catchesNum = document.getElementById("catchesNumber");
 const deathsNum = document.getElementById("deathsNumber");
-/** @import { PlayerData } from "../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 class PlayerInfo {
 

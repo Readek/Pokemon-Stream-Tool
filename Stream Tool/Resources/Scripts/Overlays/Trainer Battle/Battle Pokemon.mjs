@@ -1,6 +1,6 @@
 import { ActivePokemon } from "./Active Pokemon/Active Pokemon.mjs";
 import { StandbyPokemon } from "./Standby Pokemon.mjs";
-/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData } from "../../Utils/Type Definitions.mjs" */
 
 export class BattlePokemon {
 

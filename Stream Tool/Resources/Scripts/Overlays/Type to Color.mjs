@@ -1,4 +1,4 @@
-/** @import { PokeType } from "../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { PokeType } from "../Utils/Type Definitions.mjs" */
 
 const colors = {
     "Bug": "#91c12c",

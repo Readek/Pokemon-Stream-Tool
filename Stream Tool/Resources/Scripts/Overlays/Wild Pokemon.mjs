@@ -1,6 +1,6 @@
-import { getLocalizedPokeText, getLocalizedText } from "../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../Utils/Language.mjs";
 import { current } from "./Globals.mjs";
-/** @import { PokemonSentData, PokeType, PokeImgData } from "../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData, PokeType, PokeImgData } from "../Utils/Type Definitions.mjs" */
 
 const playerInfoDiv = document.getElementById("playerInfo");
 const wildDiv = document.getElementById("wildEncounterDiv");

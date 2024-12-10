@@ -1,7 +1,7 @@
 import { typeToColor } from "../Type to Color.mjs";
-import { getLocalizedPokeText, getLocalizedText } from "../../../../../Resources/Scripts/Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs";
 import { current } from "../Globals.mjs";
-/** @import { PokemonSentData } from "../../../../../Resources/Scripts/Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData } from "../../Utils/Type Definitions.mjs" */
 
 export class Pokemon {
 
