@@ -30,7 +30,7 @@ export async function updateTrainer() {
     const dataJson = {
         id : "gameData",
         type : "Trainer",
-        trainerPokemons: [], // more lines will be added below
+        pokemons: [], // more lines will be added below
         trainerName : getEnemyTrainerName()
     };
 
@@ -40,7 +40,7 @@ export async function updateTrainer() {
     for (let i = 0; i < trainerPokemons.length; i++) {
 
         // add it to the main json
-        dataJson.trainerPokemons.push({
+        dataJson.pokemons.push({
             internalSpecies : trainerPokemons[i].getInternalSpecies(),
             species : trainerPokemons[i].getSpecies(),
             nickName : trainerPokemons[i].getNickName() || trainerPokemons[i].getSpecies(),
@@ -74,7 +74,7 @@ export async function updateTrainer() {
         // once pokemon images are loaded, add them in
         const pokeImgs = await Promise.all(promises);
         for (let i = 0; i < trainerPokemons.length; i++) {
-            dataJson.trainerPokemons[i].img = pokeImgs[i];
+            dataJson.pokemons[i].img = pokeImgs[i];
         }
 
         const ipc = await import("../IPC.mjs");

@@ -57,13 +57,13 @@ export async function updateGUI(data, noNotif) {
             }
         }
         
-        for (let i = 0; i < data.catches.length; i++) {
+        for (let i = 0; data.pokemons && i < data.pokemons.length; i++) {
 
-            catches[i].setSpecies(data.catches[i].internalSpecies);
-            catches[i].setNickName(data.catches[i].nickName);
-            catches[i].setForm(data.catches[i].form);
-            catches[i].setGender(data.catches[i].gender);
-            catches[i].setShiny(data.catches[i].shiny);
+            catches[i].setSpecies(data.pokemons[i].internalSpecies);
+            catches[i].setNickName(data.pokemons[i].nickName);
+            catches[i].setForm(data.pokemons[i].form);
+            catches[i].setGender(data.pokemons[i].gender);
+            catches[i].setShiny(data.pokemons[i].shiny);
             
         }
 
@@ -71,24 +71,24 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Team") {
 
-        for (let i = 0; i < data.playerPokemons.length; i++) {
+        for (let i = 0; data.pokemons && i < data.pokemons.length; i++) {
 
-            pokemons[i].setSpecies(data.playerPokemons[i].internalSpecies);
-            pokemons[i].setNickName(data.playerPokemons[i].nickName);
-            pokemons[i].setLvl(data.playerPokemons[i].lvl);
-            pokemons[i].setForm(data.playerPokemons[i].form);
-            pokemons[i].setGender(data.playerPokemons[i].gender);
-            pokemons[i].setShiny(data.playerPokemons[i].shiny);
-            pokemons[i].setStatus(data.playerPokemons[i].status);
-            pokemons[i].setHpCurrent(data.playerPokemons[i].hpCurrent);
-            pokemons[i].setHpMax(data.playerPokemons[i].hpMax);
-            pokemons[i].setExp(data.playerPokemons[i].exp);
-            pokemons[i].setAbility(data.playerPokemons[i].ability);
-            pokemons[i].setItem(data.playerPokemons[i].item);
-            pokemons[i].setMoves(data.playerPokemons[i].moves);
-            pokemons[i].setStats(data.playerPokemons[i].stats);
-            pokemons[i].setBoosts(data.playerPokemons[i].boosts);
-            pokemons[i].setInCombat(data.playerPokemons[i].inCombat);
+            pokemons[i].setSpecies(data.pokemons[i].internalSpecies);
+            pokemons[i].setNickName(data.pokemons[i].nickName);
+            pokemons[i].setLvl(data.pokemons[i].lvl);
+            pokemons[i].setForm(data.pokemons[i].form);
+            pokemons[i].setGender(data.pokemons[i].gender);
+            pokemons[i].setShiny(data.pokemons[i].shiny);
+            pokemons[i].setStatus(data.pokemons[i].status);
+            pokemons[i].setHpCurrent(data.pokemons[i].hpCurrent);
+            pokemons[i].setHpMax(data.pokemons[i].hpMax);
+            pokemons[i].setExp(data.pokemons[i].exp);
+            pokemons[i].setAbility(data.pokemons[i].ability);
+            pokemons[i].setItem(data.pokemons[i].item);
+            pokemons[i].setMoves(data.pokemons[i].moves);
+            pokemons[i].setStats(data.pokemons[i].stats);
+            pokemons[i].setBoosts(data.pokemons[i].boosts);
+            pokemons[i].setInCombat(data.pokemons[i].inCombat);
 
         };
 
@@ -106,11 +106,13 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Wild Encounter") {
 
-        if (data.pokemon) {
-            wildEncounter.setSpecies(data.pokemon.species);
-            wildEncounter.setForm(data.pokemon.form);
-            wildEncounter.setGender(data.pokemon.gender);
-            wildEncounter.setShiny(data.pokemon.shiny);
+        if (data.pokemons) {
+            for (let i = 0; i < data.pokemons.length; i++) {
+                wildEncounter.setSpecies(data.pokemons[i].species);
+                wildEncounter.setForm(data.pokemon[i].form);
+                wildEncounter.setGender(data.pokemon[i].gender);
+                wildEncounter.setShiny(data.pokemon[i].shiny);
+            }
         } else {
             wildEncounter.setSpecies("None");
         }
@@ -120,24 +122,24 @@ export async function updateGUI(data, noNotif) {
     if (data.type == "Trainer") {
 
         // enemy trainer
-        for (let i = 0; i < data.trainerPokemons.length; i++) {
+        for (let i = 0; i < data.pokemons.length; i++) {
 
-            trainerPokemons[i].setSpecies(data.trainerPokemons[i].internalSpecies);
-            trainerPokemons[i].setNickName(data.trainerPokemons[i].nickName);
-            trainerPokemons[i].setLvl(data.trainerPokemons[i].lvl);
-            trainerPokemons[i].setForm(data.trainerPokemons[i].form);
-            trainerPokemons[i].setGender(data.trainerPokemons[i].gender);
-            trainerPokemons[i].setShiny(data.trainerPokemons[i].shiny);
-            trainerPokemons[i].setStatus(data.trainerPokemons[i].status);
-            trainerPokemons[i].setHpCurrent(data.trainerPokemons[i].hpCurrent);
-            trainerPokemons[i].setHpMax(data.trainerPokemons[i].hpMax);
-            trainerPokemons[i].setAbility(data.trainerPokemons[i].ability);
-            trainerPokemons[i].setItem(data.trainerPokemons[i].item);
-            trainerPokemons[i].setMoves(data.trainerPokemons[i].moves);
-            trainerPokemons[i].setStats(data.trainerPokemons[i].stats);
-            trainerPokemons[i].setBoosts(data.trainerPokemons[i].boosts);
-            trainerPokemons[i].setInCombat(data.trainerPokemons[i].inCombat);
-            trainerPokemons[i].setReveals(data.trainerPokemons[i].reveals);
+            trainerPokemons[i].setSpecies(data.pokemons[i].internalSpecies);
+            trainerPokemons[i].setNickName(data.pokemons[i].nickName);
+            trainerPokemons[i].setLvl(data.pokemons[i].lvl);
+            trainerPokemons[i].setForm(data.pokemons[i].form);
+            trainerPokemons[i].setGender(data.pokemons[i].gender);
+            trainerPokemons[i].setShiny(data.pokemons[i].shiny);
+            trainerPokemons[i].setStatus(data.pokemons[i].status);
+            trainerPokemons[i].setHpCurrent(data.pokemons[i].hpCurrent);
+            trainerPokemons[i].setHpMax(data.pokemons[i].hpMax);
+            trainerPokemons[i].setAbility(data.pokemons[i].ability);
+            trainerPokemons[i].setItem(data.pokemons[i].item);
+            trainerPokemons[i].setMoves(data.pokemons[i].moves);
+            trainerPokemons[i].setStats(data.pokemons[i].stats);
+            trainerPokemons[i].setBoosts(data.pokemons[i].boosts);
+            trainerPokemons[i].setInCombat(data.pokemons[i].inCombat);
+            trainerPokemons[i].setReveals(data.pokemons[i].reveals);
 
         };
 

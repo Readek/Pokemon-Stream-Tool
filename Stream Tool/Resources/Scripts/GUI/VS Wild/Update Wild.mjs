@@ -30,7 +30,7 @@ export async function updateWildEnc() {
    const dataJson = {
        id : "gameData",
        type : "Wild Encounter",
-       pokemon : await wildEncounter.sendData(),
+       pokemons : [await wildEncounter.sendData()],
    };
 
    // its time to send the data away

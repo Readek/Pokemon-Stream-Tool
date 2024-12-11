@@ -62,11 +62,15 @@
 
 /**
  * @typedef {{
+*  0: String, 1?: String, H?: String
+* }} Abilities
+*/
+
+/**
+ * @typedef {{
  *  id: String,
  *  type: "Settings" | "Catches" | "Team" | "Player" | "Wild Encounter" | "Trainer" | "Auto"
- *  playerPokemons?: PokemonSentData[],
- *  pokemon?: PokemonSentData,
- *  catches?: PokemonSentData[],
+ *  pokemons?: PokemonSentData[],
  *  battleType?: BattleType,
  *  lang?: LangCode,
  *  gen?: Number,
@@ -74,7 +78,6 @@
  *  version?: "String",
  *  player?: PlayerData,
  *  trainerName?: EnemyTrainerName,
- *  trainerPokemons?: PokemonSentData[]
  * }} SentData
  */
 
@@ -101,5 +104,8 @@
  *  boosts?: Boosts,
  *  inCombat?: Boolean,
  *  reveals?: Reveals[],
+ *  ratioM?: Number,
+ *  ratioF: Number,
+ *  abilities: Abilities
  * }} PokemonSentData
  */

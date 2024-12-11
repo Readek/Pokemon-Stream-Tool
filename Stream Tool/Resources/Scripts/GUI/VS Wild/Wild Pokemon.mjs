@@ -218,7 +218,7 @@ class WildPokemon extends Pokemon {
                 form : this.getForm(),
                 gender : this.getGender(),
                 shiny : this.getShiny(),
-                type : this.getTypes(),
+                types : this.getTypes(),
                 img : inside.electron ? await this.getImgSrc() : null,
                 stats : {
                     hp : pokedata.baseStats.hp,

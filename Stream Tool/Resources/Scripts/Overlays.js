@@ -40,21 +40,21 @@ async function updateData(data) {
 
             bTypeChanged = true;
             battleTypePrev = data.battleType;
-            
+
             // hide current poke bar
             if (data.battleType != "Trainer") {
                 promises.push(battlePokemons.hide());
             } else {
                 promises.push(pokemons.hide());
-            }            
+            }
 
         }
 
         // update that data
         if (data.battleType != "Trainer") {
-            pokemons.update(data.playerPokemons, bTypeChanged);
+            pokemons.update(data.pokemons, bTypeChanged);
         } else {
-            battlePokemons.update(data.playerPokemons, true);
+            battlePokemons.update(data.pokemons, true);
         }
 
         // show that next poke bar
@@ -75,23 +75,23 @@ async function updateData(data) {
     } else if (data.type == "Player") {
 
         playerInfo.update(data.player);
-        
+
     } else if (data.type == "Wild Encounter") {
 
-        wildPokemon.update(data.pokemon)
+        wildPokemon.update(data.pokemons[0]);
 
     } else if (data.type == "Trainer") {
 
-        setTrainerName(data.trainerName, data.trainerPokemons[0].species);
-        battlePokemons.update(data.trainerPokemons);
+        setTrainerName(data.trainerName, data.pokemons[0].species);
+        battlePokemons.update(data.pokemons);
 
-    } else if (data.type == "Config") {        
+    } else if (data.type == "Config") {
 
         if (current.lang != data.lang) {
             current.lang = data.lang;
             current.generation = data.gen;
             await setLanguage(data.lang, data.gen);
-        } else if (current.generation != data.gen) {            
+        } else if (current.generation != data.gen) {
             current.generation = data.gen;
             resetPokeLocTexts(data.gen);
         }

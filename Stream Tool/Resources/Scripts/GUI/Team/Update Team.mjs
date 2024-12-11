@@ -31,7 +31,7 @@ export async function updateTeam() {
     const dataJson = {
         id : "gameData",
         type : "Team",
-        playerPokemons: [], // more lines will be added below,
+        pokemons: [], // more lines will be added below,
         battleType: getBattleState()
     };
 
@@ -41,7 +41,7 @@ export async function updateTeam() {
     for (let i = 0; i < pokemons.length; i++) {
 
         // add it to the main json
-        dataJson.playerPokemons.push({
+        dataJson.pokemons.push({
             internalSpecies : pokemons[i].getInternalSpecies(),
             species : pokemons[i].getSpecies(),
             nickName : pokemons[i].getNickName() || pokemons[i].getSpecies(),
@@ -75,7 +75,7 @@ export async function updateTeam() {
         // once pokemon images are loaded, add them in
         const pokeImgs = await Promise.all(promises);
         for (let i = 0; i < pokemons.length; i++) {
-            dataJson.playerPokemons[i].img = pokeImgs[i];
+            dataJson.pokemons[i].img = pokeImgs[i];
         }
 
         const ipc = await import("../IPC.mjs");

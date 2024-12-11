@@ -2,6 +2,7 @@ import { current } from "./Scripts/Globals.mjs";
 import { genRnd } from "../../../Resources/Scripts/Utils/GenRnd.mjs";
 import { initWebsocket } from "../../../Resources/Scripts/Utils/WebSocket.mjs";
 import { getLocalizedPokeText, getLocalizedText, setLanguage } from "../../../Resources/Scripts/Utils/Language.mjs";
+/** @import {SentData} from "../../../Resources/Scripts/Utils/Type Definitions.mjs" */
 
 let startup = true;
 
@@ -78,22 +79,22 @@ startCountdown();
 
 /**
  * Updates overlay data with a provided object
- * @param {Object} data 
+ * @param {SentData} data 
  */
 async function updateData(data) {
 
     if (data.type == "Catches") {
         
-        if (data.catches.length > 0) {
+        if (data.pokemons.length > 0) {
 
             // check if we got a different array
-            if (catches.length != data.catches.length) {
+            if (catches.length != data.pokemons.length) {
                 // resize it if so
-                catches.length = data.catches.length;
+                catches.length = data.pokemons.length;
             }
 
             // for every incoming catch
-            for (let i = 0; i < data.catches.length; i++) {
+            for (let i = 0; i < data.pokemons.length; i++) {
 
                 // if theres no data on that slot, create a new catch
                 if (!catches[i]) {
@@ -101,10 +102,10 @@ async function updateData(data) {
                 }
 
                 // set species
-                if (data.catches[i].species != catches[i].getSpecies()) {
-                    if (data.catches[i].species) {
-                        catches[i].setSpecies(data.catches[i].species);
-                        catches[i].setImg(data.catches[i].img);
+                if (data.pokemons[i].species != catches[i].getSpecies()) {
+                    if (data.pokemons[i].species) {
+                        catches[i].setSpecies(data.pokemons[i].species);
+                        catches[i].setImg(data.pokemons[i].img);
                         catches[i].setNone(false);
                     } else {
                         catches[i].setNone(true);
@@ -112,13 +113,13 @@ async function updateData(data) {
                 }
 
                 // set nickname
-                if (data.catches[i].nickName != catches[i].getNickname()) {
-                    catches[i].setNickname(data.catches[i].nickName);
+                if (data.pokemons[i].nickName != catches[i].getNickname()) {
+                    catches[i].setNickname(data.pokemons[i].nickName);
                 }
 
                 // set gender
-                if (data.catches[i].gender != catches[i].getGender()) {
-                    catches[i].setGender(data.catches[i].gender);
+                if (data.pokemons[i].gender != catches[i].getGender()) {
+                    catches[i].setGender(data.pokemons[i].gender);
                 }
                 
             }

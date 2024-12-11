@@ -30,7 +30,7 @@ export async function updateCatches() {
     const dataJson = {
         id : "gameData",
         type : "Catches",
-        catches: [], // more lines will be added below
+        pokemons: [], // more lines will be added below
     };
 
     const promises = [];
@@ -41,7 +41,7 @@ export async function updateCatches() {
         if (!catches[i].getSpecies()) continue;
 
         // add it to the main json
-        dataJson.catches.push({
+        dataJson.pokemons.push({
             internalSpecies : catches[i].getInternalSpecies(),
             species : catches[i].getSpecies(),
             nickName : catches[i].getNickName(),
@@ -62,7 +62,7 @@ export async function updateCatches() {
         // once pokemon images are loaded, add them in
         const pokeImgs = await Promise.all(promises);
         for (let i = 0; i < pokeImgs.length; i++) {
-            dataJson.catches[i].img = pokeImgs[i];
+            dataJson.pokemons[i].img = pokeImgs[i];
         }
 
         const ipc = await import("../IPC.mjs");

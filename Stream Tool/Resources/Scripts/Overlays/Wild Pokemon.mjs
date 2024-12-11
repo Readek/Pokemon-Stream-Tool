@@ -1,6 +1,6 @@
 import { getLocalizedPokeText, getLocalizedText } from "../Utils/Language.mjs";
 import { current } from "./Globals.mjs";
-/** @import { PokemonSentData, PokeType, PokeImgData } from "../Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData, PokeType, PokeImgData, Abilities } from "../Utils/Type Definitions.mjs" */
 
 const playerInfoDiv = document.getElementById("playerInfo");
 const wildDiv = document.getElementById("wildEncounterDiv");
@@ -88,7 +88,7 @@ class WildPokemon {
 
     /**
      * Updates shown ability texts
-     * @param {Object} abilities - Object of the pokemon's abilities
+     * @param {Abilities} abilities - Object of the pokemon's abilities
      */
     setAbilities(abilities) {
 
@@ -172,7 +172,7 @@ class WildPokemon {
             this.setImg(data.img);
 
             // set type info
-            this.setTypes(data.type);
+            this.setTypes(data.types);
 
             // gender ratio
             this.setGenderRatio(data.ratioM, data.ratioF);
