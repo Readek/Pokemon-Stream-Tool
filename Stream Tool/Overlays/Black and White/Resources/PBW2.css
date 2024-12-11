@@ -296,18 +296,63 @@ html, body {
 
 
 .pokeDiv {
+    --healthy: #949494;
+    --warning: #7e7c11;
+    --danger: #7e1111;
+    --Par: var(--warning);
+    --Poi: #56117e;
+    --Fro: #1a8fa3;
+    --Bur: #7e4611;
+    --Sle: grey;
+    --activeColor: var(--healthy);
     position: relative;
     height: 120px;
     width: 300px;
-    border: thick double #949494;
+    border: thick double var(--activeColor);
     overflow: visible;
     border-radius: 5px;
+    transition: opacity .25s, margin-left .6s;
 }
-.pokeDed {
-    border-color: red;
-    filter: grayscale(.8);
+.pokeFai, .pokeDed {
+    --activeColor: var(--danger) !important;
+    filter: grayscale(.8) brightness(.8) !important;
+}
+.pokePar {
+    --activeColor: var(--warning) !important;
+}
+.pokePoi {
+    --activeColor: var(--Poi) !important;
+}
+.pokeFro {
+    --activeColor: var(--Fro) !important;
+}
+.pokeBur {
+    --activeColor: var(--Bur) !important;
+}
+.pokeSle {
+    --activeColor: var(--Sle) !important;
 }
 
+.pokeDivInCombat {
+    .pokeDivMask {
+        .pokeHpDiv {
+            transform: translateY(0px);
+        }
+    }
+    .pokeTexts {
+        transform: translateY(-11px);
+    }
+}
+.pokeDivOutOfCombat { 
+    .pokeDivMask {
+        .pokeHpDiv {
+            transform: translateY(25px);
+        }
+    }
+    .pokeTexts {
+        transform: translateY(0px);
+    }
+}
 
 .pokeTexts {
     height: 100%;
@@ -316,6 +361,14 @@ html, body {
     justify-content: center;
     margin-left: 15px;
     text-shadow: 0px 0px 5px black;
+    transition: transform .5s;
+}
+
+.pokeDivMask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .pokeLvlDiv {
@@ -341,6 +394,55 @@ html, body {
     font-style: italic;
 }
 
+.pokeHpDiv {
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    --bacColor: #363636;
+    transition: transform .5s;
+}
+.pokeHpTextDiv {
+    display: flex;
+    justify-content: center;
+    width: 70px;
+    background-color: var(--bacColor);
+    padding: 3px 0px;
+    z-index: 2;
+    flex-shrink: 0;
+    font-size: 16px;
+    border-top-right-radius: 5px;
+    border-top: 2px solid var(--activeColor);
+    border-right: 2px solid var(--activeColor);
+}
+.pokeHpText {
+    text-wrap: nowrap;
+    color: #b6b6b6;
+    transform: translateY(2px);
+}
+.pokeHpBar {
+    background-color: var(--bacColor);
+    width: 55%;
+    height: 11px;
+    transform: translateY(14px);
+    border-top-right-radius: 5px;
+    border: 4px solid var(--bacColor);
+    border-left: none;
+    overflow: hidden;
+}
+.hpBar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.pokeHpBarTotal {
+    background-color: grey;
+}
+.pokeHpBarCurrent {
+    background-color: var(--activeColor);
+    filter: brightness(1.7);
+}
+
 .pokeImgDiv {
     position: absolute;
     right: 30px;
@@ -354,10 +456,6 @@ html, body {
 .pokeImg {
     transform: scale(2);
     image-rendering: pixelated;
-}
-
-.pokeDivMask {
-    display: none;
 }
 
 
@@ -409,4 +507,85 @@ html, body {
         opacity: 1;
         transform: translateX(0px);
     }
+}
+
+@keyframes hidePokes {
+    from {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+@keyframes showPokes {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes iDontFeelSoGood {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px); filter: brightness(1.3); }
+    10% { transform: translate(1px, -2px); }
+    20% { transform: translate(-1px, 0px); }
+    30% { transform: translate(1px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    50% { transform: translate(0px, 1px); }
+    60% { transform: translate(-1px, 0px); }
+    70% { transform: translate(1px, 1px); filter: brightness(1); }
+    80% { transform: translate(-1px, -1px); }
+    90% { transform: translate(1px, 0px); }
+    100% { transform: translate(0px, -1px); }
+}
+
+@keyframes megaAnim {
+    0% {filter: brightness(1);}
+    85% {filter: brightness(15);}
+    100% {filter: brightness(1);}
+}
+
+
+@keyframes trainerIntroFull {
+    0% {transform: translateY(20px);}
+    35% {transform: translateY(20px);}
+    45% {transform: translateY(0px);}
+}
+@keyframes trainerIntroTopBar {
+    0% {transform: translateX(-100%);}
+    15% {transform: translateX(0%);}
+    85% {transform: translateX(0%);}
+    100% {transform: translateX(100%);}
+}
+@keyframes trainerIntroBotBar {
+    0% {transform: translateX(100%);}
+    15% {transform: translateX(0%);}
+    85% {transform: translateX(0%);}
+    100% {transform: translateX(-100%);}
+}
+@keyframes trainerIntroTexts {
+    0% {transform: translateX(40px); opacity: 0;}
+    5% {transform: translateX(40px); opacity: 0;}
+    15% {transform: translateX(0px); opacity: 1;}
+    85% {transform: translateX(0px); opacity: 1;}
+    95% {transform: translateX(-40px); opacity: 0;}
+    100% {transform: translateX(-40px); opacity: 0;}
+}
+
+@keyframes trainerIntroCount {
+    0% {opacity: 0;}
+    35% {opacity: 0;}
+    45% {opacity: 1;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
 }

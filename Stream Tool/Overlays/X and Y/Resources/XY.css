@@ -351,6 +351,26 @@ html, body {
 .pokeSle {
     --activeColor: var(--Sle) !important;
 }
+.pokeDivInCombat {
+    .pokeDivMask {
+        .pokeHpDiv {
+            transform: translateY(0px);
+        }
+    }
+    .pokeTexts {
+        transform: translateY(0px);
+    }
+}
+.pokeDivOutOfCombat { 
+    .pokeDivMask {
+        .pokeHpDiv {
+            transform: translateY(25px);
+        }
+    }
+    .pokeTexts {
+        transform: translateY(10px);
+    }
+}
 
 
 .pokeTexts {

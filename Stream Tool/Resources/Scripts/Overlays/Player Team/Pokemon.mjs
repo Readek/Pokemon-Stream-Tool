@@ -348,22 +348,16 @@ export class Pokemon {
     /** Shows or hides pokemon's HP bar and adjusts other elements */
     async displayHPBar() {
 
-        // support for hp stuff isnt there for old gens yet
-        // theres a race condition where gen will be 0 on first update
-        // TODO add HP CSS for BW overlay so we can remove this
-        if (current.generation == 0) await new Promise(resolve => setTimeout(resolve, 100));
-        if (current.generation <= 5) return;
-
         // if pokemon is hurt or in combat
         if (this.inCombat || this.getHpCurrent() < this.getHpMax()) {
 
-            this.hpEl.parentElement.style.transform = "translateY(0px)";
-            this.nickEl.parentElement.style.transform = "translateY(0px)";
+            this.mainEl.classList.remove("pokeDivOutOfCombat");
+            this.mainEl.classList.add("pokeDivInCombat");
 
         } else {
 
-            this.hpEl.parentElement.style.transform = "translateY(25px)";
-            this.nickEl.parentElement.style.transform = "translateY(10px)";
+            this.mainEl.classList.remove("pokeDivInCombat");
+            this.mainEl.classList.add("pokeDivOutOfCombat");
 
         }
 
