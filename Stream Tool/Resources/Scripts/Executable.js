@@ -269,6 +269,22 @@ app.on('window-all-closed', () => {
         fs.writeFileSync(`${resourcesPath}/Texts/GUI Settings.json`, JSON.stringify(data, null, 2));
         
         // save current GUI data state
+        // we will also remove some unneded values so final file is lighter
+        if (storedGuiData.catches.pokemons) {
+            storedGuiData.catches.pokemons.forEach(poke => {
+                delete poke.types;
+                delete poke.img;
+            });
+        }
+        if (storedGuiData.team.pokemons) {
+            storedGuiData.team.pokemons.forEach(poke => {
+                delete poke.types;
+                delete poke.img;
+                delete poke.itemCoords;
+                delete poke.boosts;
+                delete poke.iconCoords;
+            });
+        }
         fs.writeFileSync(`${resourcesPath}/Texts/GUI State.json`, JSON.stringify(storedGuiData, null, 2));
         
         // and good bye

@@ -42,7 +42,7 @@ export async function updateGUI(data, noNotif) {
     if (data.type == "Catches") {
 
         const homeCatchesLength = catches.length;
-        const incCatchesLength = data.catches.length;
+        const incCatchesLength = data.pokemons.length;
 
         // add or remove catches if needed
         if (homeCatchesLength < incCatchesLength) {

@@ -226,15 +226,17 @@ export class TeamPokemon extends Pokemon {
         
 
         // set the item's icon
-        this.#itemCoords = pkmn.img.Icons.getItem(value, {domain: stPath.poke});
-        const imgSrc = this.#itemCoords.left != -0 // if no icon found, display a placeholder
+        const coords = pkmn.img.Icons.getItem(value, {domain: stPath.poke});
+        const imgSrc = coords.left != -0 // if no icon found, display a placeholder
             ? `${stPath.assets}/Items/itemicons-sheet.png`
             : `${stPath.assets}/Items/None.png`;
         
         this.#itemImg.src = imgSrc;
         this.#itemImg.style.objectPosition = `
-            ${this.#itemCoords.left}px ${this.#itemCoords.top}px
+            ${coords.left}px ${coords.top}px
         `;
+
+        this.#itemCoords = {top: coords.top, left: coords.left}
         
     }
     /**
