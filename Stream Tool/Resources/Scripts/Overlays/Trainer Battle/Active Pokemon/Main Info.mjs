@@ -2,7 +2,7 @@ import { getLocalizedPokeText, getLocalizedText } from "../../../Utils/Language.
 import { current } from "../../Globals.mjs";
 import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
-/** @import { Coords, PokeImgData } from "../../../Utils/Type Definitions.mjs" */
+/** @import { Coords, PokeImgData, PokemonSentData} from "../../../Utils/Type Definitions.mjs" */
 
 
 export class ActiveMainInfo {
@@ -398,9 +398,10 @@ export class ActiveMainInfo {
             // before displaying it in game
             await new Promise(resolve => setTimeout(resolve, 1500));
 
-            this.#mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
+            // trigger that oomf animation
+            this.#shakeIt();
+            // wait a bit before hp starts ticking down to direct viewer's eyes
             await new Promise(resolve => setTimeout(resolve, 500));
-            this.#mainEl.style.animation = "";
             
             if (!this.#hpDecreasing) {
 
@@ -536,6 +537,17 @@ export class ActiveMainInfo {
     }
 
 
+    /** Triggers a shake animation for the entire pokemon div */
+    async #shakeIt() {
+        this.#mainEl.style.animation = "";
+        this.#mainEl.offsetHeight; // triggers reflow so it can animate again
+        this.#mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
+    }
+
+    /**
+     * Updates data for this pokemon if its different from previous data
+     * @param {PokemonSentData} data - Full data for this pokemon
+     */
     update(data) {
 
         this.#noHpAnim = false;
@@ -560,8 +572,10 @@ export class ActiveMainInfo {
                 const megatime = this.#player ? current.megaTime : 0;
                 setTimeout(() => {
                     this.setImg(data.img);
+                    this.setTypes(data.types);
                     this.setAbility(data.ability, true);
                     this.setItem(data.item, null, true);
+                    this.#shakeIt();
                 }, 2700 + (megatime)); 
                 if (this.#player) current.megaTime = 0;
             } else {
@@ -580,7 +594,7 @@ export class ActiveMainInfo {
         this.setLvl(data.lvl);
 
         // set type data
-        this.setTypes(data.types);
+        if (!megaEvolving) this.setTypes(data.types);
 
         // set name
         this.setName(data.nickName);

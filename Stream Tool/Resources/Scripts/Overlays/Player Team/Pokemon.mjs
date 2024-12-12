@@ -184,9 +184,10 @@ export class Pokemon {
             // before displaying it in game
             await new Promise(resolve => setTimeout(resolve, 1500));
 
-            this.mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
+            // trigger that oomf animation
+            this.#shakeIt();
+            // wait a bit before hp starts ticking down to direct viewer's eyes
             await new Promise(resolve => setTimeout(resolve, 500));
-            this.mainEl.style.animation = "";
             
             if (!this.#hpDecreasing) {
 
@@ -363,6 +364,13 @@ export class Pokemon {
 
     }
 
+    /** Triggers a shake animation for the entire pokemon div */
+    async #shakeIt() {
+        this.mainEl.style.animation = "";
+        this.mainEl.offsetHeight; // triggers reflow so it can animate again
+        this.mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
+    }
+
 
     /**
      * Updates data for this pokemon if its different from previous data
@@ -372,6 +380,7 @@ export class Pokemon {
     async update(data, bTypeChanged) {
 
         this.#noHpAnim = bTypeChanged;
+        let megaEvolving;
 
         // set species
         if (data.species != this.getSpecies() ||
@@ -382,7 +391,6 @@ export class Pokemon {
 
             if (data.species) {
 
-                let megaEvolving;
                 if (data.species == this.getSpecies() && data.form.includes("Mega")) {
                     megaEvolving = true;
                 }
@@ -394,8 +402,12 @@ export class Pokemon {
 
                 // if pokemon is mega evolving, wait for that img update
                 if (megaEvolving) {
-                    setTimeout(() => {this.setImg(data.img)}, 2700 + (current.megaTime));
-                    current.megaTime = 0;                    
+                    setTimeout(() => {
+                        this.setImg(data.img);
+                        this.setTypes(data.types);
+                        this.#shakeIt();
+                    }, 2700 + (current.megaTime));
+                    current.megaTime = 0;
                 } else {
                     this.setImg(data.img);
                 }
@@ -428,7 +440,7 @@ export class Pokemon {
         }
 
         // set background color
-        if (this.#compareIncTypes(data.types)) {
+        if (!megaEvolving && this.#compareIncTypes(data.types)) {
             this.setTypes(data.types);
         }
         
