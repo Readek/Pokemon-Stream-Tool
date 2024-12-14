@@ -70,6 +70,11 @@ export class ActivePokemon {
         this.#moveInfo.revealAll();
     }
 
+    /** Sets styles to elements when poke dies */
+    ripPoke() {
+        this.#moveInfo.setDed();
+    }
+
     /** @param {PokemonSentData} data  */
     update(data) {
 

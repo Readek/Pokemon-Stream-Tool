@@ -213,6 +213,11 @@ export class ActiveMoves {
 
     }
 
+    /** Styles movements when poke dies */
+    setDed() {
+        this.#movesEl.classList.add("pokeDed");
+    }
+
 
     /**
      * @param {Moves} moves

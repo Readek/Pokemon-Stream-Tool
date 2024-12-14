@@ -462,6 +462,7 @@ export class ActiveMainInfo {
             this.setAbility(this.#ability, true);
             this.setItem(this.#item, null, true);
             this.#parent.revealAll();
+            this.#parent.ripPoke();
         } else if (hp <= this.#hpMax*.2) { // 20%
             this.#mainEl.style.setProperty("--activeColor", "var(--danger)");
         } else if (hp <= this.#hpMax/2) { // 50%
