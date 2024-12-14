@@ -24,6 +24,7 @@ export class Pokemon {
     #side = "Front";
 
     #showHideTimeout;
+    #shakeItTimeout;
 
     /**
      * Manages all info related to a player's pokemon
@@ -366,9 +367,17 @@ export class Pokemon {
 
     /** Triggers a shake animation for the entire pokemon div */
     async #shakeIt() {
+
+        clearTimeout(this.#shakeItTimeout);
         this.mainEl.style.animation = "";
         this.mainEl.offsetHeight; // triggers reflow so it can animate again
         this.mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
+
+        // clear animation so it doesnt fire on new display
+        this.#shakeItTimeout = setTimeout(() => {
+            this.mainEl.style.animation = "";
+        }, 400);
+
     }
 
 

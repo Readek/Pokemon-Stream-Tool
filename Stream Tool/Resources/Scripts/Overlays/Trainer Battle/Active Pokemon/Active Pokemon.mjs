@@ -49,22 +49,20 @@ export class ActivePokemon {
 
     }
 
-
     /** Hides this pokemon's div */
     hidePoke() {
         this.#fullEl.style.display = "none";
     }
     /** Shows this pokemon on the bar */
     showPoke() {
+        this.#mainInfo.showIntro();
         this.#fullEl.style.display = "flex";
     }
 
     /** Sets intro animation for this poke */
     showIntro() {
-
         this.#mainInfo.showIntro();
         this.#moveInfo.showIntro();
-
     }
 
     /** Reveals all hidden enemy info */
