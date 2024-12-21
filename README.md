@@ -1,65 +1,66 @@
 <p align="center">
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20GUI.png" alt="GUI Preview">
-  
+  <img src="https://github.com/user-attachments/assets/9d63c882-74e6-429e-8554-f4f5cf2a2451" alt="GUI Preview">
+
 </p>
 
-**This project is under active WIP! Things are usable, but there will be bugs!** Join our [Discord Server](https://discord.gg/Pjput49g42) to stay up to date!
+**This project is under active WIP!** Join our [Discord Server](https://discord.gg/Pjput49g42) to stay up to date!
 
 <h1 align="center">Pokemon Stream Tool</h1>
 
-Pokemon ST is a tool that manages dynamic overlays with the help of a GUI, with features like:
+Pokemon ST allows you to manage dynamic overlays with the help of a GUI, with features like:
 
-- Manage your game's info
+- Manage your game's info.
   - **Player's party**, with info for nickname, lvl, health values...
   - Your **badges** and stats like Pokemon catched or allied Pokemon deaths.
   - **Enemy data** that gets revealed as the battle goes on.
   - Current **wild encounter** with its possible stats and abilities.
   - Store your **catches** to be displayed on a "Waiting to start" scene.
-- **Gen 6 auto-update** for player party and enemy data, reading directly from Citra (or Citra-likes).
-  - **Gen 7** is also supported, though it hasn't been tested as much.
+- **Gen 6/7 auto-update** for player party, badges and enemy data, reading directly from Citra (or Citra-likes).
 - No auto for your game? Worry not, everything can be done manually within the GUI.
+  - Manual mode supports up to Scarlet/Violet.
 - You can use the **included overlays** for OBS with minimal setup, or make your own.
-  - Screenshots included below.
 - **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
-- Download it [right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)! *No need to join any Discord server.*
+- Supports multiple languages!
+  - Fully localized: **English**, **Spanish** (ES).
+  - Pokemon, Items, Abilities and Move names: **French**, **German**, **Italian**, **Japanese**.
 - **Crossplatform** GUI (Windows, Linux), built on Electron.
-- Made to be customized! Just dive into the folders and modify the entirety of the tool to your heart's content.
+- Made to be customized! Dive into the folders and modify the entirety of the tool to your heart's content.
+- Download it **[right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)**! *No need to join any Discord server.*
 
-For the moment, the tool comes with overlays included for:
+The tool comes with pre-made overlays for some games, like:
 
 - X and Y (regular overlay):
 
-<p align="center">
-
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20XY.jpg" alt="XY Overlay Preview">
-  
-</p>
+![XY Overlay Preview](https://github.com/user-attachments/assets/d0884f72-e1f1-4dcc-bc9b-7d83912ede46)
 
 - X and Y (trainer battle)
   - Enemy info is hidden until the move gets revealed in-game.
 
-<p align="center">
+![XY Trainer Overlay Preview](https://github.com/user-attachments/assets/0e4f8a8f-b89a-4495-a522-382f0d27831b)
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20XY%20Trainer.jpg" alt="XY Trainer Overlay Preview">
-  
-</p>
+<details><summary>More Screenshots</summary>
 
-- Black and White 2:
+- Black and White 2
 
-<p align="center">
+![BW2 Overlay Preview](https://github.com/user-attachments/assets/a25a1e01-5b84-48d8-8f63-6ea524bf8ccd)
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20BnW2.jpg" alt="BW2 Overlay Preview">
-  
-</p>
 
-- Stream intro (uses data from your previous catches):
+- Omega Ruby and Alpha Saphire
 
-<p align="center">
+![image](https://github.com/user-attachments/assets/038632ad-a56c-48a6-8dde-d7e8877edb13)
 
-  <img src="https://github.com/Readek/Pokemon-Stream-Tool/blob/main/Github%20Resources/Preview%20Overlay%20Intro.gif" alt="Intro Overlay Preview">
-  
-</p>
+
+- Stream intro (uses data from your previous catches) (background not included):
+
+https://github.com/user-attachments/assets/43b7bdc7-dc29-482e-ba83-58c9390eeea8
+
+- Trainer battle intro
+
+https://github.com/user-attachments/assets/a936470f-e0ac-49a2-8a95-523d0b9c4a44
+
+</details>
+
 
 ## How to
 
