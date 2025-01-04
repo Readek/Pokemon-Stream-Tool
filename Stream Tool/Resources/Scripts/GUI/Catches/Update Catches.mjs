@@ -1,5 +1,4 @@
 import { inside } from "../Globals.mjs";
-import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
 import { catches } from "./Catches.mjs";
 
 const updateButt = document.getElementById("updateCatchesButt");
@@ -21,8 +20,6 @@ export async function updateCatches() {
         // disable updating until we get data back
         disableCatchesUpdate();
     } else {
-        // show some feedback if img loading takes too long
-        displayLoadImgsMessage("catches");
         loading = true;
     }
 
@@ -70,8 +67,6 @@ export async function updateCatches() {
         ipc.sendData("catches");
         ipc.sendRemoteData("catches");
 
-        hideLoadImgsMessage("catches");
-
     } else { // for remote GUIs
 
         const remote = await import("../Remote Requests.mjs");
@@ -82,7 +77,7 @@ export async function updateCatches() {
     }
 
     loading = false;
-    
+
 }
 
 /** removes click event listener from update button */

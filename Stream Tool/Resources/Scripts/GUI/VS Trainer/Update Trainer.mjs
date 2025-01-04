@@ -1,5 +1,4 @@
 import { inside } from "../Globals.mjs";
-import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
 import { getEnemyTrainerName, trainerPokemons } from "./TrainerPokemons.mjs";
 
 const updateButt = document.getElementById("updateTrainerButt");
@@ -21,8 +20,6 @@ export async function updateTrainer() {
         // disable updating until we get data back
         disableTrainerUpdate();
     } else {
-        // show some feedback if img loading takes too long
-        displayLoadImgsMessage("trainer");
         loading = true;
     }
 
@@ -81,8 +78,6 @@ export async function updateTrainer() {
         ipc.updateStoredData("trainer", JSON.stringify(dataJson, null, 2));
         ipc.sendData("trainer");
         ipc.sendRemoteData("trainer");
-
-        hideLoadImgsMessage("trainer");
 
     } else { // for remote GUIs
 

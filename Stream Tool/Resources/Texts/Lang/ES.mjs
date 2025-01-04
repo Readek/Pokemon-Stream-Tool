@@ -241,7 +241,7 @@ export const lang = {
     typeSteel : "Acero",
     typeWater : "Agua",
 
-    loadingImgsMessage : "Cargando sprites...",
+    loadingImgsMessage : "Cargando imágenes ({0})...",
 
     unknonwAbility : "Desconocida",
     unknownItem : "Desconocido",

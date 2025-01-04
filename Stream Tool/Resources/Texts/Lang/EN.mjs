@@ -245,7 +245,7 @@ export const lang = {
     typeSteel : "Steel",
     typeWater : "Water",
 
-    loadingImgsMessage : "Loading sprites...",
+    loadingImgsMessage : "Loading {0} sprites...",
 
     unknonwAbility : "Unknown ability",
     unknownItem : "Unknown item",

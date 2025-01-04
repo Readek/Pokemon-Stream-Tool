@@ -4,6 +4,7 @@ import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
 import { getJson } from "./File System.mjs";
 import { getLocalizedPokeText } from "../Utils/Language.mjs";
 import { fetchOffsets, fetchPokeImg } from "./Asset Download.mjs";
+import { displayLoadImgsMessage, hideLoadImgsMessage } from "./Loading Images Message.mjs";
 /** @import { PokeType, IconCoords, PokeGender, PokeImgData } from "../Utils/Type Definitions.mjs" */
 
 // these will sightly center sprite positions on the overlays
@@ -418,6 +419,9 @@ export class Pokemon {
 
         if(!this.#isNone){
 
+            // show some feedback if img loading takes too long
+            displayLoadImgsMessage(this.getSpecies());
+
             // now this is getting promising
             const promises = [];
 
@@ -460,6 +464,9 @@ export class Pokemon {
             this.#pokeImgs.gen5BackOffs = offsets[results[1].substring(39)] || [0, 0];
             this.#pokeImgs.aniFrontOffs = offsets[results[2].substring(39)] || [0, 0];
             this.#pokeImgs.aniBackOffs = offsets[results[3].substring(39)] || [0, 0];
+
+            // we are done now, hide loading message
+            hideLoadImgsMessage(this.getSpecies());
 
         }
 

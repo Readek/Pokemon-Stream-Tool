@@ -1,5 +1,4 @@
 import { inside } from "../Globals.mjs";
-import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
 import { wildEncounter } from "./Wild Pokemon.mjs";
 
 const updateButt = document.getElementById("updateWildButt");
@@ -21,8 +20,6 @@ export async function updateWildEnc() {
        // disable updating until we get data back
        disableWildUpdate();
     } else {
-        // show some feedback if img loading takes too long
-        displayLoadImgsMessage("wild");
         loading = true;
     }
 
@@ -40,8 +37,6 @@ export async function updateWildEnc() {
         ipc.updateStoredData("wild", JSON.stringify(dataJson, null, 2));
         ipc.sendData("wild");
         ipc.sendRemoteData("wild");
-
-        hideLoadImgsMessage("wild");
 
     } else { // for remote GUIs
 

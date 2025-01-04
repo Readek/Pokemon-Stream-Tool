@@ -1,5 +1,4 @@
 import { inside } from "../Globals.mjs";
-import { displayLoadImgsMessage, hideLoadImgsMessage } from "../Loading Images Message.mjs";
 import { getBattleState } from "./Battle State.mjs";
 import { pokemons } from "./TeamPokemons.mjs";
 
@@ -22,8 +21,6 @@ export async function updateTeam() {
         // disable updating until we get data back
         disableTeamUpdate();
     } else {
-        // show some feedback if img loading takes too long
-        displayLoadImgsMessage("team");
         loading = true;
     }
 
@@ -83,8 +80,6 @@ export async function updateTeam() {
         ipc.sendData("team");
         ipc.sendRemoteData("team");
 
-        hideLoadImgsMessage("team");
-
     } else { // for remote GUIs
 
         const remote = await import("../Remote Requests.mjs");
@@ -93,7 +88,7 @@ export async function updateTeam() {
         remote.sendRemoteData(dataJson);
 
     }
-    
+
     loading = false;
 
 }
