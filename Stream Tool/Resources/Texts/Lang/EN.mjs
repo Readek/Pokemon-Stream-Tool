@@ -30,6 +30,11 @@ export const lang = {
 
     deleteCatchesButt : "Delete all catches",
     updateCatchesButt : "Update catches",
+    pokedexCatchesButt : "Add current pokedex",
+
+    deleteCatchesButtTitle : "Deletes all currently stored catches",
+    updateCatchesButtTitle : "Updates catches list",
+    pokedexCatchesButtTitle : "Add currently loaded pokedex, yes the entirety of it",
 
 
     /* TEAM */

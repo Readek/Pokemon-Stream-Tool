@@ -28,8 +28,13 @@ export const lang = {
     deleteCatchButtTitle : "Borrar captura",
     addCatchButtTitle : "Añadir nueva captura",
 
-    deleteCatchesButt : "Borrar capturas",
+    deleteCatchesButt : "Borrar todas",
     updateCatchesButt : "Actualizar capturas",
+    pokedexCatchesButt : "Añadir pokedex",
+
+    deleteCatchesButtTitle : "Quita todas las capturas guardadas",
+    updateCatchesButtTitle : "Actualiza la lista de capturas",
+    pokedexCatchesButtTitle : "Añade la pokedex cargada en este momento. Enterita.",
 
 
     /* TEAM */
