@@ -1,3 +1,4 @@
+import { openConfModal } from "../Confirmation Modal.mjs";
 import { current } from "../Globals.mjs";
 import { Catch } from "./Catch.mjs";
 
@@ -25,7 +26,10 @@ export function deleteCatch(id) {
 
 /** Clears all catches currently loaded */
 document.getElementById("clearCatchesButt").addEventListener("click", () => {
-    clearAllCatches();
+    openConfModal(
+        "confModalTitleClearCatches", "confModalDescClearCatches",
+        "confModalBtnClearCatches", clearAllCatches
+    );
 });
 
 /** Clears all catches currently loaded */
@@ -36,9 +40,17 @@ function clearAllCatches(){
     catches.push(new Catch());
 }
 
-/** Adds the entire current pokedex as catches */
-document.getElementById("pokedexCatchesButt").addEventListener("click", () => {
 
+document.getElementById("pokedexCatchesButt").addEventListener("click", () => {
+    openConfModal(
+        "confModalTitleDexCatches", "confModalDescDexCatches",
+        "confModalBtnDexCatches", addPokedexCatches
+    );
+})
+
+/** Adds the entire current pokedex as catches */
+function addPokedexCatches() {
+    
     clearAllCatches();
     
     const speciesList = [...current.pkmnSpecies].filter(
@@ -54,4 +66,4 @@ document.getElementById("pokedexCatchesButt").addEventListener("click", () => {
 
     catches.at(-1).delet();
 
-})
+}

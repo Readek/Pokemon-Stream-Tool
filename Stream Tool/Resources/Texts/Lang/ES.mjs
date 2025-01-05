@@ -28,13 +28,21 @@ export const lang = {
     deleteCatchButtTitle : "Borrar captura",
     addCatchButtTitle : "Añadir nueva captura",
 
-    deleteCatchesButt : "Borrar todas",
-    updateCatchesButt : "Actualizar capturas",
-    pokedexCatchesButt : "Añadir pokedex",
-
     deleteCatchesButtTitle : "Quita todas las capturas guardadas",
+    deleteCatchesButt : "Borrar todas",
+    confModalTitleClearCatches : "¿Borrar capturas?",
+    confModalDescClearCatches : "Esto limpiará toda la lista de capturas. ¡No habrá vuelta atrás!",
+    confModalBtnClearCatches : "Si, cárgatelos",
+
     updateCatchesButtTitle : "Actualiza la lista de capturas",
-    pokedexCatchesButtTitle : "Añade la pokedex cargada en este momento. Enterita.",
+    updateCatchesButt : "Actualizar capturas",
+
+    pokedexCatchesButtTitle : "Añade la pokedex cargada actualmente. Enterita.",
+    pokedexCatchesButt : "Añadir pokedex",
+    confModalTitleDexCatches : "¿Añadir la pokédex entera?",
+    confModalDescDexCatches : "Esto añadirá a todos los Pokemon de la pokédex cargada en este momento (decidida por el selector de generación en los ajustes). También borrará la lista de capturas actual."
+        + " Ten en cuenta que al darle al botón de actualizar, se empezarán a descargar TODAS las imagenes de los Pokemon en la lista, lo cual tardará un buen rato.",
+    confModalBtnDexCatches : "Si, añádelos",
 
 
     /* TEAM */
@@ -246,11 +254,13 @@ export const lang = {
     typeSteel : "Acero",
     typeWater : "Agua",
 
-    loadingImgsMessage : "Cargando imágenes ({0})...",
-
     unknonwAbility : "Desconocida",
     unknownItem : "Desconocido",
     unknownMove : "Desconocido",
+
+    loadingImgsMessage : "Cargando imágenes ({0})...",
+
+    confModalGoBack : "Volver",
 
     /* OVERLAYS */
 

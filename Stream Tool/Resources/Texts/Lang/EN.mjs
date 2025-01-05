@@ -28,14 +28,21 @@ export const lang = {
     deleteCatchButtTitle : "Delete catch",
     addCatchButtTitle : "Add new catch",
 
-    deleteCatchesButt : "Delete all catches",
-    updateCatchesButt : "Update catches",
-    pokedexCatchesButt : "Add current pokedex",
-
     deleteCatchesButtTitle : "Deletes all currently stored catches",
-    updateCatchesButtTitle : "Updates catches list",
-    pokedexCatchesButtTitle : "Add currently loaded pokedex, yes the entirety of it",
+    deleteCatchesButt : "Delete all catches",
+    confModalTitleClearCatches : "Delete all catches?",
+    confModalDescClearCatches : "This will clear all stored catches. There's no turning back!",
+    confModalBtnClearCatches : "Yes, delete 'em",
 
+    updateCatchesButtTitle : "Updates catches list",
+    updateCatchesButt : "Update catches",
+
+    pokedexCatchesButtTitle : "Add currently loaded pokedex, yes the entirety of it",
+    pokedexCatchesButt : "Add current pokedex",
+    confModalTitleDexCatches : "Add entire pokedex?",
+    confModalDescDexCatches : "This will add the entire currently loaded pokedex (decided by generation select in settings) to the catches list. It will also clear currently stored catches."
+        + " Note that as soon as you hit update, the tool will begin to download every single pokemon sprite on the list, which will take a while.",
+    confModalBtnDexCatches : "Yes, add them all",
 
     /* TEAM */
 
@@ -250,11 +257,13 @@ export const lang = {
     typeSteel : "Steel",
     typeWater : "Water",
 
-    loadingImgsMessage : "Loading {0} sprites...",
-
     unknonwAbility : "Unknown ability",
     unknownItem : "Unknown item",
     unknownMove : "Unknown move",
+
+    loadingImgsMessage : "Loading {0} sprites...",
+
+    confModalGoBack : "Go back",
 
     /* OVERLAYS */
 

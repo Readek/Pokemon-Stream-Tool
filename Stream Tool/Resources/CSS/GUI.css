@@ -21,6 +21,9 @@
   --iconFill: #b6b6b6;
 }
 
+* {
+  box-sizing: border-box;
+}
 *::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -38,9 +41,6 @@ input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
   margin: 0; 
-}
-* {
-  box-sizing: border-box;
 }
 
 html, body {
@@ -145,7 +145,7 @@ button:hover {
   background-color: var(--bg5);
 }
 .topBarButton, .updateButt {
-  padding: 2px 5px;
+  padding: 2px 6px;
   font-size: 14px;
   height: 32px;
   font-family: "Roboto-Medium";
@@ -186,6 +186,7 @@ button:hover {
 .svgIcon {
   width: 20px;
   height: 20px;
+  margin: 0px -2px;
   fill: var(--text2);
 }
 
@@ -1250,6 +1251,69 @@ button:hover {
   border-radius: 5px;
   filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
   animation: loadingNotifAnim 2.5s both;
+}
+
+#confModal[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+#confModal {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  color: var(--text1);
+  opacity: 0;
+  transform: scale(1.1);
+  transition: all .2s allow-discrete;
+}
+@starting-style {
+  #confModal[open] {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+#confModal::backdrop {
+  background-color: #00000000;
+  backdrop-filter: blur(0px);
+  transition: all 0.2s allow-discrete;
+}
+#confModal[open]::backdrop {
+  background-color: var(--bg4);
+  backdrop-filter: blur(5px);
+}
+@starting-style {
+  #confModal[open]::backdrop {
+    backdrop-filter: blur(0px);
+    background-color: #00000000;
+  }
+}
+
+#confModalContent {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: none;
+  gap: 10px;
+
+  .updateButt {
+    background-color: var(--bg2);
+  }
+}
+
+#confModalTitle {
+  font-size: 18px;
+  border-bottom: solid 1px var(--text2);
+  padding: 3px 7px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#confModalDesc {
+  text-align: justify;
+  max-width: 550px;
 }
 
 
