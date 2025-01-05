@@ -118,7 +118,7 @@ button:hover {
   box-sizing: border-box;
   border-radius: 5px;
 }
-.selectDropDown:hover {
+.selectDropDown:hover, .selectDropDown:focus-visible {
   border-color: var(--selected);
 }
 .selectDropDown:active {
@@ -160,7 +160,8 @@ button:hover {
 .updateButt {
   text-transform: uppercase;
 }
-.topBarButton:hover, .updateButt:hover{
+.topBarButton:hover, .updateButt:hover,
+.topBarButton:focus-visible, .updateButt:focus-visible {
   border: solid 2px var(--text2);
 }
 .topBarButton:active, .updateButt:active {
@@ -260,10 +261,10 @@ button:hover {
   font-size: 18px;
   height: 26px;
 }
-#addCatchButt:hover {
+#addCatchButt:hover, #addCatchButt:focus-visible {
   border: solid 2px var(--text2);
 }
-.catchDeleteButt:hover {
+.catchDeleteButt:hover, .catchDeleteButt:focus-visible {
   border: solid 2px lightcoral;
   color: lightcoral;
 }
@@ -275,7 +276,7 @@ button:hover {
   display: flex;
   gap: 8px;
 }
-#clearCatchesButt:hover {
+#clearCatchesButt:hover, #clearCatchesButt:focus-visible {
   border-color: lightcoral;
 }
 
@@ -346,7 +347,7 @@ button:hover {
   border-radius: 5px;
   outline: none;
 }
-.selector:hover {
+.selector:hover, .selector:focus-visible {
   border-color: var(--selected);
 }
 .selector:active {
@@ -466,7 +467,7 @@ button:hover {
   box-sizing: border-box;
   border-radius: 5px;
 }
-.pokeForm:hover {
+.pokeForm:hover, .pokeForm:focus-visible {
   border-color: var(--selected);
 }
 .pokeForm:disabled {
@@ -489,7 +490,7 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
-.pokeGenderButton:hover {
+.pokeGenderButton:hover, .pokeGenderButton:focus-visible {
   border-color: var(--selected);
 }
 .pokeGenderButton:active {
@@ -516,7 +517,7 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
-.pokeShinyButton:hover {
+.pokeShinyButton:hover, .pokeShinyButton:focus-visible {
   border-color: var(--selected);
 }
 .pokeShinyButton:active {
@@ -540,7 +541,7 @@ button:hover {
   box-sizing: border-box;
   border-radius: 5px;
 }
-.pokeStatus:hover {
+.pokeStatus:hover, .pokeStatus:focus-visible {
   border-color: var(--selected);
 }
 
@@ -559,7 +560,7 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
-.pokeDetailsButt:hover {
+.pokeDetailsButt:hover, .pokeDetailsButt:focus-visible {
   border-color: var(--selected);
 }
 .pokeDetailsButt:active {
@@ -822,7 +823,7 @@ button:hover {
 }
 
 
-/* hidden stuff only apply to enemy trainer tab */
+/* hidden stuff only applies to enemy trainer tab */
 .hiddenElement {
   position: absolute;
   display: none;
@@ -839,10 +840,12 @@ button:hover {
   font-size: 14px;
   font-weight: bold;
 }
-.hiddenElement:hover .hiddenElementEye {
+.hiddenElement:hover .hiddenElementEye,
+.hiddenElement:focus-visible .hiddenElementEye {
   display: none;
 }
-.hiddenElement:hover .hiddenElementHover {
+.hiddenElement:hover .hiddenElementHover,
+.hiddenElement:focus-visible .hiddenElementHover {
   display: flex;
 }
 
@@ -878,7 +881,7 @@ button:hover {
 .badgeButton {
   transition: transform 100ms;
 }
-.badgeButton:hover {
+.badgeButton:hover, .badgeButton:focus-visible {
   transform: scale(1.1);
   filter: brightness(1.1);
 }
@@ -914,10 +917,12 @@ button:hover {
 }
 .statIcon {
   cursor: pointer;
-  transition: filter .2s;
+  transition: filter .2s, transform .2s;
 }
-.statIcon:hover {
+.statIcon:hover, .statIcon:focus-visible {
   filter: brightness(1.2);
+  transform: scale(1.1);
+  outline: none;
 }
 
 
@@ -1090,7 +1095,7 @@ button:hover {
   border: 1px solid var(--focused);
   text-transform: none;
 }
-#sendCatchButt:hover {
+#sendCatchButt:hover, #sendCatchButt:focus-visible {
   border: 1px solid var(--selected);
 }
 
@@ -1128,9 +1133,6 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
-.settingBox:hover {
-  background-color: var(--bg2);
-}
 
 .settingsCheck {
   outline: none;
@@ -1157,7 +1159,7 @@ button:hover {
   color: var(--text2);
   outline: none;
 }
-.settingsButton:hover {
+.settingsButton:hover, .settingsButton:focus-visible {
   filter: brightness(1.4);
 }
 .settingsButton:active {
@@ -1179,7 +1181,7 @@ button:hover {
   box-sizing: border-box;
   border-radius: 5px;
 }
-.settingsSelect:hover {
+.settingsSelect:hover, .settingsSelect:focus-visible {
   border-color: var(--selected);
 }
 

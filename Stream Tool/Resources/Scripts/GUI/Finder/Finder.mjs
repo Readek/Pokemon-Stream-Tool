@@ -97,6 +97,7 @@ export class Finder {
 
     /** Force hides this finder */
     hide() {
+        document.activeElement.blur();
         this._finderEl.hidePopover(false);
     }
 

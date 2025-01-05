@@ -437,10 +437,10 @@ export class TeamPokemon extends Pokemon {
 
         <div class="teamPokeMainInfo">
 
-            <div class="selector pokeSelector" tabindex="-1" locTitle="pokeSelectTitle">
+            <button class="selector pokeSelector" locTitle="pokeSelectTitle">
                 <img class="pokeSelectorIcon" alt="">
                 <div class="pokeSelectorText"></div>
-            </div>
+            </button>
 
             <input type="text" class="pokeNickName textInput mousetrap" spellcheck="false" locTitle="pokeNickTitle" locPHolder="pokeNickPHolder">
 
