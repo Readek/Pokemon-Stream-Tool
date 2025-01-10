@@ -68,7 +68,11 @@ const genGameData = {
             versions : ["Sword", "Shield"]
         },
         BDSP : {},
-        PLA : {}
+        PLA : {
+            badges : {
+                Noble : 5
+            }
+        }
     },
     9 : {
         SV : {},

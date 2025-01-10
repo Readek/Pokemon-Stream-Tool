@@ -31,7 +31,7 @@ export const lang = {
     deleteCatchesButtTitle : "Quita todas las capturas guardadas",
     deleteCatchesButt : "Borrar todas",
     confModalTitleClearCatches : "¿Borrar capturas?",
-    confModalDescClearCatches : "Esto limpiará toda la lista de capturas. ¡No habrá vuelta atrás!",
+    confModalDescClearCatches : "Esto vaciará toda la lista de capturas. ¡No habrá vuelta atrás!",
     confModalBtnClearCatches : "Si, cárgatelos",
 
     updateCatchesButtTitle : "Actualiza la lista de capturas",
@@ -125,6 +125,7 @@ export const lang = {
     badgeAkalaTitle : "Cristales Z de Akala",
     badgeUlaulaTitle : "Cristales Z de Ula-Ula",
     badgePoniTitle : "Cristales Z de Poni",
+    badgeNobleTitle : "Pokemon Señoriales",
 
     playerCatchesNumTitle : "Número de capturas",
     playerDeathsNumTitle : "Número de muertes aliadas",

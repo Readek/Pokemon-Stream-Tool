@@ -124,6 +124,7 @@ export const lang = {
     badgeAkalaTitle : "Akala Z-Crystals",
     badgeUlaulaTitle : "Ula'ula Z-Crystals",
     badgePoniTitle : "Poni Z-Crystals",
+    badgeNobleTitle : "Noble Pokemon",
 
     playerCatchesNumTitle : "Number of pokemon catches",
     playerDeathsNumTitle : "Number of ally Pokemon deaths",
