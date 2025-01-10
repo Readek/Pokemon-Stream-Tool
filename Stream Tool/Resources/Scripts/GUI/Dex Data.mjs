@@ -1,3 +1,5 @@
+import { pokeFinder } from "./Finder/Pokemon Finder.mjs";
+
 const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
 
 export const dexData = {
@@ -22,4 +24,5 @@ export function updatePokedexData(gen) {
     dexData.abilities = Object.fromEntries([...dexGens.get(gen).abilities].map(a => [a.num, a]));
     dexData.items = Object.fromEntries([...dexGens.get(gen).items].map(a => [a.num, a]));
     dexData.moves = Object.fromEntries([...dexGens.get(gen).moves].map(a => [a.num, a]));
+    pokeFinder.loadCharacters();
 }

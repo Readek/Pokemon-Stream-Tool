@@ -4,8 +4,11 @@ import { sendRemoteData } from "./Remote Requests.mjs";
 const autoUpdateButt = document.getElementById("citraButt");
 const updateButt = document.getElementById("updateTeamButt");
 
-/** Shows or hides auto update button for generations that support it */
-export async function displayAutoButt() {
+/** 
+ * Shows or hides auto update button for generations that support it
+ * @param {Number} gen - Current Generation
+ */
+export async function displayAutoButt(gen) {
 
     // disable everything by default
     autoUpdateButt.style.display = "none";
@@ -17,19 +20,19 @@ export async function displayAutoButt() {
     }
 
     // but some gens have auto support
-    if (current.generation == 6 || current.generation == 7) {
+    if (gen == 6 || gen == 7) {
 
         autoUpdateButt.style.display = "block";
 
         if (inside.electron) {
-        
+
             const citraAuto = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
             autoUpdateButt.addEventListener("click", citraAuto.autoUpdateToggleCitra);
 
         } else {
             autoUpdateButt.addEventListener("click", sendToggleAuto);
         }
-        
+
     }
 
 }
@@ -47,19 +50,19 @@ function sendToggleAuto() {
  * @param {Boolean} value 
  */
 export async function setAutoState(value) {
-    
+
     if (inside.electron) {
 
         current.autoStatus = !value;
 
         const citraAuto = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
         citraAuto.autoUpdateToggleCitra();
-        
+
     } else {
 
         current.autoStatus = value;
         updateButt.disabled = value;
-        
+
         if (value) {
             autoUpdateButt.innerHTML = "🍊 AUTO ON";
             autoUpdateButt.classList.remove("citraButtOff");

@@ -1,6 +1,5 @@
 import { resetPokeLocTexts } from "../../../Utils/Language.mjs";
 import { updatePokedexData } from "../../Dex Data.mjs";
-import { pokeFinder } from "../../Finder/Pokemon Finder.mjs";
 import { current } from "../../Globals.mjs";
 import { clearAllPokemon } from "../../Team/TeamPokemons.mjs";
 import { Setting } from "../Setting.mjs";
@@ -47,7 +46,6 @@ export class SettingGenSelect extends Setting {
         updatePokedexData(value);
 
         // resets the player's pokemon team just in case theres a null poke on this gen
-        pokeFinder.loadCharacters();
         clearAllPokemon();
 
         // updates the game select's entries

@@ -1,5 +1,6 @@
 import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { displayAutoButt } from "../../Auto Update.mjs";
+import { updatePokedexData } from "../../Dex Data.mjs";
 import { current } from "../../Globals.mjs";
 import { changeBadges } from "../../Player/Badges.mjs";
 import { displayBattleStateButt } from "../../Team/Battle State.mjs";
@@ -118,8 +119,11 @@ export class SettingGameSelect extends Setting {
         settings.versionSelect.addVersions(genGameData[current.generation][value].versions);
 
         // show or hide extra buttons
-        displayBattleStateButt();
-        displayAutoButt();
+        displayBattleStateButt(current.generation);
+        displayAutoButt(current.generation);
+
+        // gen8 pokedex does not have PLA data, but gen9 does
+        if (value == "PLA") {updatePokedexData(9)}
 
     }
 

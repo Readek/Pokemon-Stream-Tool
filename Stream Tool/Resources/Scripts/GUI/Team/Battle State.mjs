@@ -55,9 +55,12 @@ export function setBattleState(value) {
 
 }
 
-/** Shows or hides battle state button depending on generation */
-export function displayBattleStateButt() {
-    if (current.generation == 6 || current.generation == 7) {
+/** 
+ * Shows or hides battle state button depending on generation
+ * @param {Number} gen - Current Generation
+ */
+export function displayBattleStateButt(gen) {
+    if (gen == 6 || gen == 7) {
         bTypeButt.style.display = "flex";
     } else {
         bTypeButt.style.display = "none";
