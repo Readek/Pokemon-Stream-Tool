@@ -1,4 +1,5 @@
 import { getLocalizedText } from "../../../../Utils/Language.mjs";
+import { dexData } from "../../../Dex Data.mjs";
 import { current } from "../../../Globals.mjs";
 import { indexToType } from "../Type Indexes.mjs";
 import { validateRawPokemon } from "../Utils.mjs";
@@ -91,7 +92,7 @@ export class RawPokemonBattle {
      * @returns {String}
      */
     speciesName() {
-        return current.numToPoke[this.dexNum()];
+        return dexData.numToPoke[this.dexNum()];
     }
 
     /**
@@ -213,8 +214,8 @@ export class RawPokemonBattle {
             const abNum = this.#data[address];
             if (abNum == 0) {
                 this.abilityValue = "";
-            } else if (current.abilities[abNum]) {
-                this.abilityValue = current.abilities[abNum].name;
+            } else if (dexData.abilities[abNum]) {
+                this.abilityValue = dexData.abilities[abNum].name;
             } else {
                 this.abilityValue = getLocalizedText("unknownAbility");
             }
@@ -235,8 +236,8 @@ export class RawPokemonBattle {
             const itemNum = this.#data[0xA] + this.#data[0xB]*256;
             if (itemNum == 0) {
                 this.itemValue = "";
-            } else if (current.items[itemNum]) {
-                this.itemValue = current.items[itemNum].name;
+            } else if (dexData.items[itemNum]) {
+                this.itemValue = dexData.items[itemNum].name;
             } else {
                 this.itemValue = getLocalizedText("unknownItem");
             }
@@ -256,10 +257,10 @@ export class RawPokemonBattle {
         const ppAdd = address + 2 + (14 * num);
         const moveNum = this.#data[moveAdd] + this.#data[moveAdd+1]*256;
 
-        if (current.moves[moveNum]) {
+        if (dexData.moves[moveNum]) {
             
-            move.name = current.moves[moveNum].name;
-            move.type = current.moves[moveNum].type;
+            move.name = dexData.moves[moveNum].name;
+            move.type = dexData.moves[moveNum].type;
     
             move.pp = this.#data[ppAdd];
     

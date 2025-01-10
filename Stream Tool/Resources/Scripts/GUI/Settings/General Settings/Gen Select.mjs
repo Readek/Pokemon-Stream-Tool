@@ -1,6 +1,7 @@
 import { resetPokeLocTexts } from "../../../Utils/Language.mjs";
+import { updatePokedexData } from "../../Dex Data.mjs";
 import { pokeFinder } from "../../Finder/Pokemon Finder.mjs";
-import { current, dexGens } from "../../Globals.mjs";
+import { current } from "../../Globals.mjs";
 import { clearAllPokemon } from "../../Team/TeamPokemons.mjs";
 import { Setting } from "../Setting.mjs";
 import { settings } from "../Settings.mjs";
@@ -43,10 +44,7 @@ export class SettingGenSelect extends Setting {
         current.generation = value;
 
         // update that pokedex data
-        current.pkmnSpecies = dexGens.get(value).species;
-        current.abilities = Object.fromEntries([...dexGens.get(value).abilities].map(a => [a.num, a]));
-        current.items = Object.fromEntries([...dexGens.get(value).items].map(a => [a.num, a]));
-        current.moves = Object.fromEntries([...dexGens.get(value).moves].map(a => [a.num, a]));
+        updatePokedexData(value);
 
         // resets the player's pokemon team just in case theres a null poke on this gen
         pokeFinder.loadCharacters();

@@ -5,6 +5,7 @@ import { getJson } from "./File System.mjs";
 import { getLocalizedPokeText } from "../Utils/Language.mjs";
 import { fetchOffsets, fetchPokeImg } from "./Asset Download.mjs";
 import { displayLoadImgsMessage, hideLoadImgsMessage } from "./Loading Images Message.mjs";
+import { dexData } from "./Dex Data.mjs";
 /** @import { PokeType, IconCoords, PokeGender, PokeImgData } from "../Utils/Type Definitions.mjs" */
 
 // these will sightly center sprite positions on the overlays
@@ -21,7 +22,7 @@ export class Pokemon {
     #pokeData;
     #baseFormPokeData;
     #form = ""; // Short name
-    #formNames = []; // These can be used as identifiers for current.pkmnSpecies.get(); e.g., "Wormadam-Trash"
+    #formNames = []; // These can be used as identifiers for dexData.pkmnSpecies.get(); e.g., "Wormadam-Trash"
     #shortFormNames = []; // These only have the form name and are better suited for the selector; e.g., "Trash"
     #isNone = true;
     #localImgsLoaded = false;
@@ -133,7 +134,7 @@ export class Pokemon {
             this.#isNone = false;
 
             // this will fetch us all the data we will ever need
-            this.#pokeData = current.pkmnSpecies.get(name);
+            this.#pokeData = dexData.pkmnSpecies.get(name);
             // if this poke does not exist, force "None"
             if(!this.#pokeData){
                 console.log(`Something went wrong: "${name}" is not a valid species name.`);
@@ -141,7 +142,7 @@ export class Pokemon {
                 return;
             }
             // only the base species has data about forms
-            this.#baseFormPokeData = current.pkmnSpecies.get(this.#pokeData.baseSpecies);
+            this.#baseFormPokeData = dexData.pkmnSpecies.get(this.#pokeData.baseSpecies);
 
             // set the pokemon name in the selector
             this.pokeSel.children[1].innerHTML = getLocalizedPokeText(this.#pokeData.baseSpecies, "Pokemon", current.generation);
@@ -152,7 +153,7 @@ export class Pokemon {
             this.#form = this.#pokeData.forme || this.#pokeData.baseForme || "Base";
             this.#formNames = this.#baseFormPokeData.formes ?? [this.#pokeData.name];
             this.#shortFormNames = this.#formNames.map( (speciesName) => {
-                const forme = current.pkmnSpecies.get(speciesName);
+                const forme = dexData.pkmnSpecies.get(speciesName);
                 return forme.forme || forme.baseForme || "Base";
             });
 
@@ -490,7 +491,7 @@ export class Pokemon {
 
     /** Sets a random species from current dex */
     randomize() {
-        let fullSpeciesList = [...current.pkmnSpecies];
+        let fullSpeciesList = [...dexData.pkmnSpecies];
         let randomSpecies = fullSpeciesList[genRnd(0, fullSpeciesList.length)];
         this.setSpecies(randomSpecies.name);
     }

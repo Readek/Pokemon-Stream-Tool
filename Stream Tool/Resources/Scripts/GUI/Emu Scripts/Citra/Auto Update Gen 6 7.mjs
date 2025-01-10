@@ -20,6 +20,7 @@ import { getEnemyTrainerName } from "./Memory Locations/Enemy Trainer Name.mjs";
 import { setBadges } from "../../Player/Badges.mjs";
 import { getRawBadges } from "./Memory Locations/Badges.mjs";
 import { updatePlayer } from "../../Player/Update Player.mjs";
+import { dexData } from "../../Dex Data.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
 
@@ -441,7 +442,7 @@ async function updateBattlePokemon(battleType, hasChanged, onFieldPokes, pokeCou
         for (let i = 0; i < onFieldPokes[playerOrEnemy].length; i++) {
 
             // get an actual name
-            const pokeName = current.numToPoke[onFieldPokes[playerOrEnemy][i]];
+            const pokeName = dexData.numToPoke[onFieldPokes[playerOrEnemy][i]];
 
             // look for matches within the current team
             for (let i = 0; i < pokes.length; i++) {

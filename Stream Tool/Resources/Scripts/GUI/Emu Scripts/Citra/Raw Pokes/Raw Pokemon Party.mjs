@@ -1,4 +1,5 @@
 import { getLocalizedText } from "../../../../Utils/Language.mjs";
+import { dexData } from "../../../Dex Data.mjs";
 import { current } from "../../../Globals.mjs";
 import { decryptData } from "../Crypts.mjs";
 import { validateRawPokemon } from "../Utils.mjs";
@@ -78,7 +79,7 @@ export class RawPokemonParty {
      * @returns {String}
      */
     speciesName() {
-        return current.numToPoke[this.dexNum()];
+        return dexData.numToPoke[this.dexNum()];
     }
 
     /**
@@ -241,8 +242,8 @@ export class RawPokemonParty {
             const abNum = struct("B").unpack(this.#data.slice(0x14, 0x15))[0];
             if (abNum == 0) {
                 this.abilityValue = "";
-            } else if (current.abilities[abNum]) {
-                this.abilityValue = current.abilities[abNum].name;
+            } else if (dexData.abilities[abNum]) {
+                this.abilityValue = dexData.abilities[abNum].name;
             } else {
                 this.abilityValue = getLocalizedText("unknownAbility");
             }
@@ -263,8 +264,8 @@ export class RawPokemonParty {
             const itemNum = struct("<H").unpack(this.#data.slice(0x0A, 0x0C))[0];
             if (itemNum == 0) {
                 this.itemValue = "";
-            } else if (current.items[itemNum]) {
-                this.itemValue = current.items[itemNum].name;
+            } else if (dexData.items[itemNum]) {
+                this.itemValue = dexData.items[itemNum].name;
             } else {
                 this.itemValue = getLocalizedText("unknownItem");
             }
@@ -289,10 +290,10 @@ export class RawPokemonParty {
         const ppAdd = 0x62 + (num);
         const moveNum = struct("<H").unpack(this.#data.slice(moveAdd, moveAdd+2))[0];
 
-        if (current.moves[moveNum]) {
+        if (dexData.moves[moveNum]) {
             
-            move.name = current.moves[moveNum].name;
-            move.type = current.moves[moveNum].type;
+            move.name = dexData.moves[moveNum].name;
+            move.type = dexData.moves[moveNum].type;
     
             move.pp = struct("B").unpack(this.#data.slice(ppAdd, ppAdd+1))[0];
     

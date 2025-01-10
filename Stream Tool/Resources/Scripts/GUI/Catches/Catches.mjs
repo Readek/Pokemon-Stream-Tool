@@ -1,5 +1,5 @@
 import { openConfModal } from "../Confirmation Modal.mjs";
-import { current } from "../Globals.mjs";
+import { dexData } from "../Dex Data.mjs";
 import { Catch } from "./Catch.mjs";
 
 /** @type {Catch[]} */
@@ -53,7 +53,7 @@ function addPokedexCatches() {
     
     clearAllCatches();
     
-    const speciesList = [...current.pkmnSpecies].filter(
+    const speciesList = [...dexData.pkmnSpecies].filter(
         (poke) => (!poke.forme)
     ).sort(
         (poke1, poke2) => (poke1.num - poke2.num)

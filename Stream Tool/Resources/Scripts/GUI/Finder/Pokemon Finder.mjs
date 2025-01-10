@@ -1,4 +1,5 @@
 import { getLocalizedPokeText } from '../../Utils/Language.mjs';
+import { dexData } from '../Dex Data.mjs';
 import { current, stPath } from '../Globals.mjs';
 import { Pokemon } from '../Pokemon.mjs';
 import { FinderSelect } from './Finder Select.mjs';
@@ -19,7 +20,7 @@ class PokeFinder extends FinderSelect {
 
         this._clearList();
 
-        const speciesList = [...current.pkmnSpecies].filter( 
+        const speciesList = [...dexData.pkmnSpecies].filter( 
             (poke) => (!poke.forme) // check if the Pokémon is not a forme (other than the base forme)
         ).sort( 
             (poke1, poke2) => (poke1.num - poke2.num) // sort by National Dex number
@@ -90,7 +91,7 @@ class PokeFinder extends FinderSelect {
         this._storeFinderEntries();
 
         // send this to global variables for other scripts
-        current.numToPoke = numToPoke;
+        dexData.numToPoke = numToPoke;
 
     }
 
