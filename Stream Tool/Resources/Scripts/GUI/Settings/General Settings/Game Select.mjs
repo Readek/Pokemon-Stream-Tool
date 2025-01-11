@@ -76,8 +76,13 @@ const genGameData = {
         }
     },
     9 : {
-        SV : {},
-        PLZ : {}
+        SV : {
+            badges : {
+                Victory : 8,
+                Starfall : 5,
+                Legends : 5
+            }
+        },
     }
 }
 

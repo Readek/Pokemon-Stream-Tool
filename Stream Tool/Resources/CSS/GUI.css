@@ -851,6 +851,19 @@ button:hover {
 
 
 /* Player Info stuff */
+#playerInfoRegion {
+  justify-content: unset;
+  align-items: unset;
+}
+#playerInfoContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 #badges {
   display: flex;
   justify-content: center;
@@ -880,6 +893,10 @@ button:hover {
 }
 .badgeButton {
   transition: transform 100ms;
+  
+  img {
+    max-height: 92px;
+  }
 }
 .badgeButton:hover, .badgeButton:focus-visible {
   transform: scale(1.1);

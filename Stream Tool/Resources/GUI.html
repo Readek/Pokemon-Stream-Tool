@@ -97,26 +97,30 @@
 
       <div id="playerInfoRegion" class="region">
 
-        <div id="badges"></div>
+        <div id="playerInfoContent">
 
-        <div id="playerStats">
+          <div id="badges"></div>
 
-          <div class="statDiv" locTitle="playerCatchesNumTitle">
-            <load-svg src="SVGs/Pokeball.svg" tabindex="0" class="statsPokeballIcon statIcon" id="statsCatchesIcon"></load-svg>
-            <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0">
+          <div id="playerStats">
+
+            <div class="statDiv" locTitle="playerCatchesNumTitle">
+              <load-svg src="SVGs/Pokeball.svg" tabindex="0" class="statsPokeballIcon statIcon" id="statsCatchesIcon"></load-svg>
+              <input type="number" id="catchesInput" class="statInput textInput mousetrap" value="0">
+            </div>
+
+            <div class="statDiv" locTitle="playerDeathsNumTitle">
+              <load-svg src="SVGs/Skull.svg" tabindex="0" class="skullIcon statIcon" id="statsDeathsIcon"></load-svg>
+              <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0">
+            </div>
+
           </div>
 
-          <div class="statDiv" locTitle="playerDeathsNumTitle">
-            <load-svg src="SVGs/Skull.svg" tabindex="0" class="skullIcon statIcon" id="statsDeathsIcon"></load-svg>
-            <input type="number" id="deathsInput" class="statInput textInput mousetrap" value="0">
-          </div>
+          <button id="updatePlayerButt" class="updateButt">
+            <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
+            <div id="updatePlayerText" locText="playerUpdateButt"></div>
+          </button>
 
         </div>
-
-        <button id="updatePlayerButt" class="updateButt">
-          <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
-          <div id="updatePlayerText" locText="playerUpdateButt"></div>
-        </button>
 
       </div>
 

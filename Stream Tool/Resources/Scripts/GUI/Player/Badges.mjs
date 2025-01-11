@@ -58,9 +58,21 @@ export function changeBadges(badgeData) {
 
             badges[key] = [];
 
-            const wrap = createBadgeWrap();
-            for (let i = 0; i < badgeData[key]; i++) {
-                badges[key].push(new Badge(i+1, wrap, key));
+            // separate in groups of 4 for SV's victory badges
+            if (key == "Victory") {
+                const wrap1 = createBadgeWrap();
+                for (let i = 0; i < 4; i++) {
+                    badges[key].push(new Badge(i+1, wrap1, key));
+                }
+                const wrap2 = createBadgeWrap();
+                for (let i = 0; i < 4; i++) {
+                    badges[key].push(new Badge(i+5, wrap2, key));
+                }
+            } else {
+                const wrap = createBadgeWrap();
+                for (let i = 0; i < badgeData[key]; i++) {
+                    badges[key].push(new Badge(i+1, wrap, key));
+                }
             }
 
         }
