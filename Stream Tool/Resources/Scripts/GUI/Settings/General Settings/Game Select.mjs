@@ -11,19 +11,26 @@ const gameSelectSelect = document.getElementById("gameSelect");
 
 const genGameData = {
     1 : {
-        RB : {}
+        RB : {
+            pixelated : true
+        }
     },
     2 : {
         GS : {
             badges : {
                 Johto : 8,
                 Kanto : 8
-            }
+            },
+            pixelated : true
         }
     },
     3 : {
-        RS : {},
-        FRLG : {}
+        RS : {
+            pixelated : true
+        },
+        FRLG : {
+            pixelated : true
+        }
     },
     4 : {
         DP : {},
@@ -31,12 +38,17 @@ const genGameData = {
             badges : {
                 Johto : 8,
                 Kanto : 8
-            }
+            },
+            pixelated : true
         }
     },
     5 : {
-        BW : {},
-        BW2 : {}
+        BW : {
+            pixelated : true
+        },
+        BW2 : {
+            pixelated : true
+        }
     },
     6 : {
         XY : {
@@ -54,6 +66,7 @@ const genGameData = {
                 Ulaula : 7,
                 Poni : 4
             },
+            pixelated : true,
         },
         USUM : {
             badges : {
@@ -62,6 +75,7 @@ const genGameData = {
                 Ulaula : 7,
                 Poni : 4
             },
+            pixelated : true,
         },
     },
     8 : {
@@ -118,7 +132,10 @@ export class SettingGameSelect extends Setting {
         current.game = value;
 
         // change player badges
-        changeBadges(genGameData[current.generation][value].badges);
+        changeBadges(
+            genGameData[current.generation][value].badges,
+            genGameData[current.generation][value].pixelated
+        );
 
         // set game versions if any
         settings.versionSelect.addVersions(genGameData[current.generation][value].versions);

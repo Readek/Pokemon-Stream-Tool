@@ -49,6 +49,8 @@
  *  gymBadges?: Boolean[],
  *  Johto?: Boolean[], Kanto?: Boolean[],
  *  Akala?: Boolean[], Melemele?: Boolean[], Poni?: Boolean[], Ulaula?: Boolean[]
+ *  Noble?: Boolean[],
+ *  Victory?: Boolean[], Starfall?: Boolean[], Legends?: Boolean[]
  * }} BadgeData - Just "gymBadges" for most games
  */
 

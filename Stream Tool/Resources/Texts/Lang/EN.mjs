@@ -118,13 +118,20 @@ export const lang = {
     /* PLAYER */
 
     badgeGymTitle : "Gym Badge",
+
     badgeJohtoTitle : "Johto Badge",
     badgeKantoTitle : "Kanto Badge",
+
     badgeMelemeleTitle : "Melemele Z-Crystals",
     badgeAkalaTitle : "Akala Z-Crystals",
     badgeUlaulaTitle : "Ula'ula Z-Crystals",
     badgePoniTitle : "Poni Z-Crystals",
+
     badgeNobleTitle : "Noble Pokemon",
+
+    badgeVictoryTitle : "Victory Road Badge",
+    badgeStarfallTitle : "Starfall Streed Badge",
+    badgeLegendsTitle : "Path of Legends Badge",
 
     playerCatchesNumTitle : "Number of pokemon catches",
     playerDeathsNumTitle : "Number of ally Pokemon deaths",

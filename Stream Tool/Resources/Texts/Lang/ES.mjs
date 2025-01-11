@@ -119,13 +119,20 @@ export const lang = {
     /* PLAYER */
 
     badgeGymTitle : "Medalla de gimnasio",
+
     badgeJohtoTitle : "Medalla de Johto",
     badgeKantoTitle : "Medalla de Kanto",
+
     badgeMelemeleTitle : "Cristales Z de Melemele",
     badgeAkalaTitle : "Cristales Z de Akala",
     badgeUlaulaTitle : "Cristales Z de Ula-Ula",
     badgePoniTitle : "Cristales Z de Poni",
+
     badgeNobleTitle : "Pokemon Señoriales",
+
+    badgeVictoryTitle : "Medalla de la Travesía de la Victoria",
+    badgeStarfallTitle : "Medalla de la Vía Stardust",
+    badgeLegendsTitle : "Medalla de la Senda Legendaria",
 
     playerCatchesNumTitle : "Número de capturas",
     playerDeathsNumTitle : "Número de muertes aliadas",

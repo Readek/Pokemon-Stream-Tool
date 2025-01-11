@@ -47,7 +47,7 @@ export function getBadges() {
  * Updates badge assets
  * @param {BadgeData} badgeData - How this game's badges should work
  */
-export function changeBadges(badgeData) {
+export function changeBadges(badgeData, renderStyle) {
 
     badgesDiv.innerHTML = "";
     badges = {};
@@ -96,6 +96,9 @@ export function changeBadges(badgeData) {
         badgesDiv.classList.remove("badgesColumns");
 
     }
+
+    // set pixelated scaling for pixel badges        
+    badgesDiv.style.imageRendering = renderStyle ? "pixelated" : "auto";
 
 }
 
