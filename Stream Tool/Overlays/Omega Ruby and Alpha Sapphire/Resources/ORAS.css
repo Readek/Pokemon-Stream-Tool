@@ -1,7 +1,8 @@
 @font-face {
-    font-family: "Aero";
-    src: url('../../../Resources/Fonts/AERO_03.ttf');
+    font-family: "Roboto-Condensed";
+    src: url('../../../Resources/Fonts/RobotoCondensed-VariableFont_wght.ttf');
 }
+
 
 * {
     box-sizing: border-box;
@@ -10,6 +11,8 @@
 html, body {
     padding: 0;
     margin: 0;
+    font-weight: 625;
+    font-family: "Roboto-Condensed";
 }
 
 #content {
@@ -121,10 +124,9 @@ html, body {
 
 .statNumber {
     color: #f8f8f8;
-    font-family: "Aero";
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 700;
     text-shadow: 0px 0px 5px black;
-    margin-top: 4px;
 }
 
 
@@ -136,8 +138,8 @@ html, body {
     top: 358px;
     left: 52px;
     width: 373px;
-    font-family: "Aero";
-    font-size: 20px;
+    font-size: 19px;
+    font-weight: 500;
     color: white;
     text-shadow: 0px 0px 5px black;
     display: flex;
@@ -215,7 +217,8 @@ html, body {
     height: 24px;
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 5px 7px;
+    font-size: 18px;
 }
 #vsWildAbilityH {
     border: 1px solid #5d4d68;
@@ -228,6 +231,7 @@ html, body {
     width: 100%;
     padding: 0px 50px 10px 50px;
     font-size: 18px;
+    font-weight: 600;
 }
   
 .vsWildStat {
@@ -313,7 +317,6 @@ html, body {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    font-family: "Aero";
     color: #f8f8f8;
 }
 
@@ -372,7 +375,7 @@ html, body {
         }
     }
     .pokeTexts {
-        transform: translateY(10px);
+        transform: translateY(8px);
     }
 }
 
@@ -407,7 +410,9 @@ html, body {
     display: flex;
     gap: 3px;
     background-color: var(--activeColor);
-    padding: 6px 0px 0px 5px;
+    padding: 2px 0px 2px 5px;
+    align-items: center;
+    font-size: 16px;
 }
 .pokeLvlAfter {
     background-color: var(--activeColor);
@@ -417,14 +422,17 @@ html, body {
 
 
 .pokeNick {
-    font-size: 32px;
+    font-size: 30px;
 }
 
 .pokeSubText {
     display: flex;
     gap: 6px;
     font-size: 22px;
-    font-style: italic;
+    font-weight: 550;
+    font-style: oblique 15deg;
+    padding-left: 5px;
+    margin-top: -3px;
 }
 
 
@@ -446,7 +454,7 @@ html, body {
     justify-content: center;
     width: 55px;
     background-color: var(--bacColor);
-    padding: 5px 0px 1px 5px;
+    padding: 2px 0px 1px 5px;
     z-index: 2;
     flex-shrink: 0;
     text-wrap: nowrap;
@@ -511,7 +519,6 @@ html, body {
     width: 100%;
     height: 181px;
     bottom: 3px;
-    font-family: "Aero";
     color: #f8f8f8;
 }
 
@@ -605,7 +612,7 @@ html, body {
     gap: 5px;
     border-bottom: 4px double var(--activeColor);
     border-right: 4px double var(--activeColor);
-    padding: 6px 12px 0px 12px;
+    padding: 0px 12px 0px 12px;
     border-radius: 0% 0% 12% / 100% 0%;
     background-color: #00000030;
 }
@@ -613,14 +620,16 @@ html, body {
     display: flex;
     gap: 3px;
     filter: drop-shadow(0px 0px 2px black);
-    padding-right: 2px;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 3px 2px 2px 0px;
 }
 
 .activeTypeIcon {
     width: 20px;
     height: 20px;
-    margin-top: -7px;
     filter: drop-shadow(0px 0px 2px black);
+    margin-top: -2px;
     transform: scale(1.25);
 }
 
@@ -637,14 +646,16 @@ html, body {
 }
 .activeSubText {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     font-size: 20px;
     align-items: center;
+    margin: -2px 0 0 5px;
+    font-weight: 600;
 }
 
 .activeItemDiv {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     align-items: center;
 }
 .activeItemImgDiv {
@@ -698,12 +709,13 @@ html, body {
     justify-content: center;
     width: 55px;
     background-color: var(--bacColor);
-    padding: 5px 0px 1px 0px;
+    padding: 2px 0px 2px 0px;
     z-index: 2;
     flex-shrink: 0;
     text-wrap: nowrap;
     color: #b6b6b6;
     font-size: 16px;
+    font-weight: 700;
 }
 
 /** Active Moves */
@@ -718,7 +730,7 @@ html, body {
 .activeMoveDiv {
     width: 100%;
     border: 1px solid lightgray;
-    padding: 2px 10px;
+    padding: 1px 10px;
     border-radius: 10% / 100% 100% 100% 100%;
 }
 .activeMoveTexts {
@@ -742,8 +754,7 @@ html, body {
 }
 
 .activeMoveName {
-    transform: translateY(1px);
-    font-size: 20px;
+    font-size: 19px;
     text-wrap: nowrap;
     white-space: nowrap;
     max-width: 100%;
@@ -752,8 +763,7 @@ html, body {
 .activeMoveRight {
     display: flex;
     gap: 2px;
-    transform: translateY(1px);
-    font-size: 19px;
+    font-size: 18px;
 }
 .activeMoveHidePP {
     display: none;
@@ -786,7 +796,6 @@ html, body {
 
     height: 100%;
     width: 200px;
-    /* overflow: hidden; */
     display: flex;
     align-items: center;
     gap: 2px;
@@ -821,7 +830,9 @@ html, body {
 
 .standbyName {
     font-size: 22px;
+    font-weight: 500;
     text-shadow: 0px 0px 5px black;
+    text-wrap: nowrap;
 }
 
 .standbyHpDiv {
@@ -832,6 +843,7 @@ html, body {
     border-radius: 10px;
     overflow: hidden;
     filter: drop-shadow(0px 0px 2px black);
+    translate: 0px -2px;
 }
 
 
@@ -846,7 +858,6 @@ html, body {
     justify-content: center;
     align-items: center;
     filter: drop-shadow(0px 0px 3px black);
-    font-family: "Aero";
     color: #f8f8f8;
     animation: trainerIntroFull 3.5s both;
 }
@@ -866,13 +877,15 @@ html, body {
 }
 #enemyNameIntroTitle {
     font-size: 56px;
-    -webkit-text-stroke: 1px rgb(129, 54, 54);
+    font-weight: 500;
+    -webkit-text-stroke: 3px rgb(129, 54, 54);
+    paint-order: stroke fill;
     margin: 0px 10px;
 }
 #enemyNameIntroName {
     font-size: 64px;
-    font-weight: bold;
-    -webkit-text-stroke: 2px rgb(122, 30, 30);
+    -webkit-text-stroke: 4px rgb(122, 30, 30);
+    paint-order: stroke fill;
 }
 
 .enemyNameIntroBar {
@@ -901,9 +914,7 @@ html, body {
 #enemyNameIntroEqual {
     margin-right: 8px;
 }
-#enemyNameIntroPokeCount {
-    transform: translateY(2px);
-}
+
 
 /** Other */
 
@@ -921,7 +932,6 @@ html, body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: "Aero";
     font-size: 28px;
     color: lightcoral;
     text-shadow: 0px 0px 5px black;

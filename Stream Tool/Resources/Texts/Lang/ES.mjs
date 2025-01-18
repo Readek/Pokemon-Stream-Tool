@@ -11,7 +11,7 @@ export const lang = {
     topBarTeamTitle : "Modifica tu equipo Pokemon actual",
 
     topBarPlayer : "Perfil",
-    topBarPlayerTitle : "Modifica tus medallas (¡y mas!)",
+    topBarPlayerTitle : "Modifica tus medallas (¡y más!)",
 
     topBarVSWild : "VS Salvaje",
     topBarVSWildTitle : "Muestra las estadísticas de un Pokemon salvaje",

@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Aero";
-    src: url('../../../Resources/Fonts/AERO_03.ttf');
+    src: url('../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
 }
 
 * {
@@ -15,6 +15,8 @@ html, body {
 #content {
     width: 1920px;
     height: 1080px;
+    font-weight: 700;
+    font-family: "Aero";
 }
 
 
@@ -99,10 +101,8 @@ html, body {
 
 .statNumber {
     color: #f8f8f8;
-    font-family: "Aero";
-    font-size: 24px;
+    font-size: 25px;
     text-shadow: 0px 0px 5px black;
-    margin-top: 4px;
 }
 
 
@@ -115,7 +115,6 @@ html, body {
     left: 415px;
     width: 280px;
     height: 340px;
-    font-family: "Aero";
     font-size: 20px;
     color: white;
     text-shadow: 0px 0px 5px black;
@@ -195,7 +194,7 @@ html, body {
     height: 24px;
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 5px 7px;
 }
 #vsWildAbilityH {
     border: 1px solid #5d4d68;
@@ -207,7 +206,7 @@ html, body {
     flex-direction: column;
     width: 100%;
     padding: 0px 10px;
-    font-size: 18px;
+    font-size: 19px;
 }
   
 .vsWildStat {
@@ -290,7 +289,6 @@ html, body {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    font-family: "Aero";
     color: #f8f8f8;
 }
 
@@ -374,6 +372,7 @@ html, body {
 .pokeLvlDiv {
     display: flex;
     gap: 4px;
+    font-size: 19px;
 }
 
 .typeIcon {
@@ -384,14 +383,17 @@ html, body {
 
 
 .pokeNick {
-    font-size: 32px;
+    font-size: 34px;
+    margin-top: -3px;
 }
 
 .pokeSubText {
     display: flex;
     gap: 6px;
     font-size: 22px;
-    font-style: italic;
+    font-style: oblique 15deg;
+    padding-left: 5px;
+    margin-top: -3px;
 }
 
 .pokeHpDiv {
@@ -407,7 +409,7 @@ html, body {
     justify-content: center;
     width: 70px;
     background-color: var(--bacColor);
-    padding: 3px 0px;
+    padding: 2px 0px;
     z-index: 2;
     flex-shrink: 0;
     font-size: 16px;
@@ -418,13 +420,12 @@ html, body {
 .pokeHpText {
     text-wrap: nowrap;
     color: #b6b6b6;
-    transform: translateY(2px);
 }
 .pokeHpBar {
     background-color: var(--bacColor);
     width: 55%;
     height: 11px;
-    transform: translateY(14px);
+    transform: translateY(13px);
     border-top-right-radius: 5px;
     border: 4px solid var(--bacColor);
     border-left: none;
@@ -479,7 +480,6 @@ html, body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: "Aero";
     font-size: 28px;
     color: lightcoral;
     text-shadow: 0px 0px 5px black;
