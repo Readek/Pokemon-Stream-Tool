@@ -1,6 +1,14 @@
 @font-face {
-    font-family: "Roboto-Condensed";
-    src: url('../../../Resources/Fonts/RobotoCondensed-VariableFont_wght.ttf');
+    font-family: "FontBold";
+    src: url('../../../Resources/Fonts/RobotoCondensed-Bold.ttf');
+}
+@font-face {
+    font-family: "FontMain";
+    src: url('../../../Resources/Fonts/RobotoCondensed-SemiBold.ttf');
+}
+@font-face {
+    font-family: "FontMedium";
+    src: url('../../../Resources/Fonts/RobotoCondensed-Medium.ttf');
 }
 
 * {
@@ -10,8 +18,7 @@
 html, body {
     padding: 0;
     margin: 0;
-    font-weight: 625;
-    font-family: "Roboto-Condensed";
+    font-family: "FontMain";
 }
 
 #content {
@@ -120,7 +127,7 @@ html, body {
 .statNumber {
     color: #f8f8f8;
     font-size: 22px;
-    font-weight: 700;
+    font-family: "FontBold";
     text-shadow: 0px 0px 5px black;
 }
 
@@ -134,7 +141,6 @@ html, body {
     left: 52px;
     width: 373px;
     font-size: 19px;
-    font-weight: 500;
     color: white;
     text-shadow: 0px 0px 5px black;
     display: flex;
@@ -162,6 +168,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: "FontMedium";
 }
 
 .vsWildPokeTypeDiv {
@@ -226,7 +233,6 @@ html, body {
     width: 100%;
     padding: 0px 50px 10px 50px;
     font-size: 18px;
-    font-weight: 600;
 }
   
 .vsWildStat {
@@ -424,7 +430,6 @@ html, body {
     display: flex;
     gap: 6px;
     font-size: 22px;
-    font-weight: 550;
     font-style: oblique 15deg;
     padding-left: 5px;
     margin-top: -3px;
@@ -616,7 +621,7 @@ html, body {
     gap: 3px;
     filter: drop-shadow(0px 0px 2px black);
     font-size: 16px;
-    font-weight: 700;
+    font-family: "FontBold";
     padding: 3px 2px 2px 0px;
 }
 
@@ -645,7 +650,6 @@ html, body {
     font-size: 20px;
     align-items: center;
     margin: -2px 0 0 5px;
-    font-weight: 600;
 }
 
 .activeItemDiv {
@@ -710,7 +714,7 @@ html, body {
     text-wrap: nowrap;
     color: #b6b6b6;
     font-size: 16px;
-    font-weight: 700;
+    font-family: "FontBold";
 }
 
 /** Active Moves */
@@ -825,7 +829,7 @@ html, body {
 
 .standbyName {
     font-size: 22px;
-    font-weight: 500;
+    font-family: "FontMedium";
     text-shadow: 0px 0px 5px black;
     text-wrap: nowrap;
 }
@@ -872,7 +876,7 @@ html, body {
 }
 #enemyNameIntroTitle {
     font-size: 56px;
-    font-weight: 500;
+    font-family: "FontMedium";
     -webkit-text-stroke: 3px rgb(129, 54, 54);
     paint-order: stroke fill;
     margin: 0px 10px;

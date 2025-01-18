@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "Aero";
+    font-family: "FontMain";
     src: url('../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
 }
 
@@ -16,7 +16,7 @@ html, body {
     width: 1920px;
     height: 1080px;
     font-weight: 700;
-    font-family: "Aero";
+    font-family: "FontMain";
 }
 
 
