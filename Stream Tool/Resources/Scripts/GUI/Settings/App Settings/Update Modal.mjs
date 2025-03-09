@@ -24,10 +24,12 @@ document.getElementById("updateModalAccept").addEventListener("click", async () 
     
     if (downApp) {
 
-        const updApp = updateAppReplace();
-        if (updApp) {
-            replaceModalTexts("updateModalTitleDone", "updateModalDescDone");
-        } else {
+        try {
+            const updApp = updateAppReplace();
+            if (updApp) {
+                replaceModalTexts("updateModalTitleDone", "updateModalDescDone");
+            }
+        } catch (error) {
             replaceModalTexts("updateModalTitleError", "updateModalDescErrorUpdating");
         }
 

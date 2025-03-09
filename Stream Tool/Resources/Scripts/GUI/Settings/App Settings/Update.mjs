@@ -70,13 +70,13 @@ export function updateAppReplace() {
 
     // copy the files over and replace any
     fs.cpSync(
-        stPath.main + "/Temp/" + filesPath + "Overlays",
-        stPath.main + "../Overlays",
+        __dirname + "/Temp/" + filesPath + "Overlays",
+        __dirname + "/../Overlays",
         {recursive: true}
     );
     fs.cpSync(
-        stPath.text + "/Temp/" + filesPath + "Resources",
-        stPath.text + "../Resources",
+        __dirname + "/Temp/" + filesPath + "Resources",
+        __dirname + "/../Resources",
         {recursive: true}
     );
 

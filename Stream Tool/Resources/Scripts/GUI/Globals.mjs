@@ -13,8 +13,6 @@ export const stPath = {
     text : realPath + '/Texts',
     /** The "sprites" part will be completed by pkmn/img */
     poke: realPath + "/Assets/Pokemon",
-    /** The actual resources folder */
-    base: realPath,
     /** This is the internal node path, can be used to find modules */ 
     node : "",
 };
