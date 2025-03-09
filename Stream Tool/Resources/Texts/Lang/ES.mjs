@@ -32,7 +32,7 @@ export const lang = {
     deleteCatchesButt : "Borrar todas",
     confModalTitleClearCatches : "¿Borrar capturas?",
     confModalDescClearCatches : "Esto vaciará toda la lista de capturas. ¡No habrá vuelta atrás!",
-    confModalBtnClearCatches : "Si, cárgatelos",
+    confModalBtnClearCatches : "Sí, cárgatelos",
 
     updateCatchesButtTitle : "Actualiza la lista de capturas",
     updateCatchesButt : "Actualizar capturas",
@@ -42,7 +42,7 @@ export const lang = {
     confModalTitleDexCatches : "¿Añadir la pokédex entera?",
     confModalDescDexCatches : "Esto añadirá a todos los Pokemon de la pokédex cargada en este momento (decidida por el selector de generación en los ajustes). También borrará la lista de capturas actual."
         + " Ten en cuenta que al darle al botón de actualizar, se empezarán a descargar TODAS las imagenes de los Pokemon en la lista, lo cual tardará un buen rato.",
-    confModalBtnDexCatches : "Si, añádelos",
+    confModalBtnDexCatches : "Sí, añádelos",
 
 
     /* TEAM */
@@ -233,6 +233,25 @@ export const lang = {
     restoreWindowTitle : "Restaura las dimensiones y zoom por defecto de la ventana",
     restoreWindow : "Dimensiones por defecto",
 
+    appSettingsTitle : "Ajustes del programa",
+
+    gitUpdateSettingsButt : "Actualizar a la última versión",
+    gitUpdateSettingsButtTitle : "Actualiza el programa a la versión de desarrollo más nueva",
+
+    updateModalTitle : "Actualizar a la última versión",
+    updateModalDesc : "Esto actualizará el programa a la versión de desarrollo más nueva. Todos los archivos del programa serán reemplazados, pero esto no borrará archivos nuevos que hayas incluído manualmente, ni tampoco archivos viejos que hayan dejado de usarse.",
+    updateModalAccept : "Actualizar",
+
+    updateModalTitleUpdating : "Actualizando",
+    updateModalDescUpdatingDown : "Descargando la última versión de desarrollo...",
+    updateModalDescUpdating : "Reemplazando archivos por los nuevos...",
+
+    updateModalTitleDone : "¡Actualización completada!",
+    updateModalDescDone : "Actualización finalizada. Ya puedes reiniciar el programa (pulsa F5).",
+
+    updateModalTitleError : "Error al actualizar",
+    updateModalDescErrorDown : "Algo ha salido mal al descargar la actualización. Abre la consola (F12) para más información.",
+    updateModalDescErrorUpdating : "Algo ha salido mal al actualizar los archivos. Abre la consola (F12) para más información.",
 
     /* OTHER STRINGS  */
 

@@ -236,6 +236,25 @@ export const lang = {
     restoreWindowTitle : "Restores the default window width, height, and zoom values",
     restoreWindow : "Restore default dimensions",
 
+    appSettingsTitle : "App settings",
+
+    gitUpdateSettingsButt : "Update to latest git",
+    gitUpdateSettingsButtTitle : "Updates the app to the latest developer version",
+
+    updateModalTitle : "Update to latest git",
+    updateModalDesc : "This will update the app to the latest developer version. The update will overwrite any modified app files, but it will not delete files you manually added, nor old unused files.",
+    updateModalAccept : "Update",
+
+    updateModalTitleUpdating : "Updating app",
+    updateModalDescUpdatingDown : "Downloading latest git version...",
+    updateModalDescUpdating : "Replacing files with new update...",
+
+    updateModalTitleDone : "Update succesfull!",
+    updateModalDescDone : "Update completed. You can now restart the app (press F5).",
+
+    updateModalTitleError : "Update error",
+    updateModalDescErrorDown : "Something went wrong while downloading the update. Open the console (F12) for more information.",
+    updateModalDescErrorUpdating : "Something went wrong while updating the files. Open the console (F12) for more information.",
 
     /* OTHER STRINGS  */
 

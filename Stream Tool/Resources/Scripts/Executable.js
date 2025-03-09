@@ -243,6 +243,11 @@ function createWindow() {
         storedSettings = data;
     })
 
+    // this sends the temporal node path, used to find modules
+    ipcMain.on('getNodePath', (event, data) => {
+        win.webContents.send('giveNodePath', nodePath);
+    })
+
     win.on("close", () => {
         // save current window dimensions
         guiWidth = win.getBounds().width;

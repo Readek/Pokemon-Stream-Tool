@@ -1271,11 +1271,11 @@ button:hover {
   animation: loadingNotifAnim 2.5s both;
 }
 
-#confModal[open] {
+.confModal[open] {
   opacity: 1;
   transform: scale(1);
 }
-#confModal {
+.confModal {
   width: 100%;
   height: 100%;
   border: none;
@@ -1286,28 +1286,28 @@ button:hover {
   transition: all .2s allow-discrete;
 }
 @starting-style {
-  #confModal[open] {
+  .confModal[open] {
     opacity: 0;
     transform: scale(1.1);
   }
 }
-#confModal::backdrop {
+.confModal::backdrop {
   background-color: #00000000;
   backdrop-filter: blur(0px);
   transition: all 0.2s allow-discrete;
 }
-#confModal[open]::backdrop {
+.confModal[open]::backdrop {
   background-color: var(--bg4);
   backdrop-filter: blur(5px);
 }
 @starting-style {
-  #confModal[open]::backdrop {
+  .confModal[open]::backdrop {
     backdrop-filter: blur(0px);
     background-color: #00000000;
   }
 }
 
-#confModalContent {
+.confModalContent {
   display: flex;
   width: 100%;
   height: 100%;
@@ -1322,14 +1322,14 @@ button:hover {
   }
 }
 
-#confModalTitle {
+.confModalTitle {
   font-size: 18px;
   border-bottom: solid 1px var(--text2);
   padding: 3px 7px;
   text-transform: uppercase;
   font-weight: bold;
 }
-#confModalDesc {
+.confModalDesc {
   text-align: justify;
   max-width: 550px;
 }

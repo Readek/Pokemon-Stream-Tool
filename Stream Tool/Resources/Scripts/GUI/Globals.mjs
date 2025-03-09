@@ -7,9 +7,16 @@ export const inside = {
 const realPath = inside.electron ? __dirname : "";
 /** Paths used for all of the Stream Tool */
 export const stPath = {
-    poke: realPath + "/Assets/Pokemon", // the "sprites" part will be completed by @pkmn/img
+    /** All images can be found here */
     assets: realPath + "/Assets",
+    /** Where most configs are found */
     text : realPath + '/Texts',
+    /** The "sprites" part will be completed by pkmn/img */
+    poke: realPath + "/Assets/Pokemon",
+    /** The actual resources folder */
+    base: realPath,
+    /** This is the internal node path, can be used to find modules */ 
+    node : "",
 };
 
 /** Current values for stuff */

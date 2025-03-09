@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pokemon Stream Tool</title>
+  <title>Pokemon Stream Tool [GIT]</title>
   <link rel="stylesheet" href="CSS/GUI.css">
   <script src="Scripts/GUI/External Libraries/mousetrap.min.js" defer></script>
   <script src="Scripts/GUI/External Libraries/encoding.min.js" defer></script>
@@ -340,6 +340,11 @@
                 <button class="settingsButton" id="restoreWindowButt" tabindex="0" locTitle="restoreWindowTitle" locText="restoreWindow"></button>
               </div>
 
+              <div class="settingsTitle" locText="appSettingsTitle"></div>
+
+
+              <button class="settingsButton" id="gitUpdateButt" locText="gitUpdateSettingsButt" locTitle="gitUpdateSettingsButtTitle"></button>
+
             </div>
 
           </div>
@@ -357,11 +362,11 @@
 <div id="notifDiv"></div>
 <div id="loadingImgsMessage"></div>
 
-<dialog id="confModal">
-  <div id="confModalContent">
+<dialog id="confModal" class="confModal">
+  <div class="confModalContent">
 
-    <div id="confModalTitle"></div>
-    <div id="confModalDesc"></div>
+    <div id="confModalTitle" class="confModalTitle"></div>
+    <div id="confModalDesc" class="confModalDesc"></div>
     <div class="teamButtRegion">
 
       <button id="confModalGoBack" class="updateButt">
@@ -372,6 +377,28 @@
       <button id="confModalAccept" class="updateButt">
         <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
         <div id="confModalAcceptText"></div>
+      </button>
+
+    </div>
+
+  </div>
+</dialog>
+
+<dialog id="updateAppModal" class="confModal">
+  <div class="confModalContent">
+
+    <div id="updateModalTitle" class="confModalTitle" locText="updateModalTitle"></div>
+    <div id="updateModalDesc" class="confModalDesc" locText="updateModalDesc"></div>
+    <div class="teamButtRegion" id="updateModalButts">
+
+      <button id="updateModalGoBack" class="updateButt">
+        <load-svg src="SVGs/Cross.svg" class="svgIcon"></load-svg>
+        <div locText="confModalGoBack"></div>
+      </button>
+
+      <button id="updateModalAccept" class="updateButt">
+        <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
+        <div id="updateModalAcceptText" locText="updateModalAccept"></div>
       </button>
 
     </div>

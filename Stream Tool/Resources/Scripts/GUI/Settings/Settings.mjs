@@ -7,6 +7,7 @@ import { SettingVersionSelect } from "./General Settings/Version Select.mjs";
 import { SettingAlwaysOnTop } from "./Window Settings/Always on top.mjs";
 import { SettingResizableWindow } from "./Window Settings/Resizable.mjs";
 import { SettingWindowZoom } from "./Window Settings/Zoom.mjs";
+import "./App Settings/Update Modal.mjs"; // load listeners
 
 class Settings {
 

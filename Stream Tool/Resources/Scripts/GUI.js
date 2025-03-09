@@ -16,6 +16,7 @@ import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
 import { trainerPokemons } from './GUI/VS Trainer/TrainerPokemons.mjs';
 import { updateTrainer } from './GUI/VS Trainer/Update Trainer.mjs';
 import { fetchSpritesheets } from './GUI/Asset Download.mjs';
+import { getNodePath } from './GUI/IPC.mjs';
 
 
 // this is a weird way to have local file svg's that can be recolored by css
@@ -27,6 +28,8 @@ customElements.define("load-svg", class extends HTMLElement {
     }
 });
 
+// ask for the node path on startup
+if (inside.electron) {getNodePath()}
 
 init();
 /** It all starts here */
