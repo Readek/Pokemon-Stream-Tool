@@ -18,7 +18,7 @@ export async function updateAppDownload() {
 
         const http = require("https");
 
-        const dest = stPath.base + "/Temp/GitDownload.zip";
+        const dest = __dirname + "/Temp/GitDownload.zip";
 
         // create folders if needed
         fs.mkdirSync(dest.substring(0, dest.lastIndexOf("/")), { recursive: true }, (err) => {
@@ -56,14 +56,14 @@ export function updateAppReplace() {
  
     const AdmZip = require(stPath.node + "/node_modules/adm-zip/adm-zip.js")
 
-    const zip = new AdmZip(stPath.base + "/Temp/GitDownload.zip");
+    const zip = new AdmZip(__dirname + "/Temp/GitDownload.zip");
     const zipEntries = zip.getEntries();
 
     const filesPath = zipEntries[0].entryName + "Stream Tool/";
 
     zip.extractEntryTo(
         filesPath, // entry name
-        stPath.base + "/Temp", // target path
+        __dirname + "/Temp", // target path
         true, // maintainEntryPath
         true // overwrite
     );
@@ -80,7 +80,7 @@ export function updateAppReplace() {
         {recursive: true}
     );
 
-    fs.rmSync(stPath.base + "/Temp", { recursive: true});
+    fs.rmSync(__dirname + "/Temp", { recursive: true});
 
     return true;
 

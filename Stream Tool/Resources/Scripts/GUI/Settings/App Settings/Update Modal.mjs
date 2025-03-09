@@ -30,6 +30,7 @@ document.getElementById("updateModalAccept").addEventListener("click", async () 
                 replaceModalTexts("updateModalTitleDone", "updateModalDescDone");
             }
         } catch (error) {
+            console.error(error);
             replaceModalTexts("updateModalTitleError", "updateModalDescErrorUpdating");
         }
 
