@@ -12,7 +12,7 @@ let webSocket;
 export function startWebsocket() {
 
 	// we need to connect to the websocket server
-	webSocket = new WebSocket("ws://"+window.location.hostname+":8080?id=remoteGUI");
+	webSocket = new WebSocket("ws://"+window.location.hostname+":1112?id=remoteGUI");
 	webSocket.onopen = () => { // if it connects successfully
         
         // everything will update everytime we get data from the server (the GUI)

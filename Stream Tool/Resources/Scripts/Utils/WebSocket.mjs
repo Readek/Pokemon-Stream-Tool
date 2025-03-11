@@ -22,7 +22,7 @@ export function initWebsocket(dataType, functToUse) {
 function startWebsocket() {
 
 	// change this to the IP of where the GUI is being used for remote control
-	webSocket = new WebSocket(`ws://localhost:8080?id=${id}`);
+	webSocket = new WebSocket(`ws://localhost:1112?id=${id}`);
 	webSocket.onopen = () => { // if it connects successfully
 
 		// everytime we get data from the server (the GUI)

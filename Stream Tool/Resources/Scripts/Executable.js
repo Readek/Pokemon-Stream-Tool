@@ -41,7 +41,7 @@ module.exports = function initExec(rPath, nPath) {
             resizable: false,
             zoom: 100,
             remoteUpdatePort: 1111,
-            webSocketPort: 8080
+            webSocketPort: 1112
         }
         // and write it down to a file
         fs.writeFileSync(guiSettsJsonPath, JSON.stringify(storedSettings, null, 2));
