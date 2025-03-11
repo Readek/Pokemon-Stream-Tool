@@ -34,6 +34,9 @@ export async function updateGUI(data, noNotif) {
         if (current.version != data.version) {
             settings.versionSelect.setVersion(data.version);
         }
+        if (current.forceDex != data.forceDex) {
+            settings.forceDex.setForceDex(data.forceDex);
+        }
 
         if (inside.electron) settings.update();
 
@@ -56,7 +59,7 @@ export async function updateGUI(data, noNotif) {
                 catches[i].delet();
             }
         }
-        
+
         for (let i = 0; data.pokemons && i < data.pokemons.length; i++) {
 
             catches[i].setSpecies(data.pokemons[i].internalSpecies);
@@ -64,7 +67,7 @@ export async function updateGUI(data, noNotif) {
             catches[i].setForm(data.pokemons[i].form);
             catches[i].setGender(data.pokemons[i].gender);
             catches[i].setShiny(data.pokemons[i].shiny);
-            
+
         }
 
     }
@@ -156,5 +159,5 @@ export async function updateGUI(data, noNotif) {
     if (!noNotif && !current.autoStatus) {
         displayNotif(getLocalizedText("notifRemoteUpdate"));
     }
-    
+
 }

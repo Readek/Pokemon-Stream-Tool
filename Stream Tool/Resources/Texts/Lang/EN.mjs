@@ -223,6 +223,9 @@ export const lang = {
     gameSelectTitle : "Determines badges and memory reading",
     gameVersionTitle : "Determines memory reading and medals in some games",
 
+    settingFullDexTitle : "Use a Pokedex with all Pokemon from all generations",
+    settingFullDex : "Force full dex data",
+
     windowSettings : "Window Settings",
 
     alwaysOnTopTitle : "Prevents other windows to be displayed on top of this one",

@@ -8,6 +8,7 @@ import { SettingAlwaysOnTop } from "./Window Settings/Always on top.mjs";
 import { SettingResizableWindow } from "./Window Settings/Resizable.mjs";
 import { SettingWindowZoom } from "./Window Settings/Zoom.mjs";
 import "./App Settings/Update Modal.mjs"; // load listeners
+import { SettingForceDex } from "./General Settings/Force Full Dex.mjs";
 
 class Settings {
 
@@ -17,6 +18,7 @@ class Settings {
         this.genSelect = new SettingGenSelect();
         this.gameSelect = new SettingGameSelect();
         this.versionSelect = new SettingVersionSelect();
+        this.forceDex = new SettingForceDex();
 
         if (inside.electron) {
             this.alwaysOnTop = new SettingAlwaysOnTop();
@@ -38,7 +40,8 @@ class Settings {
             lang : current.lang,
             gen : current.generation,
             game : current.game,
-            version : current.version
+            version : current.version,
+            forceDex : current.forceDex
         };
 
         if (inside.electron) {

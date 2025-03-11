@@ -220,6 +220,9 @@ export const lang = {
     gameSelectTitle : "Determina las medallas y el actualizado automático",
     gameVersionTitle : "Determina el actualizado automático y medallas en algunos juegos",
 
+    settingFullDexTitle : "Usa una Pokedex con todos los Pokemon de todas las generaciones",
+    settingFullDex : "Forzar dex completa",
+
     windowSettings : "Ajustes de la ventana",
 
     alwaysOnTopTitle : "Previene que otras ventanas se pongan por encima de esta",

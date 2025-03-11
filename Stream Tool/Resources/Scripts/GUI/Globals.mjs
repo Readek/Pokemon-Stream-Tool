@@ -19,11 +19,20 @@ export const stPath = {
 
 /** Current values for stuff */
 export const current = {
-    lang : "", // most of these will change on startup
+    /** Current app language selected */
+    lang : "",
+    /** Current Pokemon generation we're using */
     generation : 0,
+    /** Current Pokemon game */
     game : "",
+    /** Version of current game */
     version : "",
-    focus : -1, // used for pokeFinder navigation
+    /** True if we want a Pokedex with all Pokemon in existance */
+    forceDex : false,
+    /** Used for pokeFinder navigation */
+    focus : -1,
+    /** If auto-update is currently enabled */
     autoStatus : false,
+    /** If current auto loop has updated some value in its process */
     autoUpdated : false
 }

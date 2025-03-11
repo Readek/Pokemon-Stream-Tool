@@ -77,7 +77,8 @@
  *  lang?: LangCode,
  *  gen?: Number,
  *  game?: String,
- *  version?: "String",
+ *  version?: String,
+ *  forceDex?: Boolean,
  *  player?: PlayerData,
  *  trainerName?: EnemyTrainerName,
  * }} SentData
