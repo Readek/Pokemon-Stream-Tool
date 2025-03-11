@@ -128,8 +128,6 @@ function createWindow() {
 
     const win = new BrowserWindow({
 
-        width: guiWidth,
-        height: guiHeight,
         resizable: false,
 
         // will be overwitten by css
@@ -152,10 +150,21 @@ function createWindow() {
 
         },
 
+        // hide it until it finishes loading
+        show: false,
+
     })
 
     // we dont like menus
     win.removeMenu()
+
+    // once the page has fully loaded
+    win.once('ready-to-show', () => {
+        // since newer electron versions, height was incorrectly set before this step
+        win.setBounds({width: guiWidth, height: guiHeight});
+        // and finally show it!
+        win.show();
+    })
 
     // load the main page
     win.loadFile(resourcesPath + "/GUI.html");
