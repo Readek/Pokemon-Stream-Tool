@@ -1,10 +1,23 @@
 @font-face {
     font-family: "Aero";
-    src: url('../../../Resources/Fonts/AERO_03.ttf');
+    src: url('../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
 }
 @font-face {
     font-family: "Pokemon";
     src: url('../../../Resources/Fonts/PKMN\ BW.ttf');
+}
+
+@font-face {
+    font-family: "FontBold";
+    src: url('../../../Resources/Fonts/RobotoCondensed-Bold.ttf');
+}
+@font-face {
+    font-family: "FontSemiBold";
+    src: url('../../../Resources/Fonts/RobotoCondensed-SemiBold.ttf');
+}
+@font-face {
+    font-family: "FontMain";
+    src: url('../../../Resources/Fonts/RobotoCondensed-Medium.ttf');
 }
 
 * {
@@ -14,6 +27,7 @@
 html, body {
     padding: 0;
     margin: 0;
+    font-family: "FontMain";
 }
 
 #content {
@@ -37,24 +51,23 @@ html, body {
 
 
 #whoThatTitle {
-    font-family: "Aero";
+    font-family: "FontBold";
     text-transform: uppercase;
-    font-weight: 900;
     color: #fdcd07;
-    text-shadow: -4px 4px #3466B0;
-    font-size: 96px;
+    text-shadow: -5px 5px #3466B0;
+    font-size: 90px;
     filter: drop-shadow(0px 0px 10px black);
 }
 
 #whoThatBarDiv {
     position: relative;
     width: 100%;
-    height: 4px;
+    height: 5px;
     overflow: hidden;
     filter: drop-shadow(0px 0px 10px black);
 }
 .whoThatBar {
-    height: 4px;
+    height: 100%;
     width: 100%;
     position: absolute;
 }
@@ -70,7 +83,6 @@ html, body {
 
 #noCatchesMessage {
     display: none;
-    font-family: "Aero";
     color: #f8f8f8;
     filter: drop-shadow(0px 0px 10px black);
     font-size: 48px;
@@ -78,7 +90,6 @@ html, body {
 
 
 #whoThatContent {
-    font-family: "Aero";
     color: #f8f8f8;
     display: flex;
     gap: 50px;
@@ -113,6 +124,7 @@ html, body {
     font-size: 74px;
     width: 200px;
     white-space: nowrap;
+    font-family: "FontSemiBold";
 }
 
 #pokeSubText {
@@ -145,9 +157,8 @@ html, body {
     transform: translateY(5px);
     display: flex;
     gap: 16px;
-    font-family: "Aero";
     color: #f8f8f8;
-    font-size: 52px;
+    font-size: 50px;
     text-shadow: 0px 0px 10px black;
     width: 100%;
     height: 100%;
@@ -167,7 +178,6 @@ html, body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: "Aero";
     font-size: 28px;
     color: lightcoral;
     text-shadow: 0px 0px 5px black;
