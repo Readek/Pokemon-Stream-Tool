@@ -14,6 +14,7 @@ export class SettingAlwaysOnTop extends Setting {
 
     load() {
         this.#alwaysOnTopCheck.checked = this.guiSettings.alwaysOnTop;
+        this.#refresh();
     }
 
     #setListener() {
