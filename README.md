@@ -10,22 +10,17 @@
 
 Pokemon ST allows you to manage dynamic overlays with the help of a GUI, with features like:
 
-- Manage your game's info.
-  - **Player's party**, with info for nickname, lvl, health values...
-  - Your **badges** and stats like Pokemon catched or allied Pokemon deaths.
-  - **Enemy data** that gets revealed as the battle goes on.
-  - Current **wild encounter** with its possible stats and abilities.
-  - Store your **catches** to be displayed on a "Waiting to start" scene.
-- **Gen 6/7 auto-update** for player party, badges and enemy data, reading directly from Citra (or Citra-likes).
+- Manage your game's info - Pokemon and their stats, badges, catches....
+- **Gen 6/7 auto-update** for player party, badges and enemy data, reading directly from [Azahar](https://github.com/azahar-emu/azahar) (or any Citra fork).
 - No auto for your game? Worry not, everything can be done manually within the GUI.
   - Manual mode supports up to Scarlet/Violet.
 - You can use the **included overlays** for OBS with minimal setup, or make your own.
-- **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
 - Supports multiple languages!
   - Fully localized: **English**, **Spanish** (ES).
   - Pokemon, Items, Abilities and Move names: **French**, **German**, **Italian**, **Japanese**.
+- **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
 - **Crossplatform** GUI (Windows, Linux), built on Electron.
-- Made to be customized! Dive into the folders and modify the entirety of the tool to your heart's content.
+- Made to be customized! Dive into the folders and easily modify the entirety of the tool.
 - Download it **[right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)**! *No need to join any Discord server.*
 
 The tool comes with pre-made overlays for some games, like:
@@ -64,9 +59,9 @@ https://github.com/user-attachments/assets/a936470f-e0ac-49a2-8a95-523d0b9c4a44
 
 ## How to
 
-There are no public official releases yet, but if you really want to try this out, you can start by getting the [latest dev build](https://github.com/Readek/Pokemon-Stream-Tool/releases).
+Keep in mind, this project is under active WIP! You can start by getting the [latest release](https://github.com/Readek/Pokemon-Stream-Tool/releases).
 
-Once you got the thing downloaded, open the `Stream Tool` folder and simply start the executable, and play around!
+Once you got the thing downloaded, extract it anywhere and open the `Stream Tool` folder, then simply start the executable, and play around!
 
 To add overlays to your stream, go into the `Stream Tool/Overlays/` folder and select the one you want, then simply drag the `.html` file found on that folder and drop it onto OBS. As long as the GUI is open, everything should be already connected!
 
