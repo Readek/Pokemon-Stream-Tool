@@ -818,8 +818,13 @@ button:hover {
   text-transform: none;
 }
 
+#citraButt {
+  display: flex;
+  gap: 5px;
+  filter: brightness(1.2);
+}
 .citraButtOff {
-  filter: grayscale(.8);
+  filter: opacity(.7) !important;
 }
 
 

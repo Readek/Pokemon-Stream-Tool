@@ -23,6 +23,7 @@ import { updatePlayer } from "../../Player/Update Player.mjs";
 import { dexData } from "../../Dex Data.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
+const autoUpdateButtText = document.getElementById("citraButtText");
 
 let inCombat = false;
 
@@ -33,12 +34,12 @@ export async function autoUpdateToggleCitra() {
 
         // update states
         current.autoStatus = true;
-        autoUpdateButt.innerHTML = "🍊 AUTO ON";
+        autoUpdateButtText.innerHTML = "AUTO ON";
         autoUpdateButt.classList.remove("citraButtOff");
 
     } else { // if theres a loop running, stop it
         
-        autoUpdateButt.innerHTML = "🍊 AUTO OFF";
+        autoUpdateButtText.innerHTML = "AUTO OFF";
         autoUpdateButt.classList.add("citraButtOff");
         current.autoStatus = false;
 

@@ -22,7 +22,7 @@ export async function displayAutoButt(gen) {
     // but some gens have auto support
     if (gen == 6 || gen == 7) {
 
-        autoUpdateButt.style.display = "block";
+        autoUpdateButt.style.display = "flex";
 
         if (inside.electron) {
 

@@ -111,7 +111,7 @@ export const lang = {
 
     pokeUpdateButt : "Update team",
 
-    autoUpdateButtOff : "🍊 AUTO OFF",
+    autoUpdateButtOff : "AUTO OFF",
     autoUpdateButtTitle : "Sets auto-update on or off",
 
 
