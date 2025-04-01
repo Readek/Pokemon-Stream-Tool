@@ -374,6 +374,11 @@ html, body {
     gap: 4px;
     font-size: 19px;
 }
+.hidePokeLvlDiv {
+    .pokeLvlDiv {
+        display: none;
+    }
+}
 
 .typeIcon {
     height: 26px;

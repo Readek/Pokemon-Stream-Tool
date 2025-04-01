@@ -1,13 +1,4 @@
 @font-face {
-    font-family: "Aero";
-    src: url('../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
-}
-@font-face {
-    font-family: "Pokemon";
-    src: url('../../../Resources/Fonts/PKMN\ BW.ttf');
-}
-
-@font-face {
     font-family: "FontBold";
     src: url('../../../Resources/Fonts/RobotoCondensed-Bold.ttf');
 }

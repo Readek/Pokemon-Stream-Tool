@@ -7,7 +7,7 @@ export class Pokemon {
 
     #species = "";
     #form = "";
-    #lvl = 0;
+    #lvl = -1;
     #nickname = "¡";
     #gender = "";
     #types = [];
@@ -84,8 +84,17 @@ export class Pokemon {
 
     /** @param {Number} lvl */
     setLvl(lvl) {
+
         this.#lvl = lvl;
         this.lvlEl.innerHTML = lvl;
+
+        // if lvl equals 0, hide it
+        if (lvl) {
+            this.mainEl.classList.remove("hidePokeLvlDiv");
+        } else {
+            this.mainEl.classList.add("hidePokeLvlDiv");
+        }
+
     }
     getLvl() {
         return this.#lvl;

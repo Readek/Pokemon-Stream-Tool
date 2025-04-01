@@ -407,6 +407,14 @@ html, body {
 .pokeLvlDiv {
     display: flex;
 }
+.hidePokeLvlDiv {
+    .pokeLvlDiv {
+        display: none;
+    }
+    .pokeTexts {
+        transform: translateY(0px);
+    }
+}
 
 .pokeLvlBefore {
     background-color: var(--activeColor);

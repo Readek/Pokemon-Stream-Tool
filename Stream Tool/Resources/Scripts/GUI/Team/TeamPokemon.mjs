@@ -446,7 +446,7 @@ export class TeamPokemon extends Pokemon {
 
             <div class="pokeLvlDiv" locTitle="pokeLvlTitle">
                 <div class="pokeLvlText" locText="pokeLvl"></div>
-                <input class="pokeLvlNumber" type="number" min="1" max="100" value="1">
+                <input class="pokeLvlNumber" type="number" min="0" max="100" value="0">
             </div>
 
             <select class="pokeForm" locTitle="pokeFormTitle"></select>
