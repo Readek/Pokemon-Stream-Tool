@@ -2,23 +2,9 @@
 
 This is a collection of elements from the example overlays, so that you can add them to existing scenes in your streaming software if you already have them. Like other overlays, just drag the html file into OBS.
 
-> [!NOTE]
-> These all use absolute sizing, so if you have any weird cropping, update the properties of the source with the width and height for the respective layout from the list below. 
+Currently this only has an element for the party, with the aim to add others in future.
+
 
 ## Pokemon Party
 
-**3x2 layout**  
-width:  960  
-height: 337  
-
-**2X3 layout**  
-width:  640  
-height: 487 
-
-**6x1 layout**  
-width:  1970  
-height: 187  
-
-**1x6 layout**  
-width:  320  
-height: 880  
+The layout will adjust based on the width of your browser source. So 1920 width will have a single row of all 6 pokemon, 960 width will have two rows of 3, 320 width will have a vertical party, etc.

@@ -33,12 +33,13 @@ html, body {
 
 /* Non-Trainer battle pokemon Section */
 
-#botPokes {
+#partyPokes {
     position: absolute;
-    top: 0px;
-    width: 1920px;
-    height: 187px;
+    left: 0px;
+    top: 20px;
+    height: 260px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 15px;
@@ -233,174 +234,6 @@ html, body {
     transform: scale(2);
     image-rendering: pixelated;
 }
-
-
-
-/** Main Info */
-/** I don't thin this is needed, but not sure
-.activeMainInfo {
-
-    --healthy: #337E11;
-    --warning: #7e7c11;
-    --danger: #7e1111;
-    --Par: var(--warning);
-    --Poi: #56117e;
-    --Fro: #1a8fa3;
-    --Bur: #7e4611;
-    --Sle: grey;
-    --activeColor: var(--healthy);
-
-    position: relative;
-    height: 126px;
-    width: 340px;
-    border: thick double var(--activeColor);
-    overflow: visible;
-    border-radius: 10% / 100% 100% 100% 100%;
-    transition: opacity .25s, margin-left .6s;
-
-}
-.activeMainInfoTiny {
-    width: 307px;
-}
-
-.activePokeImgDiv {
-    position: absolute;
-    right: 25px;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    clip-path: inset(-100px -100px 0px -100px);
-    width: 200px;
-    height: 100%;
-}
-.activePokeImg {
-    transform: scale(2);
-    image-rendering: pixelated;
-}
-
-.activeDivMask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 7% / 100% 100% 100% 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-}
-
-.activeLvlDiv {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    border-bottom: 4px double var(--activeColor);
-    border-right: 4px double var(--activeColor);
-    padding: 0px 12px 0px 12px;
-    border-radius: 0% 0% 12% / 100% 0%;
-    background-color: #00000030;
-}
-.activeLvlTexts {
-    display: flex;
-    gap: 3px;
-    filter: drop-shadow(0px 0px 2px black);
-    font-size: 16px;
-    font-family: "FontBold";
-    padding: 3px 2px 2px 0px;
-}
-
-.activeTypeIcon {
-    width: 20px;
-    height: 20px;
-    filter: drop-shadow(0px 0px 2px black);
-    margin-top: -2px;
-    transform: scale(1.25);
-}
-
-.activeMainTexts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    margin-left: 10px;
-    text-shadow: 0px 0px 5px black;
-}
-.activeName {
-    font-size: 28px;
-}
-.activeSubText {
-    display: flex;
-    gap: 6px;
-    font-size: 20px;
-    align-items: center;
-    margin: -2px 0 0 5px;
-}
-
-.activeItemDiv {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-}
-.activeItemImgDiv {
-    position: relative;
-    width: 24px;
-    height: 24px;
-    margin-left: 2px;
-}
-.activeItemImgBg {
-    position: absolute;
-    background-color: #ffffff30;
-    border: #d3d3d390 1px solid;
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    transform: scale(1.2);
-}
-.activeItemImgQue {
-    display: none;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    opacity: .7;
-}
-.activeItemImg {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    object-fit: none;
-    image-rendering: pixelated;
-    display: inline-block;
-}
-.activeItem {
-    display: none;
-}
-
-.activeHpDiv {
-    display: flex;
-    bottom: 0px;
-    width: 100%;
-    --bacColor: #363636;
-}
-.activeHpBefore {
-    background-color: var(--bacColor);
-    width: 10px;
-    flex-shrink: 0;
-}
-.activeHpText {
-    display: flex;
-    justify-content: center;
-    width: 55px;
-    background-color: var(--bacColor);
-    padding: 2px 0px 2px 0px;
-    z-index: 2;
-    flex-shrink: 0;
-    text-wrap: nowrap;
-    color: #b6b6b6;
-    font-size: 16px;
-    font-family: "FontBold";
-}
-
 
 
 /** Other */
