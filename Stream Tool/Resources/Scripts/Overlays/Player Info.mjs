@@ -21,6 +21,14 @@ class PlayerInfo {
         catchesNum.innerText = data.catches;
         deathsNum.innerText = data.deaths;
 
+        // hide stats if at 0
+        data.catches 
+            ? catchesNum.parentElement.style.display = "flex" 
+            : catchesNum.parentElement.style.display = "none";
+        data.deaths
+            ? deathsNum.parentElement.style.display = "flex" 
+            : deathsNum.parentElement.style.display = "none";
+
     }
 
 }

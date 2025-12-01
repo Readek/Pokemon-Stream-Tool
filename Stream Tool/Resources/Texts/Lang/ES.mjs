@@ -135,7 +135,7 @@ export const lang = {
     badgeLegendsTitle : "Medalla de la Senda Legendaria",
 
     playerCatchesNumTitle : "Número de capturas",
-    playerDeathsNumTitle : "Número de muertes aliadas",
+    playerDeathsNumTitle : "Número de aliados debilitados",
 
     playerUpdateButt : "Actualizar Jugador",
 

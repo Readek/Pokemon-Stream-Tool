@@ -9,10 +9,10 @@ const http = require('http')
 // modify it unless youre able to build a new exe on your own
 // you can find this code in the git's folder "Interface Source Code"
 
-let resourcesPath, nodePath;
-let httpPort, wsPort, guiWidth, guiHeight;
-let wsServer, sockets = [];
-let storedSettings;
+let resourcesPath, nodePath,
+    httpPort, wsPort, guiWidth, guiHeight,
+    wsServer, sockets = [],
+    storedSettings;
 const storedGuiData = {
     settings : {},
     catches : {},
@@ -21,8 +21,8 @@ const storedGuiData = {
 }
 
 // called from script inside executable
-module.exports = function initExec(rPath, nPath) {    
-    
+module.exports = function initExec(rPath, nPath) {
+
     // set the resources path
     resourcesPath = rPath;
     nodePath = nPath; // this is the path from within the executable
@@ -205,7 +205,7 @@ function createWindow() {
 
         // add this new connection to the array to keep track of them
         sockets.push({ws: socket, id: req.url.substring(5)})
-    
+
         // when a new client connects, send current data
         win.webContents.send('requestData')
     
@@ -281,7 +281,7 @@ app.on('window-all-closed', () => {
         }
         // write down that file
         fs.writeFileSync(`${resourcesPath}/Texts/GUI Settings.json`, JSON.stringify(data, null, 2));
-        
+
         // save current GUI data state
         // we will also remove some unneded values so final file is lighter
         if (storedGuiData.catches.pokemons) {
@@ -300,7 +300,7 @@ app.on('window-all-closed', () => {
             });
         }
         fs.writeFileSync(`${resourcesPath}/Texts/GUI State.json`, JSON.stringify(storedGuiData, null, 2));
-        
+
         // and good bye
         app.quit()
     }

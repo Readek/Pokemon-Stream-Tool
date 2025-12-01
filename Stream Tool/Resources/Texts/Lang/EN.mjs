@@ -134,7 +134,7 @@ export const lang = {
     badgeLegendsTitle : "Path of Legends Badge",
 
     playerCatchesNumTitle : "Number of pokemon catches",
-    playerDeathsNumTitle : "Number of ally Pokemon deaths",
+    playerDeathsNumTitle : "Number of fainted ally Pokemon",
 
     playerUpdateButt : "Update Player",
 
