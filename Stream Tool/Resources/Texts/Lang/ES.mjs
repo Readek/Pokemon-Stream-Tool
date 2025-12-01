@@ -40,8 +40,13 @@ export const lang = {
     pokedexCatchesButtTitle : "Añade la pokedex cargada actualmente. Enterita.",
     pokedexCatchesButt : "Añadir pokedex",
     confModalTitleDexCatches : "¿Añadir la pokédex entera?",
-    confModalDescDexCatches : "Esto añadirá a todos los Pokemon de la pokédex cargada en este momento (decidida por el selector de generación en los ajustes). También borrará la lista de capturas actual."
-        + " Ten en cuenta que al darle al botón de actualizar, se empezarán a descargar TODAS las imagenes de los Pokemon en la lista, lo cual tardará un buen rato.",
+    confModalDescDexCatches : `Esto añadirá a todos los Pokemon de la pokédex cargada
+        en este momento (decidida por el selector de generación en los ajustes).
+        <br><br>
+        También borrará la lista de capturas actual.
+        <br><br>
+        Ten en cuenta que al darle al botón de actualizar, se empezarán a descargar
+        <b>TODAS</b> las imagenes de los Pokemon en la lista, lo cual tardará un buen rato.`,
     confModalBtnDexCatches : "Sí, añádelos",
 
 
@@ -114,6 +119,25 @@ export const lang = {
 
     autoUpdateButtOff : "AUTO OFF",
     autoUpdateButtTitle : "Activa el actualizado automático",
+
+    autoHelpButtTitle : "Muesta ayuda sobre cómo funciona el actualizado automático",
+    autoHelpModalTitle : "Cómo actualizar automáticamente",
+    autoHelpModalDesc : `Puedes conectarte con un emulador (como Azahar, Lime3DS o Citra)
+        para actualizar la herramienta automáticamente. Simplemente dale al botón de Auto
+        cuando tengas tu juego abierto.
+        <hr>
+        Para que funcione en Azahar, debes habilitar "Activar servidor RPC"
+        en "Emulación" > "Configurar..." > "General" > "Depuración" dentro del emulador.
+        <hr>
+        ¡Esta funcionalidad está en desarrollo! Las cosas no funcionarán bien si:
+        <ul>
+            <li>Hay más de un mismo pokemon en un equipo en combate.</li>
+            <li>Ditto o Zoroark hacen acto de presencia en combate.</li>
+            <li>Haces un combate múltiple.</li>
+            <li>[Gen6] Inicias el combate final tras la liga.</li>
+            <li>[Gen7] Solo se mostrará a 1 entrenador enemigo en 2v2.</li>
+            <li>[Gen7] Los cristales no se registran automáticamente.</li>
+        </ul>`,
 
 
     /* PLAYER */

@@ -1,7 +1,10 @@
+import { openInfoModal } from "./Confirmation Modal.mjs";
 import { current, inside } from "./Globals.mjs";
 import { sendRemoteData } from "./Remote Requests.mjs";
 
 const autoUpdateButt = document.getElementById("citraButt");
+const autoUpdateButtText = document.getElementById("citraButtText");
+const autoUpdateHelpButt = document.getElementById("autoHelpButt");
 const updateButt = document.getElementById("updateTeamButt");
 
 /** 
@@ -12,6 +15,7 @@ export async function displayAutoButt(gen) {
 
     // disable everything by default
     autoUpdateButt.style.display = "none";
+    autoUpdateHelpButt.style.display = "none";
     if (inside.electron) {
         const autoUpdateToggleCitra = await import("./Emu Scripts/Citra/Auto Update Gen 6 7.mjs");
         autoUpdateButt.removeEventListener("click", autoUpdateToggleCitra.autoUpdateToggleCitra);
@@ -23,6 +27,7 @@ export async function displayAutoButt(gen) {
     if (gen == 6 || gen == 7) {
 
         autoUpdateButt.style.display = "flex";
+        autoUpdateHelpButt.style.display = "flex";
 
         if (inside.electron) {
 
@@ -64,13 +69,18 @@ export async function setAutoState(value) {
         updateButt.disabled = value;
 
         if (value) {
-            autoUpdateButt.innerHTML = "🍊 AUTO ON";
+            autoUpdateButtText.innerText = "AUTO ON";
             autoUpdateButt.classList.remove("citraButtOff");
         } else {
-            autoUpdateButt.innerHTML = "🍊 AUTO OFF";
+            autoUpdateButtText.innerText = "AUTO OFF";
             autoUpdateButt.classList.add("citraButtOff");
         }
 
     }
 
 }
+
+// set up help button
+autoUpdateHelpButt.addEventListener("click", () => {
+    openInfoModal("autoHelpModalTitle", "autoHelpModalDesc");
+})

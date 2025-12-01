@@ -40,8 +40,13 @@ export const lang = {
     pokedexCatchesButtTitle : "Add currently loaded pokedex, yes the entirety of it",
     pokedexCatchesButt : "Add current pokedex",
     confModalTitleDexCatches : "Add entire pokedex?",
-    confModalDescDexCatches : "This will add the entire currently loaded pokedex (decided by generation select in settings) to the catches list. It will also clear currently stored catches."
-        + " Note that as soon as you hit update, the tool will begin to download every single pokemon sprite on the list, which will take a while.",
+    confModalDescDexCatches : `This will add the entire currently loaded pokedex
+        (decided by generation select in settings) to the catches list.
+        <br><br>
+        It will also clear currently stored catches.
+        <br><br>
+        Note that as soon as you hit update, the tool will begin to download <b>every</b>
+        single pokemon sprite on the list at once, which will take a while.`,
     confModalBtnDexCatches : "Yes, add them all",
 
     /* TEAM */
@@ -113,6 +118,26 @@ export const lang = {
 
     autoUpdateButtOff : "AUTO OFF",
     autoUpdateButtTitle : "Sets auto-update on or off",
+
+    autoHelpButtTitle : "Displays help about auto-update functionality.",
+    autoHelpModalTitle : "How to: Auto-Update",
+    autoHelpModalDesc : `You can connect to an emulator (like Azahar, Lime3DS or Citra)
+        to auto-update the tool. Simply click on the Auto button when your game is
+        running.
+        <hr>
+        If you're using Azahar, make sure you have "Enable RPC server" ON over at
+        "Emulation" > "Configure..." > "General" > "Debug" in the emu.
+        <hr>
+        ¡This is all work in progress! Things can get weird if:
+        <ul>
+            <li>Theres more than 1 of the same pokemon in a team in battle.</li>
+            <li>Ditto or Zoroark are on any team in battle.</li>
+            <li>You start a multi-battle.</li>
+            <li>[Gen6] You start the final battle after the Pokemon League.</li>
+            <li>[Gen7] Only 1 enemy trainer will show up in 2v2 battles.</li>
+            <li>[Gen7] Crystals will not track automatically.</li>
+        </ul>`,
+
 
 
     /* PLAYER */
