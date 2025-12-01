@@ -750,7 +750,7 @@ export class TeamPokemon extends Pokemon {
     /** Resets all data for this pokemon */
     clear() {
         super.clear();
-        this.setLvl(1);
+        this.setLvl(0);
         this.setStatus(null);
         this.setInCombat(false);
         const emptyMove = {
