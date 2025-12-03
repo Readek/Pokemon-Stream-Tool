@@ -6,7 +6,8 @@ import { current } from "./Globals.mjs";
 const NATDEX_EXISTS = (d, g) => {
     if (!d.exists) return false;
     if (d.kind === 'Ability' && d.id === 'noability') return false;
-    if ('isNonstandard' in d && d.isNonstandard && d.isNonstandard !== 'Past') return false;
+    // TODO discover a filter to remove custom stuff without removin Leyends stuff
+    //if ('isNonstandard' in d && d.isNonstandard && d.isNonstandard !== 'Past') return false;
     return true;
 };
 

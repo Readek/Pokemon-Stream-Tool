@@ -249,7 +249,7 @@ export const lang = {
     gameVersionTitle : "Determines memory reading and medals in some games",
 
     settingFullDexTitle : "Use a Pokedex with all Pokemon from all generations",
-    settingFullDex : "Force full dex data",
+    settingFullDex : "Unlock full pokedex data",
 
     windowSettings : "Window Settings",
 

@@ -245,7 +245,7 @@ export const lang = {
     gameVersionTitle : "Determina el actualizado automático y medallas en algunos juegos",
 
     settingFullDexTitle : "Usa una Pokedex con todos los Pokemon de todas las generaciones",
-    settingFullDex : "Forzar dex completa",
+    settingFullDex : "Desbloquear pokedex completa",
 
     windowSettings : "Ajustes de la ventana",
 
