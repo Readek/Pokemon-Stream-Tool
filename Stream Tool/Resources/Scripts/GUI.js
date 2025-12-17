@@ -15,7 +15,7 @@ import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
 import { trainerPokemons } from './GUI/VS Trainer/TrainerPokemons.mjs';
 import { updateTrainer } from './GUI/VS Trainer/Update Trainer.mjs';
 import { fetchSpritesheets } from './GUI/Asset Download.mjs';
-
+import { checkDexExistance } from './GUI/Settings/App Settings/Update Dex.mjs';
 
 // this is a weird way to have local file svg's that can be recolored by css
 customElements.define("load-svg", class extends HTMLElement {
@@ -33,10 +33,15 @@ init();
 /** It all starts here */
 async function init() {
 
-    if (inside.electron) { // remote GUIs will skip this
-        // if the user doesnt have spritesheet assets, remote download them
-        await fetchSpritesheets();
-    }
+    // first up, ready up the Pokedex libraries, everything depends on this
+    if (inside.electron) await checkDexExistance();
+    // import scripts globaly
+    await import('./GUI/External Libraries/pkmn/dex.js');
+    await import('./GUI/External Libraries/pkmn/data.js');
+    await import('./GUI/External Libraries/pkmn/img.js');
+
+    // if the user doesnt have spritesheet assets, remote download them
+    if (inside.electron) await fetchSpritesheets();
 
     // initialize our pokemon class
     for (let i = 0; i < 6; i++) {

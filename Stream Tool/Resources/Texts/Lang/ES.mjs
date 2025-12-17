@@ -262,6 +262,20 @@ export const lang = {
 
     appSettingsTitle : "Ajustes del programa",
 
+    dexUpdateSettingsDays : "Días desde que se actualizó la Dex: {0}",
+    dexUpdateSettingsButt : "Actualizar Pokedex",
+    dexUpdateSettingsButtTitle : "Actualiza las librerías de la Pokedex a su última versión",
+
+    confModalTitleUpdateDex : "¿Actualizar Pokedex?",
+    confModalDescUpdateDex : `Si ves que faltan algunos de los Pokemons más recientes,
+        actualizar las librerías de la Pokedex puede hacer que aparezcan en la lista.
+        Esto recopilará los datos más recientes disponibles.
+        <br><br>
+        Se recomienda borrar la caché de imágenes tras actualizar.`,
+    confModalBtnUpdateDex: "Actualizar Dex",
+
+    dexUpdateNotif : "Pokedex actualizada, reinicia la GUI para usar los nuevos datos.",
+
     gitUpdateSettingsButt : "Actualizar a la última versión",
     gitUpdateSettingsButtTitle : "Actualiza el programa a la versión de desarrollo más nueva",
 

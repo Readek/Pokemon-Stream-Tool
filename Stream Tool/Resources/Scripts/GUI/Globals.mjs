@@ -13,6 +13,8 @@ export const stPath = {
     text : realPath + '/Texts',
     /** The "sprites" part will be completed by pkmn/img */
     poke: realPath + "/Assets/Pokemon",
+    /** Where the Pokedex libraries are stored*/
+    dexLibs: realPath + "/Scripts/GUI/External Libraries/pkmn/",
     /** This is the internal node path, can be used to find modules */ 
     node : "",
 };

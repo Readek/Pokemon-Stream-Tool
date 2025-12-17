@@ -1174,6 +1174,12 @@ button:hover {
   justify-content: center;
   margin: 5px 0px;
 }
+.settingsButtonTopText {
+  font-size: 14px;
+  color: var(--text2);
+  font-style: italic;
+  margin-bottom: 2px;
+}
 .settingsButton {
   padding: 2px 5px;
   box-sizing: border-box;
@@ -1238,6 +1244,13 @@ button:hover {
 .zoomButton {
   width: 24px;
   height: 24px;
+}
+
+.settingsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: start;
 }
 
 

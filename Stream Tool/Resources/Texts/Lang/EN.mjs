@@ -266,12 +266,26 @@ export const lang = {
 
     appSettingsTitle : "App settings",
 
+    dexUpdateSettingsDays : "Days since last Dex update: {0}",
+    dexUpdateSettingsButt : "Update Pokedex data",
+    dexUpdateSettingsButtTitle : "Updates Pokedex libraries to their latest versions",
+
+    confModalTitleUpdateDex : "Update Pokedex data?",
+    confModalDescUpdateDex : `If you think some newer Pokemon assets may be missing,
+        updating the Pokedex libraries may make them appear. This will fetch the
+        newest data available.
+        <br><br>
+        Clearing asset cache after updating the Pokedex is recommended.`,
+    confModalBtnUpdateDex: "Update",
+
+    dexUpdateNotif : "Updated Pokedex libraries, please restart GUI to use them.",
+
     gitUpdateSettingsButt : "Update to latest git",
     gitUpdateSettingsButtTitle : "Updates the app to the latest developer version",
 
     updateModalTitle : "Update to latest git",
     updateModalDesc : "This will update the app to the latest developer version. The update will overwrite any modified app files, but it will not delete files you manually added, nor old unused files.",
-    updateModalAccept : "Update",
+    updateModalAccept : "Update Dex",
 
     updateModalTitleUpdating : "Updating app",
     updateModalDescUpdatingDown : "Downloading latest git version...",

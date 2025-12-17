@@ -9,7 +9,7 @@ import { inside } from "./Globals.mjs";
 export function fetchFile(url, dest) {
 
     if (inside.electron) {
-        
+
         const http = require("https");
         const fs = require("fs");
 
@@ -17,9 +17,10 @@ export function fetchFile(url, dest) {
             http.get(url, (response) => {
                 if (response.statusCode == 302) {
                     // if the response is a redirection, we call the method again with the new location
-                    fetchFile(String(response.headers.location), dest);
+                    res(fetchFile("https://" + response.client._host
+                         + response.headers.location, dest));
                 } else {
-                    
+
                     // create folders if needed
                     fs.mkdirSync(dest.substring(0, dest.lastIndexOf("/")), { recursive: true }, (err) => {
                         if (err) throw err;
@@ -37,5 +38,5 @@ export function fetchFile(url, dest) {
         });
 
     }
-    
+
 }

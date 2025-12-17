@@ -11,12 +11,9 @@ const NATDEX_EXISTS = (d, g) => {
     return true;
 };
 
-const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
-const fullGen = new pkmn.data.Generations(pkmn.dex.Dex, NATDEX_EXISTS);
-
 export const dexData = {
     /** Holds entire Pokemon data, updated by gen select */
-    pkmnSpecies : dexGens.get(5).species, // 5 just to have a default value
+    pkmnSpecies : {},
     /** Nums relative to current gen, filled on pokeFinder fill */
     numToPoke : {},
     /** Used for auto id matching, filled on gen update */
@@ -33,9 +30,12 @@ export const dexData = {
  */
 export function updatePokedexData(gen) {
 
+    const dexGens = new pkmn.data.Generations(pkmn.dex.Dex);
+
     if (!current.forceDex) {
         dexData.pkmnSpecies = dexGens.get(gen).species;
     } else {
+        const fullGen = new pkmn.data.Generations(pkmn.dex.Dex, NATDEX_EXISTS);
         dexData.pkmnSpecies = fullGen.get(9).species; // 9 being latest gen
     }
 
