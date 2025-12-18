@@ -36,9 +36,11 @@ async function init() {
     // first up, ready up the Pokedex libraries, everything depends on this
     if (inside.electron) await checkDexExistance();
     // import scripts globaly
-    await import('./GUI/External Libraries/pkmn/dex.js');
-    await import('./GUI/External Libraries/pkmn/data.js');
-    await import('./GUI/External Libraries/pkmn/img.js');
+    const promises = [];
+    promises.push(import('./GUI/External Libraries/pkmn/dex.js'));
+    promises.push(import('./GUI/External Libraries/pkmn/data.js'));
+    promises.push(import('./GUI/External Libraries/pkmn/img.js'));
+    await Promise.all(promises); // a bit faster than waiting for each individually
 
     // if the user doesnt have spritesheet assets, remote download them
     if (inside.electron) await fetchSpritesheets();

@@ -42,6 +42,10 @@ input[type=number] {
   appearance: textfield;
   margin: 0; 
 }
+a {
+  color: var(--selected);
+  text-decoration: none;
+} 
 
 html, body {
   padding: 0;

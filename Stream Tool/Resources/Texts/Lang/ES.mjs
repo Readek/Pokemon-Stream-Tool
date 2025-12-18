@@ -262,9 +262,12 @@ export const lang = {
 
     appSettingsTitle : "Ajustes del programa",
 
-    dexUpdateSettingsDays : "Días desde que se actualizó la Dex: {0}",
     dexUpdateSettingsButt : "Actualizar Pokedex",
     dexUpdateSettingsButtTitle : "Actualiza las librerías de la Pokedex a su última versión",
+
+    dexUpdateSettingsError : "Error al comprobar versión de Pokedex.",
+    dexUpdateSettingsYesUpdate : "Hay una nueva versión de la Dex disponible.",
+    dexUpdateSettingsNoUpdate : "Tu versión de la Pokedex está al día.",
 
     confModalTitleUpdateDex : "¿Actualizar Pokedex?",
     confModalDescUpdateDex : `Si ves que faltan algunos de los Pokemons más recientes,

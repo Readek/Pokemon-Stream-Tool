@@ -266,9 +266,12 @@ export const lang = {
 
     appSettingsTitle : "App settings",
 
-    dexUpdateSettingsDays : "Days since last Dex update: {0}",
     dexUpdateSettingsButt : "Update Pokedex data",
     dexUpdateSettingsButtTitle : "Updates Pokedex libraries to their latest versions",
+    
+    dexUpdateSettingsError : "Couldn't check for Pokedex updates.",
+    dexUpdateSettingsYesUpdate : "There's a new Pokedex update available.",
+    dexUpdateSettingsNoUpdate : "Your Pokedex is currently up to date.",
 
     confModalTitleUpdateDex : "Update Pokedex data?",
     confModalDescUpdateDex : `If you think some newer Pokemon assets may be missing,

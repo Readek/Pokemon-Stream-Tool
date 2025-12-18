@@ -6,7 +6,9 @@ import { stPath } from "../../Globals.mjs";
 import { displayNotif } from "../../Notifications.mjs";
 
 const url = "https://unpkg.com/@pkmn/";
-const dexUpdateDays = document.getElementById("dexUpdateDays");
+const urlApi = "https://registry.npmjs.org/@pkmn/dex/";
+
+const dexUpdText = document.getElementById("dexUpdateText");
 
 document.getElementById("dexUpdateButt").addEventListener("click", () => {
     openConfModal(
@@ -26,8 +28,6 @@ async function updateDexLibs(noNotif) {
 
     await Promise.all(promises);
 
-    checkLastUpdate();
-
     if (!noNotif) {
         displayNotif(getLocalizedText("dexUpdateNotif"));
     }
@@ -45,18 +45,38 @@ export async function checkDexExistance() {
     
 }
 
-/** Checks creation date from Pokedex libraries, and updates days since text */
+/** Checks creation date from Pokedex libraries, and updates info text */
 function checkLastUpdate() {
 
     const fs = require("fs");
+    // get currently installed library creation date
     fs.stat(stPath.dexLibs+"dex.js", (err, stats) => {
 
         if (err) console.log(err);
         const createdDate = Date.parse(stats.birthtime);
-        const nowDate = Date.now()
-        const days = Math.floor((nowDate - createdDate) / (1000 * 3600 * 24));
 
-        dexUpdateDays.innerText = getLocalizedText("dexUpdateSettingsDays", [days]);
+        // now fetch last npm library update time
+        fetch(urlApi).then(res => {
+
+            // if api rejects us, bail out
+            if (!res.ok) {
+                dexUpdText.innerText = getLocalizedText("dexUpdateSettingsError");
+                dexUpdText.setAttribute("locText", "dexUpdateSettingsError");
+                return;
+            }
+
+            res.json().then(data => {
+
+                const dexUpdateTime = Date.parse(data.time.modified);
+
+                let locValue = dexUpdateTime > createdDate ? "Yes" : "No";
+
+                dexUpdText.innerText = getLocalizedText(`dexUpdateSettings${locValue}Update`);
+                dexUpdText.setAttribute("locText", `dexUpdateSettings${locValue}Update`);
+
+            });
+
+        })
 
     });
 

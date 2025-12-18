@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const fs = require('fs')
 const path = require('path')
 const http = require('http')
@@ -157,6 +157,12 @@ function createWindow() {
 
     // we dont like menus
     win.removeMenu()
+
+    // this will open links inside GUI in the user's browser
+    win.webContents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url);
+        return { action: 'deny' };
+    });
 
     // once the page has fully loaded
     win.once('ready-to-show', () => {
