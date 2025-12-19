@@ -39,10 +39,7 @@ export async function checkDexExistance() {
     if (!await fileExists(stPath.dexLibs+"dex.js")) {
         await updateDexLibs(true);
     }
-    // ok this is just because at this point we still havent loaded the user's
-    // language so im just waiting a bit so message set by this is localized
-    setTimeout(() => {checkLastUpdate()}, 500);
-    
+    checkLastUpdate();
 }
 
 /** Checks creation date from Pokedex libraries, and updates info text */
@@ -53,7 +50,7 @@ function checkLastUpdate() {
     fs.stat(stPath.dexLibs+"dex.js", (err, stats) => {
 
         if (err) console.log(err);
-        const createdDate = Date.parse(stats.birthtime);
+        const createdDate = Date.parse(stats.mtime);
 
         // now fetch last npm library update time
         fetch(urlApi).then(res => {

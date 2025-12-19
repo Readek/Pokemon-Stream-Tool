@@ -279,6 +279,18 @@ export const lang = {
 
     dexUpdateNotif : "Pokedex actualizada, reinicia la GUI para usar los nuevos datos.",
 
+    killCacheSettingsButt : "Borrar caché de imágenes",
+    killCacheSettingsButtTitle : "Borra toda la caché de imágenes de Pokemons que hayas descargado.",
+
+    confModalTitleKillCache : "¿Borrar caché de imágenes?",
+    confModalDescKillCache : `Esto borrará todas las imágenes de Pokemons que hayas
+        descargado hasta ahora. Esto puede que arregle cualquier imágen que haya
+        quedado corrupta, y forzará al programa a descargar las últimas versiones
+        de las imágenes disponibles la próxima vez que las descargues.`,
+    confModalBtnKillCache: "Borrar caché",
+
+    killCacheNotif : "Se ha borrado la caché de imágenes.",
+
     gitUpdateSettingsButt : "Actualizar a la última versión",
     gitUpdateSettingsButtTitle : "Actualiza el programa a la versión de desarrollo más nueva",
 

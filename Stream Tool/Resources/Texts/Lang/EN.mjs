@@ -279,9 +279,20 @@ export const lang = {
         newest data available.
         <br><br>
         Clearing asset cache after updating the Pokedex is recommended.`,
-    confModalBtnUpdateDex: "Update",
+    confModalBtnUpdateDex: "Update Pokedex",
 
     dexUpdateNotif : "Updated Pokedex libraries, please restart GUI to use them.",
+
+    killCacheSettingsButt : "Clear Pokemon asset cache",
+    killCacheSettingsButtTitle : "Deletes all previously downloaded asset images",
+
+    confModalTitleKillCache : "Clear asset cache?",
+    confModalDescKillCache : `This will remove all previously downloaded Pokemon data.
+        Doing this may fix any corrupt asset, and will make you download the most
+        recent assets available next time you fetch them.`,
+    confModalBtnKillCache: "Clear cache",
+
+    killCacheNotif : "Pokemon asset cache has been cleared.",
 
     gitUpdateSettingsButt : "Update to latest git",
     gitUpdateSettingsButtTitle : "Updates the app to the latest developer version",

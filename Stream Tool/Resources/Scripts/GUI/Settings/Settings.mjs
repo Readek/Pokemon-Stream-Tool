@@ -9,6 +9,7 @@ import { SettingResizableWindow } from "./Window Settings/Resizable.mjs";
 import { SettingWindowZoom } from "./Window Settings/Zoom.mjs";
 import "./App Settings/Update Modal.mjs"; // load listeners
 import { SettingForceDex } from "./General Settings/Force Full Dex.mjs";
+import "./App Settings/Clear Asset Cache.mjs"; // load listener
 
 class Settings {
 
