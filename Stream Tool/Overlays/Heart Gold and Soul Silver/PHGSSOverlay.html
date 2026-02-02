@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poke HGSS Overlay</title>
+    <script src="../../Resources/Scripts/Overlays.js" type="module"></script>
+    <link rel="stylesheet" href="Resources/PHGSS.css">
+</head>
+
+<body>
+
+<div id="content">
+
+    <div id="playerInfo">
+
+        <div id="badges">
+
+            <div id="badgesTop" class="badgesJohto">
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/1.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/1.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/2.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/2.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/3.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/3.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/4.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/4.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/5.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/5.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/6.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/6.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/7.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/7.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/8.png" class="badge badgeJohto" alt="">
+                    <img src="Resources/Images/Badge BGs/Johto/8.png" class="emptyBadge" alt="">
+                </div>
+            </div>
+
+            <div id="badgesBot" class="badgesKanto">
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/1.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/1.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/2.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/2.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/3.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/3.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/4.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/4.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/5.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/5.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/6.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/6.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/7.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/7.png" class="emptyBadge" alt="">
+                </div>
+                <div class="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/8.png" class="badge badgeKanto" alt="">
+                    <img src="Resources/Images/Badge BGs/Kanto/8.png" class="emptyBadge" alt="">
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div id="playerStats">
+
+            <div class="stat">
+                <load-svg src="../../Resources/SVGs/Pokeball.svg" id="catchesIcon" class="statIcon"></load-svg>
+                <div class="statNumber" id="catchesNumber"></div>
+            </div>
+
+            <div class="stat">
+                <load-svg src="../../Resources/SVGs/Skull.svg" id="deathsIcon" class="statIcon"></load-svg>
+                <div class="statNumber" id="deathsNumber"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="wildEncounterDiv">
+
+        <div class="pokeImgDiv" id="wildPokeImgDiv">
+            <img class="pokeImg" id="wildPokeImg">
+        </div>
+
+        <div id="wildBackground"></div>
+
+        <div id="wildInfoDiv">
+
+            <div class="vsWildPokeTypeDiv">
+                <div class="vsWildTypeDiv">
+                  <img alt="" class="typeIcon">
+                  <span></span>
+                </div>
+                <div class="vsWildTypeDiv">
+                  <img alt="" class="typeIcon">
+                  <span></span>
+                </div>
+              </div>
+  
+              <div id="vsWildGenderRatio">
+  
+                <div class="vsWildGenderRatioDiv">
+                  <img class="pokeGenderIcon" src="../../Resources/Assets/Gender M.png" alt="">
+                  <span class="vsWildGenderRatioText" id="vsWildGenderRatioM"></span>
+                </div>
+  
+                <div class="vsWildGenderRatioDiv">
+                  <img class="pokeGenderIcon" src="../../Resources/Assets/Gender F.png" alt="">
+                  <span class="vsWildGenderRatioText" id="vsWildGenderRatioF"></span>
+                </div>
+  
+              </div>
+  
+              <div id="vsWildAbilities">
+  
+                <div class="vsWildAbilityText" id="vsWildAbility0"></div>
+                <div class="vsWildAbilityText" id="vsWildAbility1"></div>
+                <div class="vsWildAbilityText" id="vsWildAbilityH"></div>
+  
+              </div>
+
+        </div>
+
+        <div id="vsWildStatsDiv">
+
+            <div class="vsWildStat" id="vsWildStatHP">
+              <div class="vsWildStatName vsWildStatText" locText="statsHp"></div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberHP"></div>
+              <div class="vsWildMeter" id="vsWildMeterHP"></div>
+            </div>
+
+            <div class="vsWildStat" id="vsWildStatAT">
+              <div class="vsWildStatName vsWildStatText" locText="statsAttack"></div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberAT"></div>
+              <div class="vsWildMeter" id="vsWildMeterAT"></div>
+            </div>
+
+            <div class="vsWildStat" id="vsWildStatDE">
+              <div class="vsWildStatName vsWildStatText" locText="statsDefense"></div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberDE"></div>
+              <div class="vsWildMeter" id="vsWildMeterDE"></div>
+            </div>
+
+            <div class="vsWildStat" id="vsWildStatSA">
+              <div class="vsWildStatName vsWildStatText" locText="statsSpAtk"></div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSA"></div>
+              <div class="vsWildMeter" id="vsWildMeterSA"></div>
+            </div>
+
+            <div class="vsWildStat" id="vsWildStatSD">
+              <div class="vsWildStatName vsWildStatText" locText="statsSpDef"></div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSD"></div>
+              <div class="vsWildMeter" id="vsWildMeterSD"></div>
+            </div>
+
+            <div class="vsWildStat" id="vsWildStatSP">
+              <div class="vsWildStatName vsWildStatText" locText="statsSpeed"></div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberSP"></div>
+              <div class="vsWildMeter" id="vsWildMeterSP"></div>
+            </div>
+
+            <div class="vsWildStat" id="vsWildStatTS">
+              <div class="vsWildStatName vsWildStatText" locText="statsTotal"></div>
+              <div class="vsWildStatNumber vsWildStatText" id="vsWildStatNumberTS"></div>
+              <div class="vsWildMeter" id="vsWildMeterTS"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="botPokes">
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpTextDiv">
+                        <div class="pokeHpText"></div>
+                    </div>
+                    <div class="pokeHpBar">
+                        <div class="hpBar pokeHpBarTotal"></div>
+                        <div class="hpBar pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlText" locText="pokeLvl"></div>
+                    <div class="pokeLvlNum"></div>
+                </div>
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpTextDiv">
+                        <div class="pokeHpText"></div>
+                    </div>
+                    <div class="pokeHpBar">
+                        <div class="hpBar pokeHpBarTotal"></div>
+                        <div class="hpBar pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlText" locText="pokeLvl"></div>
+                    <div class="pokeLvlNum"></div>
+                </div>
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpTextDiv">
+                        <div class="pokeHpText"></div>
+                    </div>
+                    <div class="pokeHpBar">
+                        <div class="hpBar pokeHpBarTotal"></div>
+                        <div class="hpBar pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlText" locText="pokeLvl"></div>
+                    <div class="pokeLvlNum"></div>
+                </div>
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpTextDiv">
+                        <div class="pokeHpText"></div>
+                    </div>
+                    <div class="pokeHpBar">
+                        <div class="hpBar pokeHpBarTotal"></div>
+                        <div class="hpBar pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlText" locText="pokeLvl"></div>
+                    <div class="pokeLvlNum"></div>
+                </div>
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpTextDiv">
+                        <div class="pokeHpText"></div>
+                    </div>
+                    <div class="pokeHpBar">
+                        <div class="hpBar pokeHpBarTotal"></div>
+                        <div class="hpBar pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlText" locText="pokeLvl"></div>
+                    <div class="pokeLvlNum"></div>
+                </div>
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pokeDiv">
+
+            <div class="pokeImgDiv">
+                <img class="pokeImg">
+            </div>
+
+            <div class="pokeDivMask">
+                <div class="pokeHpDiv">
+                    <div class="pokeHpTextDiv">
+                        <div class="pokeHpText"></div>
+                    </div>
+                    <div class="pokeHpBar">
+                        <div class="hpBar pokeHpBarTotal"></div>
+                        <div class="hpBar pokeHpBarCurrent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pokeTexts">
+                <div class="pokeLvlDiv">
+                    <div class="pokeLvlText" locText="pokeLvl"></div>
+                    <div class="pokeLvlNum"></div>
+                </div>
+                <div class="pokeNick"></div>
+                <div class="pokeSubText">
+                    <div class="pokeGender"></div>
+                    <div class="pokeSpecies"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="battleDiv">
+
+        <div id="battlePlayerTeam" class="battleTeam">
+            <div class="battleActiveBar" id="battleActiveBarPlayer"></div>
+            <div class="battleBotBar" id="battleStandbyBarPlayer"></div>
+        </div>
+        <div id="battleEnemyTeam" class="battleTeam">
+            <div class="battleActiveBar" id="battleActiveBarEnemy"></div>
+            <div class="battleBotBar" id="battleStandbyBarEnemy"></div>
+        </div>
+
+    </div>
+
+    <div id="enemyNameIntroDiv">
+
+        <div id="enemyNameIntroContent">
+            <div id="enemyNameIntroTopBar" class="enemyNameIntroBar"></div>
+            <div id="enemyNameIntroTexts">
+                <span id="enemyNameIntroVs">VS</span>
+                <span id="enemyNameIntroTitle"></span>
+                <span id="enemyNameIntroName"></span>
+            </div>
+            <div id="enemyNameIntroBotBar" class="enemyNameIntroBar"></div>
+            <div id="enemyNameIntroPokeCountDiv">
+                <img id="enemyNameIntroPokeImg" src="../../Resources/Assets/None.png" alt="">
+                <div id="enemyNameIntroEqual">=</div>
+                <div id="enemyNameIntroPokeCount"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <img src="Resources/Images/OBS Overlay.png">
+
+</div>
+
+<div id="connErrorDiv" locText="connError">
+    Can't connect with GUI, attempting to reconnect every 5 seconds...
+</div>
+    
+</body>
+</html>
