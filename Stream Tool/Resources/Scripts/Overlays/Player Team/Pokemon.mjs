@@ -47,15 +47,14 @@ export class Pokemon {
         // initialize status state
         this.#status = "---";
         this.mainEl.classList.add("poke---");
-        
+
     }
 
-    
     /** @param {String} species */
     setSpecies(species) {
         this.#species = species;
         if (!species) return; // we dont need to continue if no poke
-        this.speciesEl.innerHTML = getLocalizedPokeText(species, "Pokemon", current.generation);
+        this.speciesEl.textContent = getLocalizedPokeText(species, "Pokemon", current.generation);
         this.speciesEl.setAttribute("locPokemon", species);
     }
     getSpecies() {
@@ -76,7 +75,7 @@ export class Pokemon {
                 this.imgEl.style.animation = "";
             }, 3500 + current.megaTime);
         }
-        
+
     }
     getForm() {
         return this.#form;
@@ -86,7 +85,7 @@ export class Pokemon {
     setLvl(lvl) {
 
         this.#lvl = lvl;
-        this.lvlEl.innerHTML = lvl;
+        this.lvlEl.textContent = lvl;
 
         // if lvl equals 0, hide it
         if (lvl) {
@@ -104,14 +103,14 @@ export class Pokemon {
     setNickname(name) {
 
         this.#nickname = name;
-        this.nickEl.innerHTML = name;        
+        this.nickEl.textContent = name;
 
-        // hide or show sub text depending on if the poke has a nickname or not        
+        // hide or show sub text depending on if the poke has a nickname or not
         if (name && name != this.getSpecies()) {
             this.speciesEl.parentElement.style.display = "flex";
             this.nickEl.removeAttribute("locPokemon");
-        } else {            
-            this.nickEl.innerHTML = getLocalizedPokeText(
+        } else {
+            this.nickEl.textContent = getLocalizedPokeText(
                 this.getSpecies(), "Pokemon", current.generation);
             this.nickEl.setAttribute("locPokemon", this.getSpecies());
             this.speciesEl.parentElement.style.display = "none";
@@ -128,7 +127,7 @@ export class Pokemon {
      */
     setGender(gender) {
         this.#gender = gender;
-        this.gendEl.innerHTML = getLocalizedText("pokePronoun" + (gender || "Null"));
+        this.gendEl.textContent = getLocalizedText("pokePronoun" + (gender || "Null"));
         this.gendEl.setAttribute("locText", "pokePronoun" + (gender || "Null"));
     }
     getGender() {
@@ -184,7 +183,7 @@ export class Pokemon {
             // if HP increased, just do everything instantly without animations
             this.#hpActive = hp;
             this.#updateHpBar(hp);
-            
+
         } else {
 
             // our boi has been damaged! play some animations
@@ -198,7 +197,7 @@ export class Pokemon {
             this.#shakeIt();
             // wait a bit before hp starts ticking down to direct viewer's eyes
             await new Promise(resolve => setTimeout(resolve, 500));
-            
+
             if (!this.#hpDecreasing) {
 
                 this.#hpDecreasing = true;
@@ -206,19 +205,18 @@ export class Pokemon {
                 while (this.#hpActive >= this.#hpCurrent) {
 
                     this.#updateHpBar(this.#hpActive);
-    
+
                     await new Promise(resolve => setTimeout(resolve, 1000/30));
-        
+
                     this.#hpActive--;
-    
+
                 }
 
                 this.#hpDecreasing = false;
 
             }
-            
 
-        }        
+        }
 
     }
 
@@ -229,7 +227,7 @@ export class Pokemon {
     #updateHpBar (hp) {
 
         // update hp texts
-        this.hpEl.innerHTML = hp + "/" + this.#hpMax;
+        this.hpEl.textContent = hp + "/" + this.#hpMax;
 
         // adjust the health bar
         const percent = hp / this.#hpMax * 100 - 100;
@@ -258,7 +256,7 @@ export class Pokemon {
         this.inCombat = value;
 
         this.turnSprite(value);
-        this.displayHPBar(value);         
+        this.displayHPBar(value);
 
     }
 
@@ -279,11 +277,11 @@ export class Pokemon {
         // using a Python script included in the assets repo.
         const offset = img["gen5" + this.#side + "Offs"];
         this.imgEl.style.transform = `scale(2) translate(${offset[0]}px, ${offset[1]}px)`;
-        
+
         // actual image change
         this.#img = img;
         this.imgEl.src = img["gen5" + this.#side];
-    
+
     }
     getImgSrc() {
         return this.#img;
@@ -415,7 +413,7 @@ export class Pokemon {
 
                 this.setSpecies(data.species);
                 this.setForm(data.form, megaEvolving);
-                
+
                 this.showPoke();
 
                 // if pokemon is mega evolving, wait for that img update
@@ -461,7 +459,7 @@ export class Pokemon {
         if (!megaEvolving && this.#compareIncTypes(data.types)) {
             this.setTypes(data.types);
         }
-        
+
         // set status condition
         this.setStatus(data.status);
 

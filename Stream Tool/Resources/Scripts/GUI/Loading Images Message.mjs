@@ -16,7 +16,7 @@ export function displayLoadImgsMessage(id) {
     // get a localized poke name
     const name = getLocalizedPokeText(id, "Pokemon", current.generation);
     // and display it on the message
-    loadingMessageEl.innerHTML = getLocalizedText("loadingImgsMessage", [name]);
+    loadingMessageEl.textContent = getLocalizedText("loadingImgsMessage", [name]);
 
     // wait a tick so we dont display the message if the function finishes fast enough
     timeouts[id] = setTimeout(() => {
@@ -36,7 +36,7 @@ export function hideLoadImgsMessage(id) {
     loadings[id] = false;
 
     loadingMessageEl.style.display = "none";
-    
+
     clearTimeout(timeouts[id]);
 
 }

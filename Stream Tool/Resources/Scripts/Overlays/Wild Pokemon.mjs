@@ -59,14 +59,14 @@ class WildPokemon {
 
         typeDivs[0].firstElementChild.src = `
             ../../Resources/Assets/Type Icons/${types[0]}.png`;
-        typeDivs[0].lastElementChild.innerHTML = getLocalizedText("type"+types[0]);
+        typeDivs[0].lastElementChild.textContent = getLocalizedText("type"+types[0]);
         typeDivs[0].lastElementChild.setAttribute("locText", "type"+types[0]);
 
         if (types[1]) { // only if it has a second type
 
             typeDivs[1].firstElementChild.src = `
                 ../../Resources/Assets/Type Icons/${types[1]}.png`;
-            typeDivs[1].lastElementChild.innerHTML = getLocalizedText("type"+types[1]);
+            typeDivs[1].lastElementChild.textContent = getLocalizedText("type"+types[1]);
             typeDivs[1].lastElementChild.setAttribute("locText", "type"+types[1]);
             typeDivs[1].style.display = "flex";
 
@@ -82,8 +82,8 @@ class WildPokemon {
      * @param {Number} ratioF - Female Ratio
      */
     setGenderRatio(ratioM, ratioF) {
-        ratioMaleDiv.innerHTML = `${ratioM * 100}%`;
-        ratioFemaleDiv.innerHTML = `${ratioF * 100}%`;
+        ratioMaleDiv.textContent = `${ratioM * 100}%`;
+        ratioFemaleDiv.textContent = `${ratioF * 100}%`;
     }
 
     /**
@@ -93,12 +93,12 @@ class WildPokemon {
     setAbilities(abilities) {
 
         // we assume a pokemon always has at least 1 ability
-        ability0Div.innerHTML = getLocalizedPokeText(abilities[0], "Ability", current.generation);
+        ability0Div.textContent = getLocalizedPokeText(abilities[0], "Ability", current.generation);
         ability0Div.setAttribute("locAbility", abilities[0]);
 
         // second ability
         if (abilities[1]) {
-            ability1Div.innerHTML = getLocalizedPokeText(abilities[1], "Ability", current.generation);
+            ability1Div.textContent = getLocalizedPokeText(abilities[1], "Ability", current.generation);
             ability1Div.setAttribute("locAbility", abilities[1]);
             ability1Div.style.display = "flex";
         } else { // hide if non existant
@@ -107,7 +107,7 @@ class WildPokemon {
 
         // hidden ability
         if (abilities.H) {
-            abilityHiddenDiv.innerHTML = getLocalizedPokeText(abilities.H, "Ability", current.generation);
+            abilityHiddenDiv.textContent = getLocalizedPokeText(abilities.H, "Ability", current.generation);
             abilityHiddenDiv.setAttribute("locAbility", abilities.H);
             abilityHiddenDiv.style.display = "flex";
         } else {
@@ -123,13 +123,13 @@ class WildPokemon {
     updateMeters(stats) {
 
         // base stats
-        statTextHP.innerHTML = stats.hp;
-        statTextAT.innerHTML = stats.atk;
-        statTextDE.innerHTML = stats.def;
-        statTextSA.innerHTML = stats.spa;
-        statTextSD.innerHTML = stats.spd;
-        statTextSP.innerHTML = stats.spe;
-        statTextTS.innerHTML = stats.bst;
+        statTextHP.textContent = stats.hp;
+        statTextAT.textContent = stats.atk;
+        statTextDE.textContent = stats.def;
+        statTextSA.textContent = stats.spa;
+        statTextSD.textContent = stats.spd;
+        statTextSP.textContent = stats.spe;
+        statTextTS.textContent = stats.bst;
 
         // we wait a tick so the animation plays when coming from display none
         setTimeout(() => {
@@ -185,7 +185,7 @@ class WildPokemon {
 
             // if there previously was no poke displayed
             if (!isPoke) {
-                
+
                 // slide out badges and slide in poke info
                 playerInfoDiv.style.animation = "slideOut .5s both";
                 setTimeout(() => {

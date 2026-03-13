@@ -59,12 +59,12 @@ export class StandbyPokemon {
         // this is to flip back things like text so it can be read
         const flipBack = this.#player ? "nada" : "flipBack";
 
-        element.innerHTML = `
+        element.insertAdjacentHTML("afterbegin", `
 
             <img class="standbyPokeIconDiv" src="../../Resources/Assets/Pokemon/pokemonicons-sheet.png">
 
             <div class="standbyNameHp">
-        
+
                 <div class="standbyName ${flipBack}"></div>
 
                 <div class="standbyHpDiv">
@@ -76,7 +76,7 @@ export class StandbyPokemon {
 
             </div>
 
-        `
+        `);
 
         // add element to the battle overlay
         if (this.#player) {
@@ -150,10 +150,10 @@ export class StandbyPokemon {
 
         if (!this.#player && !this.#reveal) {
             // enemies yet to be revealed will hide their names
-            this.#nameText.innerHTML = "???";
+            this.#nameText.textContent = "???";
             this.#nameText.setAttribute("locPokemon", "???");
         } else {
-            this.#nameText.innerHTML = getLocalizedPokeText(name, "Pokemon", current.generation);
+            this.#nameText.textContent = getLocalizedPokeText(name, "Pokemon", current.generation);
             this.#nameText.setAttribute("locPokemon", name);
         }
 
@@ -185,7 +185,7 @@ export class StandbyPokemon {
      * @param {Numner} max 
      */
     async setHp(hp, max) {
-        
+
         this.#hpCurrent = hp;
         this.#hpMax = max;
 
@@ -289,7 +289,7 @@ export class StandbyPokemon {
 
             this.setSpecies(data.species);
             this.setForm(data.form);
-            
+
             this.setIcon(data.iconCoords);
 
         }

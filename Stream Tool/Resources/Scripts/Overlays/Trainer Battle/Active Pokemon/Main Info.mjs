@@ -4,7 +4,6 @@ import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
 /** @import { Coords, PokeImgData, PokemonSentData} from "../../../Utils/Type Definitions.mjs" */
 
-
 export class ActiveMainInfo {
 
     #player;
@@ -86,7 +85,7 @@ export class ActiveMainInfo {
         this.#mainEl.classList.add("poke---");
 
         // get correct lvl text
-        el.getElementsByClassName("activeLvlText")[0].innerHTML = getLocalizedText("pokeLvl");
+        el.getElementsByClassName("activeLvlText")[0].textContent = getLocalizedText("pokeLvl");
 
         this.#parent = parent;
 
@@ -106,8 +105,8 @@ export class ActiveMainInfo {
         // this is to flip back things like text so it can be read
         const flipBack = this.#player ? "" : "flipBack";
 
-        element.innerHTML = `
-        
+        element.insertAdjacentHTML("afterbegin", `
+
             <div class="activePokeImgDiv">
                 <img class="activePokeImg">
             </div>
@@ -124,7 +123,7 @@ export class ActiveMainInfo {
                 </div>
 
                 <div class="activeMainTexts">
-            
+
                     <div class="activeName ${flipBack}"></div>
                     <div class="activeSubText">
                         <div class="activeAbility ${flipBack}"></div>
@@ -137,7 +136,7 @@ export class ActiveMainInfo {
                             </div>
                             <div class="activeItem ${flipBack}"></div>
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -154,7 +153,7 @@ export class ActiveMainInfo {
 
             </div>
 
-        `
+        `);
 
         // add element to the battle overlay
         fullEl.appendChild(element);
@@ -177,8 +176,8 @@ export class ActiveMainInfo {
         return this.#form;
     }
     /**
-     * @param {String} form 
-     * @param {Boolean} megaEvolving 
+     * @param {String} form
+     * @param {Boolean} megaEvolving
      */
     setForm(form, megaEvolving) {
 
@@ -199,7 +198,7 @@ export class ActiveMainInfo {
 
     /**
      * Set the image path for this pokemon, as well as position offsets
-     * @param {PokeImgData} imgData 
+     * @param {PokeImgData} imgData
      */
     setImg(imgData) {
 
@@ -233,7 +232,7 @@ export class ActiveMainInfo {
     setLvl(lvl) {
         if (lvl == this.#lvl) return;
         this.#lvl = lvl;
-        this.#lvlText.innerHTML = lvl;
+        this.#lvlText.textContent = lvl;
     }
     getLvl() {
         return this.#lvl;
@@ -272,7 +271,7 @@ export class ActiveMainInfo {
         if (name == this.#name) return;
 
         this.#name = name;
-        this.#nameText.innerHTML = getLocalizedPokeText(name, "Pokemon", current.generation);
+        this.#nameText.textContent = getLocalizedPokeText(name, "Pokemon", current.generation);
         this.#nameText.setAttribute("locPokemon", name);
 
     }
@@ -302,7 +301,7 @@ export class ActiveMainInfo {
 
         }
 
-        this.#abilityText.innerHTML = getLocalizedPokeText(ability, "Ability", current.generation);
+        this.#abilityText.textContent = getLocalizedPokeText(ability, "Ability", current.generation);
         this.#abilityText.setAttribute("locAbility", this.#ability);
 
     }
@@ -336,7 +335,7 @@ export class ActiveMainInfo {
 
         }
 
-        this.#itemText.innerHTML = getLocalizedPokeText(item, "Item", current.generation);
+        this.#itemText.textContent = getLocalizedPokeText(item, "Item", current.generation);
         this.#itemText.setAttribute("locItem", this.#item);
 
         this.#itemImg.style.objectPosition = `
@@ -379,7 +378,7 @@ export class ActiveMainInfo {
      * @param {Numner} max 
      */
     async setHp(hp, max) {
-        
+
         const oldHp = this.#hpCurrent;
         this.#hpCurrent = hp;
         this.#hpMax = max;
@@ -389,7 +388,7 @@ export class ActiveMainInfo {
             // if HP increased, just do everything instantly without animations
             this.#hpActive = hp;
             this.#updateHpBar(hp);
-            
+
         } else {
 
             // our boi has been damaged! play some animations
@@ -403,7 +402,7 @@ export class ActiveMainInfo {
             this.#shakeIt();
             // wait a bit before hp starts ticking down to direct viewer's eyes
             await new Promise(resolve => setTimeout(resolve, 500));
-            
+
             if (!this.#hpDecreasing) {
 
                 this.#hpDecreasing = true;
@@ -411,19 +410,18 @@ export class ActiveMainInfo {
                 while (this.#hpActive >= this.#hpCurrent) {
 
                     this.#updateHpBar(this.#hpActive);
-    
+
                     await new Promise(resolve => setTimeout(resolve, 1000/30));
-        
+
                     this.#hpActive--;
-    
+
                 }
 
                 this.#hpDecreasing = false;
 
             }
-            
 
-        }        
+        }
 
     }
 
@@ -440,7 +438,7 @@ export class ActiveMainInfo {
         // update hp texts
         if (this.#player) {
             // player gets to see actual number
-            this.#hpText.innerHTML = hp + "/" + this.#hpMax;
+            this.#hpText.textContent = hp + "/" + this.#hpMax;
         } else {
             // enemies only have perecents
             let percentText;
@@ -450,7 +448,7 @@ export class ActiveMainInfo {
             } else {
                 percentText = Math.round(percent);
             }
-            this.#hpText.innerHTML = percentText + "%";
+            this.#hpText.textContent = percentText + "%";
         }
 
         // and just because its cool, recolor border if in danger
@@ -541,7 +539,7 @@ export class ActiveMainInfo {
 
     /** Triggers a shake animation for the entire pokemon div */
     async #shakeIt() {
-        
+
         clearTimeout(this.#shakeItTimeout);
         this.#mainEl.style.animation = "";
         this.#mainEl.offsetHeight; // triggers reflow so it can animate again
@@ -576,7 +574,7 @@ export class ActiveMainInfo {
 
             this.setSpecies(data.species);
             this.setForm(data.form, megaEvolving);
-            
+
             // if pokemon is mega evolving, wait for that img update
             if (megaEvolving) {
                 const megatime = this.#player ? current.megaTime : 0;
@@ -614,7 +612,7 @@ export class ActiveMainInfo {
 
         // set item
         this.setItem(data.item, data.itemCoords);
-        
+
         // set status condition
         this.setStatus(data.status);
 

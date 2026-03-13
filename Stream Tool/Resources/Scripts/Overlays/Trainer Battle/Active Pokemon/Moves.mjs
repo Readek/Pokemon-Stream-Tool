@@ -33,7 +33,7 @@ export class ActiveMoves {
         for (let i = 0; i < 4; i++) {
             this.#moveEl[i].name = moveNames[i];
             this.#moveEl[i].pp = moveNums[i];
-            movePPText[i].innerHTML = getLocalizedText("pokePP");            
+            movePPText[i].textContent = getLocalizedText("pokePP");            
         }
 
     }
@@ -74,7 +74,7 @@ export class ActiveMoves {
 
         const element = document.createElement("div");
         element.classList.add("activeMoveDiv");
-        element.innerHTML = `
+        element.insertAdjacentHTML("afterbegin", `
 
         <div class="activeMoveTexts">
             <div class="activeMoveName ${flipBack}"></div>
@@ -84,7 +84,7 @@ export class ActiveMoves {
             </div>
         </div>
 
-        `
+        `);
 
         return element;
 
@@ -110,7 +110,7 @@ export class ActiveMoves {
                 }
 
                 this.#move[i].pp = moves[i].pp;
-                this.#moveEl[i].pp.innerHTML = moves[i].pp;
+                this.#moveEl[i].pp.textContent = moves[i].pp;
 
                 // for enemies, if the move wasn't revealed, hide pps
                 // if no move, also hide pps
@@ -129,9 +129,9 @@ export class ActiveMoves {
                 this.#move[i].name = moves[i].name || "???";
                 // if no move
                 if (moves[i].name == "") moves[i].name = "-";
-                
+
                 const textToDisplay = !this.#player && !reveal ? "???" : moves[i].name;
-                this.#moveEl[i].name.innerHTML = getLocalizedPokeText(textToDisplay, "Move", current.generation);
+                this.#moveEl[i].name.textContent = getLocalizedPokeText(textToDisplay, "Move", current.generation);
                 this.#moveEl[i].name.setAttribute("locMove", textToDisplay);
 
                 // for enemies, if the move wasn't revealed, just display Normal colors

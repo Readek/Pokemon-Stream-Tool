@@ -10,7 +10,7 @@ let badges = {};
  * @param {BadgeData} states - Badge states
  */
 export function setBadges(states) {
-    
+
     for (const key in states) {
 
         for (let i = 0; i < states[key].length; i++) {
@@ -32,13 +32,13 @@ export function getBadges() {
     for (const key in badges) {
 
         badgeState[key] = [];
-        
+
         for (let i = 0; i < badges[key].length; i++) {
             badgeState[key].push(badges[key][i].getValue());
         }
 
-    }    
-    
+    }
+
     return badgeState;
 
 }
@@ -49,9 +49,9 @@ export function getBadges() {
  */
 export function changeBadges(badgeData, renderStyle) {
 
-    badgesDiv.innerHTML = "";
+    badgesDiv.replaceChildren();
     badges = {};
-    
+
     if (badgeData) { // games that deviate from standard 8 gym badges
 
         for (const key in badgeData) {
@@ -97,7 +97,7 @@ export function changeBadges(badgeData, renderStyle) {
 
     }
 
-    // set pixelated scaling for pixel badges        
+    // set pixelated scaling for pixel badges
     badgesDiv.style.imageRendering = renderStyle ? "pixelated" : "auto";
 
 }

@@ -69,10 +69,10 @@ export async function setAutoState(value) {
         updateButt.disabled = value;
 
         if (value) {
-            autoUpdateButtText.innerText = "AUTO ON";
+            autoUpdateButtText.textContent = "AUTO ON";
             autoUpdateButt.classList.remove("citraButtOff");
         } else {
-            autoUpdateButtText.innerText = "AUTO OFF";
+            autoUpdateButtText.textContent = "AUTO OFF";
             autoUpdateButt.classList.add("citraButtOff");
         }
 

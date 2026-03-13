@@ -117,9 +117,9 @@ export class Pokemon {
         if (!name || name == "None") {
 
             this.#isNone = true;
-            this.pokeSel.children[1].innerHTML = "";
+            this.pokeSel.children[1].textContent = "";
             this.pokeSel.children[1].setAttribute("locPokemon", "");
-            
+
             // add a default "Base" option
             this.#addFormOption("Base");
             // switch to this value, and disable the selector
@@ -145,7 +145,7 @@ export class Pokemon {
             this.#baseFormPokeData = dexData.pkmnSpecies.get(this.#pokeData.baseSpecies);
 
             // set the pokemon name in the selector
-            this.pokeSel.children[1].innerHTML = getLocalizedPokeText(this.#pokeData.baseSpecies, "Pokemon", current.generation);
+            this.pokeSel.children[1].textContent = getLocalizedPokeText(this.#pokeData.baseSpecies, "Pokemon", current.generation);
             this.pokeSel.children[1].setAttribute("locPokemon", this.#pokeData.baseSpecies);
 
             // set the form lists
@@ -165,7 +165,7 @@ export class Pokemon {
             this.formSel.value = this.#form;
             // if there is only one form, disable the form selector
             this.formSel.disabled = (this.#formNames.length <= 1);
-            
+
             // gender locking
             if (this.#pokeData.genderRatio.M == 1) {
                 this.setGender("M");
@@ -187,7 +187,7 @@ export class Pokemon {
         this.setTypes();
 
     }
-    
+
     /** Updates this poke's icon and stores its coordinates */
     #updateIcon() {
 
@@ -268,12 +268,12 @@ export class Pokemon {
      */
     setForm(value, force = false) {
 
-        if(this.#isNone) return;        
+        if(this.#isNone) return;
 
         if (!force && this.getForm() == value) return;
 
         if (this.#shortFormNames.includes(value)) {
-            
+
             let form = this.#formNames[this.#shortFormNames.indexOf(value)];
             this.setSpecies(form, true);
 
@@ -285,7 +285,7 @@ export class Pokemon {
 
     }
 
-    /** 
+    /**
      * Sets form via index, usually for game memory values
      * @param {Number} value - Form index 
      */
@@ -296,7 +296,7 @@ export class Pokemon {
             this.formSel.selectedIndex = value;
             this.setForm(this.formSel.value, true);
         }
-        
+
     }
 
     /** @returns {String[]} */
@@ -399,7 +399,7 @@ export class Pokemon {
             }
 
         }
-        
+
     }
 
     /**
@@ -446,7 +446,7 @@ export class Pokemon {
                         fetchPokeImg(this.#formNames[i], "ani", "p2", this.getGender(), this.getShiny());
                         fetchPokeImg(this.#formNames[i], "ani", "p2", this.getGender(), this.getShiny());
                     }
-                    
+
                 }
 
             }

@@ -57,7 +57,7 @@ function checkLastUpdate() {
 
             // if api rejects us, bail out
             if (!res.ok) {
-                dexUpdText.innerText = getLocalizedText("dexUpdateSettingsError");
+                dexUpdText.textContent = getLocalizedText("dexUpdateSettingsError");
                 dexUpdText.setAttribute("locText", "dexUpdateSettingsError");
                 return;
             }
@@ -68,7 +68,7 @@ function checkLastUpdate() {
 
                 let locValue = dexUpdateTime > createdDate ? "Yes" : "No";
 
-                dexUpdText.innerText = getLocalizedText(`dexUpdateSettings${locValue}Update`);
+                dexUpdText.textContent = getLocalizedText(`dexUpdateSettings${locValue}Update`);
                 dexUpdText.setAttribute("locText", `dexUpdateSettings${locValue}Update`);
 
             });

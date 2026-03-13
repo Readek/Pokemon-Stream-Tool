@@ -16,13 +16,13 @@ class PokeFinder extends FinderSelect {
     }
 
     /** Fills the Pokemon Finder list with current pokedex data */
-    async loadCharacters() {        
+    async loadCharacters() {
 
         this._clearList();
 
-        const speciesList = [...dexData.pkmnSpecies].filter( 
+        const speciesList = [...dexData.pkmnSpecies].filter(
             (poke) => (!poke.forme) // check if the Pokémon is not a forme (other than the base forme)
-        ).sort( 
+        ).sort(
             (poke1, poke2) => (poke1.num - poke2.num) // sort by National Dex number
         );
 
@@ -50,7 +50,7 @@ class PokeFinder extends FinderSelect {
 
             // pokemon name
             const spanName = document.createElement('span');
-            spanName.innerHTML = getLocalizedPokeText(pokemon.name, "Pokemon", current.generation);
+            spanName.textContent = getLocalizedPokeText(pokemon.name, "Pokemon", current.generation);
             spanName.setAttribute("locPokemon", pokemon.name);
             spanName.className = "pfName";
 
@@ -78,9 +78,9 @@ class PokeFinder extends FinderSelect {
         imgIcon.className = "fIconImg";
         imgIcon.alt = "None";
         imgIcon.src = `${stPath.assets}/None.png`;
-        
+
         const spanName = document.createElement('span');
-        spanName.innerHTML = "None";
+        spanName.textContent = "None";
         spanName.className = "pfName";
 
         newDiv.appendChild(imgIcon);

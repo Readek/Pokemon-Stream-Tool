@@ -87,7 +87,7 @@ export async function updateTrainer() {
         remote.sendRemoteData(dataJson);
 
     }
-    
+
     loading = false;
 
 }
@@ -107,5 +107,5 @@ export function enableTrainerUpdate() {
  * @param {String} text - New button text
  */
 function changeUpdateText(text) {
-    updateText.innerHTML = text;
+    updateText.textContent = text;
 }

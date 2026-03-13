@@ -44,7 +44,7 @@ export async function updatePlayer() {
         remote.sendRemoteData(dataJson);
 
     }
-    
+
 }
 
 /** removes click event listener from update button */
@@ -62,5 +62,5 @@ export function enablePlayerUpdate() {
  * @param {String} text - New button text
  */
 function changeUpdateText(text) {
-    updateText.innerHTML = text;
+    updateText.textContent = text;
 }

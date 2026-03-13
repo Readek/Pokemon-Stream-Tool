@@ -34,12 +34,12 @@ export async function autoUpdateToggleCitra() {
 
         // update states
         current.autoStatus = true;
-        autoUpdateButtText.innerHTML = "AUTO ON";
+        autoUpdateButtText.textContent = "AUTO ON";
         autoUpdateButt.classList.remove("citraButtOff");
 
     } else { // if theres a loop running, stop it
         
-        autoUpdateButtText.innerHTML = "AUTO OFF";
+        autoUpdateButtText.textContent = "AUTO OFF";
         autoUpdateButt.classList.add("citraButtOff");
         current.autoStatus = false;
 
@@ -202,7 +202,7 @@ async function autoUpdateData(firstLoop) {
             }
 
         } else {
-            
+
             // a tiny wait just in case
             await new Promise(resolve => setTimeout(resolve, 100));
 
@@ -279,7 +279,7 @@ async function autoUpdateData(firstLoop) {
 
         // update player battle data
         let readCount = await updateBattlePokemon(battleType, hasChanged, onFieldPokes, 0, false);
-        
+
         // gen 7 poke positions are fixed, while gen 6 are not
         // in gen 7, enemy slots start at slot 12
         readCount = current.generation == 7 ? 12 : readCount;

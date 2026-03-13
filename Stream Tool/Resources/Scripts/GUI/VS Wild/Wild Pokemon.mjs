@@ -101,15 +101,15 @@ class WildPokemon extends Pokemon {
     #fillInfo() {
 
         const pokeData = this.getPokeData()
-        
+
         // base stats
-        this.#statTextHP.innerHTML = pokeData.baseStats.hp;
-        this.#statTextAT.innerHTML = pokeData.baseStats.atk;
-        this.#statTextDE.innerHTML = pokeData.baseStats.def;
-        this.#statTextSA.innerHTML = pokeData.baseStats.spa;
-        this.#statTextSD.innerHTML = pokeData.baseStats.spd;
-        this.#statTextSP.innerHTML = pokeData.baseStats.spe;
-        this.#statTextTS.innerHTML = pokeData.bst;
+        this.#statTextHP.textContent = pokeData.baseStats.hp;
+        this.#statTextAT.textContent = pokeData.baseStats.atk;
+        this.#statTextDE.textContent = pokeData.baseStats.def;
+        this.#statTextSA.textContent = pokeData.baseStats.spa;
+        this.#statTextSD.textContent = pokeData.baseStats.spd;
+        this.#statTextSP.textContent = pokeData.baseStats.spe;
+        this.#statTextTS.textContent = pokeData.bst;
 
         // we wait a tick so the animation plays when coming from display none
         setTimeout(() => {
@@ -125,27 +125,27 @@ class WildPokemon extends Pokemon {
         // poke types
         let types = this.getTypes();
         this.typeImg1.src = `${stPath.assets}/Type Icons/${types[0]}.png`;
-        this.typeImg1.parentElement.lastElementChild.innerHTML = getLocalizedText("type"+types[0]);
+        this.typeImg1.parentElement.lastElementChild.textContent = getLocalizedText("type"+types[0]);
         this.typeImg1.parentElement.lastElementChild.setAttribute("locText", "type"+types[0]);
         if (types[1]) {
             this.typeImg2.src = `${stPath.assets}/Type Icons/${types[1]}.png`;
             this.typeImg2.parentElement.style.display = "flex";
-            this.typeImg2.parentElement.lastElementChild.innerHTML = getLocalizedText("type"+types[1]);
+            this.typeImg2.parentElement.lastElementChild.textContent = getLocalizedText("type"+types[1]);
             this.typeImg2.parentElement.lastElementChild.setAttribute("locText", "type"+types[1]);
         } else {
             this.typeImg2.parentElement.style.display = "none";
         }
 
         // gender ratio
-        this.#genderRatioTextM.innerHTML = pokeData.genderRatio.M * 100 + "%";
-        this.#genderRatioTextF.innerHTML = pokeData.genderRatio.F * 100 + "%";
+        this.#genderRatioTextM.textContent = pokeData.genderRatio.M * 100 + "%";
+        this.#genderRatioTextF.textContent = pokeData.genderRatio.F * 100 + "%";
 
         // abilities
-        this.#abilityText0.innerHTML = getLocalizedPokeText(pokeData.abilities[0], "Ability", current.generation);
+        this.#abilityText0.textContent = getLocalizedPokeText(pokeData.abilities[0], "Ability", current.generation);
         this.#abilityText0.setAttribute("locAbility", pokeData.abilities[0]);
 
         if (pokeData.abilities[1]) {
-            this.#abilityText1.innerHTML = getLocalizedPokeText(pokeData.abilities[1], "Ability", current.generation);
+            this.#abilityText1.textContent = getLocalizedPokeText(pokeData.abilities[1], "Ability", current.generation);
             this.#abilityText1.setAttribute("locAbility", pokeData.abilities[1]);
             this.#abilityText1.style.display = "flex";
         } else {
@@ -153,7 +153,7 @@ class WildPokemon extends Pokemon {
         }
 
         if (pokeData.abilities.H) {
-            this.#abilityTextH.innerHTML = getLocalizedPokeText(pokeData.abilities.H, "Ability", current.generation)
+            this.#abilityTextH.textContent = getLocalizedPokeText(pokeData.abilities.H, "Ability", current.generation)
             this.#abilityTextH.setAttribute("locAbility", pokeData.abilities.H);
             this.#abilityTextH.style.display = "flex";
         } else {
@@ -228,7 +228,7 @@ class WildPokemon extends Pokemon {
                     spd : pokedata.baseStats.spd,
                     spe : pokedata.baseStats.spe,
                     bst : pokedata.bst
-                },                
+                },
                 ratioM : pokedata.genderRatio.M,
                 ratioF : pokedata.genderRatio.F,
                 abilities : {
@@ -243,10 +243,7 @@ class WildPokemon extends Pokemon {
 
     /** Creates the pokemon's HTML element */
     generateElement() {
-
         return document.getElementById("vsWildRegion");
-
-
     }
 
 }

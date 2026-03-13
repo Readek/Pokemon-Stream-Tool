@@ -174,21 +174,21 @@ function whosThatPokemon() {
         ${offset[0]}px, ${offset[1]}px)`;
 
     // nickname
-    whoThatPokeNick.innerHTML = getLocalizedPokeText(chosenPoke.getNickname(), "Pokemon", current.generation);
+    whoThatPokeNick.textContent = getLocalizedPokeText(chosenPoke.getNickname(), "Pokemon", current.generation);
     whoThatPokeNick.setAttribute("locPokemon", chosenPoke.getNickname());
 
     // species
-    whoThatPokeSpecies.innerHTML = chosenPoke.getSpecies();
+    whoThatPokeSpecies.textContent = chosenPoke.getSpecies();
 
     // gender
-    whoThatPokeGender.innerHTML = getLocalizedText("pokePronoun"+(chosenPoke.getGender() || "Null"));
+    whoThatPokeGender.textContent = getLocalizedText("pokePronoun"+(chosenPoke.getGender() || "Null"));
     whoThatPokeGender.setAttribute("locText", "pokePronoun"+(chosenPoke.getGender() || "Null"));
 
     // hide or show sub text depending on if the poke has a nickname or not
     if (chosenPoke.getNickname() && chosenPoke.getNickname() != chosenPoke.getSpecies()) {
         whoThatPokeSpecies.parentElement.style.display = "flex";
     } else {
-        whoThatPokeNick.innerHTML = chosenPoke.getSpecies();
+        whoThatPokeNick.textContent = chosenPoke.getSpecies();
         whoThatPokeSpecies.parentElement.style.display = "none";
     }
 
@@ -249,13 +249,13 @@ function reduceCountdown() {
             seconds = "0" + seconds;
         }
         
-        countdownText.innerHTML = getLocalizedText("cdTextProgress", [minutes, seconds]);
+        countdownText.textContent = getLocalizedText("cdTextProgress", [minutes, seconds]);
 
         countdown -= 1;
 
     } else {
         
-        countdownText.innerHTML = getLocalizedText("cdTextFinished");
+        countdownText.textContent = getLocalizedText("cdTextFinished");
 
     }
 

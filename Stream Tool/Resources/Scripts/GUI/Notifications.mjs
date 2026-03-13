@@ -9,9 +9,9 @@ export function displayNotif(text) {
     // create the element and give it some style
     const newDiv = document.createElement("div");
     newDiv.classList.add("notifText");
-    
+
     // give it that text
-    newDiv.innerHTML = text;
+    newDiv.textContent = text;
 
     // add it to the notification area
     notifDiv.appendChild(newDiv);
@@ -22,7 +22,7 @@ export function displayNotif(text) {
 }
 
 function killNotif() {
-    
+
     notifDiv.removeChild(this);
 
 }

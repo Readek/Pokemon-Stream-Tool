@@ -111,7 +111,7 @@ export class SettingGameSelect extends Setting {
 
     #setListener() {
         gameSelectSelect.addEventListener("change", () => {
-            
+
             this.setGame(gameSelectSelect.value);
 
             // send the data to remote guis
@@ -156,16 +156,16 @@ export class SettingGameSelect extends Setting {
     addGames(gen) {
 
         // clear current game select state
-        gameSelectSelect.innerHTML = "";
+        gameSelectSelect.replaceChildren();
 
         // check if gen requested has data
         if (genGameData[gen]) {
-        
+
             // add a new select entry for each game found
             for (const key in genGameData[gen]) {
                 this.#addGameEntry(key);
             }
-            
+
         }
 
         // auto-select the first game on the list

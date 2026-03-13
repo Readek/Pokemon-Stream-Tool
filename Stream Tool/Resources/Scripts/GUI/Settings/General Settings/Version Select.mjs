@@ -46,11 +46,11 @@ export class SettingVersionSelect extends Setting {
      * Clears the version list and adds entries from provided array
      * @param {String[]} versions - Versions for current game
      */
-    addVersions(versions) {        
+    addVersions(versions) {
 
         if (versions) {
 
-            versionSelectSelect.innerHTML = "";
+            versionSelectSelect.replaceChildren();
 
             // fill version select and display it
             for (let i = 0; i < versions.length; i++) {
@@ -62,13 +62,12 @@ export class SettingVersionSelect extends Setting {
             // auto-select the first version on the list
             this.setVersion(versionSelectSelect.value);
 
-
         } else {
 
             // if no versions, hide select and erase current version
             versionSelectSelect.style.display = "none";
             current.version = null;
-            
+
         }
 
     }

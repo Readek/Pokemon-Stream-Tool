@@ -27,21 +27,21 @@ export function setTrainerName(nameData, species) {
 
     }
 
-    titleText.innerHTML = nameData.title;
-    nameText.innerHTML = nameData.name;
+    titleText.textContent = nameData.title;
+    nameText.textContent = nameData.name;
 
     name = nameData.name;
 
 }
 
-/** 
- * Sets enemy trainer's intro pokemon count 
+/**
+ * Sets enemy trainer's intro pokemon count
  * @param {Number} num - Number of enemy pokemon
  */
 export function setTrainerPokeCount(num) {
     if (pokeCount == num) return;
     pokeCount = num;
-    countText.innerHTML = num;
+    countText.textContent = num;
 }
 
 /** Display enemy trainer name intro, hides it when done */

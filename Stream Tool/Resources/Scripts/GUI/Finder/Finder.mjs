@@ -114,7 +114,7 @@ export class Finder {
      * @protected clearList
      */
     _clearList() {
-        this.#list.innerHTML = "";
+        this.#list.replaceChildren();
     }
 
     

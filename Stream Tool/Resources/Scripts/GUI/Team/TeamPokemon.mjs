@@ -52,7 +52,7 @@ export class TeamPokemon extends Pokemon {
         super(enemy);
 
         this.lvlInp = this.el.getElementsByClassName("pokeLvlNumber")[0];
-        
+
         this.statusSel = this.el.getElementsByClassName('pokeStatus')[0];
 
         // if right click on species, manually toggle in combat status
@@ -86,7 +86,7 @@ export class TeamPokemon extends Pokemon {
             this.#moveInp[i].pp = this.el.getElementsByClassName(`pokeMove${i}PP`)[0];
             this.#moveInp[i].parent = this.#moveInp[i].name.parentElement;
         }
-        
+
         // stats
         for (let i = 0; i < statKeys.length; i++) {
             this.#statEl[statKeys[i]].num = this.el.getElementsByClassName(`poke${statKeysUpper[i]}`)[0];
@@ -208,22 +208,21 @@ export class TeamPokemon extends Pokemon {
         return this.#item;
     }
     /** @param {String} value - Ability name */
-    setItem(value) {        
+    setItem(value) {
 
         if (this.getItem() == value) return;
         this.#item = value;
 
         // localize this item to current language
-        if (value) {            
-            this.#itemInp.innerHTML = getLocalizedPokeText(value, "Item", current.generation);
+        if (value) {
+            this.#itemInp.textContent = getLocalizedPokeText(value, "Item", current.generation);
             this.#itemInp.setAttribute("locItem", value);
             this.#itemInp.removeAttribute("locText");
         } else {
-            this.#itemInp.innerHTML = getLocalizedText("pokeItemNone");
+            this.#itemInp.textContent = getLocalizedText("pokeItemNone");
             this.#itemInp.setAttribute("locText", "pokeItemNone");
             this.#itemInp.removeAttribute("locItem");
         }
-        
 
         // set the item's icon
         const coords = pkmn.img.Icons.getItem(value, {domain: stPath.poke});
@@ -237,7 +236,7 @@ export class TeamPokemon extends Pokemon {
         `;
 
         this.#itemCoords = {top: coords.top, left: coords.left}
-        
+
     }
     /**
      * Item icon coordinates for the icon spritesheet
@@ -252,7 +251,7 @@ export class TeamPokemon extends Pokemon {
         return this.#move;
     }
     /**
-     * @param {Moves} moves 
+     * @param {Moves} moves
      */
     setMoves(moves) {
 
@@ -283,7 +282,7 @@ export class TeamPokemon extends Pokemon {
 
                 this.#move[i].pp = moves[i].pp;
                 this.#moveInp[i].pp.value = moves[i].pp;
-                
+
             }
 
         }
@@ -305,14 +304,13 @@ export class TeamPokemon extends Pokemon {
         // for each different stat
         for (let i = 0; i < statKeys.length; i++) {
 
-            
             if (this.#stat[statKeys[i]].num != stats[statKeys[i]].num) {
 
                 // update internal value
                 this.#stat[statKeys[i]].num = stats[statKeys[i]].num;
 
                 // update displayed text
-                this.#statEl[statKeys[i]].num.innerHTML = stats[statKeys[i]].num;
+                this.#statEl[statKeys[i]].num.textContent = stats[statKeys[i]].num;
 
                 // update stat bar
                 const percent = stats[statKeys[i]].num * 100 / 400;
@@ -322,21 +320,20 @@ export class TeamPokemon extends Pokemon {
 
             if (this.#stat[statKeys[i]].ev != stats[statKeys[i]].ev
             || this.#stat[statKeys[i]].iv != stats[statKeys[i]].iv) {
-                
+
                 // update internal values
                 this.#stat[statKeys[i]].ev = stats[statKeys[i]].ev;
                 this.#stat[statKeys[i]].iv = stats[statKeys[i]].iv;
 
                 // update displayed text
                 if (stats[statKeys[i]].ev != undefined && stats[statKeys[i]].iv != undefined) {
-                    this.#statEl[statKeys[i]].eviv.innerHTML = `(${stats[statKeys[i]].ev}) (${stats[statKeys[i]].iv})`;   
+                    this.#statEl[statKeys[i]].eviv.textContent = `(${stats[statKeys[i]].ev}) (${stats[statKeys[i]].iv})`;   
                 } else {
-                    this.#statEl[statKeys[i]].eviv.innerHTML = "";
+                    this.#statEl[statKeys[i]].eviv.textContent = "";
                 }
 
             }
 
-            
         }
 
     }
@@ -355,9 +352,9 @@ export class TeamPokemon extends Pokemon {
         if (!boosts) return;
 
         for (let i = 0; i < boostKeys.length; i++) {
-            
+
             if (this.#boost[boostKeys[i]] != boosts[boostKeys[i]]) {
-                
+
                 this.#boost[boostKeys[i]] = boosts[boostKeys[i]];
 
                 if (this.#boostEl[boostKeys[i]]) {
@@ -384,15 +381,15 @@ export class TeamPokemon extends Pokemon {
                         const multNum = Number(divi.toFixed(2));
 
                         this.#boostEl[boostKeys[i]].style.display = "block";
-                        this.#boostEl[boostKeys[i]].innerHTML = `x${multNum}`;
-                    
+                        this.#boostEl[boostKeys[i]].textContent = `x${multNum}`;
+
                     } else {
                         this.#boostEl[boostKeys[i]].style.display = "none";
                     }
                 }
 
             }
-            
+
         }
 
     }
@@ -404,7 +401,7 @@ export class TeamPokemon extends Pokemon {
     setInCombat(value) {
 
         if (this.#inCombat == value) return;
-        
+
         this.#inCombat = value;
 
         // if in combat
@@ -433,7 +430,7 @@ export class TeamPokemon extends Pokemon {
         const element = document.createElement("div");
         element.classList.add("pokemonDiv");
         // and now for the big fat text
-        element.innerHTML = `
+        element.insertAdjacentHTML("afterbegin", `
 
         <div class="teamPokeMainInfo">
 
@@ -541,7 +538,7 @@ export class TeamPokemon extends Pokemon {
 
         </div>
 
-        `
+        `);
 
         // add move elements
         const detailsMoves = element.getElementsByClassName("detailsMoveRow")[0];
@@ -577,7 +574,7 @@ export class TeamPokemon extends Pokemon {
 
         const element = document.createElement("div");
         element.classList.add("pokeMoveBlock", "pokeMoveDiv" + num);
-        element.innerHTML = `
+        element.insertAdjacentHTML("afterbegin", `
 
         <input class="pokeDetailsInput pokeMoveName pokeMove${num}" type="text" placeholder="-" spellcheck="false">
         <div class="pokeDetailsMoveDiv">
@@ -585,7 +582,7 @@ export class TeamPokemon extends Pokemon {
             <div class="" locText="pokePP"></div>
         </div>
 
-        `
+        `);
 
         return element;
 
@@ -600,7 +597,7 @@ export class TeamPokemon extends Pokemon {
 
         const element = document.createElement("div");
         element.classList.add("pokeDetailsStatDiv");
-        element.innerHTML = `
+        element.insertAdjacentHTML("afterbegin", `
 
         <div class="pokeStatTexts">
             <div class="pokeStatName" locText="poke${statKey}" locTitle="poke${statKey}Title"></div>
@@ -616,7 +613,7 @@ export class TeamPokemon extends Pokemon {
             <div class="pokeStatBarActive pokeStatBar pokeStat${statKey}Bar"></div>
         </div>
 
-        `
+        `);
 
         return element;
 
@@ -656,17 +653,17 @@ export class TeamPokemon extends Pokemon {
     createHideEl(el, parentEl, key) {
 
         el.classList.add("hiddenElement");
-        
+
         // what to show when not hovering
         const theEye = document.createElement("div");
         theEye.classList.add("hiddenElementEye")
-        theEye.innerHTML = "👁️"; // 👁️
+        theEye.textContent = "👁️"; // 👁️
         el.append(theEye);
 
         // what to show when hovering
         const hoverText = document.createElement("div");
         hoverText.classList.add("hiddenElementHover")
-        hoverText.innerHTML = getLocalizedText("hiddenHover");
+        hoverText.textContent = getLocalizedText("hiddenHover");
         el.append(hoverText);
 
         // click to force show

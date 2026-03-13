@@ -178,7 +178,7 @@ function resetTexts() {
     // regular inline text
     const texts = document.querySelectorAll("*[locText]");
     for (const el of texts) {
-        el.innerHTML = getLocalizedText(el.getAttribute("locText"));
+        el.textContent = getLocalizedText(el.getAttribute("locText"));
     }
 
     // title hover tooltips
@@ -207,7 +207,7 @@ export function resetPokeLocTexts(gen) {
         for (const el of els) {
             const textToSet = getLocalizedPokeText(el.getAttribute(`loc${key}`), key, gen);
             el.value = textToSet; // some of them are inputs
-            el.innerHTML = textToSet;
+            el.textContent = textToSet;
         }
     });
 }

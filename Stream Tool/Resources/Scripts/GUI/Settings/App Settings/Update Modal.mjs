@@ -21,7 +21,7 @@ document.getElementById("updateModalAccept").addEventListener("click", async () 
 
     // aaaand update
     const downApp = await updateAppDownload();
-    
+
     if (downApp) {
 
         try {
@@ -46,10 +46,10 @@ document.getElementById("updateModalGoBack").addEventListener("click", () => {
 
 /**
  * Replaces this modal's title and description strings
- * @param {String} title 
- * @param {String} desc 
+ * @param {String} title
+ * @param {String} desc
  */
 function replaceModalTexts(title, desc) {
-    modalTitle.innerHTML = getLocalizedText(title);
+    modalTitle.textContent = getLocalizedText(title);
     modalDesc.innerHTML = getLocalizedText(desc);
 }

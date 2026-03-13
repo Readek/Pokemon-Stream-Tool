@@ -42,7 +42,7 @@ export class SettingWindowZoom extends Setting {
     #changeZoom() {
         const { webFrame } = require('electron');
         webFrame.setZoomFactor(this.#zoomValue / 100);
-        this.#zoomTextValue.innerHTML = `${this.#zoomValue}%`;
+        this.#zoomTextValue.textContent = `${this.#zoomValue}%`;
         this.save("zoom", this.#zoomValue);
     }
 

@@ -33,7 +33,7 @@ export class Catch extends Pokemon {
         // but what if the pokemon wants to be free
         this.deletButt = this.el.getElementsByClassName('catchDeleteButt')[0];
         this.deletButt.addEventListener("click", () => {this.delet()});
-        
+
     }
 
     getId() {
@@ -45,7 +45,7 @@ export class Catch extends Pokemon {
 
         const element = document.createElement("div");
         element.classList.add("catchDiv");
-        element.innerHTML = `
+        element.insertAdjacentHTML("afterbegin", `
 
             <button class="catchDeleteButt catchButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
 
@@ -67,7 +67,7 @@ export class Catch extends Pokemon {
                 <img class="pokeShinyIcon" src="Assets/Shiny Icon.png" alt="">
             </button>
 
-        `
+        `);
 
         // add it to the GUI
         catchesDiv.appendChild(element);

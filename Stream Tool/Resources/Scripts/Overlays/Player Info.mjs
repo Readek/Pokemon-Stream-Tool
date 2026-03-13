@@ -39,8 +39,8 @@ class PlayerInfo {
         }
 
         // get us those sweet stats
-        catchesNum.innerText = data.catches;
-        deathsNum.innerText = data.deaths;
+        catchesNum.textContent = data.catches;
+        deathsNum.textContent = data.deaths;
 
         // hide stats if at 0
         data.catches 

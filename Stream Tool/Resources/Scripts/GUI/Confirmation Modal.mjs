@@ -23,11 +23,11 @@ export function openConfModal(title, desc, buttText, action) {
 
     // show confirm button in case it was hidden
     modalButt.style.display = "flex";
-    
+
     // change texts all around
-    modalTitle.innerHTML = getLocalizedText(title);
+    modalTitle.textContent = getLocalizedText(title);
     modalDesc.innerHTML = getLocalizedText(desc);
-    modalButtText.innerHTML = getLocalizedText(buttText);
+    modalButtText.textContent = getLocalizedText(buttText);
 
     // what the confirm button does
     modalButt.addEventListener("click", () => {
@@ -58,7 +58,7 @@ export function openInfoModal(title, desc) {
     modalButt.style.display = "none";
 
     // change texts all around
-    modalTitle.innerHTML = getLocalizedText(title);
+    modalTitle.textContent = getLocalizedText(title);
     modalDesc.innerHTML = getLocalizedText(desc);
 
     modal.showModal();

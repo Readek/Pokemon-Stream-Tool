@@ -95,5 +95,5 @@ export function enableCatchesUpdate() {
  * @param {String} text - New button text
  */
 function changeUpdateText(text) {
-    updateText.innerHTML = text;
+    updateText.textContent = text;
 }

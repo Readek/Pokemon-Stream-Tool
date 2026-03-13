@@ -1,5 +1,4 @@
 import { getLocalizedText } from "../../Utils/Language.mjs";
-import { current } from "../Globals.mjs";
 import { clearAllTrainerPokemon } from "../VS Trainer/TrainerPokemons.mjs";
 /** @import { BattleType } from "../../Utils/Type Definitions.mjs" */
 
@@ -11,7 +10,7 @@ bTypeButt.addEventListener("click", toggleBattleState);
 
 /** Moves on to the next battle state when manually clicking the button */
 function toggleBattleState() {
-    
+
     const state = getBattleState();
 
     if (state == "None") {
@@ -39,14 +38,14 @@ export function getBattleState() {
  * @param {BattleType} value - Battle type to swap to
  */
 export function setBattleState(value) {
-    
+
     // skip if value is same as what we already got
     if (value == battleType) return;
 
     battleType = value;
 
     // change button text
-    bTypeButt.innerHTML = getLocalizedText("bTypeButt" + value);
+    bTypeButt.textContent = getLocalizedText("bTypeButt" + value);
     bTypeButt.setAttribute("locText", "bTypeButt" + value);
 
     if (value != "Trainer") {
@@ -55,7 +54,7 @@ export function setBattleState(value) {
 
 }
 
-/** 
+/**
  * Shows or hides battle state button depending on generation
  * @param {Number} gen - Current Generation
  */

@@ -21,7 +21,7 @@ export class FinderSelect extends Finder {
     /**
      * Filters the finder's content depending on input text
      * @param {String} filterValue - Text to filter in
-    */ 
+    */
     #filterFinder(filterValue) {
 
         const filterText = filterValue.toLocaleLowerCase();
@@ -34,7 +34,7 @@ export class FinderSelect extends Finder {
         for (let i = 0; i < finderEntries.length; i++) {
 
             // find the name we are looking for
-            const entryName = finderEntries[i].getElementsByClassName("pfName")[0].innerHTML;
+            const entryName = finderEntries[i].getElementsByClassName("pfName")[0].textContent;
             const entryText = entryName.toLocaleLowerCase();
 
             // if the name doesnt include the filter value, hide it
