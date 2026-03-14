@@ -112,9 +112,9 @@ export async function updateGUI(data, noNotif) {
         if (data.pokemons) {
             for (let i = 0; i < data.pokemons.length; i++) {
                 wildEncounter.setSpecies(data.pokemons[i].species);
-                wildEncounter.setForm(data.pokemon[i].form);
-                wildEncounter.setGender(data.pokemon[i].gender);
-                wildEncounter.setShiny(data.pokemon[i].shiny);
+                wildEncounter.setForm(data.pokemons[i].form);
+                wildEncounter.setGender(data.pokemons[i].gender);
+                wildEncounter.setShiny(data.pokemons[i].shiny);
             }
         } else {
             wildEncounter.setSpecies("None");
