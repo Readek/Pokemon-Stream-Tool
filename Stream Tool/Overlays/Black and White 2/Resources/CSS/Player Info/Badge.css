@@ -1,30 +1,10 @@
 @import "../../../../../Resources/CSS/Overlays/Player Info/Badge.css";
 
-#badgeImg {
-    position: absolute;
-}
-
-.badge1 {
-    transform: translate(2px, 2px);
-}
-.badge2 {
-    transform: translate(2px, 2px);
-}
-.badge3 {
-    transform: translate(4px, 4px);
-}
-.badge4 {
-    transform: translate(2px, 4px);
-}
-.badge5 {
-    transform: translate(2px, 4px);
-}
-.badge6 {
-    transform: translate(2px, 2px);
-}
-.badge7 {
-    transform: translate(2px, 8px);
-}
-.badge8 {
-    transform: translate(2px, 2px);
-}
+.badge1 {translate: 2px 2px}
+.badge2 {translate: 2px 2px}
+.badge3 {translate: 4px 4px}
+.badge4 {translate: 2px 4px}
+.badge5 {translate: 2px 4px}
+.badge6 {translate: 2px 2px}
+.badge7 {translate: 2px 8px}
+.badge8 {translate: 2px 2px}

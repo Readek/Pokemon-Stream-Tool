@@ -1,0 +1,65 @@
+#playerInfo {
+    position: absolute;
+    top: 355px;
+    left: 52px;
+    width: 373px;
+    display: flex;
+    flex-direction: column;
+    background-color: #444444c4;
+    border-radius: 20px;
+    border: thick double grey;
+    padding: 10px 5px 10px 5px;
+}
+
+/** Badge Panel */
+
+.badgeGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0px 5px;
+}
+
+/** Stats */
+
+#playerStats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 3px solid rgb(46, 46, 46);
+    border-radius: 20px;
+    background-color: rgb(71, 71, 71);
+    padding: 2px 10px 2px 10px;
+    margin-top: 5px;
+}
+
+.statIcon {
+    display: flex;
+    align-items: center;
+    object-fit: contain;
+    width: 20px;
+    height: 20px;
+}
+#catchesIcon {
+    stroke: white;
+    fill: none;
+    scale: 1.15;
+}
+#deathsIcon {
+    fill: white;
+}
+
+.statNumber {
+    color: #f8f8f8;
+    font-size: 22px;
+    font-family: "FontBold";
+    text-shadow: 0px 0px 5px black;
+}

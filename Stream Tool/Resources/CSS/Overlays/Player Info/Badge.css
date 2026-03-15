@@ -1,0 +1,17 @@
+#badgeImg {
+    position: absolute;
+    animation: badgeGet .3s;
+}
+
+@keyframes badgeGet {
+    from {
+        opacity: 0;
+        filter: brightness(2);
+        transform: scale(2);
+    }
+    to {
+        opacity: 1;
+        filter: brightness(1);
+        transform: scale(1);
+    }
+}

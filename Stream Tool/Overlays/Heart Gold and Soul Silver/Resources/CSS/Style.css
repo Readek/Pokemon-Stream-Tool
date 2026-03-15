@@ -1,3 +1,5 @@
+@import "Player Info/Player Info.css";
+
 @font-face {
     font-family: "FontMain";
     src: url('../../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
@@ -17,75 +19,6 @@ html, body {
     height: 1080px;
     font-weight: 700;
     font-family: "FontMain";
-}
-
-#playerInfo {
-    position: absolute;
-    top: 545px;
-    left: 1125px;
-    display: flex;
-}
-
-#badges {
-    background-color: #54555ed4;
-    border-radius: 20px;
-    border: thick double #b8a479;
-}
-
-.badgeGroup {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    padding: 6px;
-    justify-items: center;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-
-#playerStats {
-    display: flex;
-    flex-direction: column;
-    grid-template-rows: 50% 50%;
-    width: 100px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-left: 1%;
-    gap: 10px;
-}
-
-.stat {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    background-color: #54555ed4;
-    border-radius: 20px;
-    border: thick double #b8a479;
-    padding: 5%;
-}
-
-.statIcon {
-    object-fit: contain;
-    width: 20px;
-    height: 20px
-}
-#catchesIcon {
-    stroke: white;
-    fill: none;
-    transform: scale(1.15);
-}
-#killsIcon {
-    fill: white;
-}
-#deathsIcon {
-    fill: white;
-}
-
-.statNumber {
-    color: #f8f8f8;
-    font-size: 25px;
-    text-shadow: 0px 0px 5px black;
 }
 
 

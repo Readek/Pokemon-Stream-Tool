@@ -1,0 +1,3 @@
+Styles found here apply to ALL overlays.
+
+If you want to edit a specific overlay, go to its own CSS folder in the Overlays root folder.

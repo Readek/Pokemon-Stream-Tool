@@ -2,11 +2,17 @@
 import "./Badge.mjs";
 
 const badgeEl = document.getElementById("badges");
+const badgeComp = {};
 
 const catchesNum = document.getElementById("catchesNumber");
 const deathsNum = document.getElementById("deathsNumber");
 
-const badgeComp = {};
+const statUpAnim = [
+    {transform: "scale(1)", filter: "brightness(1)"},
+    {transform: "scale(1.2)", filter: "brightness(1.3)", offset: 0.2},
+    {transform: "scale(1)", filter: "brightness(1)"}
+];
+const statUpTime = {duration: 200, easing: "ease-out"}
 
 class PlayerInfo {
 
@@ -54,17 +60,23 @@ class PlayerInfo {
 
     /**
      * @param {Number} catches 
-     * @param {Number} deaths 
+     * @param {Number} deaths
      */
     #updateStats(catches, deaths) {
 
-        // get us those sweet stats
-        catchesNum.textContent = catches;
-        deathsNum.textContent = deaths;
-
-        // hide stats if at 0
-        catchesNum.parentElement.style.display = catches ? "flex" : "none";
-        deathsNum.parentElement.style.display = catches ? "flex" : "none";
+        if (catches != catchesNum.textContent) {
+            // update that number
+            catchesNum.textContent = catches;
+            // animate on stat update
+            catchesNum.parentElement.animate(statUpAnim, statUpTime);
+            // hide stats if at 0
+            catchesNum.parentElement.style.display = catches ? "flex" : "none";
+        } 
+        if (deaths != deathsNum.textContent) {
+            deathsNum.textContent = deaths;
+            deathsNum.parentElement.animate(statUpAnim, statUpTime);
+            deathsNum.parentElement.style.display = catches ? "flex" : "none";
+        }
 
     }
 

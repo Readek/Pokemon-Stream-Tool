@@ -1,3 +1,5 @@
+@import "Player Info/Player Info.css";
+
 @font-face {
     font-family: "FontMain";
     src: url('../../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
@@ -17,67 +19,6 @@ html, body {
     height: 1080px;
     font-weight: 700;
     font-family: "FontMain";
-}
-
-
-#playerInfo {
-    position: absolute;
-    top: 560px;
-    left: 426px;
-    width: 260px;
-    display: flex;
-    flex-direction: column;
-    border: solid;
-    border-width: 8px 6px;
-    border-image: url("../Images/Badges\ BG.png") 8 6 fill;
-    padding: 4px;
-    gap: 2px;
-}
-.badgeGroup {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    gap: 2px 0px;
-    /* this is because badge compo looks off between left and right */
-    transform: translateX(2px);
-}
-
-
-#playerStats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.stat {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.statIcon {
-    object-fit: contain;
-    width: 20px;
-    height: 20px
-}
-#catchesIcon {
-    stroke: white;
-    fill: none;
-    transform: scale(1.15);
-}
-#killsIcon {
-    fill: white;
-}
-#deathsIcon {
-    fill: white;
-}
-
-.statNumber {
-    color: #f8f8f8;
-    font-size: 25px;
-    text-shadow: 0px 0px 5px black;
 }
 
 
