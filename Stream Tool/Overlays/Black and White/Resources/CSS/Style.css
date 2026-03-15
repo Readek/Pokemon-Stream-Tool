@@ -1,6 +1,6 @@
 @font-face {
     font-family: "FontMain";
-    src: url('../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
+    src: url('../../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
 }
 
 * {
@@ -24,48 +24,23 @@ html, body {
     position: absolute;
     top: 560px;
     left: 426px;
+    width: 260px;
     display: flex;
     flex-direction: column;
+    border: solid;
+    border-width: 8px 6px;
+    border-image: url("../Images/Badges\ BG.png") 8 6 fill;
+    padding: 4px;
+    gap: 2px;
 }
-
-#badgesTop, #badgesBot {
-    position: relative;
-}
-
-.badge {
-    position: absolute
-}
-#badge1 {
-    top: 16px;
-    left: 20px;
-}
-#badge2 {
-    top: 20px;
-    left: 66px;
-}
-#badge3 {
-    top: 18px;
-    right: 72px;
-}
-#badge4 {
-    top: 16px;
-    right: 8px;
-}
-#badge5 {
-    top: 16px;
-    left: 14px;
-}
-#badge6 {
-    top: 18px;
-    left: 74px;
-}
-#badge7 {
-    top: 18px;
-    right: 68px;
-}
-#badge8 {
-    top: 20px;
-    right: 9px;
+.badgeGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2px 0px;
+    /* this is because badge compo looks off between left and right */
+    transform: translateX(2px);
 }
 
 

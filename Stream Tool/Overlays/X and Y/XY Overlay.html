@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Poke XY Overlay</title>
     <script src="../../Resources/Scripts/Overlays.js" type="module"></script>
-    <link rel="stylesheet" href="Resources/XY.css">
+    <link rel="stylesheet" href="Resources/CSS/Style.css">
 </head>
 
 <body>
@@ -22,45 +22,14 @@
     <div id="playerInfo">
 
         <div id="badges">
-
-            <div id="badgesTop">
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/1.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/1.png" class="emptyBadge" alt="">
+            <div class="badgeGroup b-gymBadges"></div>
+            <template id="badgeTemplate">
+                <link rel="stylesheet" href="Resources/CSS/Player Info/Badge.css">
+                <div id="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/6/XY/((badgeNum)).png" id="badgeImg" class="badge">
+                    <img src="Resources/Images/Badge BGs/((badgeNum)).png" id="badgeBg">
                 </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/2.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/2.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/3.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/3.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/4.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/4.png" class="emptyBadge" alt="">
-                </div>
-            </div>
-
-            <div id="badgesBot">
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/5.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/5.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/6.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/6.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/7.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/7.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/6/XY/8.png" class="badge" alt="">
-                    <img src="Resources/Images/Badge BGs/8.png" class="emptyBadge" alt="">
-                </div>
-            </div>
-
+            </template>
         </div>
 
         <div id="playerStats">

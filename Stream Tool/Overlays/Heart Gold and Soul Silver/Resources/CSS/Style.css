@@ -1,6 +1,6 @@
 @font-face {
     font-family: "FontMain";
-    src: url('../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
+    src: url('../../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
 }
 
 * {
@@ -32,23 +32,16 @@ html, body {
     border: thick double #b8a479;
 }
 
-#badgesTop, #badgesBot {
-    position: relative;
-
+.badgeGroup {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-
     padding: 6px;
     justify-items: center;
     align-items: center;
     justify-content: space-evenly;
-    
 }
 
-.badge {
-    position: absolute;
-}
 
 #playerStats {
     display: flex;

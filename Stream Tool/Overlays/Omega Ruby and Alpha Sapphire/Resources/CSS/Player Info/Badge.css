@@ -1,0 +1,9 @@
+@import "../../../../../Resources/CSS/Overlays/Player Info/Badge.css";
+
+div {
+    zoom: 1.15;
+}
+
+#badgeImg {
+    position: absolute;
+}

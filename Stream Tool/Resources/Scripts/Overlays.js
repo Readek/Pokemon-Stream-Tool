@@ -1,7 +1,7 @@
 import { resetPokeLocTexts, setLanguage } from "./Utils/Language.mjs";
 import { initWebsocket } from "./Utils/WebSocket.mjs";
 import { current } from "./Overlays/Globals.mjs";
-import { playerInfo } from "./Overlays/Player Info.mjs";
+import { playerInfo } from "./Overlays/Player Info/Player Info.mjs";
 import { pokemons } from "./Overlays/Player Team/Pokemons.mjs";
 import { battlePokemons } from "./Overlays/Trainer Battle/Battle Pokemons.mjs";
 import { setTrainerName, showTrainerNameIntro } from "./Overlays/Trainer Battle/Trainer Name Intro.mjs";

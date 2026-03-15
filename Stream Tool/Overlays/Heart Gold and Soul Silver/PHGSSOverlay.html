@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Poke HGSS Overlay</title>
     <script src="../../Resources/Scripts/Overlays.js" type="module"></script>
-    <link rel="stylesheet" href="Resources/PHGSS.css">
+    <link rel="stylesheet" href="Resources/CSS/Style.css">
 </head>
 
 <body>
@@ -14,79 +14,16 @@
     <div id="playerInfo">
 
         <div id="badges">
-
-            <div id="badgesTop" class="badgesJohto">
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/1.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/1.png" class="emptyBadge" alt="">
+            <div class="badgeGroup b-Johto"></div>
+            <div class="badgeGroup b-Kanto"></div>
+            <template id="badgeTemplate">
+                <link rel="stylesheet" href="Resources/CSS/Player Info/Badge.css">
+                <div id="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/4/HGSS/((badgeType))((badgeNum)).png" id="badgeImg" class="badge">
+                    <img src="Resources/Images/Badge BGs/((badgeType))((badgeNum)).png" id="badgeBg">
                 </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/2.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/2.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/3.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/3.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/4.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/4.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/5.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/5.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/6.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/6.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/7.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/7.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Johto/8.png" class="badge badgeJohto" alt="">
-                    <img src="Resources/Images/Badge BGs/Johto/8.png" class="emptyBadge" alt="">
-                </div>
-            </div>
-
-            <div id="badgesBot" class="badgesKanto">
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/1.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/1.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/2.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/2.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/3.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/3.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/4.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/4.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/5.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/5.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/6.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/6.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/7.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/7.png" class="emptyBadge" alt="">
-                </div>
-                <div class="badgeDiv">
-                    <img src="../../Resources/Assets/Badges/4/HGSS/Kanto/8.png" class="badge badgeKanto" alt="">
-                    <img src="Resources/Images/Badge BGs/Kanto/8.png" class="emptyBadge" alt="">
-                </div>
-            </div>
-            
+            </template>
         </div>
-
 
         <div id="playerStats">
 

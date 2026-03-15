@@ -1,14 +1,14 @@
 @font-face {
     font-family: "FontBold";
-    src: url('../../../Resources/Fonts/RobotoCondensed-Bold.ttf');
+    src: url('../../../../Resources/Fonts/RobotoCondensed-Bold.ttf');
 }
 @font-face {
     font-family: "FontMain";
-    src: url('../../../Resources/Fonts/RobotoCondensed-SemiBold.ttf');
+    src: url('../../../../Resources/Fonts/RobotoCondensed-SemiBold.ttf');
 }
 @font-face {
     font-family: "FontMedium";
-    src: url('../../../Resources/Fonts/RobotoCondensed-Medium.ttf');
+    src: url('../../../../Resources/Fonts/RobotoCondensed-Medium.ttf');
 }
 
 * {
@@ -78,14 +78,12 @@ html, body {
     padding: 10px 5px 10px 5px;
 }
 
-#badgesTop, #badgesBot {
+.badgeGroup {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-}
-
-.badge {
-    position: absolute;
+    gap: 0px 5px;
 }
 
 

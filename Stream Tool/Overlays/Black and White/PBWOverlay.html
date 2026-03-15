@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Poke BnW Overlay</title>
+    <title>Poke BnW2 Overlay</title>
     <script src="../../Resources/Scripts/Overlays.js" type="module"></script>
-    <link rel="stylesheet" href="Resources/PBW2.css">
+    <link rel="stylesheet" href="Resources/CSS/Style.css">
 </head>
 
 <body>
@@ -13,20 +13,15 @@
 
     <div id="playerInfo">
 
-        <div id="badgesTop">
-            <img src="../../Resources/Assets/Badges/5/BW2/1.png" id="badge1" class="badge" alt="">
-            <img src="../../Resources/Assets/Badges/5/BW2/2.png" id="badge2" class="badge" alt="">
-            <img src="../../Resources/Assets/Badges/5/BW2/3.png" id="badge3" class="badge" alt="">
-            <img src="../../Resources/Assets/Badges/5/BW2/4.png" id="badge4" class="badge" alt="">
-            <img src="Resources/Images/Badges Top.png" alt="">
-        </div>
-
-        <div id="badgesBot">
-            <img src="../../Resources/Assets/Badges/5/BW2/5.png" id="badge5" class="badge" alt="">
-            <img src="../../Resources/Assets/Badges/5/BW2/6.png" id="badge6" class="badge" alt="">
-            <img src="../../Resources/Assets/Badges/5/BW2/7.png" id="badge7" class="badge" alt="">
-            <img src="../../Resources/Assets/Badges/5/BW2/8.png" id="badge8" class="badge">
-            <img src="Resources/Images/Badges Bot.png" alt="">
+        <div id="badges">
+            <div class="badgeGroup b-gymBadges"></div>
+            <template id="badgeTemplate">
+                <link rel="stylesheet" href="Resources/CSS/Player Info/Badge.css">
+                <div id="badgeDiv">
+                    <img src="../../Resources/Assets/Badges/5/BW2/((badgeNum)).png" id="badgeImg" class="badge">
+                    <img src="Resources/Images/Badge BGs/((badgeNum)).png" id="badgeBg">
+                </div>
+            </template>
         </div>
 
         <div id="playerStats">
