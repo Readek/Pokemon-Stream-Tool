@@ -172,25 +172,33 @@ function romanToInt(roman) {
     return result;
 }
 
-/** Updates all texts to current language */
-function resetTexts() {
+/**
+ * Updates all texts to current language
+ * @param {NodeListOf<Element>?} element
+ */
+function resetTexts(element = document.body.querySelectorAll("*")) {
 
-    // regular inline text
-    const texts = document.querySelectorAll("*[locText]");
-    for (const el of texts) {
-        el.textContent = getLocalizedText(el.getAttribute("locText"));
-    }
+    // look for ALL elements inside the document
+    for (const el of element) {
 
-    // title hover tooltips
-    const titles = document.querySelectorAll("*[locTitle]");
-    for (const el of titles) {
-        el.title = getLocalizedText(el.getAttribute("locTitle"));
-    }
+        // if element has a shadow root, take a look inside
+        if (el.shadowRoot) {
+            resetTexts(el.shadowRoot.querySelectorAll("*"));
+            continue;
+        };
+        // regular text
+        if (el.hasAttribute("locText")) {
+            el.textContent = getLocalizedText(el.getAttribute("locText")); continue;
+        }
+        // title hover tooltips
+        if (el.hasAttribute("locTitle")) {
+            el.title = getLocalizedText(el.getAttribute("locTitle")); continue;
+        }
+         // placeholder texts for inputs
+        if (el.hasAttribute("locPHolder")) {
+            el.placeholder = getLocalizedText(el.getAttribute("locPHolder")); continue;
+        }
 
-    // placeholder texts for inputs
-    const pHolders = document.querySelectorAll("*[locPHolder]");
-    for (const el of pHolders) {
-        el.placeholder = getLocalizedText(el.getAttribute("locPHolder"));
     }
 
 }
@@ -198,16 +206,29 @@ function resetTexts() {
 /**
  * Updates all localized pokemon strings to current language
  * @param {Number} gen - Current generation
+ * @param {NodeListOf<Element>?} element
  */
-export function resetPokeLocTexts(gen) {
-    // localized poke strings
+export function resetPokeLocTexts(gen, element = document.body.querySelectorAll("*")) {
+
     const pokeKeys = ["Ability", "Item", "Move", "Pokemon"];
-    pokeKeys.forEach(key => {
-        const els = document.querySelectorAll(`*[loc${key}]`);
-        for (const el of els) {
-            const textToSet = getLocalizedPokeText(el.getAttribute(`loc${key}`), key, gen);
-            el.value = textToSet; // some of them are inputs
-            el.textContent = textToSet;
+
+    for (const el of element) {
+
+        // if element has a shadow root, take a look inside
+        if (el.shadowRoot) {
+            resetPokeLocTexts(gen, el.shadowRoot.querySelectorAll("*"));
+            continue;
         }
-    });
+
+        // check if we need to update the text for each key type
+        pokeKeys.forEach(key => {
+            if (el.hasAttribute(`loc${key}`)) {
+                const textToSet = getLocalizedPokeText(el.getAttribute(`loc${key}`), key, gen);
+                el.value = textToSet; // some of them are inputs
+                el.textContent = textToSet;
+            }
+        });
+
+    }
+
 }
