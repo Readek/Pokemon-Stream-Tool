@@ -7,13 +7,6 @@ const badgeComp = {};
 const catchesNum = document.getElementById("catchesNumber");
 const deathsNum = document.getElementById("deathsNumber");
 
-const statUpAnim = [
-    {transform: "scale(1)", filter: "brightness(1)"},
-    {transform: "scale(1.2)", filter: "brightness(1.3)", offset: 0.2},
-    {transform: "scale(1)", filter: "brightness(1)"}
-];
-const statUpTime = {duration: 200, easing: "ease-out"}
-
 class PlayerInfo {
 
     /**
@@ -67,15 +60,15 @@ class PlayerInfo {
         if (catches != catchesNum.textContent) {
             // update that number
             catchesNum.textContent = catches;
-            // animate on stat update
-            catchesNum.parentElement.animate(statUpAnim, statUpTime);
             // hide stats if at 0
             catchesNum.parentElement.style.display = catches ? "flex" : "none";
+            // animate on stat update
+            if (catches) catchesNum.parentElement.getAnimations()[0].play();
         } 
         if (deaths != deathsNum.textContent) {
             deathsNum.textContent = deaths;
-            deathsNum.parentElement.animate(statUpAnim, statUpTime);
-            deathsNum.parentElement.style.display = catches ? "flex" : "none";
+            deathsNum.parentElement.style.display = deaths ? "flex" : "none";
+            if (deaths) deathsNum.parentElement.getAnimations()[0].play();
         }
 
     }

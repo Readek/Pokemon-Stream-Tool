@@ -1,3 +1,5 @@
+@import "../../../../../Resources/CSS/Overlays/Player Info/Stats.css";
+
 #playerInfo {
     position: absolute;
     top: 560px;
@@ -34,7 +36,7 @@
 }
 
 .stat {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 5px;
 }
