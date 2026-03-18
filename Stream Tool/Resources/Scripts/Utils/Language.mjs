@@ -188,15 +188,15 @@ function resetTexts(element = document.body.querySelectorAll("*")) {
         };
         // regular text
         if (el.hasAttribute("locText")) {
-            el.textContent = getLocalizedText(el.getAttribute("locText")); continue;
+            el.textContent = getLocalizedText(el.getAttribute("locText"));
         }
         // title hover tooltips
         if (el.hasAttribute("locTitle")) {
-            el.title = getLocalizedText(el.getAttribute("locTitle")); continue;
+            el.title = getLocalizedText(el.getAttribute("locTitle"));
         }
          // placeholder texts for inputs
         if (el.hasAttribute("locPHolder")) {
-            el.placeholder = getLocalizedText(el.getAttribute("locPHolder")); continue;
+            el.placeholder = getLocalizedText(el.getAttribute("locPHolder"));
         }
 
     }
