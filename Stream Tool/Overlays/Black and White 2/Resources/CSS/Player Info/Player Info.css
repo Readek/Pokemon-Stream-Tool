@@ -59,7 +59,7 @@
 }
 
 .statNumber {
-    color: #f8f8f8;
+    color: var(--textMain);
     font-size: 25px;
     text-shadow: 0px 0px 5px black;
 }

@@ -1,0 +1,190 @@
+@import "../../../../../Resources/CSS/Overlays/Player Team/Player Team.css";
+
+:host {
+    --elWidth: 300px;
+    height: 120px;
+    width: var(--elWidth);
+    margin-left: 0px;
+    opacity: 1;
+    transition: opacity .25s .3s, margin-left .6s;
+
+    @starting-style {
+        margin-left: calc(0px - var(--elWidth) - var(--elGap));
+        opacity: 0;
+    }
+}
+
+#pokeDiv {
+    --healthy: #337E11;
+    --warning: #7e7c11;
+    --danger: #7e1111;
+    --Par: var(--warning);
+    --Poi: #56117e;
+    --Fro: #1a8fa3;
+    --Bur: #7e4611;
+    --Sle: grey;
+    --activeColor: var(--healthy);
+    position: relative;
+    height: 100%;
+    border: thick double var(--activeColor);
+    border-radius: 30% / 100% 100% 100% 100%;
+}
+
+.pokeDivInCombat {
+    .pokeDivMask {
+        .pokeHpDiv {
+            transform: translateY(0px);
+        }
+    }
+    .pokeTexts {
+        transform: translateY(0px);
+    }
+}
+.pokeDivOutOfCombat { 
+    .pokeDivMask {
+        .pokeHpDiv {
+            transform: translateY(25px);
+        }
+    }
+    .pokeTexts {
+        transform: translateY(8px);
+    }
+}
+
+
+.pokeTexts {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+    text-shadow: 0px 0px 5px black;
+    transition: transform .5s;
+}
+
+.pokeDivMask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 27% / 100% 100% 100% 100%;
+    overflow: hidden;
+}
+
+.pokeLvlDiv {
+    display: flex;
+}
+.hidePokeLvlDiv {
+    .pokeLvlDiv {
+        display: none;
+    }
+    .pokeTexts {
+        transform: translateY(0px);
+    }
+}
+
+.pokeLvlBefore {
+    background-color: var(--activeColor);
+    width: 26px;
+}
+.pokeLvlTexts {
+    display: flex;
+    gap: 3px;
+    background-color: var(--activeColor);
+    padding: 2px 0px 2px 5px;
+    align-items: center;
+    font-size: 16px;
+}
+.pokeLvlAfter {
+    background-color: var(--activeColor);
+    width: 20px;
+    border-bottom-right-radius: 100%;
+}
+
+
+.pokeNick {
+    font-size: 30px;
+}
+
+.pokeSubText {
+    display: flex;
+    gap: 6px;
+    font-size: 22px;
+    font-style: oblique 15deg;
+    padding-left: 5px;
+    margin-top: -3px;
+}
+
+
+.pokeHpDiv {
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    --bacColor: #363636;
+    transition: transform .5s;
+}
+.pokeHpBefore {
+    background-color: var(--bacColor);
+    width: 26px;
+    flex-shrink: 0;
+}
+.pokeHpText {
+    display: flex;
+    justify-content: center;
+    width: 55px;
+    background-color: var(--bacColor);
+    padding: 2px 0px 1px 5px;
+    z-index: 2;
+    flex-shrink: 0;
+    text-wrap: nowrap;
+    color: #b6b6b6;
+    font-size: 16px;
+}
+.pokeHpAfter {
+    background-color: var(--bacColor);
+    width: 24px;
+    margin-left: -17px;
+    border-top-right-radius: 50%;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.pokeHpBar {
+    background-color: var(--bacColor);
+    width: 50%;
+    height: 11px;
+    transform: translateY(12px);
+    border-radius: 10% / 0 100% 0 0;
+    border: 4px solid var(--bacColor);
+    border-right: 6px solid var(--bacColor);
+    border-left: none;
+    overflow: hidden;
+}
+.hpBar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.pokeHpBarTotal {
+    background-color: grey;
+}
+.pokeHpBarCurrent {
+    background-color: var(--activeColor);
+    filter: brightness(1.7);
+}
+
+
+.pokeImgDiv {
+    position: absolute;
+    right: 30px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    clip-path: inset(-100px -100px 0px -100px);
+    width: 200px;
+    height: 100%;
+}
+.pokeImg {
+    transform: scale(2);
+    image-rendering: pixelated;
+}

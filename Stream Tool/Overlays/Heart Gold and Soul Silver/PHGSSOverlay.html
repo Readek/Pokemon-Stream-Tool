@@ -136,197 +136,47 @@
 
     <div id="botPokes">
 
-        <div class="pokeDiv">
+        <template id="teamPokeTemplate">
 
-            <div class="pokeImgDiv">
-                <img class="pokeImg">
-            </div>
+            <link rel="stylesheet" href="Resources/CSS/Player Team/Player Team.css">
 
-            <div class="pokeDivMask">
-                <div class="pokeHpDiv">
-                    <div class="pokeHpTextDiv">
-                        <div class="pokeHpText"></div>
-                    </div>
-                    <div class="pokeHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
-                    </div>
+            <div id="pokeDiv">
+
+                <div class="pokeImgDiv">
+                    <img class="pokeImg">
                 </div>
-            </div>
 
-            <div class="pokeTexts">
-                <div class="pokeLvlDiv">
-                    <div class="pokeLvlText" locText="pokeLvl"></div>
-                    <div class="pokeLvlNum"></div>
-                </div>
-                <div class="pokeNick"></div>
-                <div class="pokeSubText">
-                    <div class="pokeGender"></div>
-                    <div class="pokeSpecies"></div>
-                </div>
-            </div>
+                <div class="pokeDivMask">
 
-        </div>
-
-        <div class="pokeDiv">
-
-            <div class="pokeImgDiv">
-                <img class="pokeImg">
-            </div>
-
-            <div class="pokeDivMask">
-                <div class="pokeHpDiv">
-                    <div class="pokeHpTextDiv">
-                        <div class="pokeHpText"></div>
+                    <div class="pokeTexts">
+                        <div class="pokeLvlDiv">
+                            <div class="pokeLvlText" locText="pokeLvl"></div>
+                            <div class="pokeLvlNum"></div>
+                        </div>
+                        <div class="pokeNick"></div>
+                        <div class="pokeSubText">
+                            <div class="pokeGender"></div>
+                            <div class="pokeSpecies"></div>
+                        </div>
                     </div>
-                    <div class="pokeHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
+
+                    <div class="pokeHpHiddenDiv">
+                        <div class="pokeHpDiv">
+                            <div class="pokeHpTextDiv">
+                                <div class="pokeHpText"></div>
+                            </div>
+                            <div class="pokeHpBar">
+                                <div class="hpBar pokeHpBarTotal"></div>
+                                <div class="hpBar pokeHpBarCurrent"></div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
 
-            <div class="pokeTexts">
-                <div class="pokeLvlDiv">
-                    <div class="pokeLvlText" locText="pokeLvl"></div>
-                    <div class="pokeLvlNum"></div>
-                </div>
-                <div class="pokeNick"></div>
-                <div class="pokeSubText">
-                    <div class="pokeGender"></div>
-                    <div class="pokeSpecies"></div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="pokeDiv">
-
-            <div class="pokeImgDiv">
-                <img class="pokeImg">
-            </div>
-
-            <div class="pokeDivMask">
-                <div class="pokeHpDiv">
-                    <div class="pokeHpTextDiv">
-                        <div class="pokeHpText"></div>
-                    </div>
-                    <div class="pokeHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pokeTexts">
-                <div class="pokeLvlDiv">
-                    <div class="pokeLvlText" locText="pokeLvl"></div>
-                    <div class="pokeLvlNum"></div>
-                </div>
-                <div class="pokeNick"></div>
-                <div class="pokeSubText">
-                    <div class="pokeGender"></div>
-                    <div class="pokeSpecies"></div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="pokeDiv">
-
-            <div class="pokeImgDiv">
-                <img class="pokeImg">
-            </div>
-
-            <div class="pokeDivMask">
-                <div class="pokeHpDiv">
-                    <div class="pokeHpTextDiv">
-                        <div class="pokeHpText"></div>
-                    </div>
-                    <div class="pokeHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pokeTexts">
-                <div class="pokeLvlDiv">
-                    <div class="pokeLvlText" locText="pokeLvl"></div>
-                    <div class="pokeLvlNum"></div>
-                </div>
-                <div class="pokeNick"></div>
-                <div class="pokeSubText">
-                    <div class="pokeGender"></div>
-                    <div class="pokeSpecies"></div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="pokeDiv">
-
-            <div class="pokeImgDiv">
-                <img class="pokeImg">
-            </div>
-
-            <div class="pokeDivMask">
-                <div class="pokeHpDiv">
-                    <div class="pokeHpTextDiv">
-                        <div class="pokeHpText"></div>
-                    </div>
-                    <div class="pokeHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pokeTexts">
-                <div class="pokeLvlDiv">
-                    <div class="pokeLvlText" locText="pokeLvl"></div>
-                    <div class="pokeLvlNum"></div>
-                </div>
-                <div class="pokeNick"></div>
-                <div class="pokeSubText">
-                    <div class="pokeGender"></div>
-                    <div class="pokeSpecies"></div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="pokeDiv">
-
-            <div class="pokeImgDiv">
-                <img class="pokeImg">
-            </div>
-
-            <div class="pokeDivMask">
-                <div class="pokeHpDiv">
-                    <div class="pokeHpTextDiv">
-                        <div class="pokeHpText"></div>
-                    </div>
-                    <div class="pokeHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pokeTexts">
-                <div class="pokeLvlDiv">
-                    <div class="pokeLvlText" locText="pokeLvl"></div>
-                    <div class="pokeLvlNum"></div>
-                </div>
-                <div class="pokeNick"></div>
-                <div class="pokeSubText">
-                    <div class="pokeGender"></div>
-                    <div class="pokeSpecies"></div>
-                </div>
-            </div>
-
-        </div>
+        </template>
 
     </div>
 

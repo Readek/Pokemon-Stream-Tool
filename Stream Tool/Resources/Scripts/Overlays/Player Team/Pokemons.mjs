@@ -8,14 +8,6 @@ class Pokemons {
     /** @type {Pokemon[]} */
     #pokemons = [];
 
-    constructor() {
-
-        for (const pokeDiv of document.getElementsByClassName("pokeDiv")) {
-            this.#pokemons.push(new Pokemon(pokeDiv))
-        }
-
-    }
-
     /**
      * Gets the selected pokemon class
      * @param {Number} pokeNumber - Pokemon slot
@@ -31,10 +23,26 @@ class Pokemons {
      * @param {Boolean} bTypeChanged - If we just swapped battle type
      */
     update(data, bTypeChanged) {
-        
-        for (let i = 0; i < this.#pokemons.length; i++) {
-            this.#pokemons[i].update(data[i], bTypeChanged);            
-        }
+
+        for (let i = 0; i < Math.max(this.#pokemons.length, data.length); i++) {
+
+            // if we got sent more pokes than we have, create new ones
+            if (!this.#pokemons[i]) {
+                this.#pokemons.push(document.createElement("team-pokemon"));
+                pokesDiv.appendChild(this.#pokemons[i]);
+            }
+
+            // if we got sent less pokes than we have, delete the rest
+            if (!data[i]) {
+                this.#pokemons[i].delet();                
+                this.#pokemons.splice(i, 1);
+                i--;
+            } else {
+                // update all that data
+                this.#pokemons[i].update(data[i], bTypeChanged);
+            }
+
+        }        
 
     }
 
@@ -50,5 +58,5 @@ class Pokemons {
 
 }
 
-/** Player's party pokemons */
+/** Player's non-trainer battle party pokemon data */
 export const pokemons = new Pokemons;

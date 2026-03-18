@@ -1,0 +1,25 @@
+@import "../../../../Resources/CSS/Overlays/Poke Animations.css";
+
+* {
+    box-sizing: border-box;
+}
+
+.pokeFai, .pokeDed {
+    --activeColor: var(--danger) !important;
+    filter: grayscale(.8) brightness(.8) !important;
+}
+.pokePar {
+    --activeColor: var(--warning) !important;
+}
+.pokePoi {
+    --activeColor: var(--Poi) !important;
+}
+.pokeFro {
+    --activeColor: var(--Fro) !important;
+}
+.pokeBur {
+    --activeColor: var(--Bur) !important;
+}
+.pokeSle {
+    --activeColor: var(--Sle) !important;
+}

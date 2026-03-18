@@ -1,15 +1,18 @@
 import { typeToColor } from "../Type to Color.mjs";
 import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs";
 import { current } from "../Globals.mjs";
-/** @import { PokemonSentData } from "../../Utils/Type Definitions.mjs" */
+/** @import { PokemonSentData, PokeGender, PokeType, PokeImgData } from "../../Utils/Type Definitions.mjs" */
 
-export class Pokemon {
+const pokeTemplate = document.getElementById("teamPokeTemplate");
+
+export class Pokemon extends HTMLElement {
 
     #species = "";
     #form = "";
     #lvl = -1;
     #nickname = "¡";
     #gender = "";
+    /** @type {PokeType[]} */
     #types = [];
     #status = "";
     #shiny = false;
@@ -20,19 +23,22 @@ export class Pokemon {
     #hpDecreasing = false;
     #noHpAnim = false;
 
-    #img = "";
+    /** @type {PokeImgData} */
+    #img;
     #side = "Front";
-
-    #showHideTimeout;
-    #shakeItTimeout;
 
     /**
      * Manages all info related to a player's pokemon
-     * @param {HTMLElement} el 
      */
-    constructor(el) {
+    constructor() {
 
-        this.mainEl = el;
+        super();
+        const template = pokeTemplate.content;
+        const shadow = this.attachShadow({ mode: "open" });
+        shadow.appendChild(document.importNode(template, true));
+
+        this.mainEl = shadow.getElementById("pokeDiv");
+        const el = this.mainEl;
 
         this.speciesEl = el.getElementsByClassName(`pokeSpecies`)[0];
         this.lvlEl = el.getElementsByClassName(`pokeLvlNum`)[0];
@@ -46,15 +52,19 @@ export class Pokemon {
 
         // initialize status state
         this.#status = "---";
-        this.mainEl.classList.add("poke---");
+        el.classList.add("poke---");
+
+        // add localized strings where needed
+        const lvlTextEl = el.getElementsByClassName(`pokeLvlText`)[0];
+        lvlTextEl.textContent = getLocalizedText("pokeLvl");
 
     }
 
     /** @param {String} species */
     setSpecies(species) {
         this.#species = species;
-        if (!species) return; // we dont need to continue if no poke
-        this.speciesEl.textContent = getLocalizedPokeText(species, "Pokemon", current.generation);
+        this.speciesEl.textContent = getLocalizedPokeText(
+            species, "Pokemon", current.generation);
         this.speciesEl.setAttribute("locPokemon", species);
     }
     getSpecies() {
@@ -69,11 +79,12 @@ export class Pokemon {
 
         this.#form = form;
 
+        // cool mega evolution animation
         if (megaEvolving) {
-            this.imgEl.style.animation = `megaAnim 3.5s ${current.megaTime / 1000}s linear`;
-            setTimeout(() => {
-                this.imgEl.style.animation = "";
-            }, 3500 + current.megaTime);
+            this.imgEl.style.animation = `
+                megaAnim 3.5s ${current.megaTime / 1000}s linear forwards
+            `;
+            this.imgEl.getAnimations()[0].play();
         }
 
     }
@@ -121,25 +132,23 @@ export class Pokemon {
         return this.#nickname;
     }
 
-    /**
-     * Gender can be "F", "M", or null
-     * @param {String} gender 
-     */
+    /** @param {PokeGender} gender */
     setGender(gender) {
         this.#gender = gender;
-        this.gendEl.textContent = getLocalizedText("pokePronoun" + (gender || "Null"));
-        this.gendEl.setAttribute("locText", "pokePronoun" + (gender || "Null"));
+        this.gendEl.textContent = getLocalizedText(`pokePronoun${gender || "Null"}`);
+        this.gendEl.setAttribute("locText", `pokePronoun${gender || "Null"}`);
     }
+    /** @returns {PokeGender} */
     getGender() {
         return this.#gender;
     }
 
-    /** @param {String[]} types */
+    /** @param {PokeType[]} types */
     setTypes(types) {
         this.#types = types;
         this.#setBackgroundColor(types);
     }
-    /** @returns {String[]} */
+    /** @returns {PokeType[]} */
     getTypes() {
         return this.#types;
     }
@@ -150,7 +159,7 @@ export class Pokemon {
         // if fainted, let HP decide when to set status
         // if hp is 0/0, we'll assume user is using manual and thus allow fainted status
         if (status != "Fai" || (this.#hpCurrent == 0 && this.#hpMax == 0)) {
-            this.mainEl.classList.replace("poke" + this.#status, "poke" + status);
+            this.mainEl.classList.replace(`poke${this.#status}`, `poke${status}`);
             this.#status = status;
         }
 
@@ -176,45 +185,45 @@ export class Pokemon {
         this.#hpMax = max;
 
         // hide or show the health bar if pokemon is hurt (or in combat)
-        this.displayHPBar();
+        this.#displayHPBar();
 
         if (oldHp <= hp || this.#noHpAnim) {
 
             // if HP increased, just do everything instantly without animations
             this.#hpActive = hp;
             this.#updateHpBar(hp);
+            return;
 
-        } else {
+        }
 
-            // our boi has been damaged! play some animations
+        // our boi has been damaged! play some animations
 
-            // we fake a wait here to avoid having the overlay show data
-            // before it happens in game, since data in memory updates
-            // before displaying it in game
-            await new Promise(resolve => setTimeout(resolve, 1500));
+        // we fake a wait here to avoid having the overlay show data
+        // before it happens in game, since data in memory updates
+        // before displaying it in game
+        await new Promise(resolve => setTimeout(resolve, 1500));
 
-            // trigger that oomf animation
-            this.#shakeIt();
-            // wait a bit before hp starts ticking down to direct viewer's eyes
-            await new Promise(resolve => setTimeout(resolve, 500));
+        // trigger that oomf animation
+        this.#shakeIt();
+        // wait a bit before hp starts ticking down to direct viewer's eyes
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-            if (!this.#hpDecreasing) {
+        // decrease that health bar
+        if (!this.#hpDecreasing) {
 
-                this.#hpDecreasing = true;
+            this.#hpDecreasing = true;
 
-                while (this.#hpActive >= this.#hpCurrent) {
+            while (this.#hpActive >= this.#hpCurrent) {
 
-                    this.#updateHpBar(this.#hpActive);
+                this.#updateHpBar(this.#hpActive);
 
-                    await new Promise(resolve => setTimeout(resolve, 1000/30));
+                await new Promise(resolve => setTimeout(resolve, 1000/30)); // 30 fps
 
-                    this.#hpActive--;
-
-                }
-
-                this.#hpDecreasing = false;
+                this.#hpActive--;
 
             }
+
+            this.#hpDecreasing = false;
 
         }
 
@@ -255,14 +264,14 @@ export class Pokemon {
 
         this.inCombat = value;
 
-        this.turnSprite(value);
-        this.displayHPBar(value);
+        this.#turnSprite(value);
+        this.#displayHPBar();
 
     }
 
     /**
      * Group of image src's for this pokemon
-     * @param {String[]} img 
+     * @param {PokeImgData} img 
      */
     setImg(img) {
 
@@ -285,33 +294,6 @@ export class Pokemon {
     }
     getImgSrc() {
         return this.#img;
-    }
-
-    /** Hides this pokemon's div */
-    hidePoke() {
-
-        this.mainEl.style.opacity = "0";
-
-        // this prevents bugs if a pokemon hides and shows fast enough
-        clearTimeout(this.#showHideTimeout);
-
-        this.#showHideTimeout = setTimeout(() => {
-            // we use margin here with div width + flex gap
-            this.mainEl.style.marginLeft = "-315px";
-            this.setSpecies(null);
-        }, 250);
-
-    }
-    /** Shows this pokemon on the list */
-    showPoke() {
-
-        this.mainEl.style.marginLeft = "0px";
-
-        clearTimeout(this.#showHideTimeout);
-
-        this.#showHideTimeout = setTimeout(() => {
-            this.mainEl.style.opacity = "1";
-        }, 300);
     }
 
     /**
@@ -348,14 +330,14 @@ export class Pokemon {
      * Turns the pokemon's sprite
      * @param {Boolean} side - True for "Back", false for "Front"
      */
-    turnSprite(side) {
+    #turnSprite(side) {
         this.#side = side ? "Back" : "Front";
         this.setImg(this.getImgSrc());
     }
 
 
     /** Shows or hides pokemon's HP bar and adjusts other elements */
-    async displayHPBar() {
+    #displayHPBar() {
 
         // if pokemon is hurt or in combat
         if (this.inCombat || this.getHpCurrent() < this.getHpMax()) {
@@ -375,15 +357,13 @@ export class Pokemon {
     /** Triggers a shake animation for the entire pokemon div */
     async #shakeIt() {
 
-        clearTimeout(this.#shakeItTimeout);
-        this.mainEl.style.animation = "";
-        this.mainEl.offsetHeight; // triggers reflow so it can animate again
-        this.mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
-
-        // clear animation so it doesnt fire on new display
-        this.#shakeItTimeout = setTimeout(() => {
-            this.mainEl.style.animation = "";
-        }, 400);
+        // apply the animation the first time this happens
+        if (!this.mainEl.getAnimations()[0]) {
+            this.mainEl.style.animation = `
+                shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s forwards
+            `;
+        }
+        this.mainEl.getAnimations()[0].play();
 
     }
 
@@ -405,34 +385,26 @@ export class Pokemon {
             // dont animate hp changes if pokemon changed
             this.#noHpAnim = true;
 
-            if (data.species) {
-
-                if (data.species == this.getSpecies() && data.form.includes("Mega")) {
-                    megaEvolving = true;
-                }
-
-                this.setSpecies(data.species);
-                this.setForm(data.form, megaEvolving);
-
-                this.showPoke();
-
-                // if pokemon is mega evolving, wait for that img update
-                if (megaEvolving) {
-                    setTimeout(() => {
-                        this.setImg(data.img);
-                        this.setTypes(data.types);
-                        this.#shakeIt();
-                    }, 2700 + (current.megaTime));
-                    current.megaTime = 0;
-                } else {
-                    this.setImg(data.img);
-                }
-
-                this.#shiny = data.shiny;
-
-            } else {
-                this.hidePoke();
+            if (data.species == this.getSpecies() && data.form.includes("Mega")) {
+                megaEvolving = true;
             }
+
+            this.setSpecies(data.species);
+            this.setForm(data.form, megaEvolving);
+
+            // if pokemon is mega evolving, wait for that img update
+            if (megaEvolving) {
+                setTimeout(() => {
+                    this.setImg(data.img);
+                    this.setTypes(data.types);
+                    this.#shakeIt();
+                }, 2700 + (current.megaTime));
+                current.megaTime = 0;
+            } else {
+                this.setImg(data.img);
+            }
+
+            this.#shiny = data.shiny;
 
         } else if (this.#shiny != data.shiny) {
             // if shiny was toggled, just update the image
@@ -469,8 +441,28 @@ export class Pokemon {
         }
 
         // in combat status
-        this.setInCombat(data.inCombat);
+        this.setInCombat(data.inCombat);        
+
+    }
+
+    /** All things have to die someday */
+    async delet() {
+        
+        // say goodbye
+        this.style.opacity = 0;
+        await this.getAnimations()[0].finished;
+
+        // the ilusion of removing an item from a list smoothly
+        const mindTheGap = Number(window.getComputedStyle(this.parentElement)
+            .getPropertyValue("gap").replace("px", ""));
+        this.style.marginLeft = (-this.offsetWidth-mindTheGap)+"px";
+        
+        // and after that finishes, dont come back
+        await this.getAnimations()[0].finished;
+        this.remove();
 
     }
 
 }
+
+customElements.define("team-pokemon", Pokemon);

@@ -11,6 +11,10 @@
     src: url('../../../Resources/Fonts/RobotoCondensed-Medium.ttf');
 }
 
+:root {
+    --textMain: #f8f8f8;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -74,14 +78,14 @@ html, body {
 
 #noCatchesMessage {
     display: none;
-    color: #f8f8f8;
+    color: var(--textMain);
     filter: drop-shadow(0px 0px 10px black);
     font-size: 48px;
 }
 
 
 #whoThatContent {
-    color: #f8f8f8;
+    color: var(--textMain);
     display: flex;
     gap: 50px;
 }
@@ -148,7 +152,7 @@ html, body {
     transform: translateY(5px);
     display: flex;
     gap: 16px;
-    color: #f8f8f8;
+    color: var(--textMain);
     font-size: 50px;
     text-shadow: 0px 0px 10px black;
     width: 100%;
