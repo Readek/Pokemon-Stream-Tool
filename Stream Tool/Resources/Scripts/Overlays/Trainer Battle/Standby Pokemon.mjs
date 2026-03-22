@@ -2,10 +2,12 @@ import { getLocalizedPokeText } from "../../Utils/Language.mjs";
 import { current } from "../Globals.mjs";
 /** @import { IconCoords, PokemonSentData } from "../../Utils/Type Definitions.mjs" */
 
+const standbyTemplate = document.getElementById("standbyPokeTemplate");
 const playerActiveDiv = document.getElementById("battleStandbyBarPlayer");
 const enemyActiveDiv = document.getElementById("battleStandbyBarEnemy");
 
-export class StandbyPokemon {
+/** Manages standby combat overlay elements for this pokemon */
+export class StandbyPokemon extends HTMLElement {
 
     #player = true;
 
@@ -29,17 +31,15 @@ export class StandbyPokemon {
     #reveal = false;
     #reveals = [];
 
-    /**
-     * Manages standby combat overlay elements for this pokemon
-     * @param {Boolean} side - True if player, false if enemy
-     */
-    constructor(side) {
+    constructor() {
 
-        this.#player = side;
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        shadow.appendChild(document.importNode(standbyTemplate.content, true));
 
-        const el = this.#createElement();
-
+        const el = shadow.getElementById("standbyPokemon");
         this.#mainEl = el;
+
         this.#iconEl = el.getElementsByClassName(`standbyPokeIconDiv`)[0];
         this.#nameText = el.getElementsByClassName("standbyName")[0];
         this.#hpBar = el.getElementsByClassName("pokeHpBarCurrent")[0];
@@ -50,45 +50,19 @@ export class StandbyPokemon {
 
     }
 
-    #createElement() {
-
-        const element = document.createElement("div");
-        element.classList.add("standbyPokemon");
-
-        // if enemy, the entire element is mirrored
-        // this is to flip back things like text so it can be read
-        const flipBack = this.#player ? "nada" : "flipBack";
-
-        element.insertAdjacentHTML("afterbegin", `
-
-            <img class="standbyPokeIconDiv" src="../../Resources/Assets/Pokemon/pokemonicons-sheet.png">
-
-            <div class="standbyNameHp">
-
-                <div class="standbyName ${flipBack}"></div>
-
-                <div class="standbyHpDiv">
-                    <div class="standbyHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
-                    </div>
-                </div>
-
-            </div>
-
-        `);
-
+    /**
+     * Sets player or enemy status to this element
+     *  @param {Boolean} side - True if player, false if enemy
+     */
+    friendOrFoe(side) {
+        this.#player = side;
         // add element to the battle overlay
-        if (this.#player) {
-            playerActiveDiv.appendChild(element);
+        if (side) {
+            playerActiveDiv.appendChild(this);
         } else {
-            enemyActiveDiv.appendChild(element);
+            enemyActiveDiv.appendChild(this);
         }
-
-        return element;
-
     }
-
 
     getSpecies() {
         return this.#species;
@@ -236,11 +210,11 @@ export class StandbyPokemon {
 
     /** Hides this pokemon's div */
     hidePoke() {
-        this.#mainEl.style.display = "none";
+        this.style.display = "none";
     }
     /** Shows this pokemon on the bar */
     showPoke() {
-        this.#mainEl.style.display = "flex";
+        this.style.display = "flex";
     }
 
     /** Sets intro animation for this poke */
@@ -261,7 +235,7 @@ export class StandbyPokemon {
     update(data) {
 
         // if pokemon is not in combat right now, hide it
-        if (data.inCombat || !data.species) {
+        if (data.inCombat) {
 
             this.hidePoke();
             this.#inCombat = data.inCombat;
@@ -311,7 +285,9 @@ export class StandbyPokemon {
 
     /** Deletes the entirety of this pokemon */
     delet() {
-        this.#mainEl.remove();
+        this.remove();
     }
 
 }
+
+customElements.define("standby-pokemon", StandbyPokemon);

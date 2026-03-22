@@ -190,6 +190,114 @@
             <div class="battleBotBar" id="battleStandbyBarEnemy"></div>
         </div>
 
+        <template id="battlePokeMainTemplate">
+
+            <link rel="stylesheet" href="Resources/CSS/Trainer Battle/Active/Active Poke Main.css">
+
+            <div id="activeMainInfo">
+
+                <div class="activePokeImgDiv">
+                    <img class="activePokeImg">
+                </div>
+            
+                <div class="activeDivMask">
+
+                    <div class="activeLvlDiv">
+                        <div class="activeLvlTexts flipBack">
+                            <div class="activeLvlText" locText="pokeLvl"></div>
+                            <div class="activeLvlNum"></div>
+                        </div>
+                        <img class="activeTypeIcon">
+                        <img class="activeTypeIcon">
+                    </div>
+
+                    <div class="activeMainTexts">
+
+                        <div class="activeName flipBack"></div>
+                        <div class="activeSubText">
+                            <div class="activeAbility flipBack"></div>
+                            <div class="activeItemDiv">
+                                <div class="activeItemPipe">|</div>
+                                <div class="activeItemImgDiv">
+                                    <div class="activeItemImgBg"></div>
+                                    <div class="activeItemImgQue flipBack">?</div>
+                                    <img class="activeItemImg" src="../../Resources/Assets/Items/itemicons-sheet.png"/>
+                                </div>
+                                <div class="activeItem flipBack"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="activeHpDiv">
+                        <div class="activeHpTextDiv">
+                            <div class="activeHpText flipBack"></div>
+                        </div>
+                        <div class="pokeHpBar">
+                            <div class="hpBar pokeHpBarTotal"></div>
+                            <div class="hpBar pokeHpBarCurrent"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </template>
+
+        <template id="battlePokeMovesTemplate">
+            <link rel="stylesheet" href="Resources/CSS/Trainer Battle/Active/Active Poke Moves.css">
+            <div id="activeMoveInfo">
+                <active-poke-move></active-poke-move>
+                <active-poke-move></active-poke-move>
+                <active-poke-move></active-poke-move>
+                <active-poke-move></active-poke-move>
+            </div>
+        </template>
+
+        <template id="battlePokeMoveTemplate">
+            <link rel="stylesheet" href="Resources/CSS/Trainer Battle/Active/Active Poke Move.css">
+            <div id="activeMoveDiv">
+                <div class="activeMoveTexts">
+                    <div class="nameContainer">
+                        <div class="activeMoveName flipBack"></div>
+                    </div>
+                    <div class="activeMoveRight flipBack">
+                        <div class="activeMovePPNum"></div>
+                        <div class="activeMovePPText" locText="pokePP"></div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="standbyPokeTemplate">
+
+            <link rel="stylesheet" href="Resources/CSS/Trainer Battle/Standby Poke.css">
+
+            <div id="standbyPokemon">
+
+                <img class="standbyPokeIconDiv" src="../../Resources/Assets/Pokemon/pokemonicons-sheet.png">
+
+                <div class="standbyNameHp">
+
+                    <div class="nameContainer">
+                        <div class="standbyName flipBack"></div>
+                    </div>
+
+                    <div class="standbyHpDiv">
+                        <div class="standbyHpBar">
+                            <div class="hpBar pokeHpBarTotal"></div>
+                            <div class="hpBar pokeHpBarCurrent"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </template>
+
     </div>
 
     <div id="enemyNameIntroDiv">

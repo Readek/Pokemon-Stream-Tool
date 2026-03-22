@@ -1,4 +1,5 @@
 @import "Player Info/Player Info.css";
+@import "Trainer Battle/Trainer Battle.css";
 
 @font-face {
     font-family: "FontMain";
@@ -7,6 +8,16 @@
 
 :root {
     --textMain: #f8f8f8;
+
+    --healthy: #949494;
+    --warning: #7e7c11;
+    --danger: #7e1111;
+    --Par: var(--warning);
+    --Poi: #56117e;
+    --Fro: #1a8fa3;
+    --Bur: #7e4611;
+    --Sle: grey;
+    --activeColor: var(--healthy);
 }
 
 * {
@@ -220,15 +231,7 @@ html, body {
 }
 
 
-#battleDiv {
-    display: none;
-}
-
-
-#enemyNameIntroDiv {
-    display: none;
-}
-
+/* Other */
 
 #connErrorDiv {
     display: none;
@@ -247,28 +250,6 @@ html, body {
 
 
 /* Animations! */
-@keyframes slideOut {
-    from {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-    to {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-
 @keyframes hidePokes {
     from {
         opacity: 1;
@@ -288,64 +269,4 @@ html, body {
         opacity: 1;
         transform: translateY(0px);
     }
-}
-
-@keyframes iDontFeelSoGood {
-    from {opacity: 1;}
-    to {opacity: 0;}
-}
-
-@keyframes shake {
-    0% { transform: translate(1px, 1px); filter: brightness(1.3); }
-    10% { transform: translate(1px, -2px); }
-    20% { transform: translate(-1px, 0px); }
-    30% { transform: translate(1px, 1px); }
-    40% { transform: translate(2px, -1px); }
-    50% { transform: translate(0px, 1px); }
-    60% { transform: translate(-1px, 0px); }
-    70% { transform: translate(1px, 1px); filter: brightness(1); }
-    80% { transform: translate(-1px, -1px); }
-    90% { transform: translate(1px, 0px); }
-    100% { transform: translate(0px, -1px); }
-}
-
-@keyframes megaAnim {
-    0% {filter: brightness(1);}
-    85% {filter: brightness(15);}
-    100% {filter: brightness(1);}
-}
-
-
-@keyframes trainerIntroFull {
-    0% {transform: translateY(20px);}
-    35% {transform: translateY(20px);}
-    45% {transform: translateY(0px);}
-}
-@keyframes trainerIntroTopBar {
-    0% {transform: translateX(-100%);}
-    15% {transform: translateX(0%);}
-    85% {transform: translateX(0%);}
-    100% {transform: translateX(100%);}
-}
-@keyframes trainerIntroBotBar {
-    0% {transform: translateX(100%);}
-    15% {transform: translateX(0%);}
-    85% {transform: translateX(0%);}
-    100% {transform: translateX(-100%);}
-}
-@keyframes trainerIntroTexts {
-    0% {transform: translateX(40px); opacity: 0;}
-    5% {transform: translateX(40px); opacity: 0;}
-    15% {transform: translateX(0px); opacity: 1;}
-    85% {transform: translateX(0px); opacity: 1;}
-    95% {transform: translateX(-40px); opacity: 0;}
-    100% {transform: translateX(-40px); opacity: 0;}
-}
-
-@keyframes trainerIntroCount {
-    0% {opacity: 0;}
-    35% {opacity: 0;}
-    45% {opacity: 1;}
-    90% {opacity: 1;}
-    100% {opacity: 0;}
 }

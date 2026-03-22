@@ -1,0 +1,3 @@
+.pokeFai, .pokeDed {
+    filter: grayscale(.8) brightness(.8) !important;
+}

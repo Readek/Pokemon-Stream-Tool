@@ -7,7 +7,9 @@
  * } PokeType
  */
 
-/** @typedef {[{name: String, type: PokeType, pp: Number}]} Moves */
+/** @typedef {[Move]} Moves */
+/** @typedef {{name: String, type: PokeType, pp: Number}} Move */
+
 
 /**
  * @typedef {{left: Number, top: Number}} Coords

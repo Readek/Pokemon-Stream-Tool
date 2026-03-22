@@ -5,6 +5,7 @@ import { StandbyPokemon } from "./Standby Pokemon.mjs";
 export class BattlePokemon {
 
     #active;
+    /** @type {StandbyPokemon} */
     #standby;
 
     #gamemode = 0;
@@ -17,7 +18,9 @@ export class BattlePokemon {
     constructor(side) {
 
         this.#active = new ActivePokemon(side);
-        this.#standby = new StandbyPokemon(side);
+        
+        this.#standby = document.createElement("standby-pokemon");
+        this.#standby.friendOrFoe(side);
 
     }
 
@@ -63,10 +66,8 @@ export class BattlePokemon {
     }
 
     delet() {
-
         this.#active.delet();
         this.#standby.delet();
-
     }
 
 }

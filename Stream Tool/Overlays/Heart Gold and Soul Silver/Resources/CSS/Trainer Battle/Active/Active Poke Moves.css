@@ -1,0 +1,21 @@
+@import "../../../../../../Resources/CSS/Overlays/Trainer Battle/Active/Active Poke Moves.css";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#activeMoveInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    width: 200px;
+}
+
+.activeMoveDiv1v1 {
+    width: 200px !important;
+}
+.activeMoveDiv2v2 {
+    width: 150px !important;
+}

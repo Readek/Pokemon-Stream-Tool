@@ -34,7 +34,7 @@ class Pokemons {
 
             // if we got sent less pokes than we have, delete the rest
             if (!data[i]) {
-                this.#pokemons[i].delet();                
+                this.#pokemons[i].delet();
                 this.#pokemons.splice(i, 1);
                 i--;
             } else {
@@ -42,7 +42,7 @@ class Pokemons {
                 this.#pokemons[i].update(data[i], bTypeChanged);
             }
 
-        }        
+        }
 
     }
 
@@ -53,7 +53,7 @@ class Pokemons {
     async hide() {
         const fadeTime = .7
         pokesDiv.style.animation = `hidePokes ${fadeTime}s both`;
-        await new Promise(resolve => setTimeout(resolve, fadeTime*1000));
+        await pokesDiv.getAnimations()[0].finished;
     }
 
 }

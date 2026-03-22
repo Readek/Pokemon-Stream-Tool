@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+.activeMoveHidePP {
+
+    .activeMoveRight {
+        display: none;
+    }
+
+}
+
+.flipBack {
+    transform: var(--flipBack);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}

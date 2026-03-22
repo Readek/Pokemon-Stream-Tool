@@ -4,7 +4,10 @@ import { typeToColor } from "../../Type to Color.mjs";
 import { ActivePokemon } from "./Active Pokemon.mjs";
 /** @import { Coords, PokeImgData, PokemonSentData} from "../../../Utils/Type Definitions.mjs" */
 
-export class ActiveMainInfo {
+const elTemplate = document.getElementById("battlePokeMainTemplate");
+
+/** Manages active combat overlay elements for this pokemon */
+export class ActiveMainInfo extends HTMLElement {
 
     #player;
 
@@ -44,20 +47,14 @@ export class ActiveMainInfo {
     #reveals = [];
 
     #parent;
-    #shakeItTimeout;
 
-    /**
-     * Manages active combat overlay elements for this pokemon
-     * @param {Boolean} side - True if player, false if enemy
-     * @param {HTMLElement} fullEl - Element to append to
-     * @param {ActivePokemon} parent - Parent class for some calls
-     */
-    constructor(side, fullEl, parent) {
+    constructor() {
 
-        this.#player = side;
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        shadow.appendChild(document.importNode(elTemplate.content, true));
 
-        const el = this.#createElement(fullEl);
-
+        const el = shadow.getElementById("activeMainInfo");
         this.#mainEl = el;
 
         this.#imgEl = el.getElementsByClassName(`activePokeImg`)[0];
@@ -82,86 +79,22 @@ export class ActiveMainInfo {
 
         // initialize status state
         this.#status = "---";
-        this.#mainEl.classList.add("poke---");
+        el.classList.add("poke---");
 
-        // get correct lvl text
+        // get correct lvl text        
         el.getElementsByClassName("activeLvlText")[0].textContent = getLocalizedText("pokeLvl");
-
-        this.#parent = parent;
 
     }
 
     /**
-     * Creates element containing main active pokemon info
-     * @param {HTMLElement} fullEl - Element to append to
-     * @returns {HTMLElement}
+     * Sets player or enemy status and parent class
+     *  @param {Boolean} side - True if player, false if enemy
+     *  @param {ActivePokemon} parent - Parent class for some calls
      */
-    #createElement(fullEl) {
-
-        const element = document.createElement("div");
-        element.classList.add("activeMainInfo");
-
-        // if enemy, the entire element is mirrored
-        // this is to flip back things like text so it can be read
-        const flipBack = this.#player ? "" : "flipBack";
-
-        element.insertAdjacentHTML("afterbegin", `
-
-            <div class="activePokeImgDiv">
-                <img class="activePokeImg">
-            </div>
-        
-            <div class="activeDivMask">
-
-                <div class="activeLvlDiv">
-                    <div class="activeLvlTexts ${flipBack}">
-                        <div class="activeLvlText" locText="pokeLvl"></div>
-                        <div class="activeLvlNum"></div>
-                    </div>
-                    <img class="activeTypeIcon">
-                    <img class="activeTypeIcon">
-                </div>
-
-                <div class="activeMainTexts">
-
-                    <div class="activeName ${flipBack}"></div>
-                    <div class="activeSubText">
-                        <div class="activeAbility ${flipBack}"></div>
-                        <div class="activeItemDiv">
-                            <div class="activeItemPipe">|</div>
-                            <div class="activeItemImgDiv">
-                                <div class="activeItemImgBg"></div>
-                                <div class="activeItemImgQue ${flipBack}">?</div>
-                                <img class="activeItemImg" src="../../Resources/Assets/Items/itemicons-sheet.png"/>
-                            </div>
-                            <div class="activeItem ${flipBack}"></div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="activeHpDiv">
-                    <div class="activeHpBefore"></div>
-                    <div class="activeHpText ${flipBack}"></div>
-                    <div class="pokeHpAfter"></div>
-                    <div class="pokeHpBar">
-                        <div class="hpBar pokeHpBarTotal"></div>
-                        <div class="hpBar pokeHpBarCurrent"></div>
-                    </div>
-                </div>
-
-            </div>
-
-        `);
-
-        // add element to the battle overlay
-        fullEl.appendChild(element);
-
-        return element;
-
+    initialize(side, parent) {
+        this.#player = side;
+        this.#parent = parent;
     }
-
 
     getSpecies() {
         return this.#species;
@@ -187,11 +120,12 @@ export class ActiveMainInfo {
 
         const megaTime = this.#player ? current.megaTime : 0;
 
+        // cool mega evolution animation
         if (megaEvolving) {
-            this.#imgEl.style.animation = `megaAnim 3.5s ${megaTime / 1000}s linear`;
-            setTimeout(() => {
-                this.#imgEl.style.animation = "";
-            }, 3500 + megaTime);
+            this.#imgEl.style.animation = `
+                megaAnim 3.5s ${megaTime / 1000}s linear forwards
+            `;
+            this.#imgEl.getAnimations()[0].play();
         }
 
     }
@@ -246,9 +180,9 @@ export class ActiveMainInfo {
         this.#types = types;
 
         // type icons
-        this.#typeImg1.src = "../../Resources/Assets/Type Icons/" + types[0] + ".png";
+        this.#typeImg1.src = `../../Resources/Assets/Type Icons/${types[0]}.png`;
         if (types[1]) {
-            this.#typeImg2.src = "../../Resources/Assets/Type Icons/" + types[1] + ".png";
+            this.#typeImg2.src = `../../Resources/Assets/Type Icons/${types[1]}.png`;
             this.#typeImg2.style.display = "flex";
         } else {
             this.#typeImg2.style.display = "none";
@@ -411,7 +345,7 @@ export class ActiveMainInfo {
 
                     this.#updateHpBar(this.#hpActive);
 
-                    await new Promise(resolve => setTimeout(resolve, 1000/30));
+                    await new Promise(resolve => setTimeout(resolve, 1000/30)); // 30 fps
 
                     this.#hpActive--;
 
@@ -529,26 +463,20 @@ export class ActiveMainInfo {
 
     /** Sets intro animation for this poke */
     showIntro() {
-
-        const aniTime = .4;
-        this.#mainEl.style.animation = `slideIn ${aniTime}s both`;
-        // this will also fire every time pokemon swaps into combat
-
+        this.#mainEl.getAnimations()[0]?.play();
     }
 
 
     /** Triggers a shake animation for the entire pokemon div */
     async #shakeIt() {
 
-        clearTimeout(this.#shakeItTimeout);
-        this.#mainEl.style.animation = "";
-        this.#mainEl.offsetHeight; // triggers reflow so it can animate again
-        this.#mainEl.style.animation = "shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s";
-
-        // clear animation so it doesnt fire on new display
-        this.#shakeItTimeout = setTimeout(() => {
-            this.#mainEl.style.animation = "";
-        }, 400);
+        // apply the animation the first time this happens
+        if (!this.getAnimations()[0]) {
+            this.style.animation = `
+                shake cubic-bezier(0.0, 0.3, 0.1, 1.0) .4s forwards
+            `;
+        }
+        this.getAnimations()[0].play();
 
     }
 
@@ -584,7 +512,7 @@ export class ActiveMainInfo {
                     this.setAbility(data.ability, true);
                     this.setItem(data.item, null, true);
                     this.#shakeIt();
-                }, 2700 + (megatime)); 
+                }, 2700 + (megatime));
                 if (this.#player) current.megaTime = 0;
             } else {
                 this.setImg(data.img);
@@ -648,3 +576,5 @@ export class ActiveMainInfo {
     }
 
 }
+
+customElements.define("active-poke-main", ActiveMainInfo);

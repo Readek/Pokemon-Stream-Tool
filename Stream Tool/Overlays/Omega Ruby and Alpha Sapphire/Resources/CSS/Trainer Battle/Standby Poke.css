@@ -1,0 +1,79 @@
+@import "../../../../../Resources/CSS/Overlays/Trainer Battle/Standby Poke.css";
+
+:host {
+    height: 36px;
+    flex: 0 1 200px;
+}
+
+#standbyPokemon {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #00000060;
+    border: 2px solid var(--activeColor);
+    border-radius: 10% / 100% 100% 100% 100%;
+}
+
+.standbyPokeIconDiv {
+    width: 40px;
+    height: 30px;
+    object-fit: none;
+    image-rendering: pixelated;
+    display: inline-block;
+    flex-shrink: 0;
+    transform: scaleX(-2) scaleY(2) translate(-5px, -4px);
+}
+.standbyUnrevealed {
+    transform: scaleX(-1.4) scaleY(1.4) translate(-9px, -2px);
+    opacity: .75;
+}
+
+.standbyNameHp {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    padding-right: 12px;
+    padding-left: 22px;
+}
+
+.nameContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.standbyName {
+    position: absolute;
+    font-size: 21px;
+    font-family: "FontMedium";
+    text-shadow: 0px 0px 5px black;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.standbyHpDiv {
+    position: relative;
+    display: flex;
+    width: 96%;
+    height: 3px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    filter: drop-shadow(0px 0px 2px black);
+    margin-bottom: 3px;
+}
+
+.hpBar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.pokeHpBarTotal {
+    background-color: grey;
+}
+.pokeHpBarCurrent {
+    background-color: var(--activeColor);
+    filter: brightness(1.7);
+}

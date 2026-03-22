@@ -11,7 +11,9 @@ export class ActivePokemon {
 
     #fullEl;
 
+    /** @type {ActiveMainInfo} */
     #mainInfo;
+    /** @type {ActiveMoves} */
     #moveInfo;
 
     /**
@@ -23,8 +25,13 @@ export class ActivePokemon {
         const el = this.#createElement(side);
         this.#fullEl = el;
 
-        this.#mainInfo = new ActiveMainInfo(side, el, this);
-        this.#moveInfo = new ActiveMoves(side, el);
+        this.#mainInfo = document.createElement("active-poke-main");
+        this.#mainInfo.initialize(side, this);
+        el.appendChild(this.#mainInfo);
+
+        this.#moveInfo = document.createElement("active-poke-moves");
+        this.#moveInfo.friendOrFoe(side);
+        el.appendChild(this.#moveInfo);
 
     }
 
@@ -55,8 +62,8 @@ export class ActivePokemon {
     }
     /** Shows this pokemon on the bar */
     showPoke() {
-        this.#mainInfo.showIntro();
         this.#fullEl.style.display = "flex";
+        this.#mainInfo.showIntro();
     }
 
     /** Sets intro animation for this poke */
