@@ -313,6 +313,28 @@ button:hover {
 }
 
 
+.deletePokeButt {
+  font-family: "Roboto-Medium";
+  border: solid 2px var(--focused);
+  border-radius: 100%;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  transition: border-color 100ms;
+  padding: 0px 8px;
+  margin-right: 2px;
+  font-size: 18px;
+  height: 26px;
+}
+.deletePokeButt:hover, .deletePokeButt:focus-visible {
+  border: solid 2px lightcoral;
+  color: lightcoral;
+}
+.deletePokeButt:active {
+  filter: brightness(.8);
+}
+
+
 .finderEntry {
   display: flex;
   align-items: center;
@@ -1386,11 +1408,4 @@ button:hover {
   10% {opacity: 1;}
   20% {border-color: var(--focused);}
   100% {opacity: 1;}
-}
-
-
-@media (max-width: 590px) {
-
-  
-
 }

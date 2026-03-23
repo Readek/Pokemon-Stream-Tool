@@ -31,7 +31,7 @@ export class Catch extends Pokemon {
         }
 
         // but what if the pokemon wants to be free
-        this.deletButt = this.el.getElementsByClassName('catchDeleteButt')[0];
+        this.deletButt = this.el.getElementsByClassName('deletePokeButt')[0];
         this.deletButt.addEventListener("click", () => {this.delet()});
 
     }
@@ -47,7 +47,7 @@ export class Catch extends Pokemon {
         element.classList.add("catchDiv");
         element.insertAdjacentHTML("afterbegin", `
 
-            <button class="catchDeleteButt catchButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
+            <button class="deletePokeButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
 
             <button class="selector pokeSelector" locTitle="pokeSelectTitle" title="${getLocalizedText("pokeSelectTitle")}">
                 <img class="pokeSelectorIcon" alt="">

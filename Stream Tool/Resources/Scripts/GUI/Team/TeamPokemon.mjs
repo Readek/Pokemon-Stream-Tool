@@ -2,7 +2,9 @@ import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs
 import { current, inside, stPath } from "../Globals.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { typeToColor } from "../Type to Color.mjs";
+import { deleteTrainerPokemon } from "../VS Trainer/TrainerPokemons.mjs";
 import { updateTrainer } from "../VS Trainer/Update Trainer.mjs";
+import { deleteTeamPokemon } from "./TeamPokemons.mjs";
 /** @import { Moves, Coords, Stats, Boosts, Reveals } from "../../Utils/Type Definitions.mjs" */
 
 const statKeys = ["hp", "atk", "def", "spa", "spd", "spe"];
@@ -13,7 +15,11 @@ const boostKeysUpper = ["Atk", "Def", "SpA", "SpD", "Spe", "Pre", "Acc"];
 const pokePartyDiv = document.getElementById("pokeParty");
 const trainerPartyDiv = document.getElementById("trainerParty");
 
+let idCounter = 1; // used to find pokemon on an array
+
 export class TeamPokemon extends Pokemon {
+
+    #id;
 
     #status = "";
 
@@ -50,6 +56,9 @@ export class TeamPokemon extends Pokemon {
     constructor(enemy) {
 
         super(enemy);
+
+        this.#id = idCounter; // set the unique id to this pokemon
+        idCounter++; // change number for the next one
 
         this.lvlInp = this.el.getElementsByClassName("pokeLvlNumber")[0];
 
@@ -105,6 +114,15 @@ export class TeamPokemon extends Pokemon {
             this.#expInp.parentElement.style.display = "none";
         }
 
+        // delete button
+        this.el.getElementsByClassName('deletePokeButt')[0].addEventListener("click", () => {
+            this.delet();
+        })
+
+    }
+
+    getId() {
+        return this.#id;
     }
 
     /** @param {String} name - Name of the pokemon */
@@ -434,6 +452,8 @@ export class TeamPokemon extends Pokemon {
 
         <div class="teamPokeMainInfo">
 
+            <button class="deletePokeButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
+
             <button class="selector pokeSelector" locTitle="pokeSelectTitle">
                 <img class="pokeSelectorIcon" alt="">
                 <div class="pokeSelectorText"></div>
@@ -756,6 +776,16 @@ export class TeamPokemon extends Pokemon {
             pp: 0
         }
         this.setMoves([emptyMove, emptyMove, emptyMove, emptyMove])
+    }
+
+    /** All good things have to die someday */
+    delet() {
+        this.el.remove();
+        if (!this.enemy) {
+            deleteTeamPokemon(this.#id);
+        } else {
+            deleteTrainerPokemon(this.#id);
+        }
     }
 
 }
