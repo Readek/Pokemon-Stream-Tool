@@ -45,9 +45,6 @@ export class SettingGenSelect extends Setting {
         // update that pokedex data
         updatePokedexData(value);
 
-        // resets the player's pokemon team just in case theres a null poke on this gen
-        clearAllPokemon();
-
         // updates the game select's entries
         settings.gameSelect.addGames(value);
 

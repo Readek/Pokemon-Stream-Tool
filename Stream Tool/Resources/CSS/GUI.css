@@ -220,18 +220,45 @@ button:hover {
   padding: 8px 0px;
   display: none;
 }
+.regionContent {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+  overflow-y: auto;
+  gap: 8px;
+}
+.regionButtons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.addPokeButt {
+  font-family: "Roboto-Medium";
+  border: solid 2px var(--focused);
+  border-radius: 10px;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: border-color 100ms;
+  padding: 0px 8px;
+  font-size: 18px;
+  height: 32px;
+  flex-shrink: 0;
+}
+.addPokeButt:hover, .addPokeButt:focus-visible {
+  border: solid 2px var(--text2);
+}
+.addPokeButt:active {
+  filter: brightness(.8);
+}
 
 
 /* catches stuff */
-#catchesContent {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: center;
-  overflow-y: auto;
-  width: 100%;
-}
-
 #catchesDiv {
   display: flex;
   flex-direction: column;
@@ -253,33 +280,10 @@ button:hover {
   align-items: center;
   transition: border-color 100ms;
 }
-#addCatchButt {
-  padding: 0px 8px;
-  font-size: 18px;
-  height: 30px;
-  flex-shrink: 0;
-}
-.catchDeleteButt {
-  padding: 0px 8px;
-  margin-right: 2px;
-  font-size: 18px;
-  height: 26px;
-}
-#addCatchButt:hover, #addCatchButt:focus-visible {
-  border: solid 2px var(--text2);
-}
-.catchDeleteButt:hover, .catchDeleteButt:focus-visible {
-  border: solid 2px lightcoral;
-  color: lightcoral;
-}
 .catchButt:active {
   filter: brightness(.8);
 }
 
-.catchesButtRow {
-  display: flex;
-  gap: 8px;
-}
 #clearCatchesButt:hover, #clearCatchesButt:focus-visible {
   border-color: lightcoral;
 }
@@ -290,12 +294,27 @@ button:hover {
   display: flex;
 }
 
+.noPokesMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+
+  .noPokesMessageMain {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .noPokesMessageSecond {
+    font-size: 13px;
+    color: var(--text2);
+  }
+}
+
 #pokeParty, #trainerParty {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  overflow-y: auto;
   width: 100%;
 }
 
@@ -835,11 +854,6 @@ button:hover {
 }
 
 
-.teamButtRegion {
-  display: flex;
-  gap: 8px;
-}
-
 #bTypeButt {
   text-transform: none;
 }
@@ -887,19 +901,6 @@ button:hover {
 
 
 /* Player Info stuff */
-#playerInfoRegion {
-  justify-content: unset;
-  align-items: unset;
-}
-#playerInfoContent {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: auto;
-  margin-bottom: auto;
-}
 #badges {
   display: flex;
   justify-content: center;

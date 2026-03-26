@@ -6,8 +6,8 @@ import { current, inside } from "./Globals.mjs";
 import { displayNotif } from "./Notifications.mjs";
 import { setBadges } from "./Player/Badges.mjs";
 import { playerStats } from "./Player/Stats.mjs";
-import { pokemons } from "./Team/TeamPokemons.mjs";
-import { setEnemyTrainerName, trainerPokemons } from "./VS Trainer/TrainerPokemons.mjs";
+import { addTeamPokemon, pokemons } from "./Team/TeamPokemons.mjs";
+import { addTrainerPokemon, setEnemyTrainerName, trainerPokemons } from "./VS Trainer/TrainerPokemons.mjs";
 import { settings } from "./Settings/Settings.mjs";
 import { wildEncounter } from "./VS Wild/Wild Pokemon.mjs";
 import { setBattleState } from "./Team/Battle State.mjs";
@@ -74,6 +74,17 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Team") {
 
+        for (let i = 0; i < Math.max(data.pokemons.length, pokemons.length); i++) {
+
+            if (!pokemons[i]) { // if local doesnt exist, add one
+                addTeamPokemon();
+            } else if (!data.pokemons[i]) { // if remote doesnt exist, delete ours
+                pokemons[i].delet();
+                i--;
+            }
+
+        }
+
         for (let i = 0; data.pokemons && i < data.pokemons.length; i++) {
 
             pokemons[i].setSpecies(data.pokemons[i].internalSpecies);
@@ -124,8 +135,18 @@ export async function updateGUI(data, noNotif) {
 
     if (data.type == "Trainer") {
 
-        // enemy trainer
-        for (let i = 0; i < data.pokemons.length; i++) {
+        for (let i = 0; i < Math.max(data.trainerPokemons.length, pokemons.length); i++) {
+            
+            if (!pokemons[i]) {
+                addTrainerPokemon();
+            } else if (!data.trainerPokemons[i]) {
+                trainerPokemons[i].delet();
+                i--;
+            }
+
+        }
+
+        for (let i = 0; i < data.trainerPokemons.length; i++) {
 
             trainerPokemons[i].setSpecies(data.pokemons[i].internalSpecies);
             trainerPokemons[i].setNickName(data.pokemons[i].nickName);

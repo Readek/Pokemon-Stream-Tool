@@ -2,8 +2,8 @@ import { getLocalizedText } from "../../../Utils/Language.mjs";
 import { current } from "../../Globals.mjs";
 import { sendRemoteDataRaw } from "../../IPC.mjs";
 import { displayNotif } from "../../Notifications.mjs";
-import { pokemons } from "../../Team/TeamPokemons.mjs";
-import { setEnemyTrainerName, trainerPokemons } from "../../VS Trainer/TrainerPokemons.mjs";
+import { addTeamPokemon, pokemons } from "../../Team/TeamPokemons.mjs";
+import { addTrainerPokemon, setEnemyTrainerName, trainerPokemons } from "../../VS Trainer/TrainerPokemons.mjs";
 import { updateTeam } from "../../Team/Update Team.mjs";
 import { updateTrainer } from "../../VS Trainer/Update Trainer.mjs";
 import { debugCitraMemory } from "./Debug Read.mjs";
@@ -163,7 +163,7 @@ async function autoUpdateData(firstLoop) {
 
         if (battleType == "None") {
 
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < pokemons.length; i++) {
 
                 // reset some stuffs
                 pokemons[i].setBoosts({
@@ -171,9 +171,12 @@ async function autoUpdateData(firstLoop) {
                 });
                 pokemons[i].setInCombat(false);
 
-                // clear enemy trainer states
-                trainerPokemons[i].clear();
+            }
 
+            // clear enemy trainer pokes
+            for (let i = 0; i < trainerPokemons.length; i++) {
+                trainerPokemons[i].delet();
+                i--;
             }
 
             // clear trainer name
@@ -234,17 +237,21 @@ async function autoUpdateData(firstLoop) {
         }
 
         // use party data
-        for (let i = 0; i < pokemons.length; i++) {
+        const markForDeath = [];
+        for (let i = 0; i < rawPokesIndexed.length; i++) {
 
             if (rawPokesIndexed[i].hasChanged() && rawPokesIndexed[i].valid) {
 
-                pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
-
-                // if there's no pokemon, just clear all data and move on
-                if (!pokemons[i].getSpecies()) {
-                    pokemons[i].clear();
+                // if there's no pokemon, just delete poke and move on
+                if (!rawPokesIndexed[i].dexNum()) {
+                    if (pokemons[i]) markForDeath.push(pokemons[i]);
                     continue;
+                } else if (!pokemons[i]) {
+                    // if valid pokemon doesnt exist, create one
+                    addTeamPokemon();
                 }
+
+                pokemons[i].setSpecies(rawPokesIndexed[i].speciesName());
 
                 pokemons[i].setNickName(rawPokesIndexed[i].nickname());
                 pokemons[i].setLvl(rawPokesIndexed[i].level());
@@ -264,6 +271,9 @@ async function autoUpdateData(firstLoop) {
 
             }
 
+        }
+        for (let i = 0; i < markForDeath.length; i++) {
+            markForDeath[i].delet();
         }
 
         // gym badges (no known data for gen7 yet)
@@ -377,7 +387,7 @@ async function updateBattlePokemon(battleType, hasChanged, onFieldPokes, pokeCou
 
     let readCount = 0;
 
-    for (let i = 0; i < pokes.length; i++) {
+    for (let i = 0; i < rawPokes.length; i++) {
 
         // go read that pokemon
         await getPokeBattle(battleType, i + pokeCount, i, enemy);
@@ -392,6 +402,9 @@ async function updateBattlePokemon(battleType, hasChanged, onFieldPokes, pokeCou
         }
 
         if (rawPokes[i].hasChanged() && rawPokes[i].valid) {
+
+            // create GUI pokemon if this slot doesnt have any
+            if (!pokes[i]) !enemy ? addTeamPokemon() : addTrainerPokemon();
 
             // theres some data that we dont know where to get in battle
             // if the species doesnt match non battle data, clear this info
@@ -426,7 +439,7 @@ async function updateBattlePokemon(battleType, hasChanged, onFieldPokes, pokeCou
     // in case we didnt read all 6 pokemon, clear empty remaining slots
     if (readCount != 0) {
         for (let i = readCount; i < 6; i++) {
-            pokes[i].clear();
+            pokes[i]?.delet();
         }
     }
 

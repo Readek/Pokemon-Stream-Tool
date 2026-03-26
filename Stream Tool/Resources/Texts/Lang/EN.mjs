@@ -51,6 +51,12 @@ export const lang = {
 
     /* TEAM */
 
+    noTeamPokesMessageMain : "No tienes ningún Pokemon. Por ahora.",
+    noTeamPokesMessageSecond : "Puedes añadir uno con el botón de aquí abajo.",
+
+    addPokeButtTitle : "You have no Pokemon. Yet.",
+    deletePokeButtTitle : "You can add one with the button bellow.",
+
     pokeSelectTitle : "Everyone is here!\nRick click to force in combat status.",
     finderFilterPHolder : "Type to filter...",
 
@@ -192,6 +198,9 @@ export const lang = {
 
 
     /* VS TRAINER */
+
+    noTrainerPokesMessageMain : "No enemy Pokes. For now.",
+    noTrainerPokesMessageSecond : "This tab is mostly used for games with auto-update.",
 
     hiddenHover : "Click to reveal",
 

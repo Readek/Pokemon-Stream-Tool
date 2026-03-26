@@ -1,8 +1,6 @@
 import './GUI/Top Bar.mjs'; // so it loads the listeners
 import { loadKeybinds } from './GUI/Keybinds.mjs';
 import { inside, stPath } from './GUI/Globals.mjs';
-import { pokemons } from './GUI/Team/TeamPokemons.mjs'
-import { TeamPokemon } from './GUI/Team/TeamPokemon.mjs';
 import { updateGUI } from './GUI/Remote Update.mjs';
 import { getJson } from './GUI/File System.mjs';
 import { updatePlayer } from './GUI/Player/Update Player.mjs';
@@ -12,7 +10,6 @@ import { catches } from './GUI/Catches/Catches.mjs';
 import { Catch } from './GUI/Catches/Catch.mjs';
 import { updateCatches } from './GUI/Catches/Update Catches.mjs';
 import { updateWildEnc } from './GUI/VS Wild/Update Wild.mjs';
-import { trainerPokemons } from './GUI/VS Trainer/TrainerPokemons.mjs';
 import { updateTrainer } from './GUI/VS Trainer/Update Trainer.mjs';
 import { fetchSpritesheets } from './GUI/Asset Download.mjs';
 import { checkDexExistance } from './GUI/Settings/App Settings/Update Dex.mjs';
@@ -44,12 +41,6 @@ async function init() {
 
     // if the user doesnt have spritesheet assets, remote download them
     if (inside.electron) await fetchSpritesheets();
-
-    // initialize our pokemon class
-    for (let i = 0; i < 6; i++) {
-        pokemons.push(new TeamPokemon());
-        trainerPokemons.push(new TeamPokemon(true));
-    }
 
     // get those keybinds running
     loadKeybinds();

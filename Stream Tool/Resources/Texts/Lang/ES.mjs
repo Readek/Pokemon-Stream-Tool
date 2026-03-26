@@ -52,6 +52,12 @@ export const lang = {
 
     /* TEAM */
 
+    noTeamPokesMessageMain : "No tienes ningún Pokemon. Por ahora.",
+    noTeamPokesMessageSecond : "Puedes añadir uno con el botón de aquí abajo.",
+
+    addPokeButtTitle : "Añade un nuevo Pokemon",
+    deletePokeButtTitle : "Elimina este Pokemon",
+
     pokeSelectTitle : "Selecciona un Pokemon.\nHaz click derecho para forzar en combate.",
     finderFilterPHolder : "Escribe para filtar...",
 
@@ -192,6 +198,9 @@ export const lang = {
 
 
     /* VS TRAINER */
+
+    noTrainerPokesMessageMain : "No hay enemigos a la vista.",
+    noTrainerPokesMessageSecond : "Los juegos con auto-actualización usarán esta pestaña.",
 
     hiddenHover : "Click para revelar",
 

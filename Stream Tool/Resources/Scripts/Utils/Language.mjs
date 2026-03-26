@@ -176,7 +176,7 @@ function romanToInt(roman) {
  * Updates all texts to current language
  * @param {NodeListOf<Element>?} element
  */
-function resetTexts(element = document.body.querySelectorAll("*")) {
+export function resetTexts(element = document.body.querySelectorAll("*")) {
 
     // look for ALL elements inside the document
     for (const el of element) {

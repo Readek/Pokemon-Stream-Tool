@@ -1,4 +1,4 @@
-import { getLocalizedPokeText, getLocalizedText } from "../../Utils/Language.mjs";
+import { getLocalizedPokeText, getLocalizedText, resetPokeLocTexts, resetTexts } from "../../Utils/Language.mjs";
 import { current, inside, stPath } from "../Globals.mjs";
 import { Pokemon } from "../Pokemon.mjs";
 import { typeToColor } from "../Type to Color.mjs";
@@ -128,7 +128,7 @@ export class TeamPokemon extends Pokemon {
     /** @param {String} name - Name of the pokemon */
     setSpecies(name) {
         // if enemy
-        if (this.enemy && name && (!this.speciesName || this.speciesName == "None") && current.autoStatus) {
+        if (this.enemy && name != "None" && current.autoStatus) {
             this.hideRevealInfo(true);
         }
         super.setSpecies(name);
@@ -452,7 +452,7 @@ export class TeamPokemon extends Pokemon {
 
         <div class="teamPokeMainInfo">
 
-            <button class="deletePokeButt" locTitle="deleteCatchButtTitle" title="${getLocalizedText("deleteCatchButtTitle")}">-</button>
+            <button class="deletePokeButt" locTitle="deletePokeButtTitle">-</button>
 
             <button class="selector pokeSelector" locTitle="pokeSelectTitle">
                 <img class="pokeSelectorIcon" alt="">
@@ -573,6 +573,11 @@ export class TeamPokemon extends Pokemon {
             const statEl = this.createStatElement(statKeysUpper[i]);
             detailsStatsEl.appendChild(statEl);
         }
+
+        // this will automatically add all localized texts needed
+        const allEles = element.querySelectorAll("*");
+        resetTexts(allEles);
+        resetPokeLocTexts(current.generation, allEles);
 
         // add it to the GUI
         if (this.enemy) {

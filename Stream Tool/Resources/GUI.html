@@ -48,12 +48,15 @@
 
       <div id="catchesRegion" class="region">
 
-        <div id="catchesContent">
+        <div class="regionContent">
           <div id="catchesDiv"></div>
-          <button id="addCatchButt" class="catchButt" locTitle="addCatchButtTitle">+</button>  
+          <button id="addCatchButt" class="addPokeButt" locTitle="addCatchButtTitle">
+            <span>+</span>
+            <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+          </button>
         </div>
 
-        <div class="catchesButtRow">
+        <div class="regionButtons">
 
           <button id="clearCatchesButt" class="updateButt" locTitle="deleteCatchesButtTitle">
             <load-svg src="SVGs/Cross.svg" class="svgIcon"></load-svg>
@@ -75,9 +78,23 @@
 
       <div id="teamRegion" class="region">
 
-        <div id=pokeParty></div>
+        <div class="regionContent">
 
-        <div class="teamButtRegion">
+          <div id=pokeParty></div>
+
+          <div id="noTeamPokesMessage" class="noPokesMessage">
+            <div class="noPokesMessageMain" locText="noTeamPokesMessageMain"></div>
+            <div class="noPokesMessageSecond" locText="noTeamPokesMessageSecond"></div>
+          </div>
+
+          <button id="addTeamPokeButt" class="addPokeButt" locTitle="addPokeButtTitle">
+            <span>+</span>
+            <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+          </button>
+
+        </div>
+        
+        <div class="regionButtons">
 
           <button class="updateButt battleTypeButt" id="bTypeButt" locText="bTypeButtNone" locTitle="bTypeButtTitle"></button>
 
@@ -99,7 +116,7 @@
 
       <div id="playerInfoRegion" class="region">
 
-        <div id="playerInfoContent">
+        <div class="regionContent">
 
           <div id="badges"></div>
 
@@ -117,11 +134,13 @@
 
           </div>
 
+        </div>
+
+        <div class="regionButtons">
           <button id="updatePlayerButt" class="updateButt">
             <load-svg src="SVGs/Check.svg" class="svgIcon"></load-svg>
             <div id="updatePlayerText" locText="playerUpdateButt"></div>
           </button>
-
         </div>
 
       </div>
@@ -255,9 +274,23 @@
 
       <div id="vsTrainerRegion" class="region">
 
-        <div id=trainerParty></div>
+        <div class="regionContent">
 
-        <div class="teamButtRegion">
+          <div id=trainerParty></div>
+
+          <div id="noTrainerPokesMessage" class="noPokesMessage">
+            <div class="noPokesMessageMain" loctext="noTrainerPokesMessageMain"></div>
+            <div class="noPokesMessageSecond" locText="noTrainerPokesMessageSecond"></div>
+          </div>
+
+          <button id="addTrainerPokeButt" class="addPokeButt" locTitle="addPokeButtTitle">
+            <span>+</span>
+            <load-svg src="SVGs/Pokeball.svg" class="pokeballIcon"></load-svg>
+          </button>
+
+        </div>
+
+        <div class="regionButtons">
 
           <input type="text" id="trainerNameInp" class="textInput mousetrap" spellcheck="false" locPHolder="trainerNamePHolder" locTitle="trainerNameTitle">
 
@@ -380,7 +413,7 @@
 
     <div id="confModalTitle" class="confModalTitle"></div>
     <div id="confModalDesc" class="confModalDesc"></div>
-    <div class="teamButtRegion">
+    <div class="regionButtons">
 
       <button id="confModalGoBack" class="updateButt">
         <load-svg src="SVGs/Cross.svg" class="svgIcon"></load-svg>
@@ -402,7 +435,7 @@
 
     <div id="updateModalTitle" class="confModalTitle" locText="updateModalTitle"></div>
     <div id="updateModalDesc" class="confModalDesc" locText="updateModalDesc"></div>
-    <div class="teamButtRegion" id="updateModalButts">
+    <div class="regionButtons" id="updateModalButts">
 
       <button id="updateModalGoBack" class="updateButt">
         <load-svg src="SVGs/Cross.svg" class="svgIcon"></load-svg>
