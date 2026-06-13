@@ -1,0 +1,95 @@
+@import "Player Info/Player Info.css";
+@import "Trainer Battle/Trainer Battle.css";
+@import "Wild Encounter/Wild Encounter.css";
+
+@font-face {
+    font-family: "FontMain";
+    src: url('../../../../Resources/Fonts/GemunuLibre-VariableFont_wght.ttf');
+}
+
+:root {
+    --textMain: #f8f8f8;
+
+    --healthy: #88f8f0;
+    --warning: #7e7c11;
+    --danger: #7e1111;
+    --Par: var(--warning);
+    --Poi: #56117e;
+    --Fro: #1a8fa3;
+    --Bur: #7e4611;
+    --Sle: grey;
+    --activeColor: var(--healthy);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+#content {
+    width: 1920px;
+    height: 1080px;
+    font-weight: 700;
+    font-family: "FontMain";
+}
+
+
+/* Non-Trainer battle pokemon Section */
+
+#botPokes {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 165px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --elGap: 15px; /* goes to children elements */
+    gap: var(--elGap);
+    color: var(--textMain);
+}
+
+
+/* Other */
+
+#connErrorDiv {
+    display: none;
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 28px;
+    color: lightcoral;
+    text-shadow: 0px 0px 5px black;
+}
+
+
+/* Animations! */
+@keyframes hidePokes {
+    from {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+@keyframes showPokes {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}

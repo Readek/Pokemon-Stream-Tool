@@ -1,0 +1,65 @@
+@import "../../../../../Resources/CSS/Overlays/Player Info/Stats.css";
+
+#playerInfo {
+    position: absolute;
+    top: 560px;
+    left: 426px;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    border: solid;
+    border-width: 8px 6px;
+    border-image: url("../../Images/Badges BG.png") 8 6 fill;
+    padding: 4px;
+    gap: 2px;
+}
+
+/** Badge Panel */
+
+.badgeGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2px 7px;
+    /* this is because badge compo looks off between left and right */
+    transform: translateX(2px);
+}
+
+/** Stats */
+
+#playerStats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat {
+    display: none;
+    align-items: center;
+    gap: 5px;
+}
+
+.statIcon {
+    object-fit: contain;
+    width: 20px;
+    height: 20px
+}
+#catchesIcon {
+    stroke: white;
+    fill: none;
+    scale: 1.15;
+}
+#killsIcon {
+    fill: white;
+}
+#deathsIcon {
+    fill: white;
+}
+
+.statNumber {
+    color: var(--textMain);
+    font-size: 25px;
+    text-shadow: 0px 0px 5px black;
+}
