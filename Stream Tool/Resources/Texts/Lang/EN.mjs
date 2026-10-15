@@ -308,13 +308,13 @@ export const lang = {
 
     updateModalTitle : "Update to latest git",
     updateModalDesc : "This will update the app to the latest developer version. The update will overwrite any modified app files, but it will not delete files you manually added, nor old unused files.",
-    updateModalAccept : "Update Dex",
+    updateModalAccept : "Update!",
 
     updateModalTitleUpdating : "Updating app",
     updateModalDescUpdatingDown : "Downloading latest git version...",
     updateModalDescUpdating : "Replacing files with new update...",
 
-    updateModalTitleDone : "Update succesfull!",
+    updateModalTitleDone : "Update succesful!",
     updateModalDescDone : "Update completed. You can now restart the app (press F5).",
 
     updateModalTitleError : "Update error",
