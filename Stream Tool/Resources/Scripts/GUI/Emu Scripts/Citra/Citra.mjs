@@ -1,5 +1,19 @@
 const dgram = require('node:dgram');
 
+/* 
+
+This is basically my attempt at porting AzaharRPC.py to javascript.
+
+As of time of writing, Azahar's RPC server has no documentation
+other than the original file itself in the Azahar repo.
+
+As such, this is pretty messy, unoptimized, and mostly based on
+versions of the script that are now very old.
+
+So... TODO try to understand Azahar's script better?
+
+*/
+
 // this will connect us to the emulator
 const socket = dgram.createSocket("udp4");
 
@@ -7,8 +21,8 @@ const socket = dgram.createSocket("udp4");
 const adress = "localhost";
 // this do be citra's port
 const port = 45987;
-
-const maxRequestDataSize = 32;
+// max size to ask for. this used to be much lower...
+const maxRequestDataSize = 32 * 1024;
 
 let theResolve = null;
 
@@ -130,9 +144,9 @@ class Citra {
     #prepareHeader() {
 
         const result = new Uint32Array(6);
-        result[0] = 1; // Request Version
-        result[1] = 0; // Request ID
-        result[2] = 1; // Request Type
+        result[0] = 2; // Request Version
+        result[1] = 0; // Request ID // TODO RANDOMIZE
+        result[2] = 1; // Request Type (1 to read, 2 to write, 3 to get ProcessList)
         result[3] = 8; // Request Data Size
         return result;
 
