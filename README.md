@@ -4,24 +4,23 @@
 
 </p>
 
-**This project is under active WIP!** Join our [Discord Server](https://discord.gg/Pjput49g42) to stay up to date!
+**This project is WIP!** Join our [Discord Server](https://discord.gg/Pjput49g42) or our [Fluxer Community](https://fluxer.gg/JB4BeqYy) to stay up to date!
 
 <h1 align="center">Pokemon Stream Tool</h1>
 
 Pokemon ST allows you to manage dynamic overlays with the help of a GUI, with features like:
 
 - Manage your game's info - Pokemon and their stats, badges, catches....
-- **Gen 6/7 auto-update** for player party, badges and enemy data, reading directly from [Azahar](https://github.com/azahar-emu/azahar) (or any Citra fork).
+- **Gen 6/7 auto-update** for player party, badges and enemy data, reading directly from [Azahar](https://github.com/azahar-emu/azahar).
 - No auto for your game? Worry not, everything can be done manually within the GUI.
   - Manual mode supports up to Scarlet/Violet.
-- You can use the **included overlays** for OBS with minimal setup, or make your own.
+- You can use the **included overlays** for OBS with minimal setup, or create your own.
 - Supports multiple languages!
-  - Fully localized: **English**, **Spanish** (ES).
+  - Fully localized: **English**, **Spanish** (Spain).
   - Pokemon, Items, Abilities and Move names: **French**, **German**, **Italian**, **Japanese**.
 - **Remote GUI** so multiple people on different devices can manage the overlay info at the same time.
-- **Crossplatform** GUI (Windows, Linux), built on Electron.
+- **Crossplatform** GUI for Windows and Linux.
 - Made to be customized! Dive into the folders and easily modify the entirety of the tool.
-- Download it **[right here, right now](https://github.com/Readek/Pokemon-Stream-Tool/releases)**! *No need to join any Discord server.*
 
 The tool comes with pre-made overlays for some games, like:
 
@@ -73,12 +72,20 @@ The overlay uses sprites from Pokémon Showdown, which aren't included in this r
 
 ---
 
+### AI usage
+
+Because nowadays every repo has to have this section, apparently? And I'm here to tell you that this project has not, and will never use any kind of generative AI. 0. None. Nada.
+
+In fact, I encourage you to dive into the code, as every script is exposed to the user! The code is extensively commentated (maybe a bit too commentated) so anyone willing to modify it for any reason can do so with ease.
+
+So go ahead and grab any kind of text editor! Let me help you code, just as others have helped me in the past.
+
 ### Used libraries
 
 - [@pkmn](https://github.com/pkmn/ps), main Pokemon data library used.
 - [encoding.js](https://github.com/polygonplanet/encoding.js), to translate Unicode to regular text.
 - [Mousetrap](https://github.com/ccampbell/mousetrap), to handle some hotkeys.
-- [Electron](https://www.electronjs.org/), duh.
+- [Electron](https://www.electronjs.org/). I'm sorry.
 
 ### References
 
