@@ -51,11 +51,11 @@ export const lang = {
 
     /* TEAM */
 
-    noTeamPokesMessageMain : "No tienes ningún Pokemon. Por ahora.",
-    noTeamPokesMessageSecond : "Puedes añadir uno con el botón de aquí abajo.",
+    noTeamPokesMessageMain : "You have no Pokemon. Yet.",
+    noTeamPokesMessageSecond : "You can add one with the button bellow.",
 
-    addPokeButtTitle : "You have no Pokemon. Yet.",
-    deletePokeButtTitle : "You can add one with the button bellow.",
+    addPokeButtTitle : "Add a new Pokemon",
+    deletePokeButtTitle : "Delete this Pokemon",
 
     pokeSelectTitle : "Everyone is here!\nRick click to force in combat status.",
     finderFilterPHolder : "Type to filter...",
